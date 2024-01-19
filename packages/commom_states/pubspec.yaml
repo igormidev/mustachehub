@@ -1,0 +1,33 @@
+name: commom_states
+description: "A new Flutter package project."
+version: 0.0.1
+publish_to: 'none'
+
+environment:
+  sdk: '>=3.2.3 <4.0.0'
+  flutter: ">=1.17.0"
+
+dependency_overrides:
+  meta: ^1.1.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  equatable: ^2.0.5
+  uuid: ^4.2.2
+  freezed_annotation: ^2.4.1
+  bloc: ^8.1.2 
+  flutter_bloc: ^8.1.3
+  mustache_hub_core:
+    path: ../mustache_hub_core
+  micro_navigation_core:
+    path: ../micro_navigation_core
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+  build_runner: ^2.3.3 
+  freezed: ^2.3.2
+
+flutter:

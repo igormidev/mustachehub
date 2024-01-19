@@ -1,0 +1,23 @@
+name: mustache_source_service
+description: "A new Flutter package project."
+version: 0.0.1
+publish_to: 'none'
+
+environment:
+  sdk: '>=3.2.3 <4.0.0'
+  flutter: ">=1.17.0"
+
+dependencies:
+  mustache_hub_core:
+    path: ../mustache_hub_core
+  mustache_firebase_references:
+    path: ../mustache_firebase_references
+  firebase_core: ^2.24.2
+  cloud_firestore: ^4.13.6
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0 
+
+flutter:
