@@ -27,7 +27,7 @@ abstract class NavigationPossibilitiesState
       ENavigationPossibilities.collection,
       ENavigationPossibilities.generateText,
       ENavigationPossibilities.createMustache,
-      ENavigationPossibilities.login,
+      ENavigationPossibilities.auth,
       ENavigationPossibilities.settings,
     ])
     List<ENavigationPossibilities> possibilities,

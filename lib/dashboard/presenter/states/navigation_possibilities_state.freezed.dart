@@ -351,7 +351,7 @@ class _$LoggedOutImpl implements LoggedOut {
         ENavigationPossibilities.collection,
         ENavigationPossibilities.generateText,
         ENavigationPossibilities.createMustache,
-        ENavigationPossibilities.login,
+        ENavigationPossibilities.auth,
         ENavigationPossibilities.settings
       ]})
       : _possibilities = possibilities;

@@ -14,7 +14,7 @@ class MustacheRouteInformationParser
       '/generateText' => ENavigationPossibilities.generateText,
       '/createMustache' => ENavigationPossibilities.createMustache,
       '/account' => ENavigationPossibilities.account,
-      '/login' => ENavigationPossibilities.login,
+      '/auth' => ENavigationPossibilities.auth,
       '/settings' => ENavigationPossibilities.settings,
       '/becamePremium' => ENavigationPossibilities.becamePremium,
       (_) => ENavigationPossibilities.DEFAULT_POSSIBILITY,
@@ -32,7 +32,7 @@ class MustacheRouteInformationParser
       ENavigationPossibilities.generateText => '/generateText',
       ENavigationPossibilities.createMustache => '/createMustache',
       ENavigationPossibilities.account => '/account',
-      ENavigationPossibilities.login => '/login',
+      ENavigationPossibilities.auth => '/auth',
       ENavigationPossibilities.settings => '/settings',
       ENavigationPossibilities.becamePremium => '/becamePremium',
     };

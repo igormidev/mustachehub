@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:media_query_core/responsiveness/visibility_width_based.dart';
-import 'package:mustachehub/auth/ui/views/login_view/login_view.dart';
+import 'package:mustachehub/auth/presenter/states/auth_module_router.dart';
 import 'package:mustachehub/dashboard/data/entities/e_navigation_possibilities.dart';
 import 'package:mustachehub/dashboard/ui/navigation_widgets/dashboard_drawer/dashboard_drawer.dart';
 import 'package:mustachehub/dashboard/ui/navigation_widgets/dashboard_rail/dashboard_rail.dart';
@@ -66,9 +66,9 @@ class MustacheMainNavigator extends StatelessWidget {
                       color: Colors.brown,
                     ),
                   ),
-                ENavigationPossibilities.login => MaterialPage(
+                ENavigationPossibilities.auth => MaterialPage(
                     key: ValueKey(possibility.name),
-                    child: const LoginView(),
+                    child: AuthModuleRouter(),
                   ),
                 ENavigationPossibilities.settings => MaterialPage(
                     key: ValueKey(possibility.name),

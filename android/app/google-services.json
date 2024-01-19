@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "667846746873",
+    "project_id": "mustache-hub---prod",
+    "storage_bucket": "mustache-hub---prod.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:667846746873:android:cb1cfa890c23a1aaacf828",
+        "android_client_info": {
+          "package_name": "com.hub.mustache.mustachehub"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAi16vDNebhnckeXddhCoppVLgrxkBeNp0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:667846746873:android:069a7e70ea09a63facf828",
+        "android_client_info": {
+          "package_name": "io.mustachehub.mustachehub"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAi16vDNebhnckeXddhCoppVLgrxkBeNp0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -28,6 +28,7 @@
 		33CC10F62044A3C60003C045 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33CC10F42044A3C60003C045 /* MainMenu.xib */; };
 		33CC11132044BFA00003C045 /* MainFlutterWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33CC11122044BFA00003C045 /* MainFlutterWindow.swift */; };
 		6E611F58EB0FC224BB1E01D6 /* Pods_Runner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6455F8B971F42A32405C68F9 /* Pods_Runner.framework */; };
+		A9F0C4BFCE9B0655B5B7DA97 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2A8E8B82E2C0030B6DCA9E9A /* GoogleService-Info.plist */; };
 		E64E4E815C8E3ACE18F93445 /* Pods_RunnerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 084AAEEA5F5C1F7D4657F823 /* Pods_RunnerTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -63,6 +64,7 @@
 
 /* Begin PBXFileReference section */
 		084AAEEA5F5C1F7D4657F823 /* Pods_RunnerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RunnerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2A8E8B82E2C0030B6DCA9E9A /* GoogleService-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Runner/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		331C80D5294CF71000263BE5 /* RunnerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RunnerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		331C80D7294CF71000263BE5 /* RunnerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunnerTests.swift; sourceTree = "<group>"; };
 		333000ED22D3DE5D00554162 /* Warnings.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Warnings.xcconfig; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 				33CC10EE2044A3C60003C045 /* Products */,
 				D73912EC22F37F3D000D13A0 /* Frameworks */,
 				849FDBF21F2BAECB2C7288FF /* Pods */,
+				2A8E8B82E2C0030B6DCA9E9A /* GoogleService-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -316,6 +319,7 @@
 			files = (
 				33CC10F32044A3C60003C045 /* Assets.xcassets in Resources */,
 				33CC10F62044A3C60003C045 /* MainMenu.xib in Resources */,
+				A9F0C4BFCE9B0655B5B7DA97 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

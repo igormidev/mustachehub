@@ -21,7 +21,7 @@ enum ENavigationPossibilities {
     Icons.person_rounded,
   ),
 
-  login(
+  auth(
     Icons.key,
     Icons.key_outlined,
   ),

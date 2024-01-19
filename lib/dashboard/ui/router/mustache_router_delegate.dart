@@ -3,6 +3,12 @@ import 'package:mustachehub/dashboard/ui/router/mustache_main_navigator.dart';
 import 'package:mustachehub/dashboard/data/entities/e_navigation_possibilities.dart';
 import 'package:mustachehub/dashboard/presenter/states/navigation_possibilities_state.dart';
 
+class NavigatorService {
+  static final GlobalKey<NavigatorState> rootNavigatorState =
+      GlobalKey<NavigatorState>();
+  static final BuildContext rootContext = rootNavigatorState.currentContext!;
+}
+
 class MustacheRouterDelegate extends RouterDelegate<ENavigationPossibilities>
     with
         ChangeNotifier,
@@ -12,7 +18,8 @@ class MustacheRouterDelegate extends RouterDelegate<ENavigationPossibilities>
   NavigationPossibilitiesState state = NavigationPossibilitiesState.loggedOut();
 
   @override
-  final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+  final GlobalKey<NavigatorState> navigatorKey =
+      NavigatorService.rootNavigatorState;
 
   void setUserToLoggedIn() {
     state = LoggedIn();
@@ -53,7 +60,7 @@ class MustacheRouterDelegate extends RouterDelegate<ENavigationPossibilities>
         );
       } else {
         state = NavigationPossibilitiesState.loggedOut(
-          selectedPossibility: ENavigationPossibilities.login,
+          selectedPossibility: ENavigationPossibilities.auth,
         );
       }
     }

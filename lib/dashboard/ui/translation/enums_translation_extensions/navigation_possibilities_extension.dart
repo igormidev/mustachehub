@@ -7,7 +7,7 @@ extension NavigationPossibilitiesExtension on ENavigationPossibilities {
       ENavigationPossibilities.generateText => 'Generate text',
       ENavigationPossibilities.createMustache => 'Create mustache',
       ENavigationPossibilities.account => 'My account',
-      ENavigationPossibilities.login => 'Log in',
+      ENavigationPossibilities.auth => 'Log in',
       ENavigationPossibilities.settings => 'Configuration',
       ENavigationPossibilities.becamePremium => 'Became Premium',
     };
@@ -19,7 +19,7 @@ extension NavigationPossibilitiesExtension on ENavigationPossibilities {
       ENavigationPossibilities.generateText => 'Generate',
       ENavigationPossibilities.createMustache => 'Create',
       ENavigationPossibilities.account => 'Account',
-      ENavigationPossibilities.login => 'Log in',
+      ENavigationPossibilities.auth => 'Log in',
       ENavigationPossibilities.settings => 'Configs',
       ENavigationPossibilities.becamePremium => 'Premium',
     };
