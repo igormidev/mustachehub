@@ -8,7 +8,6 @@ class AuthConductorInformationParser
     RouteInformation routeInformation,
   ) {
     final String routeName = routeInformation.uri.path;
-
     final EAuthPossibilities choosedPossibility = switch (routeName) {
       '/auth/login' => EAuthPossibilities.login,
       '/auth/signin' => EAuthPossibilities.sigin,

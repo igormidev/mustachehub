@@ -5,7 +5,6 @@ import 'mustache_route_information_parser.dart';
 class MustacheMaterialApp extends StatelessWidget {
   final MustacheRouterDelegate _delegate = MustacheRouterDelegate();
   final BackButtonDispatcher _backButtonDispatcher = RootBackButtonDispatcher();
-  // ChildBackButtonDispatcher(RootBackButtonDispatcher());
   MustacheMaterialApp({super.key});
 
   @override

@@ -16,74 +16,51 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$AuthNavigationPossibilityState {
+  EAuthPossibilities get selectedPossibility =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
     required TResult Function(EAuthPossibilities selectedPossibility)
-        undefinedVersion,
-    required TResult Function(EAuthPossibilities selectedPossibility)
-        mobileVersion,
-    required TResult Function(EAuthPossibilities selectedPossibility)
-        desktopVersion,
+        definedVersion,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function(EAuthPossibilities selectedPossibility)? undefinedVersion,
-    TResult? Function(EAuthPossibilities selectedPossibility)? mobileVersion,
-    TResult? Function(EAuthPossibilities selectedPossibility)? desktopVersion,
+    TResult? Function(EAuthPossibilities selectedPossibility)? definedVersion,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(EAuthPossibilities selectedPossibility)? undefinedVersion,
-    TResult Function(EAuthPossibilities selectedPossibility)? mobileVersion,
-    TResult Function(EAuthPossibilities selectedPossibility)? desktopVersion,
+    TResult Function(EAuthPossibilities selectedPossibility)? definedVersion,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_AuthNavigationPossibilityStateInitial value)
-        initial,
     required TResult Function(
             _AuthNavigationPossibilityStateInitialUndefinedVersion value)
-        undefinedVersion,
-    required TResult Function(
-            _AuthNavigationPossibilityStateMobileVersion value)
-        mobileVersion,
-    required TResult Function(
-            _AuthNavigationPossibilityStateDesktopVersion value)
-        desktopVersion,
+        definedVersion,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_AuthNavigationPossibilityStateInitial value)? initial,
     TResult? Function(
             _AuthNavigationPossibilityStateInitialUndefinedVersion value)?
-        undefinedVersion,
-    TResult? Function(_AuthNavigationPossibilityStateMobileVersion value)?
-        mobileVersion,
-    TResult? Function(_AuthNavigationPossibilityStateDesktopVersion value)?
-        desktopVersion,
+        definedVersion,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_AuthNavigationPossibilityStateInitial value)? initial,
     TResult Function(
             _AuthNavigationPossibilityStateInitialUndefinedVersion value)?
-        undefinedVersion,
-    TResult Function(_AuthNavigationPossibilityStateMobileVersion value)?
-        mobileVersion,
-    TResult Function(_AuthNavigationPossibilityStateDesktopVersion value)?
-        desktopVersion,
+        definedVersion,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $AuthNavigationPossibilityStateCopyWith<AuthNavigationPossibilityState>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -93,6 +70,8 @@ abstract class $AuthNavigationPossibilityStateCopyWith<$Res> {
           $Res Function(AuthNavigationPossibilityState) then) =
       _$AuthNavigationPossibilityStateCopyWithImpl<$Res,
           AuthNavigationPossibilityState>;
+  @useResult
+  $Res call({EAuthPossibilities selectedPossibility});
 }
 
 /// @nodoc
@@ -105,150 +84,24 @@ class _$AuthNavigationPossibilityStateCopyWithImpl<$Res,
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-}
 
-/// @nodoc
-abstract class _$$AuthNavigationPossibilityStateInitialImplCopyWith<$Res> {
-  factory _$$AuthNavigationPossibilityStateInitialImplCopyWith(
-          _$AuthNavigationPossibilityStateInitialImpl value,
-          $Res Function(_$AuthNavigationPossibilityStateInitialImpl) then) =
-      __$$AuthNavigationPossibilityStateInitialImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$AuthNavigationPossibilityStateInitialImplCopyWithImpl<$Res>
-    extends _$AuthNavigationPossibilityStateCopyWithImpl<$Res,
-        _$AuthNavigationPossibilityStateInitialImpl>
-    implements _$$AuthNavigationPossibilityStateInitialImplCopyWith<$Res> {
-  __$$AuthNavigationPossibilityStateInitialImplCopyWithImpl(
-      _$AuthNavigationPossibilityStateInitialImpl _value,
-      $Res Function(_$AuthNavigationPossibilityStateInitialImpl) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$AuthNavigationPossibilityStateInitialImpl
-    implements _AuthNavigationPossibilityStateInitial {
-  _$AuthNavigationPossibilityStateInitialImpl();
-
+  @pragma('vm:prefer-inline')
   @override
-  String toString() {
-    return 'AuthNavigationPossibilityState.initial()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$AuthNavigationPossibilityStateInitialImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function(EAuthPossibilities selectedPossibility)
-        undefinedVersion,
-    required TResult Function(EAuthPossibilities selectedPossibility)
-        mobileVersion,
-    required TResult Function(EAuthPossibilities selectedPossibility)
-        desktopVersion,
+  $Res call({
+    Object? selectedPossibility = null,
   }) {
-    return initial();
+    return _then(_value.copyWith(
+      selectedPossibility: null == selectedPossibility
+          ? _value.selectedPossibility
+          : selectedPossibility // ignore: cast_nullable_to_non_nullable
+              as EAuthPossibilities,
+    ) as $Val);
   }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function(EAuthPossibilities selectedPossibility)? undefinedVersion,
-    TResult? Function(EAuthPossibilities selectedPossibility)? mobileVersion,
-    TResult? Function(EAuthPossibilities selectedPossibility)? desktopVersion,
-  }) {
-    return initial?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(EAuthPossibilities selectedPossibility)? undefinedVersion,
-    TResult Function(EAuthPossibilities selectedPossibility)? mobileVersion,
-    TResult Function(EAuthPossibilities selectedPossibility)? desktopVersion,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_AuthNavigationPossibilityStateInitial value)
-        initial,
-    required TResult Function(
-            _AuthNavigationPossibilityStateInitialUndefinedVersion value)
-        undefinedVersion,
-    required TResult Function(
-            _AuthNavigationPossibilityStateMobileVersion value)
-        mobileVersion,
-    required TResult Function(
-            _AuthNavigationPossibilityStateDesktopVersion value)
-        desktopVersion,
-  }) {
-    return initial(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_AuthNavigationPossibilityStateInitial value)? initial,
-    TResult? Function(
-            _AuthNavigationPossibilityStateInitialUndefinedVersion value)?
-        undefinedVersion,
-    TResult? Function(_AuthNavigationPossibilityStateMobileVersion value)?
-        mobileVersion,
-    TResult? Function(_AuthNavigationPossibilityStateDesktopVersion value)?
-        desktopVersion,
-  }) {
-    return initial?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_AuthNavigationPossibilityStateInitial value)? initial,
-    TResult Function(
-            _AuthNavigationPossibilityStateInitialUndefinedVersion value)?
-        undefinedVersion,
-    TResult Function(_AuthNavigationPossibilityStateMobileVersion value)?
-        mobileVersion,
-    TResult Function(_AuthNavigationPossibilityStateDesktopVersion value)?
-        desktopVersion,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _AuthNavigationPossibilityStateInitial
-    implements AuthNavigationPossibilityState {
-  factory _AuthNavigationPossibilityStateInitial() =
-      _$AuthNavigationPossibilityStateInitialImpl;
 }
 
 /// @nodoc
 abstract class _$$AuthNavigationPossibilityStateInitialUndefinedVersionImplCopyWith<
-    $Res> {
+    $Res> implements $AuthNavigationPossibilityStateCopyWith<$Res> {
   factory _$$AuthNavigationPossibilityStateInitialUndefinedVersionImplCopyWith(
           _$AuthNavigationPossibilityStateInitialUndefinedVersionImpl value,
           $Res Function(
@@ -256,6 +109,7 @@ abstract class _$$AuthNavigationPossibilityStateInitialUndefinedVersionImplCopyW
               then) =
       __$$AuthNavigationPossibilityStateInitialUndefinedVersionImplCopyWithImpl<
           $Res>;
+  @override
   @useResult
   $Res call({EAuthPossibilities selectedPossibility});
 }
@@ -300,7 +154,7 @@ class _$AuthNavigationPossibilityStateInitialUndefinedVersionImpl
 
   @override
   String toString() {
-    return 'AuthNavigationPossibilityState.undefinedVersion(selectedPossibility: $selectedPossibility)';
+    return 'AuthNavigationPossibilityState.definedVersion(selectedPossibility: $selectedPossibility)';
   }
 
   @override
@@ -329,39 +183,28 @@ class _$AuthNavigationPossibilityStateInitialUndefinedVersionImpl
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
     required TResult Function(EAuthPossibilities selectedPossibility)
-        undefinedVersion,
-    required TResult Function(EAuthPossibilities selectedPossibility)
-        mobileVersion,
-    required TResult Function(EAuthPossibilities selectedPossibility)
-        desktopVersion,
+        definedVersion,
   }) {
-    return undefinedVersion(selectedPossibility);
+    return definedVersion(selectedPossibility);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function(EAuthPossibilities selectedPossibility)? undefinedVersion,
-    TResult? Function(EAuthPossibilities selectedPossibility)? mobileVersion,
-    TResult? Function(EAuthPossibilities selectedPossibility)? desktopVersion,
+    TResult? Function(EAuthPossibilities selectedPossibility)? definedVersion,
   }) {
-    return undefinedVersion?.call(selectedPossibility);
+    return definedVersion?.call(selectedPossibility);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(EAuthPossibilities selectedPossibility)? undefinedVersion,
-    TResult Function(EAuthPossibilities selectedPossibility)? mobileVersion,
-    TResult Function(EAuthPossibilities selectedPossibility)? desktopVersion,
+    TResult Function(EAuthPossibilities selectedPossibility)? definedVersion,
     required TResult orElse(),
   }) {
-    if (undefinedVersion != null) {
-      return undefinedVersion(selectedPossibility);
+    if (definedVersion != null) {
+      return definedVersion(selectedPossibility);
     }
     return orElse();
   }
@@ -369,51 +212,33 @@ class _$AuthNavigationPossibilityStateInitialUndefinedVersionImpl
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_AuthNavigationPossibilityStateInitial value)
-        initial,
     required TResult Function(
             _AuthNavigationPossibilityStateInitialUndefinedVersion value)
-        undefinedVersion,
-    required TResult Function(
-            _AuthNavigationPossibilityStateMobileVersion value)
-        mobileVersion,
-    required TResult Function(
-            _AuthNavigationPossibilityStateDesktopVersion value)
-        desktopVersion,
+        definedVersion,
   }) {
-    return undefinedVersion(this);
+    return definedVersion(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_AuthNavigationPossibilityStateInitial value)? initial,
     TResult? Function(
             _AuthNavigationPossibilityStateInitialUndefinedVersion value)?
-        undefinedVersion,
-    TResult? Function(_AuthNavigationPossibilityStateMobileVersion value)?
-        mobileVersion,
-    TResult? Function(_AuthNavigationPossibilityStateDesktopVersion value)?
-        desktopVersion,
+        definedVersion,
   }) {
-    return undefinedVersion?.call(this);
+    return definedVersion?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_AuthNavigationPossibilityStateInitial value)? initial,
     TResult Function(
             _AuthNavigationPossibilityStateInitialUndefinedVersion value)?
-        undefinedVersion,
-    TResult Function(_AuthNavigationPossibilityStateMobileVersion value)?
-        mobileVersion,
-    TResult Function(_AuthNavigationPossibilityStateDesktopVersion value)?
-        desktopVersion,
+        definedVersion,
     required TResult orElse(),
   }) {
-    if (undefinedVersion != null) {
-      return undefinedVersion(this);
+    if (definedVersion != null) {
+      return definedVersion(this);
     }
     return orElse();
   }
@@ -425,369 +250,11 @@ abstract class _AuthNavigationPossibilityStateInitialUndefinedVersion
           {required final EAuthPossibilities selectedPossibility}) =
       _$AuthNavigationPossibilityStateInitialUndefinedVersionImpl;
 
+  @override
   EAuthPossibilities get selectedPossibility;
+  @override
   @JsonKey(ignore: true)
   _$$AuthNavigationPossibilityStateInitialUndefinedVersionImplCopyWith<
           _$AuthNavigationPossibilityStateInitialUndefinedVersionImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$AuthNavigationPossibilityStateMobileVersionImplCopyWith<
-    $Res> {
-  factory _$$AuthNavigationPossibilityStateMobileVersionImplCopyWith(
-          _$AuthNavigationPossibilityStateMobileVersionImpl value,
-          $Res Function(_$AuthNavigationPossibilityStateMobileVersionImpl)
-              then) =
-      __$$AuthNavigationPossibilityStateMobileVersionImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({EAuthPossibilities selectedPossibility});
-}
-
-/// @nodoc
-class __$$AuthNavigationPossibilityStateMobileVersionImplCopyWithImpl<$Res>
-    extends _$AuthNavigationPossibilityStateCopyWithImpl<$Res,
-        _$AuthNavigationPossibilityStateMobileVersionImpl>
-    implements
-        _$$AuthNavigationPossibilityStateMobileVersionImplCopyWith<$Res> {
-  __$$AuthNavigationPossibilityStateMobileVersionImplCopyWithImpl(
-      _$AuthNavigationPossibilityStateMobileVersionImpl _value,
-      $Res Function(_$AuthNavigationPossibilityStateMobileVersionImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? selectedPossibility = null,
-  }) {
-    return _then(_$AuthNavigationPossibilityStateMobileVersionImpl(
-      selectedPossibility: null == selectedPossibility
-          ? _value.selectedPossibility
-          : selectedPossibility // ignore: cast_nullable_to_non_nullable
-              as EAuthPossibilities,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$AuthNavigationPossibilityStateMobileVersionImpl
-    implements _AuthNavigationPossibilityStateMobileVersion {
-  _$AuthNavigationPossibilityStateMobileVersionImpl(
-      {required this.selectedPossibility});
-
-  @override
-  final EAuthPossibilities selectedPossibility;
-
-  @override
-  String toString() {
-    return 'AuthNavigationPossibilityState.mobileVersion(selectedPossibility: $selectedPossibility)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$AuthNavigationPossibilityStateMobileVersionImpl &&
-            (identical(other.selectedPossibility, selectedPossibility) ||
-                other.selectedPossibility == selectedPossibility));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, selectedPossibility);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$AuthNavigationPossibilityStateMobileVersionImplCopyWith<
-          _$AuthNavigationPossibilityStateMobileVersionImpl>
-      get copyWith =>
-          __$$AuthNavigationPossibilityStateMobileVersionImplCopyWithImpl<
-                  _$AuthNavigationPossibilityStateMobileVersionImpl>(
-              this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function(EAuthPossibilities selectedPossibility)
-        undefinedVersion,
-    required TResult Function(EAuthPossibilities selectedPossibility)
-        mobileVersion,
-    required TResult Function(EAuthPossibilities selectedPossibility)
-        desktopVersion,
-  }) {
-    return mobileVersion(selectedPossibility);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function(EAuthPossibilities selectedPossibility)? undefinedVersion,
-    TResult? Function(EAuthPossibilities selectedPossibility)? mobileVersion,
-    TResult? Function(EAuthPossibilities selectedPossibility)? desktopVersion,
-  }) {
-    return mobileVersion?.call(selectedPossibility);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(EAuthPossibilities selectedPossibility)? undefinedVersion,
-    TResult Function(EAuthPossibilities selectedPossibility)? mobileVersion,
-    TResult Function(EAuthPossibilities selectedPossibility)? desktopVersion,
-    required TResult orElse(),
-  }) {
-    if (mobileVersion != null) {
-      return mobileVersion(selectedPossibility);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_AuthNavigationPossibilityStateInitial value)
-        initial,
-    required TResult Function(
-            _AuthNavigationPossibilityStateInitialUndefinedVersion value)
-        undefinedVersion,
-    required TResult Function(
-            _AuthNavigationPossibilityStateMobileVersion value)
-        mobileVersion,
-    required TResult Function(
-            _AuthNavigationPossibilityStateDesktopVersion value)
-        desktopVersion,
-  }) {
-    return mobileVersion(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_AuthNavigationPossibilityStateInitial value)? initial,
-    TResult? Function(
-            _AuthNavigationPossibilityStateInitialUndefinedVersion value)?
-        undefinedVersion,
-    TResult? Function(_AuthNavigationPossibilityStateMobileVersion value)?
-        mobileVersion,
-    TResult? Function(_AuthNavigationPossibilityStateDesktopVersion value)?
-        desktopVersion,
-  }) {
-    return mobileVersion?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_AuthNavigationPossibilityStateInitial value)? initial,
-    TResult Function(
-            _AuthNavigationPossibilityStateInitialUndefinedVersion value)?
-        undefinedVersion,
-    TResult Function(_AuthNavigationPossibilityStateMobileVersion value)?
-        mobileVersion,
-    TResult Function(_AuthNavigationPossibilityStateDesktopVersion value)?
-        desktopVersion,
-    required TResult orElse(),
-  }) {
-    if (mobileVersion != null) {
-      return mobileVersion(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _AuthNavigationPossibilityStateMobileVersion
-    implements AuthNavigationPossibilityState {
-  factory _AuthNavigationPossibilityStateMobileVersion(
-          {required final EAuthPossibilities selectedPossibility}) =
-      _$AuthNavigationPossibilityStateMobileVersionImpl;
-
-  EAuthPossibilities get selectedPossibility;
-  @JsonKey(ignore: true)
-  _$$AuthNavigationPossibilityStateMobileVersionImplCopyWith<
-          _$AuthNavigationPossibilityStateMobileVersionImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$AuthNavigationPossibilityStateDesktopVersionImplCopyWith<
-    $Res> {
-  factory _$$AuthNavigationPossibilityStateDesktopVersionImplCopyWith(
-          _$AuthNavigationPossibilityStateDesktopVersionImpl value,
-          $Res Function(_$AuthNavigationPossibilityStateDesktopVersionImpl)
-              then) =
-      __$$AuthNavigationPossibilityStateDesktopVersionImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({EAuthPossibilities selectedPossibility});
-}
-
-/// @nodoc
-class __$$AuthNavigationPossibilityStateDesktopVersionImplCopyWithImpl<$Res>
-    extends _$AuthNavigationPossibilityStateCopyWithImpl<$Res,
-        _$AuthNavigationPossibilityStateDesktopVersionImpl>
-    implements
-        _$$AuthNavigationPossibilityStateDesktopVersionImplCopyWith<$Res> {
-  __$$AuthNavigationPossibilityStateDesktopVersionImplCopyWithImpl(
-      _$AuthNavigationPossibilityStateDesktopVersionImpl _value,
-      $Res Function(_$AuthNavigationPossibilityStateDesktopVersionImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? selectedPossibility = null,
-  }) {
-    return _then(_$AuthNavigationPossibilityStateDesktopVersionImpl(
-      selectedPossibility: null == selectedPossibility
-          ? _value.selectedPossibility
-          : selectedPossibility // ignore: cast_nullable_to_non_nullable
-              as EAuthPossibilities,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$AuthNavigationPossibilityStateDesktopVersionImpl
-    implements _AuthNavigationPossibilityStateDesktopVersion {
-  _$AuthNavigationPossibilityStateDesktopVersionImpl(
-      {required this.selectedPossibility});
-
-  @override
-  final EAuthPossibilities selectedPossibility;
-
-  @override
-  String toString() {
-    return 'AuthNavigationPossibilityState.desktopVersion(selectedPossibility: $selectedPossibility)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$AuthNavigationPossibilityStateDesktopVersionImpl &&
-            (identical(other.selectedPossibility, selectedPossibility) ||
-                other.selectedPossibility == selectedPossibility));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, selectedPossibility);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$AuthNavigationPossibilityStateDesktopVersionImplCopyWith<
-          _$AuthNavigationPossibilityStateDesktopVersionImpl>
-      get copyWith =>
-          __$$AuthNavigationPossibilityStateDesktopVersionImplCopyWithImpl<
-                  _$AuthNavigationPossibilityStateDesktopVersionImpl>(
-              this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function(EAuthPossibilities selectedPossibility)
-        undefinedVersion,
-    required TResult Function(EAuthPossibilities selectedPossibility)
-        mobileVersion,
-    required TResult Function(EAuthPossibilities selectedPossibility)
-        desktopVersion,
-  }) {
-    return desktopVersion(selectedPossibility);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function(EAuthPossibilities selectedPossibility)? undefinedVersion,
-    TResult? Function(EAuthPossibilities selectedPossibility)? mobileVersion,
-    TResult? Function(EAuthPossibilities selectedPossibility)? desktopVersion,
-  }) {
-    return desktopVersion?.call(selectedPossibility);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(EAuthPossibilities selectedPossibility)? undefinedVersion,
-    TResult Function(EAuthPossibilities selectedPossibility)? mobileVersion,
-    TResult Function(EAuthPossibilities selectedPossibility)? desktopVersion,
-    required TResult orElse(),
-  }) {
-    if (desktopVersion != null) {
-      return desktopVersion(selectedPossibility);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_AuthNavigationPossibilityStateInitial value)
-        initial,
-    required TResult Function(
-            _AuthNavigationPossibilityStateInitialUndefinedVersion value)
-        undefinedVersion,
-    required TResult Function(
-            _AuthNavigationPossibilityStateMobileVersion value)
-        mobileVersion,
-    required TResult Function(
-            _AuthNavigationPossibilityStateDesktopVersion value)
-        desktopVersion,
-  }) {
-    return desktopVersion(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_AuthNavigationPossibilityStateInitial value)? initial,
-    TResult? Function(
-            _AuthNavigationPossibilityStateInitialUndefinedVersion value)?
-        undefinedVersion,
-    TResult? Function(_AuthNavigationPossibilityStateMobileVersion value)?
-        mobileVersion,
-    TResult? Function(_AuthNavigationPossibilityStateDesktopVersion value)?
-        desktopVersion,
-  }) {
-    return desktopVersion?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_AuthNavigationPossibilityStateInitial value)? initial,
-    TResult Function(
-            _AuthNavigationPossibilityStateInitialUndefinedVersion value)?
-        undefinedVersion,
-    TResult Function(_AuthNavigationPossibilityStateMobileVersion value)?
-        mobileVersion,
-    TResult Function(_AuthNavigationPossibilityStateDesktopVersion value)?
-        desktopVersion,
-    required TResult orElse(),
-  }) {
-    if (desktopVersion != null) {
-      return desktopVersion(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _AuthNavigationPossibilityStateDesktopVersion
-    implements AuthNavigationPossibilityState {
-  factory _AuthNavigationPossibilityStateDesktopVersion(
-          {required final EAuthPossibilities selectedPossibility}) =
-      _$AuthNavigationPossibilityStateDesktopVersionImpl;
-
-  EAuthPossibilities get selectedPossibility;
-  @JsonKey(ignore: true)
-  _$$AuthNavigationPossibilityStateDesktopVersionImplCopyWith<
-          _$AuthNavigationPossibilityStateDesktopVersionImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

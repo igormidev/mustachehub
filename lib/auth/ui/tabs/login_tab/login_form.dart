@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../pages/login_page/sections/login_form_and_buttons_section/login_form_and_buttons_section.dart';
+import 'package:mustachehub/auth/ui/sections/login_form_and_buttons_section/login_form_and_buttons_section.dart';
 
 class LoginTab extends StatelessWidget {
   const LoginTab({super.key});
@@ -14,18 +13,17 @@ class LoginTab extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 50),
             Text(
-              'Login',
+              'Log in',
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                     color: Theme.of(context).colorScheme.outline,
                   ),
             ),
             Text(
-              'Enter your mustache account',
+              'Enter your mustache\nhub account',
               style: Theme.of(context).textTheme.displaySmall,
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 25),
             const LoginFormAndButtonsSection(),
           ],
         ),

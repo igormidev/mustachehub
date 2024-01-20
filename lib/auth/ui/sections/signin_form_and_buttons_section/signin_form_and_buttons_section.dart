@@ -2,20 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mustache_hub_core/mustache_hub_core.dart';
-import 'package:mustachehub/auth/presenter/cubits/login_form_cubit.dart';
+import 'package:mustachehub/auth/presenter/cubits/sign_up_form_cubit.dart';
 
-part 'login_form_and_buttons_section_methods.dart';
+part 'signin_form_and_buttons_section_methods.dart';
 
-class LoginFormAndButtonsSection extends StatefulWidget {
-  const LoginFormAndButtonsSection({super.key});
+class SigninFormAndButtonsSection extends StatefulWidget {
+  const SigninFormAndButtonsSection({super.key});
 
   @override
-  State<LoginFormAndButtonsSection> createState() =>
-      _LoginFormAndButtonsSectionState();
+  State<SigninFormAndButtonsSection> createState() =>
+      _SigninFormAndButtonsSectionState();
 }
 
-class _LoginFormAndButtonsSectionState extends State<LoginFormAndButtonsSection>
-    with LoginFormAndButtonsSectionMethods, ValidatorsMixins {
+class _SigninFormAndButtonsSectionState
+    extends State<SigninFormAndButtonsSection>
+    with SignInFormAndButtonsSectionMethods, ValidatorsMixins {
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -23,6 +24,17 @@ class _LoginFormAndButtonsSectionState extends State<LoginFormAndButtonsSection>
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
+          TextFormField(
+            controller: _nameEC,
+            decoration: const InputDecoration(
+              labelText: 'Full name',
+            ),
+            validator: (val) => combineValidators([
+              () => isNotEmpty(val),
+              () => needsToMatchRegex(RegExp('^[a-zA-Z\\s]+'), val),
+            ]),
+          ),
+          const SizedBox(height: 20),
           TextFormField(
             controller: _emailEC,
             validator: isValidEmail,
@@ -43,10 +55,24 @@ class _LoginFormAndButtonsSectionState extends State<LoginFormAndButtonsSection>
           ),
           const SizedBox(height: 20),
           FilledButton(
-            onPressed: _makeLogin,
-            child: const Text('Enter'),
+            onPressed: _createAccount,
+            child: const Text('Create account'),
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 8),
+          Row(
+            children: [
+              const Expanded(child: Divider(endIndent: 8)),
+              Text(
+                'Or',
+                style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                      color: Theme.of(context).colorScheme.outline,
+                      fontWeight: FontWeight.bold,
+                    ),
+              ),
+              const Expanded(child: Divider(indent: 8)),
+            ],
+          ),
+          const SizedBox(height: 8),
           Row(
             children: [
               Expanded(
@@ -57,7 +83,7 @@ class _LoginFormAndButtonsSectionState extends State<LoginFormAndButtonsSection>
                     color: Colors.white,
                   ),
                   label: Text(
-                    'Enter with Google',
+                    'Create with Google',
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
                           color: Colors.white,
                         ),
@@ -80,7 +106,7 @@ class _LoginFormAndButtonsSectionState extends State<LoginFormAndButtonsSection>
                     color: Colors.white,
                   ),
                   label: Text(
-                    'Enter with Google',
+                    'Create with Google',
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
                           color: Colors.white,
                         ),
@@ -92,38 +118,6 @@ class _LoginFormAndButtonsSectionState extends State<LoginFormAndButtonsSection>
                       borderRadius: BorderRadius.circular(12), // <-- Radius
                     ),
                   ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
-          Row(
-            children: [
-              const Expanded(child: Divider(endIndent: 8)),
-              Text(
-                'Or',
-                style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                      color: Theme.of(context).colorScheme.outline,
-                      fontWeight: FontWeight.bold,
-                    ),
-              ),
-              const Expanded(child: Divider(indent: 8)),
-            ],
-          ),
-          const SizedBox(height: 8),
-          Row(
-            children: [
-              Expanded(
-                child: OutlinedButton(
-                  onPressed: () {},
-                  child: const Text('Password recovery'),
-                ),
-              ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: OutlinedButton(
-                  onPressed: () {},
-                  child: const Text('Create account'),
                 ),
               ),
             ],

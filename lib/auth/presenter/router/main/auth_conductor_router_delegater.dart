@@ -6,7 +6,9 @@ import 'package:mustachehub/auth/ui/conductor/auth_size_screen_conductor.dart';
 class AuthConductorRouterDelegater extends RouterDelegate<EAuthPossibilities>
     with ChangeNotifier, PopNavigatorRouterDelegateMixin<EAuthPossibilities> {
   AuthNavigationPossibilityState state =
-      AuthNavigationPossibilityState.initial();
+      AuthNavigationPossibilityState.definedVersion(
+    selectedPossibility: EAuthPossibilities.DEFAULT_POSSIBILITY,
+  );
 
   @override
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -14,27 +16,13 @@ class AuthConductorRouterDelegater extends RouterDelegate<EAuthPossibilities>
   void selectNavigation(EAuthPossibilities selectedValue) {
     if (state.selectedPossibility == selectedValue) return;
 
-    final AuthNavigationPossibilityState? newState = state.mapOrNull(
-      desktopVersion: (value) {
-        return AuthNavigationPossibilityState.desktopVersion(
-          selectedPossibility: selectedValue,
-        );
-      },
-      mobileVersion: (value) {
-        return AuthNavigationPossibilityState.mobileVersion(
-          selectedPossibility: selectedValue,
-        );
-      },
+    final AuthNavigationPossibilityState newState =
+        AuthNavigationPossibilityState.definedVersion(
+      selectedPossibility: selectedValue,
     );
-    if (newState != null) {
-      state = newState;
-      notifyListeners();
-    } else {
-      state = AuthNavigationPossibilityState.undefinedVersion(
-        selectedPossibility: selectedValue,
-      );
-      notifyListeners();
-    }
+
+    state = newState;
+    notifyListeners();
   }
 
   @override
@@ -55,9 +43,8 @@ class AuthConductorRouterDelegater extends RouterDelegate<EAuthPossibilities>
 
   @override
   Widget build(BuildContext context) {
-    if (state.selectedPossibility == null) const SizedBox.shrink();
-
     return AuthSizeScreenConductor(
+      navigatorKey: navigatorKey,
       onPopPageCallback: _handlePopPage,
     );
   }
