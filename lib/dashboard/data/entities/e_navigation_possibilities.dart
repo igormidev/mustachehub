@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-enum ENavigationPossibilities {
+enum EDashboardNavigationPossibilities {
   collection(
     Icons.collections_bookmark_outlined,
     Icons.collections_bookmark_rounded,
@@ -37,12 +37,12 @@ enum ENavigationPossibilities {
   );
 
   // ignore: non_constant_identifier_names
-  static ENavigationPossibilities DEFAULT_POSSIBILITY =
-      ENavigationPossibilities.collection;
+  static EDashboardNavigationPossibilities DEFAULT_POSSIBILITY =
+      EDashboardNavigationPossibilities.collection;
 
   final IconData selectedIcon;
   final IconData unselectedIcon;
-  const ENavigationPossibilities(
+  const EDashboardNavigationPossibilities(
     this.unselectedIcon,
     this.selectedIcon,
   );

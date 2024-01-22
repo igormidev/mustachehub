@@ -1,35 +1,38 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:mustachehub/dashboard/data/entities/e_navigation_possibilities.dart';
+import 'package:mustachehub/dashboard/presenter/states/current_navigation_state.dart';
 
 part 'navigation_possibilities_state.freezed.dart';
 
 @freezed
 abstract class NavigationPossibilitiesState
     with _$NavigationPossibilitiesState {
+  factory NavigationPossibilitiesState.initial({
+    required Uri navigationIntent,
+  }) = Initial;
+
   factory NavigationPossibilitiesState.loggedIn({
-    @Default(ENavigationPossibilities.collection)
-    ENavigationPossibilities selectedPossibility,
+    required CurrentNavigationState selectedPossibility,
     @Default([
-      ENavigationPossibilities.collection,
-      ENavigationPossibilities.generateText,
-      ENavigationPossibilities.createMustache,
-      ENavigationPossibilities.account,
-      ENavigationPossibilities.becamePremium,
-      ENavigationPossibilities.settings,
+      EDashboardNavigationPossibilities.collection,
+      EDashboardNavigationPossibilities.generateText,
+      EDashboardNavigationPossibilities.createMustache,
+      EDashboardNavigationPossibilities.account,
+      EDashboardNavigationPossibilities.becamePremium,
+      EDashboardNavigationPossibilities.settings,
     ])
-    List<ENavigationPossibilities> possibilities,
+    List<EDashboardNavigationPossibilities> possibilities,
   }) = LoggedIn;
 
   factory NavigationPossibilitiesState.loggedOut({
-    @Default(ENavigationPossibilities.collection)
-    ENavigationPossibilities selectedPossibility,
+    required CurrentNavigationState selectedPossibility,
     @Default([
-      ENavigationPossibilities.collection,
-      ENavigationPossibilities.generateText,
-      ENavigationPossibilities.createMustache,
-      ENavigationPossibilities.auth,
-      ENavigationPossibilities.settings,
+      EDashboardNavigationPossibilities.collection,
+      EDashboardNavigationPossibilities.generateText,
+      EDashboardNavigationPossibilities.createMustache,
+      EDashboardNavigationPossibilities.auth,
+      EDashboardNavigationPossibilities.settings,
     ])
-    List<ENavigationPossibilities> possibilities,
+    List<EDashboardNavigationPossibilities> possibilities,
   }) = LoggedOut;
 }

@@ -1,22 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:mustachehub/dashboard/data/entities/e_navigation_possibilities.dart';
+import 'package:mustachehub/dashboard/presenter/states/current_navigation_state.dart';
+import 'package:mustachehub/dashboard/presenter/states/navigation_possibilities_state.dart';
 import 'package:mustachehub/dashboard/ui/navigation_widgets/methods/tab_selection_mixin.dart';
 import 'package:mustachehub/dashboard/ui/translation/enums_translation_extensions/navigation_possibilities_extension.dart';
 
 class DashboardDrawer extends StatelessWidget with TabSelectionMixin {
-  final ENavigationPossibilities selectedPossibility;
   @override
-  final List<ENavigationPossibilities> possibilities;
+  final CurrentNavigationState currentNavigationState;
+  final int selectedIndex;
+  @override
+  final List<EDashboardNavigationPossibilities> possibilities;
+  @override
+  final NavigationPossibilitiesState state;
   const DashboardDrawer({
     super.key,
-    required this.selectedPossibility,
+    required this.selectedIndex,
+    required this.currentNavigationState,
     required this.possibilities,
+    required this.state,
   });
 
   @override
   Widget build(BuildContext context) {
-    int selectedIndex = possibilities.indexOf(selectedPossibility);
-
     return SizedBox(
       width: 225,
       child: NavigationDrawer(

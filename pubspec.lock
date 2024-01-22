@@ -177,6 +177,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.18.0"
+  commom_states:
+    dependency: "direct main"
+    description:
+      path: "packages/commom_states"
+      relative: true
+    source: path
+    version: "0.0.1"
   convert:
     dependency: transitive
     description:
@@ -495,6 +502,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.10.0"
+  micro_navigation_core:
+    dependency: transitive
+    description:
+      path: "packages/micro_navigation_core"
+      relative: true
+    source: path
+    version: "0.0.1"
   mime:
     dependency: transitive
     description:

@@ -23,6 +23,8 @@ dependencies:
     path: packages/media_query_core
   mustache_hub_core:
     path: packages/mustache_hub_core
+  commom_states:
+    path: packages/commom_states
 
   firebase_core: ^2.24.2
   firebase_auth: ^4.16.0

@@ -1,4 +1,10 @@
+import 'package:commom_states/cubits/session_cubit.dart';
+import 'package:commom_states/states/session_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mustachehub/dashboard/presenter/states/current_navigation_state.dart';
+import 'package:mustachehub/dashboard/presenter/states/navigation_possibilities_state.dart';
+import 'package:mustachehub/dashboard/ui/router/mustache_router_delegate.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -8,6 +14,19 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(Durations.extralong1, () {
+      final sessionState = context.read<SessionCubit>();
+      sessionState.setSessionState(SessionState.guest());
+      final router =
+          (Router.of(context).routerDelegate as MustacheRouterDelegate);
+      router.selectNavigation(NavigationPossibilitiesState.loggedOut(
+          selectedPossibility: const CollectionCurrentNavigationState()));
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

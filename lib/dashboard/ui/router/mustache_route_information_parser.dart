@@ -1,62 +1,81 @@
+import 'package:commom_states/commom_states.dart';
 import 'package:flutter/material.dart';
-import 'package:mustachehub/dashboard/data/entities/e_navigation_possibilities.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mustachehub/auth/presenter/router/main/auth_navigation_state.dart';
+import 'package:mustachehub/dashboard/presenter/states/current_navigation_state.dart';
+import 'package:mustachehub/dashboard/presenter/states/navigation_possibilities_state.dart';
 
 class MustacheRouteInformationParser
-    extends RouteInformationParser<ENavigationPossibilities> {
+    extends RouteInformationParser<NavigationPossibilitiesState> {
   @override
-  Future<ENavigationPossibilities> parseRouteInformation(
+  Future<NavigationPossibilitiesState> parseRouteInformationWithDependencies(
     RouteInformation routeInformation,
+    BuildContext context,
   ) {
     final String routeName = routeInformation.uri.path;
+    final sessionState = context.read<SessionCubit>().state;
 
-    final ENavigationPossibilities _ = switch (routeName) {
-      '/collection' => ENavigationPossibilities.collection,
-      '/generateText' => ENavigationPossibilities.generateText,
-      '/createMustache' => ENavigationPossibilities.createMustache,
-      '/account' => ENavigationPossibilities.account,
-      '/auth' => ENavigationPossibilities.auth,
-      '/settings' => ENavigationPossibilities.settings,
-      '/becamePremium' => ENavigationPossibilities.becamePremium,
-      (_) => ENavigationPossibilities.DEFAULT_POSSIBILITY,
-    };
+    return sessionState.map<Future<NavigationPossibilitiesState>>(
+      notDeterminedYet: (_) async {
+        return NavigationPossibilitiesState.initial(
+            navigationIntent: routeInformation.uri);
+      },
+      guest: (state) async {
+        final CurrentNavigationState choosedPossibility;
+        if (routeName.startsWith('/collection')) {
+          choosedPossibility = const CollectionCurrentNavigationState();
+        } else if (routeName.startsWith('/generateText')) {
+          choosedPossibility = const GenerateTextNavigationState();
+        } else if (routeName.startsWith('/createMustache')) {
+          choosedPossibility = const CreateMustacheNavigationState();
+        } else if (routeName.startsWith('/auth')) {
+          choosedPossibility = AuthNavigationState.fromUri(path: routeName);
+        } else if (routeName.startsWith('/settings')) {
+          choosedPossibility = const ConfigurationsNavigationState();
+        } else {
+          choosedPossibility = AuthNavigationState.defaultRoute();
+        }
 
-    final ENavigationPossibilities choosedPossibility;
-    if (routeName.startsWith('/collection')) {
-      choosedPossibility = ENavigationPossibilities.collection;
-    } else if (routeName.startsWith('/generateText')) {
-      choosedPossibility = ENavigationPossibilities.generateText;
-    } else if (routeName.startsWith('/createMustache')) {
-      choosedPossibility = ENavigationPossibilities.createMustache;
-    } else if (routeName.startsWith('/account')) {
-      choosedPossibility = ENavigationPossibilities.account;
-    } else if (routeName.startsWith('/auth')) {
-      choosedPossibility = ENavigationPossibilities.auth;
-    } else if (routeName.startsWith('/settings')) {
-      choosedPossibility = ENavigationPossibilities.settings;
-    } else if (routeName.startsWith('/becamePremium')) {
-      choosedPossibility = ENavigationPossibilities.becamePremium;
-    } else {
-      choosedPossibility = ENavigationPossibilities.DEFAULT_POSSIBILITY;
-    }
+        return NavigationPossibilitiesState.loggedOut(
+          selectedPossibility: choosedPossibility,
+        );
+      },
+      loggedIn: (state) async {
+        final CurrentNavigationState choosedPossibility;
 
-    return Future.value(choosedPossibility);
-    // return Future.value(_);
+        if (routeName.startsWith('/collection')) {
+          choosedPossibility = const CollectionCurrentNavigationState();
+        } else if (routeName.startsWith('/generateText')) {
+          choosedPossibility = const GenerateTextNavigationState();
+        } else if (routeName.startsWith('/createMustache')) {
+          choosedPossibility = const CreateMustacheNavigationState();
+        } else if (routeName.startsWith('/account')) {
+          choosedPossibility = const AccountNavigationState();
+        } else if (routeName.startsWith('/settings')) {
+          choosedPossibility = const ConfigurationsNavigationState();
+        } else if (routeName.startsWith('/becamePremium')) {
+          choosedPossibility = const BecamePremiumNavigationState();
+        } else {
+          choosedPossibility = const GenerateTextNavigationState();
+        }
+
+        return NavigationPossibilitiesState.loggedIn(
+          selectedPossibility: choosedPossibility,
+        );
+      },
+    );
   }
 
   @override
   RouteInformation restoreRouteInformation(
-    ENavigationPossibilities configuration,
+    NavigationPossibilitiesState configuration,
   ) {
-    final String routeName = switch (configuration) {
-      ENavigationPossibilities.collection => '/collection',
-      ENavigationPossibilities.generateText => '/generateText',
-      ENavigationPossibilities.createMustache => '/createMustache',
-      ENavigationPossibilities.account => '/account',
-      ENavigationPossibilities.auth => '/auth',
-      ENavigationPossibilities.settings => '/settings',
-      ENavigationPossibilities.becamePremium => '/becamePremium',
-    };
+    final choosedPossibilityName = configuration.map(
+      initial: (state) => state.navigationIntent,
+      loggedIn: (state) => state.selectedPossibility.toUri(),
+      loggedOut: (state) => state.selectedPossibility.toUri(),
+    );
 
-    return RouteInformation(uri: Uri(path: routeName));
+    return RouteInformation(uri: choosedPossibilityName);
   }
 }

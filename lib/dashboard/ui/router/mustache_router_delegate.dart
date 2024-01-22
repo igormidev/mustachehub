@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mustachehub/dashboard/ui/pages/splash_page/splash_page.dart';
 import 'package:mustachehub/dashboard/ui/router/mustache_main_navigator.dart';
-import 'package:mustachehub/dashboard/data/entities/e_navigation_possibilities.dart';
 import 'package:mustachehub/dashboard/presenter/states/navigation_possibilities_state.dart';
 
 class NavigatorService {
@@ -9,91 +9,77 @@ class NavigatorService {
   static final BuildContext rootContext = rootNavigatorState.currentContext!;
 }
 
-class MustacheRouterDelegate extends RouterDelegate<ENavigationPossibilities>
+class MustacheRouterDelegate
+    extends RouterDelegate<NavigationPossibilitiesState>
     with
         ChangeNotifier,
-        PopNavigatorRouterDelegateMixin<ENavigationPossibilities> {
+        PopNavigatorRouterDelegateMixin<NavigationPossibilitiesState> {
   MustacheRouterDelegate();
-
-  NavigationPossibilitiesState state = NavigationPossibilitiesState.loggedOut();
 
   @override
   final GlobalKey<NavigatorState> navigatorKey =
       NavigatorService.rootNavigatorState;
 
-  void setUserToLoggedIn() {
-    state = LoggedIn();
-    notifyListeners();
-  }
-
-  void setUserToLoggedOut() {
-    state = LoggedOut();
-    notifyListeners();
-  }
-
-  void selectNavigation(ENavigationPossibilities selectedValue) {
-    if (state.selectedPossibility == selectedValue) return;
-    if (state is LoggedIn) {
-      final LoggedIn loggedInState = state as LoggedIn;
-
-      final isValidPossibility =
-          loggedInState.possibilities.contains(selectedValue);
-
-      if (isValidPossibility) {
-        state = NavigationPossibilitiesState.loggedIn(
-          selectedPossibility: selectedValue,
-        );
-      } else {
-        state = NavigationPossibilitiesState.loggedIn(
-          selectedPossibility: ENavigationPossibilities.account,
-        );
-      }
-    } else if (state is LoggedOut) {
-      final LoggedOut loggedOutState = state as LoggedOut;
-
-      final isValidPossibility =
-          loggedOutState.possibilities.contains(selectedValue);
-
-      if (isValidPossibility) {
-        state = NavigationPossibilitiesState.loggedOut(
-          selectedPossibility: selectedValue,
-        );
-      } else {
-        state = NavigationPossibilitiesState.loggedOut(
-          selectedPossibility: ENavigationPossibilities.auth,
-        );
-      }
-    }
-    notifyListeners();
-  }
+  NavigationPossibilitiesState? state;
 
   @override
   Future<void> setNewRoutePath(
-    ENavigationPossibilities configuration,
+    NavigationPossibilitiesState configuration,
   ) async {
     selectNavigation(configuration);
   }
 
+  void selectNavigation(
+    NavigationPossibilitiesState configuration,
+  ) {
+    state = configuration;
+    final possibility = configuration.mapOrNull(
+      loggedIn: (value) => value.selectedPossibility.possibilityEnum,
+      loggedOut: (value) => value.selectedPossibility.possibilityEnum,
+    );
+    print('changedToPossibility $possibility');
+    notifyListeners();
+  }
+
   @override
-  ENavigationPossibilities get currentConfiguration =>
-      state.selectedPossibility;
+  NavigationPossibilitiesState? get currentConfiguration => state;
 
   bool _handlePopPage(Route<dynamic> route, dynamic result) {
     final bool success = route.didPop(result);
-    notifyListeners();
+    if (success) {
+      notifyListeners();
+    }
     return success;
   }
 
   @override
   Widget build(BuildContext context) {
-    final ENavigationPossibilities possibility = state.selectedPossibility;
-    final List<ENavigationPossibilities> possibilities = state.possibilities;
+    if (state == null) return SizedBox.fromSize();
 
-    return MustacheMainNavigator(
-      navigatorKey: navigatorKey,
-      possibility: possibility,
-      possibilities: possibilities,
-      onPopPageCallback: _handlePopPage,
+    return state!.map(
+      initial: (value) {
+        return const SplashScreen();
+      },
+      loggedIn: (value) {
+        print('value: ${value.selectedPossibility.possibilityEnum}');
+        return MustacheMainNavigator(
+          navigatorKey: navigatorKey,
+          currentNavigationState: value.selectedPossibility,
+          possibilities: value.possibilities,
+          onPopPageCallback: _handlePopPage,
+          state: value,
+        );
+      },
+      loggedOut: (value) {
+        print('value: ${value.selectedPossibility.possibilityEnum}');
+        return MustacheMainNavigator(
+          navigatorKey: navigatorKey,
+          currentNavigationState: value.selectedPossibility,
+          possibilities: value.possibilities,
+          onPopPageCallback: _handlePopPage,
+          state: value,
+        );
+      },
     );
   }
 }
