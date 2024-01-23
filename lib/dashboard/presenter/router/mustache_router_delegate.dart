@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mustachehub/dashboard/ui/pages/splash_page/splash_page.dart';
-import 'package:mustachehub/dashboard/ui/router/mustache_main_navigator.dart';
+import 'package:mustachehub/dashboard/ui/pages/view/splash_view.dart';
+import 'package:mustachehub/dashboard/presenter/router/mustache_main_navigator.dart';
 import 'package:mustachehub/dashboard/presenter/states/navigation_possibilities_state.dart';
 
 class NavigatorService {
@@ -44,7 +44,7 @@ class MustacheRouterDelegate
   @override
   NavigationPossibilitiesState? get currentConfiguration => state;
 
-  bool _handlePopPage(Route<dynamic> route, dynamic result) {
+  bool handlePopPage(Route<dynamic> route, dynamic result) {
     final bool success = route.didPop(result);
     if (success) {
       notifyListeners();
@@ -61,22 +61,20 @@ class MustacheRouterDelegate
         return const SplashScreen();
       },
       loggedIn: (value) {
-        print('value: ${value.selectedPossibility.possibilityEnum}');
         return MustacheMainNavigator(
           navigatorKey: navigatorKey,
           currentNavigationState: value.selectedPossibility,
           possibilities: value.possibilities,
-          onPopPageCallback: _handlePopPage,
+          onPopPageCallback: handlePopPage,
           state: value,
         );
       },
       loggedOut: (value) {
-        print('value: ${value.selectedPossibility.possibilityEnum}');
         return MustacheMainNavigator(
           navigatorKey: navigatorKey,
           currentNavigationState: value.selectedPossibility,
           possibilities: value.possibilities,
-          onPopPageCallback: _handlePopPage,
+          onPopPageCallback: handlePopPage,
           state: value,
         );
       },

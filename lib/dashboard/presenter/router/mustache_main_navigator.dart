@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:media_query_core/responsiveness/visibility_width_based.dart';
-import 'package:mustachehub/auth/presenter/states/auth_module_router.dart';
+import 'package:mustachehub/auth/presenter/router/main/auth_module.dart';
 import 'package:mustachehub/dashboard/data/entities/e_navigation_possibilities.dart';
 import 'package:mustachehub/dashboard/presenter/states/current_navigation_state.dart';
 import 'package:mustachehub/dashboard/presenter/states/navigation_possibilities_state.dart';
 import 'package:mustachehub/dashboard/ui/navigation_widgets/dashboard_drawer/dashboard_drawer.dart';
 import 'package:mustachehub/dashboard/ui/navigation_widgets/dashboard_rail/dashboard_rail.dart';
+import 'package:mustachehub/dashboard/ui/pages/not_found_404_page/not_found_404_page.dart';
 
 class MustacheMainNavigator extends StatelessWidget {
   final NavigationPossibilitiesState state;
@@ -53,13 +54,15 @@ class MustacheMainNavigator extends StatelessWidget {
             key: navigatorKey,
             pages: [
               switch (currentNavigationState.possibilityEnum) {
-                EDashboardNavigationPossibilities.collection => MaterialPage(
-                    key: const ValueKey(
-                      EDashboardNavigationPossibilities.collection,
-                    ),
-                    child: Container(
-                      color: Colors.green,
-                    ),
+                EDashboardNavigationPossibilities.collection =>
+                  const MaterialPage(
+                    // key: const ValueKey(
+                    //   EDashboardNavigationPossibilities.collection,
+                    // ),
+                    // child: Container(
+                    //   color: Colors.green,
+                    // ),
+                    child: NotFound404Page(),
                   ),
                 EDashboardNavigationPossibilities.generateText => MaterialPage(
                     key: const ValueKey(
@@ -85,7 +88,7 @@ class MustacheMainNavigator extends StatelessWidget {
                   ),
                 EDashboardNavigationPossibilities.auth => const MaterialPage(
                     key: ValueKey(EDashboardNavigationPossibilities.auth),
-                    child: AuthModuleRouter(),
+                    child: AuthModule(),
                   ),
                 EDashboardNavigationPossibilities.settings => MaterialPage(
                     key: const ValueKey(

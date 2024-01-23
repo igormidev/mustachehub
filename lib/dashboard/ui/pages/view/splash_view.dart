@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mustachehub/dashboard/presenter/states/current_navigation_state.dart';
 import 'package:mustachehub/dashboard/presenter/states/navigation_possibilities_state.dart';
-import 'package:mustachehub/dashboard/ui/router/mustache_router_delegate.dart';
+import 'package:mustachehub/dashboard/presenter/router/mustache_router_delegate.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

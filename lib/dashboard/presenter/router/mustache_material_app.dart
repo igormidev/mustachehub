@@ -1,7 +1,7 @@
 import 'package:commom_states/commom_states.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mustachehub/dashboard/ui/router/mustache_router_delegate.dart';
+import 'package:mustachehub/dashboard/presenter/router/mustache_router_delegate.dart';
 import 'mustache_route_information_parser.dart';
 
 class MustacheMaterialApp extends StatelessWidget {

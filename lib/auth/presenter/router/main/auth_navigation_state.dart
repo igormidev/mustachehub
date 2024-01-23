@@ -5,7 +5,7 @@ import 'package:mustachehub/dashboard/presenter/states/current_navigation_state.
 class AuthNavigationState extends CurrentNavigationState {
   final EAuthPossibilities possibility;
 
-  const AuthNavigationState._(this.possibility);
+  const AuthNavigationState(this.possibility);
 
   @override
   final EDashboardNavigationPossibilities possibilityEnum =
@@ -15,18 +15,18 @@ class AuthNavigationState extends CurrentNavigationState {
     required String path,
   }) {
     if (path.contains('login')) {
-      return const AuthNavigationState._(EAuthPossibilities.login);
+      return const AuthNavigationState(EAuthPossibilities.login);
     } else if (path.contains('signin')) {
-      return const AuthNavigationState._(EAuthPossibilities.sigin);
+      return const AuthNavigationState(EAuthPossibilities.sigin);
     } else if (path.contains('passrecovery')) {
-      return const AuthNavigationState._(EAuthPossibilities.passrecovery);
+      return const AuthNavigationState(EAuthPossibilities.passrecovery);
     } else {
-      return const AuthNavigationState._(EAuthPossibilities.login);
+      return const AuthNavigationState(EAuthPossibilities.login);
     }
   }
 
   factory AuthNavigationState.defaultRoute() =>
-      const AuthNavigationState._(EAuthPossibilities.login);
+      const AuthNavigationState(EAuthPossibilities.login);
 
   @override
   Uri toUri() {

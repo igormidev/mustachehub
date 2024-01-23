@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mustachehub/auth/presenter/router/main/auth_conductor_router_delegater.dart';
+import 'package:mustachehub/auth/presenter/router/main/auth_navigation_state.dart';
 import 'package:mustachehub/auth/presenter/router/main/e_auth_possibilities.dart';
 import 'package:mustachehub/auth/ui/tabs/login_tab/login_form.dart';
 import 'package:mustachehub/auth/ui/tabs/pass_recovery_tab/pass_recovery_tab.dart';
@@ -8,12 +8,14 @@ import 'package:mustachehub/auth/ui/views/auth_desktop_view/cards/logging_advant
 import 'package:mustachehub/auth/ui/widgets/onboarding_logo.dart';
 
 class AuthDesktopView extends StatelessWidget {
+  final AuthNavigationState state;
   final GlobalKey<NavigatorState> navigatorKey;
   final bool Function(Route<dynamic> route, dynamic result) onPopPageCallback;
 
   const AuthDesktopView({
     super.key,
     required this.navigatorKey,
+    required this.state,
     required this.onPopPageCallback,
   });
 
@@ -58,16 +60,13 @@ class AuthDesktopView extends StatelessWidget {
           child: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 500),
             child: Builder(builder: (context) {
-              final AuthConductorRouterDelegater delegate = (Router.of(context)
-                  .routerDelegate as AuthConductorRouterDelegater);
-
               return Material(
                 color: Colors.transparent,
                 child: Navigator(
                   key: navigatorKey,
                   onPopPage: onPopPageCallback,
                   pages: [
-                    switch (delegate.currentConfiguration) {
+                    switch (state.possibility) {
                       EAuthPossibilities.login => MaterialPage(
                           key: ValueKey(EAuthPossibilities.login.toString()),
                           child: const LoginTab(),
@@ -80,10 +79,6 @@ class AuthDesktopView extends StatelessWidget {
                           key: ValueKey(
                               EAuthPossibilities.passrecovery.toString()),
                           child: const PassRecoveryTab(),
-                        ),
-                      null => const MaterialPage(
-                          key: ValueKey('authempty'),
-                          child: SizedBox.shrink(),
                         ),
                     }
                   ],

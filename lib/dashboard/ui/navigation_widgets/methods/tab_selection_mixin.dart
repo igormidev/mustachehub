@@ -3,7 +3,7 @@ import 'package:mustachehub/auth/presenter/router/main/auth_navigation_state.dar
 import 'package:mustachehub/dashboard/data/entities/e_navigation_possibilities.dart';
 import 'package:mustachehub/dashboard/presenter/states/current_navigation_state.dart';
 import 'package:mustachehub/dashboard/presenter/states/navigation_possibilities_state.dart';
-import 'package:mustachehub/dashboard/ui/router/mustache_router_delegate.dart';
+import 'package:mustachehub/dashboard/presenter/router/mustache_router_delegate.dart';
 
 mixin TabSelectionMixin on Widget {
   abstract final CurrentNavigationState currentNavigationState;

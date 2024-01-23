@@ -13,7 +13,9 @@ class SigninTab extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const BackButton(),
+            BackButton(onPressed: () {
+              Router.neglect(context, () {});
+            }),
             Text(
               'Sign in',
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
