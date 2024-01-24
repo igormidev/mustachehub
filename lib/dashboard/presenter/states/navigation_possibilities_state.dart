@@ -1,18 +1,15 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:mustachehub/dashboard/data/entities/e_navigation_possibilities.dart';
-import 'package:mustachehub/dashboard/presenter/states/current_navigation_state.dart';
 
 part 'navigation_possibilities_state.freezed.dart';
 
 @freezed
 abstract class NavigationPossibilitiesState
     with _$NavigationPossibilitiesState {
-  factory NavigationPossibilitiesState.initial({
-    required Uri navigationIntent,
-  }) = Initial;
+  factory NavigationPossibilitiesState.initial() = Initial;
 
   factory NavigationPossibilitiesState.loggedIn({
-    required CurrentNavigationState selectedPossibility,
+    required EDashboardNavigationPossibilities selectedPossibility,
     @Default([
       EDashboardNavigationPossibilities.collection,
       EDashboardNavigationPossibilities.generateText,
@@ -25,7 +22,7 @@ abstract class NavigationPossibilitiesState
   }) = LoggedIn;
 
   factory NavigationPossibilitiesState.loggedOut({
-    required CurrentNavigationState selectedPossibility,
+    required EDashboardNavigationPossibilities selectedPossibility,
     @Default([
       EDashboardNavigationPossibilities.collection,
       EDashboardNavigationPossibilities.generateText,

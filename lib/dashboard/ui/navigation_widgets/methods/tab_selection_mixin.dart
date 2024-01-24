@@ -1,74 +1,45 @@
+import 'package:commom_states/commom_states.dart';
 import 'package:flutter/material.dart';
-import 'package:mustachehub/auth/presenter/router/main/auth_navigation_state.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mustachehub/dashboard/data/entities/e_navigation_possibilities.dart';
-import 'package:mustachehub/dashboard/presenter/states/current_navigation_state.dart';
-import 'package:mustachehub/dashboard/presenter/states/navigation_possibilities_state.dart';
-import 'package:mustachehub/dashboard/presenter/router/mustache_router_delegate.dart';
+import 'package:mustachehub/dashboard/presenter/cubit/navigation_possibilities_cubit.dart';
 
 mixin TabSelectionMixin on Widget {
-  abstract final CurrentNavigationState currentNavigationState;
-  abstract final NavigationPossibilitiesState state;
-  abstract final List<EDashboardNavigationPossibilities> possibilities;
-
-  void onTabSelected(int index, BuildContext context) {
-    final MustacheRouterDelegate mustacheRouter =
-        Router.of(context).routerDelegate as MustacheRouterDelegate;
+  void onTabSelected(
+      int index,
+      List<EDashboardNavigationPossibilities> possibilities,
+      BuildContext context) {
+    if (context.isSessionStateDetermined) return;
 
     final EDashboardNavigationPossibilities choosedPossibility =
         possibilities[index];
 
-    final selectedPossibility = mustacheRouter.currentConfiguration?.mapOrNull(
-      loggedIn: (value) => value.selectedPossibility,
-      loggedOut: (value) => value.selectedPossibility,
-    );
+    final dashboardCubit = context.read<NavigationPossibilitiesCubit>();
+    dashboardCubit.setDashboardEnum(context, choosedPossibility);
 
-    if (selectedPossibility?.possibilityEnum == choosedPossibility) {
-      return;
+    switch (choosedPossibility) {
+      case EDashboardNavigationPossibilities.collection:
+        context.go('/collection');
+        break;
+      case EDashboardNavigationPossibilities.generateText:
+        context.go('/generateText');
+        break;
+      case EDashboardNavigationPossibilities.createMustache:
+        context.go('/createMustache');
+        break;
+      case EDashboardNavigationPossibilities.account:
+        context.go('/account');
+        break;
+      case EDashboardNavigationPossibilities.auth:
+        context.go('/auth/login');
+        break;
+      case EDashboardNavigationPossibilities.settings:
+        context.go('/settings');
+        break;
+      case EDashboardNavigationPossibilities.becamePremium:
+        context.go('/becamePremium');
+        break;
     }
-    final CurrentNavigationState newRoute = switch (choosedPossibility) {
-      EDashboardNavigationPossibilities.collection =>
-        const CollectionCurrentNavigationState(),
-      EDashboardNavigationPossibilities.generateText =>
-        const GenerateTextNavigationState(),
-      EDashboardNavigationPossibilities.createMustache =>
-        const CreateMustacheNavigationState(),
-      EDashboardNavigationPossibilities.account =>
-        const AccountNavigationState(),
-      EDashboardNavigationPossibilities.auth =>
-        AuthNavigationState.defaultRoute(),
-      EDashboardNavigationPossibilities.settings =>
-        const ConfigurationsNavigationState(),
-      EDashboardNavigationPossibilities.becamePremium =>
-        const BecamePremiumNavigationState(),
-    };
-
-    final router =
-        (Router.of(context).routerDelegate as MustacheRouterDelegate);
-
-    final newPossibility = router.state?.mapOrNull(
-      loggedIn: (value) => LoggedIn(selectedPossibility: newRoute),
-      loggedOut: (value) => LoggedOut(selectedPossibility: newRoute),
-    );
-
-    if (newPossibility == null) return;
-
-    router.selectNavigation(newPossibility);
-
-    // print('inner ${newRoute.possibilityEnum}');
-
-    // Router.navigate(context, () {
-    //   mustacheRouter.selectNavigation(NavigationPossibilitiesState.loggedOut(
-    //     selectedPossibility: newRoute,
-    //   ));
-    // });
-
-    // Router.of(context)
-    //     .routeInformationParser!
-    //     .parseRouteInformationWithDependencies(
-    //       RouteInformation(
-    //         uri: currentNavigationState.toUri(),
-    //       ),
-    //       context,
-    //     );
   }
 }

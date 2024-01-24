@@ -18,33 +18,35 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$NavigationPossibilitiesState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Uri navigationIntent) initial,
-    required TResult Function(CurrentNavigationState selectedPossibility,
+    required TResult Function() initial,
+    required TResult Function(
+            EDashboardNavigationPossibilities selectedPossibility,
             List<EDashboardNavigationPossibilities> possibilities)
         loggedIn,
-    required TResult Function(CurrentNavigationState selectedPossibility,
+    required TResult Function(
+            EDashboardNavigationPossibilities selectedPossibility,
             List<EDashboardNavigationPossibilities> possibilities)
         loggedOut,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Uri navigationIntent)? initial,
-    TResult? Function(CurrentNavigationState selectedPossibility,
+    TResult? Function()? initial,
+    TResult? Function(EDashboardNavigationPossibilities selectedPossibility,
             List<EDashboardNavigationPossibilities> possibilities)?
         loggedIn,
-    TResult? Function(CurrentNavigationState selectedPossibility,
+    TResult? Function(EDashboardNavigationPossibilities selectedPossibility,
             List<EDashboardNavigationPossibilities> possibilities)?
         loggedOut,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Uri navigationIntent)? initial,
-    TResult Function(CurrentNavigationState selectedPossibility,
+    TResult Function()? initial,
+    TResult Function(EDashboardNavigationPossibilities selectedPossibility,
             List<EDashboardNavigationPossibilities> possibilities)?
         loggedIn,
-    TResult Function(CurrentNavigationState selectedPossibility,
+    TResult Function(EDashboardNavigationPossibilities selectedPossibility,
             List<EDashboardNavigationPossibilities> possibilities)?
         loggedOut,
     required TResult orElse(),
@@ -100,8 +102,6 @@ abstract class _$$InitialImplCopyWith<$Res> {
   factory _$$InitialImplCopyWith(
           _$InitialImpl value, $Res Function(_$InitialImpl) then) =
       __$$InitialImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({Uri navigationIntent});
 }
 
 /// @nodoc
@@ -111,94 +111,71 @@ class __$$InitialImplCopyWithImpl<$Res>
   __$$InitialImplCopyWithImpl(
       _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? navigationIntent = null,
-  }) {
-    return _then(_$InitialImpl(
-      navigationIntent: null == navigationIntent
-          ? _value.navigationIntent
-          : navigationIntent // ignore: cast_nullable_to_non_nullable
-              as Uri,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$InitialImpl implements Initial {
-  _$InitialImpl({required this.navigationIntent});
-
-  @override
-  final Uri navigationIntent;
+  _$InitialImpl();
 
   @override
   String toString() {
-    return 'NavigationPossibilitiesState.initial(navigationIntent: $navigationIntent)';
+    return 'NavigationPossibilitiesState.initial()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$InitialImpl &&
-            (identical(other.navigationIntent, navigationIntent) ||
-                other.navigationIntent == navigationIntent));
+        (other.runtimeType == runtimeType && other is _$InitialImpl);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, navigationIntent);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>
-      __$$InitialImplCopyWithImpl<_$InitialImpl>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Uri navigationIntent) initial,
-    required TResult Function(CurrentNavigationState selectedPossibility,
+    required TResult Function() initial,
+    required TResult Function(
+            EDashboardNavigationPossibilities selectedPossibility,
             List<EDashboardNavigationPossibilities> possibilities)
         loggedIn,
-    required TResult Function(CurrentNavigationState selectedPossibility,
+    required TResult Function(
+            EDashboardNavigationPossibilities selectedPossibility,
             List<EDashboardNavigationPossibilities> possibilities)
         loggedOut,
   }) {
-    return initial(navigationIntent);
+    return initial();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Uri navigationIntent)? initial,
-    TResult? Function(CurrentNavigationState selectedPossibility,
+    TResult? Function()? initial,
+    TResult? Function(EDashboardNavigationPossibilities selectedPossibility,
             List<EDashboardNavigationPossibilities> possibilities)?
         loggedIn,
-    TResult? Function(CurrentNavigationState selectedPossibility,
+    TResult? Function(EDashboardNavigationPossibilities selectedPossibility,
             List<EDashboardNavigationPossibilities> possibilities)?
         loggedOut,
   }) {
-    return initial?.call(navigationIntent);
+    return initial?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Uri navigationIntent)? initial,
-    TResult Function(CurrentNavigationState selectedPossibility,
+    TResult Function()? initial,
+    TResult Function(EDashboardNavigationPossibilities selectedPossibility,
             List<EDashboardNavigationPossibilities> possibilities)?
         loggedIn,
-    TResult Function(CurrentNavigationState selectedPossibility,
+    TResult Function(EDashboardNavigationPossibilities selectedPossibility,
             List<EDashboardNavigationPossibilities> possibilities)?
         loggedOut,
     required TResult orElse(),
   }) {
     if (initial != null) {
-      return initial(navigationIntent);
+      return initial();
     }
     return orElse();
   }
@@ -239,12 +216,7 @@ class _$InitialImpl implements Initial {
 }
 
 abstract class Initial implements NavigationPossibilitiesState {
-  factory Initial({required final Uri navigationIntent}) = _$InitialImpl;
-
-  Uri get navigationIntent;
-  @JsonKey(ignore: true)
-  _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  factory Initial() = _$InitialImpl;
 }
 
 /// @nodoc
@@ -254,7 +226,7 @@ abstract class _$$LoggedInImplCopyWith<$Res> {
       __$$LoggedInImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
-      {CurrentNavigationState selectedPossibility,
+      {EDashboardNavigationPossibilities selectedPossibility,
       List<EDashboardNavigationPossibilities> possibilities});
 }
 
@@ -276,7 +248,7 @@ class __$$LoggedInImplCopyWithImpl<$Res>
       selectedPossibility: null == selectedPossibility
           ? _value.selectedPossibility
           : selectedPossibility // ignore: cast_nullable_to_non_nullable
-              as CurrentNavigationState,
+              as EDashboardNavigationPossibilities,
       possibilities: null == possibilities
           ? _value._possibilities
           : possibilities // ignore: cast_nullable_to_non_nullable
@@ -301,7 +273,7 @@ class _$LoggedInImpl implements LoggedIn {
       : _possibilities = possibilities;
 
   @override
-  final CurrentNavigationState selectedPossibility;
+  final EDashboardNavigationPossibilities selectedPossibility;
   final List<EDashboardNavigationPossibilities> _possibilities;
   @override
   @JsonKey()
@@ -340,11 +312,13 @@ class _$LoggedInImpl implements LoggedIn {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Uri navigationIntent) initial,
-    required TResult Function(CurrentNavigationState selectedPossibility,
+    required TResult Function() initial,
+    required TResult Function(
+            EDashboardNavigationPossibilities selectedPossibility,
             List<EDashboardNavigationPossibilities> possibilities)
         loggedIn,
-    required TResult Function(CurrentNavigationState selectedPossibility,
+    required TResult Function(
+            EDashboardNavigationPossibilities selectedPossibility,
             List<EDashboardNavigationPossibilities> possibilities)
         loggedOut,
   }) {
@@ -354,11 +328,11 @@ class _$LoggedInImpl implements LoggedIn {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Uri navigationIntent)? initial,
-    TResult? Function(CurrentNavigationState selectedPossibility,
+    TResult? Function()? initial,
+    TResult? Function(EDashboardNavigationPossibilities selectedPossibility,
             List<EDashboardNavigationPossibilities> possibilities)?
         loggedIn,
-    TResult? Function(CurrentNavigationState selectedPossibility,
+    TResult? Function(EDashboardNavigationPossibilities selectedPossibility,
             List<EDashboardNavigationPossibilities> possibilities)?
         loggedOut,
   }) {
@@ -368,11 +342,11 @@ class _$LoggedInImpl implements LoggedIn {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Uri navigationIntent)? initial,
-    TResult Function(CurrentNavigationState selectedPossibility,
+    TResult Function()? initial,
+    TResult Function(EDashboardNavigationPossibilities selectedPossibility,
             List<EDashboardNavigationPossibilities> possibilities)?
         loggedIn,
-    TResult Function(CurrentNavigationState selectedPossibility,
+    TResult Function(EDashboardNavigationPossibilities selectedPossibility,
             List<EDashboardNavigationPossibilities> possibilities)?
         loggedOut,
     required TResult orElse(),
@@ -420,11 +394,11 @@ class _$LoggedInImpl implements LoggedIn {
 
 abstract class LoggedIn implements NavigationPossibilitiesState {
   factory LoggedIn(
-          {required final CurrentNavigationState selectedPossibility,
+          {required final EDashboardNavigationPossibilities selectedPossibility,
           final List<EDashboardNavigationPossibilities> possibilities}) =
       _$LoggedInImpl;
 
-  CurrentNavigationState get selectedPossibility;
+  EDashboardNavigationPossibilities get selectedPossibility;
   List<EDashboardNavigationPossibilities> get possibilities;
   @JsonKey(ignore: true)
   _$$LoggedInImplCopyWith<_$LoggedInImpl> get copyWith =>
@@ -438,7 +412,7 @@ abstract class _$$LoggedOutImplCopyWith<$Res> {
       __$$LoggedOutImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
-      {CurrentNavigationState selectedPossibility,
+      {EDashboardNavigationPossibilities selectedPossibility,
       List<EDashboardNavigationPossibilities> possibilities});
 }
 
@@ -460,7 +434,7 @@ class __$$LoggedOutImplCopyWithImpl<$Res>
       selectedPossibility: null == selectedPossibility
           ? _value.selectedPossibility
           : selectedPossibility // ignore: cast_nullable_to_non_nullable
-              as CurrentNavigationState,
+              as EDashboardNavigationPossibilities,
       possibilities: null == possibilities
           ? _value._possibilities
           : possibilities // ignore: cast_nullable_to_non_nullable
@@ -484,7 +458,7 @@ class _$LoggedOutImpl implements LoggedOut {
       : _possibilities = possibilities;
 
   @override
-  final CurrentNavigationState selectedPossibility;
+  final EDashboardNavigationPossibilities selectedPossibility;
   final List<EDashboardNavigationPossibilities> _possibilities;
   @override
   @JsonKey()
@@ -523,11 +497,13 @@ class _$LoggedOutImpl implements LoggedOut {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Uri navigationIntent) initial,
-    required TResult Function(CurrentNavigationState selectedPossibility,
+    required TResult Function() initial,
+    required TResult Function(
+            EDashboardNavigationPossibilities selectedPossibility,
             List<EDashboardNavigationPossibilities> possibilities)
         loggedIn,
-    required TResult Function(CurrentNavigationState selectedPossibility,
+    required TResult Function(
+            EDashboardNavigationPossibilities selectedPossibility,
             List<EDashboardNavigationPossibilities> possibilities)
         loggedOut,
   }) {
@@ -537,11 +513,11 @@ class _$LoggedOutImpl implements LoggedOut {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Uri navigationIntent)? initial,
-    TResult? Function(CurrentNavigationState selectedPossibility,
+    TResult? Function()? initial,
+    TResult? Function(EDashboardNavigationPossibilities selectedPossibility,
             List<EDashboardNavigationPossibilities> possibilities)?
         loggedIn,
-    TResult? Function(CurrentNavigationState selectedPossibility,
+    TResult? Function(EDashboardNavigationPossibilities selectedPossibility,
             List<EDashboardNavigationPossibilities> possibilities)?
         loggedOut,
   }) {
@@ -551,11 +527,11 @@ class _$LoggedOutImpl implements LoggedOut {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Uri navigationIntent)? initial,
-    TResult Function(CurrentNavigationState selectedPossibility,
+    TResult Function()? initial,
+    TResult Function(EDashboardNavigationPossibilities selectedPossibility,
             List<EDashboardNavigationPossibilities> possibilities)?
         loggedIn,
-    TResult Function(CurrentNavigationState selectedPossibility,
+    TResult Function(EDashboardNavigationPossibilities selectedPossibility,
             List<EDashboardNavigationPossibilities> possibilities)?
         loggedOut,
     required TResult orElse(),
@@ -603,11 +579,11 @@ class _$LoggedOutImpl implements LoggedOut {
 
 abstract class LoggedOut implements NavigationPossibilitiesState {
   factory LoggedOut(
-          {required final CurrentNavigationState selectedPossibility,
+          {required final EDashboardNavigationPossibilities selectedPossibility,
           final List<EDashboardNavigationPossibilities> possibilities}) =
       _$LoggedOutImpl;
 
-  CurrentNavigationState get selectedPossibility;
+  EDashboardNavigationPossibilities get selectedPossibility;
   List<EDashboardNavigationPossibilities> get possibilities;
   @JsonKey(ignore: true)
   _$$LoggedOutImplCopyWith<_$LoggedOutImpl> get copyWith =>

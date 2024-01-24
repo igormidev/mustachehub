@@ -33,8 +33,36 @@ extension SessionStateBuildContextExtension on BuildContext {
             orElse: () => false,
           );
 
+  bool get isSessionStateDetermined => read<SessionCubit>().state.maybeMap(
+        notDeterminedYet: (_) => false,
+        orElse: () => true,
+      );
+
   bool get isUserNotLoggedIn => isUserLoggedIn == false;
   bool get isUserLoggedIn => read<SessionCubit>().state.maybeMap(
+        loggedIn: (_) => true,
+        orElse: () => false,
+      );
+}
+
+extension SessionStateExtension on SessionState {
+  bool get isUserStarterOrHigher =>
+      isStarterUser || isUnlimitedUser || isProUser;
+  bool get isUserUnlimitedOrHigher => isUnlimitedUser || isProUser;
+
+  bool get isFreeUser =>
+      isUserLoggedInAs(AccountTier.free) || isUserNotLoggedIn;
+  bool get isStarterUser => isUserLoggedInAs(AccountTier.starter);
+  bool get isUnlimitedUser => isUserLoggedInAs(AccountTier.unlimited);
+  bool get isProUser => isUserLoggedInAs(AccountTier.pro);
+
+  bool isUserLoggedInAs(AccountTier tier) => maybeMap(
+        loggedIn: (state) => state.account.tier == tier,
+        orElse: () => false,
+      );
+
+  bool get isUserNotLoggedIn => isUserLoggedIn == false;
+  bool get isUserLoggedIn => maybeMap(
         loggedIn: (_) => true,
         orElse: () => false,
       );

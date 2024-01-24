@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mustachehub/auth/ui/sections/pass_recovery_tab/pass_recovery_form_and_buttons_section.dart';
-import 'package:mustachehub/dashboard/presenter/router/mustache_router_delegate.dart';
 
 class PassRecoveryTab extends StatelessWidget {
   const PassRecoveryTab({super.key});
@@ -15,10 +14,7 @@ class PassRecoveryTab extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             BackButton(
-              onPressed: () {
-                // Navigator.of(context).pop();
-                Navigator.of(NavigatorService.rootContext).pop();
-              },
+              onPressed: () {},
             ),
             Text(
               'Pass recovery',

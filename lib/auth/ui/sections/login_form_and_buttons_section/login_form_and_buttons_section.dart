@@ -3,10 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mustache_hub_core/mustache_hub_core.dart';
 import 'package:mustachehub/auth/presenter/cubits/login_form_cubit.dart';
-import 'package:mustachehub/auth/presenter/router/main/auth_navigation_state.dart';
-import 'package:mustachehub/auth/presenter/router/main/e_auth_possibilities.dart';
-import 'package:mustachehub/dashboard/presenter/router/extension.dart';
-import 'package:mustachehub/dashboard/presenter/states/navigation_possibilities_state.dart';
 
 part 'login_form_and_buttons_section_methods.dart';
 
@@ -120,13 +116,13 @@ class _LoginFormAndButtonsSectionState extends State<LoginFormAndButtonsSection>
               Expanded(
                 child: OutlinedButton(
                   onPressed: () {
-                    context.router.selectNavigation(
-                      NavigationPossibilitiesState.loggedOut(
-                        selectedPossibility: const AuthNavigationState(
-                          EAuthPossibilities.passrecovery,
-                        ),
-                      ),
-                    );
+                    // context.router.selectNavigation(
+                    //   NavigationPossibilitiesState.loggedOut(
+                    //     selectedPossibility: const AuthNavigationState(
+                    //       EAuthPossibilities.passrecovery,
+                    //     ),
+                    //   ),
+                    // );
                   },
                   child: const Text('Password recovery'),
                 ),
@@ -135,12 +131,12 @@ class _LoginFormAndButtonsSectionState extends State<LoginFormAndButtonsSection>
               Expanded(
                 child: OutlinedButton(
                   onPressed: () {
-                    context.router.selectNavigation(
-                        NavigationPossibilitiesState.loggedOut(
-                      selectedPossibility: const AuthNavigationState(
-                        EAuthPossibilities.sigin,
-                      ),
-                    ));
+                    // context.router.selectNavigation(
+                    //     NavigationPossibilitiesState.loggedOut(
+                    //   selectedPossibility: const AuthNavigationState(
+                    //     EAuthPossibilities.sigin,
+                    //   ),
+                    // ));
                   },
                   child: const Text('Create account'),
                 ),

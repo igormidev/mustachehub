@@ -40,6 +40,12 @@ enum EDashboardNavigationPossibilities {
   static EDashboardNavigationPossibilities DEFAULT_POSSIBILITY =
       EDashboardNavigationPossibilities.collection;
 
+  static EDashboardNavigationPossibilities fromString(String name) {
+    return EDashboardNavigationPossibilities.values.firstWhere(
+      (e) => name.startsWith('/${e.name}'),
+    );
+  }
+
   final IconData selectedIcon;
   final IconData unselectedIcon;
   const EDashboardNavigationPossibilities(

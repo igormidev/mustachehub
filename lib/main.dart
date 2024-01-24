@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:mustachehub/firebase_options.dart';
-import 'package:mustachehub/dashboard/presenter/router/mustache_material_app.dart';
+import 'package:mustachehub/app_core/mustache_material_app.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,6 +17,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MustacheMaterialApp();
+    return const MustacheMaterialApp();
   }
 }

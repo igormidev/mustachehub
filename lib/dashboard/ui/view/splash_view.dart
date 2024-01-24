@@ -2,9 +2,9 @@ import 'package:commom_states/cubits/session_cubit.dart';
 import 'package:commom_states/states/session_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mustachehub/dashboard/presenter/states/current_navigation_state.dart';
+import 'package:mustachehub/dashboard/data/entities/e_navigation_possibilities.dart';
+import 'package:mustachehub/dashboard/presenter/cubit/navigation_possibilities_cubit.dart';
 import 'package:mustachehub/dashboard/presenter/states/navigation_possibilities_state.dart';
-import 'package:mustachehub/dashboard/presenter/router/mustache_router_delegate.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -19,11 +19,15 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Future.delayed(Durations.extralong1, () {
       final sessionState = context.read<SessionCubit>();
-      sessionState.setSessionState(SessionState.guest());
-      final router =
-          (Router.of(context).routerDelegate as MustacheRouterDelegate);
-      router.selectNavigation(NavigationPossibilitiesState.loggedOut(
-          selectedPossibility: const CollectionCurrentNavigationState()));
+      final dashboardCubit = context.read<NavigationPossibilitiesCubit>();
+      Future.delayed(const Duration(seconds: 1), () {
+        dashboardCubit.setNavigationPossibilitiesState(
+          NavigationPossibilitiesState.loggedOut(
+            selectedPossibility: EDashboardNavigationPossibilities.collection,
+          ),
+        );
+        sessionState.setSessionState(SessionState.guest());
+      });
     });
   }
 
