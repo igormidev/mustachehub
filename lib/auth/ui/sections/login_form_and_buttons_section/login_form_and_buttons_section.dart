@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mustache_hub_core/mustache_hub_core.dart';
 import 'package:mustachehub/auth/presenter/cubits/login_form_cubit.dart';
 
@@ -116,13 +117,7 @@ class _LoginFormAndButtonsSectionState extends State<LoginFormAndButtonsSection>
               Expanded(
                 child: OutlinedButton(
                   onPressed: () {
-                    // context.router.selectNavigation(
-                    //   NavigationPossibilitiesState.loggedOut(
-                    //     selectedPossibility: const AuthNavigationState(
-                    //       EAuthPossibilities.passrecovery,
-                    //     ),
-                    //   ),
-                    // );
+                    context.go('/auth/passrecovery');
                   },
                   child: const Text('Password recovery'),
                 ),
@@ -131,12 +126,7 @@ class _LoginFormAndButtonsSectionState extends State<LoginFormAndButtonsSection>
               Expanded(
                 child: OutlinedButton(
                   onPressed: () {
-                    // context.router.selectNavigation(
-                    //     NavigationPossibilitiesState.loggedOut(
-                    //   selectedPossibility: const AuthNavigationState(
-                    //     EAuthPossibilities.sigin,
-                    //   ),
-                    // ));
+                    context.go('/auth/signin');
                   },
                   child: const Text('Create account'),
                 ),

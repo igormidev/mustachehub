@@ -5,12 +5,12 @@ import 'package:go_router/go_router.dart';
 import 'package:mustachehub/dashboard/data/entities/e_navigation_possibilities.dart';
 import 'package:mustachehub/dashboard/presenter/cubit/navigation_possibilities_cubit.dart';
 
-mixin TabSelectionMixin on Widget {
+mixin TabSelectionMixin {
   void onTabSelected(
       int index,
       List<EDashboardNavigationPossibilities> possibilities,
       BuildContext context) {
-    if (context.isSessionStateDetermined) return;
+    if (context.isSessionStateDetermined == false) return;
 
     final EDashboardNavigationPossibilities choosedPossibility =
         possibilities[index];

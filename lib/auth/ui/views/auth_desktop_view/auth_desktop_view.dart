@@ -13,53 +13,52 @@ class AuthDesktopView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return VisibilityWidthBased.fromParentMaxWidthConstraint(
-      minimumWidth: ScreenSize.x1300,
-      replacement: const Text('Navigator()'),
-      // replacement:  navigator,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Center(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: SizedBox(
-                width: 400,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        'Advantages of logging in:',
-                        style: Theme.of(context).textTheme.headlineSmall,
+    return Scaffold(
+      body: VisibilityWidthBased.fromMediaQueryScreenWidth(
+        minimumWidth: ScreenSize.x1300,
+        replacement: navigator,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Center(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: SizedBox(
+                  width: 400,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'Advantages of logging in:',
+                          style: Theme.of(context).textTheme.headlineSmall,
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 16),
-                    const LoggingAdvantagesCards(),
-                    const SizedBox(height: 16),
-                    OnboardingLogo(
-                      height: 400,
-                      width: 400,
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.tertiaryContainer,
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(20)),
+                      const SizedBox(height: 16),
+                      const LoggingAdvantagesCards(),
+                      const SizedBox(height: 16),
+                      OnboardingLogo(
+                        height: 400,
+                        width: 400,
+                        decoration: BoxDecoration(
+                          color:
+                              Theme.of(context).colorScheme.tertiaryContainer,
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(20)),
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 50),
-            child: ConstrainedBox(
+            ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 500),
               child: navigator,
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

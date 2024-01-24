@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mustachehub/auth/ui/views/auth_desktop_view/auth_desktop_view.dart';
-import 'package:mustachehub/dashboard/data/entities/e_navigation_possibilities.dart';
+import 'package:mustachehub/auth/ui/views/login_view/login_view.dart';
+import 'package:mustachehub/auth/ui/views/pass_recovery_view/pass_recovery_view.dart';
+import 'package:mustachehub/auth/ui/views/signin_view/signin_view.dart';
 import 'package:mustachehub/dashboard/presenter/cubit/navigation_possibilities_cubit.dart';
 import 'package:mustachehub/dashboard/presenter/states/navigation_possibilities_state.dart';
 import 'package:mustachehub/dashboard/ui/pages/not_found_404_page/not_found_404_page.dart';
@@ -40,16 +42,9 @@ GoRouter appRouter(SessionCubit sessionCubit) {
         } else {
           return '/not-found';
         }
-      } else if (context.isSessionStateDetermined) {
-        final navPossibilitiesState =
-            context.read<NavigationPossibilitiesCubit>().state;
-        if (navPossibilitiesState is LoggedIn) {
-          return state.matchedLocation;
-        } else if (navPossibilitiesState is LoggedOut) {
-          return state.matchedLocation;
-        } else {
-          return '/not-found';
-        }
+      } else if (context.isSessionStateDetermined == false &&
+          isSplashScreen == false) {
+        return '/splash';
       }
 
       return null;
@@ -70,14 +65,15 @@ GoRouter appRouter(SessionCubit sessionCubit) {
         ),
       ),
       ShellRoute(
+        parentNavigatorKey: NavigatorService.rootNavigatorKey,
         navigatorKey: NavigatorService.dashboardNavigatorKey,
-        observers: [GoRouterObserver()],
         builder: (BuildContext context, GoRouterState state, Widget child) {
           return DashboardView(navigator: child);
         },
         routes: [
           GoRoute(
             path: '/collection',
+            parentNavigatorKey: NavigatorService.dashboardNavigatorKey,
             builder: (context, state) {
               return Container(
                 color: Colors.green[300],
@@ -86,14 +82,22 @@ GoRouter appRouter(SessionCubit sessionCubit) {
           ),
           GoRoute(
             path: '/generateText',
+            parentNavigatorKey: NavigatorService.dashboardNavigatorKey,
             builder: (context, state) {
               return Container(
                 color: Colors.blueGrey,
+                child: const Center(
+                  child: Text(
+                    'OPA',
+                    style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+                  ),
+                ),
               );
             },
           ),
           GoRoute(
             path: '/createMustache',
+            parentNavigatorKey: NavigatorService.dashboardNavigatorKey,
             builder: (context, state) {
               return Container(
                 color: Colors.brown[400],
@@ -102,6 +106,7 @@ GoRouter appRouter(SessionCubit sessionCubit) {
           ),
           GoRoute(
             path: '/account',
+            parentNavigatorKey: NavigatorService.dashboardNavigatorKey,
             builder: (context, state) {
               return Container(
                 color: Colors.purple[300],
@@ -110,6 +115,7 @@ GoRouter appRouter(SessionCubit sessionCubit) {
           ),
           GoRoute(
             path: '/becamePremium',
+            parentNavigatorKey: NavigatorService.dashboardNavigatorKey,
             builder: (context, state) {
               return Container(
                 color: Colors.amber[300],
@@ -118,41 +124,66 @@ GoRouter appRouter(SessionCubit sessionCubit) {
           ),
           GoRoute(
             path: '/settings',
+            parentNavigatorKey: NavigatorService.dashboardNavigatorKey,
             builder: (context, state) {
               return Container(
                 color: Colors.pink[300],
               );
             },
           ),
-          StatefulShellRoute.indexedStack(branches: const []),
           ShellRoute(
-            builder: (BuildContext context, GoRouterState state, Widget child) {
-              return AuthDesktopView(
-                navigator: child,
-              );
+            parentNavigatorKey: NavigatorService.dashboardNavigatorKey,
+            navigatorKey: NavigatorService.authNovigator,
+            builder: (
+              BuildContext context,
+              GoRouterState state,
+              Widget child,
+            ) {
+              return AuthDesktopView(navigator: child);
             },
             routes: [
               GoRoute(
                 path: '/auth/login',
-                builder: (context, state) {
-                  return Container(
-                    color: Colors.white,
-                  );
-                },
+                parentNavigatorKey: NavigatorService.authNovigator,
+                pageBuilder: (context, state) => CustomTransitionPage<void>(
+                  key: state.pageKey,
+                  child: Material(
+                    color: Theme.of(context).colorScheme.background,
+                    child: const LoginView(),
+                  ),
+                  transitionsBuilder: (
+                    context,
+                    animation,
+                    secondaryAnimation,
+                    child,
+                  ) {
+                    return SlideTransition(
+                      position: Tween<Offset>(
+                        begin: const Offset(-1, 0),
+                        end: Offset.zero,
+                      ).animate(animation),
+                      child: child,
+                    );
+                  },
+                ),
               ),
               GoRoute(
                 path: '/auth/signin',
+                parentNavigatorKey: NavigatorService.authNovigator,
                 builder: (context, state) {
-                  return Container(
-                    color: Colors.lime,
+                  return Material(
+                    color: Theme.of(context).colorScheme.background,
+                    child: const SignInView(),
                   );
                 },
               ),
               GoRoute(
-                path: '/passrecovery',
+                path: '/auth/passrecovery',
+                parentNavigatorKey: NavigatorService.authNovigator,
                 builder: (context, state) {
-                  return Container(
-                    color: Colors.orange[300],
+                  return Material(
+                    color: Theme.of(context).colorScheme.background,
+                    child: const PassRecoveryView(),
                   );
                 },
               ),
@@ -182,32 +213,5 @@ class GoRouterRefreshStream<T> extends ChangeNotifier {
   void dispose() {
     _subscription.cancel();
     super.dispose();
-  }
-}
-
-class GoRouterObserver extends NavigatorObserver {
-  @override
-  void didPush(Route<dynamic> route, Route<dynamic>? previousRoute) {
-    final context = NavigatorService.dashboardNavigatorKey.currentContext;
-    final dashboard =
-        EDashboardNavigationPossibilities.fromString(route.settings.name!);
-    context
-        ?.read<NavigationPossibilitiesCubit>()
-        .setDashboardEnum(context, dashboard);
-  }
-
-  @override
-  void didPop(Route<dynamic> route, Route<dynamic>? previousRoute) {
-    print('MyTest didPop: $route');
-  }
-
-  @override
-  void didRemove(Route<dynamic> route, Route<dynamic>? previousRoute) {
-    print('MyTest didRemove: $route');
-  }
-
-  @override
-  void didReplace({Route<dynamic>? newRoute, Route<dynamic>? oldRoute}) {
-    print('MyTest didReplace: $newRoute');
   }
 }

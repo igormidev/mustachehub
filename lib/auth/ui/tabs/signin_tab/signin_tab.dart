@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mustachehub/auth/ui/sections/signin_form_and_buttons_section/signin_form_and_buttons_section.dart';
 
 class SigninTab extends StatelessWidget {
@@ -13,9 +14,11 @@ class SigninTab extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            BackButton(onPressed: () {
-              Router.neglect(context, () {});
-            }),
+            BackButton(
+              onPressed: () {
+                context.go('/auth/login');
+              },
+            ),
             Text(
               'Sign in',
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(

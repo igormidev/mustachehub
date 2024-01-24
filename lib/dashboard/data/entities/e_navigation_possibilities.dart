@@ -1,3 +1,4 @@
+import 'package:enchanted_collection/enchanted_collection.dart';
 import 'package:flutter/material.dart';
 
 enum EDashboardNavigationPossibilities {
@@ -40,8 +41,8 @@ enum EDashboardNavigationPossibilities {
   static EDashboardNavigationPossibilities DEFAULT_POSSIBILITY =
       EDashboardNavigationPossibilities.collection;
 
-  static EDashboardNavigationPossibilities fromString(String name) {
-    return EDashboardNavigationPossibilities.values.firstWhere(
+  static EDashboardNavigationPossibilities? fromString(String name) {
+    return EDashboardNavigationPossibilities.values.singleWhereOrNull(
       (e) => name.startsWith('/${e.name}'),
     );
   }
