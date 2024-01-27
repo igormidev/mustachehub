@@ -11,8 +11,8 @@ import 'package:mustachehub/auth/ui/views/signin_view/signin_view.dart';
 import 'package:mustachehub/dashboard/presenter/cubit/navigation_possibilities_cubit.dart';
 import 'package:mustachehub/dashboard/presenter/states/navigation_possibilities_state.dart';
 import 'package:mustachehub/dashboard/ui/pages/not_found_404_page/not_found_404_page.dart';
-import 'package:mustachehub/dashboard/ui/view/dashboard_view.dart';
-import 'package:mustachehub/dashboard/ui/view/splash_view.dart';
+import 'package:mustachehub/dashboard/ui/view/dashboard_view/dashboard_view.dart';
+import 'package:mustachehub/dashboard/ui/view/spash_view/splash_view.dart';
 
 class NavigatorService {
   static final GlobalKey<NavigatorState> dashboardNavigatorKey =
@@ -57,6 +57,18 @@ GoRouter appRouter(SessionCubit sessionCubit) {
       GoRoute(
         path: '/splash',
         builder: (context, state) => const SplashScreen(),
+        // builder: (context, state) {
+        //   return const Scaffold(
+        //     body: Center(
+        //       // child: LogInAnimation(
+        //       // child: PassRecoveryAnimation(
+        //       child: SignInAnimation(
+        //         height: 400,
+        //         width: 400,
+        //       ),
+        //     ),
+        //   );
+        // },
       ),
       GoRoute(
         path: '/not-found',
@@ -145,45 +157,34 @@ GoRouter appRouter(SessionCubit sessionCubit) {
               GoRoute(
                 path: '/auth/login',
                 parentNavigatorKey: NavigatorService.authNovigator,
-                pageBuilder: (context, state) => CustomTransitionPage<void>(
-                  key: state.pageKey,
-                  child: Material(
-                    color: Theme.of(context).colorScheme.background,
+                pageBuilder: (context, state) {
+                  return BottomSheetTransitionPage(
+                    key: state.pageKey,
                     child: const LoginView(),
-                  ),
-                  transitionsBuilder: (
-                    context,
-                    animation,
-                    secondaryAnimation,
-                    child,
-                  ) {
-                    return SlideTransition(
-                      position: Tween<Offset>(
-                        begin: const Offset(-1, 0),
-                        end: Offset.zero,
-                      ).animate(animation),
-                      child: child,
-                    );
-                  },
-                ),
+                    context: context,
+                  );
+                },
               ),
               GoRoute(
                 path: '/auth/signin',
                 parentNavigatorKey: NavigatorService.authNovigator,
-                builder: (context, state) {
-                  return Material(
-                    color: Theme.of(context).colorScheme.background,
+                pageBuilder: (context, state) {
+                  return BottomSheetTransitionPage(
+                    key: state.pageKey,
                     child: const SignInView(),
+                    context: context,
+                    offsetBegin: const Offset(0, -1),
                   );
                 },
               ),
               GoRoute(
                 path: '/auth/passrecovery',
                 parentNavigatorKey: NavigatorService.authNovigator,
-                builder: (context, state) {
-                  return Material(
-                    color: Theme.of(context).colorScheme.background,
+                pageBuilder: (context, state) {
+                  return BottomSheetTransitionPage(
+                    key: state.pageKey,
                     child: const PassRecoveryView(),
+                    context: context,
                   );
                 },
               ),
@@ -214,4 +215,61 @@ class GoRouterRefreshStream<T> extends ChangeNotifier {
     _subscription.cancel();
     super.dispose();
   }
+}
+
+class VerticalPageRouteTransition extends PageRouteBuilder {
+  final Widget child;
+
+  VerticalPageRouteTransition({
+    required this.child,
+  }) : super(
+          pageBuilder: (context, animation, secondaryAnimation) => child,
+        );
+
+  @override
+  Widget buildTransitions(BuildContext context, Animation<double> animation,
+      Animation<double> secondaryAnimation, Widget child) {
+    final tween = Tween(begin: const Offset(0, 1), end: Offset.zero);
+    final curveTween = CurveTween(curve: Curves.easeInOutCubic);
+    final offsetAnimation = animation.drive(curveTween).drive(tween);
+
+    return SlideTransition(
+      position: offsetAnimation,
+      child: child,
+    );
+  }
+}
+
+class BottomSheetTransitionPage extends CustomTransitionPage<void> {
+  BottomSheetTransitionPage({
+    required this.context,
+    required super.key,
+    required super.child,
+    this.offsetBegin,
+  }) : super(transitionsBuilder: (_, __, ___, ____) {
+          throw UnimplementedError();
+        });
+  final BuildContext context;
+  final Offset? offsetBegin;
+
+  @override
+  Widget Function(
+    BuildContext context,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+    Widget child,
+  ) get transitionsBuilder => (
+        BuildContext context,
+        Animation<double> animation,
+        Animation<double> secondaryAnimation,
+        Widget child,
+      ) {
+        return SlideTransition(
+          position: Tween<Offset>(
+            begin: offsetBegin ?? const Offset(0, 1),
+            end: Offset.zero,
+          ).animate(animation),
+          child: child,
+        );
+      };
 }

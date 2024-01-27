@@ -9,23 +9,26 @@ class LoginTab extends StatelessWidget {
     return Center(
       child: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Log in',
-              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    color: Theme.of(context).colorScheme.outline,
-                  ),
-            ),
-            Text(
-              'Enter your mustache\nhub account',
-              style: Theme.of(context).textTheme.displaySmall,
-            ),
-            const SizedBox(height: 25),
-            const LoginFormAndButtonsSection(),
-          ],
+        child: Material(
+          color: Theme.of(context).colorScheme.background,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Log in',
+                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                      color: Theme.of(context).colorScheme.outline,
+                    ),
+              ),
+              Text(
+                'Enter your mustache\nhub account',
+                style: Theme.of(context).textTheme.displaySmall,
+              ),
+              const SizedBox(height: 25),
+              const LoginFormAndButtonsSection(),
+            ],
+          ),
         ),
       ),
     );

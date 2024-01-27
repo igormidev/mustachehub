@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mustachehub/auth/ui/sections/signin_form_and_buttons_section/signin_form_and_buttons_section.dart';
-import 'package:mustachehub/auth/ui/widgets/onboarding_logo.dart';
+import 'package:mustachehub/auth/ui/widgets/signin_animation.dart';
 
 class SignInPage extends StatelessWidget {
   const SignInPage({super.key});
@@ -13,12 +13,14 @@ class SignInPage extends StatelessWidget {
         children: [
           const SizedBox(height: 20),
           Center(
-            child: OnboardingLogo(
-              height: 400,
-              width: 400,
+            child: DecoratedBox(
               decoration: BoxDecoration(
                 color: Theme.of(context).colorScheme.tertiaryContainer,
                 borderRadius: const BorderRadius.all(Radius.circular(20)),
+              ),
+              child: const SignInAnimation(
+                height: 400,
+                width: 400,
               ),
             ),
           ),

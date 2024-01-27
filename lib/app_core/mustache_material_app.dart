@@ -2,6 +2,7 @@ import 'package:commom_states/commom_states.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mustachehub/app_core/app_routes.dart';
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:mustachehub/dashboard/presenter/cubit/navigation_possibilities_cubit.dart';
 
 class MustacheMaterialApp extends StatelessWidget {
@@ -17,9 +18,15 @@ class MustacheMaterialApp extends StatelessWidget {
       child: Builder(builder: (context) {
         return MaterialApp.router(
           title: 'Mustache Hub',
-          theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          // // The Mandy red, dark theme.
+          // darkTheme: FlexThemeData.dark(scheme: FlexScheme.mandyRed),
+          // // Use dark or light theme based on system setting.
+          // themeMode: ThemeMode.system,
+          theme: FlexThemeData.light(
+            scheme: FlexScheme.mandyRed,
+            colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
             useMaterial3: true,
+          ).copyWith(
             inputDecorationTheme: InputDecorationTheme(
               border: const OutlineInputBorder(
                 borderSide: BorderSide.none,

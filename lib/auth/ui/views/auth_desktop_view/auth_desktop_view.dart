@@ -1,9 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:media_query_core/responsiveness/visibility_width_based.dart';
 import 'package:mustachehub/auth/ui/views/auth_desktop_view/cards/logging_advantages_cards.dart';
-import 'package:mustachehub/auth/ui/widgets/onboarding_logo.dart';
+import 'package:mustachehub/auth/ui/widgets/login_animation.dart';
+import 'package:mustachehub/auth/ui/widgets/pass_recovery_animation.dart';
+import 'package:mustachehub/auth/ui/widgets/signin_animation.dart';
 
-class AuthDesktopView extends StatelessWidget {
+part 'auth_desktop_methods.dart';
+
+const items = [
+  SignInAnimation(
+    width: 400,
+    height: 400,
+  ),
+  LogInAnimation(
+    height: 400,
+    width: 400,
+  ),
+  PassRecoveryAnimation(
+    width: 400,
+    height: 400,
+  ),
+];
+
+class AuthDesktopView extends StatefulWidget {
   final Widget navigator;
 
   const AuthDesktopView({
@@ -12,11 +32,17 @@ class AuthDesktopView extends StatelessWidget {
   });
 
   @override
+  State<AuthDesktopView> createState() => _AuthDesktopViewState();
+}
+
+class _AuthDesktopViewState extends State<AuthDesktopView>
+    with AuthDesktopMethods {
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: VisibilityWidthBased.fromMediaQueryScreenWidth(
         minimumWidth: ScreenSize.x1300,
-        replacement: navigator,
+        replacement: widget.navigator,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -38,14 +64,22 @@ class AuthDesktopView extends StatelessWidget {
                       const SizedBox(height: 16),
                       const LoggingAdvantagesCards(),
                       const SizedBox(height: 16),
-                      OnboardingLogo(
-                        height: 400,
-                        width: 400,
+                      Container(
                         decoration: BoxDecoration(
                           color:
                               Theme.of(context).colorScheme.tertiaryContainer,
                           borderRadius:
                               const BorderRadius.all(Radius.circular(20)),
+                        ),
+                        height: 400,
+                        width: 400,
+                        child: PageView.builder(
+                          controller: _pageController,
+                          itemCount: items.length,
+                          scrollDirection: Axis.vertical,
+                          itemBuilder: (context, index) {
+                            return items[index];
+                          },
                         ),
                       ),
                     ],
@@ -55,7 +89,7 @@ class AuthDesktopView extends StatelessWidget {
             ),
             ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 500),
-              child: navigator,
+              child: widget.navigator,
             ),
           ],
         ),

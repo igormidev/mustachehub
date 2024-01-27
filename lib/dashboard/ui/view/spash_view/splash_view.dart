@@ -1,10 +1,12 @@
+import 'package:flutter/material.dart';
 import 'package:commom_states/cubits/session_cubit.dart';
 import 'package:commom_states/states/session_state.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mustachehub/dashboard/data/entities/e_navigation_possibilities.dart';
 import 'package:mustachehub/dashboard/presenter/cubit/navigation_possibilities_cubit.dart';
 import 'package:mustachehub/dashboard/presenter/states/navigation_possibilities_state.dart';
+
+part 'splash_view_methods.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -13,24 +15,7 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
-  @override
-  void initState() {
-    super.initState();
-    Future.delayed(Durations.extralong1, () {
-      final sessionState = context.read<SessionCubit>();
-      final dashboardCubit = context.read<NavigationPossibilitiesCubit>();
-      Future.delayed(const Duration(seconds: 1), () {
-        dashboardCubit.setNavigationPossibilitiesState(
-          NavigationPossibilitiesState.loggedOut(
-            selectedPossibility: EDashboardNavigationPossibilities.collection,
-          ),
-        );
-        sessionState.setSessionState(SessionState.guest());
-      });
-    });
-  }
-
+class _SplashScreenState extends State<SplashScreen> with SplashViewMethods {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

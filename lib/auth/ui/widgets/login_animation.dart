@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
-class OnboardingLogo extends StatelessWidget {
-  final BoxDecoration? decoration;
+class LogInAnimation extends StatelessWidget {
   final double width;
   final double height;
-  const OnboardingLogo({
+  const LogInAnimation({
     super.key,
-    this.decoration,
     required this.width,
     required this.height,
   });
@@ -15,12 +13,10 @@ class OnboardingLogo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: decoration,
       constraints: BoxConstraints(maxWidth: width, maxHeight: height),
       child: Lottie.asset(
-        'assets/onboarding.json',
+        'assets/lottie/auth/login.json',
         delegates: LottieDelegates(
-          text: (initialText) => '**$initialText**',
           values: [
             /// Legs
             ValueDelegate.color(

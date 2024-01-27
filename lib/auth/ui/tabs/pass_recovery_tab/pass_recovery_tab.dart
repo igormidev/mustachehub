@@ -10,33 +10,36 @@ class PassRecoveryTab extends StatelessWidget {
     return Center(
       child: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            BackButton(
-              onPressed: () {
-                context.go('/auth/login');
-              },
-            ),
-            Text(
-              'Pass recovery',
-              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    color: Theme.of(context).colorScheme.outline,
-                  ),
-            ),
-            Text(
-              'Forgot your mustache\nhub account password?',
-              style: Theme.of(context).textTheme.displaySmall,
-            ),
-            const SizedBox(height: 8),
-            Text(
-              'Type bellow the email you used to register your account and we will send you a recovery code.',
-              style: Theme.of(context).textTheme.bodyMedium,
-            ),
-            const SizedBox(height: 16),
-            const PassRecoveryForAndButtonsSection(),
-          ],
+        child: Material(
+          color: Theme.of(context).colorScheme.background,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              BackButton(
+                onPressed: () {
+                  context.go('/auth/login');
+                },
+              ),
+              Text(
+                'Pass recovery',
+                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                      color: Theme.of(context).colorScheme.outline,
+                    ),
+              ),
+              Text(
+                'Forgot your mustache\nhub account password?',
+                style: Theme.of(context).textTheme.displaySmall,
+              ),
+              const SizedBox(height: 8),
+              Text(
+                'Type bellow the email you used to register your account and we will send you a recovery code.',
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+              const SizedBox(height: 16),
+              const PassRecoveryForAndButtonsSection(),
+            ],
+          ),
         ),
       ),
     );
