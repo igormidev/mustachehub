@@ -4,13 +4,15 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mustachehub/app_core/theme/components/mustache_button_loader.dart';
 
 enum _MediaType {
-  facebook(iconData: FontAwesomeIcons.facebook),
-  google(iconData: FontAwesomeIcons.google);
+  facebook(iconData: FontAwesomeIcons.facebook, colorButton: Color(0xff39579A)),
+  google(iconData: FontAwesomeIcons.google, colorButton: Color(0xffDF4A32));
 
   final IconData iconData;
+  final Color colorButton;
 
   const _MediaType({
     required this.iconData,
+    required this.colorButton,
   });
 }
 
@@ -26,7 +28,7 @@ class MediaButtons<B extends StateStreamable<S>, S> extends StatelessWidget {
     required this.onPressed,
     required this.isLoading,
   }) : _mediaType = _MediaType.facebook;
-  const MediaButtons.instagram({
+  const MediaButtons.google({
     super.key,
     required this.text,
     required this.onPressed,
@@ -45,16 +47,28 @@ class MediaButtons<B extends StateStreamable<S>, S> extends StatelessWidget {
               color: Colors.white,
             ),
             label: isLoading(state)
-                ? const MustacheButtonLoader(color: Colors.white)
-                : Text(
-                    text,
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          color: Colors.white,
+                ? const Center(
+                    child: Padding(
+                      padding: EdgeInsets.only(right: 32),
+                      child: MustacheButtonLoader(color: Colors.white),
+                    ),
+                  )
+                : Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          text,
+                          style:
+                              Theme.of(context).textTheme.titleMedium?.copyWith(
+                                    color: Colors.white,
+                                  ),
                         ),
+                      ),
+                    ],
                   ),
             style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.all(20),
-              backgroundColor: const Color(0xffDF4A32),
+              backgroundColor: _mediaType.colorButton,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12), // <-- Radius
               ),

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mustache_hub_core/mustache_hub_core.dart';
 import 'package:mustachehub/auth/presenter/cubits/sign_up_form_cubit.dart';
+import 'package:mustachehub/auth/presenter/states/sign_up_form_state.dart';
+import 'package:mustachehub/auth/ui/sections/widgets/media_buttons.dart';
 
 part 'signin_form_and_buttons_section_methods.dart';
 
@@ -54,9 +55,23 @@ class _SigninFormAndButtonsSectionState
             ]),
           ),
           const SizedBox(height: 20),
-          FilledButton(
-            onPressed: _createAccountWithCredential,
-            child: const Text('Create account'),
+          BlocBuilder<SignUpFormCubit, SignUpFormState>(
+            builder: (context, state) {
+              return FilledButton(
+                onPressed: state.maybeMap(
+                  loadingWithCredentials: null,
+                  orElse: () => _createAccountWithCredential,
+                ),
+                child: state.maybeMap(
+                  loadingWithCredentials: (_) => const SizedBox(
+                    height: 20,
+                    width: 20,
+                    child: CircularProgressIndicator(color: Colors.white),
+                  ),
+                  orElse: () => const Text('Create account'),
+                ),
+              );
+            },
           ),
           const SizedBox(height: 8),
           Row(
@@ -75,49 +90,21 @@ class _SigninFormAndButtonsSectionState
           const SizedBox(height: 8),
           Row(
             children: [
-              Expanded(
-                child: ElevatedButton.icon(
-                  onPressed: () {},
-                  icon: const Icon(
-                    FontAwesomeIcons.google,
-                    color: Colors.white,
-                  ),
-                  label: Text(
-                    'Create with Google',
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          color: Colors.white,
-                        ),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.all(20),
-                    backgroundColor: const Color(0xffDF4A32),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12), // <-- Radius
-                    ),
-                  ),
+              MediaButtons<SignUpFormCubit, SignUpFormState>.google(
+                text: 'Create with Google',
+                onPressed: _createAccountWithGoogle,
+                isLoading: (state) => state.maybeMap(
+                  loadingWithGoogle: (_) => true,
+                  orElse: () => false,
                 ),
               ),
               const SizedBox(width: 8),
-              Expanded(
-                child: ElevatedButton.icon(
-                  onPressed: () {},
-                  icon: const Icon(
-                    FontAwesomeIcons.facebook,
-                    color: Colors.white,
-                  ),
-                  label: Text(
-                    'Create with Google',
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          color: Colors.white,
-                        ),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.all(20),
-                    backgroundColor: const Color(0xff39579A),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12), // <-- Radius
-                    ),
-                  ),
+              MediaButtons<SignUpFormCubit, SignUpFormState>.facebook(
+                text: 'Enter with Facebook',
+                onPressed: _createAccountWithFacebook,
+                isLoading: (state) => state.maybeMap(
+                  loadingWithGoogle: (_) => true,
+                  orElse: () => false,
                 ),
               ),
             ],

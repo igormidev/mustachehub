@@ -9,10 +9,13 @@ class MustacheButtonLoader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SizedBox(
+    return SizedBox(
       height: 20,
       width: 20,
-      child: CircularProgressIndicator.adaptive(),
+      child: CircularProgressIndicator.adaptive(
+        valueColor:
+            color == null ? null : AlwaysStoppedAnimation<Color>(color!),
+      ),
     );
   }
 }
