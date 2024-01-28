@@ -6,7 +6,9 @@ part 'login_form_state.freezed.dart';
 @freezed
 abstract class LoginFormState with _$LoginFormState {
   factory LoginFormState.initial() = _Initial;
-  factory LoginFormState.loading() = LoginFormStateLoading;
+  factory LoginFormState.loadingWithCredentials() = _LoginFormStateLoading;
+  factory LoginFormState.loadingWithFacebook() = _LoginFormStateFacebook;
+  factory LoginFormState.loadingWithGoogle() = _LoginFormStateGoogle;
   factory LoginFormState.error({
     required CredentialAuthException error,
   }) = LoginFormStateError;

@@ -18,21 +18,18 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$LoadingState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() refreshing,
     required TResult Function() processing,
     required TResult Function() done,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? refreshing,
     TResult? Function()? processing,
     TResult? Function()? done,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? refreshing,
     TResult Function()? processing,
     TResult Function()? done,
     required TResult orElse(),
@@ -40,21 +37,18 @@ mixin _$LoadingState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Refreshing value) refreshing,
     required TResult Function(_Processing value) processing,
     required TResult Function(_Done value) done,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Refreshing value)? refreshing,
     TResult? Function(_Processing value)? processing,
     TResult? Function(_Done value)? done,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Refreshing value)? refreshing,
     TResult Function(_Processing value)? processing,
     TResult Function(_Done value)? done,
     required TResult orElse(),
@@ -78,114 +72,6 @@ class _$LoadingStateCopyWithImpl<$Res, $Val extends LoadingState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-}
-
-/// @nodoc
-abstract class _$$RefreshingImplCopyWith<$Res> {
-  factory _$$RefreshingImplCopyWith(
-          _$RefreshingImpl value, $Res Function(_$RefreshingImpl) then) =
-      __$$RefreshingImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$RefreshingImplCopyWithImpl<$Res>
-    extends _$LoadingStateCopyWithImpl<$Res, _$RefreshingImpl>
-    implements _$$RefreshingImplCopyWith<$Res> {
-  __$$RefreshingImplCopyWithImpl(
-      _$RefreshingImpl _value, $Res Function(_$RefreshingImpl) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$RefreshingImpl implements _Refreshing {
-  _$RefreshingImpl();
-
-  @override
-  String toString() {
-    return 'LoadingState.refreshing()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$RefreshingImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() refreshing,
-    required TResult Function() processing,
-    required TResult Function() done,
-  }) {
-    return refreshing();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? refreshing,
-    TResult? Function()? processing,
-    TResult? Function()? done,
-  }) {
-    return refreshing?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? refreshing,
-    TResult Function()? processing,
-    TResult Function()? done,
-    required TResult orElse(),
-  }) {
-    if (refreshing != null) {
-      return refreshing();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Refreshing value) refreshing,
-    required TResult Function(_Processing value) processing,
-    required TResult Function(_Done value) done,
-  }) {
-    return refreshing(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Refreshing value)? refreshing,
-    TResult? Function(_Processing value)? processing,
-    TResult? Function(_Done value)? done,
-  }) {
-    return refreshing?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Refreshing value)? refreshing,
-    TResult Function(_Processing value)? processing,
-    TResult Function(_Done value)? done,
-    required TResult orElse(),
-  }) {
-    if (refreshing != null) {
-      return refreshing(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Refreshing implements LoadingState {
-  factory _Refreshing() = _$RefreshingImpl;
 }
 
 /// @nodoc
@@ -226,7 +112,6 @@ class _$ProcessingImpl implements _Processing {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() refreshing,
     required TResult Function() processing,
     required TResult Function() done,
   }) {
@@ -236,7 +121,6 @@ class _$ProcessingImpl implements _Processing {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? refreshing,
     TResult? Function()? processing,
     TResult? Function()? done,
   }) {
@@ -246,7 +130,6 @@ class _$ProcessingImpl implements _Processing {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? refreshing,
     TResult Function()? processing,
     TResult Function()? done,
     required TResult orElse(),
@@ -260,7 +143,6 @@ class _$ProcessingImpl implements _Processing {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Refreshing value) refreshing,
     required TResult Function(_Processing value) processing,
     required TResult Function(_Done value) done,
   }) {
@@ -270,7 +152,6 @@ class _$ProcessingImpl implements _Processing {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Refreshing value)? refreshing,
     TResult? Function(_Processing value)? processing,
     TResult? Function(_Done value)? done,
   }) {
@@ -280,7 +161,6 @@ class _$ProcessingImpl implements _Processing {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Refreshing value)? refreshing,
     TResult Function(_Processing value)? processing,
     TResult Function(_Done value)? done,
     required TResult orElse(),
@@ -333,7 +213,6 @@ class _$DoneImpl implements _Done {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() refreshing,
     required TResult Function() processing,
     required TResult Function() done,
   }) {
@@ -343,7 +222,6 @@ class _$DoneImpl implements _Done {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? refreshing,
     TResult? Function()? processing,
     TResult? Function()? done,
   }) {
@@ -353,7 +231,6 @@ class _$DoneImpl implements _Done {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? refreshing,
     TResult Function()? processing,
     TResult Function()? done,
     required TResult orElse(),
@@ -367,7 +244,6 @@ class _$DoneImpl implements _Done {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Refreshing value) refreshing,
     required TResult Function(_Processing value) processing,
     required TResult Function(_Done value) done,
   }) {
@@ -377,7 +253,6 @@ class _$DoneImpl implements _Done {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Refreshing value)? refreshing,
     TResult? Function(_Processing value)? processing,
     TResult? Function(_Done value)? done,
   }) {
@@ -387,7 +262,6 @@ class _$DoneImpl implements _Done {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Refreshing value)? refreshing,
     TResult Function(_Processing value)? processing,
     TResult Function(_Done value)? done,
     required TResult orElse(),

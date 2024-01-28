@@ -19,7 +19,9 @@ mixin _$LoginFormState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
+    required TResult Function() loadingWithCredentials,
+    required TResult Function() loadingWithFacebook,
+    required TResult Function() loadingWithGoogle,
     required TResult Function(CredentialAuthException error) error,
     required TResult Function() success,
   }) =>
@@ -27,7 +29,9 @@ mixin _$LoginFormState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loading,
+    TResult? Function()? loadingWithCredentials,
+    TResult? Function()? loadingWithFacebook,
+    TResult? Function()? loadingWithGoogle,
     TResult? Function(CredentialAuthException error)? error,
     TResult? Function()? success,
   }) =>
@@ -35,7 +39,9 @@ mixin _$LoginFormState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
+    TResult Function()? loadingWithCredentials,
+    TResult Function()? loadingWithFacebook,
+    TResult Function()? loadingWithGoogle,
     TResult Function(CredentialAuthException error)? error,
     TResult Function()? success,
     required TResult orElse(),
@@ -44,7 +50,11 @@ mixin _$LoginFormState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(LoginFormStateLoading value) loading,
+    required TResult Function(_LoginFormStateLoading value)
+        loadingWithCredentials,
+    required TResult Function(_LoginFormStateFacebook value)
+        loadingWithFacebook,
+    required TResult Function(_LoginFormStateGoogle value) loadingWithGoogle,
     required TResult Function(LoginFormStateError value) error,
     required TResult Function(_Success value) success,
   }) =>
@@ -52,7 +62,9 @@ mixin _$LoginFormState {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(LoginFormStateLoading value)? loading,
+    TResult? Function(_LoginFormStateLoading value)? loadingWithCredentials,
+    TResult? Function(_LoginFormStateFacebook value)? loadingWithFacebook,
+    TResult? Function(_LoginFormStateGoogle value)? loadingWithGoogle,
     TResult? Function(LoginFormStateError value)? error,
     TResult? Function(_Success value)? success,
   }) =>
@@ -60,7 +72,9 @@ mixin _$LoginFormState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(LoginFormStateLoading value)? loading,
+    TResult Function(_LoginFormStateLoading value)? loadingWithCredentials,
+    TResult Function(_LoginFormStateFacebook value)? loadingWithFacebook,
+    TResult Function(_LoginFormStateGoogle value)? loadingWithGoogle,
     TResult Function(LoginFormStateError value)? error,
     TResult Function(_Success value)? success,
     required TResult orElse(),
@@ -125,7 +139,9 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
+    required TResult Function() loadingWithCredentials,
+    required TResult Function() loadingWithFacebook,
+    required TResult Function() loadingWithGoogle,
     required TResult Function(CredentialAuthException error) error,
     required TResult Function() success,
   }) {
@@ -136,7 +152,9 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loading,
+    TResult? Function()? loadingWithCredentials,
+    TResult? Function()? loadingWithFacebook,
+    TResult? Function()? loadingWithGoogle,
     TResult? Function(CredentialAuthException error)? error,
     TResult? Function()? success,
   }) {
@@ -147,7 +165,9 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
+    TResult Function()? loadingWithCredentials,
+    TResult Function()? loadingWithFacebook,
+    TResult Function()? loadingWithGoogle,
     TResult Function(CredentialAuthException error)? error,
     TResult Function()? success,
     required TResult orElse(),
@@ -162,7 +182,11 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(LoginFormStateLoading value) loading,
+    required TResult Function(_LoginFormStateLoading value)
+        loadingWithCredentials,
+    required TResult Function(_LoginFormStateFacebook value)
+        loadingWithFacebook,
+    required TResult Function(_LoginFormStateGoogle value) loadingWithGoogle,
     required TResult Function(LoginFormStateError value) error,
     required TResult Function(_Success value) success,
   }) {
@@ -173,7 +197,9 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(LoginFormStateLoading value)? loading,
+    TResult? Function(_LoginFormStateLoading value)? loadingWithCredentials,
+    TResult? Function(_LoginFormStateFacebook value)? loadingWithFacebook,
+    TResult? Function(_LoginFormStateGoogle value)? loadingWithGoogle,
     TResult? Function(LoginFormStateError value)? error,
     TResult? Function(_Success value)? success,
   }) {
@@ -184,7 +210,9 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(LoginFormStateLoading value)? loading,
+    TResult Function(_LoginFormStateLoading value)? loadingWithCredentials,
+    TResult Function(_LoginFormStateFacebook value)? loadingWithFacebook,
+    TResult Function(_LoginFormStateGoogle value)? loadingWithGoogle,
     TResult Function(LoginFormStateError value)? error,
     TResult Function(_Success value)? success,
     required TResult orElse(),
@@ -219,12 +247,12 @@ class __$$LoginFormStateLoadingImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$LoginFormStateLoadingImpl implements LoginFormStateLoading {
+class _$LoginFormStateLoadingImpl implements _LoginFormStateLoading {
   _$LoginFormStateLoadingImpl();
 
   @override
   String toString() {
-    return 'LoginFormState.loading()';
+    return 'LoginFormState.loadingWithCredentials()';
   }
 
   @override
@@ -241,35 +269,41 @@ class _$LoginFormStateLoadingImpl implements LoginFormStateLoading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
+    required TResult Function() loadingWithCredentials,
+    required TResult Function() loadingWithFacebook,
+    required TResult Function() loadingWithGoogle,
     required TResult Function(CredentialAuthException error) error,
     required TResult Function() success,
   }) {
-    return loading();
+    return loadingWithCredentials();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loading,
+    TResult? Function()? loadingWithCredentials,
+    TResult? Function()? loadingWithFacebook,
+    TResult? Function()? loadingWithGoogle,
     TResult? Function(CredentialAuthException error)? error,
     TResult? Function()? success,
   }) {
-    return loading?.call();
+    return loadingWithCredentials?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
+    TResult Function()? loadingWithCredentials,
+    TResult Function()? loadingWithFacebook,
+    TResult Function()? loadingWithGoogle,
     TResult Function(CredentialAuthException error)? error,
     TResult Function()? success,
     required TResult orElse(),
   }) {
-    if (loading != null) {
-      return loading();
+    if (loadingWithCredentials != null) {
+      return loadingWithCredentials();
     }
     return orElse();
   }
@@ -278,42 +312,310 @@ class _$LoginFormStateLoadingImpl implements LoginFormStateLoading {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(LoginFormStateLoading value) loading,
+    required TResult Function(_LoginFormStateLoading value)
+        loadingWithCredentials,
+    required TResult Function(_LoginFormStateFacebook value)
+        loadingWithFacebook,
+    required TResult Function(_LoginFormStateGoogle value) loadingWithGoogle,
     required TResult Function(LoginFormStateError value) error,
     required TResult Function(_Success value) success,
   }) {
-    return loading(this);
+    return loadingWithCredentials(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(LoginFormStateLoading value)? loading,
+    TResult? Function(_LoginFormStateLoading value)? loadingWithCredentials,
+    TResult? Function(_LoginFormStateFacebook value)? loadingWithFacebook,
+    TResult? Function(_LoginFormStateGoogle value)? loadingWithGoogle,
     TResult? Function(LoginFormStateError value)? error,
     TResult? Function(_Success value)? success,
   }) {
-    return loading?.call(this);
+    return loadingWithCredentials?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(LoginFormStateLoading value)? loading,
+    TResult Function(_LoginFormStateLoading value)? loadingWithCredentials,
+    TResult Function(_LoginFormStateFacebook value)? loadingWithFacebook,
+    TResult Function(_LoginFormStateGoogle value)? loadingWithGoogle,
     TResult Function(LoginFormStateError value)? error,
     TResult Function(_Success value)? success,
     required TResult orElse(),
   }) {
-    if (loading != null) {
-      return loading(this);
+    if (loadingWithCredentials != null) {
+      return loadingWithCredentials(this);
     }
     return orElse();
   }
 }
 
-abstract class LoginFormStateLoading implements LoginFormState {
-  factory LoginFormStateLoading() = _$LoginFormStateLoadingImpl;
+abstract class _LoginFormStateLoading implements LoginFormState {
+  factory _LoginFormStateLoading() = _$LoginFormStateLoadingImpl;
+}
+
+/// @nodoc
+abstract class _$$LoginFormStateFacebookImplCopyWith<$Res> {
+  factory _$$LoginFormStateFacebookImplCopyWith(
+          _$LoginFormStateFacebookImpl value,
+          $Res Function(_$LoginFormStateFacebookImpl) then) =
+      __$$LoginFormStateFacebookImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$LoginFormStateFacebookImplCopyWithImpl<$Res>
+    extends _$LoginFormStateCopyWithImpl<$Res, _$LoginFormStateFacebookImpl>
+    implements _$$LoginFormStateFacebookImplCopyWith<$Res> {
+  __$$LoginFormStateFacebookImplCopyWithImpl(
+      _$LoginFormStateFacebookImpl _value,
+      $Res Function(_$LoginFormStateFacebookImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$LoginFormStateFacebookImpl implements _LoginFormStateFacebook {
+  _$LoginFormStateFacebookImpl();
+
+  @override
+  String toString() {
+    return 'LoginFormState.loadingWithFacebook()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$LoginFormStateFacebookImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loadingWithCredentials,
+    required TResult Function() loadingWithFacebook,
+    required TResult Function() loadingWithGoogle,
+    required TResult Function(CredentialAuthException error) error,
+    required TResult Function() success,
+  }) {
+    return loadingWithFacebook();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loadingWithCredentials,
+    TResult? Function()? loadingWithFacebook,
+    TResult? Function()? loadingWithGoogle,
+    TResult? Function(CredentialAuthException error)? error,
+    TResult? Function()? success,
+  }) {
+    return loadingWithFacebook?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loadingWithCredentials,
+    TResult Function()? loadingWithFacebook,
+    TResult Function()? loadingWithGoogle,
+    TResult Function(CredentialAuthException error)? error,
+    TResult Function()? success,
+    required TResult orElse(),
+  }) {
+    if (loadingWithFacebook != null) {
+      return loadingWithFacebook();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_LoginFormStateLoading value)
+        loadingWithCredentials,
+    required TResult Function(_LoginFormStateFacebook value)
+        loadingWithFacebook,
+    required TResult Function(_LoginFormStateGoogle value) loadingWithGoogle,
+    required TResult Function(LoginFormStateError value) error,
+    required TResult Function(_Success value) success,
+  }) {
+    return loadingWithFacebook(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_LoginFormStateLoading value)? loadingWithCredentials,
+    TResult? Function(_LoginFormStateFacebook value)? loadingWithFacebook,
+    TResult? Function(_LoginFormStateGoogle value)? loadingWithGoogle,
+    TResult? Function(LoginFormStateError value)? error,
+    TResult? Function(_Success value)? success,
+  }) {
+    return loadingWithFacebook?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_LoginFormStateLoading value)? loadingWithCredentials,
+    TResult Function(_LoginFormStateFacebook value)? loadingWithFacebook,
+    TResult Function(_LoginFormStateGoogle value)? loadingWithGoogle,
+    TResult Function(LoginFormStateError value)? error,
+    TResult Function(_Success value)? success,
+    required TResult orElse(),
+  }) {
+    if (loadingWithFacebook != null) {
+      return loadingWithFacebook(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _LoginFormStateFacebook implements LoginFormState {
+  factory _LoginFormStateFacebook() = _$LoginFormStateFacebookImpl;
+}
+
+/// @nodoc
+abstract class _$$LoginFormStateGoogleImplCopyWith<$Res> {
+  factory _$$LoginFormStateGoogleImplCopyWith(_$LoginFormStateGoogleImpl value,
+          $Res Function(_$LoginFormStateGoogleImpl) then) =
+      __$$LoginFormStateGoogleImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$LoginFormStateGoogleImplCopyWithImpl<$Res>
+    extends _$LoginFormStateCopyWithImpl<$Res, _$LoginFormStateGoogleImpl>
+    implements _$$LoginFormStateGoogleImplCopyWith<$Res> {
+  __$$LoginFormStateGoogleImplCopyWithImpl(_$LoginFormStateGoogleImpl _value,
+      $Res Function(_$LoginFormStateGoogleImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$LoginFormStateGoogleImpl implements _LoginFormStateGoogle {
+  _$LoginFormStateGoogleImpl();
+
+  @override
+  String toString() {
+    return 'LoginFormState.loadingWithGoogle()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$LoginFormStateGoogleImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loadingWithCredentials,
+    required TResult Function() loadingWithFacebook,
+    required TResult Function() loadingWithGoogle,
+    required TResult Function(CredentialAuthException error) error,
+    required TResult Function() success,
+  }) {
+    return loadingWithGoogle();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loadingWithCredentials,
+    TResult? Function()? loadingWithFacebook,
+    TResult? Function()? loadingWithGoogle,
+    TResult? Function(CredentialAuthException error)? error,
+    TResult? Function()? success,
+  }) {
+    return loadingWithGoogle?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loadingWithCredentials,
+    TResult Function()? loadingWithFacebook,
+    TResult Function()? loadingWithGoogle,
+    TResult Function(CredentialAuthException error)? error,
+    TResult Function()? success,
+    required TResult orElse(),
+  }) {
+    if (loadingWithGoogle != null) {
+      return loadingWithGoogle();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_LoginFormStateLoading value)
+        loadingWithCredentials,
+    required TResult Function(_LoginFormStateFacebook value)
+        loadingWithFacebook,
+    required TResult Function(_LoginFormStateGoogle value) loadingWithGoogle,
+    required TResult Function(LoginFormStateError value) error,
+    required TResult Function(_Success value) success,
+  }) {
+    return loadingWithGoogle(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_LoginFormStateLoading value)? loadingWithCredentials,
+    TResult? Function(_LoginFormStateFacebook value)? loadingWithFacebook,
+    TResult? Function(_LoginFormStateGoogle value)? loadingWithGoogle,
+    TResult? Function(LoginFormStateError value)? error,
+    TResult? Function(_Success value)? success,
+  }) {
+    return loadingWithGoogle?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_LoginFormStateLoading value)? loadingWithCredentials,
+    TResult Function(_LoginFormStateFacebook value)? loadingWithFacebook,
+    TResult Function(_LoginFormStateGoogle value)? loadingWithGoogle,
+    TResult Function(LoginFormStateError value)? error,
+    TResult Function(_Success value)? success,
+    required TResult orElse(),
+  }) {
+    if (loadingWithGoogle != null) {
+      return loadingWithGoogle(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _LoginFormStateGoogle implements LoginFormState {
+  factory _LoginFormStateGoogle() = _$LoginFormStateGoogleImpl;
 }
 
 /// @nodoc
@@ -382,7 +684,9 @@ class _$LoginFormStateErrorImpl implements LoginFormStateError {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
+    required TResult Function() loadingWithCredentials,
+    required TResult Function() loadingWithFacebook,
+    required TResult Function() loadingWithGoogle,
     required TResult Function(CredentialAuthException error) error,
     required TResult Function() success,
   }) {
@@ -393,7 +697,9 @@ class _$LoginFormStateErrorImpl implements LoginFormStateError {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loading,
+    TResult? Function()? loadingWithCredentials,
+    TResult? Function()? loadingWithFacebook,
+    TResult? Function()? loadingWithGoogle,
     TResult? Function(CredentialAuthException error)? error,
     TResult? Function()? success,
   }) {
@@ -404,7 +710,9 @@ class _$LoginFormStateErrorImpl implements LoginFormStateError {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
+    TResult Function()? loadingWithCredentials,
+    TResult Function()? loadingWithFacebook,
+    TResult Function()? loadingWithGoogle,
     TResult Function(CredentialAuthException error)? error,
     TResult Function()? success,
     required TResult orElse(),
@@ -419,7 +727,11 @@ class _$LoginFormStateErrorImpl implements LoginFormStateError {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(LoginFormStateLoading value) loading,
+    required TResult Function(_LoginFormStateLoading value)
+        loadingWithCredentials,
+    required TResult Function(_LoginFormStateFacebook value)
+        loadingWithFacebook,
+    required TResult Function(_LoginFormStateGoogle value) loadingWithGoogle,
     required TResult Function(LoginFormStateError value) error,
     required TResult Function(_Success value) success,
   }) {
@@ -430,7 +742,9 @@ class _$LoginFormStateErrorImpl implements LoginFormStateError {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(LoginFormStateLoading value)? loading,
+    TResult? Function(_LoginFormStateLoading value)? loadingWithCredentials,
+    TResult? Function(_LoginFormStateFacebook value)? loadingWithFacebook,
+    TResult? Function(_LoginFormStateGoogle value)? loadingWithGoogle,
     TResult? Function(LoginFormStateError value)? error,
     TResult? Function(_Success value)? success,
   }) {
@@ -441,7 +755,9 @@ class _$LoginFormStateErrorImpl implements LoginFormStateError {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(LoginFormStateLoading value)? loading,
+    TResult Function(_LoginFormStateLoading value)? loadingWithCredentials,
+    TResult Function(_LoginFormStateFacebook value)? loadingWithFacebook,
+    TResult Function(_LoginFormStateGoogle value)? loadingWithGoogle,
     TResult Function(LoginFormStateError value)? error,
     TResult Function(_Success value)? success,
     required TResult orElse(),
@@ -502,7 +818,9 @@ class _$SuccessImpl implements _Success {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
+    required TResult Function() loadingWithCredentials,
+    required TResult Function() loadingWithFacebook,
+    required TResult Function() loadingWithGoogle,
     required TResult Function(CredentialAuthException error) error,
     required TResult Function() success,
   }) {
@@ -513,7 +831,9 @@ class _$SuccessImpl implements _Success {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loading,
+    TResult? Function()? loadingWithCredentials,
+    TResult? Function()? loadingWithFacebook,
+    TResult? Function()? loadingWithGoogle,
     TResult? Function(CredentialAuthException error)? error,
     TResult? Function()? success,
   }) {
@@ -524,7 +844,9 @@ class _$SuccessImpl implements _Success {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
+    TResult Function()? loadingWithCredentials,
+    TResult Function()? loadingWithFacebook,
+    TResult Function()? loadingWithGoogle,
     TResult Function(CredentialAuthException error)? error,
     TResult Function()? success,
     required TResult orElse(),
@@ -539,7 +861,11 @@ class _$SuccessImpl implements _Success {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(LoginFormStateLoading value) loading,
+    required TResult Function(_LoginFormStateLoading value)
+        loadingWithCredentials,
+    required TResult Function(_LoginFormStateFacebook value)
+        loadingWithFacebook,
+    required TResult Function(_LoginFormStateGoogle value) loadingWithGoogle,
     required TResult Function(LoginFormStateError value) error,
     required TResult Function(_Success value) success,
   }) {
@@ -550,7 +876,9 @@ class _$SuccessImpl implements _Success {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(LoginFormStateLoading value)? loading,
+    TResult? Function(_LoginFormStateLoading value)? loadingWithCredentials,
+    TResult? Function(_LoginFormStateFacebook value)? loadingWithFacebook,
+    TResult? Function(_LoginFormStateGoogle value)? loadingWithGoogle,
     TResult? Function(LoginFormStateError value)? error,
     TResult? Function(_Success value)? success,
   }) {
@@ -561,7 +889,9 @@ class _$SuccessImpl implements _Success {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(LoginFormStateLoading value)? loading,
+    TResult Function(_LoginFormStateLoading value)? loadingWithCredentials,
+    TResult Function(_LoginFormStateFacebook value)? loadingWithFacebook,
+    TResult Function(_LoginFormStateGoogle value)? loadingWithGoogle,
     TResult Function(LoginFormStateError value)? error,
     TResult Function(_Success value)? success,
     required TResult orElse(),

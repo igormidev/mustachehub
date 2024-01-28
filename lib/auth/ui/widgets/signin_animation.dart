@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:lottie/lottie.dart';
+import 'package:media_query_core/media_query_core.dart';
 
 class SignInAnimation extends StatelessWidget {
   final double width;
@@ -30,28 +31,28 @@ class SignInAnimation extends StatelessWidget {
             alignment: Alignment.topCenter,
             child: Padding(
               padding: const EdgeInsets.only(top: 16),
-              child: Text(
-                'Wellcome',
-                style: Theme.of(context).textTheme.displayMedium,
-              )
-                  .animate(
-                    delay: const Duration(milliseconds: 500),
-                  )
-                  .scale(),
+              child: SizedBoxApearDelay(
+                child: Text(
+                  'Welcome',
+                  style: Theme.of(context).textTheme.displayMedium,
+                ).animate().scale(),
+              ),
             ),
           ),
           Align(
             alignment: Alignment.topCenter,
             child: Padding(
               padding: const EdgeInsets.only(top: 68),
-              child: Text(
-                'To a new productivity world',
-                style: Theme.of(context).textTheme.titleMedium,
-              )
-                  .animate(
-                    delay: const Duration(milliseconds: 1000),
-                  )
-                  .fadeIn(),
+              child: SizedBoxApearDelay(
+                child: Text(
+                  'to a new productivity world',
+                  style: Theme.of(context).textTheme.titleMedium,
+                )
+                    .animate(
+                      delay: const Duration(milliseconds: 800),
+                    )
+                    .fadeIn(),
+              ),
             ),
           ),
           Positioned(

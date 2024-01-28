@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:go_router/go_router.dart';
+import 'package:media_query_core/perfomance/sized_box_apear_delay.dart';
 import 'package:media_query_core/responsiveness/visibility_width_based.dart';
 import 'package:mustachehub/auth/ui/views/auth_desktop_view/cards/logging_advantages_cards.dart';
 import 'package:mustachehub/auth/ui/widgets/login_animation.dart';
@@ -73,14 +75,25 @@ class _AuthDesktopViewState extends State<AuthDesktopView>
                         ),
                         height: 400,
                         width: 400,
-                        child: PageView.builder(
-                          controller: _pageController,
-                          itemCount: items.length,
-                          scrollDirection: Axis.vertical,
-                          itemBuilder: (context, index) {
-                            return items[index];
-                          },
+                        child: SizedBoxApearDelay(
+                          duration: const Duration(milliseconds: 600),
+                          child: PageView.builder(
+                            controller: _pageController,
+                            itemCount: items.length,
+                            scrollDirection: Axis.vertical,
+                            itemBuilder: (context, index) {
+                              return items[index];
+                            },
+                          ).animate().scale(),
                         ),
+                        // child: PageView.builder(
+                        //   controller: _pageController,
+                        //   itemCount: items.length,
+                        //   scrollDirection: Axis.vertical,
+                        //   itemBuilder: (context, index) {
+                        //     return items[index];
+                        //   },
+                        // ),
                       ),
                     ],
                   ),

@@ -1,9 +1,17 @@
 import 'dart:async';
 import 'package:commom_states/cubits/session_cubit.dart';
 import 'package:commom_states/states/session_state.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mustachehub/auth/data/repositories/implementations/log_in_repository_impl.dart';
+import 'package:mustachehub/auth/data/repositories/implementations/sign_in_repository_impl.dart';
+import 'package:mustachehub/auth/data/repositories/interfaces/i_log_in_repository.dart';
+import 'package:mustachehub/auth/data/repositories/interfaces/i_sign_in_repository.dart';
+import 'package:mustachehub/auth/presenter/cubits/login_form_cubit.dart';
+import 'package:mustachehub/auth/presenter/cubits/pass_recovery_form_cubit.dart';
+import 'package:mustachehub/auth/presenter/cubits/sign_up_form_cubit.dart';
 import 'package:mustachehub/auth/ui/views/auth_desktop_view/auth_desktop_view.dart';
 import 'package:mustachehub/auth/ui/views/login_view/login_view.dart';
 import 'package:mustachehub/auth/ui/views/pass_recovery_view/pass_recovery_view.dart';
@@ -160,7 +168,9 @@ GoRouter appRouter(SessionCubit sessionCubit) {
                 pageBuilder: (context, state) {
                   return BottomSheetTransitionPage(
                     key: state.pageKey,
-                    child: const LoginView(),
+                    child: const AuthBlocProvider(
+                      child: LoginView(),
+                    ),
                     context: context,
                   );
                 },
@@ -171,7 +181,9 @@ GoRouter appRouter(SessionCubit sessionCubit) {
                 pageBuilder: (context, state) {
                   return BottomSheetTransitionPage(
                     key: state.pageKey,
-                    child: const SignInView(),
+                    child: const AuthBlocProvider(
+                      child: SignInView(),
+                    ),
                     context: context,
                     offsetBegin: const Offset(0, -1),
                   );
@@ -183,7 +195,9 @@ GoRouter appRouter(SessionCubit sessionCubit) {
                 pageBuilder: (context, state) {
                   return BottomSheetTransitionPage(
                     key: state.pageKey,
-                    child: const PassRecoveryView(),
+                    child: const AuthBlocProvider(
+                      child: PassRecoveryView(),
+                    ),
                     context: context,
                   );
                 },
@@ -235,6 +249,49 @@ class VerticalPageRouteTransition extends PageRouteBuilder {
 
     return SlideTransition(
       position: offsetAnimation,
+      child: child,
+    );
+  }
+}
+
+class AuthBlocProvider extends StatelessWidget {
+  final Widget child;
+  const AuthBlocProvider({
+    super.key,
+    required this.child,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiBlocProvider(
+      providers: [
+        RepositoryProvider<FirebaseAuth>(
+          create: (context) => FirebaseAuth.instance,
+        ),
+        RepositoryProvider<ISignInRepository>(
+          create: (context) => SignInRepositoryImpl(
+            firebaseAuth: context.read<FirebaseAuth>(),
+          ),
+        ),
+        RepositoryProvider<ILogInRepository>(
+          create: (context) => LogInRepositoryImpl(
+            firebaseAuth: context.read<FirebaseAuth>(),
+          ),
+        ),
+        BlocProvider<LoginFormCubit>(
+          create: (context) => LoginFormCubit(
+            loginRepository: context.read<ILogInRepository>(),
+          ),
+        ),
+        BlocProvider<PassRecoveryFormCubit>(
+          create: (context) => PassRecoveryFormCubit(),
+        ),
+        BlocProvider<SignUpFormCubit>(
+          create: (context) => SignUpFormCubit(
+            signInRepository: context.read<ISignInRepository>(),
+          ),
+        ),
+      ],
       child: child,
     );
   }

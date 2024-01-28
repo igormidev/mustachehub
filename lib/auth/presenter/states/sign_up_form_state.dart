@@ -6,7 +6,9 @@ part 'sign_up_form_state.freezed.dart';
 @freezed
 abstract class SignUpFormState with _$SignUpFormState {
   factory SignUpFormState.initial() = _Initial;
-  factory SignUpFormState.loading() = SignUpFormStateLoading;
+  factory SignUpFormState.loadingWithCredentials() = _SignUpFormStateLoading;
+  factory SignUpFormState.loadingWithFacebook() = _SignUpFormStateFacebook;
+  factory SignUpFormState.loadingWithGoogle() = _SignUpFormStateGoogle;
   factory SignUpFormState.withError({
     required CredentialAuthException error,
   }) = SignUpFormStateError;

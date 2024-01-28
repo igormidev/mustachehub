@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:media_query_core/perfomance/sized_box_apear_delay.dart';
 import 'package:mustachehub/auth/ui/sections/pass_recovery_tab/pass_recovery_form_and_buttons_section.dart';
 import 'package:mustachehub/auth/ui/widgets/pass_recovery_animation.dart';
 
@@ -18,9 +20,12 @@ class PassRecoveryPage extends StatelessWidget {
                 color: Theme.of(context).colorScheme.tertiaryContainer,
                 borderRadius: const BorderRadius.all(Radius.circular(20)),
               ),
-              child: const PassRecoveryAnimation(
-                height: 400,
-                width: 400,
+              child: SizedBoxApearDelay(
+                duration: const Duration(milliseconds: 600),
+                child: const PassRecoveryAnimation(
+                  height: 400,
+                  width: 400,
+                ).animate().scale(),
               ),
             ),
           ),

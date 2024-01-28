@@ -55,7 +55,7 @@ class _SigninFormAndButtonsSectionState
           ),
           const SizedBox(height: 20),
           FilledButton(
-            onPressed: _createAccount,
+            onPressed: _createAccountWithCredential,
             child: const Text('Create account'),
           ),
           const SizedBox(height: 8),

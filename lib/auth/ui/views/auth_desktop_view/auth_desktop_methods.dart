@@ -9,19 +9,19 @@ mixin AuthDesktopMethods on State<AuthDesktopView> {
     if (currentUri.path.contains('/auth/signin')) {
       _pageController.animateToPage(
         0,
-        duration: const Duration(seconds: 1),
+        duration: 700.milliseconds,
         curve: Curves.linear,
       );
     } else if (currentUri.path.contains('/auth/login')) {
       _pageController.animateToPage(
         1,
-        duration: const Duration(seconds: 1),
+        duration: 700.milliseconds,
         curve: Curves.linear,
       );
     } else if (currentUri.path.contains('/auth/passrecovery')) {
       _pageController.animateToPage(
         2,
-        duration: const Duration(seconds: 1),
+        duration: 700.milliseconds,
         curve: Curves.linear,
       );
     }

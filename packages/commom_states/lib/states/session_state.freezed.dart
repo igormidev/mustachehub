@@ -316,15 +316,15 @@ class __$$LogedInImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? account = freezed,
-    Object? user = freezed,
+    Object? account = null,
+    Object? user = null,
   }) {
     return _then(_$LogedInImpl(
-      account: freezed == account
+      account: null == account
           ? _value.account
           : account // ignore: cast_nullable_to_non_nullable
               as AccountInfo,
-      user: freezed == user
+      user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as UserInfo,
@@ -352,15 +352,12 @@ class _$LogedInImpl implements _LogedIn {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LogedInImpl &&
-            const DeepCollectionEquality().equals(other.account, account) &&
-            const DeepCollectionEquality().equals(other.user, user));
+            (identical(other.account, account) || other.account == account) &&
+            (identical(other.user, user) || other.user == user));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(account),
-      const DeepCollectionEquality().hash(user));
+  int get hashCode => Object.hash(runtimeType, account, user);
 
   @JsonKey(ignore: true)
   @override

@@ -8,7 +8,7 @@ mixin SignInFormAndButtonsSectionMethods on State<SigninFormAndButtonsSection> {
 
   SignUpFormCubit get signInCubit => context.read<SignUpFormCubit>();
 
-  void _createAccount() {
+  Future<void> _createAccountWithCredential() async {
     final formState = _formKey.currentState;
     if (formState?.validate() != true) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -20,13 +20,24 @@ mixin SignInFormAndButtonsSectionMethods on State<SigninFormAndButtonsSection> {
     }
 
     FocusScope.of(context).unfocus();
-    signInCubit.defineAsInitial();
 
-    signInCubit.createUser(
+    await signInCubit.createUserWithCredential(
       name: _nameEC.text,
       email: _emailEC.text,
       password: _passwordEC.text,
     );
+  }
+
+  Future<void> _createAccountWithFacebook() async {
+    FocusScope.of(context).unfocus();
+
+    await signInCubit.createUserWithFacebook();
+  }
+
+  Future<void> _createAccountWithGoogle() async {
+    FocusScope.of(context).unfocus();
+
+    await signInCubit.createUserWithGoogle();
   }
 
   @override

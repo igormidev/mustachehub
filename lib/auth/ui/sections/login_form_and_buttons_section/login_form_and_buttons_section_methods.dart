@@ -7,24 +7,35 @@ mixin LoginFormAndButtonsSectionMethods on State<LoginFormAndButtonsSection> {
 
   LoginFormCubit get loginCubit => context.read<LoginFormCubit>();
 
-  void _makeLogin() {
-    final formState = _formKey.currentState;
-    if (formState?.validate() != true) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Please fill in all fields'),
-        ),
-      );
-      return;
-    }
+  Future<void> _makeLogin() async {
+    // final formState = _formKey.currentState;
+    // if (formState?.validate() != true) {
+    //   ScaffoldMessenger.of(context).showSnackBar(
+    //     const SnackBar(
+    //       content: Text('Please fill in all fields'),
+    //     ),
+    //   );
+    //   return;
+    // }
 
     FocusScope.of(context).unfocus();
-    loginCubit.defineAsInitial();
 
-    loginCubit.logInUserWithCredentials(
+    await loginCubit.logInUserWithCredentials(
       email: _emailEC.text,
       password: _passwordEC.text,
     );
+  }
+
+  Future<void> _makeLoginWithFacebook() async {
+    FocusScope.of(context).unfocus();
+
+    await loginCubit.logInWithFacebook();
+  }
+
+  Future<void> _makeLoginWithGoogle() async {
+    FocusScope.of(context).unfocus();
+
+    await loginCubit.logInWithGoogle();
   }
 
   @override
