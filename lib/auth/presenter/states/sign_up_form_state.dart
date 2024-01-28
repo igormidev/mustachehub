@@ -9,7 +9,7 @@ abstract class SignUpFormState with _$SignUpFormState {
   factory SignUpFormState.loadingWithCredentials() = _SignUpFormStateLoading;
   factory SignUpFormState.loadingWithFacebook() = _SignUpFormStateFacebook;
   factory SignUpFormState.loadingWithGoogle() = _SignUpFormStateGoogle;
-  factory SignUpFormState.withError({
+  factory SignUpFormState.error({
     required CredentialAuthException error,
   }) = SignUpFormStateError;
   factory SignUpFormState.success() = _Success;

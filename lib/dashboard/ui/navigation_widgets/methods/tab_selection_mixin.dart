@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mustachehub/dashboard/data/entities/e_navigation_possibilities.dart';
-import 'package:mustachehub/dashboard/presenter/cubit/navigation_possibilities_cubit.dart';
+import 'package:mustachehub/dashboard/presenter/cubits/navigation_possibilities_cubit.dart';
 
 mixin TabSelectionMixin {
   void onTabSelected(

@@ -77,23 +77,12 @@ class _AuthDesktopViewState extends State<AuthDesktopView>
                         width: 400,
                         child: SizedBoxApearDelay(
                           duration: const Duration(milliseconds: 600),
-                          child: PageView.builder(
+                          child: PageView(
                             controller: _pageController,
-                            itemCount: items.length,
                             scrollDirection: Axis.vertical,
-                            itemBuilder: (context, index) {
-                              return items[index];
-                            },
+                            children: items,
                           ).animate().scale(),
                         ),
-                        // child: PageView.builder(
-                        //   controller: _pageController,
-                        //   itemCount: items.length,
-                        //   scrollDirection: Axis.vertical,
-                        //   itemBuilder: (context, index) {
-                        //     return items[index];
-                        //   },
-                        // ),
                       ),
                     ],
                   ),

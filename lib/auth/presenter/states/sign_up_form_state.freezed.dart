@@ -22,7 +22,7 @@ mixin _$SignUpFormState {
     required TResult Function() loadingWithCredentials,
     required TResult Function() loadingWithFacebook,
     required TResult Function() loadingWithGoogle,
-    required TResult Function(CredentialAuthException error) withError,
+    required TResult Function(CredentialAuthException error) error,
     required TResult Function() success,
   }) =>
       throw _privateConstructorUsedError;
@@ -32,7 +32,7 @@ mixin _$SignUpFormState {
     TResult? Function()? loadingWithCredentials,
     TResult? Function()? loadingWithFacebook,
     TResult? Function()? loadingWithGoogle,
-    TResult? Function(CredentialAuthException error)? withError,
+    TResult? Function(CredentialAuthException error)? error,
     TResult? Function()? success,
   }) =>
       throw _privateConstructorUsedError;
@@ -42,7 +42,7 @@ mixin _$SignUpFormState {
     TResult Function()? loadingWithCredentials,
     TResult Function()? loadingWithFacebook,
     TResult Function()? loadingWithGoogle,
-    TResult Function(CredentialAuthException error)? withError,
+    TResult Function(CredentialAuthException error)? error,
     TResult Function()? success,
     required TResult orElse(),
   }) =>
@@ -55,7 +55,7 @@ mixin _$SignUpFormState {
     required TResult Function(_SignUpFormStateFacebook value)
         loadingWithFacebook,
     required TResult Function(_SignUpFormStateGoogle value) loadingWithGoogle,
-    required TResult Function(SignUpFormStateError value) withError,
+    required TResult Function(SignUpFormStateError value) error,
     required TResult Function(_Success value) success,
   }) =>
       throw _privateConstructorUsedError;
@@ -65,7 +65,7 @@ mixin _$SignUpFormState {
     TResult? Function(_SignUpFormStateLoading value)? loadingWithCredentials,
     TResult? Function(_SignUpFormStateFacebook value)? loadingWithFacebook,
     TResult? Function(_SignUpFormStateGoogle value)? loadingWithGoogle,
-    TResult? Function(SignUpFormStateError value)? withError,
+    TResult? Function(SignUpFormStateError value)? error,
     TResult? Function(_Success value)? success,
   }) =>
       throw _privateConstructorUsedError;
@@ -75,7 +75,7 @@ mixin _$SignUpFormState {
     TResult Function(_SignUpFormStateLoading value)? loadingWithCredentials,
     TResult Function(_SignUpFormStateFacebook value)? loadingWithFacebook,
     TResult Function(_SignUpFormStateGoogle value)? loadingWithGoogle,
-    TResult Function(SignUpFormStateError value)? withError,
+    TResult Function(SignUpFormStateError value)? error,
     TResult Function(_Success value)? success,
     required TResult orElse(),
   }) =>
@@ -142,7 +142,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function() loadingWithCredentials,
     required TResult Function() loadingWithFacebook,
     required TResult Function() loadingWithGoogle,
-    required TResult Function(CredentialAuthException error) withError,
+    required TResult Function(CredentialAuthException error) error,
     required TResult Function() success,
   }) {
     return initial();
@@ -155,7 +155,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function()? loadingWithCredentials,
     TResult? Function()? loadingWithFacebook,
     TResult? Function()? loadingWithGoogle,
-    TResult? Function(CredentialAuthException error)? withError,
+    TResult? Function(CredentialAuthException error)? error,
     TResult? Function()? success,
   }) {
     return initial?.call();
@@ -168,7 +168,7 @@ class _$InitialImpl implements _Initial {
     TResult Function()? loadingWithCredentials,
     TResult Function()? loadingWithFacebook,
     TResult Function()? loadingWithGoogle,
-    TResult Function(CredentialAuthException error)? withError,
+    TResult Function(CredentialAuthException error)? error,
     TResult Function()? success,
     required TResult orElse(),
   }) {
@@ -187,7 +187,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function(_SignUpFormStateFacebook value)
         loadingWithFacebook,
     required TResult Function(_SignUpFormStateGoogle value) loadingWithGoogle,
-    required TResult Function(SignUpFormStateError value) withError,
+    required TResult Function(SignUpFormStateError value) error,
     required TResult Function(_Success value) success,
   }) {
     return initial(this);
@@ -200,7 +200,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function(_SignUpFormStateLoading value)? loadingWithCredentials,
     TResult? Function(_SignUpFormStateFacebook value)? loadingWithFacebook,
     TResult? Function(_SignUpFormStateGoogle value)? loadingWithGoogle,
-    TResult? Function(SignUpFormStateError value)? withError,
+    TResult? Function(SignUpFormStateError value)? error,
     TResult? Function(_Success value)? success,
   }) {
     return initial?.call(this);
@@ -213,7 +213,7 @@ class _$InitialImpl implements _Initial {
     TResult Function(_SignUpFormStateLoading value)? loadingWithCredentials,
     TResult Function(_SignUpFormStateFacebook value)? loadingWithFacebook,
     TResult Function(_SignUpFormStateGoogle value)? loadingWithGoogle,
-    TResult Function(SignUpFormStateError value)? withError,
+    TResult Function(SignUpFormStateError value)? error,
     TResult Function(_Success value)? success,
     required TResult orElse(),
   }) {
@@ -273,7 +273,7 @@ class _$SignUpFormStateLoadingImpl implements _SignUpFormStateLoading {
     required TResult Function() loadingWithCredentials,
     required TResult Function() loadingWithFacebook,
     required TResult Function() loadingWithGoogle,
-    required TResult Function(CredentialAuthException error) withError,
+    required TResult Function(CredentialAuthException error) error,
     required TResult Function() success,
   }) {
     return loadingWithCredentials();
@@ -286,7 +286,7 @@ class _$SignUpFormStateLoadingImpl implements _SignUpFormStateLoading {
     TResult? Function()? loadingWithCredentials,
     TResult? Function()? loadingWithFacebook,
     TResult? Function()? loadingWithGoogle,
-    TResult? Function(CredentialAuthException error)? withError,
+    TResult? Function(CredentialAuthException error)? error,
     TResult? Function()? success,
   }) {
     return loadingWithCredentials?.call();
@@ -299,7 +299,7 @@ class _$SignUpFormStateLoadingImpl implements _SignUpFormStateLoading {
     TResult Function()? loadingWithCredentials,
     TResult Function()? loadingWithFacebook,
     TResult Function()? loadingWithGoogle,
-    TResult Function(CredentialAuthException error)? withError,
+    TResult Function(CredentialAuthException error)? error,
     TResult Function()? success,
     required TResult orElse(),
   }) {
@@ -318,7 +318,7 @@ class _$SignUpFormStateLoadingImpl implements _SignUpFormStateLoading {
     required TResult Function(_SignUpFormStateFacebook value)
         loadingWithFacebook,
     required TResult Function(_SignUpFormStateGoogle value) loadingWithGoogle,
-    required TResult Function(SignUpFormStateError value) withError,
+    required TResult Function(SignUpFormStateError value) error,
     required TResult Function(_Success value) success,
   }) {
     return loadingWithCredentials(this);
@@ -331,7 +331,7 @@ class _$SignUpFormStateLoadingImpl implements _SignUpFormStateLoading {
     TResult? Function(_SignUpFormStateLoading value)? loadingWithCredentials,
     TResult? Function(_SignUpFormStateFacebook value)? loadingWithFacebook,
     TResult? Function(_SignUpFormStateGoogle value)? loadingWithGoogle,
-    TResult? Function(SignUpFormStateError value)? withError,
+    TResult? Function(SignUpFormStateError value)? error,
     TResult? Function(_Success value)? success,
   }) {
     return loadingWithCredentials?.call(this);
@@ -344,7 +344,7 @@ class _$SignUpFormStateLoadingImpl implements _SignUpFormStateLoading {
     TResult Function(_SignUpFormStateLoading value)? loadingWithCredentials,
     TResult Function(_SignUpFormStateFacebook value)? loadingWithFacebook,
     TResult Function(_SignUpFormStateGoogle value)? loadingWithGoogle,
-    TResult Function(SignUpFormStateError value)? withError,
+    TResult Function(SignUpFormStateError value)? error,
     TResult Function(_Success value)? success,
     required TResult orElse(),
   }) {
@@ -404,7 +404,7 @@ class _$SignUpFormStateFacebookImpl implements _SignUpFormStateFacebook {
     required TResult Function() loadingWithCredentials,
     required TResult Function() loadingWithFacebook,
     required TResult Function() loadingWithGoogle,
-    required TResult Function(CredentialAuthException error) withError,
+    required TResult Function(CredentialAuthException error) error,
     required TResult Function() success,
   }) {
     return loadingWithFacebook();
@@ -417,7 +417,7 @@ class _$SignUpFormStateFacebookImpl implements _SignUpFormStateFacebook {
     TResult? Function()? loadingWithCredentials,
     TResult? Function()? loadingWithFacebook,
     TResult? Function()? loadingWithGoogle,
-    TResult? Function(CredentialAuthException error)? withError,
+    TResult? Function(CredentialAuthException error)? error,
     TResult? Function()? success,
   }) {
     return loadingWithFacebook?.call();
@@ -430,7 +430,7 @@ class _$SignUpFormStateFacebookImpl implements _SignUpFormStateFacebook {
     TResult Function()? loadingWithCredentials,
     TResult Function()? loadingWithFacebook,
     TResult Function()? loadingWithGoogle,
-    TResult Function(CredentialAuthException error)? withError,
+    TResult Function(CredentialAuthException error)? error,
     TResult Function()? success,
     required TResult orElse(),
   }) {
@@ -449,7 +449,7 @@ class _$SignUpFormStateFacebookImpl implements _SignUpFormStateFacebook {
     required TResult Function(_SignUpFormStateFacebook value)
         loadingWithFacebook,
     required TResult Function(_SignUpFormStateGoogle value) loadingWithGoogle,
-    required TResult Function(SignUpFormStateError value) withError,
+    required TResult Function(SignUpFormStateError value) error,
     required TResult Function(_Success value) success,
   }) {
     return loadingWithFacebook(this);
@@ -462,7 +462,7 @@ class _$SignUpFormStateFacebookImpl implements _SignUpFormStateFacebook {
     TResult? Function(_SignUpFormStateLoading value)? loadingWithCredentials,
     TResult? Function(_SignUpFormStateFacebook value)? loadingWithFacebook,
     TResult? Function(_SignUpFormStateGoogle value)? loadingWithGoogle,
-    TResult? Function(SignUpFormStateError value)? withError,
+    TResult? Function(SignUpFormStateError value)? error,
     TResult? Function(_Success value)? success,
   }) {
     return loadingWithFacebook?.call(this);
@@ -475,7 +475,7 @@ class _$SignUpFormStateFacebookImpl implements _SignUpFormStateFacebook {
     TResult Function(_SignUpFormStateLoading value)? loadingWithCredentials,
     TResult Function(_SignUpFormStateFacebook value)? loadingWithFacebook,
     TResult Function(_SignUpFormStateGoogle value)? loadingWithGoogle,
-    TResult Function(SignUpFormStateError value)? withError,
+    TResult Function(SignUpFormStateError value)? error,
     TResult Function(_Success value)? success,
     required TResult orElse(),
   }) {
@@ -534,7 +534,7 @@ class _$SignUpFormStateGoogleImpl implements _SignUpFormStateGoogle {
     required TResult Function() loadingWithCredentials,
     required TResult Function() loadingWithFacebook,
     required TResult Function() loadingWithGoogle,
-    required TResult Function(CredentialAuthException error) withError,
+    required TResult Function(CredentialAuthException error) error,
     required TResult Function() success,
   }) {
     return loadingWithGoogle();
@@ -547,7 +547,7 @@ class _$SignUpFormStateGoogleImpl implements _SignUpFormStateGoogle {
     TResult? Function()? loadingWithCredentials,
     TResult? Function()? loadingWithFacebook,
     TResult? Function()? loadingWithGoogle,
-    TResult? Function(CredentialAuthException error)? withError,
+    TResult? Function(CredentialAuthException error)? error,
     TResult? Function()? success,
   }) {
     return loadingWithGoogle?.call();
@@ -560,7 +560,7 @@ class _$SignUpFormStateGoogleImpl implements _SignUpFormStateGoogle {
     TResult Function()? loadingWithCredentials,
     TResult Function()? loadingWithFacebook,
     TResult Function()? loadingWithGoogle,
-    TResult Function(CredentialAuthException error)? withError,
+    TResult Function(CredentialAuthException error)? error,
     TResult Function()? success,
     required TResult orElse(),
   }) {
@@ -579,7 +579,7 @@ class _$SignUpFormStateGoogleImpl implements _SignUpFormStateGoogle {
     required TResult Function(_SignUpFormStateFacebook value)
         loadingWithFacebook,
     required TResult Function(_SignUpFormStateGoogle value) loadingWithGoogle,
-    required TResult Function(SignUpFormStateError value) withError,
+    required TResult Function(SignUpFormStateError value) error,
     required TResult Function(_Success value) success,
   }) {
     return loadingWithGoogle(this);
@@ -592,7 +592,7 @@ class _$SignUpFormStateGoogleImpl implements _SignUpFormStateGoogle {
     TResult? Function(_SignUpFormStateLoading value)? loadingWithCredentials,
     TResult? Function(_SignUpFormStateFacebook value)? loadingWithFacebook,
     TResult? Function(_SignUpFormStateGoogle value)? loadingWithGoogle,
-    TResult? Function(SignUpFormStateError value)? withError,
+    TResult? Function(SignUpFormStateError value)? error,
     TResult? Function(_Success value)? success,
   }) {
     return loadingWithGoogle?.call(this);
@@ -605,7 +605,7 @@ class _$SignUpFormStateGoogleImpl implements _SignUpFormStateGoogle {
     TResult Function(_SignUpFormStateLoading value)? loadingWithCredentials,
     TResult Function(_SignUpFormStateFacebook value)? loadingWithFacebook,
     TResult Function(_SignUpFormStateGoogle value)? loadingWithGoogle,
-    TResult Function(SignUpFormStateError value)? withError,
+    TResult Function(SignUpFormStateError value)? error,
     TResult Function(_Success value)? success,
     required TResult orElse(),
   }) {
@@ -661,7 +661,7 @@ class _$SignUpFormStateErrorImpl implements SignUpFormStateError {
 
   @override
   String toString() {
-    return 'SignUpFormState.withError(error: $error)';
+    return 'SignUpFormState.error(error: $error)';
   }
 
   @override
@@ -690,10 +690,10 @@ class _$SignUpFormStateErrorImpl implements SignUpFormStateError {
     required TResult Function() loadingWithCredentials,
     required TResult Function() loadingWithFacebook,
     required TResult Function() loadingWithGoogle,
-    required TResult Function(CredentialAuthException error) withError,
+    required TResult Function(CredentialAuthException error) error,
     required TResult Function() success,
   }) {
-    return withError(error);
+    return error(this.error);
   }
 
   @override
@@ -703,10 +703,10 @@ class _$SignUpFormStateErrorImpl implements SignUpFormStateError {
     TResult? Function()? loadingWithCredentials,
     TResult? Function()? loadingWithFacebook,
     TResult? Function()? loadingWithGoogle,
-    TResult? Function(CredentialAuthException error)? withError,
+    TResult? Function(CredentialAuthException error)? error,
     TResult? Function()? success,
   }) {
-    return withError?.call(error);
+    return error?.call(this.error);
   }
 
   @override
@@ -716,12 +716,12 @@ class _$SignUpFormStateErrorImpl implements SignUpFormStateError {
     TResult Function()? loadingWithCredentials,
     TResult Function()? loadingWithFacebook,
     TResult Function()? loadingWithGoogle,
-    TResult Function(CredentialAuthException error)? withError,
+    TResult Function(CredentialAuthException error)? error,
     TResult Function()? success,
     required TResult orElse(),
   }) {
-    if (withError != null) {
-      return withError(error);
+    if (error != null) {
+      return error(this.error);
     }
     return orElse();
   }
@@ -735,10 +735,10 @@ class _$SignUpFormStateErrorImpl implements SignUpFormStateError {
     required TResult Function(_SignUpFormStateFacebook value)
         loadingWithFacebook,
     required TResult Function(_SignUpFormStateGoogle value) loadingWithGoogle,
-    required TResult Function(SignUpFormStateError value) withError,
+    required TResult Function(SignUpFormStateError value) error,
     required TResult Function(_Success value) success,
   }) {
-    return withError(this);
+    return error(this);
   }
 
   @override
@@ -748,10 +748,10 @@ class _$SignUpFormStateErrorImpl implements SignUpFormStateError {
     TResult? Function(_SignUpFormStateLoading value)? loadingWithCredentials,
     TResult? Function(_SignUpFormStateFacebook value)? loadingWithFacebook,
     TResult? Function(_SignUpFormStateGoogle value)? loadingWithGoogle,
-    TResult? Function(SignUpFormStateError value)? withError,
+    TResult? Function(SignUpFormStateError value)? error,
     TResult? Function(_Success value)? success,
   }) {
-    return withError?.call(this);
+    return error?.call(this);
   }
 
   @override
@@ -761,12 +761,12 @@ class _$SignUpFormStateErrorImpl implements SignUpFormStateError {
     TResult Function(_SignUpFormStateLoading value)? loadingWithCredentials,
     TResult Function(_SignUpFormStateFacebook value)? loadingWithFacebook,
     TResult Function(_SignUpFormStateGoogle value)? loadingWithGoogle,
-    TResult Function(SignUpFormStateError value)? withError,
+    TResult Function(SignUpFormStateError value)? error,
     TResult Function(_Success value)? success,
     required TResult orElse(),
   }) {
-    if (withError != null) {
-      return withError(this);
+    if (error != null) {
+      return error(this);
     }
     return orElse();
   }
@@ -824,7 +824,7 @@ class _$SuccessImpl implements _Success {
     required TResult Function() loadingWithCredentials,
     required TResult Function() loadingWithFacebook,
     required TResult Function() loadingWithGoogle,
-    required TResult Function(CredentialAuthException error) withError,
+    required TResult Function(CredentialAuthException error) error,
     required TResult Function() success,
   }) {
     return success();
@@ -837,7 +837,7 @@ class _$SuccessImpl implements _Success {
     TResult? Function()? loadingWithCredentials,
     TResult? Function()? loadingWithFacebook,
     TResult? Function()? loadingWithGoogle,
-    TResult? Function(CredentialAuthException error)? withError,
+    TResult? Function(CredentialAuthException error)? error,
     TResult? Function()? success,
   }) {
     return success?.call();
@@ -850,7 +850,7 @@ class _$SuccessImpl implements _Success {
     TResult Function()? loadingWithCredentials,
     TResult Function()? loadingWithFacebook,
     TResult Function()? loadingWithGoogle,
-    TResult Function(CredentialAuthException error)? withError,
+    TResult Function(CredentialAuthException error)? error,
     TResult Function()? success,
     required TResult orElse(),
   }) {
@@ -869,7 +869,7 @@ class _$SuccessImpl implements _Success {
     required TResult Function(_SignUpFormStateFacebook value)
         loadingWithFacebook,
     required TResult Function(_SignUpFormStateGoogle value) loadingWithGoogle,
-    required TResult Function(SignUpFormStateError value) withError,
+    required TResult Function(SignUpFormStateError value) error,
     required TResult Function(_Success value) success,
   }) {
     return success(this);
@@ -882,7 +882,7 @@ class _$SuccessImpl implements _Success {
     TResult? Function(_SignUpFormStateLoading value)? loadingWithCredentials,
     TResult? Function(_SignUpFormStateFacebook value)? loadingWithFacebook,
     TResult? Function(_SignUpFormStateGoogle value)? loadingWithGoogle,
-    TResult? Function(SignUpFormStateError value)? withError,
+    TResult? Function(SignUpFormStateError value)? error,
     TResult? Function(_Success value)? success,
   }) {
     return success?.call(this);
@@ -895,7 +895,7 @@ class _$SuccessImpl implements _Success {
     TResult Function(_SignUpFormStateLoading value)? loadingWithCredentials,
     TResult Function(_SignUpFormStateFacebook value)? loadingWithFacebook,
     TResult Function(_SignUpFormStateGoogle value)? loadingWithGoogle,
-    TResult Function(SignUpFormStateError value)? withError,
+    TResult Function(SignUpFormStateError value)? error,
     TResult Function(_Success value)? success,
     required TResult orElse(),
   }) {

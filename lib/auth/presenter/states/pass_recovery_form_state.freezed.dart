@@ -20,7 +20,7 @@ mixin _$PassRecoveryFormState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() error,
+    required TResult Function(CredentialAuthException error) error,
     required TResult Function() success,
   }) =>
       throw _privateConstructorUsedError;
@@ -28,7 +28,7 @@ mixin _$PassRecoveryFormState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? error,
+    TResult? Function(CredentialAuthException error)? error,
     TResult? Function()? success,
   }) =>
       throw _privateConstructorUsedError;
@@ -36,7 +36,7 @@ mixin _$PassRecoveryFormState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? error,
+    TResult Function(CredentialAuthException error)? error,
     TResult Function()? success,
     required TResult orElse(),
   }) =>
@@ -131,7 +131,7 @@ class _$PassRecoveryStateInitialImpl implements _PassRecoveryStateInitial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() error,
+    required TResult Function(CredentialAuthException error) error,
     required TResult Function() success,
   }) {
     return initial();
@@ -142,7 +142,7 @@ class _$PassRecoveryStateInitialImpl implements _PassRecoveryStateInitial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? error,
+    TResult? Function(CredentialAuthException error)? error,
     TResult? Function()? success,
   }) {
     return initial?.call();
@@ -153,7 +153,7 @@ class _$PassRecoveryStateInitialImpl implements _PassRecoveryStateInitial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? error,
+    TResult Function(CredentialAuthException error)? error,
     TResult Function()? success,
     required TResult orElse(),
   }) {
@@ -249,7 +249,7 @@ class _$PassRecoveryStateLoadingImpl implements _PassRecoveryStateLoading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() error,
+    required TResult Function(CredentialAuthException error) error,
     required TResult Function() success,
   }) {
     return loading();
@@ -260,7 +260,7 @@ class _$PassRecoveryStateLoadingImpl implements _PassRecoveryStateLoading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? error,
+    TResult? Function(CredentialAuthException error)? error,
     TResult? Function()? success,
   }) {
     return loading?.call();
@@ -271,7 +271,7 @@ class _$PassRecoveryStateLoadingImpl implements _PassRecoveryStateLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? error,
+    TResult Function(CredentialAuthException error)? error,
     TResult Function()? success,
     required TResult orElse(),
   }) {
@@ -329,6 +329,8 @@ abstract class _$$PassRecoveryStateErrorImplCopyWith<$Res> {
           _$PassRecoveryStateErrorImpl value,
           $Res Function(_$PassRecoveryStateErrorImpl) then) =
       __$$PassRecoveryStateErrorImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({CredentialAuthException error});
 }
 
 /// @nodoc
@@ -340,37 +342,61 @@ class __$$PassRecoveryStateErrorImplCopyWithImpl<$Res>
       _$PassRecoveryStateErrorImpl _value,
       $Res Function(_$PassRecoveryStateErrorImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? error = null,
+  }) {
+    return _then(_$PassRecoveryStateErrorImpl(
+      error: null == error
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as CredentialAuthException,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$PassRecoveryStateErrorImpl implements _PassRecoveryStateError {
-  _$PassRecoveryStateErrorImpl();
+  _$PassRecoveryStateErrorImpl({required this.error});
+
+  @override
+  final CredentialAuthException error;
 
   @override
   String toString() {
-    return 'PassRecoveryFormState.error()';
+    return 'PassRecoveryFormState.error(error: $error)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$PassRecoveryStateErrorImpl);
+            other is _$PassRecoveryStateErrorImpl &&
+            (identical(other.error, error) || other.error == error));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, error);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$PassRecoveryStateErrorImplCopyWith<_$PassRecoveryStateErrorImpl>
+      get copyWith => __$$PassRecoveryStateErrorImplCopyWithImpl<
+          _$PassRecoveryStateErrorImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() error,
+    required TResult Function(CredentialAuthException error) error,
     required TResult Function() success,
   }) {
-    return error();
+    return error(this.error);
   }
 
   @override
@@ -378,10 +404,10 @@ class _$PassRecoveryStateErrorImpl implements _PassRecoveryStateError {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? error,
+    TResult? Function(CredentialAuthException error)? error,
     TResult? Function()? success,
   }) {
-    return error?.call();
+    return error?.call(this.error);
   }
 
   @override
@@ -389,12 +415,12 @@ class _$PassRecoveryStateErrorImpl implements _PassRecoveryStateError {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? error,
+    TResult Function(CredentialAuthException error)? error,
     TResult Function()? success,
     required TResult orElse(),
   }) {
     if (error != null) {
-      return error();
+      return error(this.error);
     }
     return orElse();
   }
@@ -438,7 +464,14 @@ class _$PassRecoveryStateErrorImpl implements _PassRecoveryStateError {
 }
 
 abstract class _PassRecoveryStateError implements PassRecoveryFormState {
-  factory _PassRecoveryStateError() = _$PassRecoveryStateErrorImpl;
+  factory _PassRecoveryStateError(
+          {required final CredentialAuthException error}) =
+      _$PassRecoveryStateErrorImpl;
+
+  CredentialAuthException get error;
+  @JsonKey(ignore: true)
+  _$$PassRecoveryStateErrorImplCopyWith<_$PassRecoveryStateErrorImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -484,7 +517,7 @@ class _$PassRecoveryStateDataImpl implements _PassRecoveryStateData {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() error,
+    required TResult Function(CredentialAuthException error) error,
     required TResult Function() success,
   }) {
     return success();
@@ -495,7 +528,7 @@ class _$PassRecoveryStateDataImpl implements _PassRecoveryStateData {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? error,
+    TResult? Function(CredentialAuthException error)? error,
     TResult? Function()? success,
   }) {
     return success?.call();
@@ -506,7 +539,7 @@ class _$PassRecoveryStateDataImpl implements _PassRecoveryStateData {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? error,
+    TResult Function(CredentialAuthException error)? error,
     TResult Function()? success,
     required TResult orElse(),
   }) {

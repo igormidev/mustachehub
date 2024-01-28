@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 
 @immutable
-abstract class CredentialAuthException {
+sealed class CredentialAuthException {
   const CredentialAuthException();
 
   factory CredentialAuthException.fromFirebaseError(
@@ -14,6 +14,8 @@ abstract class CredentialAuthException {
       return NoInternetDetected(error);
     } else if (error.code.contains('email-already-in-use')) {
       return CredentialEmailAlreadyExists(error);
+    } else if (error.code.contains('invalid-credential')) {
+      return CredentialUserNotFound(error);
     } else if (error.code.contains('invalid-email')) {
       return CredentialInvalidEmail(error);
     } else if (error.code.contains('invalid-password')) {

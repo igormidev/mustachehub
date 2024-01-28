@@ -3,7 +3,7 @@ import 'package:commom_states/cubits/session_cubit.dart';
 import 'package:commom_states/states/session_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mustachehub/dashboard/data/entities/e_navigation_possibilities.dart';
-import 'package:mustachehub/dashboard/presenter/cubit/navigation_possibilities_cubit.dart';
+import 'package:mustachehub/dashboard/presenter/cubits/navigation_possibilities_cubit.dart';
 import 'package:mustachehub/dashboard/presenter/states/navigation_possibilities_state.dart';
 
 part 'splash_view_methods.dart';

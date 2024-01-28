@@ -16,7 +16,7 @@ import 'package:mustachehub/auth/ui/views/auth_desktop_view/auth_desktop_view.da
 import 'package:mustachehub/auth/ui/views/login_view/login_view.dart';
 import 'package:mustachehub/auth/ui/views/pass_recovery_view/pass_recovery_view.dart';
 import 'package:mustachehub/auth/ui/views/signin_view/signin_view.dart';
-import 'package:mustachehub/dashboard/presenter/cubit/navigation_possibilities_cubit.dart';
+import 'package:mustachehub/dashboard/presenter/cubits/navigation_possibilities_cubit.dart';
 import 'package:mustachehub/dashboard/presenter/states/navigation_possibilities_state.dart';
 import 'package:mustachehub/dashboard/ui/pages/not_found_404_page/not_found_404_page.dart';
 import 'package:mustachehub/dashboard/ui/view/dashboard_view/dashboard_view.dart';
@@ -226,8 +226,8 @@ class GoRouterRefreshStream<T> extends ChangeNotifier {
 
   @override
   void dispose() {
-    _subscription.cancel();
     super.dispose();
+    _subscription.cancel();
   }
 }
 

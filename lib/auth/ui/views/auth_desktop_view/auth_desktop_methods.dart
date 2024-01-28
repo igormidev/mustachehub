@@ -9,13 +9,13 @@ mixin AuthDesktopMethods on State<AuthDesktopView> {
     if (currentUri.path.contains('/auth/signin')) {
       _pageController.animateToPage(
         0,
-        duration: 700.milliseconds,
+        duration: 600.milliseconds,
         curve: Curves.linear,
       );
     } else if (currentUri.path.contains('/auth/login')) {
       _pageController.animateToPage(
         1,
-        duration: 700.milliseconds,
+        duration: 600.milliseconds,
         curve: Curves.linear,
       );
     } else if (currentUri.path.contains('/auth/passrecovery')) {
@@ -38,10 +38,10 @@ mixin AuthDesktopMethods on State<AuthDesktopView> {
 
   @override
   void dispose() {
-    super.dispose();
     _pageController.dispose();
     GoRouter.of(context)
         .routeInformationProvider
         .removeListener(_authIconNavigationUpdater);
+    super.dispose();
   }
 }

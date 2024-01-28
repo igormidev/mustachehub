@@ -15,6 +15,7 @@ class LoginTab extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              const SizedBox(height: 46),
               Text(
                 'Log in',
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(

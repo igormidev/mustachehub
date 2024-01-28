@@ -8,15 +8,15 @@ mixin LoginFormAndButtonsSectionMethods on State<LoginFormAndButtonsSection> {
   LoginFormCubit get loginCubit => context.read<LoginFormCubit>();
 
   Future<void> _makeLogin() async {
-    // final formState = _formKey.currentState;
-    // if (formState?.validate() != true) {
-    //   ScaffoldMessenger.of(context).showSnackBar(
-    //     const SnackBar(
-    //       content: Text('Please fill in all fields'),
-    //     ),
-    //   );
-    //   return;
-    // }
+    final formState = _formKey.currentState;
+    if (formState?.validate() != true) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Please fill in all fields'),
+        ),
+      );
+      return;
+    }
 
     FocusScope.of(context).unfocus();
 

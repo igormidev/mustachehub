@@ -100,7 +100,7 @@ class _SigninFormAndButtonsSectionState
               ),
               const SizedBox(width: 8),
               MediaButtons<SignUpFormCubit, SignUpFormState>.facebook(
-                text: 'Enter with Facebook',
+                text: 'Create with Facebook',
                 onPressed: _createAccountWithFacebook,
                 isLoading: (state) => state.maybeMap(
                   loadingWithGoogle: (_) => true,

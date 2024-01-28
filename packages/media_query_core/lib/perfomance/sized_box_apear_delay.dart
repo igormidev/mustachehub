@@ -23,9 +23,11 @@ class _SizedBoxApearDelayState extends State<SizedBoxApearDelay> {
   void initState() {
     super.initState();
     Future.delayed(widget.duration, () {
-      setState(() {
-        _isSizedBoxVisible = true;
-      });
+      if (context.mounted) {
+        setState(() {
+          _isSizedBoxVisible = true;
+        });
+      }
     });
   }
 

@@ -18,13 +18,12 @@ class LoginFormCubit extends Cubit<LoginFormState>
   }) async {
     emit(LoginFormState.loadingWithCredentials());
     await Future.delayed(const Duration(seconds: 3));
-    emit(LoginFormState.success());
-    // final response = await _loginRepository.signInUserWithEmailAndPassword(
-    //   email: email,
-    //   password: password,
-    // );
+    final response = await _loginRepository.signInUserWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
 
-    // emit(response);
+    emit(response);
   }
 
   Future<void> logInWithFacebook() async {
@@ -58,7 +57,6 @@ mixin GlobalLoadingEnforcer<T> on Cubit<T> {
     super.onChange(change);
     final t = change.nextState.toString().toLowerCase();
     final isLoading = t.contains('loading') || t.contains('processing');
-    print('isLoading: $isLoading');
     if (isLoading) {
       NavigatorService.rootNavigatorKey.currentContext!.setGlobalLoading();
     } else {

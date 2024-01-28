@@ -15,11 +15,13 @@ class LoginPage extends StatelessWidget {
         children: [
           const SizedBox(height: 20),
           Center(
-            child: DecoratedBox(
+            child: Container(
               decoration: BoxDecoration(
                 color: Theme.of(context).colorScheme.tertiaryContainer,
                 borderRadius: const BorderRadius.all(Radius.circular(20)),
               ),
+              height: 400,
+              width: 400,
               child: SizedBoxApearDelay(
                 duration: const Duration(milliseconds: 600),
                 child: const LogInAnimation(
@@ -32,10 +34,10 @@ class LoginPage extends StatelessWidget {
           const SizedBox(height: 20),
           const Center(
             child: SizedBox(
-              width: 400,
+              width: 450,
               child: FittedBox(
                 child: SizedBox(
-                  width: 440,
+                  width: 450,
                   child: LoginFormAndButtonsSection(),
                 ),
               ),

@@ -23,9 +23,9 @@ mixin DashboardViewMethods on State<DashboardView> {
 
   @override
   void dispose() {
-    super.dispose();
     GoRouter.of(context)
         .routeInformationProvider
         .removeListener(_dashbaordNavigationUpdater);
+    super.dispose();
   }
 }

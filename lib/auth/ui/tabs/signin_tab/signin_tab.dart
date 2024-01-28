@@ -16,6 +16,7 @@ class SigninTab extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              const SizedBox(height: 8),
               BackButton(
                 onPressed: () {
                   context.go('/auth/login');
@@ -32,7 +33,17 @@ class SigninTab extends StatelessWidget {
                 style: Theme.of(context).textTheme.displaySmall,
               ),
               const SizedBox(height: 25),
-              const SigninFormAndButtonsSection(),
+              const Center(
+                child: SizedBox(
+                  width: 480,
+                  child: FittedBox(
+                    child: SizedBox(
+                      width: 480,
+                      child: SigninFormAndButtonsSection(),
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
         ),

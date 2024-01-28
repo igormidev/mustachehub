@@ -35,7 +35,7 @@ class SignInRepositoryImpl
         return SignUpFormState.success();
       },
       toState: (error) {
-        return SignUpFormState.withError(error: error);
+        return SignUpFormState.error(error: error);
       },
     );
   }
