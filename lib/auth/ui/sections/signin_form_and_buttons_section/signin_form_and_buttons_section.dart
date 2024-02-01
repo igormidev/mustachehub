@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:media_query_core/reactiveness/boolean_toggle_wrapper.dart';
 import 'package:mustache_hub_core/mustache_hub_core.dart';
 import 'package:mustachehub/auth/presenter/cubits/sign_up_form_cubit.dart';
 import 'package:mustachehub/auth/presenter/states/sign_up_form_state.dart';
@@ -44,15 +45,29 @@ class _SigninFormAndButtonsSectionState
             ),
           ),
           const SizedBox(height: 20),
-          TextFormField(
-            controller: _passwordEC,
-            decoration: const InputDecoration(
-              labelText: 'Password',
-            ),
-            validator: (val) => combineValidators([
-              () => isNotEmpty(val),
-              () => lenghtHasToBeAtLeast(8, val),
-            ]),
+          BooleanToggleWrapper(
+            builder: (context, isVisible, toggleFunction) {
+              return TextFormField(
+                controller: _passwordEC,
+                decoration: InputDecoration(
+                  labelText: 'Password',
+                  suffixIcon: Padding(
+                    padding: const EdgeInsets.only(right: 8),
+                    child: IconButton(
+                      onPressed: toggleFunction,
+                      icon: Icon(
+                        isVisible ? Icons.visibility : Icons.visibility_off,
+                      ),
+                    ),
+                  ),
+                ),
+                obscureText: isVisible == false,
+                validator: (val) => combineValidators([
+                  () => isNotEmpty(val),
+                  () => lenghtHasToBeAtLeast(8, val),
+                ]),
+              );
+            },
           ),
           const SizedBox(height: 20),
           BlocBuilder<SignUpFormCubit, SignUpFormState>(

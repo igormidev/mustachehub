@@ -21,7 +21,9 @@ mixin _$UserFetchState {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(CredentialAuthException error) error,
-    required TResult Function() done,
+    required TResult Function() doneWithoutUser,
+    required TResult Function(UserProfile userInfo, AccountInfo accountInfo)
+        doneWithUser,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -29,7 +31,9 @@ mixin _$UserFetchState {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(CredentialAuthException error)? error,
-    TResult? Function()? done,
+    TResult? Function()? doneWithoutUser,
+    TResult? Function(UserProfile userInfo, AccountInfo accountInfo)?
+        doneWithUser,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -37,7 +41,9 @@ mixin _$UserFetchState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(CredentialAuthException error)? error,
-    TResult Function()? done,
+    TResult Function()? doneWithoutUser,
+    TResult Function(UserProfile userInfo, AccountInfo accountInfo)?
+        doneWithUser,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -46,7 +52,9 @@ mixin _$UserFetchState {
     required TResult Function(_UserFetchStateInitial value) initial,
     required TResult Function(_UserFetchStateLoading value) loading,
     required TResult Function(_UserFetchStateError value) error,
-    required TResult Function(_UserFetchStateDone value) done,
+    required TResult Function(_UserFetchStateDoneWithoutUser value)
+        doneWithoutUser,
+    required TResult Function(_UserFetchStateDoneWithUser value) doneWithUser,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -54,7 +62,8 @@ mixin _$UserFetchState {
     TResult? Function(_UserFetchStateInitial value)? initial,
     TResult? Function(_UserFetchStateLoading value)? loading,
     TResult? Function(_UserFetchStateError value)? error,
-    TResult? Function(_UserFetchStateDone value)? done,
+    TResult? Function(_UserFetchStateDoneWithoutUser value)? doneWithoutUser,
+    TResult? Function(_UserFetchStateDoneWithUser value)? doneWithUser,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -62,7 +71,8 @@ mixin _$UserFetchState {
     TResult Function(_UserFetchStateInitial value)? initial,
     TResult Function(_UserFetchStateLoading value)? loading,
     TResult Function(_UserFetchStateError value)? error,
-    TResult Function(_UserFetchStateDone value)? done,
+    TResult Function(_UserFetchStateDoneWithoutUser value)? doneWithoutUser,
+    TResult Function(_UserFetchStateDoneWithUser value)? doneWithUser,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -129,7 +139,9 @@ class _$UserFetchStateInitialImpl implements _UserFetchStateInitial {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(CredentialAuthException error) error,
-    required TResult Function() done,
+    required TResult Function() doneWithoutUser,
+    required TResult Function(UserProfile userInfo, AccountInfo accountInfo)
+        doneWithUser,
   }) {
     return initial();
   }
@@ -140,7 +152,9 @@ class _$UserFetchStateInitialImpl implements _UserFetchStateInitial {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(CredentialAuthException error)? error,
-    TResult? Function()? done,
+    TResult? Function()? doneWithoutUser,
+    TResult? Function(UserProfile userInfo, AccountInfo accountInfo)?
+        doneWithUser,
   }) {
     return initial?.call();
   }
@@ -151,7 +165,9 @@ class _$UserFetchStateInitialImpl implements _UserFetchStateInitial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(CredentialAuthException error)? error,
-    TResult Function()? done,
+    TResult Function()? doneWithoutUser,
+    TResult Function(UserProfile userInfo, AccountInfo accountInfo)?
+        doneWithUser,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -166,7 +182,9 @@ class _$UserFetchStateInitialImpl implements _UserFetchStateInitial {
     required TResult Function(_UserFetchStateInitial value) initial,
     required TResult Function(_UserFetchStateLoading value) loading,
     required TResult Function(_UserFetchStateError value) error,
-    required TResult Function(_UserFetchStateDone value) done,
+    required TResult Function(_UserFetchStateDoneWithoutUser value)
+        doneWithoutUser,
+    required TResult Function(_UserFetchStateDoneWithUser value) doneWithUser,
   }) {
     return initial(this);
   }
@@ -177,7 +195,8 @@ class _$UserFetchStateInitialImpl implements _UserFetchStateInitial {
     TResult? Function(_UserFetchStateInitial value)? initial,
     TResult? Function(_UserFetchStateLoading value)? loading,
     TResult? Function(_UserFetchStateError value)? error,
-    TResult? Function(_UserFetchStateDone value)? done,
+    TResult? Function(_UserFetchStateDoneWithoutUser value)? doneWithoutUser,
+    TResult? Function(_UserFetchStateDoneWithUser value)? doneWithUser,
   }) {
     return initial?.call(this);
   }
@@ -188,7 +207,8 @@ class _$UserFetchStateInitialImpl implements _UserFetchStateInitial {
     TResult Function(_UserFetchStateInitial value)? initial,
     TResult Function(_UserFetchStateLoading value)? loading,
     TResult Function(_UserFetchStateError value)? error,
-    TResult Function(_UserFetchStateDone value)? done,
+    TResult Function(_UserFetchStateDoneWithoutUser value)? doneWithoutUser,
+    TResult Function(_UserFetchStateDoneWithUser value)? doneWithUser,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -245,7 +265,9 @@ class _$UserFetchStateLoadingImpl implements _UserFetchStateLoading {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(CredentialAuthException error) error,
-    required TResult Function() done,
+    required TResult Function() doneWithoutUser,
+    required TResult Function(UserProfile userInfo, AccountInfo accountInfo)
+        doneWithUser,
   }) {
     return loading();
   }
@@ -256,7 +278,9 @@ class _$UserFetchStateLoadingImpl implements _UserFetchStateLoading {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(CredentialAuthException error)? error,
-    TResult? Function()? done,
+    TResult? Function()? doneWithoutUser,
+    TResult? Function(UserProfile userInfo, AccountInfo accountInfo)?
+        doneWithUser,
   }) {
     return loading?.call();
   }
@@ -267,7 +291,9 @@ class _$UserFetchStateLoadingImpl implements _UserFetchStateLoading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(CredentialAuthException error)? error,
-    TResult Function()? done,
+    TResult Function()? doneWithoutUser,
+    TResult Function(UserProfile userInfo, AccountInfo accountInfo)?
+        doneWithUser,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -282,7 +308,9 @@ class _$UserFetchStateLoadingImpl implements _UserFetchStateLoading {
     required TResult Function(_UserFetchStateInitial value) initial,
     required TResult Function(_UserFetchStateLoading value) loading,
     required TResult Function(_UserFetchStateError value) error,
-    required TResult Function(_UserFetchStateDone value) done,
+    required TResult Function(_UserFetchStateDoneWithoutUser value)
+        doneWithoutUser,
+    required TResult Function(_UserFetchStateDoneWithUser value) doneWithUser,
   }) {
     return loading(this);
   }
@@ -293,7 +321,8 @@ class _$UserFetchStateLoadingImpl implements _UserFetchStateLoading {
     TResult? Function(_UserFetchStateInitial value)? initial,
     TResult? Function(_UserFetchStateLoading value)? loading,
     TResult? Function(_UserFetchStateError value)? error,
-    TResult? Function(_UserFetchStateDone value)? done,
+    TResult? Function(_UserFetchStateDoneWithoutUser value)? doneWithoutUser,
+    TResult? Function(_UserFetchStateDoneWithUser value)? doneWithUser,
   }) {
     return loading?.call(this);
   }
@@ -304,7 +333,8 @@ class _$UserFetchStateLoadingImpl implements _UserFetchStateLoading {
     TResult Function(_UserFetchStateInitial value)? initial,
     TResult Function(_UserFetchStateLoading value)? loading,
     TResult Function(_UserFetchStateError value)? error,
-    TResult Function(_UserFetchStateDone value)? done,
+    TResult Function(_UserFetchStateDoneWithoutUser value)? doneWithoutUser,
+    TResult Function(_UserFetchStateDoneWithUser value)? doneWithUser,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -386,7 +416,9 @@ class _$UserFetchStateErrorImpl implements _UserFetchStateError {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(CredentialAuthException error) error,
-    required TResult Function() done,
+    required TResult Function() doneWithoutUser,
+    required TResult Function(UserProfile userInfo, AccountInfo accountInfo)
+        doneWithUser,
   }) {
     return error(this.error);
   }
@@ -397,7 +429,9 @@ class _$UserFetchStateErrorImpl implements _UserFetchStateError {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(CredentialAuthException error)? error,
-    TResult? Function()? done,
+    TResult? Function()? doneWithoutUser,
+    TResult? Function(UserProfile userInfo, AccountInfo accountInfo)?
+        doneWithUser,
   }) {
     return error?.call(this.error);
   }
@@ -408,7 +442,9 @@ class _$UserFetchStateErrorImpl implements _UserFetchStateError {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(CredentialAuthException error)? error,
-    TResult Function()? done,
+    TResult Function()? doneWithoutUser,
+    TResult Function(UserProfile userInfo, AccountInfo accountInfo)?
+        doneWithUser,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -423,7 +459,9 @@ class _$UserFetchStateErrorImpl implements _UserFetchStateError {
     required TResult Function(_UserFetchStateInitial value) initial,
     required TResult Function(_UserFetchStateLoading value) loading,
     required TResult Function(_UserFetchStateError value) error,
-    required TResult Function(_UserFetchStateDone value) done,
+    required TResult Function(_UserFetchStateDoneWithoutUser value)
+        doneWithoutUser,
+    required TResult Function(_UserFetchStateDoneWithUser value) doneWithUser,
   }) {
     return error(this);
   }
@@ -434,7 +472,8 @@ class _$UserFetchStateErrorImpl implements _UserFetchStateError {
     TResult? Function(_UserFetchStateInitial value)? initial,
     TResult? Function(_UserFetchStateLoading value)? loading,
     TResult? Function(_UserFetchStateError value)? error,
-    TResult? Function(_UserFetchStateDone value)? done,
+    TResult? Function(_UserFetchStateDoneWithoutUser value)? doneWithoutUser,
+    TResult? Function(_UserFetchStateDoneWithUser value)? doneWithUser,
   }) {
     return error?.call(this);
   }
@@ -445,7 +484,8 @@ class _$UserFetchStateErrorImpl implements _UserFetchStateError {
     TResult Function(_UserFetchStateInitial value)? initial,
     TResult Function(_UserFetchStateLoading value)? loading,
     TResult Function(_UserFetchStateError value)? error,
-    TResult Function(_UserFetchStateDone value)? done,
+    TResult Function(_UserFetchStateDoneWithoutUser value)? doneWithoutUser,
+    TResult Function(_UserFetchStateDoneWithUser value)? doneWithUser,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -466,35 +506,40 @@ abstract class _UserFetchStateError implements UserFetchState {
 }
 
 /// @nodoc
-abstract class _$$UserFetchStateDoneImplCopyWith<$Res> {
-  factory _$$UserFetchStateDoneImplCopyWith(_$UserFetchStateDoneImpl value,
-          $Res Function(_$UserFetchStateDoneImpl) then) =
-      __$$UserFetchStateDoneImplCopyWithImpl<$Res>;
+abstract class _$$UserFetchStateDoneWithoutUserImplCopyWith<$Res> {
+  factory _$$UserFetchStateDoneWithoutUserImplCopyWith(
+          _$UserFetchStateDoneWithoutUserImpl value,
+          $Res Function(_$UserFetchStateDoneWithoutUserImpl) then) =
+      __$$UserFetchStateDoneWithoutUserImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$UserFetchStateDoneImplCopyWithImpl<$Res>
-    extends _$UserFetchStateCopyWithImpl<$Res, _$UserFetchStateDoneImpl>
-    implements _$$UserFetchStateDoneImplCopyWith<$Res> {
-  __$$UserFetchStateDoneImplCopyWithImpl(_$UserFetchStateDoneImpl _value,
-      $Res Function(_$UserFetchStateDoneImpl) _then)
+class __$$UserFetchStateDoneWithoutUserImplCopyWithImpl<$Res>
+    extends _$UserFetchStateCopyWithImpl<$Res,
+        _$UserFetchStateDoneWithoutUserImpl>
+    implements _$$UserFetchStateDoneWithoutUserImplCopyWith<$Res> {
+  __$$UserFetchStateDoneWithoutUserImplCopyWithImpl(
+      _$UserFetchStateDoneWithoutUserImpl _value,
+      $Res Function(_$UserFetchStateDoneWithoutUserImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$UserFetchStateDoneImpl implements _UserFetchStateDone {
-  _$UserFetchStateDoneImpl();
+class _$UserFetchStateDoneWithoutUserImpl
+    implements _UserFetchStateDoneWithoutUser {
+  _$UserFetchStateDoneWithoutUserImpl();
 
   @override
   String toString() {
-    return 'UserFetchState.done()';
+    return 'UserFetchState.doneWithoutUser()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$UserFetchStateDoneImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$UserFetchStateDoneWithoutUserImpl);
   }
 
   @override
@@ -506,9 +551,11 @@ class _$UserFetchStateDoneImpl implements _UserFetchStateDone {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(CredentialAuthException error) error,
-    required TResult Function() done,
+    required TResult Function() doneWithoutUser,
+    required TResult Function(UserProfile userInfo, AccountInfo accountInfo)
+        doneWithUser,
   }) {
-    return done();
+    return doneWithoutUser();
   }
 
   @override
@@ -517,9 +564,11 @@ class _$UserFetchStateDoneImpl implements _UserFetchStateDone {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(CredentialAuthException error)? error,
-    TResult? Function()? done,
+    TResult? Function()? doneWithoutUser,
+    TResult? Function(UserProfile userInfo, AccountInfo accountInfo)?
+        doneWithUser,
   }) {
-    return done?.call();
+    return doneWithoutUser?.call();
   }
 
   @override
@@ -528,11 +577,13 @@ class _$UserFetchStateDoneImpl implements _UserFetchStateDone {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(CredentialAuthException error)? error,
-    TResult Function()? done,
+    TResult Function()? doneWithoutUser,
+    TResult Function(UserProfile userInfo, AccountInfo accountInfo)?
+        doneWithUser,
     required TResult orElse(),
   }) {
-    if (done != null) {
-      return done();
+    if (doneWithoutUser != null) {
+      return doneWithoutUser();
     }
     return orElse();
   }
@@ -543,9 +594,11 @@ class _$UserFetchStateDoneImpl implements _UserFetchStateDone {
     required TResult Function(_UserFetchStateInitial value) initial,
     required TResult Function(_UserFetchStateLoading value) loading,
     required TResult Function(_UserFetchStateError value) error,
-    required TResult Function(_UserFetchStateDone value) done,
+    required TResult Function(_UserFetchStateDoneWithoutUser value)
+        doneWithoutUser,
+    required TResult Function(_UserFetchStateDoneWithUser value) doneWithUser,
   }) {
-    return done(this);
+    return doneWithoutUser(this);
   }
 
   @override
@@ -554,9 +607,10 @@ class _$UserFetchStateDoneImpl implements _UserFetchStateDone {
     TResult? Function(_UserFetchStateInitial value)? initial,
     TResult? Function(_UserFetchStateLoading value)? loading,
     TResult? Function(_UserFetchStateError value)? error,
-    TResult? Function(_UserFetchStateDone value)? done,
+    TResult? Function(_UserFetchStateDoneWithoutUser value)? doneWithoutUser,
+    TResult? Function(_UserFetchStateDoneWithUser value)? doneWithUser,
   }) {
-    return done?.call(this);
+    return doneWithoutUser?.call(this);
   }
 
   @override
@@ -565,16 +619,191 @@ class _$UserFetchStateDoneImpl implements _UserFetchStateDone {
     TResult Function(_UserFetchStateInitial value)? initial,
     TResult Function(_UserFetchStateLoading value)? loading,
     TResult Function(_UserFetchStateError value)? error,
-    TResult Function(_UserFetchStateDone value)? done,
+    TResult Function(_UserFetchStateDoneWithoutUser value)? doneWithoutUser,
+    TResult Function(_UserFetchStateDoneWithUser value)? doneWithUser,
     required TResult orElse(),
   }) {
-    if (done != null) {
-      return done(this);
+    if (doneWithoutUser != null) {
+      return doneWithoutUser(this);
     }
     return orElse();
   }
 }
 
-abstract class _UserFetchStateDone implements UserFetchState {
-  factory _UserFetchStateDone() = _$UserFetchStateDoneImpl;
+abstract class _UserFetchStateDoneWithoutUser implements UserFetchState {
+  factory _UserFetchStateDoneWithoutUser() =
+      _$UserFetchStateDoneWithoutUserImpl;
+}
+
+/// @nodoc
+abstract class _$$UserFetchStateDoneWithUserImplCopyWith<$Res> {
+  factory _$$UserFetchStateDoneWithUserImplCopyWith(
+          _$UserFetchStateDoneWithUserImpl value,
+          $Res Function(_$UserFetchStateDoneWithUserImpl) then) =
+      __$$UserFetchStateDoneWithUserImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({UserProfile userInfo, AccountInfo accountInfo});
+}
+
+/// @nodoc
+class __$$UserFetchStateDoneWithUserImplCopyWithImpl<$Res>
+    extends _$UserFetchStateCopyWithImpl<$Res, _$UserFetchStateDoneWithUserImpl>
+    implements _$$UserFetchStateDoneWithUserImplCopyWith<$Res> {
+  __$$UserFetchStateDoneWithUserImplCopyWithImpl(
+      _$UserFetchStateDoneWithUserImpl _value,
+      $Res Function(_$UserFetchStateDoneWithUserImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? userInfo = null,
+    Object? accountInfo = null,
+  }) {
+    return _then(_$UserFetchStateDoneWithUserImpl(
+      userInfo: null == userInfo
+          ? _value.userInfo
+          : userInfo // ignore: cast_nullable_to_non_nullable
+              as UserProfile,
+      accountInfo: null == accountInfo
+          ? _value.accountInfo
+          : accountInfo // ignore: cast_nullable_to_non_nullable
+              as AccountInfo,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$UserFetchStateDoneWithUserImpl implements _UserFetchStateDoneWithUser {
+  _$UserFetchStateDoneWithUserImpl(
+      {required this.userInfo, required this.accountInfo});
+
+  @override
+  final UserProfile userInfo;
+  @override
+  final AccountInfo accountInfo;
+
+  @override
+  String toString() {
+    return 'UserFetchState.doneWithUser(userInfo: $userInfo, accountInfo: $accountInfo)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$UserFetchStateDoneWithUserImpl &&
+            (identical(other.userInfo, userInfo) ||
+                other.userInfo == userInfo) &&
+            (identical(other.accountInfo, accountInfo) ||
+                other.accountInfo == accountInfo));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, userInfo, accountInfo);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$UserFetchStateDoneWithUserImplCopyWith<_$UserFetchStateDoneWithUserImpl>
+      get copyWith => __$$UserFetchStateDoneWithUserImplCopyWithImpl<
+          _$UserFetchStateDoneWithUserImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(CredentialAuthException error) error,
+    required TResult Function() doneWithoutUser,
+    required TResult Function(UserProfile userInfo, AccountInfo accountInfo)
+        doneWithUser,
+  }) {
+    return doneWithUser(userInfo, accountInfo);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(CredentialAuthException error)? error,
+    TResult? Function()? doneWithoutUser,
+    TResult? Function(UserProfile userInfo, AccountInfo accountInfo)?
+        doneWithUser,
+  }) {
+    return doneWithUser?.call(userInfo, accountInfo);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(CredentialAuthException error)? error,
+    TResult Function()? doneWithoutUser,
+    TResult Function(UserProfile userInfo, AccountInfo accountInfo)?
+        doneWithUser,
+    required TResult orElse(),
+  }) {
+    if (doneWithUser != null) {
+      return doneWithUser(userInfo, accountInfo);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_UserFetchStateInitial value) initial,
+    required TResult Function(_UserFetchStateLoading value) loading,
+    required TResult Function(_UserFetchStateError value) error,
+    required TResult Function(_UserFetchStateDoneWithoutUser value)
+        doneWithoutUser,
+    required TResult Function(_UserFetchStateDoneWithUser value) doneWithUser,
+  }) {
+    return doneWithUser(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_UserFetchStateInitial value)? initial,
+    TResult? Function(_UserFetchStateLoading value)? loading,
+    TResult? Function(_UserFetchStateError value)? error,
+    TResult? Function(_UserFetchStateDoneWithoutUser value)? doneWithoutUser,
+    TResult? Function(_UserFetchStateDoneWithUser value)? doneWithUser,
+  }) {
+    return doneWithUser?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_UserFetchStateInitial value)? initial,
+    TResult Function(_UserFetchStateLoading value)? loading,
+    TResult Function(_UserFetchStateError value)? error,
+    TResult Function(_UserFetchStateDoneWithoutUser value)? doneWithoutUser,
+    TResult Function(_UserFetchStateDoneWithUser value)? doneWithUser,
+    required TResult orElse(),
+  }) {
+    if (doneWithUser != null) {
+      return doneWithUser(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UserFetchStateDoneWithUser implements UserFetchState {
+  factory _UserFetchStateDoneWithUser(
+          {required final UserProfile userInfo,
+          required final AccountInfo accountInfo}) =
+      _$UserFetchStateDoneWithUserImpl;
+
+  UserProfile get userInfo;
+  AccountInfo get accountInfo;
+  @JsonKey(ignore: true)
+  _$$UserFetchStateDoneWithUserImplCopyWith<_$UserFetchStateDoneWithUserImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

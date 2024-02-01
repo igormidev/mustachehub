@@ -1,11 +1,18 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mustachehub/dashboard/data/repositories/interfaces/i_user_fetch_repository.dart';
 import 'package:mustachehub/dashboard/presenter/states/user_fetch_state.dart';
 
 class UserFetchCubit extends Cubit<UserFetchState> {
-  UserFetchCubit() : super(UserFetchState.initial());
+  final IUserFetchRepository _userFetchRepository;
+  UserFetchCubit({
+    required IUserFetchRepository userFetchRepository,
+  })  : _userFetchRepository = userFetchRepository,
+        super(UserFetchState.initial());
 
-  void fetchUser() {
+  Future<void> fetchUser() async {
     emit(UserFetchState.loading());
-    emit(UserFetchState.done());
+
+    final state = await _userFetchRepository.getPersistenceUser();
+    emit(state);
   }
 }

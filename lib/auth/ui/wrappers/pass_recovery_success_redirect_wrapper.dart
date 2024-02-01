@@ -6,9 +6,9 @@ import 'package:mustachehub/auth/presenter/cubits/pass_recovery_form_cubit.dart'
 import 'package:mustachehub/auth/presenter/states/pass_recovery_form_state.dart';
 import 'package:mustachehub/auth/ui/translation/creadential_auth_exception_translation.dart';
 
-class PassRecoveryRedirectWrapper extends StatelessWidget {
+class PassRecoverySuccessRedirectWrapper extends StatelessWidget {
   final Widget child;
-  const PassRecoveryRedirectWrapper({
+  const PassRecoverySuccessRedirectWrapper({
     super.key,
     required this.child,
   });

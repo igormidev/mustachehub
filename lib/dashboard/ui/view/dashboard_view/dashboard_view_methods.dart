@@ -4,9 +4,10 @@ mixin DashboardViewMethods on State<DashboardView> {
   @override
   void initState() {
     super.initState();
-    GoRouter.of(context)
-        .routeInformationProvider
-        .addListener(_dashbaordNavigationUpdater);
+    if (mounted)
+      GoRouter.of(context)
+          .routeInformationProvider
+          .addListener(_dashbaordNavigationUpdater);
   }
 
   void _dashbaordNavigationUpdater() {
@@ -23,9 +24,11 @@ mixin DashboardViewMethods on State<DashboardView> {
 
   @override
   void dispose() {
-    GoRouter.of(context)
-        .routeInformationProvider
-        .removeListener(_dashbaordNavigationUpdater);
+    if (mounted) {
+      GoRouter.of(context)
+          .routeInformationProvider
+          .removeListener(_dashbaordNavigationUpdater);
+    }
     super.dispose();
   }
 }

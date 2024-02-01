@@ -9,8 +9,8 @@ class LogInRepositoryImpl
   final FirebaseAuth _fb;
 
   LogInRepositoryImpl({
-    FirebaseAuth? firebaseAuth,
-  }) : _fb = firebaseAuth ?? FirebaseAuth.instance;
+    required FirebaseAuth firebaseAuth,
+  }) : _fb = firebaseAuth;
 
   @override
   Future<LoginFormState> signInUserWithEmailAndPassword({

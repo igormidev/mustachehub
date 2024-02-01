@@ -13,7 +13,7 @@ dependencies:
   mustache_firebase_references:
     path: ../mustache_firebase_references
   firebase_core: ^2.24.2
-  cloud_firestore: ^4.13.6
+  cloud_firestore: ^4.14.0
 
 dev_dependencies:
   flutter_test:

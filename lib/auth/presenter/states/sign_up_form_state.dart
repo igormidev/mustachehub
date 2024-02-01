@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:mustachehub/auth/data/exceptions/auth_failure.dart';
+import 'package:mustachehub/app_core/exceptions/auth_failure.dart';
 
 part 'sign_up_form_state.freezed.dart';
 

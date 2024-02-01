@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mustachehub/auth/presenter/cubits/login_form_cubit.dart';
+import 'package:mustachehub/auth/presenter/states/login_form_state.dart';
 import 'package:mustachehub/app_core/theme/components/error_snack_bar.dart';
-import 'package:mustachehub/auth/presenter/cubits/sign_up_form_cubit.dart';
-import 'package:mustachehub/auth/presenter/states/sign_up_form_state.dart';
 import 'package:mustachehub/auth/ui/translation/creadential_auth_exception_translation.dart';
 
-class SigninSuccessRedirectWrapper extends StatelessWidget {
+class LoginSuccessRedirectWrapper extends StatelessWidget {
   final Widget child;
-  const SigninSuccessRedirectWrapper({
+  const LoginSuccessRedirectWrapper({
     super.key,
     required this.child,
   });
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<SignUpFormCubit, SignUpFormState>(
+    return BlocListener<LoginFormCubit, LoginFormState>(
       listener: (context, state) {
         state.mapOrNull(
           error: (value) {
@@ -31,7 +32,11 @@ class SigninSuccessRedirectWrapper extends StatelessWidget {
             return;
           },
           success: (value) {
-            context.go('/splash');
+            WidgetsBinding.instance.addPostFrameCallback(
+              (_) {
+                context.go('/splash');
+              },
+            );
           },
         );
       },

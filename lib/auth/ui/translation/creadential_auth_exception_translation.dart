@@ -1,4 +1,4 @@
-import 'package:mustachehub/auth/data/exceptions/auth_failure.dart';
+import 'package:mustachehub/app_core/exceptions/auth_failure.dart';
 
 class CreadentialAuthExceptionTranslation {
   static String getTitle(CredentialAuthException exception) {

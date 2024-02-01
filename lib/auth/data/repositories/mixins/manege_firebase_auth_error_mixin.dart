@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:mustachehub/auth/data/exceptions/auth_failure.dart';
+import 'package:mustachehub/app_core/exceptions/auth_failure.dart';
 
 mixin ManegeFirebaseAuthErrorMixin {
   Future<T> manegeDefaultErrorWrapper<T>({

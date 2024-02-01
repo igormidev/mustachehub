@@ -1,0 +1,63 @@
+import 'package:commom_states/cubits/session_cubit.dart';
+import 'package:commom_states/states/session_state.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mustachehub/app_core/theme/components/error_snack_bar.dart';
+import 'package:mustachehub/dashboard/data/entities/e_navigation_possibilities.dart';
+import 'package:mustachehub/dashboard/presenter/cubits/navigation_possibilities_cubit.dart';
+import 'package:mustachehub/dashboard/presenter/cubits/user_fetch_cubit.dart';
+import 'package:mustachehub/dashboard/presenter/states/navigation_possibilities_state.dart';
+import 'package:mustachehub/dashboard/presenter/states/user_fetch_state.dart';
+
+class FetchUserRedirectWrapper extends StatelessWidget {
+  final Widget child;
+  const FetchUserRedirectWrapper({
+    super.key,
+    required this.child,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocListener<UserFetchCubit, UserFetchState>(
+      listener: (context, state) {
+        state.mapOrNull(
+          doneWithoutUser: (_) {
+            final sessionCubit = context.read<SessionCubit>();
+            final dashboardCubit = context.read<NavigationPossibilitiesCubit>();
+
+            dashboardCubit.setNavigationPossibilitiesState(
+              NavigationPossibilitiesState.loggedOut(
+                selectedPossibility:
+                    EDashboardNavigationPossibilities.collection,
+              ),
+            );
+            sessionCubit.setSessionState(SessionState.guest());
+          },
+          doneWithUser: (value) {
+            final sessionCubit = context.read<SessionCubit>();
+            final dashboardCubit = context.read<NavigationPossibilitiesCubit>();
+
+            dashboardCubit.setNavigationPossibilitiesState(
+              NavigationPossibilitiesState.loggedIn(
+                selectedPossibility:
+                    EDashboardNavigationPossibilities.collection,
+              ),
+            );
+            sessionCubit.setSessionState(SessionState.loggedIn(
+              account: value.accountInfo,
+              user: value.userInfo,
+            ));
+          },
+          error: (value) {
+            context.go('/not-found');
+            ScaffoldMessenger.of(context).showSnackBar(
+              ErrorSnackBar(context: context, text: 'Error fetching user'),
+            );
+          },
+        );
+      },
+      child: child,
+    );
+  }
+}

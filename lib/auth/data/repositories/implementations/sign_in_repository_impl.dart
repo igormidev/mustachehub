@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mustachehub/auth/data/repositories/interfaces/i_sign_in_repository.dart';
 import 'package:mustachehub/auth/data/repositories/mixins/manege_firebase_auth_error_mixin.dart';
@@ -7,14 +8,18 @@ import 'package:uuid/uuid.dart';
 class SignInRepositoryImpl
     with ManegeFirebaseAuthErrorMixin
     implements ISignInRepository {
-  final FirebaseAuth _fb;
+  final FirebaseAuth _firebaseAtuh;
+  final FirebaseFirestore _firestore;
+
   // ignore: unused_field
   final Uuid _uuid;
 
   SignInRepositoryImpl({
-    FirebaseAuth? firebaseAuth,
+    required FirebaseAuth firebaseAuth,
+    required FirebaseFirestore firebaseStorage,
     Uuid? uuid,
-  })  : _fb = firebaseAuth ?? FirebaseAuth.instance,
+  })  : _firebaseAtuh = firebaseAuth,
+        _firestore = firebaseStorage,
         _uuid = uuid ?? const Uuid();
 
   @override
@@ -25,12 +30,20 @@ class SignInRepositoryImpl
   }) async {
     return manegeDefaultErrorWrapper(
       func: () async {
-        final userCredential = await _fb.createUserWithEmailAndPassword(
+        final userCredential =
+            await _firebaseAtuh.createUserWithEmailAndPassword(
           email: email,
           password: password,
         );
 
         await userCredential.user?.updateDisplayName(userName);
+
+        await _firestore
+            .collection('/accountsInfo/')
+            .doc(userCredential.user?.uid)
+            .set({
+          "tier": 0,
+        });
 
         return SignUpFormState.success();
       },

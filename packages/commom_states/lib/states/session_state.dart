@@ -13,8 +13,8 @@ abstract class SessionState with _$SessionState {
   factory SessionState.guest() = _Guest;
   factory SessionState.loggedIn({
     required AccountInfo account,
-    required UserInfo user,
-  }) = _LogedIn;
+    required UserProfile user,
+  }) = _LoggedIn;
 }
 
 extension SessionStateBuildContextExtension on BuildContext {

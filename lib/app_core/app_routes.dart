@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:commom_states/cubits/session_cubit.dart';
 import 'package:commom_states/states/session_state.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -16,7 +17,10 @@ import 'package:mustachehub/auth/ui/views/auth_desktop_view/auth_desktop_view.da
 import 'package:mustachehub/auth/ui/views/login_view/login_view.dart';
 import 'package:mustachehub/auth/ui/views/pass_recovery_view/pass_recovery_view.dart';
 import 'package:mustachehub/auth/ui/views/signin_view/signin_view.dart';
+import 'package:mustachehub/dashboard/data/repositories/implementations/user_fetch_repository_impl.dart';
+import 'package:mustachehub/dashboard/data/repositories/interfaces/i_user_fetch_repository.dart';
 import 'package:mustachehub/dashboard/presenter/cubits/navigation_possibilities_cubit.dart';
+import 'package:mustachehub/dashboard/presenter/cubits/user_fetch_cubit.dart';
 import 'package:mustachehub/dashboard/presenter/states/navigation_possibilities_state.dart';
 import 'package:mustachehub/dashboard/ui/pages/not_found_404_page/not_found_404_page.dart';
 import 'package:mustachehub/dashboard/ui/view/dashboard_view/dashboard_view.dart';
@@ -64,7 +68,22 @@ GoRouter appRouter(SessionCubit sessionCubit) {
     routes: [
       GoRoute(
         path: '/splash',
-        builder: (context, state) => const SplashScreen(),
+        builder: (context, state) => MultiBlocProvider(
+          providers: [
+            RepositoryProvider<IUserFetchRepository>(
+              create: (context) => UserFetchRepositoryImpl(
+                firebaseAuth: context.read<FirebaseAuth>(),
+                firebaseStorage: context.read<FirebaseFirestore>(),
+              ),
+            ),
+            BlocProvider<UserFetchCubit>(
+              create: (context) => UserFetchCubit(
+                userFetchRepository: context.read<IUserFetchRepository>(),
+              ),
+            ),
+          ],
+          child: const SplashScreen(),
+        ),
         // builder: (context, state) {
         //   return const Scaffold(
         //     body: Center(
@@ -159,7 +178,11 @@ GoRouter appRouter(SessionCubit sessionCubit) {
               GoRouterState state,
               Widget child,
             ) {
-              return AuthDesktopView(navigator: child);
+              return AuthBlocProvider(
+                child: AuthDesktopView(
+                  navigator: child,
+                ),
+              );
             },
             routes: [
               GoRoute(
@@ -168,9 +191,7 @@ GoRouter appRouter(SessionCubit sessionCubit) {
                 pageBuilder: (context, state) {
                   return BottomSheetTransitionPage(
                     key: state.pageKey,
-                    child: const AuthBlocProvider(
-                      child: LoginView(),
-                    ),
+                    child: const LoginView(),
                     context: context,
                   );
                 },
@@ -181,9 +202,7 @@ GoRouter appRouter(SessionCubit sessionCubit) {
                 pageBuilder: (context, state) {
                   return BottomSheetTransitionPage(
                     key: state.pageKey,
-                    child: const AuthBlocProvider(
-                      child: SignInView(),
-                    ),
+                    child: const SignInView(),
                     context: context,
                     offsetBegin: const Offset(0, -1),
                   );
@@ -195,9 +214,7 @@ GoRouter appRouter(SessionCubit sessionCubit) {
                 pageBuilder: (context, state) {
                   return BottomSheetTransitionPage(
                     key: state.pageKey,
-                    child: const AuthBlocProvider(
-                      child: PassRecoveryView(),
-                    ),
+                    child: const PassRecoveryView(),
                     context: context,
                   );
                 },
@@ -265,12 +282,10 @@ class AuthBlocProvider extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        RepositoryProvider<FirebaseAuth>(
-          create: (context) => FirebaseAuth.instance,
-        ),
         RepositoryProvider<ISignInRepository>(
           create: (context) => SignInRepositoryImpl(
             firebaseAuth: context.read<FirebaseAuth>(),
+            firebaseStorage: context.read<FirebaseFirestore>(),
           ),
         ),
         RepositoryProvider<ILogInRepository>(

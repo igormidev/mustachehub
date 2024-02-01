@@ -24,11 +24,11 @@ class PackageService {
         _packageReference = packageReference;
 
   Future<ExpectedPayload> getExpectedPayload({
-    required UserInfo userInfo,
+    required UserProfile userProfile,
     required String packageId,
   }) async {
     final expectedPayloadRef = _packageReference.expectedPayload(
-        packageId: packageId, userId: userInfo.id);
+        packageId: packageId, userId: userProfile.id);
 
     final payloadJson = (await expectedPayloadRef.get()).data();
     if (payloadJson == null) {
@@ -43,11 +43,11 @@ class PackageService {
   }
 
   Future<PackageInfo> getExpectedPackageInfo({
-    required UserInfo userInfo,
+    required UserProfile userProfile,
     required String packageId,
   }) async {
     final packageInfoRef = _packageReference.packageInfo(
-        packageId: packageId, userId: userInfo.id);
+        packageId: packageId, userId: userProfile.id);
 
     final packageInfoJson = (await packageInfoRef.get()).data();
     if (packageInfoJson == null) {
@@ -62,14 +62,14 @@ class PackageService {
   }
 
   Future<Template> createTemplate({
-    required UserInfo userInfo,
+    required UserProfile userProfile,
     required PackageInfo packageInfo,
     required ExpectedPayload expectedPayload,
   }) async {
     final newPackageRef =
-        _packageReference.generateNewPackageRefId(userId: userInfo.id);
+        _packageReference.generateNewPackageRefId(userId: userProfile.id);
     final expectedPayloadRef = _packageReference.expectedPayload(
-        packageId: newPackageRef.id, userId: userInfo.id);
+        packageId: newPackageRef.id, userId: userProfile.id);
 
     final Map<String, dynamic> packageInfoJson;
     final Map<String, dynamic> expectedPayloadJson;
@@ -95,13 +95,13 @@ class PackageService {
   }
 
   Future<void> updateTemplate({
-    required UserInfo userInfo,
+    required UserProfile userProfile,
     required Template template,
   }) {
     final packageInfoRef = _packageReference.packageInfo(
-        packageId: template.id, userId: userInfo.id);
+        packageId: template.id, userId: userProfile.id);
     final expectedPayloadRef = _packageReference.expectedPayload(
-        packageId: template.id, userId: userInfo.id);
+        packageId: template.id, userId: userProfile.id);
 
     final Map<String, dynamic> packageInfoJson;
     final Map<String, dynamic> expectedPayloadJson;

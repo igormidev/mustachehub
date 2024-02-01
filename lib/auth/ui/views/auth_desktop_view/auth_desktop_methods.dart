@@ -6,6 +6,8 @@ mixin AuthDesktopMethods on State<AuthDesktopView> {
   void _authIconNavigationUpdater() {
     final currentUri = Router.of(context).routeInformationProvider?.value.uri;
     if (currentUri == null) return;
+    if (_pageController.hasClients == false) return;
+
     if (currentUri.path.contains('/auth/signin')) {
       _pageController.animateToPage(
         0,
@@ -31,17 +33,20 @@ mixin AuthDesktopMethods on State<AuthDesktopView> {
   void initState() {
     super.initState();
     _pageController = PageController(initialPage: 1);
-    GoRouter.of(context)
-        .routeInformationProvider
-        .addListener(_authIconNavigationUpdater);
+    if (mounted)
+      GoRouter.of(context)
+          .routeInformationProvider
+          .addListener(_authIconNavigationUpdater);
   }
 
   @override
   void dispose() {
     _pageController.dispose();
-    GoRouter.of(context)
-        .routeInformationProvider
-        .removeListener(_authIconNavigationUpdater);
+    if (mounted) {
+      GoRouter.of(context)
+          .routeInformationProvider
+          .removeListener(_authIconNavigationUpdater);
+    }
     super.dispose();
   }
 }
