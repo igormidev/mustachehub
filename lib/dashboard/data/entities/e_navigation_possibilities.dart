@@ -1,6 +1,7 @@
+import 'package:enchanted_collection/enchanted_collection.dart';
 import 'package:flutter/material.dart';
 
-enum ENavigationPossibilities {
+enum EDashboardNavigationPossibilities {
   collection(
     Icons.collections_bookmark_outlined,
     Icons.collections_bookmark_rounded,
@@ -21,7 +22,7 @@ enum ENavigationPossibilities {
     Icons.person_rounded,
   ),
 
-  login(
+  auth(
     Icons.key,
     Icons.key_outlined,
   ),
@@ -37,12 +38,18 @@ enum ENavigationPossibilities {
   );
 
   // ignore: non_constant_identifier_names
-  static ENavigationPossibilities DEFAULT_POSSIBILITY =
-      ENavigationPossibilities.collection;
+  static EDashboardNavigationPossibilities DEFAULT_POSSIBILITY =
+      EDashboardNavigationPossibilities.collection;
+
+  static EDashboardNavigationPossibilities? fromString(String name) {
+    return EDashboardNavigationPossibilities.values.singleWhereOrNull(
+      (e) => name.startsWith('/${e.name}'),
+    );
+  }
 
   final IconData selectedIcon;
   final IconData unselectedIcon;
-  const ENavigationPossibilities(
+  const EDashboardNavigationPossibilities(
     this.unselectedIcon,
     this.selectedIcon,
   );

@@ -20,21 +20,21 @@ mixin _$SessionState {
   TResult when<TResult extends Object?>({
     required TResult Function() notDeterminedYet,
     required TResult Function() guest,
-    required TResult Function(AccountInfo account, UserInfo user) loggedIn,
+    required TResult Function(AccountInfo account, UserProfile user) loggedIn,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? notDeterminedYet,
     TResult? Function()? guest,
-    TResult? Function(AccountInfo account, UserInfo user)? loggedIn,
+    TResult? Function(AccountInfo account, UserProfile user)? loggedIn,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? notDeterminedYet,
     TResult Function()? guest,
-    TResult Function(AccountInfo account, UserInfo user)? loggedIn,
+    TResult Function(AccountInfo account, UserProfile user)? loggedIn,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -42,21 +42,21 @@ mixin _$SessionState {
   TResult map<TResult extends Object?>({
     required TResult Function(_NotDeterminedYet value) notDeterminedYet,
     required TResult Function(_Guest value) guest,
-    required TResult Function(_LogedIn value) loggedIn,
+    required TResult Function(_LoggedIn value) loggedIn,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_NotDeterminedYet value)? notDeterminedYet,
     TResult? Function(_Guest value)? guest,
-    TResult? Function(_LogedIn value)? loggedIn,
+    TResult? Function(_LoggedIn value)? loggedIn,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_NotDeterminedYet value)? notDeterminedYet,
     TResult Function(_Guest value)? guest,
-    TResult Function(_LogedIn value)? loggedIn,
+    TResult Function(_LoggedIn value)? loggedIn,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -120,7 +120,7 @@ class _$NotDeterminedYetImpl implements _NotDeterminedYet {
   TResult when<TResult extends Object?>({
     required TResult Function() notDeterminedYet,
     required TResult Function() guest,
-    required TResult Function(AccountInfo account, UserInfo user) loggedIn,
+    required TResult Function(AccountInfo account, UserProfile user) loggedIn,
   }) {
     return notDeterminedYet();
   }
@@ -130,7 +130,7 @@ class _$NotDeterminedYetImpl implements _NotDeterminedYet {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? notDeterminedYet,
     TResult? Function()? guest,
-    TResult? Function(AccountInfo account, UserInfo user)? loggedIn,
+    TResult? Function(AccountInfo account, UserProfile user)? loggedIn,
   }) {
     return notDeterminedYet?.call();
   }
@@ -140,7 +140,7 @@ class _$NotDeterminedYetImpl implements _NotDeterminedYet {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? notDeterminedYet,
     TResult Function()? guest,
-    TResult Function(AccountInfo account, UserInfo user)? loggedIn,
+    TResult Function(AccountInfo account, UserProfile user)? loggedIn,
     required TResult orElse(),
   }) {
     if (notDeterminedYet != null) {
@@ -154,7 +154,7 @@ class _$NotDeterminedYetImpl implements _NotDeterminedYet {
   TResult map<TResult extends Object?>({
     required TResult Function(_NotDeterminedYet value) notDeterminedYet,
     required TResult Function(_Guest value) guest,
-    required TResult Function(_LogedIn value) loggedIn,
+    required TResult Function(_LoggedIn value) loggedIn,
   }) {
     return notDeterminedYet(this);
   }
@@ -164,7 +164,7 @@ class _$NotDeterminedYetImpl implements _NotDeterminedYet {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_NotDeterminedYet value)? notDeterminedYet,
     TResult? Function(_Guest value)? guest,
-    TResult? Function(_LogedIn value)? loggedIn,
+    TResult? Function(_LoggedIn value)? loggedIn,
   }) {
     return notDeterminedYet?.call(this);
   }
@@ -174,7 +174,7 @@ class _$NotDeterminedYetImpl implements _NotDeterminedYet {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_NotDeterminedYet value)? notDeterminedYet,
     TResult Function(_Guest value)? guest,
-    TResult Function(_LogedIn value)? loggedIn,
+    TResult Function(_LoggedIn value)? loggedIn,
     required TResult orElse(),
   }) {
     if (notDeterminedYet != null) {
@@ -228,7 +228,7 @@ class _$GuestImpl implements _Guest {
   TResult when<TResult extends Object?>({
     required TResult Function() notDeterminedYet,
     required TResult Function() guest,
-    required TResult Function(AccountInfo account, UserInfo user) loggedIn,
+    required TResult Function(AccountInfo account, UserProfile user) loggedIn,
   }) {
     return guest();
   }
@@ -238,7 +238,7 @@ class _$GuestImpl implements _Guest {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? notDeterminedYet,
     TResult? Function()? guest,
-    TResult? Function(AccountInfo account, UserInfo user)? loggedIn,
+    TResult? Function(AccountInfo account, UserProfile user)? loggedIn,
   }) {
     return guest?.call();
   }
@@ -248,7 +248,7 @@ class _$GuestImpl implements _Guest {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? notDeterminedYet,
     TResult Function()? guest,
-    TResult Function(AccountInfo account, UserInfo user)? loggedIn,
+    TResult Function(AccountInfo account, UserProfile user)? loggedIn,
     required TResult orElse(),
   }) {
     if (guest != null) {
@@ -262,7 +262,7 @@ class _$GuestImpl implements _Guest {
   TResult map<TResult extends Object?>({
     required TResult Function(_NotDeterminedYet value) notDeterminedYet,
     required TResult Function(_Guest value) guest,
-    required TResult Function(_LogedIn value) loggedIn,
+    required TResult Function(_LoggedIn value) loggedIn,
   }) {
     return guest(this);
   }
@@ -272,7 +272,7 @@ class _$GuestImpl implements _Guest {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_NotDeterminedYet value)? notDeterminedYet,
     TResult? Function(_Guest value)? guest,
-    TResult? Function(_LogedIn value)? loggedIn,
+    TResult? Function(_LoggedIn value)? loggedIn,
   }) {
     return guest?.call(this);
   }
@@ -282,7 +282,7 @@ class _$GuestImpl implements _Guest {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_NotDeterminedYet value)? notDeterminedYet,
     TResult Function(_Guest value)? guest,
-    TResult Function(_LogedIn value)? loggedIn,
+    TResult Function(_LoggedIn value)? loggedIn,
     required TResult orElse(),
   }) {
     if (guest != null) {
@@ -297,50 +297,50 @@ abstract class _Guest implements SessionState {
 }
 
 /// @nodoc
-abstract class _$$LogedInImplCopyWith<$Res> {
-  factory _$$LogedInImplCopyWith(
-          _$LogedInImpl value, $Res Function(_$LogedInImpl) then) =
-      __$$LogedInImplCopyWithImpl<$Res>;
+abstract class _$$LoggedInImplCopyWith<$Res> {
+  factory _$$LoggedInImplCopyWith(
+          _$LoggedInImpl value, $Res Function(_$LoggedInImpl) then) =
+      __$$LoggedInImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({AccountInfo account, UserInfo user});
+  $Res call({AccountInfo account, UserProfile user});
 }
 
 /// @nodoc
-class __$$LogedInImplCopyWithImpl<$Res>
-    extends _$SessionStateCopyWithImpl<$Res, _$LogedInImpl>
-    implements _$$LogedInImplCopyWith<$Res> {
-  __$$LogedInImplCopyWithImpl(
-      _$LogedInImpl _value, $Res Function(_$LogedInImpl) _then)
+class __$$LoggedInImplCopyWithImpl<$Res>
+    extends _$SessionStateCopyWithImpl<$Res, _$LoggedInImpl>
+    implements _$$LoggedInImplCopyWith<$Res> {
+  __$$LoggedInImplCopyWithImpl(
+      _$LoggedInImpl _value, $Res Function(_$LoggedInImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? account = freezed,
-    Object? user = freezed,
+    Object? account = null,
+    Object? user = null,
   }) {
-    return _then(_$LogedInImpl(
-      account: freezed == account
+    return _then(_$LoggedInImpl(
+      account: null == account
           ? _value.account
           : account // ignore: cast_nullable_to_non_nullable
               as AccountInfo,
-      user: freezed == user
+      user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as UserInfo,
+              as UserProfile,
     ));
   }
 }
 
 /// @nodoc
 
-class _$LogedInImpl implements _LogedIn {
-  _$LogedInImpl({required this.account, required this.user});
+class _$LoggedInImpl implements _LoggedIn {
+  _$LoggedInImpl({required this.account, required this.user});
 
   @override
   final AccountInfo account;
   @override
-  final UserInfo user;
+  final UserProfile user;
 
   @override
   String toString() {
@@ -351,29 +351,26 @@ class _$LogedInImpl implements _LogedIn {
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$LogedInImpl &&
-            const DeepCollectionEquality().equals(other.account, account) &&
-            const DeepCollectionEquality().equals(other.user, user));
+            other is _$LoggedInImpl &&
+            (identical(other.account, account) || other.account == account) &&
+            (identical(other.user, user) || other.user == user));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(account),
-      const DeepCollectionEquality().hash(user));
+  int get hashCode => Object.hash(runtimeType, account, user);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$LogedInImplCopyWith<_$LogedInImpl> get copyWith =>
-      __$$LogedInImplCopyWithImpl<_$LogedInImpl>(this, _$identity);
+  _$$LoggedInImplCopyWith<_$LoggedInImpl> get copyWith =>
+      __$$LoggedInImplCopyWithImpl<_$LoggedInImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() notDeterminedYet,
     required TResult Function() guest,
-    required TResult Function(AccountInfo account, UserInfo user) loggedIn,
+    required TResult Function(AccountInfo account, UserProfile user) loggedIn,
   }) {
     return loggedIn(account, user);
   }
@@ -383,7 +380,7 @@ class _$LogedInImpl implements _LogedIn {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? notDeterminedYet,
     TResult? Function()? guest,
-    TResult? Function(AccountInfo account, UserInfo user)? loggedIn,
+    TResult? Function(AccountInfo account, UserProfile user)? loggedIn,
   }) {
     return loggedIn?.call(account, user);
   }
@@ -393,7 +390,7 @@ class _$LogedInImpl implements _LogedIn {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? notDeterminedYet,
     TResult Function()? guest,
-    TResult Function(AccountInfo account, UserInfo user)? loggedIn,
+    TResult Function(AccountInfo account, UserProfile user)? loggedIn,
     required TResult orElse(),
   }) {
     if (loggedIn != null) {
@@ -407,7 +404,7 @@ class _$LogedInImpl implements _LogedIn {
   TResult map<TResult extends Object?>({
     required TResult Function(_NotDeterminedYet value) notDeterminedYet,
     required TResult Function(_Guest value) guest,
-    required TResult Function(_LogedIn value) loggedIn,
+    required TResult Function(_LoggedIn value) loggedIn,
   }) {
     return loggedIn(this);
   }
@@ -417,7 +414,7 @@ class _$LogedInImpl implements _LogedIn {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_NotDeterminedYet value)? notDeterminedYet,
     TResult? Function(_Guest value)? guest,
-    TResult? Function(_LogedIn value)? loggedIn,
+    TResult? Function(_LoggedIn value)? loggedIn,
   }) {
     return loggedIn?.call(this);
   }
@@ -427,7 +424,7 @@ class _$LogedInImpl implements _LogedIn {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_NotDeterminedYet value)? notDeterminedYet,
     TResult Function(_Guest value)? guest,
-    TResult Function(_LogedIn value)? loggedIn,
+    TResult Function(_LoggedIn value)? loggedIn,
     required TResult orElse(),
   }) {
     if (loggedIn != null) {
@@ -437,14 +434,14 @@ class _$LogedInImpl implements _LogedIn {
   }
 }
 
-abstract class _LogedIn implements SessionState {
-  factory _LogedIn(
+abstract class _LoggedIn implements SessionState {
+  factory _LoggedIn(
       {required final AccountInfo account,
-      required final UserInfo user}) = _$LogedInImpl;
+      required final UserProfile user}) = _$LoggedInImpl;
 
   AccountInfo get account;
-  UserInfo get user;
+  UserProfile get user;
   @JsonKey(ignore: true)
-  _$$LogedInImplCopyWith<_$LogedInImpl> get copyWith =>
+  _$$LoggedInImplCopyWith<_$LoggedInImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

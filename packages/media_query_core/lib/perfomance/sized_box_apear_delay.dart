@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 class SizedBoxApearDelay extends StatefulWidget {
-  final double width;
-  final double height;
+  final double? width;
+  final double? height;
   final Widget child;
   final Duration duration;
   const SizedBoxApearDelay({
     super.key,
-    required this.width,
-    required this.height,
+    this.width,
+    this.height,
     required this.child,
     this.duration = const Duration(seconds: 1),
   });
@@ -23,9 +23,11 @@ class _SizedBoxApearDelayState extends State<SizedBoxApearDelay> {
   void initState() {
     super.initState();
     Future.delayed(widget.duration, () {
-      setState(() {
-        _isSizedBoxVisible = true;
-      });
+      if (context.mounted) {
+        setState(() {
+          _isSizedBoxVisible = true;
+        });
+      }
     });
   }
 

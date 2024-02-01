@@ -7,25 +7,27 @@ part 'loading_state.freezed.dart';
 
 @freezed
 abstract class LoadingState with _$LoadingState {
-  factory LoadingState.refreshing() = _Refreshing;
+  /// Processing of a request
   factory LoadingState.processing() = _Processing;
+
   factory LoadingState.done() = _Done;
 }
 
 extension LoadingStateBuildContextExtension on BuildContext {
   void setGlobalLoading() {
-    read<LoadingCubit>().setRefreshing();
+    if (isLoading) return;
+    read<LoadingCubit>().setToLoading();
   }
 
   void endGlobalLoading() {
+    if (isNotLoading) return;
     read<LoadingCubit>().setToLoadingDone();
   }
 
   bool get isLoading => read<LoadingCubit>().state.map(
-        refreshing: (_) => true,
         processing: (_) => true,
         done: (_) => false,
       );
 
-  bool get isNotLoading => isLoading == false;
+  bool get isNotLoading => !isLoading;
 }

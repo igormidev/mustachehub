@@ -6,30 +6,30 @@ part 'navigation_possibilities_state.freezed.dart';
 @freezed
 abstract class NavigationPossibilitiesState
     with _$NavigationPossibilitiesState {
+  factory NavigationPossibilitiesState.initial() = Initial;
+
   factory NavigationPossibilitiesState.loggedIn({
-    @Default(ENavigationPossibilities.collection)
-    ENavigationPossibilities selectedPossibility,
+    required EDashboardNavigationPossibilities selectedPossibility,
     @Default([
-      ENavigationPossibilities.collection,
-      ENavigationPossibilities.generateText,
-      ENavigationPossibilities.createMustache,
-      ENavigationPossibilities.account,
-      ENavigationPossibilities.becamePremium,
-      ENavigationPossibilities.settings,
+      EDashboardNavigationPossibilities.collection,
+      EDashboardNavigationPossibilities.generateText,
+      EDashboardNavigationPossibilities.createMustache,
+      EDashboardNavigationPossibilities.account,
+      EDashboardNavigationPossibilities.becamePremium,
+      EDashboardNavigationPossibilities.settings,
     ])
-    List<ENavigationPossibilities> possibilities,
+    List<EDashboardNavigationPossibilities> possibilities,
   }) = LoggedIn;
 
   factory NavigationPossibilitiesState.loggedOut({
-    @Default(ENavigationPossibilities.collection)
-    ENavigationPossibilities selectedPossibility,
+    required EDashboardNavigationPossibilities selectedPossibility,
     @Default([
-      ENavigationPossibilities.collection,
-      ENavigationPossibilities.generateText,
-      ENavigationPossibilities.createMustache,
-      ENavigationPossibilities.login,
-      ENavigationPossibilities.settings,
+      EDashboardNavigationPossibilities.collection,
+      EDashboardNavigationPossibilities.generateText,
+      EDashboardNavigationPossibilities.createMustache,
+      EDashboardNavigationPossibilities.auth,
+      EDashboardNavigationPossibilities.settings,
     ])
-    List<ENavigationPossibilities> possibilities,
+    List<EDashboardNavigationPossibilities> possibilities,
   }) = LoggedOut;
 }
