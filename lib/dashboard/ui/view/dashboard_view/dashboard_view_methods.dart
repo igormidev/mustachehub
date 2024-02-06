@@ -4,10 +4,11 @@ mixin DashboardViewMethods on State<DashboardView> {
   @override
   void initState() {
     super.initState();
-    if (mounted)
+    if (mounted) {
       GoRouter.of(context)
           .routeInformationProvider
           .addListener(_dashbaordNavigationUpdater);
+    }
   }
 
   void _dashbaordNavigationUpdater() {

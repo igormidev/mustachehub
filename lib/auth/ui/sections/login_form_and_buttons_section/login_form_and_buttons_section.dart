@@ -43,10 +43,7 @@ class _LoginFormAndButtonsSectionState extends State<LoginFormAndButtonsSection>
                   suffixIcon: Padding(
                     padding: const EdgeInsets.only(right: 8),
                     child: IconButton(
-                      // onPressed: toggleFunction,
-                      onPressed: () {
-                        context.go('/splash');
-                      },
+                      onPressed: toggleFunction,
                       icon: Icon(
                         isVisible ? Icons.visibility : Icons.visibility_off,
                       ),

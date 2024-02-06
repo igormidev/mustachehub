@@ -54,7 +54,7 @@ class _MustacheMaterialAppState extends State<MustacheMaterialApp> {
             child: MaterialApp.router(
               title: 'Mustache Hub',
               theme: ThemeData(
-                colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
+                colorScheme: ColorScheme.fromSeed(seedColor: Colors.purple),
                 inputDecorationTheme: InputDecorationTheme(
                   border: const OutlineInputBorder(
                     borderSide: BorderSide.none,
@@ -80,7 +80,7 @@ class _MustacheMaterialAppState extends State<MustacheMaterialApp> {
                     ),
                     textStyle:
                         Theme.of(context).textTheme.titleMedium?.copyWith(
-                              color: Colors.white,
+                              color: Theme.of(context).colorScheme.onPrimary,
                             ),
                   ),
                 ),

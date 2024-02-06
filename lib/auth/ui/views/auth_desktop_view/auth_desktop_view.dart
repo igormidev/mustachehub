@@ -3,6 +3,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:go_router/go_router.dart';
 import 'package:media_query_core/perfomance/sized_box_apear_delay.dart';
 import 'package:media_query_core/responsiveness/visibility_width_based.dart';
+import 'package:mustachehub/app_core/app_routes.dart';
 import 'package:mustachehub/auth/ui/views/auth_desktop_view/cards/logging_advantages_cards.dart';
 import 'package:mustachehub/auth/ui/widgets/login_animation.dart';
 import 'package:mustachehub/auth/ui/widgets/pass_recovery_animation.dart';

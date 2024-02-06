@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mustachehub/account/ui/pages/account_page/account_page.dart';
 import 'package:mustachehub/auth/data/repositories/implementations/log_in_repository_impl.dart';
 import 'package:mustachehub/auth/data/repositories/implementations/sign_in_repository_impl.dart';
 import 'package:mustachehub/auth/data/repositories/interfaces/i_log_in_repository.dart';
@@ -147,8 +148,20 @@ GoRouter appRouter(SessionCubit sessionCubit) {
             path: '/account',
             parentNavigatorKey: NavigatorService.dashboardNavigatorKey,
             builder: (context, state) {
-              return Container(
-                color: Colors.purple[300],
+              final accountInfo = context.read<SessionState>().mapOrNull(
+                    loggedIn: (state) => state.account,
+                  );
+              final userProfile = context.read<SessionState>().mapOrNull(
+                    loggedIn: (state) => state.user,
+                  );
+                  
+              if (accountInfo == null || userProfile == null) {
+                return const SizedBox();
+              }
+
+              return AccountPage(
+                accountInfo: accountInfo,
+                userProfile: userProfile,
               );
             },
           ),
