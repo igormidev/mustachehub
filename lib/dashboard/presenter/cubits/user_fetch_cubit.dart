@@ -15,4 +15,8 @@ class UserFetchCubit extends Cubit<UserFetchState> {
     final state = await _userFetchRepository.getPersistenceUser();
     emit(state);
   }
+
+  void startFromZero() {
+    emit(UserFetchState.initial());
+  }
 }

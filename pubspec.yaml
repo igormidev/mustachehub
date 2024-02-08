@@ -4,6 +4,9 @@ publish_to: 'none'
 
 version: 1.0.0+1
 
+dependency_overrides: 
+  uuid: ^4.2.2
+
 environment:
   sdk: '>=3.2.3 <4.0.0' 
 dependencies:
@@ -21,6 +24,10 @@ dependencies:
   hydrated_bloc: ^9.1.3 
   go_router: 13.0.1
   enchanted_collection: 
+  simple_platform: ^1.0.1
+  image_network: ^2.5.4+1
+  image_picker: ^1.0.4
+  image_picker_for_web: ^3.0.1
   flutter_animate:
   fluttertoast: ^8.2.4
   media_query_core:
@@ -73,6 +80,7 @@ flutter:
   assets:
     - assets/visual_identity/logo.PNG
     - assets/lottie/auth/
+    - assets/lottie/account/
     - assets/lottie/
     - assets/
   #   - images/a_dot_ham.jpeg

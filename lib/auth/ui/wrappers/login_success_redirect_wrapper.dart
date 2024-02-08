@@ -23,14 +23,16 @@ class LoginSuccessRedirectWrapper extends StatelessWidget {
         state.mapOrNull(
           error: (value) {
             final error = value.error;
-            ScaffoldMessenger.of(context).showSnackBar(
-              ErrorSnackBar(
-                context: context,
-                text: CreadentialAuthExceptionTranslation.getTitle(error),
-                description:
-                    CreadentialAuthExceptionTranslation.getDescription(error),
-              ),
-            );
+            ScaffoldMessenger.of(context)
+              ..hideCurrentSnackBar()
+              ..showSnackBar(
+                ErrorSnackBar(
+                  context: context,
+                  text: CreadentialAuthExceptionTranslation.getTitle(error),
+                  description:
+                      CreadentialAuthExceptionTranslation.getDescription(error),
+                ),
+              );
             return;
           },
           success: (value) {

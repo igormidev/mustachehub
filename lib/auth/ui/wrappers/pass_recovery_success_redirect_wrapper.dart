@@ -20,23 +20,27 @@ class PassRecoverySuccessRedirectWrapper extends StatelessWidget {
         state.mapOrNull(
           error: (value) {
             final error = value.error;
-            ScaffoldMessenger.of(context).showSnackBar(
-              ErrorSnackBar(
-                context: context,
-                text: CreadentialAuthExceptionTranslation.getTitle(error),
-                description:
-                    CreadentialAuthExceptionTranslation.getDescription(error),
-              ),
-            );
+            ScaffoldMessenger.of(context)
+              ..hideCurrentSnackBar()
+              ..showSnackBar(
+                ErrorSnackBar(
+                  context: context,
+                  text: CreadentialAuthExceptionTranslation.getTitle(error),
+                  description:
+                      CreadentialAuthExceptionTranslation.getDescription(error),
+                ),
+              );
             return;
           },
           success: (value) {
             context.go('/auth/login');
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Password successfully changed!'),
-              ),
-            );
+            ScaffoldMessenger.of(context)
+              ..hideCurrentSnackBar()
+              ..showSnackBar(
+                const SnackBar(
+                  content: Text('Password successfully changed!'),
+                ),
+              );
             return;
           },
         );

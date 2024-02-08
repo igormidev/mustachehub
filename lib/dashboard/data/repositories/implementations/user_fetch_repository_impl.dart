@@ -36,6 +36,7 @@ class UserFetchRepositoryImpl implements IUserFetchRepository {
         name: user.displayName ?? '---',
         email: user.email ?? '---',
         urlDisplayImage: user.photoURL,
+        isEmailVerified: user.emailVerified,
       ),
       accountInfo: AccountInfo(
         tier: AccountTier.values[accountInfoJson['tier'] as int],

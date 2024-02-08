@@ -24,18 +24,20 @@ class _DashboardViewState extends State<DashboardView>
     with DashboardViewMethods {
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        const VisibilityWidthBased.fromMediaQueryScreenWidth(
-          maximumWidth: ScreenSize.x1300,
-          child: DashboardRail(),
-        ),
-        const VisibilityWidthBased.fromMediaQueryScreenWidth(
-          minimumWidth: ScreenSize.x1300,
-          child: DashboardDrawer(),
-        ),
-        Expanded(child: widget.navigator),
-      ],
+    return Scaffold(
+      body: Row(
+        children: [
+          const VisibilityWidthBased.fromMediaQueryScreenWidth(
+            maximumWidth: ScreenSize.x1300,
+            child: DashboardRail(),
+          ),
+          const VisibilityWidthBased.fromMediaQueryScreenWidth(
+            minimumWidth: ScreenSize.x1300,
+            child: DashboardDrawer(),
+          ),
+          Expanded(child: widget.navigator),
+        ],
+      ),
     );
   }
 }

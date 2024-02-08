@@ -3,6 +3,7 @@ import 'package:commom_states/commom_states.dart';
 import 'package:commom_states/cubits/loading_cubit.dart';
 import 'package:commom_states/states/loading_state.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mustachehub/app_core/app_routes.dart';
@@ -21,14 +22,19 @@ class _MustacheMaterialAppState extends State<MustacheMaterialApp> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => SessionCubit()),
-        BlocProvider(create: (context) => LoadingCubit()),
-        BlocProvider(create: (context) => NavigationPossibilitiesCubit()),
+        BlocProvider<SessionCubit>(create: (context) => SessionCubit()),
+        BlocProvider<LoadingCubit>(create: (context) => LoadingCubit()),
+        BlocProvider<NavigationPossibilitiesCubit>(
+          create: (context) => NavigationPossibilitiesCubit(),
+        ),
         RepositoryProvider<FirebaseAuth>(
           create: (context) => FirebaseAuth.instance,
         ),
         RepositoryProvider<FirebaseFirestore>(
           create: (context) => FirebaseFirestore.instance,
+        ),
+        RepositoryProvider<FirebaseStorage>(
+          create: (context) => FirebaseStorage.instance,
         ),
       ],
       child: Builder(builder: (context) {

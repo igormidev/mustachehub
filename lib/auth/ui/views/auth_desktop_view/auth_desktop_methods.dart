@@ -43,7 +43,7 @@ mixin AuthDesktopMethods on State<AuthDesktopView> {
   void dispose() {
     if (mounted) {
       _pageController.dispose();
-      final context = NavigatorService.dashboardNavigatorKey.currentContext!;
+      final context = NavigatorService.i.dashboardNavigatorKey.currentContext!;
       GoRouter.of(context)
           .routeInformationProvider
           .removeListener(_authIconNavigationUpdater);

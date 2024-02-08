@@ -10,11 +10,13 @@ mixin LoginFormAndButtonsSectionMethods on State<LoginFormAndButtonsSection> {
   Future<void> _makeLogin() async {
     final formState = _formKey.currentState;
     if (formState?.validate() != true) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Please fill in all fields'),
-        ),
-      );
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(
+          const SnackBar(
+            content: Text('Please fill in all fields'),
+          ),
+        );
       return;
     }
 

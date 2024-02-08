@@ -11,9 +11,11 @@ import 'package:mustachehub/dashboard/presenter/states/navigation_possibilities_
 import 'package:mustachehub/dashboard/presenter/states/user_fetch_state.dart';
 
 class FetchUserRedirectWrapper extends StatelessWidget {
+  final String targetRoute;
   final Widget child;
   const FetchUserRedirectWrapper({
     super.key,
+    required this.targetRoute,
     required this.child,
   });
 
@@ -51,9 +53,11 @@ class FetchUserRedirectWrapper extends StatelessWidget {
           },
           error: (value) {
             context.go('/not-found');
-            ScaffoldMessenger.of(context).showSnackBar(
-              ErrorSnackBar(context: context, text: 'Error fetching user'),
-            );
+            ScaffoldMessenger.of(context)
+              ..hideCurrentSnackBar()
+              ..showSnackBar(
+                ErrorSnackBar(context: context, text: 'Error fetching user'),
+              );
           },
         );
       },

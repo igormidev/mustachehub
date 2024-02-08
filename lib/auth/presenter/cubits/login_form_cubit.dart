@@ -30,24 +30,12 @@ class LoginFormCubit extends Cubit<LoginFormState>
     emit(LoginFormState.loadingWithFacebook());
     await Future.delayed(const Duration(seconds: 3));
     emit(LoginFormState.success());
-    // final response = await _loginRepository.signInUserWithEmailAndPassword(
-    //   email: email,
-    //   password: password,
-    // );
-
-    // emit(response);
   }
 
   Future<void> logInWithGoogle() async {
     emit(LoginFormState.loadingWithGoogle());
     await Future.delayed(const Duration(seconds: 3));
     emit(LoginFormState.success());
-    // final response = await _loginRepository.signInUserWithEmailAndPassword(
-    //   email: email,
-    //   password: password,
-    // );
-
-    // emit(response);
   }
 }
 
@@ -58,9 +46,9 @@ mixin GlobalLoadingEnforcer<T> on Cubit<T> {
     final t = change.nextState.toString().toLowerCase();
     final isLoading = t.contains('loading') || t.contains('processing');
     if (isLoading) {
-      NavigatorService.rootNavigatorKey.currentContext!.setGlobalLoading();
+      NavigatorService.i.rootNavigatorKey.currentContext!.setGlobalLoading();
     } else {
-      NavigatorService.rootNavigatorKey.currentContext!.endGlobalLoading();
+      NavigatorService.i.rootNavigatorKey.currentContext!.endGlobalLoading();
     }
   }
 }
