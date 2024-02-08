@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:go_router/go_router.dart';
 import 'package:media_query_core/perfomance/sized_box_apear_delay.dart';
 import 'package:media_query_core/responsiveness/visibility_width_based.dart';
 import 'package:mustachehub/app_core/app_routes.dart';
@@ -79,8 +78,9 @@ class _AuthDesktopViewState extends State<AuthDesktopView>
                                 color: Theme.of(context)
                                     .colorScheme
                                     .tertiaryContainer,
-                                borderRadius:
-                                    const BorderRadius.all(Radius.circular(20)),
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(20),
+                                ),
                               ),
                               height: 400,
                               width: 400,

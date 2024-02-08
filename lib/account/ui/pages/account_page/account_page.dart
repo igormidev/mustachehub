@@ -173,7 +173,7 @@ class AccountPage extends StatelessWidget {
                       ),
                     const SizedBox(height: 8),
                     ListTile(
-                      title: const Text('Logout'),
+                      title: const Text('Log out'),
                       trailing: const IsLoadingBloc<LogOutCubit, LogOutState>(
                         child: Icon(Icons.exit_to_app),
                       ),

@@ -36,10 +36,22 @@ class ImageUpdaterWrapper extends StatelessWidget {
               );
           },
           imageSelectorUploadSuccess: (state) {
-            context.read<SessionCubit>().updateUserPhoto(
-                  state.uploadedUrl,
-                );
+            final sessionCubit = context.read<SessionCubit>();
+            final imageSelectorCubit = context.read<ImageSelectorCubit>();
+            print('newImage: ${state.uploadedUrl}');
+            sessionCubit.updateUserPhoto(
+              state.uploadedUrl,
+            );
+            imageSelectorCubit.resetState();
             context.pop();
+            ScaffoldMessenger.of(context)
+              ..hideCurrentSnackBar()
+              ..showSnackBar(
+                const SnackBar(
+                  duration: Duration(seconds: 2),
+                  content: Text('Image updated with success!'),
+                ),
+              );
           },
         );
       },

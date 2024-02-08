@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:media_query_core/reactiveness/boolean_toggle_wrapper.dart';
+import 'package:media_query_core/reactiveness/is_loading_bloc.dart';
 import 'package:mustache_hub_core/mustache_hub_core.dart';
 import 'package:mustachehub/auth/presenter/cubits/sign_up_form_cubit.dart';
 import 'package:mustachehub/auth/presenter/states/sign_up_form_state.dart';
@@ -77,13 +78,8 @@ class _SigninFormAndButtonsSectionState
                   loadingWithCredentials: null,
                   orElse: () => _createAccountWithCredential,
                 ),
-                child: state.maybeMap(
-                  loadingWithCredentials: (_) => const SizedBox(
-                    height: 20,
-                    width: 20,
-                    child: CircularProgressIndicator(color: Colors.white),
-                  ),
-                  orElse: () => const Text('Create account'),
+                child: const IsLoadingBloc<SignUpFormCubit, SignUpFormState>(
+                  child: Text('Create account'),
                 ),
               );
             },

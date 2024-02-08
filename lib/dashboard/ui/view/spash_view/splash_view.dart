@@ -6,7 +6,7 @@ import 'package:mustachehub/dashboard/ui/view/spash_view/wrappers/fetch_user_red
 part 'splash_view_methods.dart';
 
 class SplashScreen extends StatefulWidget {
-  final String targetRoute;
+  final String? targetRoute;
   const SplashScreen({
     super.key,
     required this.targetRoute,
@@ -20,7 +20,6 @@ class _SplashScreenState extends State<SplashScreen> with SplashViewMethods {
   @override
   Widget build(BuildContext context) {
     return FetchUserRedirectWrapper(
-      targetRoute: widget.targetRoute,
       child: Scaffold(
         body: Center(
           child: Padding(

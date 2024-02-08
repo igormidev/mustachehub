@@ -25,6 +25,9 @@ mixin AuthDesktopMethods on State<AuthDesktopView> {
         duration: 700.milliseconds,
         curve: Curves.linear,
       );
+    } else {
+      router.routeInformationProvider
+          .removeListener(_authIconNavigationUpdater);
     }
   }
 
@@ -32,21 +35,14 @@ mixin AuthDesktopMethods on State<AuthDesktopView> {
   void initState() {
     super.initState();
     _pageController = PageController(initialPage: 1);
-    if (mounted) {
-      GoRouter.of(context)
-          .routeInformationProvider
-          .addListener(_authIconNavigationUpdater);
-    }
+
+    router.routeInformationProvider.addListener(_authIconNavigationUpdater);
   }
 
   @override
   void dispose() {
     if (mounted) {
       _pageController.dispose();
-      final context = NavigatorService.i.dashboardNavigatorKey.currentContext!;
-      GoRouter.of(context)
-          .routeInformationProvider
-          .removeListener(_authIconNavigationUpdater);
     }
     super.dispose();
   }

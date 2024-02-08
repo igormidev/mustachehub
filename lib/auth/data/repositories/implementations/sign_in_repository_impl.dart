@@ -14,7 +14,7 @@ class SignInRepositoryImpl
   // ignore: unused_field
   final Uuid _uuid;
 
-  SignInRepositoryImpl({
+  const SignInRepositoryImpl({
     required FirebaseAuth firebaseAuth,
     required FirebaseFirestore firebaseStorage,
     Uuid? uuid,

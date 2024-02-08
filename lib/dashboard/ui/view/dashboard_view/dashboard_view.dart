@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:media_query_core/responsiveness/visibility_width_based.dart';
+import 'package:mustachehub/app_core/app_routes.dart';
 import 'package:mustachehub/dashboard/data/entities/e_navigation_possibilities.dart';
 import 'package:mustachehub/dashboard/presenter/cubits/navigation_possibilities_cubit.dart';
 import 'package:mustachehub/dashboard/ui/navigation_widgets/dashboard_drawer/dashboard_drawer.dart';
@@ -21,7 +22,8 @@ class DashboardView extends StatefulWidget {
 }
 
 class _DashboardViewState extends State<DashboardView>
-    with DashboardViewMethods {
+// with DashboardViewMethods
+{
   @override
   Widget build(BuildContext context) {
     return Scaffold(

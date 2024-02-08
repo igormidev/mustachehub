@@ -44,7 +44,7 @@ class UserDisplayCircleAvatar extends StatelessWidget {
                   builder: (context, state) {
                     final user = state.userProfile();
                     final displayImage = user?.urlDisplayImage;
-
+                    print('displayImage: $displayImage');
                     if (size == UserImageSize.small) {
                       return user == null
                           ? const Icon(
@@ -87,6 +87,7 @@ class UserDisplayCircleAvatar extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(120),
                                   child: FittedBox(
                                     child: ImageNetwork(
+                                      key: ValueKey(displayImage),
                                       image: displayImage,
                                       height: height ?? 140,
                                       width: width ?? 140,

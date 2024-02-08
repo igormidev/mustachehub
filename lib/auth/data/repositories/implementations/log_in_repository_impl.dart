@@ -8,7 +8,7 @@ class LogInRepositoryImpl
     implements ILogInRepository {
   final FirebaseAuth _fb;
 
-  LogInRepositoryImpl({
+  const LogInRepositoryImpl({
     required FirebaseAuth firebaseAuth,
   }) : _fb = firebaseAuth;
 

@@ -8,7 +8,7 @@ mixin PassRecoveryFormAndButtonsSectionMethods
   PassRecoveryFormCubit get signInCubit =>
       context.read<PassRecoveryFormCubit>();
 
-  void _sendCodeToEmail() {
+  Future<void> _sendCodeToEmail() async {
     final formState = _formKey.currentState;
     if (formState?.validate() != true) {
       ScaffoldMessenger.of(context)
@@ -23,7 +23,7 @@ mixin PassRecoveryFormAndButtonsSectionMethods
 
     FocusScope.of(context).unfocus();
 
-    signInCubit.recoveryPasswordForEmail(
+    await signInCubit.recoveryPasswordForEmail(
       email: _emailEC.text,
     );
   }

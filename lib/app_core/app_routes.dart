@@ -17,9 +17,12 @@ import 'package:mustachehub/account/presenter/cubit/image_selector_cubit.dart';
 import 'package:mustachehub/account/presenter/cubit/log_out_cubit.dart';
 import 'package:mustachehub/account/ui/pages/account_page/account_page.dart';
 import 'package:mustachehub/account/ui/pages/account_page/pages/account_image_select_page/account_image_select_page.dart';
+import 'package:mustachehub/app_core/mustache_material_app.dart';
 import 'package:mustachehub/auth/data/repositories/implementations/log_in_repository_impl.dart';
+import 'package:mustachehub/auth/data/repositories/implementations/pass_recovery_repository_impl.dart';
 import 'package:mustachehub/auth/data/repositories/implementations/sign_in_repository_impl.dart';
 import 'package:mustachehub/auth/data/repositories/interfaces/i_log_in_repository.dart';
+import 'package:mustachehub/auth/data/repositories/interfaces/i_pass_recovery_repository.dart';
 import 'package:mustachehub/auth/data/repositories/interfaces/i_sign_in_repository.dart';
 import 'package:mustachehub/auth/presenter/cubits/login_form_cubit.dart';
 import 'package:mustachehub/auth/presenter/cubits/pass_recovery_form_cubit.dart';
@@ -30,9 +33,7 @@ import 'package:mustachehub/auth/ui/views/pass_recovery_view/pass_recovery_view.
 import 'package:mustachehub/auth/ui/views/signin_view/signin_view.dart';
 import 'package:mustachehub/dashboard/data/repositories/implementations/user_fetch_repository_impl.dart';
 import 'package:mustachehub/dashboard/data/repositories/interfaces/i_user_fetch_repository.dart';
-import 'package:mustachehub/dashboard/presenter/cubits/navigation_possibilities_cubit.dart';
 import 'package:mustachehub/dashboard/presenter/cubits/user_fetch_cubit.dart';
-import 'package:mustachehub/dashboard/presenter/states/navigation_possibilities_state.dart';
 import 'package:mustachehub/dashboard/ui/pages/not_found_404_page/not_found_404_page.dart';
 import 'package:mustachehub/dashboard/ui/view/dashboard_view/dashboard_view.dart';
 import 'package:mustachehub/dashboard/ui/view/spash_view/splash_view.dart';
@@ -49,42 +50,33 @@ class NavigatorService {
       GlobalKey<NavigatorState>(debugLabel: 'authNovigator');
   final GlobalKey<NavigatorState> rootNavigatorKey =
       GlobalKey<NavigatorState>(debugLabel: 'rootNavigator');
+
+  final GlobalKey<NavigatorState> materialApp = GlobalKey<NavigatorState>(
+    debugLabel: 'materialApp',
+  );
 }
 
-GoRouter appRouter(SessionCubit sessionCubit) {
-  return GoRouter(
-    debugLogDiagnostics: true,
-    navigatorKey: NavigatorService.i.rootNavigatorKey,
-    refreshListenable: GoRouterRefreshStream(sessionCubit.stream),
-    redirect: (context, state) {
-      final isSplashScreen = state.matchedLocation == '/splash';
+final router = GoRouter(
+  debugLogDiagnostics: true,
+  navigatorKey: NavigatorService.i.rootNavigatorKey,
+  // refreshListenable: GoRouterRefreshStream(sessionCubit.stream),
+  redirect: (context, state) {
+    final isInitialScreen = state.matchedLocation == '/splash';
+    if (isInitialScreen == false && !context.isSessionStateDetermined) {
+      return '/splash';
+    }
 
-      if (isSplashScreen && context.isSessionStateDetermined) {
-        final navPossibilitiesState =
-            context.read<NavigationPossibilitiesCubit>().state;
-
-        if (navPossibilitiesState is LoggedIn) {
-          return '/${navPossibilitiesState.selectedPossibility.name}';
-        } else if (navPossibilitiesState is LoggedOut) {
-          return '/${navPossibilitiesState.selectedPossibility.name}';
-        } else {
-          return '/not-found';
-        }
-      } else if (context.isSessionStateDetermined == false &&
-          isSplashScreen == false) {
-        return '/splash';
-      }
-
-      return null;
-    },
-    onException: (context, state, router) {
-      router.replace('/not-found');
-    },
-    initialLocation: '/splash',
-    routes: [
-      GoRoute(
-        path: '/splash',
-        builder: (context, state) => MultiBlocProvider(
+    return null;
+  },
+  onException: (context, state, router) {
+    router.replace('/not-found');
+  },
+  initialLocation: '/splash',
+  routes: [
+    GoRoute(
+      path: '/splash',
+      builder: (context, state) {
+        return MultiBlocProvider(
           providers: [
             RepositoryProvider<IUserFetchRepository>(
               create: (context) => UserFetchRepositoryImpl(
@@ -98,223 +90,213 @@ GoRouter appRouter(SessionCubit sessionCubit) {
               ),
             ),
           ],
-          child: const SplashScreen(),
+          child: const SplashScreen(
+            targetRoute: null,
+          ),
+        );
+      },
+    ),
+    GoRoute(
+      path: '/not-found',
+      builder: (context, state) => const Scaffold(
+        body: NotFound404Page(),
+      ),
+    ),
+    ShellRoute(
+      parentNavigatorKey: NavigatorService.i.rootNavigatorKey,
+      navigatorKey: NavigatorService.i.dashboardNavigatorKey,
+      builder: (BuildContext context, GoRouterState state, Widget child) {
+        return DashboardView(navigator: child);
+      },
+      routes: [
+        GoRoute(
+          path: '/collection',
+          parentNavigatorKey: NavigatorService.i.dashboardNavigatorKey,
+          builder: (context, state) {
+            return Container(
+              color: Colors.green[300],
+            );
+          },
         ),
-        // builder: (context, state) {
-        //   return const Scaffold(
-        //     body: Center(
-        //       // child: LogInAnimation(
-        //       // child: PassRecoveryAnimation(
-        //       child: SignInAnimation(
-        //         height: 400,
-        //         width: 400,
-        //       ),
-        //     ),
-        //   );
-        // },
-      ),
-      GoRoute(
-        path: '/not-found',
-        builder: (context, state) => const Scaffold(
-          body: NotFound404Page(),
+        GoRoute(
+          path: '/generateText',
+          parentNavigatorKey: NavigatorService.i.dashboardNavigatorKey,
+          builder: (context, state) {
+            return Container(
+              color: Colors.blueGrey,
+              child: const Center(
+                child: Text(
+                  'OPA',
+                  style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+                ),
+              ),
+            );
+          },
         ),
-      ),
-      ShellRoute(
-        parentNavigatorKey: NavigatorService.i.rootNavigatorKey,
-        navigatorKey: NavigatorService.i.dashboardNavigatorKey,
-        builder: (BuildContext context, GoRouterState state, Widget child) {
-          return DashboardView(navigator: child);
-        },
-        routes: [
-          GoRoute(
-            path: '/collection',
-            parentNavigatorKey: NavigatorService.i.dashboardNavigatorKey,
-            builder: (context, state) {
-              return Container(
-                color: Colors.green[300],
-              );
-            },
-          ),
-          GoRoute(
-            path: '/generateText',
-            parentNavigatorKey: NavigatorService.i.dashboardNavigatorKey,
-            builder: (context, state) {
-              return Container(
-                color: Colors.blueGrey,
-                child: const Center(
-                  child: Text(
-                    'OPA',
-                    style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+        GoRoute(
+          path: '/createMustache',
+          parentNavigatorKey: NavigatorService.i.dashboardNavigatorKey,
+          builder: (context, state) {
+            return Container(
+              color: Colors.brown[400],
+            );
+          },
+        ),
+        GoRoute(
+          path: '/account',
+          parentNavigatorKey: NavigatorService.i.dashboardNavigatorKey,
+          redirect: (context, state) {
+            final accountInfo = context.read<SessionCubit>().state.mapOrNull(
+                  loggedIn: (state) => state.account,
+                );
+            final userProfile = context.read<SessionCubit>().state.mapOrNull(
+                  loggedIn: (state) => state.user,
+                );
+
+            if (accountInfo == null || userProfile == null) {
+              return '/auth/login';
+            } else {
+              return null;
+            }
+          },
+          builder: (context, state) {
+            final accountInfo = context.read<SessionCubit>().state.mapOrNull(
+                  loggedIn: (state) => state.account,
+                );
+            final userProfile = context.read<SessionCubit>().state.mapOrNull(
+                  loggedIn: (state) => state.user,
+                );
+
+            if (accountInfo == null || userProfile == null) {
+              return const SizedBox();
+            }
+
+            return MultiBlocProvider(
+              providers: [
+                RepositoryProvider<IAccountRepository>(
+                  create: (context) => AccountRepositoryImpl(
+                    auth: context.read<FirebaseAuth>(),
                   ),
                 ),
-              );
-            },
-          ),
-          GoRoute(
-            path: '/createMustache',
-            parentNavigatorKey: NavigatorService.i.dashboardNavigatorKey,
-            builder: (context, state) {
-              return Container(
-                color: Colors.brown[400],
-              );
-            },
-          ),
-          GoRoute(
-            path: '/account',
-            parentNavigatorKey: NavigatorService.i.dashboardNavigatorKey,
-            redirect: (context, state) {
-              final accountInfo = context.read<SessionCubit>().state.mapOrNull(
-                    loggedIn: (state) => state.account,
-                  );
-              final userProfile = context.read<SessionCubit>().state.mapOrNull(
-                    loggedIn: (state) => state.user,
-                  );
-
-              if (accountInfo == null || userProfile == null) {
-                return '/auth/login';
-              } else {
-                return null;
-              }
-            },
-            builder: (context, state) {
-              final accountInfo = context.read<SessionCubit>().state.mapOrNull(
-                    loggedIn: (state) => state.account,
-                  );
-              final userProfile = context.read<SessionCubit>().state.mapOrNull(
-                    loggedIn: (state) => state.user,
-                  );
-
-              if (accountInfo == null || userProfile == null) {
-                return const SizedBox();
-              }
-
-              return MultiBlocProvider(
-                providers: [
-                  RepositoryProvider<IAccountRepository>(
-                    create: (context) => AccountRepositoryImpl(
-                      auth: context.read<FirebaseAuth>(),
-                    ),
+                BlocProvider<ChangePasswordCubit>(
+                  create: (context) => ChangePasswordCubit(
+                    accountRepository: context.read<IAccountRepository>(),
                   ),
-                  BlocProvider<ChangePasswordCubit>(
-                    create: (context) => ChangePasswordCubit(
-                      accountRepository: context.read<IAccountRepository>(),
-                    ),
-                  ),
-                  BlocProvider<EmailVerificationCubit>(
-                    create: (context) => EmailVerificationCubit(
-                      accountRepository: context.read<IAccountRepository>(),
-                    ),
-                  ),
-                  BlocProvider<LogOutCubit>(
-                    create: (context) => LogOutCubit(
-                      accountRepository: context.read<IAccountRepository>(),
-                    ),
-                  ),
-                ],
-                child: AccountPage(
-                  accountInfo: accountInfo,
-                  userProfile: userProfile,
                 ),
-              );
-            },
-            routes: [
-              GoRoute(
-                path: 'changeProfileImage',
-                builder: (context, state) {
-                  return MultiBlocProvider(
-                    providers: [
-                      RepositoryProvider<IImageRepository>(
-                        create: (context) => ImageRepositoryImpl(
-                          auth: context.read<FirebaseAuth>(),
-                          storage: context.read<FirebaseStorage>(),
-                        ),
+                BlocProvider<EmailVerificationCubit>(
+                  create: (context) => EmailVerificationCubit(
+                    accountRepository: context.read<IAccountRepository>(),
+                  ),
+                ),
+                BlocProvider<LogOutCubit>(
+                  create: (context) => LogOutCubit(
+                    accountRepository: context.read<IAccountRepository>(),
+                  ),
+                ),
+              ],
+              child: AccountPage(
+                accountInfo: accountInfo,
+                userProfile: userProfile,
+              ),
+            );
+          },
+          routes: [
+            GoRoute(
+              path: 'changeProfileImage',
+              builder: (context, state) {
+                return MultiBlocProvider(
+                  providers: [
+                    RepositoryProvider<IImageRepository>(
+                      create: (context) => ImageRepositoryImpl(
+                        auth: context.read<FirebaseAuth>(),
+                        storage: context.read<FirebaseStorage>(),
                       ),
-                      BlocProvider(
-                        create: (context) => ImageSelectorCubit(
-                          imageRepository: context.read<IImageRepository>(),
-                        ),
+                    ),
+                    BlocProvider(
+                      create: (context) => ImageSelectorCubit(
+                        imageRepository: context.read<IImageRepository>(),
                       ),
-                    ],
-                    child: const AccountImageSelectPage(),
-                  );
-                },
-              )
-            ],
-          ),
-          GoRoute(
-            path: '/becamePremium',
-            parentNavigatorKey: NavigatorService.i.dashboardNavigatorKey,
-            builder: (context, state) {
-              return Container(
-                color: Colors.amber[300],
-              );
-            },
-          ),
-          GoRoute(
-            path: '/settings',
-            parentNavigatorKey: NavigatorService.i.dashboardNavigatorKey,
-            builder: (context, state) {
-              return Container(
-                color: Colors.pink[300],
-              );
-            },
-          ),
-          ShellRoute(
-            parentNavigatorKey: NavigatorService.i.dashboardNavigatorKey,
-            navigatorKey: NavigatorService.i.authNovigator,
-            builder: (
-              BuildContext context,
-              GoRouterState state,
-              Widget child,
-            ) {
-              return AuthBlocProvider(
-                child: AuthDesktopView(
-                  navigator: child,
-                ),
-              );
-            },
-            routes: [
-              GoRoute(
-                path: '/auth/login',
-                parentNavigatorKey: NavigatorService.i.authNovigator,
-                pageBuilder: (context, state) {
-                  return BottomSheetTransitionPage(
-                    key: state.pageKey,
-                    child: const LoginView(),
-                    context: context,
-                  );
-                },
+                    ),
+                  ],
+                  child: const AccountImageSelectPage(),
+                );
+              },
+            )
+          ],
+        ),
+        GoRoute(
+          path: '/becamePremium',
+          parentNavigatorKey: NavigatorService.i.dashboardNavigatorKey,
+          builder: (context, state) {
+            return Container(
+              color: Colors.amber[300],
+            );
+          },
+        ),
+        GoRoute(
+          path: '/settings',
+          parentNavigatorKey: NavigatorService.i.dashboardNavigatorKey,
+          builder: (context, state) {
+            return Container(
+              color: Colors.pink[300],
+            );
+          },
+        ),
+        ShellRoute(
+          parentNavigatorKey: NavigatorService.i.dashboardNavigatorKey,
+          navigatorKey: NavigatorService.i.authNovigator,
+          builder: (
+            BuildContext context,
+            GoRouterState state,
+            Widget child,
+          ) {
+            return AuthBlocProvider(
+              child: AuthDesktopView(
+                navigator: child,
               ),
-              GoRoute(
-                path: '/auth/signin',
-                parentNavigatorKey: NavigatorService.i.authNovigator,
-                pageBuilder: (context, state) {
-                  return BottomSheetTransitionPage(
-                    key: state.pageKey,
-                    child: const SignInView(),
-                    context: context,
-                    offsetBegin: const Offset(0, -1),
-                  );
-                },
-              ),
-              GoRoute(
-                path: '/auth/passrecovery',
-                parentNavigatorKey: NavigatorService.i.authNovigator,
-                pageBuilder: (context, state) {
-                  return BottomSheetTransitionPage(
-                    key: state.pageKey,
-                    child: const PassRecoveryView(),
-                    context: context,
-                  );
-                },
-              ),
-            ],
-          ),
-        ],
-      ),
-    ],
-  );
-}
+            );
+          },
+          routes: [
+            GoRoute(
+              path: '/auth/login',
+              parentNavigatorKey: NavigatorService.i.authNovigator,
+              pageBuilder: (context, state) {
+                return BottomSheetTransitionPage(
+                  key: state.pageKey,
+                  child: const LoginView(),
+                  context: context,
+                );
+              },
+            ),
+            GoRoute(
+              path: '/auth/signin',
+              parentNavigatorKey: NavigatorService.i.authNovigator,
+              pageBuilder: (context, state) {
+                return BottomSheetTransitionPage(
+                  key: state.pageKey,
+                  child: const SignInView(),
+                  context: context,
+                  offsetBegin: const Offset(0, -1),
+                );
+              },
+            ),
+            GoRoute(
+              path: '/auth/passrecovery',
+              parentNavigatorKey: NavigatorService.i.authNovigator,
+              pageBuilder: (context, state) {
+                return BottomSheetTransitionPage(
+                  key: state.pageKey,
+                  child: const PassRecoveryView(),
+                  context: context,
+                );
+              },
+            ),
+          ],
+        ),
+      ],
+    ),
+  ],
+);
 
 class GoRouterRefreshStream<T> extends ChangeNotifier {
   /// Creates a [GoRouterRefreshStream].
@@ -382,13 +364,20 @@ class AuthBlocProvider extends StatelessWidget {
             firebaseAuth: context.read<FirebaseAuth>(),
           ),
         ),
+        RepositoryProvider<IPassRecoveryRepository>(
+          create: (context) => PassRecoveryRepositoryImpl(
+            firebaseAuth: context.read<FirebaseAuth>(),
+          ),
+        ),
         BlocProvider<LoginFormCubit>(
           create: (context) => LoginFormCubit(
             loginRepository: context.read<ILogInRepository>(),
           ),
         ),
         BlocProvider<PassRecoveryFormCubit>(
-          create: (context) => PassRecoveryFormCubit(),
+          create: (context) => PassRecoveryFormCubit(
+            passRecoveryRepository: context.read<IPassRecoveryRepository>(),
+          ),
         ),
         BlocProvider<SignUpFormCubit>(
           create: (context) => SignUpFormCubit(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mustachehub/app_core/theme/components/error_snack_bar.dart';
@@ -37,8 +38,12 @@ class PassRecoverySuccessRedirectWrapper extends StatelessWidget {
             ScaffoldMessenger.of(context)
               ..hideCurrentSnackBar()
               ..showSnackBar(
-                const SnackBar(
-                  content: Text('Password successfully changed!'),
+                SnackBar(
+                  duration: 6.seconds,
+                  content: const Text(
+                    'Recovery code sent to your e-mail. '
+                    'Please check out your inbox (check in spam section as well).',
+                  ),
                 ),
               );
             return;

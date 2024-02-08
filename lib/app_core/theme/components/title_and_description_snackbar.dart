@@ -7,7 +7,6 @@ class TitleAndDescriptionSnackbar extends SnackBar {
     required String text,
     required String description,
   }) : super(
-          backgroundColor: Theme.of(context).colorScheme.errorContainer,
           content: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,

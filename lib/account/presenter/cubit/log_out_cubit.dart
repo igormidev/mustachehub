@@ -12,6 +12,7 @@ class LogOutCubit extends Cubit<LogOutState> {
 
   Future<void> logOut() async {
     emit(LogOutState.loading());
+    await Future.delayed(const Duration(seconds: 1));
     final response = await _accountRepository.logOut();
     emit(response);
   }

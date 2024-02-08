@@ -2,8 +2,10 @@ part of 'login_form_and_buttons_section.dart';
 
 mixin LoginFormAndButtonsSectionMethods on State<LoginFormAndButtonsSection> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController _emailEC = TextEditingController();
-  final TextEditingController _passwordEC = TextEditingController();
+  final TextEditingController _emailEC =
+      TextEditingController(text: 'igor_midev@outlook.com');
+  final TextEditingController _passwordEC =
+      TextEditingController(text: 'Teste@123');
 
   LoginFormCubit get loginCubit => context.read<LoginFormCubit>();
 

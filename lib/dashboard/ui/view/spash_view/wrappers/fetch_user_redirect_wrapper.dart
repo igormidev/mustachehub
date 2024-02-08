@@ -11,11 +11,9 @@ import 'package:mustachehub/dashboard/presenter/states/navigation_possibilities_
 import 'package:mustachehub/dashboard/presenter/states/user_fetch_state.dart';
 
 class FetchUserRedirectWrapper extends StatelessWidget {
-  final String targetRoute;
   final Widget child;
   const FetchUserRedirectWrapper({
     super.key,
-    required this.targetRoute,
     required this.child,
   });
 
@@ -35,6 +33,10 @@ class FetchUserRedirectWrapper extends StatelessWidget {
               ),
             );
             sessionCubit.setSessionState(SessionState.guest());
+
+            context.go(
+              '/${EDashboardNavigationPossibilities.DEFAULT_POSSIBILITY.name}',
+            );
           },
           doneWithUser: (value) {
             final sessionCubit = context.read<SessionCubit>();
@@ -50,6 +52,10 @@ class FetchUserRedirectWrapper extends StatelessWidget {
               account: value.accountInfo,
               user: value.userInfo,
             ));
+
+            context.go(
+              '/${EDashboardNavigationPossibilities.DEFAULT_POSSIBILITY.name}',
+            );
           },
           error: (value) {
             context.go('/not-found');

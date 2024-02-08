@@ -33,11 +33,7 @@ class SigninSuccessRedirectWrapper extends StatelessWidget {
             return;
           },
           success: (value) {
-            WidgetsBinding.instance.addPostFrameCallback(
-              (_) {
-                context.go('/splash');
-              },
-            );
+            context.go('/splash');
           },
         );
       },
