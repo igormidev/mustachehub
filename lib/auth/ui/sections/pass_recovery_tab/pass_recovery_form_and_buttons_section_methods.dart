@@ -8,20 +8,22 @@ mixin PassRecoveryFormAndButtonsSectionMethods
   PassRecoveryFormCubit get signInCubit =>
       context.read<PassRecoveryFormCubit>();
 
-  void _sendCodeToEmail() {
+  Future<void> _sendCodeToEmail() async {
     final formState = _formKey.currentState;
     if (formState?.validate() != true) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Please fill in all fields'),
-        ),
-      );
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(
+          const SnackBar(
+            content: Text('Please fill in all fields'),
+          ),
+        );
       return;
     }
 
     FocusScope.of(context).unfocus();
 
-    signInCubit.recoveryPasswordForEmail(
+    await signInCubit.recoveryPasswordForEmail(
       email: _emailEC.text,
     );
   }

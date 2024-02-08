@@ -2,7 +2,6 @@ part of 'auth_desktop_view.dart';
 
 mixin AuthDesktopMethods on State<AuthDesktopView> {
   late final PageController _pageController;
-
   void _authIconNavigationUpdater() {
     final currentUri = Router.of(context).routeInformationProvider?.value.uri;
     if (currentUri == null) return;
@@ -26,6 +25,9 @@ mixin AuthDesktopMethods on State<AuthDesktopView> {
         duration: 700.milliseconds,
         curve: Curves.linear,
       );
+    } else {
+      router.routeInformationProvider
+          .removeListener(_authIconNavigationUpdater);
     }
   }
 
@@ -33,19 +35,14 @@ mixin AuthDesktopMethods on State<AuthDesktopView> {
   void initState() {
     super.initState();
     _pageController = PageController(initialPage: 1);
-    if (mounted)
-      GoRouter.of(context)
-          .routeInformationProvider
-          .addListener(_authIconNavigationUpdater);
+
+    router.routeInformationProvider.addListener(_authIconNavigationUpdater);
   }
 
   @override
   void dispose() {
-    _pageController.dispose();
     if (mounted) {
-      GoRouter.of(context)
-          .routeInformationProvider
-          .removeListener(_authIconNavigationUpdater);
+      _pageController.dispose();
     }
     super.dispose();
   }

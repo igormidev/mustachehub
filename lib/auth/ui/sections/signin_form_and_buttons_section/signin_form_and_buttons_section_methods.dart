@@ -11,11 +11,13 @@ mixin SignInFormAndButtonsSectionMethods on State<SigninFormAndButtonsSection> {
   Future<void> _createAccountWithCredential() async {
     final formState = _formKey.currentState;
     if (formState?.validate() != true) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Please fill in all fields'),
-        ),
-      );
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(
+          const SnackBar(
+            content: Text('Please fill in all fields'),
+          ),
+        );
       return;
     }
 

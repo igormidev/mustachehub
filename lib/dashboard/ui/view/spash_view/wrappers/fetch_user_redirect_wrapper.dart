@@ -33,6 +33,10 @@ class FetchUserRedirectWrapper extends StatelessWidget {
               ),
             );
             sessionCubit.setSessionState(SessionState.guest());
+
+            context.go(
+              '/${EDashboardNavigationPossibilities.DEFAULT_POSSIBILITY.name}',
+            );
           },
           doneWithUser: (value) {
             final sessionCubit = context.read<SessionCubit>();
@@ -48,12 +52,18 @@ class FetchUserRedirectWrapper extends StatelessWidget {
               account: value.accountInfo,
               user: value.userInfo,
             ));
+
+            context.go(
+              '/${EDashboardNavigationPossibilities.DEFAULT_POSSIBILITY.name}',
+            );
           },
           error: (value) {
             context.go('/not-found');
-            ScaffoldMessenger.of(context).showSnackBar(
-              ErrorSnackBar(context: context, text: 'Error fetching user'),
-            );
+            ScaffoldMessenger.of(context)
+              ..hideCurrentSnackBar()
+              ..showSnackBar(
+                ErrorSnackBar(context: context, text: 'Error fetching user'),
+              );
           },
         );
       },
