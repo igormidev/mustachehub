@@ -27,8 +27,8 @@ class _ChangePasswordFormDialogState extends State<ChangePasswordFormDialog>
 
     const changePasswordDescription = 'Fullfill the form below to change your '
         'password';
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
+    return Align(
+      alignment: Alignment.bottomCenter,
       child: Material(
         color: Colors.transparent,
         child: Form(

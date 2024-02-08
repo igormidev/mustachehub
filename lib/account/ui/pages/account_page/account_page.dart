@@ -14,6 +14,7 @@ import 'package:mustachehub/account/ui/pages/account_page/widgets/user_info/user
 import 'package:mustachehub/account/ui/pages/account_page/wrappers/log_out_redirect_wrapper.dart';
 import 'package:mustachehub/account/ui/pages/account_page/account_wrappers_agregator.dart';
 import 'package:mustachehub/account/ui/widgets/user_display_circle_avatar.dart';
+import 'package:mustachehub/app_core/app_routes.dart';
 
 class AccountPage extends StatelessWidget {
   final AccountInfo accountInfo;
@@ -123,15 +124,17 @@ class AccountPage extends StatelessWidget {
                         child: Icon(Icons.lock),
                       ),
                       onTap: () {
+                        final changePassCubit =
+                            context.read<ChangePasswordCubit>();
+
                         showModalBottomSheet(
                           context: context,
                           constraints: const BoxConstraints(
-                            maxWidth: double.infinity,
+                            maxWidth: double.maxFinite,
                           ),
                           builder: (context) {
                             return ChangePasswordFormDialog(
-                              changePasswordCubit:
-                                  context.read<ChangePasswordCubit>(),
+                              changePasswordCubit: changePassCubit,
                             );
                           },
                         );
