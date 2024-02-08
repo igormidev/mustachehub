@@ -5,18 +5,18 @@ import 'package:mustachehub/dashboard/data/repositories/interfaces/i_user_fetch_
 import 'package:mustachehub/dashboard/presenter/states/user_fetch_state.dart';
 
 class UserFetchRepositoryImpl implements IUserFetchRepository {
-  final FirebaseAuth _firebaseUser;
+  final FirebaseAuth _firebaseAuth;
   final FirebaseFirestore _firestore;
 
   UserFetchRepositoryImpl({
     required FirebaseAuth firebaseAuth,
     required FirebaseFirestore firebaseStorage,
-  })  : _firebaseUser = firebaseAuth,
+  })  : _firebaseAuth = firebaseAuth,
         _firestore = firebaseStorage;
 
   @override
   Future<UserFetchState> getPersistenceUser() async {
-    final user = _firebaseUser.currentUser;
+    final user = _firebaseAuth.currentUser;
 
     if (user == null) {
       return Future.value(UserFetchState.doneWithoutUser());
@@ -36,6 +36,7 @@ class UserFetchRepositoryImpl implements IUserFetchRepository {
         name: user.displayName ?? '---',
         email: user.email ?? '---',
         urlDisplayImage: user.photoURL,
+        isEmailVerified: user.emailVerified,
       ),
       accountInfo: AccountInfo(
         tier: AccountTier.values[accountInfoJson['tier'] as int],

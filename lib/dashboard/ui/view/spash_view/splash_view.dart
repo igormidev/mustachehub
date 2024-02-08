@@ -1,12 +1,16 @@
-import 'package:flutter/material.dart'; 
-import 'package:flutter_bloc/flutter_bloc.dart'; 
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mustachehub/dashboard/presenter/cubits/user_fetch_cubit.dart';
-import 'package:mustachehub/dashboard/ui/view/spash_view/wrappers/fetch_user_redirect_wrapper.dart'; 
+import 'package:mustachehub/dashboard/ui/view/spash_view/wrappers/fetch_user_redirect_wrapper.dart';
 
 part 'splash_view_methods.dart';
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({super.key});
+  final String? targetRoute;
+  const SplashScreen({
+    super.key,
+    required this.targetRoute,
+  });
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();

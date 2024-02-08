@@ -18,6 +18,8 @@ abstract class SessionState with _$SessionState {
 }
 
 extension SessionStateBuildContextExtension on BuildContext {
+  UserProfile? userProfile() => read<SessionCubit>().state.userProfile();
+
   bool isUserStarterOrHigher() =>
       isStarterUser() || isUnlimitedUser() || isProUser();
   bool isUserUnlimitedOrHigher() => isUnlimitedUser() || isProUser();
@@ -46,6 +48,10 @@ extension SessionStateBuildContextExtension on BuildContext {
 }
 
 extension SessionStateExtension on SessionState {
+  UserProfile? userProfile() => maybeMap(
+        loggedIn: (state) => state.user,
+        orElse: () => null,
+      );
   bool get isUserStarterOrHigher =>
       isStarterUser || isUnlimitedUser || isProUser;
   bool get isUserUnlimitedOrHigher => isUnlimitedUser || isProUser;

@@ -7,4 +7,18 @@ class SessionCubit extends Cubit<SessionState> {
   void setSessionState(SessionState sessionState) {
     emit(sessionState);
   }
+
+  void updateUserPhoto(String newUserPhoto) {
+    state.mapOrNull(
+      loggedIn: (state) {
+        emit(
+          state.copyWith(
+            user: state.user.copyWith(
+              urlDisplayImage: newUserPhoto,
+            ),
+          ),
+        );
+      },
+    );
+  }
 }
