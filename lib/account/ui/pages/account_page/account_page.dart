@@ -14,7 +14,6 @@ import 'package:mustachehub/account/ui/pages/account_page/widgets/user_info/user
 import 'package:mustachehub/account/ui/pages/account_page/wrappers/log_out_redirect_wrapper.dart';
 import 'package:mustachehub/account/ui/pages/account_page/account_wrappers_agregator.dart';
 import 'package:mustachehub/account/ui/widgets/user_display_circle_avatar.dart';
-import 'package:mustachehub/app_core/app_routes.dart';
 
 class AccountPage extends StatelessWidget {
   final AccountInfo accountInfo;

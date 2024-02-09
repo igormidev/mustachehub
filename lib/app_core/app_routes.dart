@@ -17,7 +17,6 @@ import 'package:mustachehub/account/presenter/cubit/image_selector_cubit.dart';
 import 'package:mustachehub/account/presenter/cubit/log_out_cubit.dart';
 import 'package:mustachehub/account/ui/pages/account_page/account_page.dart';
 import 'package:mustachehub/account/ui/pages/account_page/pages/account_image_select_page/account_image_select_page.dart';
-import 'package:mustachehub/app_core/mustache_material_app.dart';
 import 'package:mustachehub/auth/data/repositories/implementations/log_in_repository_impl.dart';
 import 'package:mustachehub/auth/data/repositories/implementations/pass_recovery_repository_impl.dart';
 import 'package:mustachehub/auth/data/repositories/implementations/sign_in_repository_impl.dart';
@@ -31,6 +30,17 @@ import 'package:mustachehub/auth/ui/views/auth_desktop_view/auth_desktop_view.da
 import 'package:mustachehub/auth/ui/views/login_view/login_view.dart';
 import 'package:mustachehub/auth/ui/views/pass_recovery_view/pass_recovery_view.dart';
 import 'package:mustachehub/auth/ui/views/signin_view/signin_view.dart';
+import 'package:mustachehub/create/data/adapters/token_identifier_flatmap_adapter.dart';
+import 'package:mustachehub/create/data/adapters/token_identifier_text_display_adapter.dart';
+import 'package:mustachehub/create/data/repositories/implementations/package_form_repository_impl.dart';
+import 'package:mustachehub/create/data/repositories/interfaces/i_package_form_repository.dart';
+import 'package:mustachehub/create/presenter/cubits/content_string_cubit.dart';
+import 'package:mustachehub/create/presenter/cubits/fields_text_size_cubit.dart';
+import 'package:mustachehub/create/presenter/cubits/package_form_cubit.dart';
+import 'package:mustachehub/create/presenter/cubits/sugestion_cubit.dart';
+import 'package:mustachehub/create/presenter/cubits/tab_controll_cubit.dart';
+import 'package:mustachehub/create/presenter/cubits/variables_cubit.dart';
+import 'package:mustachehub/create/ui/create_template_view/create_template_view.dart';
 import 'package:mustachehub/dashboard/data/repositories/implementations/user_fetch_repository_impl.dart';
 import 'package:mustachehub/dashboard/data/repositories/interfaces/i_user_fetch_repository.dart';
 import 'package:mustachehub/dashboard/presenter/cubits/user_fetch_cubit.dart';
@@ -123,13 +133,7 @@ final router = GoRouter(
           parentNavigatorKey: NavigatorService.i.dashboardNavigatorKey,
           builder: (context, state) {
             return Container(
-              color: Colors.blueGrey,
-              child: const Center(
-                child: Text(
-                  'OPA',
-                  style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
-                ),
-              ),
+              color: Colors.brown[400],
             );
           },
         ),
@@ -137,8 +141,37 @@ final router = GoRouter(
           path: '/createMustache',
           parentNavigatorKey: NavigatorService.i.dashboardNavigatorKey,
           builder: (context, state) {
-            return Container(
-              color: Colors.brown[400],
+            return MultiBlocProvider(
+              providers: [
+                // Repositories
+                RepositoryProvider<IPackageFormRepository>(
+                  create: (context) => PackageFormRepositoryImpl(),
+                ),
+                RepositoryProvider<TokenIdentifierFlatMapAdapter>(
+                  create: (context) => TokenIdentifierFlatMapAdapter(),
+                ),
+                RepositoryProvider<TokenIdentifierTextDisplayAdapter>(
+                  create: (context) => TokenIdentifierTextDisplayAdapter(),
+                ),
+
+                BlocProvider(create: (context) => ContentStringCubit()),
+                BlocProvider(create: (context) => FieldsTextSizeCubit()),
+                BlocProvider(
+                    create: (context) => PackageFormCubit(
+                          repository: context.read<IPackageFormRepository>(),
+                        )),
+                BlocProvider(
+                  create: (context) => SugestionCubit(
+                    tokenIdentifierFlatMapAdapter:
+                        context.read<TokenIdentifierFlatMapAdapter>(),
+                    tokenIdentifierTextDisplayAdapter:
+                        context.read<TokenIdentifierTextDisplayAdapter>(),
+                  ),
+                ),
+                BlocProvider(create: (context) => TabControllCubit()),
+                BlocProvider(create: (context) => VariablesCubit()),
+              ],
+              child: const CreateTemplateView(),
             );
           },
         ),

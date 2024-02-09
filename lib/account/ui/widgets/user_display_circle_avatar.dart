@@ -44,7 +44,6 @@ class UserDisplayCircleAvatar extends StatelessWidget {
                   builder: (context, state) {
                     final user = state.userProfile();
                     final displayImage = user?.urlDisplayImage;
-                    print('displayImage: $displayImage');
                     if (size == UserImageSize.small) {
                       return user == null
                           ? const Icon(
