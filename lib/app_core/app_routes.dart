@@ -189,19 +189,21 @@ final router = GoRouter(
                 BlocProvider(create: (context) => VariablesCubit()),
 
                 /// Generator and test
-                RepositoryProvider(create: (context) => DtoAdapter()),
-                BlocProvider(
+                RepositoryProvider<DtoAdapter>(
+                  create: (context) => DtoAdapter(),
+                ),
+                BlocProvider<ContentCubit>(
                   create: (context) => ContentCubit(
                     dtoAdapter: context.read<DtoAdapter>(),
                   ),
                 ),
-                BlocProvider(
+                BlocProvider<VariablesCubit>(
                   create: (context) => VariablesCubit(),
                 ),
-                BlocProvider(
+                BlocProvider<FormStatsCubit>(
                   create: (context) => FormStatsCubit(),
                 ),
-                BlocProvider(
+                BlocProvider<PayloadCubit>(
                   create: (context) => PayloadCubit(
                     dtoAdapter: context.read<DtoAdapter>(),
                     outputCubit: context.read<ContentCubit>(),

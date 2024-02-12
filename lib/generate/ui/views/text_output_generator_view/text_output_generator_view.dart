@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mustache_hub_core/mustache_hub_core.dart';
-import 'package:mustachehub/generate/presenter/cubits/content_cubit.dart';
 import 'package:mustachehub/generate/presenter/cubits/payload_cubit.dart';
-import 'package:mustachehub/generate/presenter/states/payload_state.dart';
+import 'package:mustachehub/generate/presenter/mixins/set_generator_dependencies_mixin.dart';
 import 'package:mustachehub/generate/ui/pages/template_input_form_page/template_input_form_page.dart';
 import 'package:mustachehub/generate/ui/pages/text_output_page/text_output_page.dart';
 
@@ -22,25 +21,19 @@ class TextOutputGeneratorView extends StatefulWidget {
       _TextOutputGeneratorViewState();
 }
 
-class _TextOutputGeneratorViewState extends State<TextOutputGeneratorView> {
+class _TextOutputGeneratorViewState extends State<TextOutputGeneratorView>
+    with SetGeneratorDependenciesMixin {
   @override
   void initState() {
     super.initState();
     Future.microtask(() async {
-      final payloadCubit = context.read<PayloadCubit>();
-      final outputCubit = context.read<ContentCubit>();
-      await payloadCubit.updateContent(
+      setDependencies(
+        context: context,
         content: widget.content,
-        expectedPayload: ExpectedPayload(
-          textPipes: widget.generatorData.textPipes,
-          booleanPipes: widget.generatorData.booleanPipes,
-          modelPipes: widget.generatorData.modelPipes,
-        ),
-        expectedPayloadDto: null,
+        textPipes: widget.generatorData.textPipes,
+        booleanPipes: widget.generatorData.booleanPipes,
+        modelPipes: widget.generatorData.modelPipes,
       );
-      if (payloadCubit.state is InitialPayloadState) {
-        outputCubit.setPendency(widget.content);
-      }
     });
   }
 

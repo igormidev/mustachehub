@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cursor_autocomplete_options/cursor_autocomplete_options.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
@@ -50,7 +52,9 @@ class AddMustacheDelimmiterInputFormatter extends TextInputFormatter {
     if (didTappedDellimiter) {
       try {
         setSuggestionFromCurrentCursor(newText, newValue.selection.start + 1);
-      } catch (_) {}
+      } catch (_, s) {
+        log(_.toString(), stackTrace: s);
+      }
 
       return newValue.copyWith(
         text: newText,

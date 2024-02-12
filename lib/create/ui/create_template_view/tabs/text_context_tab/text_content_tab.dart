@@ -16,17 +16,17 @@ import 'package:mustachehub/create/presenter/state/variables_state.dart';
 import 'package:mustachehub/create/ui/create_template_view/tabs/variables_creation_tab/widgets/headers/text_content_header.dart';
 import 'package:mustachex/mustachex.dart';
 
-class TextContentSection extends StatefulWidget {
-  const TextContentSection({super.key});
+class TextContentTab extends StatefulWidget {
+  const TextContentTab({super.key});
 
   @override
-  State<TextContentSection> createState() => _TextContentSectionState();
+  State<TextContentTab> createState() => _TextContentTabState();
 }
 
-class _TextContentSectionState extends State<TextContentSection> {
+class _TextContentTabState extends State<TextContentTab> {
   final FocusNode textfieldFocusNode = FocusNode();
   late final VariablesController controller;
-  final TextEditingController textEditingController = TextEditingController();
+  late final TextEditingController textEditingController;
   late final OptionsController<TokenIdentifier> optionsController;
   final Debouncer decouncer = Debouncer(timerDuration: 800.ms);
 
@@ -38,6 +38,9 @@ class _TextContentSectionState extends State<TextContentSection> {
     controller = VariablesController(
       text: contentCubit.state.currentText,
     );
+
+    textEditingController =
+        TextEditingController(text: contentCubit.state.currentText);
 
     final varCubit = context.read<VariablesCubit>();
     final vars = _getExpectedVariablesFromState(varCubit.state);
@@ -131,14 +134,14 @@ class _TextContentSectionState extends State<TextContentSection> {
                   return TextFormField(
                     focusNode: textfieldFocusNode,
                     controller: textEditingController,
-                    // expands: true,
-                    // scrollController: ,
                     maxLines: 10,
                     style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                           height: 1,
                           fontSize: varState.testStringTextSize,
                         ),
                     decoration: InputDecoration(
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 16, horizontal: 16),
                       border: const OutlineInputBorder(
                         borderSide: BorderSide.none,
                       ),

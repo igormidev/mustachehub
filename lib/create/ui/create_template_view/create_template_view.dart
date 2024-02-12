@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mustachehub/create/ui/create_template_view/tabs/text_context_tab/text_content_section.dart';
+import 'package:mustachehub/create/ui/create_template_view/tabs/template_input_form_tab_view/template_input_form_tab_view.dart';
+import 'package:mustachehub/create/ui/create_template_view/tabs/template_output_tab_view/template_output_tab_view.dart';
+import 'package:mustachehub/create/ui/create_template_view/tabs/text_context_tab/text_content_tab.dart';
 import 'package:mustachehub/create/ui/create_template_view/tabs/variables_creation_tab/variables_creation_tab.dart';
-import 'package:mustachehub/create/ui/create_template_view/template_view_open_test_bottomsheet_method.dart';
+import 'package:mustachehub/create/ui/create_template_view/methods/template_view_open_test_bottomsheet_method.dart';
 import 'package:mustachehub/create/ui/create_template_view/views/create_template_tab_view/create_template_tab_view.dart';
 import 'package:mustachehub/create/ui/create_template_view/widgets/create_template_bottom_navigation_bar/create_template_bottom_navigation_bar.dart';
 import 'package:mustachehub/dashboard/ui/navigation_widgets/dashboard_drawer/dashboard_drawer.dart';
@@ -46,7 +48,7 @@ class CreateTemplateView extends StatelessWidget
                   children: [
                     Expanded(child: VariablesCreationTab()),
                     const VerticalDivider(width: 20),
-                    const Expanded(child: TextContentSection()),
+                    const Expanded(child: TextContentTab()),
                   ],
                 );
               } else if (1300 < width && width <= 1850) {
@@ -54,7 +56,7 @@ class CreateTemplateView extends StatelessWidget
                   children: [
                     Expanded(child: VariablesCreationTab()),
                     const VerticalDivider(width: 20),
-                    const Expanded(child: TextContentSection()),
+                    const Expanded(child: TextContentTab()),
                     const VerticalDivider(width: 20),
                     const Expanded(child: TemplateInputFormPageView()),
                   ],
@@ -64,19 +66,11 @@ class CreateTemplateView extends StatelessWidget
                   children: [
                     Expanded(child: VariablesCreationTab()),
                     const VerticalDivider(width: 20),
-                    const Expanded(child: TextContentSection()),
+                    const Expanded(child: TextContentTab()),
                     const VerticalDivider(width: 20),
-                    Expanded(
-                      child: ColoredBox(
-                        color: Colors.orange[400]!,
-                      ),
-                    ),
+                    const Expanded(child: TemplateInputFormPageView()),
                     const VerticalDivider(width: 20),
-                    Expanded(
-                      child: ColoredBox(
-                        color: Colors.pink[300]!,
-                      ),
-                    ),
+                    Expanded(child: TemplateOutputTabView()),
                   ],
                 );
               }

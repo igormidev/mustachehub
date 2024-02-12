@@ -17,6 +17,7 @@ mixin TemplateViewOpenTestBottomsheetMethod {
       horizontalPadding: 20,
       verticalPadding: 10,
       child: GenerateDependenciesProvider(
+        contextWithDependencies: context,
         child: TextOutputGeneratorView(
           content: contentCubit.state.currentText,
           generatorData: ExpectedPayload(
