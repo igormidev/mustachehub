@@ -66,8 +66,9 @@ class AccountPage extends StatelessWidget {
                               alignment: Alignment.bottomRight,
                               child: CircleAvatar(
                                 radius: 20,
-                                backgroundColor:
-                                    Theme.of(context).colorScheme.secondary,
+                                backgroundColor: Theme.of(
+                                  context,
+                                ).colorScheme.secondary,
                                 child: IconButton(
                                   onPressed: () {
                                     context.push('/account/changeProfileImage');

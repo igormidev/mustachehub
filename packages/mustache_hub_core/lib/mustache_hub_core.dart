@@ -9,3 +9,4 @@ export 'src/entities/package_info.dart';
 export 'src/entities/pipe/pipe.dart';
 export 'src/core/custom_exception.dart';
 export 'src/mixins/validators_mixins.dart';
+export 'src/mixins/mustache_text_mixin.dart';

@@ -136,7 +136,6 @@ class _MustacheMaterialAppState extends State<MustacheMaterialApp> {
                 ),
               ),
               routerConfig: router,
-              // routerConfig: appRouter(context.read<SessionCubit>()),
             ),
           ),
         );

@@ -44,9 +44,14 @@ import 'package:mustachehub/create/ui/create_template_view/create_template_view.
 import 'package:mustachehub/dashboard/data/repositories/implementations/user_fetch_repository_impl.dart';
 import 'package:mustachehub/dashboard/data/repositories/interfaces/i_user_fetch_repository.dart';
 import 'package:mustachehub/dashboard/presenter/cubits/user_fetch_cubit.dart';
+import 'package:mustachehub/dashboard/ui/navigation_widgets/dashboard_drawer/dashboard_drawer.dart';
 import 'package:mustachehub/dashboard/ui/pages/not_found_404_page/not_found_404_page.dart';
 import 'package:mustachehub/dashboard/ui/view/dashboard_view/dashboard_view.dart';
 import 'package:mustachehub/dashboard/ui/view/spash_view/splash_view.dart';
+import 'package:mustachehub/generate/data/adapters/dto_adapter.dart';
+import 'package:mustachehub/generate/presenter/cubits/content_cubit.dart';
+import 'package:mustachehub/generate/presenter/cubits/form_stats_cubit.dart';
+import 'package:mustachehub/generate/presenter/cubits/payload_cubit.dart';
 
 class NavigatorService {
   static NavigatorService? _instance;
@@ -123,8 +128,14 @@ final router = GoRouter(
           path: '/collection',
           parentNavigatorKey: NavigatorService.i.dashboardNavigatorKey,
           builder: (context, state) {
-            return Container(
-              color: Colors.green[300],
+            return Scaffold(
+              appBar: AppBar(
+                title: const Text('Collection'),
+              ),
+              drawer: context.drawerOrNull,
+              body: Container(
+                color: Colors.green[300],
+              ),
             );
           },
         ),
@@ -132,8 +143,14 @@ final router = GoRouter(
           path: '/generateText',
           parentNavigatorKey: NavigatorService.i.dashboardNavigatorKey,
           builder: (context, state) {
-            return Container(
-              color: Colors.brown[400],
+            return Scaffold(
+              appBar: AppBar(
+                title: const Text('Generate text'),
+              ),
+              drawer: context.drawerOrNull,
+              body: Container(
+                color: Colors.brown[400],
+              ),
             );
           },
         ),
@@ -170,6 +187,26 @@ final router = GoRouter(
                 ),
                 BlocProvider(create: (context) => TabControllCubit()),
                 BlocProvider(create: (context) => VariablesCubit()),
+
+                /// Generator and test
+                RepositoryProvider(create: (context) => DtoAdapter()),
+                BlocProvider(
+                  create: (context) => ContentCubit(
+                    dtoAdapter: context.read<DtoAdapter>(),
+                  ),
+                ),
+                BlocProvider(
+                  create: (context) => VariablesCubit(),
+                ),
+                BlocProvider(
+                  create: (context) => FormStatsCubit(),
+                ),
+                BlocProvider(
+                  create: (context) => PayloadCubit(
+                    dtoAdapter: context.read<DtoAdapter>(),
+                    outputCubit: context.read<ContentCubit>(),
+                  ),
+                ),
               ],
               child: const CreateTemplateView(),
             );
@@ -261,8 +298,14 @@ final router = GoRouter(
           path: '/becamePremium',
           parentNavigatorKey: NavigatorService.i.dashboardNavigatorKey,
           builder: (context, state) {
-            return Container(
-              color: Colors.amber[300],
+            return Scaffold(
+              appBar: AppBar(
+                title: const Text('Became premium'),
+              ),
+              drawer: context.drawerOrNull,
+              body: Container(
+                color: Colors.amber[300],
+              ),
             );
           },
         ),
@@ -270,8 +313,14 @@ final router = GoRouter(
           path: '/settings',
           parentNavigatorKey: NavigatorService.i.dashboardNavigatorKey,
           builder: (context, state) {
-            return Container(
-              color: Colors.pink[300],
+            return Scaffold(
+              appBar: AppBar(
+                title: const Text('Settings'),
+              ),
+              drawer: context.drawerOrNull,
+              body: Container(
+                color: Colors.pink[300],
+              ),
             );
           },
         ),

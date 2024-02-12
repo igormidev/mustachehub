@@ -58,7 +58,7 @@ class SignInAnimation extends StatelessWidget {
           Positioned(
             top: 40,
             child: SizedBox(
-              width: 400,
+              width: 500,
               height: 400,
               child: Lottie.asset(
                 'assets/lottie/auth/create_account.json',

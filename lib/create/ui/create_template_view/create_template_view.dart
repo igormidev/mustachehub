@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:media_query_core/responsiveness/visibility_width_based.dart';
+import 'package:mustachehub/create/ui/create_template_view/tabs/text_context_tab/text_content_section.dart';
 import 'package:mustachehub/create/ui/create_template_view/tabs/variables_creation_tab/variables_creation_tab.dart';
+import 'package:mustachehub/create/ui/create_template_view/template_view_open_test_bottomsheet_method.dart';
 import 'package:mustachehub/create/ui/create_template_view/views/create_template_tab_view/create_template_tab_view.dart';
 import 'package:mustachehub/create/ui/create_template_view/widgets/create_template_bottom_navigation_bar/create_template_bottom_navigation_bar.dart';
 import 'package:mustachehub/dashboard/ui/navigation_widgets/dashboard_drawer/dashboard_drawer.dart';
 
-class CreateTemplateView extends StatelessWidget {
+class CreateTemplateView extends StatelessWidget
+    with TemplateViewOpenTestBottomsheetMethod {
   const CreateTemplateView({super.key});
 
   @override
@@ -13,20 +15,17 @@ class CreateTemplateView extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         final width = constraints.maxWidth;
-        final willShowTestButton = 800 < width && width <= 1300;
+        final willShowTestButton = 900 < width && width <= 1300;
 
         return Scaffold(
-          drawer: const VisibilityWidthBased.fromMediaQueryScreenWidth(
-            maximumWidth: ScreenSize.x800,
-            child: DashboardDrawer(),
-          ),
+          drawer: context.drawerOrNull,
           appBar: AppBar(
             centerTitle: true,
             title: const Text('Create mustache template'),
             actions: [
               if (willShowTestButton)
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () => openTestDialog(context),
                   icon: const Icon(Icons.science_rounded),
                 ),
               IconButton(
@@ -40,14 +39,14 @@ class CreateTemplateView extends StatelessWidget {
           ),
           body: Builder(
             builder: (context) {
-              if (width <= 800) {
+              if (width <= 900) {
                 return const CreateTemplateTabView();
               } else if (750 < width && width <= 1300) {
                 return Row(
                   children: [
                     Expanded(child: VariablesCreationTab()),
                     const VerticalDivider(width: 20),
-                    Expanded(child: ColoredBox(color: Colors.brown[400]!)),
+                    const Expanded(child: TextContentSection()),
                   ],
                 );
               } else if (1300 < width && width <= 1850) {
@@ -55,23 +54,17 @@ class CreateTemplateView extends StatelessWidget {
                   children: [
                     Expanded(child: VariablesCreationTab()),
                     const VerticalDivider(width: 20),
-                    Expanded(child: ColoredBox(color: Colors.brown[400]!)),
+                    const Expanded(child: TextContentSection()),
                     const VerticalDivider(width: 20),
-                    Expanded(child: Container(color: Colors.green[200])),
+                    const Expanded(child: TemplateInputFormPageView()),
                   ],
                 );
               } else {
                 return Row(
                   children: [
-                    Expanded(
-                      child: VariablesCreationTab(),
-                    ),
+                    Expanded(child: VariablesCreationTab()),
                     const VerticalDivider(width: 20),
-                    Expanded(
-                      child: ColoredBox(
-                        color: Colors.brown[400]!,
-                      ),
-                    ),
+                    const Expanded(child: TextContentSection()),
                     const VerticalDivider(width: 20),
                     Expanded(
                       child: ColoredBox(
@@ -89,7 +82,7 @@ class CreateTemplateView extends StatelessWidget {
               }
             },
           ),
-          bottomNavigationBar: width <= 750
+          bottomNavigationBar: width <= 900
               ? const CreateTemplateBottomNavigationBar()
               : SizedBox.fromSize(),
         );

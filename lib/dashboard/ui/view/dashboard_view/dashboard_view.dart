@@ -30,6 +30,7 @@ class _DashboardViewState extends State<DashboardView>
       body: Row(
         children: [
           const VisibilityWidthBased.fromMediaQueryScreenWidth(
+            minimumWidth: ScreenSize.x900,
             maximumWidth: ScreenSize.x1300,
             child: DashboardRail(),
           ),

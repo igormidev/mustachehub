@@ -9,14 +9,14 @@ class CreateTemplateBottomNavigationBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bloc = context.read<TabControllCubit>();
+    final tabControllCubit = context.read<TabControllCubit>();
 
     return BlocBuilder<TabControllCubit, int>(
       builder: (context, state) {
         return BottomNavigationBar(
           currentIndex: state,
           onTap: (selectedIndex) {
-            bloc.changeTab(selectedIndex);
+            tabControllCubit.changeTab(selectedIndex);
           },
           items: const [
             BottomNavigationBarItem(
