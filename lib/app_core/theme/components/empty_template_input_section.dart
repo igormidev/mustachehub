@@ -39,8 +39,7 @@ class EmptyIndicatorSection extends StatelessWidget {
                   .titleLarge
                   ?.copyWith(color: Theme.of(context).colorScheme.outline),
             ),
-            if (Theme.of(context).brightness == Brightness.dark)
-              const SizedBox(height: 16),
+            const SizedBox(height: 16),
             ConstrainedBox(
               constraints: BoxConstraints(
                 maxHeight: 250 - (margin ?? 0),

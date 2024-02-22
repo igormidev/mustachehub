@@ -10,7 +10,8 @@ dependencies:
   equatable: ^2.0.5
   uuid: ^4.2.2
   freezed_annotation: ^2.4.1
-  mason: 
+  mason:
+    path: ../../cloned_apis/mason
 
 dev_dependencies:
   lints: ^2.1.0

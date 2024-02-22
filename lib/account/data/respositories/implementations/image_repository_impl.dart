@@ -22,7 +22,7 @@ class ImageRepositoryImpl implements IImageRepository {
     required Uint8List image,
   }) async {
     try {
-      final String path = 'userimages/$userId';
+      final String path = 'avatars/$userId';
 
       try {
         final userImagesRef = _storage.ref(path);

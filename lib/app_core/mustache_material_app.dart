@@ -107,11 +107,11 @@ class _MustacheMaterialAppState extends State<MustacheMaterialApp> {
                 ),
                 inputDecorationTheme: InputDecorationTheme(
                   border: const OutlineInputBorder(
-                    borderSide: BorderSide.none,
+                    // borderSide: BorderSide.none,
                     borderRadius: BorderRadius.all(Radius.circular(8)),
                   ),
                   filled: true,
-                  fillColor: colorScheme.secondaryContainer,
+                  fillColor: colorScheme.secondaryContainer.withAlpha(80),
                   contentPadding: const EdgeInsets.symmetric(horizontal: 12),
                 ),
                 outlinedButtonTheme: OutlinedButtonThemeData(
