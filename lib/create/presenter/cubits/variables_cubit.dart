@@ -2,11 +2,17 @@ import 'dart:developer';
 
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:mustache_hub_core/mustache_hub_core.dart';
+import 'package:mustachehub/create/data/adapters/token_identifier_flatmap_adapter.dart';
 import 'package:mustachehub/create/presenter/state/variables_state.dart';
 
 class VariablesCubit extends HydratedCubit<VariablesState> {
-  VariablesCubit()
-      : super(const VariablesState(
+  final TokenIdentifierFlatMapAdapter _tokenIdentifierFlatMapAdapter;
+
+  VariablesCubit({
+    required TokenIdentifierFlatMapAdapter tokenIdentifierFlatMapAdapter,
+  })  : _tokenIdentifierFlatMapAdapter = tokenIdentifierFlatMapAdapter,
+        super(const VariablesState(
+          flatMap: {},
           textPipes: [],
           booleanPipes: [],
           modelPipes: [],
@@ -15,7 +21,13 @@ class VariablesCubit extends HydratedCubit<VariablesState> {
   void updateTextVariables({
     required List<TextPipe> textPipes,
   }) {
+    final flatMap = _tokenIdentifierFlatMapAdapter.toFlatMap(
+      textPipes: textPipes,
+      booleanPipes: state.booleanPipes,
+      modelPipes: state.modelPipes,
+    );
     emit(VariablesState(
+      flatMap: flatMap,
       textPipes: textPipes,
       booleanPipes: state.booleanPipes,
       modelPipes: state.modelPipes,
@@ -25,7 +37,13 @@ class VariablesCubit extends HydratedCubit<VariablesState> {
   void updateBooleanVariables({
     required List<BooleanPipe> booleanPipes,
   }) {
+    final flatMap = _tokenIdentifierFlatMapAdapter.toFlatMap(
+      textPipes: state.textPipes,
+      booleanPipes: booleanPipes,
+      modelPipes: state.modelPipes,
+    );
     emit(VariablesState(
+      flatMap: flatMap,
       textPipes: state.textPipes,
       booleanPipes: booleanPipes,
       modelPipes: state.modelPipes,
@@ -35,7 +53,13 @@ class VariablesCubit extends HydratedCubit<VariablesState> {
   void updateModelVariables({
     required List<ModelPipe> modelPipes,
   }) {
+    final flatMap = _tokenIdentifierFlatMapAdapter.toFlatMap(
+      textPipes: state.textPipes,
+      booleanPipes: state.booleanPipes,
+      modelPipes: modelPipes,
+    );
     emit(VariablesState(
+      flatMap: flatMap,
       textPipes: state.textPipes,
       booleanPipes: state.booleanPipes,
       modelPipes: modelPipes,

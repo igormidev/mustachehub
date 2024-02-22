@@ -16,6 +16,8 @@ dependencies:
     sdk: flutter 
   cupertino_icons: ^1.0.2
   equatable: ^2.0.5
+  text_analyser: 
+    path: packages/text_analyser
   uuid: ^4.2.2
   freezed_annotation: ^2.4.1
   lottie: 2.7.0

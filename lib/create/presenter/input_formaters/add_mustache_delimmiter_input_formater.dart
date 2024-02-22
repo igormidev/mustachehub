@@ -1,14 +1,13 @@
 import 'dart:developer';
-
 import 'package:cursor_autocomplete_options/cursor_autocomplete_options.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:mustachehub/create/presenter/cubits/sugestion_cubit.dart';
+import 'package:mustachehub/create/presenter/cubits/suggestion_cubit.dart';
 import 'package:mustachehub/create/presenter/cubits/variables_cubit.dart';
 import 'package:mustachex/mustachex.dart';
 
 class AddMustacheDelimmiterInputFormatter extends TextInputFormatter {
-  final SugestionCubit sugestionCubit;
+  final SuggestionCubit sugestionCubit;
   final VariablesCubit varCubit;
   final OptionsController optionsController;
 
@@ -80,7 +79,7 @@ class AddMustacheDelimmiterInputFormatter extends TextInputFormatter {
       return;
     }
 
-    await sugestionCubit.setSuggestionsFromCurrentCursorIndex(
+    await sugestionCubit.setSuggestions(
       cursorIndex: cursorIndex,
       tokens: tokens,
       textPipes: varState.textPipes,

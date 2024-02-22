@@ -30,12 +30,14 @@ abstract class AnalysedSegment with _$AnalysedSegment {
   /// This is a valid open mode identifier declaration, but because the rest of
   /// the text dosen't have an corresponding close declaration match. It is invalid.
   factory AnalysedSegment.modelDeclarationOpenWithoutClose({
+    // ✅
     required String content,
   }) = _AnalysedSegmentModelDeclarationOpenWithoutClose;
 
   /// This is a valid close mode identifier declaration, but because the previous part of
   /// the text dosen't have an corresponding open declaration match. It is invalid.
   factory AnalysedSegment.modelDeclarationCloseWithoutOpen({
+    // ✅
     required String content,
   }) = _AnalysedSegmentModelDeclarationCloseWithoutOpen;
 
@@ -44,6 +46,7 @@ abstract class AnalysedSegment with _$AnalysedSegment {
   /// open or close delimiters sirgil indicator.
   factory AnalysedSegment.nonModelVariableWithOpenOrCloseDelimmiter({
     // ✅
+
     required String content,
   }) = _AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiter;
 
@@ -58,6 +61,7 @@ abstract class AnalysedSegment with _$AnalysedSegment {
   /// available in the current context. For instance: Is trying to use a
   /// variable of a model outside of the model scope.
   factory AnalysedSegment.variableExistsButCannotBeUsedInThisContext({
+    // ✅
     required String content,
   }) = _AnalysedSegmentVariableExistsButCannotBeUsedInThisContext;
 }

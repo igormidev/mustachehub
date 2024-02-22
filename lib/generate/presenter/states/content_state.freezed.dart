@@ -114,7 +114,7 @@ class _$ContentStateImpl implements _ContentState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType && other is _$ContentStateImpl);
   }
@@ -247,7 +247,7 @@ class _$WithGeneratedTextImpl implements _WithGeneratedText {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$WithGeneratedTextImpl &&
@@ -395,7 +395,7 @@ class _$WithContentTextImpl implements _WithContentText {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$WithContentTextImpl &&
@@ -526,7 +526,7 @@ class _$FailureGeneratingTextImpl implements _FailureGeneratingText {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$FailureGeneratingTextImpl);

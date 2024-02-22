@@ -7,9 +7,9 @@ import 'package:mustachehub/app_core/app_routes.dart';
 import 'package:mustachehub/create/presenter/controllers/variables_info_highlight_text_editing_controller.dart';
 import 'package:mustachehub/create/presenter/cubits/content_string_cubit.dart';
 import 'package:mustachehub/create/presenter/cubits/fields_text_size_cubit.dart';
-import 'package:mustachehub/create/presenter/cubits/sugestion_cubit.dart';
+import 'package:mustachehub/create/presenter/cubits/suggestion_cubit.dart';
+import 'package:mustachehub/create/presenter/cubits/token_identifier.dart';
 import 'package:mustachehub/create/presenter/cubits/variables_cubit.dart';
-import 'package:mustachehub/create/presenter/dto/token_identifier.dart';
 import 'package:mustachehub/create/presenter/input_formaters/add_mustache_delimmiter_input_formater.dart';
 import 'package:mustachehub/create/presenter/state/fields_text_size_state.dart';
 import 'package:mustachehub/create/presenter/state/variables_state.dart';
@@ -105,7 +105,7 @@ class _TextContentTabState extends State<TextContentTab> {
     final sizeBloc = context.read<FieldsTextSizeCubit>();
     final contentCubit = context.read<ContentStringCubit>();
     final varCubit = context.read<VariablesCubit>();
-    final sugestionCubit = context.read<SugestionCubit>();
+    final sugestionCubit = context.read<SuggestionCubit>();
 
     return MultiBlocListener(
       listeners: [

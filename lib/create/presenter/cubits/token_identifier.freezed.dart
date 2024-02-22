@@ -14,32 +14,52 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
+TokenIdentifier _$TokenIdentifierFromJson(Map<String, dynamic> json) {
+  switch (json['runtimeType']) {
+    case 'text':
+      return TextTokenIdentifier.fromJson(json);
+    case 'boolean':
+      return BooleanTokenIdentifier.fromJson(json);
+    case 'model':
+      return ModelTokenIdentifier.fromJson(json);
+
+    default:
+      throw CheckedFromJsonException(json, 'runtimeType', 'TokenIdentifier',
+          'Invalid union type "${json['runtimeType']}"!');
+  }
+}
+
 /// @nodoc
 mixin _$TokenIdentifier {
+  String? get parrentName => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String name) text,
-    required TResult Function(String name) boolean,
-    required TResult Function(String name, List<String> textsNames,
-            List<String> booleanNames, List<String> subModelsNames)
+    required TResult Function(String? parrentName, String name) text,
+    required TResult Function(String? parrentName, String name) boolean,
+    required TResult Function(
+            String? parrentName,
+            String name,
+            List<String> textsNames,
+            List<String> booleanNames,
+            List<String> subModelsNames)
         model,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String name)? text,
-    TResult? Function(String name)? boolean,
-    TResult? Function(String name, List<String> textsNames,
+    TResult? Function(String? parrentName, String name)? text,
+    TResult? Function(String? parrentName, String name)? boolean,
+    TResult? Function(String? parrentName, String name, List<String> textsNames,
             List<String> booleanNames, List<String> subModelsNames)?
         model,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String name)? text,
-    TResult Function(String name)? boolean,
-    TResult Function(String name, List<String> textsNames,
+    TResult Function(String? parrentName, String name)? text,
+    TResult Function(String? parrentName, String name)? boolean,
+    TResult Function(String? parrentName, String name, List<String> textsNames,
             List<String> booleanNames, List<String> subModelsNames)?
         model,
     required TResult orElse(),
@@ -67,7 +87,7 @@ mixin _$TokenIdentifier {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
-
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $TokenIdentifierCopyWith<TokenIdentifier> get copyWith =>
       throw _privateConstructorUsedError;
@@ -79,7 +99,7 @@ abstract class $TokenIdentifierCopyWith<$Res> {
           TokenIdentifier value, $Res Function(TokenIdentifier) then) =
       _$TokenIdentifierCopyWithImpl<$Res, TokenIdentifier>;
   @useResult
-  $Res call({String name});
+  $Res call({String? parrentName, String name});
 }
 
 /// @nodoc
@@ -95,9 +115,14 @@ class _$TokenIdentifierCopyWithImpl<$Res, $Val extends TokenIdentifier>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? parrentName = freezed,
     Object? name = null,
   }) {
     return _then(_value.copyWith(
+      parrentName: freezed == parrentName
+          ? _value.parrentName
+          : parrentName // ignore: cast_nullable_to_non_nullable
+              as String?,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -114,7 +139,7 @@ abstract class _$$TextTokenIdentifierImplCopyWith<$Res>
       __$$TextTokenIdentifierImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name});
+  $Res call({String? parrentName, String name});
 }
 
 /// @nodoc
@@ -128,9 +153,14 @@ class __$$TextTokenIdentifierImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? parrentName = freezed,
     Object? name = null,
   }) {
     return _then(_$TextTokenIdentifierImpl(
+      parrentName: freezed == parrentName
+          ? _value.parrentName
+          : parrentName // ignore: cast_nullable_to_non_nullable
+              as String?,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -140,16 +170,26 @@ class __$$TextTokenIdentifierImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$TextTokenIdentifierImpl implements TextTokenIdentifier {
-  _$TextTokenIdentifierImpl({required this.name});
+  const _$TextTokenIdentifierImpl(
+      {required this.parrentName, required this.name, final String? $type})
+      : $type = $type ?? 'text';
 
+  factory _$TextTokenIdentifierImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TextTokenIdentifierImplFromJson(json);
+
+  @override
+  final String? parrentName;
   @override
   final String name;
 
+  @JsonKey(name: 'runtimeType')
+  final String $type;
+
   @override
   String toString() {
-    return 'TokenIdentifier.text(name: $name)';
+    return 'TokenIdentifier.text(parrentName: $parrentName, name: $name)';
   }
 
   @override
@@ -157,11 +197,14 @@ class _$TextTokenIdentifierImpl implements TextTokenIdentifier {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TextTokenIdentifierImpl &&
+            (identical(other.parrentName, parrentName) ||
+                other.parrentName == parrentName) &&
             (identical(other.name, name) || other.name == name));
   }
 
+  @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, name);
+  int get hashCode => Object.hash(runtimeType, parrentName, name);
 
   @JsonKey(ignore: true)
   @override
@@ -173,39 +216,43 @@ class _$TextTokenIdentifierImpl implements TextTokenIdentifier {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String name) text,
-    required TResult Function(String name) boolean,
-    required TResult Function(String name, List<String> textsNames,
-            List<String> booleanNames, List<String> subModelsNames)
+    required TResult Function(String? parrentName, String name) text,
+    required TResult Function(String? parrentName, String name) boolean,
+    required TResult Function(
+            String? parrentName,
+            String name,
+            List<String> textsNames,
+            List<String> booleanNames,
+            List<String> subModelsNames)
         model,
   }) {
-    return text(name);
+    return text(parrentName, name);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String name)? text,
-    TResult? Function(String name)? boolean,
-    TResult? Function(String name, List<String> textsNames,
+    TResult? Function(String? parrentName, String name)? text,
+    TResult? Function(String? parrentName, String name)? boolean,
+    TResult? Function(String? parrentName, String name, List<String> textsNames,
             List<String> booleanNames, List<String> subModelsNames)?
         model,
   }) {
-    return text?.call(name);
+    return text?.call(parrentName, name);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String name)? text,
-    TResult Function(String name)? boolean,
-    TResult Function(String name, List<String> textsNames,
+    TResult Function(String? parrentName, String name)? text,
+    TResult Function(String? parrentName, String name)? boolean,
+    TResult Function(String? parrentName, String name, List<String> textsNames,
             List<String> booleanNames, List<String> subModelsNames)?
         model,
     required TResult orElse(),
   }) {
     if (text != null) {
-      return text(name);
+      return text(parrentName, name);
     }
     return orElse();
   }
@@ -243,12 +290,25 @@ class _$TextTokenIdentifierImpl implements TextTokenIdentifier {
     }
     return orElse();
   }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$TextTokenIdentifierImplToJson(
+      this,
+    );
+  }
 }
 
 abstract class TextTokenIdentifier implements TokenIdentifier {
-  factory TextTokenIdentifier({required final String name}) =
-      _$TextTokenIdentifierImpl;
+  const factory TextTokenIdentifier(
+      {required final String? parrentName,
+      required final String name}) = _$TextTokenIdentifierImpl;
 
+  factory TextTokenIdentifier.fromJson(Map<String, dynamic> json) =
+      _$TextTokenIdentifierImpl.fromJson;
+
+  @override
+  String? get parrentName;
   @override
   String get name;
   @override
@@ -266,7 +326,7 @@ abstract class _$$BooleanTokenIdentifierImplCopyWith<$Res>
       __$$BooleanTokenIdentifierImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name});
+  $Res call({String? parrentName, String name});
 }
 
 /// @nodoc
@@ -281,9 +341,14 @@ class __$$BooleanTokenIdentifierImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? parrentName = freezed,
     Object? name = null,
   }) {
     return _then(_$BooleanTokenIdentifierImpl(
+      parrentName: freezed == parrentName
+          ? _value.parrentName
+          : parrentName // ignore: cast_nullable_to_non_nullable
+              as String?,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -293,16 +358,26 @@ class __$$BooleanTokenIdentifierImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$BooleanTokenIdentifierImpl implements BooleanTokenIdentifier {
-  _$BooleanTokenIdentifierImpl({required this.name});
+  const _$BooleanTokenIdentifierImpl(
+      {required this.parrentName, required this.name, final String? $type})
+      : $type = $type ?? 'boolean';
 
+  factory _$BooleanTokenIdentifierImpl.fromJson(Map<String, dynamic> json) =>
+      _$$BooleanTokenIdentifierImplFromJson(json);
+
+  @override
+  final String? parrentName;
   @override
   final String name;
 
+  @JsonKey(name: 'runtimeType')
+  final String $type;
+
   @override
   String toString() {
-    return 'TokenIdentifier.boolean(name: $name)';
+    return 'TokenIdentifier.boolean(parrentName: $parrentName, name: $name)';
   }
 
   @override
@@ -310,11 +385,14 @@ class _$BooleanTokenIdentifierImpl implements BooleanTokenIdentifier {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$BooleanTokenIdentifierImpl &&
+            (identical(other.parrentName, parrentName) ||
+                other.parrentName == parrentName) &&
             (identical(other.name, name) || other.name == name));
   }
 
+  @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, name);
+  int get hashCode => Object.hash(runtimeType, parrentName, name);
 
   @JsonKey(ignore: true)
   @override
@@ -326,39 +404,43 @@ class _$BooleanTokenIdentifierImpl implements BooleanTokenIdentifier {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String name) text,
-    required TResult Function(String name) boolean,
-    required TResult Function(String name, List<String> textsNames,
-            List<String> booleanNames, List<String> subModelsNames)
+    required TResult Function(String? parrentName, String name) text,
+    required TResult Function(String? parrentName, String name) boolean,
+    required TResult Function(
+            String? parrentName,
+            String name,
+            List<String> textsNames,
+            List<String> booleanNames,
+            List<String> subModelsNames)
         model,
   }) {
-    return boolean(name);
+    return boolean(parrentName, name);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String name)? text,
-    TResult? Function(String name)? boolean,
-    TResult? Function(String name, List<String> textsNames,
+    TResult? Function(String? parrentName, String name)? text,
+    TResult? Function(String? parrentName, String name)? boolean,
+    TResult? Function(String? parrentName, String name, List<String> textsNames,
             List<String> booleanNames, List<String> subModelsNames)?
         model,
   }) {
-    return boolean?.call(name);
+    return boolean?.call(parrentName, name);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String name)? text,
-    TResult Function(String name)? boolean,
-    TResult Function(String name, List<String> textsNames,
+    TResult Function(String? parrentName, String name)? text,
+    TResult Function(String? parrentName, String name)? boolean,
+    TResult Function(String? parrentName, String name, List<String> textsNames,
             List<String> booleanNames, List<String> subModelsNames)?
         model,
     required TResult orElse(),
   }) {
     if (boolean != null) {
-      return boolean(name);
+      return boolean(parrentName, name);
     }
     return orElse();
   }
@@ -396,12 +478,25 @@ class _$BooleanTokenIdentifierImpl implements BooleanTokenIdentifier {
     }
     return orElse();
   }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$BooleanTokenIdentifierImplToJson(
+      this,
+    );
+  }
 }
 
 abstract class BooleanTokenIdentifier implements TokenIdentifier {
-  factory BooleanTokenIdentifier({required final String name}) =
-      _$BooleanTokenIdentifierImpl;
+  const factory BooleanTokenIdentifier(
+      {required final String? parrentName,
+      required final String name}) = _$BooleanTokenIdentifierImpl;
 
+  factory BooleanTokenIdentifier.fromJson(Map<String, dynamic> json) =
+      _$BooleanTokenIdentifierImpl.fromJson;
+
+  @override
+  String? get parrentName;
   @override
   String get name;
   @override
@@ -419,7 +514,8 @@ abstract class _$$ModelTokenIdentifierImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String name,
+      {String? parrentName,
+      String name,
       List<String> textsNames,
       List<String> booleanNames,
       List<String> subModelsNames});
@@ -436,12 +532,17 @@ class __$$ModelTokenIdentifierImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? parrentName = freezed,
     Object? name = null,
     Object? textsNames = null,
     Object? booleanNames = null,
     Object? subModelsNames = null,
   }) {
     return _then(_$ModelTokenIdentifierImpl(
+      parrentName: freezed == parrentName
+          ? _value.parrentName
+          : parrentName // ignore: cast_nullable_to_non_nullable
+              as String?,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -463,17 +564,25 @@ class __$$ModelTokenIdentifierImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$ModelTokenIdentifierImpl implements ModelTokenIdentifier {
-  _$ModelTokenIdentifierImpl(
-      {required this.name,
+  const _$ModelTokenIdentifierImpl(
+      {required this.parrentName,
+      required this.name,
       required final List<String> textsNames,
       required final List<String> booleanNames,
-      required final List<String> subModelsNames})
+      required final List<String> subModelsNames,
+      final String? $type})
       : _textsNames = textsNames,
         _booleanNames = booleanNames,
-        _subModelsNames = subModelsNames;
+        _subModelsNames = subModelsNames,
+        $type = $type ?? 'model';
 
+  factory _$ModelTokenIdentifierImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ModelTokenIdentifierImplFromJson(json);
+
+  @override
+  final String? parrentName;
   @override
   final String name;
   final List<String> _textsNames;
@@ -500,9 +609,12 @@ class _$ModelTokenIdentifierImpl implements ModelTokenIdentifier {
     return EqualUnmodifiableListView(_subModelsNames);
   }
 
+  @JsonKey(name: 'runtimeType')
+  final String $type;
+
   @override
   String toString() {
-    return 'TokenIdentifier.model(name: $name, textsNames: $textsNames, booleanNames: $booleanNames, subModelsNames: $subModelsNames)';
+    return 'TokenIdentifier.model(parrentName: $parrentName, name: $name, textsNames: $textsNames, booleanNames: $booleanNames, subModelsNames: $subModelsNames)';
   }
 
   @override
@@ -510,6 +622,8 @@ class _$ModelTokenIdentifierImpl implements ModelTokenIdentifier {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ModelTokenIdentifierImpl &&
+            (identical(other.parrentName, parrentName) ||
+                other.parrentName == parrentName) &&
             (identical(other.name, name) || other.name == name) &&
             const DeepCollectionEquality()
                 .equals(other._textsNames, _textsNames) &&
@@ -519,9 +633,11 @@ class _$ModelTokenIdentifierImpl implements ModelTokenIdentifier {
                 .equals(other._subModelsNames, _subModelsNames));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      parrentName,
       name,
       const DeepCollectionEquality().hash(_textsNames),
       const DeepCollectionEquality().hash(_booleanNames),
@@ -538,39 +654,44 @@ class _$ModelTokenIdentifierImpl implements ModelTokenIdentifier {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String name) text,
-    required TResult Function(String name) boolean,
-    required TResult Function(String name, List<String> textsNames,
-            List<String> booleanNames, List<String> subModelsNames)
+    required TResult Function(String? parrentName, String name) text,
+    required TResult Function(String? parrentName, String name) boolean,
+    required TResult Function(
+            String? parrentName,
+            String name,
+            List<String> textsNames,
+            List<String> booleanNames,
+            List<String> subModelsNames)
         model,
   }) {
-    return model(name, textsNames, booleanNames, subModelsNames);
+    return model(parrentName, name, textsNames, booleanNames, subModelsNames);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String name)? text,
-    TResult? Function(String name)? boolean,
-    TResult? Function(String name, List<String> textsNames,
+    TResult? Function(String? parrentName, String name)? text,
+    TResult? Function(String? parrentName, String name)? boolean,
+    TResult? Function(String? parrentName, String name, List<String> textsNames,
             List<String> booleanNames, List<String> subModelsNames)?
         model,
   }) {
-    return model?.call(name, textsNames, booleanNames, subModelsNames);
+    return model?.call(
+        parrentName, name, textsNames, booleanNames, subModelsNames);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String name)? text,
-    TResult Function(String name)? boolean,
-    TResult Function(String name, List<String> textsNames,
+    TResult Function(String? parrentName, String name)? text,
+    TResult Function(String? parrentName, String name)? boolean,
+    TResult Function(String? parrentName, String name, List<String> textsNames,
             List<String> booleanNames, List<String> subModelsNames)?
         model,
     required TResult orElse(),
   }) {
     if (model != null) {
-      return model(name, textsNames, booleanNames, subModelsNames);
+      return model(parrentName, name, textsNames, booleanNames, subModelsNames);
     }
     return orElse();
   }
@@ -608,15 +729,28 @@ class _$ModelTokenIdentifierImpl implements ModelTokenIdentifier {
     }
     return orElse();
   }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ModelTokenIdentifierImplToJson(
+      this,
+    );
+  }
 }
 
 abstract class ModelTokenIdentifier implements TokenIdentifier {
-  factory ModelTokenIdentifier(
-      {required final String name,
+  const factory ModelTokenIdentifier(
+      {required final String? parrentName,
+      required final String name,
       required final List<String> textsNames,
       required final List<String> booleanNames,
       required final List<String> subModelsNames}) = _$ModelTokenIdentifierImpl;
 
+  factory ModelTokenIdentifier.fromJson(Map<String, dynamic> json) =
+      _$ModelTokenIdentifierImpl.fromJson;
+
+  @override
+  String? get parrentName;
   @override
   String get name;
   List<String> get textsNames;

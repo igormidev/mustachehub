@@ -1,11 +1,19 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:enchanted_regex/enchanted_regex.dart';
 import 'package:mustache_hub_core/mustache_hub_core.dart';
-import 'package:mustachex/mustachex.dart';
 import 'package:text_analyser/src/adapters/token_identifier_flatmap_adapter.dart';
 import 'package:text_analyser/src/models/analysed_segment.dart';
 import 'package:text_analyser/src/models/token_identifier.dart';
-import 'package:enchanted_regex/enchanted_regex.dart';
-import 'package:enchanted_collection/enchanted_collection.dart';
+
+class AnalysedResponse {
+  final Set<TokenIdentifier> tokenIdentifiers;
+  final List<AnalysedSegment> segments;
+
+  const AnalysedResponse({
+    required this.tokenIdentifiers,
+    required this.segments,
+  });
+}
 
 class TextAnalyserBase {
   final TokenIdentifierFlatMapAdapter tokenIdentifierFlatMapAdapter;
@@ -15,37 +23,48 @@ class TextAnalyserBase {
     required this.tokenIdentifierFlatMapAdapter,
   });
 
-  List<TextSegment> getMatchClusters(
+  AnalysedResponse? getMatchClusters(
     String input,
     int indexAtText,
+    Map<String, TokenIdentifier> flatMap,
   ) {
     final isIndexInText = indexAtText >= 0 && indexAtText < input.length;
+    if (isIndexInText == false) {
+      return null;
+    }
 
-    final List<TextSegment> textSegments = <TextSegment>[];
-
-    final Map<String, TokenIdentifier> flatMap;
-    flatMap = tokenIdentifierFlatMapAdapter.toFlatMap(
-      textPipes: expectedPayload.textPipes,
-      booleanPipes: expectedPayload.booleanPipes,
-      modelPipes: expectedPayload.modelPipes,
-    );
-
-    final List<IdentifierDeclaration> identifiers =
-        getIdentifiers(input, flatMap);
+    final Set<TokenIdentifier> validScopesIdentifier = {};
 
     final RegExp regExp = RegExp(r'{{[#\/]?(?<name>[a-zA-Z]+?)}}');
-    // final RegExp regExp = RegExp(r'{{#?\/?(?<identifier>[a-zA-Z]+?)}}');
-    final List<AnalysedSegment> segments = [];
 
+    /// The index of the segment and the segment itself
+    /// The index should be in increasing order (1, 2, 3, 4, ..., n)
+    final Map<int, AnalysedSegment> segments = {};
+
+    int index = -1;
+
+    /// The valid model scopes in the input.
+    final Map<String, List<ToAnalyseScope>> modelScopes = {};
+
+    final Map<String, List<ToAnalyseDeclarationModel>>
+        notDefininedOpenModelSegments = {};
+
+    final Map<String, List<ToAnalyseDeclaration>> notDefininedNonModelSegments =
+        {};
+
+    /// First role of analysis
     input.forEachNamedGroup(
       regExp,
-      onMatch: (group) {
+      onMatch: (FindedGroup group) {
+        index++;
+
         final TokenIdentifier? tokenIdentifier = flatMap[group.content];
 
         if (tokenIdentifier == null) {
-          return segments.add(AnalysedSegment.declarationOfUncatalogedVariable(
+          segments[index] = AnalysedSegment.declarationOfUncatalogedVariable(
             content: group.content,
-          ));
+          );
+          return;
         }
 
         final bool isOpenDelimiter = group.fullMatchText.startsWith('{{#');
@@ -61,75 +80,192 @@ class TextAnalyserBase {
           final seg = AnalysedSegment.nonModelVariableWithOpenOrCloseDelimmiter(
             content: group.content,
           );
-          return segments.add(seg);
+          segments[index] = seg;
+          return;
         }
 
         if (isModel && hasDelimiter == false) {
-          return segments.add(AnalysedSegment.invalidMapDeclaration(
+          segments[index] = AnalysedSegment.invalidMapDeclaration(
             content: group.content,
-          ));
+          );
+          return;
         }
 
-        return segments.add(AnalysedSegment.validDeclaration(
-          content: group.content,
-        ));
+        /// It is a valid declaration of a not model
+        if (isModel == false) {
+          // Root variables are not inside a scope model.
+          // There are in the first layer of the variables declaration.
+          // For that cases, we don't even have to check if they are valid or not
+          // because they don't depend on a scope/context to be used. Can be used globally.
+          final isRootTokenIdentifier = tokenIdentifier.parrentName == null;
+          if (isRootTokenIdentifier) {
+            segments[index] = AnalysedSegment.validDeclaration(
+              content: group.content,
+            );
+            return;
+          } else {
+            final bool dontExistSegmentYet =
+                notDefininedNonModelSegments.containsKey(group.content) ==
+                    false;
+            if (dontExistSegmentYet == false) {
+              notDefininedNonModelSegments[group.content] = [];
+            }
+
+            notDefininedNonModelSegments[group.content]?.add(
+              ToAnalyseDeclaration(
+                tokenIdentifier: tokenIdentifier,
+                findedGroup: group,
+                indexInSegment: index,
+              ),
+            );
+          }
+          return;
+        }
+
+        // Now, we need to now if the model has a opne and close declaration in somewhere in the text.
+        if (notDefininedOpenModelSegments.containsKey(group.content) == false) {
+          notDefininedOpenModelSegments[group.content] = [];
+        }
+
+        if (isOpenDelimiter) {
+          notDefininedOpenModelSegments[group.content]?.add(
+            ToAnalyseDeclarationModel(
+              tokenIdentifier: tokenIdentifier as ModelTokenIdentifier,
+              findedGroup: group,
+              indexInSegment: index,
+            ),
+          );
+          return;
+        } else {
+          final List<ToAnalyseDeclarationModel>? openDeclarations =
+              notDefininedOpenModelSegments[group.content];
+
+          if (openDeclarations == null || openDeclarations.isEmpty) {
+            segments[index] = AnalysedSegment.modelDeclarationCloseWithoutOpen(
+              content: group.content,
+            );
+            return;
+          }
+
+          final ToAnalyseDeclarationModel openDeclaration =
+              openDeclarations.removeLast();
+
+          segments[index] = AnalysedSegment.validDeclaration(
+            content: group.content,
+          );
+
+          final IdentifierScope scope = IdentifierScope(
+            startDeclaration: IdentifierDeclaration(
+              start: openDeclaration.findedGroup.globalStart,
+              end: openDeclaration.findedGroup.globalEnd,
+            ),
+            endDeclaration: IdentifierDeclaration(
+              start: group.globalStart,
+              end: group.globalEnd,
+            ),
+            identifier: group.content,
+          );
+
+          final scopesDir = modelScopes[scope.identifier];
+          if (scopesDir == null) {
+            modelScopes[scope.identifier] = [];
+          }
+
+          modelScopes[scope.identifier]?.add(ToAnalyseScope(
+            indexInSegment: modelScopes.keys.length + 1,
+            scope: scope,
+          ));
+
+          final bool isIndexAtTextWithinScope =
+              scope.startDeclaration.end < indexAtText &&
+                  indexAtText < scope.endDeclaration.start;
+
+          if (isIndexAtTextWithinScope) {
+            validScopesIdentifier.add(tokenIdentifier);
+          }
+
+          return;
+        }
       },
       onNonMatch: (text) {
-        segments.add(AnalysedSegment.text(content: text));
+        index++;
+
+        segments[index] = AnalysedSegment.text(content: text);
       },
     );
 
-    final List<IdentifierDeclaration> notCatalogedDeclarations = [];
-
-    final List<IdentifierDeclaration> validDeclaration = [];
-
-    final List<IdentifierScope> validScopes = [];
-
-    final List<IdentifierDeclaration> mapWithoutDelimiterDeclaration = [];
-
-    /// Declarations that have an open delimiter but no close delimiter
-    final List<IdentifierDeclaration> invalidDeclarations = [];
-
-    for (final IdentifierDeclaration identifierDeclaration in identifiers) {
-      if (identifierDeclaration.isCatalogedIdentifier == false) {
-        notCatalogedDeclarations.add(identifierDeclaration);
-        continue;
+    notDefininedOpenModelSegments.forEach((content, declarations) {
+      for (final declaration in declarations) {
+        segments[declaration.indexInSegment] =
+            AnalysedSegment.modelDeclarationOpenWithoutClose(
+          content: content,
+        );
       }
-    }
+    });
 
-    return textSegments;
-  }
+    notDefininedNonModelSegments.forEach((content, declarations) {
+      for (final declaration in declarations) {
+        final List<ToAnalyseScope>? scopesPattern =
+            modelScopes[declaration.tokenIdentifier.parrentName];
 
-  List<IdentifierDeclaration> getIdentifiers(
-    String source,
-    Map<String, TokenIdentifier> flatMapVariables,
-  ) {
-    final List<IdentifierDeclaration> identifiers = <IdentifierDeclaration>[];
-    final RegExp regExp = RegExp(r'{{#?\/?(?<identifier>[a-zA-Z]+?)}}');
-    source.forEachNamedGroup(
-      regExp,
-      onMatch: (FindedGroup group) {
-        final TokenIdentifier? tokenIdentifier =
-            flatMapVariables[group.content];
+        final isDeclarationInCorrectScope =
+            scopesPattern?.any((ToAnalyseScope analysisModel) {
+          return analysisModel.scope.startDeclaration.end <
+                  declaration.findedGroup.globalStart &&
+              declaration.findedGroup.globalEnd <
+                  analysisModel.scope.endDeclaration.start;
+        });
 
-        final bool isCatalogedIdentifier = tokenIdentifier != null;
-
-        if (group.name == 'identifier') {
-          identifiers.add(IdentifierDeclaration(
-            start: group.globalStart,
-            end: group.globalEnd,
-            identifier: group.content,
-            isCatalogedIdentifier: isCatalogedIdentifier,
-            tokenIdentifier: tokenIdentifier,
-            fullDeclaration:
-                source.substring(group.globalStart, group.globalEnd),
-          ));
+        if (isDeclarationInCorrectScope == true) {
+          segments[declaration.indexInSegment] =
+              AnalysedSegment.validDeclaration(
+            content: content,
+          );
+        } else {
+          segments[declaration.indexInSegment] =
+              AnalysedSegment.variableExistsButCannotBeUsedInThisContext(
+            content: content,
+          );
         }
-      },
-    );
+      }
+    });
 
-    return identifiers;
+    return AnalysedResponse(
+      segments: segments.values.toList(),
+      tokenIdentifiers: validScopesIdentifier,
+    );
   }
+}
+
+class ToAnalyseDeclarationModel {
+  final ModelTokenIdentifier tokenIdentifier;
+  final FindedGroup findedGroup;
+  final int indexInSegment;
+  const ToAnalyseDeclarationModel({
+    required this.tokenIdentifier,
+    required this.findedGroup,
+    required this.indexInSegment,
+  });
+}
+
+class ToAnalyseDeclaration {
+  final TokenIdentifier tokenIdentifier;
+  final FindedGroup findedGroup;
+  final int indexInSegment;
+  const ToAnalyseDeclaration({
+    required this.tokenIdentifier,
+    required this.findedGroup,
+    required this.indexInSegment,
+  });
+}
+
+class ToAnalyseScope {
+  final int indexInSegment;
+  final IdentifierScope scope;
+  const ToAnalyseScope({
+    required this.indexInSegment,
+    required this.scope,
+  });
 }
 
 class IdentifierScope {
@@ -146,18 +282,10 @@ class IdentifierScope {
 class IdentifierDeclaration {
   final int start;
   final int end;
-  final String identifier;
-  final String fullDeclaration;
-  final bool isCatalogedIdentifier;
-  final TokenIdentifier? tokenIdentifier;
 
   const IdentifierDeclaration({
     required this.start,
     required this.end,
-    required this.identifier,
-    required this.fullDeclaration,
-    required this.isCatalogedIdentifier,
-    required this.tokenIdentifier,
   });
 }
 

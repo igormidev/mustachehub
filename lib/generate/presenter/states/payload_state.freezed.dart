@@ -134,7 +134,7 @@ class _$WithRequiredFieldsPendencyImpl implements WithRequiredFieldsPendency {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$WithRequiredFieldsPendencyImpl &&
@@ -284,7 +284,7 @@ class _$WithValidPayloadImpl implements WithValidPayload {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$WithValidPayloadImpl &&
@@ -416,7 +416,7 @@ class _$InitialPayloadStateImpl implements InitialPayloadState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$InitialPayloadStateImpl);

@@ -8,13 +8,13 @@ environment:
 
 dependency_overrides: 
   uuid: ^4.2.2
-  enchanted_regex: ^1.0.4
   mustachex: 
     path: ../../cloned_apis/mustachex  
   enchanted_collection:
 
 # Add regular dependencies here.
 dependencies:
+  enchanted_regex: ^1.0.4
   freezed_annotation: ^2.4.1
   build_runner: ^2.3.3 
   freezed: ^2.3.2

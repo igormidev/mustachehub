@@ -12,7 +12,22 @@ part of 'token_identifier.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
+TokenIdentifier _$TokenIdentifierFromJson(Map<String, dynamic> json) {
+  switch (json['runtimeType']) {
+    case 'text':
+      return TextTokenIdentifier.fromJson(json);
+    case 'boolean':
+      return BooleanTokenIdentifier.fromJson(json);
+    case 'model':
+      return ModelTokenIdentifier.fromJson(json);
+
+    default:
+      throw CheckedFromJsonException(json, 'runtimeType', 'TokenIdentifier',
+          'Invalid union type "${json['runtimeType']}"!');
+  }
+}
 
 /// @nodoc
 mixin _$TokenIdentifier {
@@ -72,7 +87,7 @@ mixin _$TokenIdentifier {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
-
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $TokenIdentifierCopyWith<TokenIdentifier> get copyWith =>
       throw _privateConstructorUsedError;
@@ -155,14 +170,22 @@ class __$$TextTokenIdentifierImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$TextTokenIdentifierImpl implements TextTokenIdentifier {
-  _$TextTokenIdentifierImpl({required this.parrentName, required this.name});
+  const _$TextTokenIdentifierImpl(
+      {required this.parrentName, required this.name, final String? $type})
+      : $type = $type ?? 'text';
+
+  factory _$TextTokenIdentifierImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TextTokenIdentifierImplFromJson(json);
 
   @override
   final String? parrentName;
   @override
   final String name;
+
+  @JsonKey(name: 'runtimeType')
+  final String $type;
 
   @override
   String toString() {
@@ -179,6 +202,7 @@ class _$TextTokenIdentifierImpl implements TextTokenIdentifier {
             (identical(other.name, name) || other.name == name));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, parrentName, name);
 
@@ -266,12 +290,22 @@ class _$TextTokenIdentifierImpl implements TextTokenIdentifier {
     }
     return orElse();
   }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$TextTokenIdentifierImplToJson(
+      this,
+    );
+  }
 }
 
 abstract class TextTokenIdentifier implements TokenIdentifier {
-  factory TextTokenIdentifier(
+  const factory TextTokenIdentifier(
       {required final String? parrentName,
       required final String name}) = _$TextTokenIdentifierImpl;
+
+  factory TextTokenIdentifier.fromJson(Map<String, dynamic> json) =
+      _$TextTokenIdentifierImpl.fromJson;
 
   @override
   String? get parrentName;
@@ -324,14 +358,22 @@ class __$$BooleanTokenIdentifierImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$BooleanTokenIdentifierImpl implements BooleanTokenIdentifier {
-  _$BooleanTokenIdentifierImpl({required this.parrentName, required this.name});
+  const _$BooleanTokenIdentifierImpl(
+      {required this.parrentName, required this.name, final String? $type})
+      : $type = $type ?? 'boolean';
+
+  factory _$BooleanTokenIdentifierImpl.fromJson(Map<String, dynamic> json) =>
+      _$$BooleanTokenIdentifierImplFromJson(json);
 
   @override
   final String? parrentName;
   @override
   final String name;
+
+  @JsonKey(name: 'runtimeType')
+  final String $type;
 
   @override
   String toString() {
@@ -348,6 +390,7 @@ class _$BooleanTokenIdentifierImpl implements BooleanTokenIdentifier {
             (identical(other.name, name) || other.name == name));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, parrentName, name);
 
@@ -435,12 +478,22 @@ class _$BooleanTokenIdentifierImpl implements BooleanTokenIdentifier {
     }
     return orElse();
   }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$BooleanTokenIdentifierImplToJson(
+      this,
+    );
+  }
 }
 
 abstract class BooleanTokenIdentifier implements TokenIdentifier {
-  factory BooleanTokenIdentifier(
+  const factory BooleanTokenIdentifier(
       {required final String? parrentName,
       required final String name}) = _$BooleanTokenIdentifierImpl;
+
+  factory BooleanTokenIdentifier.fromJson(Map<String, dynamic> json) =
+      _$BooleanTokenIdentifierImpl.fromJson;
 
   @override
   String? get parrentName;
@@ -511,17 +564,22 @@ class __$$ModelTokenIdentifierImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$ModelTokenIdentifierImpl implements ModelTokenIdentifier {
-  _$ModelTokenIdentifierImpl(
+  const _$ModelTokenIdentifierImpl(
       {required this.parrentName,
       required this.name,
       required final List<String> textsNames,
       required final List<String> booleanNames,
-      required final List<String> subModelsNames})
+      required final List<String> subModelsNames,
+      final String? $type})
       : _textsNames = textsNames,
         _booleanNames = booleanNames,
-        _subModelsNames = subModelsNames;
+        _subModelsNames = subModelsNames,
+        $type = $type ?? 'model';
+
+  factory _$ModelTokenIdentifierImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ModelTokenIdentifierImplFromJson(json);
 
   @override
   final String? parrentName;
@@ -551,6 +609,9 @@ class _$ModelTokenIdentifierImpl implements ModelTokenIdentifier {
     return EqualUnmodifiableListView(_subModelsNames);
   }
 
+  @JsonKey(name: 'runtimeType')
+  final String $type;
+
   @override
   String toString() {
     return 'TokenIdentifier.model(parrentName: $parrentName, name: $name, textsNames: $textsNames, booleanNames: $booleanNames, subModelsNames: $subModelsNames)';
@@ -572,6 +633,7 @@ class _$ModelTokenIdentifierImpl implements ModelTokenIdentifier {
                 .equals(other._subModelsNames, _subModelsNames));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -667,15 +729,25 @@ class _$ModelTokenIdentifierImpl implements ModelTokenIdentifier {
     }
     return orElse();
   }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ModelTokenIdentifierImplToJson(
+      this,
+    );
+  }
 }
 
 abstract class ModelTokenIdentifier implements TokenIdentifier {
-  factory ModelTokenIdentifier(
+  const factory ModelTokenIdentifier(
       {required final String? parrentName,
       required final String name,
       required final List<String> textsNames,
       required final List<String> booleanNames,
       required final List<String> subModelsNames}) = _$ModelTokenIdentifierImpl;
+
+  factory ModelTokenIdentifier.fromJson(Map<String, dynamic> json) =
+      _$ModelTokenIdentifierImpl.fromJson;
 
   @override
   String? get parrentName;
