@@ -25,7 +25,6 @@ class TextContentTab extends StatefulWidget {
 class _TextContentTabState extends State<TextContentTab> {
   final FocusNode textfieldFocusNode = FocusNode();
   late final VariablesInfoHighlightTextEditingController controller;
-  late final TextEditingController textEditingController;
   late final OptionsController<TokenIdentifier> optionsController;
   final Debouncer decouncer = Debouncer(timerDuration: 800.ms);
 
@@ -38,13 +37,9 @@ class _TextContentTabState extends State<TextContentTab> {
       text: contentCubit.state.currentText,
     );
 
-    textEditingController = TextEditingController(
-      text: contentCubit.state.currentText,
-    );
-
     optionsController = OptionsController<TokenIdentifier>(
       textfieldFocusNode: textfieldFocusNode,
-      textEditingController: textEditingController,
+      textEditingController: controller,
       context: context,
       optionAsString: (option) => option.name,
       overlay: Overlay.of(
@@ -69,19 +64,19 @@ class _TextContentTabState extends State<TextContentTab> {
           text: option.map(
             text: (value) {
               Future.delayed(const Duration(milliseconds: 800), () {
-                _notifyContentCubit(contentCubit, textEditingController.text);
+                _notifyContentCubit(contentCubit, controller.text);
               });
               return value.name;
             },
             boolean: (value) {
               Future.delayed(const Duration(milliseconds: 800), () {
-                _notifyContentCubit(contentCubit, textEditingController.text);
+                _notifyContentCubit(contentCubit, controller.text);
               });
               return '#${value.name}}}{{/${value.name}';
             },
             model: (value) {
               Future.delayed(const Duration(milliseconds: 800), () {
-                _notifyContentCubit(contentCubit, textEditingController.text);
+                _notifyContentCubit(contentCubit, controller.text);
               });
               return '#${value.name}}}{{/${value.name}';
             },
@@ -137,7 +132,7 @@ class _TextContentTabState extends State<TextContentTab> {
                   optionsController.updateContext(context);
                   return TextFormField(
                     focusNode: textfieldFocusNode,
-                    controller: textEditingController,
+                    controller: controller,
                     maxLines: 10,
                     style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                           height: 1,
