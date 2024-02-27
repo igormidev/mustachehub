@@ -2,19 +2,18 @@ import 'package:cursor_autocomplete_options/cursor_autocomplete_options.dart';
 import 'package:dart_debouncer/dart_debouncer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mustache_hub_core/mustache_hub_core.dart';
 import 'package:mustachehub/app_core/app_routes.dart';
 import 'package:mustachehub/create/presenter/controllers/variables_info_highlight_text_editing_controller.dart';
 import 'package:mustachehub/create/presenter/cubits/content_string_cubit.dart';
 import 'package:mustachehub/create/presenter/cubits/fields_text_size_cubit.dart';
 import 'package:mustachehub/create/presenter/cubits/suggestion_cubit.dart';
-import 'package:mustachehub/create/presenter/cubits/token_identifier.dart';
 import 'package:mustachehub/create/presenter/cubits/variables_cubit.dart';
 import 'package:mustachehub/create/presenter/input_formaters/add_mustache_delimmiter_input_formater.dart';
 import 'package:mustachehub/create/presenter/state/fields_text_size_state.dart';
-import 'package:mustachehub/create/presenter/state/variables_state.dart';
+import 'package:mustachehub/create/presenter/state/suggestion_state.dart';
 import 'package:mustachehub/create/ui/create_template_view/tabs/variables_creation_tab/widgets/headers/text_content_header.dart';
 import 'package:mustachex/mustachex.dart';
+import 'package:text_analyser/text_analyser.dart';
 
 class TextContentTab extends StatefulWidget {
   const TextContentTab({super.key});
@@ -25,7 +24,7 @@ class TextContentTab extends StatefulWidget {
 
 class _TextContentTabState extends State<TextContentTab> {
   final FocusNode textfieldFocusNode = FocusNode();
-  late final VariablesController controller;
+  late final VariablesInfoHighlightTextEditingController controller;
   late final TextEditingController textEditingController;
   late final OptionsController<TokenIdentifier> optionsController;
   final Debouncer decouncer = Debouncer(timerDuration: 800.ms);
@@ -35,22 +34,13 @@ class _TextContentTabState extends State<TextContentTab> {
     super.initState();
 
     final contentCubit = context.read<ContentStringCubit>();
-    controller = VariablesController(
+    controller = VariablesInfoHighlightTextEditingController(
       text: contentCubit.state.currentText,
     );
 
-    textEditingController =
-        TextEditingController(text: contentCubit.state.currentText);
-
-    final varCubit = context.read<VariablesCubit>();
-    final vars = _getExpectedVariablesFromState(varCubit.state);
-    controller.updateExpectedVariables(vars);
-
-    final tokens = contentCubit.state.mapOrNull(
-      withToken: (v) => v.tokensInIt,
+    textEditingController = TextEditingController(
+      text: contentCubit.state.currentText,
     );
-
-    controller.updateTokens(tokens);
 
     optionsController = OptionsController<TokenIdentifier>(
       textfieldFocusNode: textfieldFocusNode,
@@ -60,7 +50,16 @@ class _TextContentTabState extends State<TextContentTab> {
       overlay: Overlay.of(
         NavigatorService.i.dashboardNavigatorKey.currentContext!,
       ),
-      onSelectInsertInCursor: (option) {
+      onTextAddedCallback: (option, newEditingValue) {
+        final sugestionCubit = context.read<SuggestionCubit>();
+        final varCubit = context.read<VariablesCubit>();
+        sugestionCubit.setSuggestions(
+          input: newEditingValue.text,
+          indexAtText: newEditingValue.selection.start,
+          flatMap: varCubit.state.flatMap,
+        );
+      },
+      selectInCursorParser: (option) {
         return InsertInCursorPayload(
           cursorIndexChangeQuantity: option.map(
             text: (value) => 2,
@@ -109,11 +108,17 @@ class _TextContentTabState extends State<TextContentTab> {
 
     return MultiBlocListener(
       listeners: [
-        BlocListener<VariablesCubit, VariablesState>(
-          bloc: context.read<VariablesCubit>(),
+        BlocListener<SuggestionCubit, SuggestionState>(
           listener: (context, state) {
-            final vars = _getExpectedVariablesFromState(state);
-            controller.updateExpectedVariables(vars);
+            state.maybeMap(
+              withIdentifiers: (value) {
+                controller.segmentsToTextInline(
+                  value.segments,
+                  context,
+                );
+              },
+              orElse: () {},
+            );
           },
         ),
       ],
@@ -122,7 +127,6 @@ class _TextContentTabState extends State<TextContentTab> {
         child: Column(
           children: [
             TextContentHeader(
-              controller: controller,
               debouncer: decouncer,
             ),
             const SizedBox(height: 8),
@@ -153,7 +157,23 @@ class _TextContentTabState extends State<TextContentTab> {
                       AddMustacheDelimmiterInputFormatter(
                         sugestionCubit: sugestionCubit,
                         varCubit: varCubit,
-                        optionsController: optionsController,
+                        onAddedDellimiter: () {
+                          final bloc = context.read<SuggestionCubit>();
+                          optionsController.showOptionsMenuWithWrapperBuilder(
+                            suggestionCardBuilder: (
+                              BuildContext dialogContext,
+                              listTilesWithOptionsBuilder,
+                            ) {
+                              return BlocProvider<SuggestionCubit>.value(
+                                value: bloc,
+                                child: SuggestionCard(
+                                  listTilesWithOptionsBuilder:
+                                      listTilesWithOptionsBuilder,
+                                ),
+                              );
+                            },
+                          );
+                        },
                       ),
                     ],
                     onChanged: (final String text) {
@@ -175,28 +195,59 @@ class _TextContentTabState extends State<TextContentTab> {
     try {
       final parser = Parser(text, null, '{{ }}');
       final tokens = parser.getTokens();
-      controller.updateTokens(tokens);
       contentCubit.registerTextWithTokens(
         newText: text,
         tokens: tokens,
       );
     } catch (_, __) {
-      controller.updateTokens(null);
       contentCubit.registerNormalText(
         newText: text,
       );
     }
   }
+}
 
-  List<String> _getExpectedVariablesFromState(VariablesState state) {
-    final List<String> expectedVariables = [];
-    for (final pipe in <Pipe>[
-      ...state.textPipes,
-      ...state.booleanPipes,
-      ...state.modelPipes,
-    ]) {
-      expectedVariables.add(pipe.mustacheName);
-    }
-    return expectedVariables;
+class SuggestionCard extends StatelessWidget {
+  final Widget Function(List<TokenIdentifier> options)
+      listTilesWithOptionsBuilder;
+
+  const SuggestionCard({
+    super.key,
+    required this.listTilesWithOptionsBuilder,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<SuggestionCubit, SuggestionState>(
+      builder: (context, state) {
+        return state.map(
+          undefined: (value) {
+            return const Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.search, size: 40),
+                SizedBox(height: 16),
+                Text('No variables found'),
+              ],
+            );
+          },
+          withIdentifiers: (value) {
+            return listTilesWithOptionsBuilder(
+              value.tokenIdentifiers.toList(),
+            );
+          },
+          errorOccurred: (value) {
+            return const Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.error, size: 40),
+                SizedBox(height: 16),
+                Text('Error occurred'),
+              ],
+            );
+          },
+        );
+      },
+    );
   }
 }

@@ -1,7 +1,4 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:enchanted_regex/enchanted_regex.dart';
-import 'package:mustache_hub_core/mustache_hub_core.dart';
-import 'package:text_analyser/src/adapters/token_identifier_flatmap_adapter.dart';
 import 'package:text_analyser/src/models/analysed_segment.dart';
 import 'package:text_analyser/src/models/token_identifier.dart';
 
@@ -16,12 +13,7 @@ class AnalysedResponse {
 }
 
 class TextAnalyserBase {
-  final TokenIdentifierFlatMapAdapter tokenIdentifierFlatMapAdapter;
-  final ExpectedPayload expectedPayload;
-  const TextAnalyserBase({
-    required this.expectedPayload,
-    required this.tokenIdentifierFlatMapAdapter,
-  });
+  const TextAnalyserBase();
 
   AnalysedResponse? getMatchClusters(
     String input,
@@ -34,6 +26,11 @@ class TextAnalyserBase {
     }
 
     final Set<TokenIdentifier> validScopesIdentifier = {};
+    flatMap.forEach((key, value) {
+      if (value.parrentName == null) {
+        validScopesIdentifier.add(value);
+      }
+    });
 
     final RegExp regExp = RegExp(r'{{[#\/]?(?<name>[a-zA-Z]+?)}}');
 

@@ -1,5 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+
 part 'token_identifier.freezed.dart';
+part 'token_identifier.g.dart';
 
 @freezed
 abstract class TokenIdentifier with _$TokenIdentifier {

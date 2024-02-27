@@ -848,6 +848,7 @@ class _$AnalysedSegmentModelDeclarationOpenWithoutCloseImpl
   _$AnalysedSegmentModelDeclarationOpenWithoutCloseImpl(
       {required this.content});
 
+// ✅
   @override
   final String content;
 
@@ -1015,7 +1016,7 @@ abstract class _AnalysedSegmentModelDeclarationOpenWithoutClose
           {required final String content}) =
       _$AnalysedSegmentModelDeclarationOpenWithoutCloseImpl;
 
-  @override
+  @override // ✅
   String get content;
   @override
   @JsonKey(ignore: true)
@@ -1070,6 +1071,7 @@ class _$AnalysedSegmentModelDeclarationCloseWithoutOpenImpl
   _$AnalysedSegmentModelDeclarationCloseWithoutOpenImpl(
       {required this.content});
 
+// ✅
   @override
   final String content;
 
@@ -1237,7 +1239,7 @@ abstract class _AnalysedSegmentModelDeclarationCloseWithoutOpen
           {required final String content}) =
       _$AnalysedSegmentModelDeclarationCloseWithoutOpenImpl;
 
-  @override
+  @override // ✅
   String get content;
   @override
   @JsonKey(ignore: true)
@@ -1750,6 +1752,7 @@ class _$AnalysedSegmentVariableExistsButCannotBeUsedInThisContextImpl
   _$AnalysedSegmentVariableExistsButCannotBeUsedInThisContextImpl(
       {required this.content});
 
+// ✅
   @override
   final String content;
 
@@ -1918,7 +1921,7 @@ abstract class _AnalysedSegmentVariableExistsButCannotBeUsedInThisContext
           {required final String content}) =
       _$AnalysedSegmentVariableExistsButCannotBeUsedInThisContextImpl;
 
-  @override
+  @override // ✅
   String get content;
   @override
   @JsonKey(ignore: true)

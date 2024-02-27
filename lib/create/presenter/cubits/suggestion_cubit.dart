@@ -23,8 +23,9 @@ class SuggestionCubit extends Cubit<SuggestionState> {
       emit(SuggestionState.errorOccurred());
     } else {
       emit(SuggestionState.withIdentifiers(
-          tokenIdentifiers: response.tokenIdentifiers,
-          segments: response.segments));
+        tokenIdentifiers: response.tokenIdentifiers,
+        segments: response.segments,
+      ));
     }
   }
 

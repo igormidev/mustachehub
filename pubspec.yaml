@@ -20,13 +20,14 @@ dependencies:
     path: packages/text_analyser
   uuid: ^4.2.2
   freezed_annotation: ^2.4.1
-  lottie: 2.7.0
-  font_awesome_flutter: 10.6.0
+  lottie: ^2.7.0
+  font_awesome_flutter: ^10.6.0
   bloc: ^8.1.2 
   flutter_bloc: ^8.1.3
-  replay_bloc: 0.2.5
+  replay_bloc: ^0.2.5
+  enchanted_regex: ^1.0.5
   hydrated_bloc: ^9.1.3 
-  go_router: 13.0.1
+  go_router: ^13.0.1
   enchanted_collection: 
   simple_platform: ^1.0.1
   image_network: ^2.5.4+1
@@ -37,7 +38,7 @@ dependencies:
   fluttertoast: ^8.2.4
   dart_debouncer: ^1.0.3
   dotted_border: ^2.1.0
-  cursor_autocomplete_options: ^1.3.1
+  cursor_autocomplete_options: ^1.5.0
   path_provider: ^2.1.2
   media_query_core:
     path: packages/media_query_core
@@ -64,6 +65,7 @@ dev_dependencies:
   flutter_lints: ^2.0.0
   flutter_launcher_icons: "^0.13.1"
   build_runner: ^2.3.3 
+  json_serializable: ^6.7.1
   freezed: ^2.3.2
 
 flutter_launcher_icons:

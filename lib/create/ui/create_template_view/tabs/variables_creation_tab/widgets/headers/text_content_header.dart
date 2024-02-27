@@ -4,16 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mustachehub/app_core/theme/default_widgets/custom_header.dart';
 import 'package:mustachehub/app_core/theme/default_widgets/debounce_widget.dart';
-import 'package:mustachehub/create/presenter/controllers/variables_info_highlight_text_editing_controller.dart';
 import 'package:mustachehub/create/presenter/cubits/fields_text_size_cubit.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class TextContentHeader extends StatelessWidget {
-  final VariablesController controller;
   final Debouncer debouncer;
   const TextContentHeader({
     super.key,
-    required this.controller,
     required this.debouncer,
   });
 
@@ -25,11 +22,9 @@ class TextContentHeader extends StatelessWidget {
     return CustomHeader(
       headerTitle: 'Content text',
       subtractOnPressed: () {
-        controller.needsToCalculateSpan = true;
         sizeBloc.decreaseSizeTestString();
       },
       addOnPressed: () {
-        controller.needsToCalculateSpan = true;
         sizeBloc.increaseSizeTestString();
       },
       subtitleWidget: RichText(

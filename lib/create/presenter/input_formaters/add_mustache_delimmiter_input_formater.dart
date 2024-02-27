@@ -1,20 +1,18 @@
 import 'dart:developer';
-import 'package:cursor_autocomplete_options/cursor_autocomplete_options.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:mustachehub/create/presenter/cubits/suggestion_cubit.dart';
 import 'package:mustachehub/create/presenter/cubits/variables_cubit.dart';
-import 'package:mustachex/mustachex.dart';
 
 class AddMustacheDelimmiterInputFormatter extends TextInputFormatter {
   final SuggestionCubit sugestionCubit;
   final VariablesCubit varCubit;
-  final OptionsController optionsController;
+  final void Function() onAddedDellimiter;
 
   AddMustacheDelimmiterInputFormatter({
-    required this.optionsController,
     required this.sugestionCubit,
     required this.varCubit,
+    required this.onAddedDellimiter,
   });
 
   @override
@@ -68,9 +66,6 @@ class AddMustacheDelimmiterInputFormatter extends TextInputFormatter {
   @visibleForTesting
   Future<void> setSuggestionFromCurrentCursor(
       String newText, int cursorIndex) async {
-    final parser = Parser(newText, null, '{{ }}');
-    final tokens = parser.getTokens();
-
     final varState = varCubit.state;
 
     if (varState.textPipes.isEmpty &&
@@ -78,29 +73,12 @@ class AddMustacheDelimmiterInputFormatter extends TextInputFormatter {
         varState.modelPipes.isEmpty) {
       return;
     }
-
-    await sugestionCubit.setSuggestions(
-      cursorIndex: cursorIndex,
-      tokens: tokens,
-      textPipes: varState.textPipes,
-      booleanPipes: varState.booleanPipes,
-      modelPipes: varState.modelPipes,
-    );
-
-    final state = sugestionCubit.state;
-
-    state.whenOrNull(
-      withSugestionAndFlatMapCache: (
-        flatMap,
-        availibleVariablesString,
-        tokenIdentifiers,
-      ) {
-        if (tokenIdentifiers.isNotEmpty) {
-          optionsController.showOptionsMenu(
-            tokenIdentifiers.map((e) => e).toList(),
-          );
-        }
-      },
+    onAddedDellimiter();
+    await Future.delayed(const Duration(milliseconds: 100));
+    sugestionCubit.setSuggestions(
+      input: newText,
+      indexAtText: cursorIndex,
+      flatMap: varCubit.state.flatMap,
     );
   }
 }

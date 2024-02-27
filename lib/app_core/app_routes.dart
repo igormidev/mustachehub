@@ -37,7 +37,7 @@ import 'package:mustachehub/create/data/repositories/interfaces/i_package_form_r
 import 'package:mustachehub/create/presenter/cubits/content_string_cubit.dart';
 import 'package:mustachehub/create/presenter/cubits/fields_text_size_cubit.dart';
 import 'package:mustachehub/create/presenter/cubits/package_form_cubit.dart';
-import 'package:mustachehub/create/presenter/cubits/sugestion_cubit.dart';
+import 'package:mustachehub/create/presenter/cubits/suggestion_cubit.dart';
 import 'package:mustachehub/create/presenter/cubits/tab_controll_cubit.dart';
 import 'package:mustachehub/create/presenter/cubits/variables_cubit.dart';
 import 'package:mustachehub/create/ui/create_template_view/create_template_view.dart';
@@ -52,6 +52,7 @@ import 'package:mustachehub/generate/data/adapters/dto_adapter.dart';
 import 'package:mustachehub/generate/presenter/cubits/content_cubit.dart';
 import 'package:mustachehub/generate/presenter/cubits/form_stats_cubit.dart';
 import 'package:mustachehub/generate/presenter/cubits/payload_cubit.dart';
+import 'package:text_analyser/text_analyser.dart';
 
 class NavigatorService {
   static NavigatorService? _instance;
@@ -165,28 +166,34 @@ final router = GoRouter(
                   create: (context) => PackageFormRepositoryImpl(),
                 ),
                 RepositoryProvider<TokenIdentifierFlatMapAdapter>(
-                  create: (context) => TokenIdentifierFlatMapAdapter(),
+                  create: (context) => const TokenIdentifierFlatMapAdapter(),
                 ),
                 RepositoryProvider<TokenIdentifierTextDisplayAdapter>(
                   create: (context) => TokenIdentifierTextDisplayAdapter(),
+                ),
+                RepositoryProvider<TextAnalyserBase>(
+                  create: (context) => const TextAnalyserBase(),
                 ),
 
                 BlocProvider(create: (context) => ContentStringCubit()),
                 BlocProvider(create: (context) => FieldsTextSizeCubit()),
                 BlocProvider(
-                    create: (context) => PackageFormCubit(
-                          repository: context.read<IPackageFormRepository>(),
-                        )),
+                  create: (context) => PackageFormCubit(
+                    repository: context.read<IPackageFormRepository>(),
+                  ),
+                ),
                 BlocProvider(
-                  create: (context) => SugestionCubit(
-                    tokenIdentifierFlatMapAdapter:
-                        context.read<TokenIdentifierFlatMapAdapter>(),
-                    tokenIdentifierTextDisplayAdapter:
-                        context.read<TokenIdentifierTextDisplayAdapter>(),
+                  create: (context) => SuggestionCubit(
+                    textAnalyser: context.read<TextAnalyserBase>(),
                   ),
                 ),
                 BlocProvider(create: (context) => TabControllCubit()),
-                BlocProvider(create: (context) => VariablesCubit()),
+                BlocProvider<VariablesCubit>(
+                  create: (context) => VariablesCubit(
+                    tokenIdentifierFlatMapAdapter:
+                        context.read<TokenIdentifierFlatMapAdapter>(),
+                  ),
+                ),
 
                 /// Generator and test
                 RepositoryProvider<DtoAdapter>(
@@ -196,9 +203,6 @@ final router = GoRouter(
                   create: (context) => ContentCubit(
                     dtoAdapter: context.read<DtoAdapter>(),
                   ),
-                ),
-                BlocProvider<VariablesCubit>(
-                  create: (context) => VariablesCubit(),
                 ),
                 BlocProvider<FormStatsCubit>(
                   create: (context) => FormStatsCubit(),
