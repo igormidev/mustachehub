@@ -27,7 +27,8 @@ class VariablesInfoHighlightTextEditingController
           return TextSpan(
             text: value.content,
             style: defaultStyle.copyWith(
-              color: cS.primaryContainer,
+              color: cS.primary,
+              backgroundColor: cS.primaryContainer,
             ),
           );
         },
@@ -35,7 +36,8 @@ class VariablesInfoHighlightTextEditingController
           return TextSpan(
             text: value.content,
             style: defaultStyle.copyWith(
-              color: cS.errorContainer,
+              color: cS.error,
+              backgroundColor: cS.errorContainer,
             ),
           );
         },
@@ -43,7 +45,8 @@ class VariablesInfoHighlightTextEditingController
           return TextSpan(
             text: value.content,
             style: defaultStyle.copyWith(
-              color: cS.errorContainer,
+              color: cS.error,
+              backgroundColor: cS.errorContainer,
             ),
           );
         },
@@ -51,7 +54,8 @@ class VariablesInfoHighlightTextEditingController
           return TextSpan(
             text: value.content,
             style: defaultStyle.copyWith(
-              color: cS.errorContainer,
+              color: cS.error,
+              backgroundColor: cS.errorContainer,
             ),
           );
         },
@@ -59,7 +63,8 @@ class VariablesInfoHighlightTextEditingController
           return TextSpan(
             text: value.content,
             style: defaultStyle.copyWith(
-              color: cS.errorContainer,
+              color: cS.error,
+              backgroundColor: cS.errorContainer,
             ),
           );
         },
@@ -67,7 +72,8 @@ class VariablesInfoHighlightTextEditingController
           return TextSpan(
             text: value.content,
             style: defaultStyle.copyWith(
-              color: cS.errorContainer,
+              color: cS.error,
+              backgroundColor: cS.errorContainer,
             ),
           );
         },
@@ -75,16 +81,19 @@ class VariablesInfoHighlightTextEditingController
           return TextSpan(
             text: value.content,
             style: defaultStyle.copyWith(
-              color: cS.errorContainer,
+              color: cS.error,
+              backgroundColor: cS.errorContainer,
             ),
           );
         },
       );
     }).toList();
 
-    cacheText = value.text;
+    cacheText = TextSpan(children: cacheSpans).toPlainText();
 
+    // cacheText = value.text;
     // this.text = TextSpan(children: cacheSpans).toPlainText();
+
     notifyListeners();
   }
 

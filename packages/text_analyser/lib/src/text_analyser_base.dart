@@ -52,6 +52,7 @@ class TextAnalyserBase {
     /// First role of analysis
     input.forEachNamedGroup(
       regExp,
+      willContainBeforeAndAfterContentAsNonMatch: false,
       onMatch: (FindedGroup group) {
         index++;
 
@@ -59,7 +60,7 @@ class TextAnalyserBase {
 
         if (tokenIdentifier == null) {
           segments[index] = AnalysedSegment.declarationOfUncatalogedVariable(
-            content: group.content,
+            content: group.fullMatchText,
           );
           return;
         }
@@ -75,7 +76,7 @@ class TextAnalyserBase {
         /// Only models can have delimiters indicators
         if (hasDelimiter && isModel == false) {
           final seg = AnalysedSegment.nonModelVariableWithOpenOrCloseDelimmiter(
-            content: group.content,
+            content: group.fullMatchText,
           );
           segments[index] = seg;
           return;
@@ -83,7 +84,7 @@ class TextAnalyserBase {
 
         if (isModel && hasDelimiter == false) {
           segments[index] = AnalysedSegment.invalidMapDeclaration(
-            content: group.content,
+            content: group.fullMatchText,
           );
           return;
         }
@@ -97,7 +98,7 @@ class TextAnalyserBase {
           final isRootTokenIdentifier = tokenIdentifier.parrentName == null;
           if (isRootTokenIdentifier) {
             segments[index] = AnalysedSegment.validDeclaration(
-              content: group.content,
+              content: group.fullMatchText,
             );
             return;
           } else {
@@ -139,7 +140,7 @@ class TextAnalyserBase {
 
           if (openDeclarations == null || openDeclarations.isEmpty) {
             segments[index] = AnalysedSegment.modelDeclarationCloseWithoutOpen(
-              content: group.content,
+              content: group.fullMatchText,
             );
             return;
           }
@@ -148,7 +149,7 @@ class TextAnalyserBase {
               openDeclarations.removeLast();
 
           segments[index] = AnalysedSegment.validDeclaration(
-            content: group.content,
+            content: group.fullMatchText,
           );
 
           final IdentifierScope scope = IdentifierScope(
@@ -195,7 +196,7 @@ class TextAnalyserBase {
       for (final declaration in declarations) {
         segments[declaration.indexInSegment] =
             AnalysedSegment.modelDeclarationOpenWithoutClose(
-          content: content,
+          content: declaration.findedGroup.fullMatchText,
         );
       }
     });
@@ -216,12 +217,12 @@ class TextAnalyserBase {
         if (isDeclarationInCorrectScope == true) {
           segments[declaration.indexInSegment] =
               AnalysedSegment.validDeclaration(
-            content: content,
+            content: declaration.findedGroup.fullMatchText,
           );
         } else {
           segments[declaration.indexInSegment] =
               AnalysedSegment.variableExistsButCannotBeUsedInThisContext(
-            content: content,
+            content: declaration.findedGroup.fullMatchText,
           );
         }
       }

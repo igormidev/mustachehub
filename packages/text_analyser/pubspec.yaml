@@ -14,7 +14,7 @@ dependency_overrides:
 
 # Add regular dependencies here.
 dependencies:
-  enchanted_regex: ^1.0.5
+  enchanted_regex: ^1.0.6
   freezed_annotation: ^2.4.1 
   mustache_hub_core:
     path: ../mustache_hub_core
