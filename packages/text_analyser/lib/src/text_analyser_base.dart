@@ -2,9 +2,10 @@ import 'package:enchanted_regex/enchanted_regex.dart';
 import 'package:enchanted_collection/enchanted_collection.dart';
 import 'package:text_analyser/src/models/analysed_segment.dart';
 import 'package:text_analyser/src/models/token_identifier.dart';
+import 'package:text_analyser/src/models/variable_implementation.dart';
 
 class AnalysedResponse {
-  final Set<TokenIdentifier> tokenIdentifiers;
+  final Set<VariableImplementation> tokenIdentifiers;
   final List<AnalysedSegment> segments;
 
   const AnalysedResponse({
@@ -26,14 +27,36 @@ class TextAnalyserBase {
       return null;
     }
 
-    final Set<TokenIdentifier> validScopesIdentifier = {};
+    final Set<ModelTokenIdentifier> validScopesIdentifier = {};
+    final Set<VariableImplementation> validVariables = {};
     flatMap.forEach((key, value) {
       if (value.parrentName == null) {
-        validScopesIdentifier.add(value);
+        value.map(
+          model: (model) {
+            validVariables.add(VariableImplementation.model(
+              modelTokenIdentifier: model,
+            ));
+          },
+          boolean: (boolean) {
+            validVariables.add(VariableImplementation.boolean(
+              booleanTokenIdentifier: boolean,
+              booleanImplementation: BooleanImplementation.normalValue(),
+            ));
+            validVariables.add(VariableImplementation.boolean(
+              booleanTokenIdentifier: boolean,
+              booleanImplementation: BooleanImplementation.invertedValue(),
+            ));
+          },
+          text: (text) {
+            validVariables.add(VariableImplementation.text(
+              textTokenIdentifier: text,
+            ));
+          },
+        );
       }
     });
 
-    final RegExp regExp = RegExp(r'{{[#\/]?(?<name>[a-zA-Z]+?)}}');
+    final RegExp regExp = RegExp(r'{{[\^#\/]?(?<name>[a-zA-Z]+?)}}');
 
     /// The index of the segment and the segment itself
     /// The index should be in increasing order (1, 2, 3, 4, ..., n)
@@ -50,8 +73,8 @@ class TextAnalyserBase {
     final Map<String, List<ToAnalyseDeclarationBoolean>>
         notDefininedOpenBooleanSegments = {};
 
-    final Map<String, List<ToAnalyseDeclaration>> notDefininedNonModelSegments =
-        {};
+    final Map<String, List<ToAnalyseDeclarationText>>
+        notDefininedNonModelSegments = {};
 
     /// First role of analysis
     input.forEachNamedGroup(
@@ -69,9 +92,6 @@ class TextAnalyserBase {
           return;
         }
 
-        final bool isOpenDelimiter = group.fullMatchText.startsWith('{{#');
-        final bool isCloseDelimiter = group.fullMatchText.startsWith('{{/');
-        final bool hasDelimiter = isOpenDelimiter || isCloseDelimiter;
         final bool isModel = tokenIdentifier.maybeMap(
           model: (_) => true,
           orElse: () => false,
@@ -84,6 +104,15 @@ class TextAnalyserBase {
           text: (_) => true,
           orElse: () => false,
         );
+
+        final bool isNormalOpenDelimiter =
+            group.fullMatchText.startsWith('{{#');
+        final bool isInverseOpenDelimiter =
+            group.fullMatchText.startsWith('{{^');
+        final bool isCloseDelimiter = group.fullMatchText.startsWith('{{/');
+        final bool hasDelimiter = isNormalOpenDelimiter ||
+            isCloseDelimiter ||
+            (isInverseOpenDelimiter && isBoolean);
 
         /// Only models can have delimiters indicators
         if (hasDelimiter && isModel == false && isBoolean == false) {
@@ -122,8 +151,8 @@ class TextAnalyserBase {
             }
 
             notDefininedNonModelSegments[group.content]?.add(
-              ToAnalyseDeclaration(
-                tokenIdentifier: tokenIdentifier,
+              ToAnalyseDeclarationText(
+                tokenIdentifier: tokenIdentifier as TextTokenIdentifier,
                 findedGroup: group,
                 indexInSegment: index,
               ),
@@ -137,7 +166,7 @@ class TextAnalyserBase {
             notDefininedOpenBooleanSegments[group.content] = [];
           }
 
-          if (isOpenDelimiter) {
+          if (isNormalOpenDelimiter || isInverseOpenDelimiter) {
             notDefininedOpenBooleanSegments[group.content]?.add(
               ToAnalyseDeclarationBoolean(
                 tokenIdentifier: tokenIdentifier as BooleanTokenIdentifier,
@@ -178,7 +207,7 @@ class TextAnalyserBase {
           notDefininedOpenModelSegments[group.content] = [];
         }
 
-        if (isOpenDelimiter) {
+        if (isNormalOpenDelimiter) {
           notDefininedOpenModelSegments[group.content]?.add(
             ToAnalyseDeclarationModel(
               tokenIdentifier: tokenIdentifier as ModelTokenIdentifier,
@@ -232,7 +261,7 @@ class TextAnalyserBase {
                   indexAtText < scope.endDeclaration.start;
 
           if (isIndexAtTextWithinScope) {
-            validScopesIdentifier.add(tokenIdentifier);
+            validScopesIdentifier.add(tokenIdentifier as ModelTokenIdentifier);
           }
 
           return;
@@ -290,30 +319,72 @@ class TextAnalyserBase {
       }
     });
 
-    print('---------------------');
-    // segments.forEach((index, element) {
-    //   print('$index ${element.segmentText}');
-    // });
-    print('---------------------');
-
-    final sortedSegmentsEntries =
-        segments.castToList((key, value) => MapEntry(key, value))
-          ..sort(
-            (a, b) => a.key.compareTo(b.key),
-          );
+    final sortedSegmentsEntries = segments
+        .castToList((key, value) => MapEntry(key, value))
+      ..sort((a, b) => a.key.compareTo(b.key));
 
     final List<AnalysedSegment> sortedSegments =
         sortedSegmentsEntries.map((e) => e.value).toList();
 
-    print('---------------------');
-    sortedSegments.forEachMapper((value, isFirst, isLast, index) {
-      print('$index ${value.segmentText}');
-    });
-    print('---------------------');
+    for (final ModelTokenIdentifier identifier in validScopesIdentifier) {
+      validVariables.add(VariableImplementation.model(
+        modelTokenIdentifier: identifier,
+      ));
+
+      for (final subModelName in identifier.subModelsNames) {
+        final isSubModelAlreadyDefined = validVariables.any((element) {
+          return element.maybeMap(
+            model: (value) {
+              return value.modelTokenIdentifier.name == subModelName;
+            },
+            orElse: () => false,
+          );
+        });
+        if (isSubModelAlreadyDefined) {
+          continue;
+        }
+
+        final TokenIdentifier? tokenIdentifier = flatMap[subModelName];
+        if (tokenIdentifier == null ||
+            tokenIdentifier is! ModelTokenIdentifier) {
+          continue;
+        }
+
+        validVariables.add(VariableImplementation.model(
+          modelTokenIdentifier: tokenIdentifier,
+        ));
+      }
+
+      for (final booleanName in identifier.booleanNames) {
+        validVariables.add(VariableImplementation.boolean(
+          booleanTokenIdentifier: BooleanTokenIdentifier(
+            parrentName: identifier.name,
+            name: booleanName,
+          ),
+          booleanImplementation: BooleanImplementation.normalValue(),
+        ));
+        validVariables.add(VariableImplementation.boolean(
+          booleanTokenIdentifier: BooleanTokenIdentifier(
+            parrentName: identifier.name,
+            name: booleanName,
+          ),
+          booleanImplementation: BooleanImplementation.invertedValue(),
+        ));
+      }
+
+      for (final textName in identifier.textsNames) {
+        validVariables.add(VariableImplementation.text(
+          textTokenIdentifier: TextTokenIdentifier(
+            parrentName: identifier.name,
+            name: textName,
+          ),
+        ));
+      }
+    }
 
     return AnalysedResponse(
       segments: sortedSegments,
-      tokenIdentifiers: validScopesIdentifier,
+      tokenIdentifiers: validVariables,
     );
   }
 }
@@ -340,11 +411,11 @@ class ToAnalyseDeclarationBoolean {
   });
 }
 
-class ToAnalyseDeclaration {
-  final TokenIdentifier tokenIdentifier;
+class ToAnalyseDeclarationText {
+  final TextTokenIdentifier tokenIdentifier;
   final FindedGroup findedGroup;
   final int indexInSegment;
-  const ToAnalyseDeclaration({
+  const ToAnalyseDeclarationText({
     required this.tokenIdentifier,
     required this.findedGroup,
     required this.indexInSegment,

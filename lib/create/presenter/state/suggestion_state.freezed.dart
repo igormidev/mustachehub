@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$SuggestionState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Set<TokenIdentifier> tokenIdentifiers,
+    required TResult Function(Set<VariableImplementation> tokenIdentifiers,
             List<AnalysedSegment> segments)
         withIdentifiers,
     required TResult Function() undefined,
@@ -27,7 +27,7 @@ mixin _$SuggestionState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Set<TokenIdentifier> tokenIdentifiers,
+    TResult? Function(Set<VariableImplementation> tokenIdentifiers,
             List<AnalysedSegment> segments)?
         withIdentifiers,
     TResult? Function()? undefined,
@@ -36,7 +36,7 @@ mixin _$SuggestionState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Set<TokenIdentifier> tokenIdentifiers,
+    TResult Function(Set<VariableImplementation> tokenIdentifiers,
             List<AnalysedSegment> segments)?
         withIdentifiers,
     TResult Function()? undefined,
@@ -96,7 +96,8 @@ abstract class _$$SuggestionStateWithIdentifiersImplCopyWith<$Res> {
       __$$SuggestionStateWithIdentifiersImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
-      {Set<TokenIdentifier> tokenIdentifiers, List<AnalysedSegment> segments});
+      {Set<VariableImplementation> tokenIdentifiers,
+      List<AnalysedSegment> segments});
 }
 
 /// @nodoc
@@ -119,7 +120,7 @@ class __$$SuggestionStateWithIdentifiersImplCopyWithImpl<$Res>
       tokenIdentifiers: null == tokenIdentifiers
           ? _value._tokenIdentifiers
           : tokenIdentifiers // ignore: cast_nullable_to_non_nullable
-              as Set<TokenIdentifier>,
+              as Set<VariableImplementation>,
       segments: null == segments
           ? _value._segments
           : segments // ignore: cast_nullable_to_non_nullable
@@ -133,14 +134,14 @@ class __$$SuggestionStateWithIdentifiersImplCopyWithImpl<$Res>
 class _$SuggestionStateWithIdentifiersImpl
     implements _SuggestionStateWithIdentifiers {
   _$SuggestionStateWithIdentifiersImpl(
-      {required final Set<TokenIdentifier> tokenIdentifiers,
+      {required final Set<VariableImplementation> tokenIdentifiers,
       required final List<AnalysedSegment> segments})
       : _tokenIdentifiers = tokenIdentifiers,
         _segments = segments;
 
-  final Set<TokenIdentifier> _tokenIdentifiers;
+  final Set<VariableImplementation> _tokenIdentifiers;
   @override
-  Set<TokenIdentifier> get tokenIdentifiers {
+  Set<VariableImplementation> get tokenIdentifiers {
     if (_tokenIdentifiers is EqualUnmodifiableSetView) return _tokenIdentifiers;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableSetView(_tokenIdentifiers);
@@ -186,7 +187,7 @@ class _$SuggestionStateWithIdentifiersImpl
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Set<TokenIdentifier> tokenIdentifiers,
+    required TResult Function(Set<VariableImplementation> tokenIdentifiers,
             List<AnalysedSegment> segments)
         withIdentifiers,
     required TResult Function() undefined,
@@ -198,7 +199,7 @@ class _$SuggestionStateWithIdentifiersImpl
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Set<TokenIdentifier> tokenIdentifiers,
+    TResult? Function(Set<VariableImplementation> tokenIdentifiers,
             List<AnalysedSegment> segments)?
         withIdentifiers,
     TResult? Function()? undefined,
@@ -210,7 +211,7 @@ class _$SuggestionStateWithIdentifiersImpl
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Set<TokenIdentifier> tokenIdentifiers,
+    TResult Function(Set<VariableImplementation> tokenIdentifiers,
             List<AnalysedSegment> segments)?
         withIdentifiers,
     TResult Function()? undefined,
@@ -262,11 +263,11 @@ class _$SuggestionStateWithIdentifiersImpl
 
 abstract class _SuggestionStateWithIdentifiers implements SuggestionState {
   factory _SuggestionStateWithIdentifiers(
-          {required final Set<TokenIdentifier> tokenIdentifiers,
+          {required final Set<VariableImplementation> tokenIdentifiers,
           required final List<AnalysedSegment> segments}) =
       _$SuggestionStateWithIdentifiersImpl;
 
-  Set<TokenIdentifier> get tokenIdentifiers;
+  Set<VariableImplementation> get tokenIdentifiers;
   List<AnalysedSegment> get segments;
   @JsonKey(ignore: true)
   _$$SuggestionStateWithIdentifiersImplCopyWith<
@@ -315,7 +316,7 @@ class _$SuggestionStateUndefinedImpl implements _SuggestionStateUndefined {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Set<TokenIdentifier> tokenIdentifiers,
+    required TResult Function(Set<VariableImplementation> tokenIdentifiers,
             List<AnalysedSegment> segments)
         withIdentifiers,
     required TResult Function() undefined,
@@ -327,7 +328,7 @@ class _$SuggestionStateUndefinedImpl implements _SuggestionStateUndefined {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Set<TokenIdentifier> tokenIdentifiers,
+    TResult? Function(Set<VariableImplementation> tokenIdentifiers,
             List<AnalysedSegment> segments)?
         withIdentifiers,
     TResult? Function()? undefined,
@@ -339,7 +340,7 @@ class _$SuggestionStateUndefinedImpl implements _SuggestionStateUndefined {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Set<TokenIdentifier> tokenIdentifiers,
+    TResult Function(Set<VariableImplementation> tokenIdentifiers,
             List<AnalysedSegment> segments)?
         withIdentifiers,
     TResult Function()? undefined,
@@ -436,7 +437,7 @@ class _$SuggestionStateErrorOccurredImpl
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Set<TokenIdentifier> tokenIdentifiers,
+    required TResult Function(Set<VariableImplementation> tokenIdentifiers,
             List<AnalysedSegment> segments)
         withIdentifiers,
     required TResult Function() undefined,
@@ -448,7 +449,7 @@ class _$SuggestionStateErrorOccurredImpl
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Set<TokenIdentifier> tokenIdentifiers,
+    TResult? Function(Set<VariableImplementation> tokenIdentifiers,
             List<AnalysedSegment> segments)?
         withIdentifiers,
     TResult? Function()? undefined,
@@ -460,7 +461,7 @@ class _$SuggestionStateErrorOccurredImpl
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Set<TokenIdentifier> tokenIdentifiers,
+    TResult Function(Set<VariableImplementation> tokenIdentifiers,
             List<AnalysedSegment> segments)?
         withIdentifiers,
     TResult Function()? undefined,

@@ -26,7 +26,7 @@ class TextContentTab extends StatefulWidget {
 class _TextContentTabState extends State<TextContentTab> {
   final FocusNode textfieldFocusNode = FocusNode();
   late final VariablesInfoHighlightTextEditingController controller;
-  late final OptionsController<TokenIdentifier> optionsController;
+  late final OptionsController<VariableImplementation> optionsController;
   final Debouncer decouncer = Debouncer(timerDuration: 800.ms);
 
   @override
@@ -38,53 +38,64 @@ class _TextContentTabState extends State<TextContentTab> {
       text: contentCubit.state.currentText,
     );
 
-    optionsController = OptionsController<TokenIdentifier>(
+    optionsController = OptionsController<VariableImplementation>(
       textfieldFocusNode: textfieldFocusNode,
       textEditingController: controller,
       context: context,
-      optionAsString: (option) => option.name,
+      // optionAsString: (option) => option.name,
+      optionAsString: (option) => option.map(
+        boolean: (value) => value.booleanImplementation.map(
+          invertedValue: (impl) {
+            return '^${value.booleanTokenIdentifier.name}';
+          },
+          normalValue: (impl) {
+            return '#${value.booleanTokenIdentifier.name}';
+          },
+        ),
+        text: (value) => value.textTokenIdentifier.name,
+        model: (value) => '#${value.modelTokenIdentifier.name}',
+      ),
       overlay: Overlay.of(
         NavigatorService.i.dashboardNavigatorKey.currentContext!,
       ),
       onTextAddedCallback: (option, newEditingValue) {
-        final sugestionCubit = context.read<SuggestionCubit>();
-        final varCubit = context.read<VariablesCubit>();
-        sugestionCubit.setSuggestions(
-          input: newEditingValue.text,
-          indexAtText: newEditingValue.selection.start,
-          flatMap: varCubit.state.flatMap,
-        );
+        _notifyContentCubit(contentCubit, newEditingValue.text);
       },
       selectInCursorParser: (option) {
         return InsertInCursorPayload(
           cursorIndexChangeQuantity: option.map(
             text: (value) => 2,
-            boolean: (value) => -3 - value.name.length,
-            model: (value) => -3 - value.name.length,
+            boolean: (value) => -3 - value.booleanTokenIdentifier.name.length,
+            model: (value) => -3 - value.modelTokenIdentifier.name.length,
           ),
           text: option.map(
             text: (value) {
-              Future.delayed(const Duration(milliseconds: 800), () {
-                _notifyContentCubit(contentCubit, controller.text);
-              });
-              return value.name;
+              final name = value.textTokenIdentifier.name;
+              return name;
             },
             boolean: (value) {
-              Future.delayed(const Duration(milliseconds: 800), () {
-                _notifyContentCubit(contentCubit, controller.text);
-              });
-              return '#${value.name}}}{{/${value.name}';
+              final name = value.booleanTokenIdentifier.name;
+              return value.booleanImplementation.map(
+                invertedValue: (_) {
+                  return '#$name}}{{/$name';
+                },
+                normalValue: (_) {
+                  return '^$name}}{{/$name';
+                },
+              );
             },
             model: (value) {
-              Future.delayed(const Duration(milliseconds: 800), () {
-                _notifyContentCubit(contentCubit, controller.text);
-              });
-              return '#${value.name}}}{{/${value.name}';
+              final name = value.modelTokenIdentifier.name;
+              return '#$name}}{{/$name';
             },
           ),
         );
       },
     );
+    Future.delayed(const Duration(milliseconds: 200), () {
+      if (!mounted) return;
+      _notifyContentCubit(contentCubit, contentCubit.state.currentText, 0);
+    });
   }
 
   @override
@@ -202,13 +213,14 @@ class _TextContentTabState extends State<TextContentTab> {
     );
   }
 
-  void _notifyContentCubit(ContentStringCubit contentCubit, String text) {
+  void _notifyContentCubit(ContentStringCubit contentCubit, String text,
+      [int? indexAtText]) {
     try {
       final sugestionCubit = context.read<SuggestionCubit>();
       final varCubit = context.read<VariablesCubit>();
       sugestionCubit.setSuggestions(
         input: controller.text,
-        indexAtText: controller.selection.start,
+        indexAtText: indexAtText ?? controller.selection.start,
         flatMap: varCubit.state.flatMap,
       );
     } catch (_, __) {}
@@ -228,7 +240,7 @@ class _TextContentTabState extends State<TextContentTab> {
 }
 
 class SuggestionCard extends StatelessWidget {
-  final Widget Function(List<TokenIdentifier> options)
+  final Widget Function(List<VariableImplementation> options)
       listTilesWithOptionsBuilder;
 
   const SuggestionCard({
