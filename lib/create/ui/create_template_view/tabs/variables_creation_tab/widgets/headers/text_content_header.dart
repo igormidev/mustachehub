@@ -4,14 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mustachehub/app_core/theme/default_widgets/custom_header.dart';
 import 'package:mustachehub/app_core/theme/default_widgets/debounce_widget.dart';
+import 'package:mustachehub/create/presenter/controllers/variables_info_highlight_text_editing_controller.dart';
 import 'package:mustachehub/create/presenter/cubits/fields_text_size_cubit.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class TextContentHeader extends StatelessWidget {
   final Debouncer debouncer;
+  final VariablesInfoHighlightTextEditingController controller;
   const TextContentHeader({
     super.key,
     required this.debouncer,
+    required this.controller,
   });
 
   @override

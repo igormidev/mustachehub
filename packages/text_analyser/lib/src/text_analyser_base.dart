@@ -1,4 +1,5 @@
 import 'package:enchanted_regex/enchanted_regex.dart';
+import 'package:enchanted_collection/enchanted_collection.dart';
 import 'package:text_analyser/src/models/analysed_segment.dart';
 import 'package:text_analyser/src/models/token_identifier.dart';
 
@@ -20,7 +21,7 @@ class TextAnalyserBase {
     int indexAtText,
     Map<String, TokenIdentifier> flatMap,
   ) {
-    final isIndexInText = indexAtText >= 0 && indexAtText < input.length;
+    final isIndexInText = indexAtText >= 0 && indexAtText <= input.length;
     if (isIndexInText == false) {
       return null;
     }
@@ -46,6 +47,9 @@ class TextAnalyserBase {
     final Map<String, List<ToAnalyseDeclarationModel>>
         notDefininedOpenModelSegments = {};
 
+    final Map<String, List<ToAnalyseDeclarationBoolean>>
+        notDefininedOpenBooleanSegments = {};
+
     final Map<String, List<ToAnalyseDeclaration>> notDefininedNonModelSegments =
         {};
 
@@ -60,7 +64,7 @@ class TextAnalyserBase {
 
         if (tokenIdentifier == null) {
           segments[index] = AnalysedSegment.declarationOfUncatalogedVariable(
-            content: group.fullMatchText,
+            segmentText: group.fullMatchText,
           );
           return;
         }
@@ -72,25 +76,33 @@ class TextAnalyserBase {
           model: (_) => true,
           orElse: () => false,
         );
+        final bool isBoolean = tokenIdentifier.maybeMap(
+          boolean: (_) => true,
+          orElse: () => false,
+        );
+        final bool isText = tokenIdentifier.maybeMap(
+          text: (_) => true,
+          orElse: () => false,
+        );
 
         /// Only models can have delimiters indicators
-        if (hasDelimiter && isModel == false) {
+        if (hasDelimiter && isModel == false && isBoolean == false) {
           final seg = AnalysedSegment.nonModelVariableWithOpenOrCloseDelimmiter(
-            content: group.fullMatchText,
+            segmentText: group.fullMatchText,
           );
           segments[index] = seg;
           return;
         }
 
-        if (isModel && hasDelimiter == false) {
+        if ((isModel || isBoolean) && hasDelimiter == false) {
           segments[index] = AnalysedSegment.invalidMapDeclaration(
-            content: group.fullMatchText,
+            segmentText: group.fullMatchText,
           );
           return;
         }
 
         /// It is a valid declaration of a not model
-        if (isModel == false) {
+        if (isText) {
           // Root variables are not inside a scope model.
           // There are in the first layer of the variables declaration.
           // For that cases, we don't even have to check if they are valid or not
@@ -98,7 +110,7 @@ class TextAnalyserBase {
           final isRootTokenIdentifier = tokenIdentifier.parrentName == null;
           if (isRootTokenIdentifier) {
             segments[index] = AnalysedSegment.validDeclaration(
-              content: group.fullMatchText,
+              segmentText: group.fullMatchText,
             );
             return;
           } else {
@@ -118,9 +130,50 @@ class TextAnalyserBase {
             );
           }
           return;
+        } else if (isBoolean) {
+          // Now, we need to now if the boolean has a open and close declaration in somewhere in the text.
+          if (notDefininedOpenBooleanSegments.containsKey(group.content) ==
+              false) {
+            notDefininedOpenBooleanSegments[group.content] = [];
+          }
+
+          if (isOpenDelimiter) {
+            notDefininedOpenBooleanSegments[group.content]?.add(
+              ToAnalyseDeclarationBoolean(
+                tokenIdentifier: tokenIdentifier as BooleanTokenIdentifier,
+                findedGroup: group,
+                indexInSegment: index,
+              ),
+            );
+            return;
+          }
+
+          final List<ToAnalyseDeclarationBoolean>? openDeclarations =
+              notDefininedOpenBooleanSegments[group.content];
+
+          if (openDeclarations == null || openDeclarations.isEmpty) {
+            segments[index] =
+                AnalysedSegment.booleanDeclarationCloseWithoutOpen(
+              segmentText: group.fullMatchText,
+            );
+          } else {
+            final ToAnalyseDeclarationBoolean openDeclaration =
+                openDeclarations.removeLast();
+
+            segments[openDeclaration.indexInSegment] =
+                AnalysedSegment.validDeclaration(
+              segmentText: openDeclaration.findedGroup.fullMatchText,
+            );
+
+            segments[index] = AnalysedSegment.validDeclaration(
+              segmentText: group.fullMatchText,
+            );
+          }
+
+          return;
         }
 
-        // Now, we need to now if the model has a opne and close declaration in somewhere in the text.
+        // Now, we need to now if the model has a open and close declaration in somewhere in the text.
         if (notDefininedOpenModelSegments.containsKey(group.content) == false) {
           notDefininedOpenModelSegments[group.content] = [];
         }
@@ -140,7 +193,7 @@ class TextAnalyserBase {
 
           if (openDeclarations == null || openDeclarations.isEmpty) {
             segments[index] = AnalysedSegment.modelDeclarationCloseWithoutOpen(
-              content: group.fullMatchText,
+              segmentText: group.fullMatchText,
             );
             return;
           }
@@ -149,7 +202,7 @@ class TextAnalyserBase {
               openDeclarations.removeLast();
 
           segments[index] = AnalysedSegment.validDeclaration(
-            content: group.fullMatchText,
+            segmentText: group.fullMatchText,
           );
 
           final IdentifierScope scope = IdentifierScope(
@@ -188,7 +241,7 @@ class TextAnalyserBase {
       onNonMatch: (text) {
         index++;
 
-        segments[index] = AnalysedSegment.text(content: text);
+        segments[index] = AnalysedSegment.text(segmentText: text);
       },
     );
 
@@ -196,7 +249,16 @@ class TextAnalyserBase {
       for (final declaration in declarations) {
         segments[declaration.indexInSegment] =
             AnalysedSegment.modelDeclarationOpenWithoutClose(
-          content: declaration.findedGroup.fullMatchText,
+          segmentText: declaration.findedGroup.fullMatchText,
+        );
+      }
+    });
+
+    notDefininedOpenBooleanSegments.forEach((content, declarations) {
+      for (final declaration in declarations) {
+        segments[declaration.indexInSegment] =
+            AnalysedSegment.booleanDeclarationOpenWithoutClose(
+          segmentText: declaration.findedGroup.fullMatchText,
         );
       }
     });
@@ -217,19 +279,40 @@ class TextAnalyserBase {
         if (isDeclarationInCorrectScope == true) {
           segments[declaration.indexInSegment] =
               AnalysedSegment.validDeclaration(
-            content: declaration.findedGroup.fullMatchText,
+            segmentText: declaration.findedGroup.fullMatchText,
           );
         } else {
           segments[declaration.indexInSegment] =
               AnalysedSegment.variableExistsButCannotBeUsedInThisContext(
-            content: declaration.findedGroup.fullMatchText,
+            segmentText: declaration.findedGroup.fullMatchText,
           );
         }
       }
     });
 
+    print('---------------------');
+    // segments.forEach((index, element) {
+    //   print('$index ${element.segmentText}');
+    // });
+    print('---------------------');
+
+    final sortedSegmentsEntries =
+        segments.castToList((key, value) => MapEntry(key, value))
+          ..sort(
+            (a, b) => a.key.compareTo(b.key),
+          );
+
+    final List<AnalysedSegment> sortedSegments =
+        sortedSegmentsEntries.map((e) => e.value).toList();
+
+    print('---------------------');
+    sortedSegments.forEachMapper((value, isFirst, isLast, index) {
+      print('$index ${value.segmentText}');
+    });
+    print('---------------------');
+
     return AnalysedResponse(
-      segments: segments.values.toList(),
+      segments: sortedSegments,
       tokenIdentifiers: validScopesIdentifier,
     );
   }
@@ -240,6 +323,17 @@ class ToAnalyseDeclarationModel {
   final FindedGroup findedGroup;
   final int indexInSegment;
   const ToAnalyseDeclarationModel({
+    required this.tokenIdentifier,
+    required this.findedGroup,
+    required this.indexInSegment,
+  });
+}
+
+class ToAnalyseDeclarationBoolean {
+  final BooleanTokenIdentifier tokenIdentifier;
+  final FindedGroup findedGroup;
+  final int indexInSegment;
+  const ToAnalyseDeclarationBoolean({
     required this.tokenIdentifier,
     required this.findedGroup,
     required this.indexInSegment,

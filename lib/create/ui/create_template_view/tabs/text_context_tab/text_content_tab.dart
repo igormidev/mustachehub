@@ -11,6 +11,7 @@ import 'package:mustachehub/create/presenter/cubits/variables_cubit.dart';
 import 'package:mustachehub/create/presenter/input_formaters/add_mustache_delimmiter_input_formater.dart';
 import 'package:mustachehub/create/presenter/state/fields_text_size_state.dart';
 import 'package:mustachehub/create/presenter/state/suggestion_state.dart';
+import 'package:mustachehub/create/presenter/state/variables_state.dart';
 import 'package:mustachehub/create/ui/create_template_view/tabs/variables_creation_tab/widgets/headers/text_content_header.dart';
 import 'package:mustachex/mustachex.dart';
 import 'package:text_analyser/text_analyser.dart';
@@ -116,12 +117,23 @@ class _TextContentTabState extends State<TextContentTab> {
             );
           },
         ),
+        BlocListener<VariablesCubit, VariablesState>(
+          listener: (context, state) {
+            final sugestionCubit = context.read<SuggestionCubit>();
+            sugestionCubit.setSuggestions(
+              input: controller.text,
+              indexAtText: controller.selection.start,
+              flatMap: state.flatMap,
+            );
+          },
+        ),
       ],
       child: Padding(
         padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
         child: Column(
           children: [
             TextContentHeader(
+              controller: controller,
               debouncer: decouncer,
             ),
             const SizedBox(height: 8),
@@ -130,14 +142,18 @@ class _TextContentTabState extends State<TextContentTab> {
                 bloc: sizeBloc,
                 builder: (context, varState) {
                   optionsController.updateContext(context);
+                  final style = Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        height: 1,
+                        fontSize: varState.testStringTextSize,
+                      );
+
+                  controller.txStyle = style;
+
                   return TextFormField(
                     focusNode: textfieldFocusNode,
                     controller: controller,
                     maxLines: 10,
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                          height: 1,
-                          fontSize: varState.testStringTextSize,
-                        ),
+                    style: style,
                     decoration: InputDecoration(
                       contentPadding: const EdgeInsets.symmetric(
                           vertical: 16, horizontal: 16),
@@ -187,6 +203,15 @@ class _TextContentTabState extends State<TextContentTab> {
   }
 
   void _notifyContentCubit(ContentStringCubit contentCubit, String text) {
+    try {
+      final sugestionCubit = context.read<SuggestionCubit>();
+      final varCubit = context.read<VariablesCubit>();
+      sugestionCubit.setSuggestions(
+        input: controller.text,
+        indexAtText: controller.selection.start,
+        flatMap: varCubit.state.flatMap,
+      );
+    } catch (_, __) {}
     try {
       final parser = Parser(text, null, '{{ }}');
       final tokens = parser.getTokens();

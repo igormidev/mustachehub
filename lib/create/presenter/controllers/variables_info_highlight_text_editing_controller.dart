@@ -12,29 +12,47 @@ class VariablesInfoHighlightTextEditingController
     BuildContext context,
   ) {
     final ColorScheme cS = Theme.of(context).colorScheme;
-    final TextStyle defaultStyle =
-        Theme.of(context).textTheme.bodyMedium!.copyWith();
+    final TextStyle? defaultStyle = _txStyle;
+    if (defaultStyle == null) return;
 
     cacheSpans = segments.map((e) {
       return e.map(
         text: (value) {
           return TextSpan(
-            text: value.content,
+            text: value.segmentText,
             style: defaultStyle,
           );
         },
         validDeclaration: (value) {
           return TextSpan(
-            text: value.content,
+            text: value.segmentText,
             style: defaultStyle.copyWith(
               color: cS.primary,
               backgroundColor: cS.primaryContainer,
             ),
           );
         },
+        booleanDeclarationCloseWithoutOpen: (value) {
+          return TextSpan(
+            text: value.segmentText,
+            style: defaultStyle.copyWith(
+              color: cS.error,
+              backgroundColor: cS.errorContainer,
+            ),
+          );
+        },
+        booleanDeclarationOpenWithoutClose: (value) {
+          return TextSpan(
+            text: value.segmentText,
+            style: defaultStyle.copyWith(
+              color: cS.error,
+              backgroundColor: cS.errorContainer,
+            ),
+          );
+        },
         invalidMapDeclaration: (value) {
           return TextSpan(
-            text: value.content,
+            text: value.segmentText,
             style: defaultStyle.copyWith(
               color: cS.error,
               backgroundColor: cS.errorContainer,
@@ -43,7 +61,7 @@ class VariablesInfoHighlightTextEditingController
         },
         modelDeclarationOpenWithoutClose: (value) {
           return TextSpan(
-            text: value.content,
+            text: value.segmentText,
             style: defaultStyle.copyWith(
               color: cS.error,
               backgroundColor: cS.errorContainer,
@@ -52,7 +70,7 @@ class VariablesInfoHighlightTextEditingController
         },
         modelDeclarationCloseWithoutOpen: (value) {
           return TextSpan(
-            text: value.content,
+            text: value.segmentText,
             style: defaultStyle.copyWith(
               color: cS.error,
               backgroundColor: cS.errorContainer,
@@ -61,7 +79,7 @@ class VariablesInfoHighlightTextEditingController
         },
         nonModelVariableWithOpenOrCloseDelimmiter: (value) {
           return TextSpan(
-            text: value.content,
+            text: value.segmentText,
             style: defaultStyle.copyWith(
               color: cS.error,
               backgroundColor: cS.errorContainer,
@@ -70,7 +88,7 @@ class VariablesInfoHighlightTextEditingController
         },
         declarationOfUncatalogedVariable: (value) {
           return TextSpan(
-            text: value.content,
+            text: value.segmentText,
             style: defaultStyle.copyWith(
               color: cS.error,
               backgroundColor: cS.errorContainer,
@@ -79,7 +97,7 @@ class VariablesInfoHighlightTextEditingController
         },
         variableExistsButCannotBeUsedInThisContext: (value) {
           return TextSpan(
-            text: value.content,
+            text: value.segmentText,
             style: defaultStyle.copyWith(
               color: cS.error,
               backgroundColor: cS.errorContainer,
@@ -91,9 +109,21 @@ class VariablesInfoHighlightTextEditingController
 
     cacheText = TextSpan(children: cacheSpans).toPlainText();
 
-    // cacheText = value.text;
-    // this.text = TextSpan(children: cacheSpans).toPlainText();
+    notifyListeners();
+  }
 
+  TextStyle? _txStyle;
+  TextStyle? get txStyle => _txStyle;
+  set txStyle(TextStyle? value) {
+    _txStyle = value;
+    cacheSpans = cacheSpans.map((e) {
+      return TextSpan(
+        text: e.text,
+        style: e.style?.copyWith(
+          fontSize: value?.fontSize,
+        ),
+      );
+    }).toList();
     notifyListeners();
   }
 
@@ -105,6 +135,8 @@ class VariablesInfoHighlightTextEditingController
     TextStyle? style,
     required bool withComposing,
   }) {
+    _txStyle ??= style;
+
     final cacheIsStillValid = cacheText == value.text && cacheSpans.isNotEmpty;
     if (cacheIsStillValid) {
       return TextSpan(children: cacheSpans);
@@ -118,7 +150,6 @@ class VariablesInfoHighlightTextEditingController
       // be thrown and this EditableText will be built with a broken subtree.
       final bool composingRegionOutOfRange =
           !value.isComposingRangeValid || !withComposing;
-
       if (composingRegionOutOfRange) {
         return TextSpan(style: style, text: text);
       }

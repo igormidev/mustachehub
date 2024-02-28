@@ -16,6 +16,7 @@ dependency_overrides:
 dependencies:
   enchanted_regex: ^1.0.6
   freezed_annotation: ^2.4.1 
+  enchanted_collection:
   mustache_hub_core:
     path: ../mustache_hub_core
   mustachex:

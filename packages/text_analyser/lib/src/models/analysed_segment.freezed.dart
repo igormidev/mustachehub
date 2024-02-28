@@ -17,45 +17,57 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$AnalysedSegment {
 // ✅
-  String get content => throw _privateConstructorUsedError;
+  String get segmentText => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String content) text,
-    required TResult Function(String content) validDeclaration,
-    required TResult Function(String content) invalidMapDeclaration,
-    required TResult Function(String content) modelDeclarationOpenWithoutClose,
-    required TResult Function(String content) modelDeclarationCloseWithoutOpen,
-    required TResult Function(String content)
+    required TResult Function(String segmentText) text,
+    required TResult Function(String segmentText) validDeclaration,
+    required TResult Function(String segmentText) invalidMapDeclaration,
+    required TResult Function(String segmentText)
+        modelDeclarationOpenWithoutClose,
+    required TResult Function(String segmentText)
+        modelDeclarationCloseWithoutOpen,
+    required TResult Function(String segmentText)
+        booleanDeclarationOpenWithoutClose,
+    required TResult Function(String segmentText)
+        booleanDeclarationCloseWithoutOpen,
+    required TResult Function(String segmentText)
         nonModelVariableWithOpenOrCloseDelimmiter,
-    required TResult Function(String content) declarationOfUncatalogedVariable,
-    required TResult Function(String content)
+    required TResult Function(String segmentText)
+        declarationOfUncatalogedVariable,
+    required TResult Function(String segmentText)
         variableExistsButCannotBeUsedInThisContext,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String content)? text,
-    TResult? Function(String content)? validDeclaration,
-    TResult? Function(String content)? invalidMapDeclaration,
-    TResult? Function(String content)? modelDeclarationOpenWithoutClose,
-    TResult? Function(String content)? modelDeclarationCloseWithoutOpen,
-    TResult? Function(String content)?
+    TResult? Function(String segmentText)? text,
+    TResult? Function(String segmentText)? validDeclaration,
+    TResult? Function(String segmentText)? invalidMapDeclaration,
+    TResult? Function(String segmentText)? modelDeclarationOpenWithoutClose,
+    TResult? Function(String segmentText)? modelDeclarationCloseWithoutOpen,
+    TResult? Function(String segmentText)? booleanDeclarationOpenWithoutClose,
+    TResult? Function(String segmentText)? booleanDeclarationCloseWithoutOpen,
+    TResult? Function(String segmentText)?
         nonModelVariableWithOpenOrCloseDelimmiter,
-    TResult? Function(String content)? declarationOfUncatalogedVariable,
-    TResult? Function(String content)?
+    TResult? Function(String segmentText)? declarationOfUncatalogedVariable,
+    TResult? Function(String segmentText)?
         variableExistsButCannotBeUsedInThisContext,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String content)? text,
-    TResult Function(String content)? validDeclaration,
-    TResult Function(String content)? invalidMapDeclaration,
-    TResult Function(String content)? modelDeclarationOpenWithoutClose,
-    TResult Function(String content)? modelDeclarationCloseWithoutOpen,
-    TResult Function(String content)? nonModelVariableWithOpenOrCloseDelimmiter,
-    TResult Function(String content)? declarationOfUncatalogedVariable,
-    TResult Function(String content)?
+    TResult Function(String segmentText)? text,
+    TResult Function(String segmentText)? validDeclaration,
+    TResult Function(String segmentText)? invalidMapDeclaration,
+    TResult Function(String segmentText)? modelDeclarationOpenWithoutClose,
+    TResult Function(String segmentText)? modelDeclarationCloseWithoutOpen,
+    TResult Function(String segmentText)? booleanDeclarationOpenWithoutClose,
+    TResult Function(String segmentText)? booleanDeclarationCloseWithoutOpen,
+    TResult Function(String segmentText)?
+        nonModelVariableWithOpenOrCloseDelimmiter,
+    TResult Function(String segmentText)? declarationOfUncatalogedVariable,
+    TResult Function(String segmentText)?
         variableExistsButCannotBeUsedInThisContext,
     required TResult orElse(),
   }) =>
@@ -73,6 +85,12 @@ mixin _$AnalysedSegment {
     required TResult Function(
             _AnalysedSegmentModelDeclarationCloseWithoutOpen value)
         modelDeclarationCloseWithoutOpen,
+    required TResult Function(
+            _AnalysedSegmentBooleanDeclarationOpenWithoutClose value)
+        booleanDeclarationOpenWithoutClose,
+    required TResult Function(
+            _AnalysedSegmentBooleanDeclarationCloseWithoutOpen value)
+        booleanDeclarationCloseWithoutOpen,
     required TResult Function(
             _AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiter value)
         nonModelVariableWithOpenOrCloseDelimmiter,
@@ -94,6 +112,10 @@ mixin _$AnalysedSegment {
         modelDeclarationOpenWithoutClose,
     TResult? Function(_AnalysedSegmentModelDeclarationCloseWithoutOpen value)?
         modelDeclarationCloseWithoutOpen,
+    TResult? Function(_AnalysedSegmentBooleanDeclarationOpenWithoutClose value)?
+        booleanDeclarationOpenWithoutClose,
+    TResult? Function(_AnalysedSegmentBooleanDeclarationCloseWithoutOpen value)?
+        booleanDeclarationCloseWithoutOpen,
     TResult? Function(
             _AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiter value)?
         nonModelVariableWithOpenOrCloseDelimmiter,
@@ -114,6 +136,10 @@ mixin _$AnalysedSegment {
         modelDeclarationOpenWithoutClose,
     TResult Function(_AnalysedSegmentModelDeclarationCloseWithoutOpen value)?
         modelDeclarationCloseWithoutOpen,
+    TResult Function(_AnalysedSegmentBooleanDeclarationOpenWithoutClose value)?
+        booleanDeclarationOpenWithoutClose,
+    TResult Function(_AnalysedSegmentBooleanDeclarationCloseWithoutOpen value)?
+        booleanDeclarationCloseWithoutOpen,
     TResult Function(
             _AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiter value)?
         nonModelVariableWithOpenOrCloseDelimmiter,
@@ -137,7 +163,7 @@ abstract class $AnalysedSegmentCopyWith<$Res> {
           AnalysedSegment value, $Res Function(AnalysedSegment) then) =
       _$AnalysedSegmentCopyWithImpl<$Res, AnalysedSegment>;
   @useResult
-  $Res call({String content});
+  $Res call({String segmentText});
 }
 
 /// @nodoc
@@ -153,12 +179,12 @@ class _$AnalysedSegmentCopyWithImpl<$Res, $Val extends AnalysedSegment>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? content = null,
+    Object? segmentText = null,
   }) {
     return _then(_value.copyWith(
-      content: null == content
-          ? _value.content
-          : content // ignore: cast_nullable_to_non_nullable
+      segmentText: null == segmentText
+          ? _value.segmentText
+          : segmentText // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -172,7 +198,7 @@ abstract class _$$AnalysedSegmentTextImplCopyWith<$Res>
       __$$AnalysedSegmentTextImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String content});
+  $Res call({String segmentText});
 }
 
 /// @nodoc
@@ -186,12 +212,12 @@ class __$$AnalysedSegmentTextImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? content = null,
+    Object? segmentText = null,
   }) {
     return _then(_$AnalysedSegmentTextImpl(
-      content: null == content
-          ? _value.content
-          : content // ignore: cast_nullable_to_non_nullable
+      segmentText: null == segmentText
+          ? _value.segmentText
+          : segmentText // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -200,15 +226,15 @@ class __$$AnalysedSegmentTextImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$AnalysedSegmentTextImpl implements _AnalysedSegmentText {
-  _$AnalysedSegmentTextImpl({required this.content});
+  _$AnalysedSegmentTextImpl({required this.segmentText});
 
 // ✅
   @override
-  final String content;
+  final String segmentText;
 
   @override
   String toString() {
-    return 'AnalysedSegment.text(content: $content)';
+    return 'AnalysedSegment.text(segmentText: $segmentText)';
   }
 
   @override
@@ -216,11 +242,12 @@ class _$AnalysedSegmentTextImpl implements _AnalysedSegmentText {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AnalysedSegmentTextImpl &&
-            (identical(other.content, content) || other.content == content));
+            (identical(other.segmentText, segmentText) ||
+                other.segmentText == segmentText));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, content);
+  int get hashCode => Object.hash(runtimeType, segmentText);
 
   @JsonKey(ignore: true)
   @override
@@ -232,53 +259,65 @@ class _$AnalysedSegmentTextImpl implements _AnalysedSegmentText {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String content) text,
-    required TResult Function(String content) validDeclaration,
-    required TResult Function(String content) invalidMapDeclaration,
-    required TResult Function(String content) modelDeclarationOpenWithoutClose,
-    required TResult Function(String content) modelDeclarationCloseWithoutOpen,
-    required TResult Function(String content)
+    required TResult Function(String segmentText) text,
+    required TResult Function(String segmentText) validDeclaration,
+    required TResult Function(String segmentText) invalidMapDeclaration,
+    required TResult Function(String segmentText)
+        modelDeclarationOpenWithoutClose,
+    required TResult Function(String segmentText)
+        modelDeclarationCloseWithoutOpen,
+    required TResult Function(String segmentText)
+        booleanDeclarationOpenWithoutClose,
+    required TResult Function(String segmentText)
+        booleanDeclarationCloseWithoutOpen,
+    required TResult Function(String segmentText)
         nonModelVariableWithOpenOrCloseDelimmiter,
-    required TResult Function(String content) declarationOfUncatalogedVariable,
-    required TResult Function(String content)
+    required TResult Function(String segmentText)
+        declarationOfUncatalogedVariable,
+    required TResult Function(String segmentText)
         variableExistsButCannotBeUsedInThisContext,
   }) {
-    return text(content);
+    return text(segmentText);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String content)? text,
-    TResult? Function(String content)? validDeclaration,
-    TResult? Function(String content)? invalidMapDeclaration,
-    TResult? Function(String content)? modelDeclarationOpenWithoutClose,
-    TResult? Function(String content)? modelDeclarationCloseWithoutOpen,
-    TResult? Function(String content)?
+    TResult? Function(String segmentText)? text,
+    TResult? Function(String segmentText)? validDeclaration,
+    TResult? Function(String segmentText)? invalidMapDeclaration,
+    TResult? Function(String segmentText)? modelDeclarationOpenWithoutClose,
+    TResult? Function(String segmentText)? modelDeclarationCloseWithoutOpen,
+    TResult? Function(String segmentText)? booleanDeclarationOpenWithoutClose,
+    TResult? Function(String segmentText)? booleanDeclarationCloseWithoutOpen,
+    TResult? Function(String segmentText)?
         nonModelVariableWithOpenOrCloseDelimmiter,
-    TResult? Function(String content)? declarationOfUncatalogedVariable,
-    TResult? Function(String content)?
+    TResult? Function(String segmentText)? declarationOfUncatalogedVariable,
+    TResult? Function(String segmentText)?
         variableExistsButCannotBeUsedInThisContext,
   }) {
-    return text?.call(content);
+    return text?.call(segmentText);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String content)? text,
-    TResult Function(String content)? validDeclaration,
-    TResult Function(String content)? invalidMapDeclaration,
-    TResult Function(String content)? modelDeclarationOpenWithoutClose,
-    TResult Function(String content)? modelDeclarationCloseWithoutOpen,
-    TResult Function(String content)? nonModelVariableWithOpenOrCloseDelimmiter,
-    TResult Function(String content)? declarationOfUncatalogedVariable,
-    TResult Function(String content)?
+    TResult Function(String segmentText)? text,
+    TResult Function(String segmentText)? validDeclaration,
+    TResult Function(String segmentText)? invalidMapDeclaration,
+    TResult Function(String segmentText)? modelDeclarationOpenWithoutClose,
+    TResult Function(String segmentText)? modelDeclarationCloseWithoutOpen,
+    TResult Function(String segmentText)? booleanDeclarationOpenWithoutClose,
+    TResult Function(String segmentText)? booleanDeclarationCloseWithoutOpen,
+    TResult Function(String segmentText)?
+        nonModelVariableWithOpenOrCloseDelimmiter,
+    TResult Function(String segmentText)? declarationOfUncatalogedVariable,
+    TResult Function(String segmentText)?
         variableExistsButCannotBeUsedInThisContext,
     required TResult orElse(),
   }) {
     if (text != null) {
-      return text(content);
+      return text(segmentText);
     }
     return orElse();
   }
@@ -297,6 +336,12 @@ class _$AnalysedSegmentTextImpl implements _AnalysedSegmentText {
     required TResult Function(
             _AnalysedSegmentModelDeclarationCloseWithoutOpen value)
         modelDeclarationCloseWithoutOpen,
+    required TResult Function(
+            _AnalysedSegmentBooleanDeclarationOpenWithoutClose value)
+        booleanDeclarationOpenWithoutClose,
+    required TResult Function(
+            _AnalysedSegmentBooleanDeclarationCloseWithoutOpen value)
+        booleanDeclarationCloseWithoutOpen,
     required TResult Function(
             _AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiter value)
         nonModelVariableWithOpenOrCloseDelimmiter,
@@ -321,6 +366,10 @@ class _$AnalysedSegmentTextImpl implements _AnalysedSegmentText {
         modelDeclarationOpenWithoutClose,
     TResult? Function(_AnalysedSegmentModelDeclarationCloseWithoutOpen value)?
         modelDeclarationCloseWithoutOpen,
+    TResult? Function(_AnalysedSegmentBooleanDeclarationOpenWithoutClose value)?
+        booleanDeclarationOpenWithoutClose,
+    TResult? Function(_AnalysedSegmentBooleanDeclarationCloseWithoutOpen value)?
+        booleanDeclarationCloseWithoutOpen,
     TResult? Function(
             _AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiter value)?
         nonModelVariableWithOpenOrCloseDelimmiter,
@@ -344,6 +393,10 @@ class _$AnalysedSegmentTextImpl implements _AnalysedSegmentText {
         modelDeclarationOpenWithoutClose,
     TResult Function(_AnalysedSegmentModelDeclarationCloseWithoutOpen value)?
         modelDeclarationCloseWithoutOpen,
+    TResult Function(_AnalysedSegmentBooleanDeclarationOpenWithoutClose value)?
+        booleanDeclarationOpenWithoutClose,
+    TResult Function(_AnalysedSegmentBooleanDeclarationCloseWithoutOpen value)?
+        booleanDeclarationCloseWithoutOpen,
     TResult Function(
             _AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiter value)?
         nonModelVariableWithOpenOrCloseDelimmiter,
@@ -362,11 +415,11 @@ class _$AnalysedSegmentTextImpl implements _AnalysedSegmentText {
 }
 
 abstract class _AnalysedSegmentText implements AnalysedSegment {
-  factory _AnalysedSegmentText({required final String content}) =
+  factory _AnalysedSegmentText({required final String segmentText}) =
       _$AnalysedSegmentTextImpl;
 
   @override // ✅
-  String get content;
+  String get segmentText;
   @override
   @JsonKey(ignore: true)
   _$$AnalysedSegmentTextImplCopyWith<_$AnalysedSegmentTextImpl> get copyWith =>
@@ -382,7 +435,7 @@ abstract class _$$AnalysedSegmentDeclarationImplCopyWith<$Res>
       __$$AnalysedSegmentDeclarationImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String content});
+  $Res call({String segmentText});
 }
 
 /// @nodoc
@@ -398,12 +451,12 @@ class __$$AnalysedSegmentDeclarationImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? content = null,
+    Object? segmentText = null,
   }) {
     return _then(_$AnalysedSegmentDeclarationImpl(
-      content: null == content
-          ? _value.content
-          : content // ignore: cast_nullable_to_non_nullable
+      segmentText: null == segmentText
+          ? _value.segmentText
+          : segmentText // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -412,15 +465,15 @@ class __$$AnalysedSegmentDeclarationImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$AnalysedSegmentDeclarationImpl implements _AnalysedSegmentDeclaration {
-  _$AnalysedSegmentDeclarationImpl({required this.content});
+  _$AnalysedSegmentDeclarationImpl({required this.segmentText});
 
 // ✅
   @override
-  final String content;
+  final String segmentText;
 
   @override
   String toString() {
-    return 'AnalysedSegment.validDeclaration(content: $content)';
+    return 'AnalysedSegment.validDeclaration(segmentText: $segmentText)';
   }
 
   @override
@@ -428,11 +481,12 @@ class _$AnalysedSegmentDeclarationImpl implements _AnalysedSegmentDeclaration {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AnalysedSegmentDeclarationImpl &&
-            (identical(other.content, content) || other.content == content));
+            (identical(other.segmentText, segmentText) ||
+                other.segmentText == segmentText));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, content);
+  int get hashCode => Object.hash(runtimeType, segmentText);
 
   @JsonKey(ignore: true)
   @override
@@ -444,53 +498,65 @@ class _$AnalysedSegmentDeclarationImpl implements _AnalysedSegmentDeclaration {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String content) text,
-    required TResult Function(String content) validDeclaration,
-    required TResult Function(String content) invalidMapDeclaration,
-    required TResult Function(String content) modelDeclarationOpenWithoutClose,
-    required TResult Function(String content) modelDeclarationCloseWithoutOpen,
-    required TResult Function(String content)
+    required TResult Function(String segmentText) text,
+    required TResult Function(String segmentText) validDeclaration,
+    required TResult Function(String segmentText) invalidMapDeclaration,
+    required TResult Function(String segmentText)
+        modelDeclarationOpenWithoutClose,
+    required TResult Function(String segmentText)
+        modelDeclarationCloseWithoutOpen,
+    required TResult Function(String segmentText)
+        booleanDeclarationOpenWithoutClose,
+    required TResult Function(String segmentText)
+        booleanDeclarationCloseWithoutOpen,
+    required TResult Function(String segmentText)
         nonModelVariableWithOpenOrCloseDelimmiter,
-    required TResult Function(String content) declarationOfUncatalogedVariable,
-    required TResult Function(String content)
+    required TResult Function(String segmentText)
+        declarationOfUncatalogedVariable,
+    required TResult Function(String segmentText)
         variableExistsButCannotBeUsedInThisContext,
   }) {
-    return validDeclaration(content);
+    return validDeclaration(segmentText);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String content)? text,
-    TResult? Function(String content)? validDeclaration,
-    TResult? Function(String content)? invalidMapDeclaration,
-    TResult? Function(String content)? modelDeclarationOpenWithoutClose,
-    TResult? Function(String content)? modelDeclarationCloseWithoutOpen,
-    TResult? Function(String content)?
+    TResult? Function(String segmentText)? text,
+    TResult? Function(String segmentText)? validDeclaration,
+    TResult? Function(String segmentText)? invalidMapDeclaration,
+    TResult? Function(String segmentText)? modelDeclarationOpenWithoutClose,
+    TResult? Function(String segmentText)? modelDeclarationCloseWithoutOpen,
+    TResult? Function(String segmentText)? booleanDeclarationOpenWithoutClose,
+    TResult? Function(String segmentText)? booleanDeclarationCloseWithoutOpen,
+    TResult? Function(String segmentText)?
         nonModelVariableWithOpenOrCloseDelimmiter,
-    TResult? Function(String content)? declarationOfUncatalogedVariable,
-    TResult? Function(String content)?
+    TResult? Function(String segmentText)? declarationOfUncatalogedVariable,
+    TResult? Function(String segmentText)?
         variableExistsButCannotBeUsedInThisContext,
   }) {
-    return validDeclaration?.call(content);
+    return validDeclaration?.call(segmentText);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String content)? text,
-    TResult Function(String content)? validDeclaration,
-    TResult Function(String content)? invalidMapDeclaration,
-    TResult Function(String content)? modelDeclarationOpenWithoutClose,
-    TResult Function(String content)? modelDeclarationCloseWithoutOpen,
-    TResult Function(String content)? nonModelVariableWithOpenOrCloseDelimmiter,
-    TResult Function(String content)? declarationOfUncatalogedVariable,
-    TResult Function(String content)?
+    TResult Function(String segmentText)? text,
+    TResult Function(String segmentText)? validDeclaration,
+    TResult Function(String segmentText)? invalidMapDeclaration,
+    TResult Function(String segmentText)? modelDeclarationOpenWithoutClose,
+    TResult Function(String segmentText)? modelDeclarationCloseWithoutOpen,
+    TResult Function(String segmentText)? booleanDeclarationOpenWithoutClose,
+    TResult Function(String segmentText)? booleanDeclarationCloseWithoutOpen,
+    TResult Function(String segmentText)?
+        nonModelVariableWithOpenOrCloseDelimmiter,
+    TResult Function(String segmentText)? declarationOfUncatalogedVariable,
+    TResult Function(String segmentText)?
         variableExistsButCannotBeUsedInThisContext,
     required TResult orElse(),
   }) {
     if (validDeclaration != null) {
-      return validDeclaration(content);
+      return validDeclaration(segmentText);
     }
     return orElse();
   }
@@ -509,6 +575,12 @@ class _$AnalysedSegmentDeclarationImpl implements _AnalysedSegmentDeclaration {
     required TResult Function(
             _AnalysedSegmentModelDeclarationCloseWithoutOpen value)
         modelDeclarationCloseWithoutOpen,
+    required TResult Function(
+            _AnalysedSegmentBooleanDeclarationOpenWithoutClose value)
+        booleanDeclarationOpenWithoutClose,
+    required TResult Function(
+            _AnalysedSegmentBooleanDeclarationCloseWithoutOpen value)
+        booleanDeclarationCloseWithoutOpen,
     required TResult Function(
             _AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiter value)
         nonModelVariableWithOpenOrCloseDelimmiter,
@@ -533,6 +605,10 @@ class _$AnalysedSegmentDeclarationImpl implements _AnalysedSegmentDeclaration {
         modelDeclarationOpenWithoutClose,
     TResult? Function(_AnalysedSegmentModelDeclarationCloseWithoutOpen value)?
         modelDeclarationCloseWithoutOpen,
+    TResult? Function(_AnalysedSegmentBooleanDeclarationOpenWithoutClose value)?
+        booleanDeclarationOpenWithoutClose,
+    TResult? Function(_AnalysedSegmentBooleanDeclarationCloseWithoutOpen value)?
+        booleanDeclarationCloseWithoutOpen,
     TResult? Function(
             _AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiter value)?
         nonModelVariableWithOpenOrCloseDelimmiter,
@@ -556,6 +632,10 @@ class _$AnalysedSegmentDeclarationImpl implements _AnalysedSegmentDeclaration {
         modelDeclarationOpenWithoutClose,
     TResult Function(_AnalysedSegmentModelDeclarationCloseWithoutOpen value)?
         modelDeclarationCloseWithoutOpen,
+    TResult Function(_AnalysedSegmentBooleanDeclarationOpenWithoutClose value)?
+        booleanDeclarationOpenWithoutClose,
+    TResult Function(_AnalysedSegmentBooleanDeclarationCloseWithoutOpen value)?
+        booleanDeclarationCloseWithoutOpen,
     TResult Function(
             _AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiter value)?
         nonModelVariableWithOpenOrCloseDelimmiter,
@@ -574,11 +654,11 @@ class _$AnalysedSegmentDeclarationImpl implements _AnalysedSegmentDeclaration {
 }
 
 abstract class _AnalysedSegmentDeclaration implements AnalysedSegment {
-  factory _AnalysedSegmentDeclaration({required final String content}) =
+  factory _AnalysedSegmentDeclaration({required final String segmentText}) =
       _$AnalysedSegmentDeclarationImpl;
 
   @override // ✅
-  String get content;
+  String get segmentText;
   @override
   @JsonKey(ignore: true)
   _$$AnalysedSegmentDeclarationImplCopyWith<_$AnalysedSegmentDeclarationImpl>
@@ -594,7 +674,7 @@ abstract class _$$AnalysedSegmentInvalidMapDeclarationImplCopyWith<$Res>
       __$$AnalysedSegmentInvalidMapDeclarationImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String content});
+  $Res call({String segmentText});
 }
 
 /// @nodoc
@@ -610,12 +690,12 @@ class __$$AnalysedSegmentInvalidMapDeclarationImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? content = null,
+    Object? segmentText = null,
   }) {
     return _then(_$AnalysedSegmentInvalidMapDeclarationImpl(
-      content: null == content
-          ? _value.content
-          : content // ignore: cast_nullable_to_non_nullable
+      segmentText: null == segmentText
+          ? _value.segmentText
+          : segmentText // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -625,15 +705,15 @@ class __$$AnalysedSegmentInvalidMapDeclarationImplCopyWithImpl<$Res>
 
 class _$AnalysedSegmentInvalidMapDeclarationImpl
     implements _AnalysedSegmentInvalidMapDeclaration {
-  _$AnalysedSegmentInvalidMapDeclarationImpl({required this.content});
+  _$AnalysedSegmentInvalidMapDeclarationImpl({required this.segmentText});
 
 // ✅
   @override
-  final String content;
+  final String segmentText;
 
   @override
   String toString() {
-    return 'AnalysedSegment.invalidMapDeclaration(content: $content)';
+    return 'AnalysedSegment.invalidMapDeclaration(segmentText: $segmentText)';
   }
 
   @override
@@ -641,11 +721,12 @@ class _$AnalysedSegmentInvalidMapDeclarationImpl
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AnalysedSegmentInvalidMapDeclarationImpl &&
-            (identical(other.content, content) || other.content == content));
+            (identical(other.segmentText, segmentText) ||
+                other.segmentText == segmentText));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, content);
+  int get hashCode => Object.hash(runtimeType, segmentText);
 
   @JsonKey(ignore: true)
   @override
@@ -658,53 +739,65 @@ class _$AnalysedSegmentInvalidMapDeclarationImpl
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String content) text,
-    required TResult Function(String content) validDeclaration,
-    required TResult Function(String content) invalidMapDeclaration,
-    required TResult Function(String content) modelDeclarationOpenWithoutClose,
-    required TResult Function(String content) modelDeclarationCloseWithoutOpen,
-    required TResult Function(String content)
+    required TResult Function(String segmentText) text,
+    required TResult Function(String segmentText) validDeclaration,
+    required TResult Function(String segmentText) invalidMapDeclaration,
+    required TResult Function(String segmentText)
+        modelDeclarationOpenWithoutClose,
+    required TResult Function(String segmentText)
+        modelDeclarationCloseWithoutOpen,
+    required TResult Function(String segmentText)
+        booleanDeclarationOpenWithoutClose,
+    required TResult Function(String segmentText)
+        booleanDeclarationCloseWithoutOpen,
+    required TResult Function(String segmentText)
         nonModelVariableWithOpenOrCloseDelimmiter,
-    required TResult Function(String content) declarationOfUncatalogedVariable,
-    required TResult Function(String content)
+    required TResult Function(String segmentText)
+        declarationOfUncatalogedVariable,
+    required TResult Function(String segmentText)
         variableExistsButCannotBeUsedInThisContext,
   }) {
-    return invalidMapDeclaration(content);
+    return invalidMapDeclaration(segmentText);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String content)? text,
-    TResult? Function(String content)? validDeclaration,
-    TResult? Function(String content)? invalidMapDeclaration,
-    TResult? Function(String content)? modelDeclarationOpenWithoutClose,
-    TResult? Function(String content)? modelDeclarationCloseWithoutOpen,
-    TResult? Function(String content)?
+    TResult? Function(String segmentText)? text,
+    TResult? Function(String segmentText)? validDeclaration,
+    TResult? Function(String segmentText)? invalidMapDeclaration,
+    TResult? Function(String segmentText)? modelDeclarationOpenWithoutClose,
+    TResult? Function(String segmentText)? modelDeclarationCloseWithoutOpen,
+    TResult? Function(String segmentText)? booleanDeclarationOpenWithoutClose,
+    TResult? Function(String segmentText)? booleanDeclarationCloseWithoutOpen,
+    TResult? Function(String segmentText)?
         nonModelVariableWithOpenOrCloseDelimmiter,
-    TResult? Function(String content)? declarationOfUncatalogedVariable,
-    TResult? Function(String content)?
+    TResult? Function(String segmentText)? declarationOfUncatalogedVariable,
+    TResult? Function(String segmentText)?
         variableExistsButCannotBeUsedInThisContext,
   }) {
-    return invalidMapDeclaration?.call(content);
+    return invalidMapDeclaration?.call(segmentText);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String content)? text,
-    TResult Function(String content)? validDeclaration,
-    TResult Function(String content)? invalidMapDeclaration,
-    TResult Function(String content)? modelDeclarationOpenWithoutClose,
-    TResult Function(String content)? modelDeclarationCloseWithoutOpen,
-    TResult Function(String content)? nonModelVariableWithOpenOrCloseDelimmiter,
-    TResult Function(String content)? declarationOfUncatalogedVariable,
-    TResult Function(String content)?
+    TResult Function(String segmentText)? text,
+    TResult Function(String segmentText)? validDeclaration,
+    TResult Function(String segmentText)? invalidMapDeclaration,
+    TResult Function(String segmentText)? modelDeclarationOpenWithoutClose,
+    TResult Function(String segmentText)? modelDeclarationCloseWithoutOpen,
+    TResult Function(String segmentText)? booleanDeclarationOpenWithoutClose,
+    TResult Function(String segmentText)? booleanDeclarationCloseWithoutOpen,
+    TResult Function(String segmentText)?
+        nonModelVariableWithOpenOrCloseDelimmiter,
+    TResult Function(String segmentText)? declarationOfUncatalogedVariable,
+    TResult Function(String segmentText)?
         variableExistsButCannotBeUsedInThisContext,
     required TResult orElse(),
   }) {
     if (invalidMapDeclaration != null) {
-      return invalidMapDeclaration(content);
+      return invalidMapDeclaration(segmentText);
     }
     return orElse();
   }
@@ -723,6 +816,12 @@ class _$AnalysedSegmentInvalidMapDeclarationImpl
     required TResult Function(
             _AnalysedSegmentModelDeclarationCloseWithoutOpen value)
         modelDeclarationCloseWithoutOpen,
+    required TResult Function(
+            _AnalysedSegmentBooleanDeclarationOpenWithoutClose value)
+        booleanDeclarationOpenWithoutClose,
+    required TResult Function(
+            _AnalysedSegmentBooleanDeclarationCloseWithoutOpen value)
+        booleanDeclarationCloseWithoutOpen,
     required TResult Function(
             _AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiter value)
         nonModelVariableWithOpenOrCloseDelimmiter,
@@ -747,6 +846,10 @@ class _$AnalysedSegmentInvalidMapDeclarationImpl
         modelDeclarationOpenWithoutClose,
     TResult? Function(_AnalysedSegmentModelDeclarationCloseWithoutOpen value)?
         modelDeclarationCloseWithoutOpen,
+    TResult? Function(_AnalysedSegmentBooleanDeclarationOpenWithoutClose value)?
+        booleanDeclarationOpenWithoutClose,
+    TResult? Function(_AnalysedSegmentBooleanDeclarationCloseWithoutOpen value)?
+        booleanDeclarationCloseWithoutOpen,
     TResult? Function(
             _AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiter value)?
         nonModelVariableWithOpenOrCloseDelimmiter,
@@ -770,6 +873,10 @@ class _$AnalysedSegmentInvalidMapDeclarationImpl
         modelDeclarationOpenWithoutClose,
     TResult Function(_AnalysedSegmentModelDeclarationCloseWithoutOpen value)?
         modelDeclarationCloseWithoutOpen,
+    TResult Function(_AnalysedSegmentBooleanDeclarationOpenWithoutClose value)?
+        booleanDeclarationOpenWithoutClose,
+    TResult Function(_AnalysedSegmentBooleanDeclarationCloseWithoutOpen value)?
+        booleanDeclarationCloseWithoutOpen,
     TResult Function(
             _AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiter value)?
         nonModelVariableWithOpenOrCloseDelimmiter,
@@ -790,11 +897,11 @@ class _$AnalysedSegmentInvalidMapDeclarationImpl
 abstract class _AnalysedSegmentInvalidMapDeclaration
     implements AnalysedSegment {
   factory _AnalysedSegmentInvalidMapDeclaration(
-          {required final String content}) =
+          {required final String segmentText}) =
       _$AnalysedSegmentInvalidMapDeclarationImpl;
 
   @override // ✅
-  String get content;
+  String get segmentText;
   @override
   @JsonKey(ignore: true)
   _$$AnalysedSegmentInvalidMapDeclarationImplCopyWith<
@@ -812,7 +919,7 @@ abstract class _$$AnalysedSegmentModelDeclarationOpenWithoutCloseImplCopyWith<
       __$$AnalysedSegmentModelDeclarationOpenWithoutCloseImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String content});
+  $Res call({String segmentText});
 }
 
 /// @nodoc
@@ -830,12 +937,12 @@ class __$$AnalysedSegmentModelDeclarationOpenWithoutCloseImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? content = null,
+    Object? segmentText = null,
   }) {
     return _then(_$AnalysedSegmentModelDeclarationOpenWithoutCloseImpl(
-      content: null == content
-          ? _value.content
-          : content // ignore: cast_nullable_to_non_nullable
+      segmentText: null == segmentText
+          ? _value.segmentText
+          : segmentText // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -846,15 +953,15 @@ class __$$AnalysedSegmentModelDeclarationOpenWithoutCloseImplCopyWithImpl<$Res>
 class _$AnalysedSegmentModelDeclarationOpenWithoutCloseImpl
     implements _AnalysedSegmentModelDeclarationOpenWithoutClose {
   _$AnalysedSegmentModelDeclarationOpenWithoutCloseImpl(
-      {required this.content});
+      {required this.segmentText});
 
 // ✅
   @override
-  final String content;
+  final String segmentText;
 
   @override
   String toString() {
-    return 'AnalysedSegment.modelDeclarationOpenWithoutClose(content: $content)';
+    return 'AnalysedSegment.modelDeclarationOpenWithoutClose(segmentText: $segmentText)';
   }
 
   @override
@@ -862,11 +969,12 @@ class _$AnalysedSegmentModelDeclarationOpenWithoutCloseImpl
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AnalysedSegmentModelDeclarationOpenWithoutCloseImpl &&
-            (identical(other.content, content) || other.content == content));
+            (identical(other.segmentText, segmentText) ||
+                other.segmentText == segmentText));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, content);
+  int get hashCode => Object.hash(runtimeType, segmentText);
 
   @JsonKey(ignore: true)
   @override
@@ -881,53 +989,65 @@ class _$AnalysedSegmentModelDeclarationOpenWithoutCloseImpl
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String content) text,
-    required TResult Function(String content) validDeclaration,
-    required TResult Function(String content) invalidMapDeclaration,
-    required TResult Function(String content) modelDeclarationOpenWithoutClose,
-    required TResult Function(String content) modelDeclarationCloseWithoutOpen,
-    required TResult Function(String content)
+    required TResult Function(String segmentText) text,
+    required TResult Function(String segmentText) validDeclaration,
+    required TResult Function(String segmentText) invalidMapDeclaration,
+    required TResult Function(String segmentText)
+        modelDeclarationOpenWithoutClose,
+    required TResult Function(String segmentText)
+        modelDeclarationCloseWithoutOpen,
+    required TResult Function(String segmentText)
+        booleanDeclarationOpenWithoutClose,
+    required TResult Function(String segmentText)
+        booleanDeclarationCloseWithoutOpen,
+    required TResult Function(String segmentText)
         nonModelVariableWithOpenOrCloseDelimmiter,
-    required TResult Function(String content) declarationOfUncatalogedVariable,
-    required TResult Function(String content)
+    required TResult Function(String segmentText)
+        declarationOfUncatalogedVariable,
+    required TResult Function(String segmentText)
         variableExistsButCannotBeUsedInThisContext,
   }) {
-    return modelDeclarationOpenWithoutClose(content);
+    return modelDeclarationOpenWithoutClose(segmentText);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String content)? text,
-    TResult? Function(String content)? validDeclaration,
-    TResult? Function(String content)? invalidMapDeclaration,
-    TResult? Function(String content)? modelDeclarationOpenWithoutClose,
-    TResult? Function(String content)? modelDeclarationCloseWithoutOpen,
-    TResult? Function(String content)?
+    TResult? Function(String segmentText)? text,
+    TResult? Function(String segmentText)? validDeclaration,
+    TResult? Function(String segmentText)? invalidMapDeclaration,
+    TResult? Function(String segmentText)? modelDeclarationOpenWithoutClose,
+    TResult? Function(String segmentText)? modelDeclarationCloseWithoutOpen,
+    TResult? Function(String segmentText)? booleanDeclarationOpenWithoutClose,
+    TResult? Function(String segmentText)? booleanDeclarationCloseWithoutOpen,
+    TResult? Function(String segmentText)?
         nonModelVariableWithOpenOrCloseDelimmiter,
-    TResult? Function(String content)? declarationOfUncatalogedVariable,
-    TResult? Function(String content)?
+    TResult? Function(String segmentText)? declarationOfUncatalogedVariable,
+    TResult? Function(String segmentText)?
         variableExistsButCannotBeUsedInThisContext,
   }) {
-    return modelDeclarationOpenWithoutClose?.call(content);
+    return modelDeclarationOpenWithoutClose?.call(segmentText);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String content)? text,
-    TResult Function(String content)? validDeclaration,
-    TResult Function(String content)? invalidMapDeclaration,
-    TResult Function(String content)? modelDeclarationOpenWithoutClose,
-    TResult Function(String content)? modelDeclarationCloseWithoutOpen,
-    TResult Function(String content)? nonModelVariableWithOpenOrCloseDelimmiter,
-    TResult Function(String content)? declarationOfUncatalogedVariable,
-    TResult Function(String content)?
+    TResult Function(String segmentText)? text,
+    TResult Function(String segmentText)? validDeclaration,
+    TResult Function(String segmentText)? invalidMapDeclaration,
+    TResult Function(String segmentText)? modelDeclarationOpenWithoutClose,
+    TResult Function(String segmentText)? modelDeclarationCloseWithoutOpen,
+    TResult Function(String segmentText)? booleanDeclarationOpenWithoutClose,
+    TResult Function(String segmentText)? booleanDeclarationCloseWithoutOpen,
+    TResult Function(String segmentText)?
+        nonModelVariableWithOpenOrCloseDelimmiter,
+    TResult Function(String segmentText)? declarationOfUncatalogedVariable,
+    TResult Function(String segmentText)?
         variableExistsButCannotBeUsedInThisContext,
     required TResult orElse(),
   }) {
     if (modelDeclarationOpenWithoutClose != null) {
-      return modelDeclarationOpenWithoutClose(content);
+      return modelDeclarationOpenWithoutClose(segmentText);
     }
     return orElse();
   }
@@ -946,6 +1066,12 @@ class _$AnalysedSegmentModelDeclarationOpenWithoutCloseImpl
     required TResult Function(
             _AnalysedSegmentModelDeclarationCloseWithoutOpen value)
         modelDeclarationCloseWithoutOpen,
+    required TResult Function(
+            _AnalysedSegmentBooleanDeclarationOpenWithoutClose value)
+        booleanDeclarationOpenWithoutClose,
+    required TResult Function(
+            _AnalysedSegmentBooleanDeclarationCloseWithoutOpen value)
+        booleanDeclarationCloseWithoutOpen,
     required TResult Function(
             _AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiter value)
         nonModelVariableWithOpenOrCloseDelimmiter,
@@ -970,6 +1096,10 @@ class _$AnalysedSegmentModelDeclarationOpenWithoutCloseImpl
         modelDeclarationOpenWithoutClose,
     TResult? Function(_AnalysedSegmentModelDeclarationCloseWithoutOpen value)?
         modelDeclarationCloseWithoutOpen,
+    TResult? Function(_AnalysedSegmentBooleanDeclarationOpenWithoutClose value)?
+        booleanDeclarationOpenWithoutClose,
+    TResult? Function(_AnalysedSegmentBooleanDeclarationCloseWithoutOpen value)?
+        booleanDeclarationCloseWithoutOpen,
     TResult? Function(
             _AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiter value)?
         nonModelVariableWithOpenOrCloseDelimmiter,
@@ -993,6 +1123,10 @@ class _$AnalysedSegmentModelDeclarationOpenWithoutCloseImpl
         modelDeclarationOpenWithoutClose,
     TResult Function(_AnalysedSegmentModelDeclarationCloseWithoutOpen value)?
         modelDeclarationCloseWithoutOpen,
+    TResult Function(_AnalysedSegmentBooleanDeclarationOpenWithoutClose value)?
+        booleanDeclarationOpenWithoutClose,
+    TResult Function(_AnalysedSegmentBooleanDeclarationCloseWithoutOpen value)?
+        booleanDeclarationCloseWithoutOpen,
     TResult Function(
             _AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiter value)?
         nonModelVariableWithOpenOrCloseDelimmiter,
@@ -1013,11 +1147,11 @@ class _$AnalysedSegmentModelDeclarationOpenWithoutCloseImpl
 abstract class _AnalysedSegmentModelDeclarationOpenWithoutClose
     implements AnalysedSegment {
   factory _AnalysedSegmentModelDeclarationOpenWithoutClose(
-          {required final String content}) =
+          {required final String segmentText}) =
       _$AnalysedSegmentModelDeclarationOpenWithoutCloseImpl;
 
   @override // ✅
-  String get content;
+  String get segmentText;
   @override
   @JsonKey(ignore: true)
   _$$AnalysedSegmentModelDeclarationOpenWithoutCloseImplCopyWith<
@@ -1035,7 +1169,7 @@ abstract class _$$AnalysedSegmentModelDeclarationCloseWithoutOpenImplCopyWith<
       __$$AnalysedSegmentModelDeclarationCloseWithoutOpenImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String content});
+  $Res call({String segmentText});
 }
 
 /// @nodoc
@@ -1053,12 +1187,12 @@ class __$$AnalysedSegmentModelDeclarationCloseWithoutOpenImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? content = null,
+    Object? segmentText = null,
   }) {
     return _then(_$AnalysedSegmentModelDeclarationCloseWithoutOpenImpl(
-      content: null == content
-          ? _value.content
-          : content // ignore: cast_nullable_to_non_nullable
+      segmentText: null == segmentText
+          ? _value.segmentText
+          : segmentText // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -1069,15 +1203,15 @@ class __$$AnalysedSegmentModelDeclarationCloseWithoutOpenImplCopyWithImpl<$Res>
 class _$AnalysedSegmentModelDeclarationCloseWithoutOpenImpl
     implements _AnalysedSegmentModelDeclarationCloseWithoutOpen {
   _$AnalysedSegmentModelDeclarationCloseWithoutOpenImpl(
-      {required this.content});
+      {required this.segmentText});
 
 // ✅
   @override
-  final String content;
+  final String segmentText;
 
   @override
   String toString() {
-    return 'AnalysedSegment.modelDeclarationCloseWithoutOpen(content: $content)';
+    return 'AnalysedSegment.modelDeclarationCloseWithoutOpen(segmentText: $segmentText)';
   }
 
   @override
@@ -1085,11 +1219,12 @@ class _$AnalysedSegmentModelDeclarationCloseWithoutOpenImpl
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AnalysedSegmentModelDeclarationCloseWithoutOpenImpl &&
-            (identical(other.content, content) || other.content == content));
+            (identical(other.segmentText, segmentText) ||
+                other.segmentText == segmentText));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, content);
+  int get hashCode => Object.hash(runtimeType, segmentText);
 
   @JsonKey(ignore: true)
   @override
@@ -1104,53 +1239,65 @@ class _$AnalysedSegmentModelDeclarationCloseWithoutOpenImpl
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String content) text,
-    required TResult Function(String content) validDeclaration,
-    required TResult Function(String content) invalidMapDeclaration,
-    required TResult Function(String content) modelDeclarationOpenWithoutClose,
-    required TResult Function(String content) modelDeclarationCloseWithoutOpen,
-    required TResult Function(String content)
+    required TResult Function(String segmentText) text,
+    required TResult Function(String segmentText) validDeclaration,
+    required TResult Function(String segmentText) invalidMapDeclaration,
+    required TResult Function(String segmentText)
+        modelDeclarationOpenWithoutClose,
+    required TResult Function(String segmentText)
+        modelDeclarationCloseWithoutOpen,
+    required TResult Function(String segmentText)
+        booleanDeclarationOpenWithoutClose,
+    required TResult Function(String segmentText)
+        booleanDeclarationCloseWithoutOpen,
+    required TResult Function(String segmentText)
         nonModelVariableWithOpenOrCloseDelimmiter,
-    required TResult Function(String content) declarationOfUncatalogedVariable,
-    required TResult Function(String content)
+    required TResult Function(String segmentText)
+        declarationOfUncatalogedVariable,
+    required TResult Function(String segmentText)
         variableExistsButCannotBeUsedInThisContext,
   }) {
-    return modelDeclarationCloseWithoutOpen(content);
+    return modelDeclarationCloseWithoutOpen(segmentText);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String content)? text,
-    TResult? Function(String content)? validDeclaration,
-    TResult? Function(String content)? invalidMapDeclaration,
-    TResult? Function(String content)? modelDeclarationOpenWithoutClose,
-    TResult? Function(String content)? modelDeclarationCloseWithoutOpen,
-    TResult? Function(String content)?
+    TResult? Function(String segmentText)? text,
+    TResult? Function(String segmentText)? validDeclaration,
+    TResult? Function(String segmentText)? invalidMapDeclaration,
+    TResult? Function(String segmentText)? modelDeclarationOpenWithoutClose,
+    TResult? Function(String segmentText)? modelDeclarationCloseWithoutOpen,
+    TResult? Function(String segmentText)? booleanDeclarationOpenWithoutClose,
+    TResult? Function(String segmentText)? booleanDeclarationCloseWithoutOpen,
+    TResult? Function(String segmentText)?
         nonModelVariableWithOpenOrCloseDelimmiter,
-    TResult? Function(String content)? declarationOfUncatalogedVariable,
-    TResult? Function(String content)?
+    TResult? Function(String segmentText)? declarationOfUncatalogedVariable,
+    TResult? Function(String segmentText)?
         variableExistsButCannotBeUsedInThisContext,
   }) {
-    return modelDeclarationCloseWithoutOpen?.call(content);
+    return modelDeclarationCloseWithoutOpen?.call(segmentText);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String content)? text,
-    TResult Function(String content)? validDeclaration,
-    TResult Function(String content)? invalidMapDeclaration,
-    TResult Function(String content)? modelDeclarationOpenWithoutClose,
-    TResult Function(String content)? modelDeclarationCloseWithoutOpen,
-    TResult Function(String content)? nonModelVariableWithOpenOrCloseDelimmiter,
-    TResult Function(String content)? declarationOfUncatalogedVariable,
-    TResult Function(String content)?
+    TResult Function(String segmentText)? text,
+    TResult Function(String segmentText)? validDeclaration,
+    TResult Function(String segmentText)? invalidMapDeclaration,
+    TResult Function(String segmentText)? modelDeclarationOpenWithoutClose,
+    TResult Function(String segmentText)? modelDeclarationCloseWithoutOpen,
+    TResult Function(String segmentText)? booleanDeclarationOpenWithoutClose,
+    TResult Function(String segmentText)? booleanDeclarationCloseWithoutOpen,
+    TResult Function(String segmentText)?
+        nonModelVariableWithOpenOrCloseDelimmiter,
+    TResult Function(String segmentText)? declarationOfUncatalogedVariable,
+    TResult Function(String segmentText)?
         variableExistsButCannotBeUsedInThisContext,
     required TResult orElse(),
   }) {
     if (modelDeclarationCloseWithoutOpen != null) {
-      return modelDeclarationCloseWithoutOpen(content);
+      return modelDeclarationCloseWithoutOpen(segmentText);
     }
     return orElse();
   }
@@ -1169,6 +1316,12 @@ class _$AnalysedSegmentModelDeclarationCloseWithoutOpenImpl
     required TResult Function(
             _AnalysedSegmentModelDeclarationCloseWithoutOpen value)
         modelDeclarationCloseWithoutOpen,
+    required TResult Function(
+            _AnalysedSegmentBooleanDeclarationOpenWithoutClose value)
+        booleanDeclarationOpenWithoutClose,
+    required TResult Function(
+            _AnalysedSegmentBooleanDeclarationCloseWithoutOpen value)
+        booleanDeclarationCloseWithoutOpen,
     required TResult Function(
             _AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiter value)
         nonModelVariableWithOpenOrCloseDelimmiter,
@@ -1193,6 +1346,10 @@ class _$AnalysedSegmentModelDeclarationCloseWithoutOpenImpl
         modelDeclarationOpenWithoutClose,
     TResult? Function(_AnalysedSegmentModelDeclarationCloseWithoutOpen value)?
         modelDeclarationCloseWithoutOpen,
+    TResult? Function(_AnalysedSegmentBooleanDeclarationOpenWithoutClose value)?
+        booleanDeclarationOpenWithoutClose,
+    TResult? Function(_AnalysedSegmentBooleanDeclarationCloseWithoutOpen value)?
+        booleanDeclarationCloseWithoutOpen,
     TResult? Function(
             _AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiter value)?
         nonModelVariableWithOpenOrCloseDelimmiter,
@@ -1216,6 +1373,10 @@ class _$AnalysedSegmentModelDeclarationCloseWithoutOpenImpl
         modelDeclarationOpenWithoutClose,
     TResult Function(_AnalysedSegmentModelDeclarationCloseWithoutOpen value)?
         modelDeclarationCloseWithoutOpen,
+    TResult Function(_AnalysedSegmentBooleanDeclarationOpenWithoutClose value)?
+        booleanDeclarationOpenWithoutClose,
+    TResult Function(_AnalysedSegmentBooleanDeclarationCloseWithoutOpen value)?
+        booleanDeclarationCloseWithoutOpen,
     TResult Function(
             _AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiter value)?
         nonModelVariableWithOpenOrCloseDelimmiter,
@@ -1236,15 +1397,519 @@ class _$AnalysedSegmentModelDeclarationCloseWithoutOpenImpl
 abstract class _AnalysedSegmentModelDeclarationCloseWithoutOpen
     implements AnalysedSegment {
   factory _AnalysedSegmentModelDeclarationCloseWithoutOpen(
-          {required final String content}) =
+          {required final String segmentText}) =
       _$AnalysedSegmentModelDeclarationCloseWithoutOpenImpl;
 
   @override // ✅
-  String get content;
+  String get segmentText;
   @override
   @JsonKey(ignore: true)
   _$$AnalysedSegmentModelDeclarationCloseWithoutOpenImplCopyWith<
           _$AnalysedSegmentModelDeclarationCloseWithoutOpenImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$AnalysedSegmentBooleanDeclarationOpenWithoutCloseImplCopyWith<
+    $Res> implements $AnalysedSegmentCopyWith<$Res> {
+  factory _$$AnalysedSegmentBooleanDeclarationOpenWithoutCloseImplCopyWith(
+          _$AnalysedSegmentBooleanDeclarationOpenWithoutCloseImpl value,
+          $Res Function(_$AnalysedSegmentBooleanDeclarationOpenWithoutCloseImpl)
+              then) =
+      __$$AnalysedSegmentBooleanDeclarationOpenWithoutCloseImplCopyWithImpl<
+          $Res>;
+  @override
+  @useResult
+  $Res call({String segmentText});
+}
+
+/// @nodoc
+class __$$AnalysedSegmentBooleanDeclarationOpenWithoutCloseImplCopyWithImpl<
+        $Res>
+    extends _$AnalysedSegmentCopyWithImpl<$Res,
+        _$AnalysedSegmentBooleanDeclarationOpenWithoutCloseImpl>
+    implements
+        _$$AnalysedSegmentBooleanDeclarationOpenWithoutCloseImplCopyWith<$Res> {
+  __$$AnalysedSegmentBooleanDeclarationOpenWithoutCloseImplCopyWithImpl(
+      _$AnalysedSegmentBooleanDeclarationOpenWithoutCloseImpl _value,
+      $Res Function(_$AnalysedSegmentBooleanDeclarationOpenWithoutCloseImpl)
+          _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? segmentText = null,
+  }) {
+    return _then(_$AnalysedSegmentBooleanDeclarationOpenWithoutCloseImpl(
+      segmentText: null == segmentText
+          ? _value.segmentText
+          : segmentText // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$AnalysedSegmentBooleanDeclarationOpenWithoutCloseImpl
+    implements _AnalysedSegmentBooleanDeclarationOpenWithoutClose {
+  _$AnalysedSegmentBooleanDeclarationOpenWithoutCloseImpl(
+      {required this.segmentText});
+
+// ✅
+  @override
+  final String segmentText;
+
+  @override
+  String toString() {
+    return 'AnalysedSegment.booleanDeclarationOpenWithoutClose(segmentText: $segmentText)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$AnalysedSegmentBooleanDeclarationOpenWithoutCloseImpl &&
+            (identical(other.segmentText, segmentText) ||
+                other.segmentText == segmentText));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, segmentText);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$AnalysedSegmentBooleanDeclarationOpenWithoutCloseImplCopyWith<
+          _$AnalysedSegmentBooleanDeclarationOpenWithoutCloseImpl>
+      get copyWith =>
+          __$$AnalysedSegmentBooleanDeclarationOpenWithoutCloseImplCopyWithImpl<
+                  _$AnalysedSegmentBooleanDeclarationOpenWithoutCloseImpl>(
+              this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String segmentText) text,
+    required TResult Function(String segmentText) validDeclaration,
+    required TResult Function(String segmentText) invalidMapDeclaration,
+    required TResult Function(String segmentText)
+        modelDeclarationOpenWithoutClose,
+    required TResult Function(String segmentText)
+        modelDeclarationCloseWithoutOpen,
+    required TResult Function(String segmentText)
+        booleanDeclarationOpenWithoutClose,
+    required TResult Function(String segmentText)
+        booleanDeclarationCloseWithoutOpen,
+    required TResult Function(String segmentText)
+        nonModelVariableWithOpenOrCloseDelimmiter,
+    required TResult Function(String segmentText)
+        declarationOfUncatalogedVariable,
+    required TResult Function(String segmentText)
+        variableExistsButCannotBeUsedInThisContext,
+  }) {
+    return booleanDeclarationOpenWithoutClose(segmentText);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String segmentText)? text,
+    TResult? Function(String segmentText)? validDeclaration,
+    TResult? Function(String segmentText)? invalidMapDeclaration,
+    TResult? Function(String segmentText)? modelDeclarationOpenWithoutClose,
+    TResult? Function(String segmentText)? modelDeclarationCloseWithoutOpen,
+    TResult? Function(String segmentText)? booleanDeclarationOpenWithoutClose,
+    TResult? Function(String segmentText)? booleanDeclarationCloseWithoutOpen,
+    TResult? Function(String segmentText)?
+        nonModelVariableWithOpenOrCloseDelimmiter,
+    TResult? Function(String segmentText)? declarationOfUncatalogedVariable,
+    TResult? Function(String segmentText)?
+        variableExistsButCannotBeUsedInThisContext,
+  }) {
+    return booleanDeclarationOpenWithoutClose?.call(segmentText);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String segmentText)? text,
+    TResult Function(String segmentText)? validDeclaration,
+    TResult Function(String segmentText)? invalidMapDeclaration,
+    TResult Function(String segmentText)? modelDeclarationOpenWithoutClose,
+    TResult Function(String segmentText)? modelDeclarationCloseWithoutOpen,
+    TResult Function(String segmentText)? booleanDeclarationOpenWithoutClose,
+    TResult Function(String segmentText)? booleanDeclarationCloseWithoutOpen,
+    TResult Function(String segmentText)?
+        nonModelVariableWithOpenOrCloseDelimmiter,
+    TResult Function(String segmentText)? declarationOfUncatalogedVariable,
+    TResult Function(String segmentText)?
+        variableExistsButCannotBeUsedInThisContext,
+    required TResult orElse(),
+  }) {
+    if (booleanDeclarationOpenWithoutClose != null) {
+      return booleanDeclarationOpenWithoutClose(segmentText);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_AnalysedSegmentText value) text,
+    required TResult Function(_AnalysedSegmentDeclaration value)
+        validDeclaration,
+    required TResult Function(_AnalysedSegmentInvalidMapDeclaration value)
+        invalidMapDeclaration,
+    required TResult Function(
+            _AnalysedSegmentModelDeclarationOpenWithoutClose value)
+        modelDeclarationOpenWithoutClose,
+    required TResult Function(
+            _AnalysedSegmentModelDeclarationCloseWithoutOpen value)
+        modelDeclarationCloseWithoutOpen,
+    required TResult Function(
+            _AnalysedSegmentBooleanDeclarationOpenWithoutClose value)
+        booleanDeclarationOpenWithoutClose,
+    required TResult Function(
+            _AnalysedSegmentBooleanDeclarationCloseWithoutOpen value)
+        booleanDeclarationCloseWithoutOpen,
+    required TResult Function(
+            _AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiter value)
+        nonModelVariableWithOpenOrCloseDelimmiter,
+    required TResult Function(
+            _AnalysedSegmentDeclarationOfUncatalogedVariable value)
+        declarationOfUncatalogedVariable,
+    required TResult Function(
+            _AnalysedSegmentVariableExistsButCannotBeUsedInThisContext value)
+        variableExistsButCannotBeUsedInThisContext,
+  }) {
+    return booleanDeclarationOpenWithoutClose(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_AnalysedSegmentText value)? text,
+    TResult? Function(_AnalysedSegmentDeclaration value)? validDeclaration,
+    TResult? Function(_AnalysedSegmentInvalidMapDeclaration value)?
+        invalidMapDeclaration,
+    TResult? Function(_AnalysedSegmentModelDeclarationOpenWithoutClose value)?
+        modelDeclarationOpenWithoutClose,
+    TResult? Function(_AnalysedSegmentModelDeclarationCloseWithoutOpen value)?
+        modelDeclarationCloseWithoutOpen,
+    TResult? Function(_AnalysedSegmentBooleanDeclarationOpenWithoutClose value)?
+        booleanDeclarationOpenWithoutClose,
+    TResult? Function(_AnalysedSegmentBooleanDeclarationCloseWithoutOpen value)?
+        booleanDeclarationCloseWithoutOpen,
+    TResult? Function(
+            _AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiter value)?
+        nonModelVariableWithOpenOrCloseDelimmiter,
+    TResult? Function(_AnalysedSegmentDeclarationOfUncatalogedVariable value)?
+        declarationOfUncatalogedVariable,
+    TResult? Function(
+            _AnalysedSegmentVariableExistsButCannotBeUsedInThisContext value)?
+        variableExistsButCannotBeUsedInThisContext,
+  }) {
+    return booleanDeclarationOpenWithoutClose?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_AnalysedSegmentText value)? text,
+    TResult Function(_AnalysedSegmentDeclaration value)? validDeclaration,
+    TResult Function(_AnalysedSegmentInvalidMapDeclaration value)?
+        invalidMapDeclaration,
+    TResult Function(_AnalysedSegmentModelDeclarationOpenWithoutClose value)?
+        modelDeclarationOpenWithoutClose,
+    TResult Function(_AnalysedSegmentModelDeclarationCloseWithoutOpen value)?
+        modelDeclarationCloseWithoutOpen,
+    TResult Function(_AnalysedSegmentBooleanDeclarationOpenWithoutClose value)?
+        booleanDeclarationOpenWithoutClose,
+    TResult Function(_AnalysedSegmentBooleanDeclarationCloseWithoutOpen value)?
+        booleanDeclarationCloseWithoutOpen,
+    TResult Function(
+            _AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiter value)?
+        nonModelVariableWithOpenOrCloseDelimmiter,
+    TResult Function(_AnalysedSegmentDeclarationOfUncatalogedVariable value)?
+        declarationOfUncatalogedVariable,
+    TResult Function(
+            _AnalysedSegmentVariableExistsButCannotBeUsedInThisContext value)?
+        variableExistsButCannotBeUsedInThisContext,
+    required TResult orElse(),
+  }) {
+    if (booleanDeclarationOpenWithoutClose != null) {
+      return booleanDeclarationOpenWithoutClose(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _AnalysedSegmentBooleanDeclarationOpenWithoutClose
+    implements AnalysedSegment {
+  factory _AnalysedSegmentBooleanDeclarationOpenWithoutClose(
+          {required final String segmentText}) =
+      _$AnalysedSegmentBooleanDeclarationOpenWithoutCloseImpl;
+
+  @override // ✅
+  String get segmentText;
+  @override
+  @JsonKey(ignore: true)
+  _$$AnalysedSegmentBooleanDeclarationOpenWithoutCloseImplCopyWith<
+          _$AnalysedSegmentBooleanDeclarationOpenWithoutCloseImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$AnalysedSegmentBooleanDeclarationCloseWithoutOpenImplCopyWith<
+    $Res> implements $AnalysedSegmentCopyWith<$Res> {
+  factory _$$AnalysedSegmentBooleanDeclarationCloseWithoutOpenImplCopyWith(
+          _$AnalysedSegmentBooleanDeclarationCloseWithoutOpenImpl value,
+          $Res Function(_$AnalysedSegmentBooleanDeclarationCloseWithoutOpenImpl)
+              then) =
+      __$$AnalysedSegmentBooleanDeclarationCloseWithoutOpenImplCopyWithImpl<
+          $Res>;
+  @override
+  @useResult
+  $Res call({String segmentText});
+}
+
+/// @nodoc
+class __$$AnalysedSegmentBooleanDeclarationCloseWithoutOpenImplCopyWithImpl<
+        $Res>
+    extends _$AnalysedSegmentCopyWithImpl<$Res,
+        _$AnalysedSegmentBooleanDeclarationCloseWithoutOpenImpl>
+    implements
+        _$$AnalysedSegmentBooleanDeclarationCloseWithoutOpenImplCopyWith<$Res> {
+  __$$AnalysedSegmentBooleanDeclarationCloseWithoutOpenImplCopyWithImpl(
+      _$AnalysedSegmentBooleanDeclarationCloseWithoutOpenImpl _value,
+      $Res Function(_$AnalysedSegmentBooleanDeclarationCloseWithoutOpenImpl)
+          _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? segmentText = null,
+  }) {
+    return _then(_$AnalysedSegmentBooleanDeclarationCloseWithoutOpenImpl(
+      segmentText: null == segmentText
+          ? _value.segmentText
+          : segmentText // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$AnalysedSegmentBooleanDeclarationCloseWithoutOpenImpl
+    implements _AnalysedSegmentBooleanDeclarationCloseWithoutOpen {
+  _$AnalysedSegmentBooleanDeclarationCloseWithoutOpenImpl(
+      {required this.segmentText});
+
+// ✅
+  @override
+  final String segmentText;
+
+  @override
+  String toString() {
+    return 'AnalysedSegment.booleanDeclarationCloseWithoutOpen(segmentText: $segmentText)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$AnalysedSegmentBooleanDeclarationCloseWithoutOpenImpl &&
+            (identical(other.segmentText, segmentText) ||
+                other.segmentText == segmentText));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, segmentText);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$AnalysedSegmentBooleanDeclarationCloseWithoutOpenImplCopyWith<
+          _$AnalysedSegmentBooleanDeclarationCloseWithoutOpenImpl>
+      get copyWith =>
+          __$$AnalysedSegmentBooleanDeclarationCloseWithoutOpenImplCopyWithImpl<
+                  _$AnalysedSegmentBooleanDeclarationCloseWithoutOpenImpl>(
+              this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String segmentText) text,
+    required TResult Function(String segmentText) validDeclaration,
+    required TResult Function(String segmentText) invalidMapDeclaration,
+    required TResult Function(String segmentText)
+        modelDeclarationOpenWithoutClose,
+    required TResult Function(String segmentText)
+        modelDeclarationCloseWithoutOpen,
+    required TResult Function(String segmentText)
+        booleanDeclarationOpenWithoutClose,
+    required TResult Function(String segmentText)
+        booleanDeclarationCloseWithoutOpen,
+    required TResult Function(String segmentText)
+        nonModelVariableWithOpenOrCloseDelimmiter,
+    required TResult Function(String segmentText)
+        declarationOfUncatalogedVariable,
+    required TResult Function(String segmentText)
+        variableExistsButCannotBeUsedInThisContext,
+  }) {
+    return booleanDeclarationCloseWithoutOpen(segmentText);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String segmentText)? text,
+    TResult? Function(String segmentText)? validDeclaration,
+    TResult? Function(String segmentText)? invalidMapDeclaration,
+    TResult? Function(String segmentText)? modelDeclarationOpenWithoutClose,
+    TResult? Function(String segmentText)? modelDeclarationCloseWithoutOpen,
+    TResult? Function(String segmentText)? booleanDeclarationOpenWithoutClose,
+    TResult? Function(String segmentText)? booleanDeclarationCloseWithoutOpen,
+    TResult? Function(String segmentText)?
+        nonModelVariableWithOpenOrCloseDelimmiter,
+    TResult? Function(String segmentText)? declarationOfUncatalogedVariable,
+    TResult? Function(String segmentText)?
+        variableExistsButCannotBeUsedInThisContext,
+  }) {
+    return booleanDeclarationCloseWithoutOpen?.call(segmentText);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String segmentText)? text,
+    TResult Function(String segmentText)? validDeclaration,
+    TResult Function(String segmentText)? invalidMapDeclaration,
+    TResult Function(String segmentText)? modelDeclarationOpenWithoutClose,
+    TResult Function(String segmentText)? modelDeclarationCloseWithoutOpen,
+    TResult Function(String segmentText)? booleanDeclarationOpenWithoutClose,
+    TResult Function(String segmentText)? booleanDeclarationCloseWithoutOpen,
+    TResult Function(String segmentText)?
+        nonModelVariableWithOpenOrCloseDelimmiter,
+    TResult Function(String segmentText)? declarationOfUncatalogedVariable,
+    TResult Function(String segmentText)?
+        variableExistsButCannotBeUsedInThisContext,
+    required TResult orElse(),
+  }) {
+    if (booleanDeclarationCloseWithoutOpen != null) {
+      return booleanDeclarationCloseWithoutOpen(segmentText);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_AnalysedSegmentText value) text,
+    required TResult Function(_AnalysedSegmentDeclaration value)
+        validDeclaration,
+    required TResult Function(_AnalysedSegmentInvalidMapDeclaration value)
+        invalidMapDeclaration,
+    required TResult Function(
+            _AnalysedSegmentModelDeclarationOpenWithoutClose value)
+        modelDeclarationOpenWithoutClose,
+    required TResult Function(
+            _AnalysedSegmentModelDeclarationCloseWithoutOpen value)
+        modelDeclarationCloseWithoutOpen,
+    required TResult Function(
+            _AnalysedSegmentBooleanDeclarationOpenWithoutClose value)
+        booleanDeclarationOpenWithoutClose,
+    required TResult Function(
+            _AnalysedSegmentBooleanDeclarationCloseWithoutOpen value)
+        booleanDeclarationCloseWithoutOpen,
+    required TResult Function(
+            _AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiter value)
+        nonModelVariableWithOpenOrCloseDelimmiter,
+    required TResult Function(
+            _AnalysedSegmentDeclarationOfUncatalogedVariable value)
+        declarationOfUncatalogedVariable,
+    required TResult Function(
+            _AnalysedSegmentVariableExistsButCannotBeUsedInThisContext value)
+        variableExistsButCannotBeUsedInThisContext,
+  }) {
+    return booleanDeclarationCloseWithoutOpen(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_AnalysedSegmentText value)? text,
+    TResult? Function(_AnalysedSegmentDeclaration value)? validDeclaration,
+    TResult? Function(_AnalysedSegmentInvalidMapDeclaration value)?
+        invalidMapDeclaration,
+    TResult? Function(_AnalysedSegmentModelDeclarationOpenWithoutClose value)?
+        modelDeclarationOpenWithoutClose,
+    TResult? Function(_AnalysedSegmentModelDeclarationCloseWithoutOpen value)?
+        modelDeclarationCloseWithoutOpen,
+    TResult? Function(_AnalysedSegmentBooleanDeclarationOpenWithoutClose value)?
+        booleanDeclarationOpenWithoutClose,
+    TResult? Function(_AnalysedSegmentBooleanDeclarationCloseWithoutOpen value)?
+        booleanDeclarationCloseWithoutOpen,
+    TResult? Function(
+            _AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiter value)?
+        nonModelVariableWithOpenOrCloseDelimmiter,
+    TResult? Function(_AnalysedSegmentDeclarationOfUncatalogedVariable value)?
+        declarationOfUncatalogedVariable,
+    TResult? Function(
+            _AnalysedSegmentVariableExistsButCannotBeUsedInThisContext value)?
+        variableExistsButCannotBeUsedInThisContext,
+  }) {
+    return booleanDeclarationCloseWithoutOpen?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_AnalysedSegmentText value)? text,
+    TResult Function(_AnalysedSegmentDeclaration value)? validDeclaration,
+    TResult Function(_AnalysedSegmentInvalidMapDeclaration value)?
+        invalidMapDeclaration,
+    TResult Function(_AnalysedSegmentModelDeclarationOpenWithoutClose value)?
+        modelDeclarationOpenWithoutClose,
+    TResult Function(_AnalysedSegmentModelDeclarationCloseWithoutOpen value)?
+        modelDeclarationCloseWithoutOpen,
+    TResult Function(_AnalysedSegmentBooleanDeclarationOpenWithoutClose value)?
+        booleanDeclarationOpenWithoutClose,
+    TResult Function(_AnalysedSegmentBooleanDeclarationCloseWithoutOpen value)?
+        booleanDeclarationCloseWithoutOpen,
+    TResult Function(
+            _AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiter value)?
+        nonModelVariableWithOpenOrCloseDelimmiter,
+    TResult Function(_AnalysedSegmentDeclarationOfUncatalogedVariable value)?
+        declarationOfUncatalogedVariable,
+    TResult Function(
+            _AnalysedSegmentVariableExistsButCannotBeUsedInThisContext value)?
+        variableExistsButCannotBeUsedInThisContext,
+    required TResult orElse(),
+  }) {
+    if (booleanDeclarationCloseWithoutOpen != null) {
+      return booleanDeclarationCloseWithoutOpen(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _AnalysedSegmentBooleanDeclarationCloseWithoutOpen
+    implements AnalysedSegment {
+  factory _AnalysedSegmentBooleanDeclarationCloseWithoutOpen(
+          {required final String segmentText}) =
+      _$AnalysedSegmentBooleanDeclarationCloseWithoutOpenImpl;
+
+  @override // ✅
+  String get segmentText;
+  @override
+  @JsonKey(ignore: true)
+  _$$AnalysedSegmentBooleanDeclarationCloseWithoutOpenImplCopyWith<
+          _$AnalysedSegmentBooleanDeclarationCloseWithoutOpenImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -1260,7 +1925,7 @@ abstract class _$$AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiterImplCo
           $Res>;
   @override
   @useResult
-  $Res call({String content});
+  $Res call({String segmentText});
 }
 
 /// @nodoc
@@ -1281,12 +1946,12 @@ class __$$AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiterImplCopyWithIm
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? content = null,
+    Object? segmentText = null,
   }) {
     return _then(_$AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiterImpl(
-      content: null == content
-          ? _value.content
-          : content // ignore: cast_nullable_to_non_nullable
+      segmentText: null == segmentText
+          ? _value.segmentText
+          : segmentText // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -1297,15 +1962,15 @@ class __$$AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiterImplCopyWithIm
 class _$AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiterImpl
     implements _AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiter {
   _$AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiterImpl(
-      {required this.content});
+      {required this.segmentText});
 
 // ✅
   @override
-  final String content;
+  final String segmentText;
 
   @override
   String toString() {
-    return 'AnalysedSegment.nonModelVariableWithOpenOrCloseDelimmiter(content: $content)';
+    return 'AnalysedSegment.nonModelVariableWithOpenOrCloseDelimmiter(segmentText: $segmentText)';
   }
 
   @override
@@ -1314,11 +1979,12 @@ class _$AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiterImpl
         (other.runtimeType == runtimeType &&
             other
                 is _$AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiterImpl &&
-            (identical(other.content, content) || other.content == content));
+            (identical(other.segmentText, segmentText) ||
+                other.segmentText == segmentText));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, content);
+  int get hashCode => Object.hash(runtimeType, segmentText);
 
   @JsonKey(ignore: true)
   @override
@@ -1333,53 +1999,65 @@ class _$AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiterImpl
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String content) text,
-    required TResult Function(String content) validDeclaration,
-    required TResult Function(String content) invalidMapDeclaration,
-    required TResult Function(String content) modelDeclarationOpenWithoutClose,
-    required TResult Function(String content) modelDeclarationCloseWithoutOpen,
-    required TResult Function(String content)
+    required TResult Function(String segmentText) text,
+    required TResult Function(String segmentText) validDeclaration,
+    required TResult Function(String segmentText) invalidMapDeclaration,
+    required TResult Function(String segmentText)
+        modelDeclarationOpenWithoutClose,
+    required TResult Function(String segmentText)
+        modelDeclarationCloseWithoutOpen,
+    required TResult Function(String segmentText)
+        booleanDeclarationOpenWithoutClose,
+    required TResult Function(String segmentText)
+        booleanDeclarationCloseWithoutOpen,
+    required TResult Function(String segmentText)
         nonModelVariableWithOpenOrCloseDelimmiter,
-    required TResult Function(String content) declarationOfUncatalogedVariable,
-    required TResult Function(String content)
+    required TResult Function(String segmentText)
+        declarationOfUncatalogedVariable,
+    required TResult Function(String segmentText)
         variableExistsButCannotBeUsedInThisContext,
   }) {
-    return nonModelVariableWithOpenOrCloseDelimmiter(content);
+    return nonModelVariableWithOpenOrCloseDelimmiter(segmentText);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String content)? text,
-    TResult? Function(String content)? validDeclaration,
-    TResult? Function(String content)? invalidMapDeclaration,
-    TResult? Function(String content)? modelDeclarationOpenWithoutClose,
-    TResult? Function(String content)? modelDeclarationCloseWithoutOpen,
-    TResult? Function(String content)?
+    TResult? Function(String segmentText)? text,
+    TResult? Function(String segmentText)? validDeclaration,
+    TResult? Function(String segmentText)? invalidMapDeclaration,
+    TResult? Function(String segmentText)? modelDeclarationOpenWithoutClose,
+    TResult? Function(String segmentText)? modelDeclarationCloseWithoutOpen,
+    TResult? Function(String segmentText)? booleanDeclarationOpenWithoutClose,
+    TResult? Function(String segmentText)? booleanDeclarationCloseWithoutOpen,
+    TResult? Function(String segmentText)?
         nonModelVariableWithOpenOrCloseDelimmiter,
-    TResult? Function(String content)? declarationOfUncatalogedVariable,
-    TResult? Function(String content)?
+    TResult? Function(String segmentText)? declarationOfUncatalogedVariable,
+    TResult? Function(String segmentText)?
         variableExistsButCannotBeUsedInThisContext,
   }) {
-    return nonModelVariableWithOpenOrCloseDelimmiter?.call(content);
+    return nonModelVariableWithOpenOrCloseDelimmiter?.call(segmentText);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String content)? text,
-    TResult Function(String content)? validDeclaration,
-    TResult Function(String content)? invalidMapDeclaration,
-    TResult Function(String content)? modelDeclarationOpenWithoutClose,
-    TResult Function(String content)? modelDeclarationCloseWithoutOpen,
-    TResult Function(String content)? nonModelVariableWithOpenOrCloseDelimmiter,
-    TResult Function(String content)? declarationOfUncatalogedVariable,
-    TResult Function(String content)?
+    TResult Function(String segmentText)? text,
+    TResult Function(String segmentText)? validDeclaration,
+    TResult Function(String segmentText)? invalidMapDeclaration,
+    TResult Function(String segmentText)? modelDeclarationOpenWithoutClose,
+    TResult Function(String segmentText)? modelDeclarationCloseWithoutOpen,
+    TResult Function(String segmentText)? booleanDeclarationOpenWithoutClose,
+    TResult Function(String segmentText)? booleanDeclarationCloseWithoutOpen,
+    TResult Function(String segmentText)?
+        nonModelVariableWithOpenOrCloseDelimmiter,
+    TResult Function(String segmentText)? declarationOfUncatalogedVariable,
+    TResult Function(String segmentText)?
         variableExistsButCannotBeUsedInThisContext,
     required TResult orElse(),
   }) {
     if (nonModelVariableWithOpenOrCloseDelimmiter != null) {
-      return nonModelVariableWithOpenOrCloseDelimmiter(content);
+      return nonModelVariableWithOpenOrCloseDelimmiter(segmentText);
     }
     return orElse();
   }
@@ -1398,6 +2076,12 @@ class _$AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiterImpl
     required TResult Function(
             _AnalysedSegmentModelDeclarationCloseWithoutOpen value)
         modelDeclarationCloseWithoutOpen,
+    required TResult Function(
+            _AnalysedSegmentBooleanDeclarationOpenWithoutClose value)
+        booleanDeclarationOpenWithoutClose,
+    required TResult Function(
+            _AnalysedSegmentBooleanDeclarationCloseWithoutOpen value)
+        booleanDeclarationCloseWithoutOpen,
     required TResult Function(
             _AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiter value)
         nonModelVariableWithOpenOrCloseDelimmiter,
@@ -1422,6 +2106,10 @@ class _$AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiterImpl
         modelDeclarationOpenWithoutClose,
     TResult? Function(_AnalysedSegmentModelDeclarationCloseWithoutOpen value)?
         modelDeclarationCloseWithoutOpen,
+    TResult? Function(_AnalysedSegmentBooleanDeclarationOpenWithoutClose value)?
+        booleanDeclarationOpenWithoutClose,
+    TResult? Function(_AnalysedSegmentBooleanDeclarationCloseWithoutOpen value)?
+        booleanDeclarationCloseWithoutOpen,
     TResult? Function(
             _AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiter value)?
         nonModelVariableWithOpenOrCloseDelimmiter,
@@ -1445,6 +2133,10 @@ class _$AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiterImpl
         modelDeclarationOpenWithoutClose,
     TResult Function(_AnalysedSegmentModelDeclarationCloseWithoutOpen value)?
         modelDeclarationCloseWithoutOpen,
+    TResult Function(_AnalysedSegmentBooleanDeclarationOpenWithoutClose value)?
+        booleanDeclarationOpenWithoutClose,
+    TResult Function(_AnalysedSegmentBooleanDeclarationCloseWithoutOpen value)?
+        booleanDeclarationCloseWithoutOpen,
     TResult Function(
             _AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiter value)?
         nonModelVariableWithOpenOrCloseDelimmiter,
@@ -1465,11 +2157,11 @@ class _$AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiterImpl
 abstract class _AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiter
     implements AnalysedSegment {
   factory _AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiter(
-          {required final String content}) =
+          {required final String segmentText}) =
       _$AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiterImpl;
 
   @override // ✅
-  String get content;
+  String get segmentText;
   @override
   @JsonKey(ignore: true)
   _$$AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiterImplCopyWith<
@@ -1487,7 +2179,7 @@ abstract class _$$AnalysedSegmentDeclarationOfUncatalogedVariableImplCopyWith<
       __$$AnalysedSegmentDeclarationOfUncatalogedVariableImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String content});
+  $Res call({String segmentText});
 }
 
 /// @nodoc
@@ -1505,12 +2197,12 @@ class __$$AnalysedSegmentDeclarationOfUncatalogedVariableImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? content = null,
+    Object? segmentText = null,
   }) {
     return _then(_$AnalysedSegmentDeclarationOfUncatalogedVariableImpl(
-      content: null == content
-          ? _value.content
-          : content // ignore: cast_nullable_to_non_nullable
+      segmentText: null == segmentText
+          ? _value.segmentText
+          : segmentText // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -1521,15 +2213,15 @@ class __$$AnalysedSegmentDeclarationOfUncatalogedVariableImplCopyWithImpl<$Res>
 class _$AnalysedSegmentDeclarationOfUncatalogedVariableImpl
     implements _AnalysedSegmentDeclarationOfUncatalogedVariable {
   _$AnalysedSegmentDeclarationOfUncatalogedVariableImpl(
-      {required this.content});
+      {required this.segmentText});
 
 // ✅
   @override
-  final String content;
+  final String segmentText;
 
   @override
   String toString() {
-    return 'AnalysedSegment.declarationOfUncatalogedVariable(content: $content)';
+    return 'AnalysedSegment.declarationOfUncatalogedVariable(segmentText: $segmentText)';
   }
 
   @override
@@ -1537,11 +2229,12 @@ class _$AnalysedSegmentDeclarationOfUncatalogedVariableImpl
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AnalysedSegmentDeclarationOfUncatalogedVariableImpl &&
-            (identical(other.content, content) || other.content == content));
+            (identical(other.segmentText, segmentText) ||
+                other.segmentText == segmentText));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, content);
+  int get hashCode => Object.hash(runtimeType, segmentText);
 
   @JsonKey(ignore: true)
   @override
@@ -1556,53 +2249,65 @@ class _$AnalysedSegmentDeclarationOfUncatalogedVariableImpl
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String content) text,
-    required TResult Function(String content) validDeclaration,
-    required TResult Function(String content) invalidMapDeclaration,
-    required TResult Function(String content) modelDeclarationOpenWithoutClose,
-    required TResult Function(String content) modelDeclarationCloseWithoutOpen,
-    required TResult Function(String content)
+    required TResult Function(String segmentText) text,
+    required TResult Function(String segmentText) validDeclaration,
+    required TResult Function(String segmentText) invalidMapDeclaration,
+    required TResult Function(String segmentText)
+        modelDeclarationOpenWithoutClose,
+    required TResult Function(String segmentText)
+        modelDeclarationCloseWithoutOpen,
+    required TResult Function(String segmentText)
+        booleanDeclarationOpenWithoutClose,
+    required TResult Function(String segmentText)
+        booleanDeclarationCloseWithoutOpen,
+    required TResult Function(String segmentText)
         nonModelVariableWithOpenOrCloseDelimmiter,
-    required TResult Function(String content) declarationOfUncatalogedVariable,
-    required TResult Function(String content)
+    required TResult Function(String segmentText)
+        declarationOfUncatalogedVariable,
+    required TResult Function(String segmentText)
         variableExistsButCannotBeUsedInThisContext,
   }) {
-    return declarationOfUncatalogedVariable(content);
+    return declarationOfUncatalogedVariable(segmentText);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String content)? text,
-    TResult? Function(String content)? validDeclaration,
-    TResult? Function(String content)? invalidMapDeclaration,
-    TResult? Function(String content)? modelDeclarationOpenWithoutClose,
-    TResult? Function(String content)? modelDeclarationCloseWithoutOpen,
-    TResult? Function(String content)?
+    TResult? Function(String segmentText)? text,
+    TResult? Function(String segmentText)? validDeclaration,
+    TResult? Function(String segmentText)? invalidMapDeclaration,
+    TResult? Function(String segmentText)? modelDeclarationOpenWithoutClose,
+    TResult? Function(String segmentText)? modelDeclarationCloseWithoutOpen,
+    TResult? Function(String segmentText)? booleanDeclarationOpenWithoutClose,
+    TResult? Function(String segmentText)? booleanDeclarationCloseWithoutOpen,
+    TResult? Function(String segmentText)?
         nonModelVariableWithOpenOrCloseDelimmiter,
-    TResult? Function(String content)? declarationOfUncatalogedVariable,
-    TResult? Function(String content)?
+    TResult? Function(String segmentText)? declarationOfUncatalogedVariable,
+    TResult? Function(String segmentText)?
         variableExistsButCannotBeUsedInThisContext,
   }) {
-    return declarationOfUncatalogedVariable?.call(content);
+    return declarationOfUncatalogedVariable?.call(segmentText);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String content)? text,
-    TResult Function(String content)? validDeclaration,
-    TResult Function(String content)? invalidMapDeclaration,
-    TResult Function(String content)? modelDeclarationOpenWithoutClose,
-    TResult Function(String content)? modelDeclarationCloseWithoutOpen,
-    TResult Function(String content)? nonModelVariableWithOpenOrCloseDelimmiter,
-    TResult Function(String content)? declarationOfUncatalogedVariable,
-    TResult Function(String content)?
+    TResult Function(String segmentText)? text,
+    TResult Function(String segmentText)? validDeclaration,
+    TResult Function(String segmentText)? invalidMapDeclaration,
+    TResult Function(String segmentText)? modelDeclarationOpenWithoutClose,
+    TResult Function(String segmentText)? modelDeclarationCloseWithoutOpen,
+    TResult Function(String segmentText)? booleanDeclarationOpenWithoutClose,
+    TResult Function(String segmentText)? booleanDeclarationCloseWithoutOpen,
+    TResult Function(String segmentText)?
+        nonModelVariableWithOpenOrCloseDelimmiter,
+    TResult Function(String segmentText)? declarationOfUncatalogedVariable,
+    TResult Function(String segmentText)?
         variableExistsButCannotBeUsedInThisContext,
     required TResult orElse(),
   }) {
     if (declarationOfUncatalogedVariable != null) {
-      return declarationOfUncatalogedVariable(content);
+      return declarationOfUncatalogedVariable(segmentText);
     }
     return orElse();
   }
@@ -1621,6 +2326,12 @@ class _$AnalysedSegmentDeclarationOfUncatalogedVariableImpl
     required TResult Function(
             _AnalysedSegmentModelDeclarationCloseWithoutOpen value)
         modelDeclarationCloseWithoutOpen,
+    required TResult Function(
+            _AnalysedSegmentBooleanDeclarationOpenWithoutClose value)
+        booleanDeclarationOpenWithoutClose,
+    required TResult Function(
+            _AnalysedSegmentBooleanDeclarationCloseWithoutOpen value)
+        booleanDeclarationCloseWithoutOpen,
     required TResult Function(
             _AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiter value)
         nonModelVariableWithOpenOrCloseDelimmiter,
@@ -1645,6 +2356,10 @@ class _$AnalysedSegmentDeclarationOfUncatalogedVariableImpl
         modelDeclarationOpenWithoutClose,
     TResult? Function(_AnalysedSegmentModelDeclarationCloseWithoutOpen value)?
         modelDeclarationCloseWithoutOpen,
+    TResult? Function(_AnalysedSegmentBooleanDeclarationOpenWithoutClose value)?
+        booleanDeclarationOpenWithoutClose,
+    TResult? Function(_AnalysedSegmentBooleanDeclarationCloseWithoutOpen value)?
+        booleanDeclarationCloseWithoutOpen,
     TResult? Function(
             _AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiter value)?
         nonModelVariableWithOpenOrCloseDelimmiter,
@@ -1668,6 +2383,10 @@ class _$AnalysedSegmentDeclarationOfUncatalogedVariableImpl
         modelDeclarationOpenWithoutClose,
     TResult Function(_AnalysedSegmentModelDeclarationCloseWithoutOpen value)?
         modelDeclarationCloseWithoutOpen,
+    TResult Function(_AnalysedSegmentBooleanDeclarationOpenWithoutClose value)?
+        booleanDeclarationOpenWithoutClose,
+    TResult Function(_AnalysedSegmentBooleanDeclarationCloseWithoutOpen value)?
+        booleanDeclarationCloseWithoutOpen,
     TResult Function(
             _AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiter value)?
         nonModelVariableWithOpenOrCloseDelimmiter,
@@ -1688,11 +2407,11 @@ class _$AnalysedSegmentDeclarationOfUncatalogedVariableImpl
 abstract class _AnalysedSegmentDeclarationOfUncatalogedVariable
     implements AnalysedSegment {
   factory _AnalysedSegmentDeclarationOfUncatalogedVariable(
-          {required final String content}) =
+          {required final String segmentText}) =
       _$AnalysedSegmentDeclarationOfUncatalogedVariableImpl;
 
   @override // ✅
-  String get content;
+  String get segmentText;
   @override
   @JsonKey(ignore: true)
   _$$AnalysedSegmentDeclarationOfUncatalogedVariableImplCopyWith<
@@ -1712,7 +2431,7 @@ abstract class _$$AnalysedSegmentVariableExistsButCannotBeUsedInThisContextImplC
           $Res>;
   @override
   @useResult
-  $Res call({String content});
+  $Res call({String segmentText});
 }
 
 /// @nodoc
@@ -1733,13 +2452,13 @@ class __$$AnalysedSegmentVariableExistsButCannotBeUsedInThisContextImplCopyWithI
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? content = null,
+    Object? segmentText = null,
   }) {
     return _then(
         _$AnalysedSegmentVariableExistsButCannotBeUsedInThisContextImpl(
-      content: null == content
-          ? _value.content
-          : content // ignore: cast_nullable_to_non_nullable
+      segmentText: null == segmentText
+          ? _value.segmentText
+          : segmentText // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -1750,15 +2469,15 @@ class __$$AnalysedSegmentVariableExistsButCannotBeUsedInThisContextImplCopyWithI
 class _$AnalysedSegmentVariableExistsButCannotBeUsedInThisContextImpl
     implements _AnalysedSegmentVariableExistsButCannotBeUsedInThisContext {
   _$AnalysedSegmentVariableExistsButCannotBeUsedInThisContextImpl(
-      {required this.content});
+      {required this.segmentText});
 
 // ✅
   @override
-  final String content;
+  final String segmentText;
 
   @override
   String toString() {
-    return 'AnalysedSegment.variableExistsButCannotBeUsedInThisContext(content: $content)';
+    return 'AnalysedSegment.variableExistsButCannotBeUsedInThisContext(segmentText: $segmentText)';
   }
 
   @override
@@ -1767,11 +2486,12 @@ class _$AnalysedSegmentVariableExistsButCannotBeUsedInThisContextImpl
         (other.runtimeType == runtimeType &&
             other
                 is _$AnalysedSegmentVariableExistsButCannotBeUsedInThisContextImpl &&
-            (identical(other.content, content) || other.content == content));
+            (identical(other.segmentText, segmentText) ||
+                other.segmentText == segmentText));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, content);
+  int get hashCode => Object.hash(runtimeType, segmentText);
 
   @JsonKey(ignore: true)
   @override
@@ -1786,53 +2506,65 @@ class _$AnalysedSegmentVariableExistsButCannotBeUsedInThisContextImpl
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String content) text,
-    required TResult Function(String content) validDeclaration,
-    required TResult Function(String content) invalidMapDeclaration,
-    required TResult Function(String content) modelDeclarationOpenWithoutClose,
-    required TResult Function(String content) modelDeclarationCloseWithoutOpen,
-    required TResult Function(String content)
+    required TResult Function(String segmentText) text,
+    required TResult Function(String segmentText) validDeclaration,
+    required TResult Function(String segmentText) invalidMapDeclaration,
+    required TResult Function(String segmentText)
+        modelDeclarationOpenWithoutClose,
+    required TResult Function(String segmentText)
+        modelDeclarationCloseWithoutOpen,
+    required TResult Function(String segmentText)
+        booleanDeclarationOpenWithoutClose,
+    required TResult Function(String segmentText)
+        booleanDeclarationCloseWithoutOpen,
+    required TResult Function(String segmentText)
         nonModelVariableWithOpenOrCloseDelimmiter,
-    required TResult Function(String content) declarationOfUncatalogedVariable,
-    required TResult Function(String content)
+    required TResult Function(String segmentText)
+        declarationOfUncatalogedVariable,
+    required TResult Function(String segmentText)
         variableExistsButCannotBeUsedInThisContext,
   }) {
-    return variableExistsButCannotBeUsedInThisContext(content);
+    return variableExistsButCannotBeUsedInThisContext(segmentText);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String content)? text,
-    TResult? Function(String content)? validDeclaration,
-    TResult? Function(String content)? invalidMapDeclaration,
-    TResult? Function(String content)? modelDeclarationOpenWithoutClose,
-    TResult? Function(String content)? modelDeclarationCloseWithoutOpen,
-    TResult? Function(String content)?
+    TResult? Function(String segmentText)? text,
+    TResult? Function(String segmentText)? validDeclaration,
+    TResult? Function(String segmentText)? invalidMapDeclaration,
+    TResult? Function(String segmentText)? modelDeclarationOpenWithoutClose,
+    TResult? Function(String segmentText)? modelDeclarationCloseWithoutOpen,
+    TResult? Function(String segmentText)? booleanDeclarationOpenWithoutClose,
+    TResult? Function(String segmentText)? booleanDeclarationCloseWithoutOpen,
+    TResult? Function(String segmentText)?
         nonModelVariableWithOpenOrCloseDelimmiter,
-    TResult? Function(String content)? declarationOfUncatalogedVariable,
-    TResult? Function(String content)?
+    TResult? Function(String segmentText)? declarationOfUncatalogedVariable,
+    TResult? Function(String segmentText)?
         variableExistsButCannotBeUsedInThisContext,
   }) {
-    return variableExistsButCannotBeUsedInThisContext?.call(content);
+    return variableExistsButCannotBeUsedInThisContext?.call(segmentText);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String content)? text,
-    TResult Function(String content)? validDeclaration,
-    TResult Function(String content)? invalidMapDeclaration,
-    TResult Function(String content)? modelDeclarationOpenWithoutClose,
-    TResult Function(String content)? modelDeclarationCloseWithoutOpen,
-    TResult Function(String content)? nonModelVariableWithOpenOrCloseDelimmiter,
-    TResult Function(String content)? declarationOfUncatalogedVariable,
-    TResult Function(String content)?
+    TResult Function(String segmentText)? text,
+    TResult Function(String segmentText)? validDeclaration,
+    TResult Function(String segmentText)? invalidMapDeclaration,
+    TResult Function(String segmentText)? modelDeclarationOpenWithoutClose,
+    TResult Function(String segmentText)? modelDeclarationCloseWithoutOpen,
+    TResult Function(String segmentText)? booleanDeclarationOpenWithoutClose,
+    TResult Function(String segmentText)? booleanDeclarationCloseWithoutOpen,
+    TResult Function(String segmentText)?
+        nonModelVariableWithOpenOrCloseDelimmiter,
+    TResult Function(String segmentText)? declarationOfUncatalogedVariable,
+    TResult Function(String segmentText)?
         variableExistsButCannotBeUsedInThisContext,
     required TResult orElse(),
   }) {
     if (variableExistsButCannotBeUsedInThisContext != null) {
-      return variableExistsButCannotBeUsedInThisContext(content);
+      return variableExistsButCannotBeUsedInThisContext(segmentText);
     }
     return orElse();
   }
@@ -1851,6 +2583,12 @@ class _$AnalysedSegmentVariableExistsButCannotBeUsedInThisContextImpl
     required TResult Function(
             _AnalysedSegmentModelDeclarationCloseWithoutOpen value)
         modelDeclarationCloseWithoutOpen,
+    required TResult Function(
+            _AnalysedSegmentBooleanDeclarationOpenWithoutClose value)
+        booleanDeclarationOpenWithoutClose,
+    required TResult Function(
+            _AnalysedSegmentBooleanDeclarationCloseWithoutOpen value)
+        booleanDeclarationCloseWithoutOpen,
     required TResult Function(
             _AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiter value)
         nonModelVariableWithOpenOrCloseDelimmiter,
@@ -1875,6 +2613,10 @@ class _$AnalysedSegmentVariableExistsButCannotBeUsedInThisContextImpl
         modelDeclarationOpenWithoutClose,
     TResult? Function(_AnalysedSegmentModelDeclarationCloseWithoutOpen value)?
         modelDeclarationCloseWithoutOpen,
+    TResult? Function(_AnalysedSegmentBooleanDeclarationOpenWithoutClose value)?
+        booleanDeclarationOpenWithoutClose,
+    TResult? Function(_AnalysedSegmentBooleanDeclarationCloseWithoutOpen value)?
+        booleanDeclarationCloseWithoutOpen,
     TResult? Function(
             _AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiter value)?
         nonModelVariableWithOpenOrCloseDelimmiter,
@@ -1898,6 +2640,10 @@ class _$AnalysedSegmentVariableExistsButCannotBeUsedInThisContextImpl
         modelDeclarationOpenWithoutClose,
     TResult Function(_AnalysedSegmentModelDeclarationCloseWithoutOpen value)?
         modelDeclarationCloseWithoutOpen,
+    TResult Function(_AnalysedSegmentBooleanDeclarationOpenWithoutClose value)?
+        booleanDeclarationOpenWithoutClose,
+    TResult Function(_AnalysedSegmentBooleanDeclarationCloseWithoutOpen value)?
+        booleanDeclarationCloseWithoutOpen,
     TResult Function(
             _AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiter value)?
         nonModelVariableWithOpenOrCloseDelimmiter,
@@ -1918,11 +2664,11 @@ class _$AnalysedSegmentVariableExistsButCannotBeUsedInThisContextImpl
 abstract class _AnalysedSegmentVariableExistsButCannotBeUsedInThisContext
     implements AnalysedSegment {
   factory _AnalysedSegmentVariableExistsButCannotBeUsedInThisContext(
-          {required final String content}) =
+          {required final String segmentText}) =
       _$AnalysedSegmentVariableExistsButCannotBeUsedInThisContextImpl;
 
   @override // ✅
-  String get content;
+  String get segmentText;
   @override
   @JsonKey(ignore: true)
   _$$AnalysedSegmentVariableExistsButCannotBeUsedInThisContextImplCopyWith<
