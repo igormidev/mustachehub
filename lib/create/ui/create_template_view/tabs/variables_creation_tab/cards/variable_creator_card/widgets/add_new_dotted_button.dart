@@ -4,7 +4,13 @@ import 'package:dotted_border/dotted_border.dart';
 class AddNewButton extends StatelessWidget {
   final String text;
   final void Function() onTap;
-  const AddNewButton({super.key, required this.onTap, required this.text});
+  final Color? color;
+  const AddNewButton({
+    super.key,
+    required this.onTap,
+    required this.text,
+    this.color,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +25,7 @@ class AddNewButton extends StatelessWidget {
             borderType: BorderType.RRect,
             radius: const Radius.circular(20),
             dashPattern: const [6, 6],
-            color: Theme.of(context).colorScheme.outlineVariant,
+            color: color ?? Theme.of(context).colorScheme.outlineVariant,
             strokeWidth: 2,
             child: Tooltip(
               message: text,

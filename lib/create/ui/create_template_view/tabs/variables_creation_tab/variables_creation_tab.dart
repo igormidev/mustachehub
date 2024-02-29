@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mustachehub/create/presenter/cubits/variables_cubit.dart';
+import 'package:mustachehub/create/ui/create_template_view/tabs/variables_creation_tab/cards/variable_creator_card/implementations/model_variable_creation_card.dart';
 import 'package:mustachehub/create/ui/create_template_view/tabs/variables_creation_tab/widgets/headers/base_sliver_pipe_creation_header.dart';
 import 'package:mustachehub/create/ui/create_template_view/tabs/variables_creation_tab/cards/variable_creator_card/implementations/boolean_variable_creation_card.dart';
 import 'package:mustachehub/create/ui/create_template_view/tabs/variables_creation_tab/cards/variable_creator_card/implementations/text_variable_creation_card.dart';
@@ -54,29 +55,27 @@ class VariablesCreationTab extends StatelessWidget {
                 bloc.updateBooleanVariables(booleanPipes: pipes);
               },
             ),
-            // const SliverToBoxAdapter(
-            //   child: Padding(
-            //     padding: EdgeInsets.only(top: 8),
-            //     child: Divider(),
-            //   ),
-            // ),
-            // const PipeCreationHeader(
-            //   headerTitle: 'List of models',
-            //   subtitleSubtitle:
-            //       'A list of templates that the user will need to fill '
-            //       'in each template field. A model can be like. For '
-            //       'example: a person with a name, age, height, etc...',
-            // ),
-            // ModelVariablesCreationWidget(
-            //   formKey: formKey,
-            //   initialList: state.modelPipes,
-            //   maxWidth: maxWidth,
-            //   retriveCreatedPipes: (pipes) {
-            //     bloc.add(
-            //       VariablesEvent.updateModelVariables(modelPipes: pipes),
-            //     );
-            //   },
-            // ),
+            const SliverToBoxAdapter(
+              child: Padding(
+                padding: EdgeInsets.only(top: 8),
+                child: Divider(),
+              ),
+            ),
+            const PipeCreationHeader(
+              headerTitle: 'List of models',
+              subtitleSubtitle:
+                  'A list of templates that the user will need to fill '
+                  'in each template field. A model can be like. For '
+                  'example: a model of a person with variables name, age, height, etc...',
+            ),
+            ModelVariablesCreationWidget(
+              formKey: formKey,
+              initialList: state.modelPipes,
+              maxWidth: 500,
+              retriveCreatedPipes: (pipes) {
+                bloc.updateModelVariables(modelPipes: pipes);
+              },
+            ),
             const SliverToBoxAdapter(child: SizedBox(height: 20)),
           ],
         ),

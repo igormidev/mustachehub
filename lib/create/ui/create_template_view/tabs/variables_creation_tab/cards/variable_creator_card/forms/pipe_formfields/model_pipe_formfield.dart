@@ -48,6 +48,18 @@ class ModelPipeFormfield extends StatelessWidget {
       pipe: pipe,
       children: [
         Text(
+          'Model variables:',
+          style: Theme.of(context).textTheme.headlineMedium,
+        ),
+        Text(
+          'Fill bellow the variables that will be used in the model',
+          style: Theme.of(context).textTheme.bodyMedium,
+        ),
+        const Padding(
+          padding: EdgeInsets.only(top: 8),
+          child: Divider(),
+        ),
+        Text(
           'Add texts variables in model:',
           style: Theme.of(context).textTheme.titleMedium,
         ),
