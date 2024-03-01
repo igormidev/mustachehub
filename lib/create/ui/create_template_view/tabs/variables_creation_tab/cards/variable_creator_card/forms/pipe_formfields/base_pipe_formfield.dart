@@ -40,6 +40,7 @@ class PipeFormfield extends StatelessWidget
   final GlobalKey<FormState> formKey;
   final Widget? optionWidget;
   final Pipe pipe;
+  final bool isColumn;
 
   PipeFormfield({
     super.key,
@@ -49,6 +50,7 @@ class PipeFormfield extends StatelessWidget
     required this.onSave,
     required this.formKey,
     required this.pipe,
+    this.isColumn = true,
     this.optionWidget,
     this.children = const [],
   });
@@ -57,81 +59,89 @@ class PipeFormfield extends StatelessWidget
   Widget build(BuildContext context) {
     final variablesBloc = context.read<VariablesCubit>();
 
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const SizedBox(height: 8),
-        TextFormField(
-          controller: descriptionEC,
-          decoration: InputDecoration(
-            label: const Text('Description'),
-            filled: true,
-            fillColor: Theme.of(context).colorScheme.onPrimary,
-          ),
-          minLines: 1,
-          maxLines: 3,
-          validator: isNotEmpty,
+    final widgets = <Widget>[
+      const SizedBox(height: 8),
+      TextFormField(
+        controller: descriptionEC,
+        decoration: InputDecoration(
+          label: const Text('Description'),
+          filled: true,
+          fillColor: Theme.of(context).colorScheme.onPrimary,
         ),
-        const SizedBox(height: 8),
-        TextFormField(
-          controller: nameEC,
-          decoration: InputDecoration(
-            label: const Text('Name'),
-            filled: true,
-            fillColor: Theme.of(context).colorScheme.onPrimary,
-          ),
-          validator: (val) => combineValidators([
-            () => isNotEmpty(val),
-            () {
-              final value = tryValidCast(val);
-              if (value == null) {
-                return 'Not valid name.';
-              }
-
-              return null;
-            },
-            () {
-              if (val == null) return 'Invalid text';
-
-              if (_containsValuesAlready(variablesBloc.state, val, pipe)) {
-                return 'Already exists a variable with this name';
-              }
-
-              return null;
-            },
-          ]),
-          maxLength: 30,
+        minLines: 1,
+        maxLines: 3,
+        validator: isNotEmpty,
+      ),
+      const SizedBox(height: 8),
+      TextFormField(
+        controller: nameEC,
+        decoration: InputDecoration(
+          label: const Text('Name'),
+          filled: true,
+          fillColor: Theme.of(context).colorScheme.onPrimary,
         ),
-        ...children,
-        const SizedBox(height: 8),
-        Row(
-          children: [
-            if (optionWidget != null) optionWidget!,
-            const Spacer(),
-            ElevatedButton.icon(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Theme.of(context).colorScheme.errorContainer,
-                foregroundColor: Theme.of(context).colorScheme.onErrorContainer,
-              ),
-              onPressed: onDelete,
-              icon: const Icon(Icons.delete),
-              label: const Text('Delete'),
+        validator: (val) => combineValidators([
+          () => isNotEmpty(val),
+          () {
+            final value = tryValidCast(val);
+            if (value == null) {
+              return 'Not valid name.';
+            }
+
+            return null;
+          },
+          () {
+            if (val == null) return 'Invalid text';
+
+            if (_containsValuesAlready(variablesBloc.state, val, pipe)) {
+              return 'Already exists a variable with this name';
+            }
+
+            return null;
+          },
+        ]),
+        maxLength: 30,
+      ),
+      ...children,
+      const SizedBox(height: 8),
+      Row(
+        children: [
+          if (optionWidget != null) optionWidget!,
+          const Spacer(),
+          ElevatedButton.icon(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Theme.of(context).colorScheme.errorContainer,
+              foregroundColor: Theme.of(context).colorScheme.onErrorContainer,
             ),
-            const SizedBox(width: 8),
-            ElevatedButton.icon(
-              onPressed: () {
-                if (formKey.currentState?.validate() == true) {
-                  onSave();
-                }
-              },
-              icon: const Icon(Icons.save),
-              label: const Text('Save'),
-            ),
-          ],
-        ),
-      ],
-    );
+            onPressed: onDelete,
+            icon: const Icon(Icons.delete),
+            label: const Text('Delete'),
+          ),
+          const SizedBox(width: 8),
+          ElevatedButton.icon(
+            onPressed: () {
+              if (formKey.currentState?.validate() == true) {
+                onSave();
+              }
+            },
+            icon: const Icon(Icons.save),
+            label: const Text('Save'),
+          ),
+        ],
+      ),
+    ];
+
+    if (isColumn) {
+      return Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: widgets,
+      );
+    } else {
+      return ListView(
+        children: widgets,
+      );
+    }
   }
 
   bool _containsValuesAlready(

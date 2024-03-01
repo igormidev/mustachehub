@@ -16,14 +16,13 @@ class ModelPipeFormfield extends StatelessWidget {
     List<BooleanPipe> booleanPipes,
     List<ModelPipe> modelPipes,
   ) onSave;
+
   final GlobalKey<FormState> formKey;
   final ModelPipe pipe;
-  final double maxWidth;
 
   ModelPipeFormfield({
     super.key,
     required this.nameEC,
-    required this.maxWidth,
     required this.descriptionEC,
     required this.onDelete,
     required this.onSave,
@@ -94,7 +93,6 @@ class ModelPipeFormfield extends StatelessWidget {
           style: Theme.of(context).textTheme.titleMedium,
         ),
         ModelVariablesCreationWidget(
-          maxWidth: maxWidth,
           type: ListType.listviewBuilder,
           formKey: formKey,
           initialList: modelPipes,

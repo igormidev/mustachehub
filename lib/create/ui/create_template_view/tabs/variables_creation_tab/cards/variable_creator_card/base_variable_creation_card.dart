@@ -7,11 +7,19 @@ enum ListType { listviewBuilder, sliverBuildDelegate }
 
 class BaseVariableCreatorCard<T extends Pipe> extends StatefulWidget {
   final String addNewText;
+
   final Widget Function(
     T pipe,
     void Function(T pipe) saveEditFunc,
     void Function() onDeleteItem,
-  ) editPipeBuilder;
+  )? editPipeBuilder;
+
+  final void Function(
+    T pipe,
+    void Function(T pipe) saveEditFunc,
+    void Function() onDeleteItem,
+  )? onEditPipeClicked;
+
   final Widget Function(
     T pipe,
     void Function() onEditSelec,
@@ -28,6 +36,7 @@ class BaseVariableCreatorCard<T extends Pipe> extends StatefulWidget {
     super.key,
     required this.addNewText,
     required this.editPipeBuilder,
+    this.onEditPipeClicked,
     required this.pipeBuilder,
     required this.generateNewPipe,
     required this.type,
@@ -49,6 +58,50 @@ class _BaseVariableCreatorCardState<T extends Pipe>
   void initState() {
     super.initState();
     pipesStateVN = ValueNotifier(widget.initialList);
+
+    selectedIndex.addListener(_onSelectedNewIndex);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+
+    selectedIndex.removeListener(_onSelectedNewIndex);
+  }
+
+  _onSelectedNewIndex() {
+    if (widget.onEditPipeClicked == null) return;
+    final innerSelectedIndex = selectedIndex.value;
+    if (innerSelectedIndex == null) return;
+    final pipe = pipesStateVN.value[innerSelectedIndex];
+
+    void listUpdate(T pipe) {
+      final innerIndex = selectedIndex.value;
+      if (innerIndex == null) return;
+
+      final newList = [...pipesStateVN.value];
+      newList[innerIndex] = pipe;
+      pipesStateVN.value = newList;
+      selectedIndex.value = null;
+      return widget.retriveCreatedPipes(newList);
+    }
+
+    void onDeleteItem() {
+      final innerIndex = selectedIndex.value;
+      if (innerIndex == null) return;
+
+      final newList = [...pipesStateVN.value];
+      newList.removeAt(innerIndex);
+      pipesStateVN.value = newList;
+      selectedIndex.value = null;
+      return widget.retriveCreatedPipes(newList);
+    }
+
+    widget.onEditPipeClicked?.call(
+      pipe,
+      listUpdate,
+      onDeleteItem,
+    );
   }
 
   @override
@@ -106,7 +159,16 @@ class _BaseVariableCreatorCardState<T extends Pipe>
                   return widget.retriveCreatedPipes(newList);
                 }
 
-                return widget.editPipeBuilder(pipe, listUpdate, onDeleteItem);
+                if (widget.onEditPipeClicked != null) {
+                  return SizedBox.fromSize();
+                } else {
+                  return widget.editPipeBuilder?.call(
+                        pipe,
+                        listUpdate,
+                        onDeleteItem,
+                      ) ??
+                      SizedBox.fromSize();
+                }
               }
 
               return Padding(

@@ -12,14 +12,12 @@ class ModelVariablesCreationWidget extends StatefulWidget {
   final ListType type;
   final GlobalKey<FormState> formKey;
   final List<ModelPipe> initialList;
-  final double maxWidth;
   final void Function(List<ModelPipe> pipes) retriveCreatedPipes;
 
   const ModelVariablesCreationWidget({
     this.type = ListType.sliverBuildDelegate,
     required this.retriveCreatedPipes,
     required this.initialList,
-    required this.maxWidth,
     required this.formKey,
     super.key,
   });
@@ -50,7 +48,6 @@ class _ModelVariablesCreationWidgetState
             descriptionEC: descriptionEC,
             onDelete: onDeleteItem,
             pipe: pipe,
-            maxWidth: widget.maxWidth,
             onSave: (
               textPipes,
               booleanPipes,
