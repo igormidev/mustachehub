@@ -35,6 +35,7 @@ import 'package:mustachehub/create/data/adapters/token_identifier_text_display_a
 import 'package:mustachehub/create/data/repositories/implementations/package_form_repository_impl.dart';
 import 'package:mustachehub/create/data/repositories/interfaces/i_package_form_repository.dart';
 import 'package:mustachehub/create/presenter/cubits/content_string_cubit.dart';
+import 'package:mustachehub/create/presenter/cubits/edit_model_info_display_cubit.dart';
 import 'package:mustachehub/create/presenter/cubits/fields_text_size_cubit.dart';
 import 'package:mustachehub/create/presenter/cubits/package_form_cubit.dart';
 import 'package:mustachehub/create/presenter/cubits/suggestion_cubit.dart';
@@ -177,6 +178,7 @@ final router = GoRouter(
 
                 BlocProvider(create: (context) => ContentStringCubit()),
                 BlocProvider(create: (context) => FieldsTextSizeCubit()),
+                BlocProvider(create: (context) => EditModelInfoDisplayCubit()),
                 BlocProvider(
                   create: (context) => PackageFormCubit(
                     repository: context.read<IPackageFormRepository>(),

@@ -69,7 +69,7 @@ class _BaseVariableCreatorCardState<T extends Pipe>
     selectedIndex.removeListener(_onSelectedNewIndex);
   }
 
-  _onSelectedNewIndex() {
+  void _onSelectedNewIndex() {
     if (widget.onEditPipeClicked == null) return;
     final innerSelectedIndex = selectedIndex.value;
     if (innerSelectedIndex == null) return;
@@ -78,6 +78,23 @@ class _BaseVariableCreatorCardState<T extends Pipe>
     void listUpdate(T pipe) {
       final innerIndex = selectedIndex.value;
       if (innerIndex == null) return;
+
+      if (pipe is ModelPipe) {
+        final areAllPipesEmpty = pipe.textPipes.isEmpty &&
+            pipe.booleanPipes.isEmpty &&
+            pipe.modelPipes.isEmpty;
+
+        if (areAllPipesEmpty) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text(
+                'You need to add at least one variable to this model',
+              ),
+            ),
+          );
+          return;
+        }
+      }
 
       final newList = [...pipesStateVN.value];
       newList[innerIndex] = pipe;
@@ -140,6 +157,23 @@ class _BaseVariableCreatorCardState<T extends Pipe>
                 void listUpdate(T pipe) {
                   final innerIndex = selectedIndex.value;
                   if (innerIndex == null) return;
+
+                  if (pipe is ModelPipe) {
+                    final areAllPipesEmpty = pipe.textPipes.isEmpty &&
+                        pipe.booleanPipes.isEmpty &&
+                        pipe.modelPipes.isEmpty;
+
+                    if (areAllPipesEmpty) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text(
+                            'You need to add at least one variable to this model',
+                          ),
+                        ),
+                      );
+                      return;
+                    }
+                  }
 
                   final newList = [...pipesStateVN.value];
                   newList[innerIndex] = pipe;
