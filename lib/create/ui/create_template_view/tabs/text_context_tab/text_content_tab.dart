@@ -163,7 +163,7 @@ class _TextContentTabState extends State<TextContentTab> {
                   return TextFormField(
                     focusNode: textfieldFocusNode,
                     controller: controller,
-                    maxLines: 10,
+                    maxLines: null,
                     style: style,
                     decoration: InputDecoration(
                       contentPadding: const EdgeInsets.symmetric(

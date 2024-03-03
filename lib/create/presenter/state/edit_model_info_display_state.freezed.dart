@@ -19,19 +19,25 @@ mixin _$EditModelInfoDisplayState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() normal,
-    required TResult Function(String displayText) withDisplayText,
+    required TResult Function(ModelPipe currentModel, String displayText,
+            List<String> subModelPaths)
+        withDisplayText,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? normal,
-    TResult? Function(String displayText)? withDisplayText,
+    TResult? Function(ModelPipe currentModel, String displayText,
+            List<String> subModelPaths)?
+        withDisplayText,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? normal,
-    TResult Function(String displayText)? withDisplayText,
+    TResult Function(ModelPipe currentModel, String displayText,
+            List<String> subModelPaths)?
+        withDisplayText,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -122,7 +128,9 @@ class _$EditModelInfoDisplayStateNormalImpl
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() normal,
-    required TResult Function(String displayText) withDisplayText,
+    required TResult Function(ModelPipe currentModel, String displayText,
+            List<String> subModelPaths)
+        withDisplayText,
   }) {
     return normal();
   }
@@ -131,7 +139,9 @@ class _$EditModelInfoDisplayStateNormalImpl
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? normal,
-    TResult? Function(String displayText)? withDisplayText,
+    TResult? Function(ModelPipe currentModel, String displayText,
+            List<String> subModelPaths)?
+        withDisplayText,
   }) {
     return normal?.call();
   }
@@ -140,7 +150,9 @@ class _$EditModelInfoDisplayStateNormalImpl
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? normal,
-    TResult Function(String displayText)? withDisplayText,
+    TResult Function(ModelPipe currentModel, String displayText,
+            List<String> subModelPaths)?
+        withDisplayText,
     required TResult orElse(),
   }) {
     if (normal != null) {
@@ -197,7 +209,8 @@ abstract class _$$EditModelInfoDisplayStateWithDisplayTextImplCopyWith<$Res> {
           $Res Function(_$EditModelInfoDisplayStateWithDisplayTextImpl) then) =
       __$$EditModelInfoDisplayStateWithDisplayTextImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String displayText});
+  $Res call(
+      {ModelPipe currentModel, String displayText, List<String> subModelPaths});
 }
 
 /// @nodoc
@@ -213,13 +226,23 @@ class __$$EditModelInfoDisplayStateWithDisplayTextImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? currentModel = null,
     Object? displayText = null,
+    Object? subModelPaths = null,
   }) {
     return _then(_$EditModelInfoDisplayStateWithDisplayTextImpl(
+      currentModel: null == currentModel
+          ? _value.currentModel
+          : currentModel // ignore: cast_nullable_to_non_nullable
+              as ModelPipe,
       displayText: null == displayText
           ? _value.displayText
           : displayText // ignore: cast_nullable_to_non_nullable
               as String,
+      subModelPaths: null == subModelPaths
+          ? _value._subModelPaths
+          : subModelPaths // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ));
   }
 }
@@ -228,14 +251,27 @@ class __$$EditModelInfoDisplayStateWithDisplayTextImplCopyWithImpl<$Res>
 
 class _$EditModelInfoDisplayStateWithDisplayTextImpl
     implements _EditModelInfoDisplayStateWithDisplayText {
-  _$EditModelInfoDisplayStateWithDisplayTextImpl({required this.displayText});
+  _$EditModelInfoDisplayStateWithDisplayTextImpl(
+      {required this.currentModel,
+      required this.displayText,
+      required final List<String> subModelPaths})
+      : _subModelPaths = subModelPaths;
 
   @override
+  final ModelPipe currentModel;
+  @override
   final String displayText;
+  final List<String> _subModelPaths;
+  @override
+  List<String> get subModelPaths {
+    if (_subModelPaths is EqualUnmodifiableListView) return _subModelPaths;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_subModelPaths);
+  }
 
   @override
   String toString() {
-    return 'EditModelInfoDisplayState.withDisplayText(displayText: $displayText)';
+    return 'EditModelInfoDisplayState.withDisplayText(currentModel: $currentModel, displayText: $displayText, subModelPaths: $subModelPaths)';
   }
 
   @override
@@ -243,12 +279,17 @@ class _$EditModelInfoDisplayStateWithDisplayTextImpl
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$EditModelInfoDisplayStateWithDisplayTextImpl &&
+            (identical(other.currentModel, currentModel) ||
+                other.currentModel == currentModel) &&
             (identical(other.displayText, displayText) ||
-                other.displayText == displayText));
+                other.displayText == displayText) &&
+            const DeepCollectionEquality()
+                .equals(other._subModelPaths, _subModelPaths));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, displayText);
+  int get hashCode => Object.hash(runtimeType, currentModel, displayText,
+      const DeepCollectionEquality().hash(_subModelPaths));
 
   @JsonKey(ignore: true)
   @override
@@ -263,29 +304,35 @@ class _$EditModelInfoDisplayStateWithDisplayTextImpl
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() normal,
-    required TResult Function(String displayText) withDisplayText,
+    required TResult Function(ModelPipe currentModel, String displayText,
+            List<String> subModelPaths)
+        withDisplayText,
   }) {
-    return withDisplayText(displayText);
+    return withDisplayText(currentModel, displayText, subModelPaths);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? normal,
-    TResult? Function(String displayText)? withDisplayText,
+    TResult? Function(ModelPipe currentModel, String displayText,
+            List<String> subModelPaths)?
+        withDisplayText,
   }) {
-    return withDisplayText?.call(displayText);
+    return withDisplayText?.call(currentModel, displayText, subModelPaths);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? normal,
-    TResult Function(String displayText)? withDisplayText,
+    TResult Function(ModelPipe currentModel, String displayText,
+            List<String> subModelPaths)?
+        withDisplayText,
     required TResult orElse(),
   }) {
     if (withDisplayText != null) {
-      return withDisplayText(displayText);
+      return withDisplayText(currentModel, displayText, subModelPaths);
     }
     return orElse();
   }
@@ -328,10 +375,14 @@ class _$EditModelInfoDisplayStateWithDisplayTextImpl
 abstract class _EditModelInfoDisplayStateWithDisplayText
     implements EditModelInfoDisplayState {
   factory _EditModelInfoDisplayStateWithDisplayText(
-          {required final String displayText}) =
+          {required final ModelPipe currentModel,
+          required final String displayText,
+          required final List<String> subModelPaths}) =
       _$EditModelInfoDisplayStateWithDisplayTextImpl;
 
+  ModelPipe get currentModel;
   String get displayText;
+  List<String> get subModelPaths;
   @JsonKey(ignore: true)
   _$$EditModelInfoDisplayStateWithDisplayTextImplCopyWith<
           _$EditModelInfoDisplayStateWithDisplayTextImpl>

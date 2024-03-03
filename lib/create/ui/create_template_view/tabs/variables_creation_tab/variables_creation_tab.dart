@@ -62,7 +62,7 @@ class VariablesCreationTab extends StatelessWidget {
               ),
             ),
             const PipeCreationHeader(
-              headerTitle: 'List of models',
+              headerTitle: 'List of models variables',
               subtitleSubtitle:
                   'A list of templates that the user will need to fill '
                   'in each template field. A model can be like. For '

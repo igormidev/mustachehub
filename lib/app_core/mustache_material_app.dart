@@ -74,7 +74,7 @@ class _MustacheMaterialAppState extends State<MustacheMaterialApp> {
         ),
       ],
       child: Builder(builder: (context) {
-        final colorScheme = ColorScheme.fromSeed(seedColor: Colors.purple);
+        final colorScheme = ColorScheme.fromSeed(seedColor: Colors.green);
         return BlocListener<LoadingCubit, LoadingState>(
           listener: (context, state) {
             state.map(
