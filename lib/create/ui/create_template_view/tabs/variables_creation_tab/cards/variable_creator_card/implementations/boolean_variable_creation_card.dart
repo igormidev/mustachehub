@@ -35,6 +35,7 @@ class _BooleanVariablesCreationWidgetState
     return BaseVariableCreatorCard<BooleanPipe>(
       addNewText: 'Add a new true/false variable',
       retriveCreatedPipes: widget.retriveCreatedPipes,
+      formKey: widget.formKey,
       initialList: widget.initialList,
       type: widget.type,
       editPipeBuilder: (pipe, saveEditFunc, onDeleteItem) {

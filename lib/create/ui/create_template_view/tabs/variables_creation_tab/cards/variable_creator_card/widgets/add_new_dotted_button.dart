@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:dotted_border/dotted_border.dart';
 
 class AddNewButton extends StatelessWidget {
-  final String text;
+  final String tooltip;
   final void Function() onTap;
   final Color? color;
   const AddNewButton({
     super.key,
     required this.onTap,
-    required this.text,
+    required this.tooltip,
     this.color,
   });
 
@@ -28,7 +28,7 @@ class AddNewButton extends StatelessWidget {
             color: color ?? Theme.of(context).colorScheme.outlineVariant,
             strokeWidth: 2,
             child: Tooltip(
-              message: text,
+              message: tooltip,
               child: Container(
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(

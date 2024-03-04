@@ -36,6 +36,7 @@ class _ModelVariablesCreationWidgetState
       addNewText: 'Add a new model variable',
       retriveCreatedPipes: widget.retriveCreatedPipes,
       initialList: widget.initialList,
+      formKey: widget.formKey,
       type: widget.type,
       editPipeBuilder: (pipe, saveEditFunc, onDeleteItem) {
         nameEC.text = pipe.name;

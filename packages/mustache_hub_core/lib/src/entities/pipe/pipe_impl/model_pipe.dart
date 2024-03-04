@@ -16,6 +16,11 @@ class ModelPipe extends Equatable implements Pipe {
   final List<BooleanPipe> booleanPipes;
   final List<ModelPipe> modelPipes;
 
+  /// Returns true if the pipe dosen't have any pipe inside it
+  bool isEmpty() {
+    return textPipes.isEmpty && booleanPipes.isEmpty && modelPipes.isEmpty;
+  }
+
   ModelPipe({
     String? pipeId,
     required this.name,
@@ -91,4 +96,24 @@ class ModelPipe extends Equatable implements Pipe {
 
   factory ModelPipe.fromJson(String source) =>
       ModelPipe.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  ModelPipe copyWith({
+    String? name,
+    String? description,
+    String? mustacheName,
+    String? pipeId,
+    List<TextPipe>? textPipes,
+    List<BooleanPipe>? booleanPipes,
+    List<ModelPipe>? modelPipes,
+  }) {
+    return ModelPipe(
+      name: name ?? this.name,
+      description: description ?? this.description,
+      mustacheName: mustacheName ?? this.mustacheName,
+      pipeId: pipeId ?? this.pipeId,
+      textPipes: textPipes ?? this.textPipes,
+      booleanPipes: booleanPipes ?? this.booleanPipes,
+      modelPipes: modelPipes ?? this.modelPipes,
+    );
+  }
 }

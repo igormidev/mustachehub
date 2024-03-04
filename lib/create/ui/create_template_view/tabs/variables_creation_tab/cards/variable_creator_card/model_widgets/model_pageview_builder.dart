@@ -1,3 +1,4 @@
+import 'package:dart_debouncer/dart_debouncer.dart';
 import 'package:enchanted_collection/enchanted_collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -43,9 +44,12 @@ class _ModelPageviewBuilderState extends State<ModelPageviewBuilder>
     return BaseVariableCreatorCard<ModelPipe>(
       addNewText: 'Add a new model variable',
       retriveCreatedPipes: widget.retriveCreatedPipes,
+      formKey: widget.formKey,
       initialList: widget.initialList,
       type: ListType.sliverBuildDelegate,
       editPipeBuilder: (pipe, saveEditFunc, onDeleteItem) {
+        context.read<EditModelInfoDisplayCubit>().startEditingInfo(pipe);
+
         nameEC.text = pipe.name;
         descriptionEC.text = pipe.description;
         return PipeFormFieldCardWrapper(
@@ -58,13 +62,13 @@ class _ModelPageviewBuilderState extends State<ModelPageviewBuilder>
                     withDisplayText: (value) => value.displayText,
                   );
 
-                  if (displayText == null) {
+                  if (displayText == null || displayText.isEmpty) {
                     return SizedBox.fromSize();
                   }
 
                   return Align(
                     alignment: Alignment.bottomLeft,
-                    child: Text(
+                    child: SelectableText(
                       displayText,
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
@@ -76,6 +80,7 @@ class _ModelPageviewBuilderState extends State<ModelPageviewBuilder>
                 child: ValueListenableBuilder(
                   valueListenable: pages,
                   child: ModelPipeFormfield(
+                    parentId: null,
                     formKey: widget.formKey,
                     nameEC: nameEC,
                     descriptionEC: descriptionEC,
@@ -143,6 +148,7 @@ class _ModelPageviewBuilderState extends State<ModelPageviewBuilder>
 }
 
 class ModelBaseCreator extends StatefulWidget {
+  final String parentId;
   final ListType type;
   final GlobalKey<FormState> formKey;
   final List<ModelPipe> initialList;
@@ -151,6 +157,7 @@ class ModelBaseCreator extends StatefulWidget {
   final void Function() popOutModelFromNavigationCallback;
   const ModelBaseCreator({
     super.key,
+    required this.parentId,
     required this.type,
     required this.formKey,
     required this.initialList,
@@ -173,12 +180,22 @@ class _ModelBaseCreatorState extends State<ModelBaseCreator>
       initialList: widget.initialList,
       type: widget.type,
       editPipeBuilder: null,
+      formKey: widget.formKey,
+      onPipesChanged: (pipes) {
+        final editCubit = context.read<EditModelInfoDisplayCubit>();
+        editCubit.updatePipes(
+          pipeId: widget.parentId,
+          pipes: pipes,
+        );
+      },
       onEditPipeClicked: (pipe, saveEditFunc, onDeleteItem) {
         nameEC.text = pipe.name;
         descriptionEC.text = pipe.description;
+
         widget.addNewModelToNavigationCallback(PipeFormFieldCardWrapper(
           type: widget.type,
           child: ModelPipeFormfield(
+            parentId: widget.parentId,
             formKey: widget.formKey,
             nameEC: nameEC,
             descriptionEC: descriptionEC,
@@ -215,7 +232,7 @@ class _ModelBaseCreatorState extends State<ModelBaseCreator>
   }
 }
 
-class ModelPipeFormfield extends StatelessWidget {
+class ModelPipeFormfield extends StatefulWidget {
   final TextEditingController nameEC;
   final TextEditingController descriptionEC;
   final void Function() onDelete;
@@ -228,6 +245,7 @@ class ModelPipeFormfield extends StatelessWidget {
   final void Function() popOutModelFromNavigationCallback;
   final GlobalKey<FormState> formKey;
   final ModelPipe pipe;
+  final String? parentId;
 
   ModelPipeFormfield({
     super.key,
@@ -237,6 +255,7 @@ class ModelPipeFormfield extends StatelessWidget {
     required this.onSave,
     required this.formKey,
     required this.pipe,
+    required this.parentId,
     required this.addNewModelToNavigationCallback,
     required this.popOutModelFromNavigationCallback,
   })  : textPipes = [...pipe.textPipes],
@@ -248,20 +267,49 @@ class ModelPipeFormfield extends StatelessWidget {
   final List<ModelPipe> modelPipes;
 
   @override
+  State<ModelPipeFormfield> createState() => _ModelPipeFormfieldState();
+}
+
+class _ModelPipeFormfieldState extends State<ModelPipeFormfield> {
+  final Debouncer debouncer = Debouncer(timerDuration: 1500.ms);
+  @override
+  void initState() {
+    super.initState();
+
+    widget.nameEC.addListener(_updateModelEdit);
+  }
+
+  void _updateModelEdit() {
+    debouncer.resetDebounce(() {
+      final editCubit = context.read<EditModelInfoDisplayCubit>();
+      editCubit.updatePipeModeNamelWithId(
+        newName: widget.nameEC.text,
+        id: widget.pipe.pipeId,
+      );
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    widget.nameEC.removeListener(_updateModelEdit);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return PipeFormfield(
-      formKey: formKey,
-      nameEC: nameEC,
-      descriptionEC: descriptionEC,
+      formKey: widget.formKey,
+      nameEC: widget.nameEC,
+      descriptionEC: widget.descriptionEC,
       onDelete: () {
-        onDelete();
-        popOutModelFromNavigationCallback();
+        widget.onDelete();
+        widget.popOutModelFromNavigationCallback();
       },
       onSave: () {
-        onSave(textPipes, booleanPipes, modelPipes);
-        popOutModelFromNavigationCallback();
+        widget.onSave(widget.textPipes, widget.booleanPipes, widget.modelPipes);
+        widget.popOutModelFromNavigationCallback();
       },
-      pipe: pipe,
+      pipe: widget.pipe,
       children: [
         Text(
           'Model variables:',
@@ -281,11 +329,18 @@ class ModelPipeFormfield extends StatelessWidget {
         ),
         TextVariablesCreationWidget(
           type: ListType.listviewBuilder,
-          formKey: formKey,
-          initialList: textPipes,
+          formKey: widget.formKey,
+          initialList: widget.textPipes,
           retriveCreatedPipes: (pipes) {
-            textPipes.clear();
-            textPipes.addAll(pipes);
+            widget.textPipes.clear();
+            widget.textPipes.addAll(pipes);
+            debouncer.garanteedExecutionAfterDebounceFinished(() {
+              final editCubit = context.read<EditModelInfoDisplayCubit>();
+              editCubit.updatePipes(
+                pipeId: widget.pipe.pipeId,
+                pipes: pipes,
+              );
+            });
           },
         ),
         const SizedBox(height: 6),
@@ -296,11 +351,18 @@ class ModelPipeFormfield extends StatelessWidget {
         ),
         BooleanVariablesCreationWidget(
           type: ListType.listviewBuilder,
-          formKey: formKey,
-          initialList: booleanPipes,
+          formKey: widget.formKey,
+          initialList: widget.booleanPipes,
           retriveCreatedPipes: (pipes) {
-            booleanPipes.clear();
-            booleanPipes.addAll(pipes);
+            widget.booleanPipes.clear();
+            widget.booleanPipes.addAll(pipes);
+            debouncer.garanteedExecutionAfterDebounceFinished(() {
+              final editCubit = context.read<EditModelInfoDisplayCubit>();
+              editCubit.updatePipes(
+                pipeId: widget.pipe.pipeId,
+                pipes: pipes,
+              );
+            });
           },
         ),
         const SizedBox(height: 6),
@@ -310,14 +372,22 @@ class ModelPipeFormfield extends StatelessWidget {
           style: Theme.of(context).textTheme.titleMedium,
         ),
         ModelBaseCreator(
+          parentId: widget.pipe.pipeId,
           type: ListType.listviewBuilder,
-          formKey: formKey,
-          initialList: modelPipes,
-          addNewModelToNavigationCallback: addNewModelToNavigationCallback,
-          popOutModelFromNavigationCallback: popOutModelFromNavigationCallback,
+          formKey: widget.formKey,
+          initialList: widget.modelPipes,
+          addNewModelToNavigationCallback:
+              widget.addNewModelToNavigationCallback,
+          popOutModelFromNavigationCallback:
+              widget.popOutModelFromNavigationCallback,
           retriveCreatedPipes: (pipes) {
-            modelPipes.clear();
-            modelPipes.addAll(pipes);
+            widget.modelPipes.clear();
+            widget.modelPipes.addAll(pipes);
+            final editCubit = context.read<EditModelInfoDisplayCubit>();
+            editCubit.updatePipes(
+              pipeId: widget.pipe.pipeId,
+              pipes: pipes,
+            );
           },
         ),
       ],

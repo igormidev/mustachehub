@@ -40,6 +40,7 @@ class _TextVariablesCreationWidgetState
       retriveCreatedPipes: widget.retriveCreatedPipes,
       initialList: widget.initialList,
       type: widget.type,
+      formKey: widget.formKey,
       editPipeBuilder: (pipe, saveEditFunc, onDeleteItem) {
         nameEC.text = pipe.name;
         descriptionEC.text = pipe.description;

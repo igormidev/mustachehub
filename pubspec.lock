@@ -252,10 +252,10 @@ packages:
     dependency: "direct main"
     description:
       name: dart_debouncer
-      sha256: "7fe031e2fb780cf10aca6bc3cb0ea5129f481456b051afd9c440d233889dc416"
+      sha256: "8a805f7e8f73a9e0371d62bed777a2d3892d1f2d74602c3679349e49025e6d7e"
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.3"
+    version: "1.1.0"
   dart_style:
     dependency: transitive
     description:

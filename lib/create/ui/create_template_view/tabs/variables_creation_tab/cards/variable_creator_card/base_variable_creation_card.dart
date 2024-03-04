@@ -32,6 +32,10 @@ class BaseVariableCreatorCard<T extends Pipe> extends StatefulWidget {
 
   final void Function(List<T> pipes) retriveCreatedPipes;
 
+  final GlobalKey<FormState> formKey;
+
+  final void Function(List<T> pipes)? onPipesChanged;
+
   const BaseVariableCreatorCard({
     super.key,
     required this.addNewText,
@@ -42,6 +46,8 @@ class BaseVariableCreatorCard<T extends Pipe> extends StatefulWidget {
     required this.type,
     required this.initialList,
     required this.retriveCreatedPipes,
+    required this.formKey,
+    this.onPipesChanged,
   });
 
   @override
@@ -60,6 +66,9 @@ class _BaseVariableCreatorCardState<T extends Pipe>
     pipesStateVN = ValueNotifier(widget.initialList);
 
     selectedIndex.addListener(_onSelectedNewIndex);
+    if (widget.onPipesChanged != null) {
+      pipesStateVN.addListener(_listChangedCallback);
+    }
   }
 
   @override
@@ -67,6 +76,11 @@ class _BaseVariableCreatorCardState<T extends Pipe>
     super.dispose();
 
     selectedIndex.removeListener(_onSelectedNewIndex);
+    pipesStateVN.removeListener(_listChangedCallback);
+  }
+
+  void _listChangedCallback() {
+    widget.onPipesChanged?.call(pipesStateVN.value);
   }
 
   void _onSelectedNewIndex() {
@@ -80,9 +94,7 @@ class _BaseVariableCreatorCardState<T extends Pipe>
       if (innerIndex == null) return;
 
       if (pipe is ModelPipe) {
-        final areAllPipesEmpty = pipe.textPipes.isEmpty &&
-            pipe.booleanPipes.isEmpty &&
-            pipe.modelPipes.isEmpty;
+        final areAllPipesEmpty = pipe.isEmpty();
 
         if (areAllPipesEmpty) {
           ScaffoldMessenger.of(context).showSnackBar(
@@ -132,6 +144,9 @@ class _BaseVariableCreatorCardState<T extends Pipe>
 
             return AddNewButton(
               onTap: () {
+                final isValid = widget.formKey.currentState?.validate() ?? true;
+                if (isValid == false) return;
+
                 final lenght = pipesStateVN.value.length;
                 pipesStateVN.value = [
                   ...pipesStateVN.value,
@@ -139,7 +154,7 @@ class _BaseVariableCreatorCardState<T extends Pipe>
                 ];
                 selectedIndex.value = lenght;
               },
-              text: widget.addNewText,
+              tooltip: widget.addNewText,
             );
           }
 
