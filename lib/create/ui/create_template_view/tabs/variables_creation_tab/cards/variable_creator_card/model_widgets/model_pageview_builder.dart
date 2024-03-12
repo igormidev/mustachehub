@@ -1,18 +1,18 @@
-import 'package:dart_debouncer/dart_debouncer.dart';
-import 'package:enchanted_collection/enchanted_collection.dart';
+import 'package:mason/mason.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mason/mason.dart';
+import 'package:dart_debouncer/dart_debouncer.dart';
 import 'package:mustache_hub_core/mustache_hub_core.dart';
-import 'package:mustachehub/create/presenter/cubits/edit_model_info_display_cubit.dart';
+import 'package:enchanted_collection/enchanted_collection.dart';
 import 'package:mustachehub/create/presenter/mixins/default_id_caster.dart';
 import 'package:mustachehub/create/presenter/state/edit_model_info_display_state.dart';
-import 'package:mustachehub/create/ui/create_template_view/tabs/variables_creation_tab/cards/display_pipe_card/implementations/model_pipe_display_card.dart';
+import 'package:mustachehub/create/presenter/cubits/edit_model_info_display_cubit.dart';
 import 'package:mustachehub/create/ui/create_template_view/tabs/variables_creation_tab/cards/variable_creator_card/base_variable_creation_card.dart';
-import 'package:mustachehub/create/ui/create_template_view/tabs/variables_creation_tab/cards/variable_creator_card/base_variables_creation_card_textfield_methods.dart';
-import 'package:mustachehub/create/ui/create_template_view/tabs/variables_creation_tab/cards/variable_creator_card/implementations/boolean_variable_creation_card.dart';
+import 'package:mustachehub/create/ui/create_template_view/tabs/variables_creation_tab/cards/display_pipe_card/implementations/model_pipe_display_card.dart';
 import 'package:mustachehub/create/ui/create_template_view/tabs/variables_creation_tab/cards/variable_creator_card/forms/pipe_formfields/base_pipe_formfield.dart';
 import 'package:mustachehub/create/ui/create_template_view/tabs/variables_creation_tab/cards/variable_creator_card/implementations/text_variable_creation_card.dart';
+import 'package:mustachehub/create/ui/create_template_view/tabs/variables_creation_tab/cards/variable_creator_card/base_variables_creation_card_textfield_methods.dart';
+import 'package:mustachehub/create/ui/create_template_view/tabs/variables_creation_tab/cards/variable_creator_card/implementations/boolean_variable_creation_card.dart';
 
 class ModelPageviewBuilder extends StatefulWidget {
   final GlobalKey<FormState> formKey;
@@ -33,6 +33,7 @@ class ModelPageviewBuilder extends StatefulWidget {
 class _ModelPageviewBuilderState extends State<ModelPageviewBuilder>
     with BaseVariablesCreationCardMethods, DefaultIdCaster {
   final ValueNotifier<List<Widget>> pages = ValueNotifier([]);
+
   @override
   void dispose() {
     pages.dispose();
@@ -56,12 +57,12 @@ class _ModelPageviewBuilderState extends State<ModelPageviewBuilder>
           type: ListType.sliverBuildDelegate,
           child: Column(
             children: [
-              BlocBuilder<EditModelInfoDisplayCubit, EditModelInfoDisplayState>(
-                builder: (context, state) {
-                  final String? displayText = state.mapOrNull(
-                    withDisplayText: (value) => value.displayText,
-                  );
-
+              BlocSelector<EditModelInfoDisplayCubit, EditModelInfoDisplayState,
+                  String?>(
+                selector: (state) => state.mapOrNull(
+                  withDisplayText: (value) => value.displayText,
+                ),
+                builder: (context, displayText) {
                   if (displayText == null || displayText.isEmpty) {
                     return SizedBox.fromSize();
                   }
@@ -72,6 +73,32 @@ class _ModelPageviewBuilderState extends State<ModelPageviewBuilder>
                       displayText,
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
+                  );
+                },
+              ),
+              BlocSelector<EditModelInfoDisplayCubit, EditModelInfoDisplayState,
+                  List<String>?>(
+                selector: (state) => state.mapOrNull(
+                  withDisplayText: (value) => value.subModelPaths,
+                ),
+                builder: (context, subModelPaths) {
+                  if (subModelPaths == null || subModelPaths.isEmpty) {
+                    return SizedBox.fromSize();
+                  }
+
+                  return Row(
+                    children: [
+                      IconButton(
+                        onPressed: () {},
+                        icon: const Icon(Icons.arrow_back),
+                      ),
+                      Expanded(
+                        child: SelectableText(
+                          subModelPaths.join('/'),
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ),
+                      ),
+                    ],
                   );
                 },
               ),
@@ -139,9 +166,8 @@ class _ModelPageviewBuilderState extends State<ModelPageviewBuilder>
           ),
         );
       },
-      pipeBuilder: (pipe, onEditSelec) {
-        return ModelPipeDisplayCard(pipe: pipe, onEdit: onEditSelec);
-      },
+      pipeBuilder: (pipe, onEditSelec) =>
+          ModelPipeDisplayCard(pipe: pipe, onEdit: onEditSelec),
       generateNewPipe: () => ModelPipe.emptyPlaceholder(),
     );
   }
@@ -174,6 +200,7 @@ class _ModelBaseCreatorState extends State<ModelBaseCreator>
     with BaseVariablesCreationCardMethods, DefaultIdCaster {
   @override
   Widget build(BuildContext context) {
+    final editCubit = context.read<EditModelInfoDisplayCubit>();
     return BaseVariableCreatorCard<ModelPipe>(
       addNewText: 'Add a new model variable',
       retriveCreatedPipes: widget.retriveCreatedPipes,
@@ -182,7 +209,6 @@ class _ModelBaseCreatorState extends State<ModelBaseCreator>
       editPipeBuilder: null,
       formKey: widget.formKey,
       onPipesChanged: (pipes) {
-        final editCubit = context.read<EditModelInfoDisplayCubit>();
         editCubit.updatePipes(
           pipeId: widget.parentId,
           pipes: pipes,
@@ -191,6 +217,8 @@ class _ModelBaseCreatorState extends State<ModelBaseCreator>
       onEditPipeClicked: (pipe, saveEditFunc, onDeleteItem) {
         nameEC.text = pipe.name;
         descriptionEC.text = pipe.description;
+
+        editCubit.addNewSubModelPath(pipe.mustacheName);
 
         widget.addNewModelToNavigationCallback(PipeFormFieldCardWrapper(
           type: widget.type,
@@ -224,9 +252,8 @@ class _ModelBaseCreatorState extends State<ModelBaseCreator>
           ),
         ));
       },
-      pipeBuilder: (pipe, onEditSelec) {
-        return ModelPipeDisplayCard(pipe: pipe, onEdit: onEditSelec);
-      },
+      pipeBuilder: (pipe, onEditSelec) =>
+          ModelPipeDisplayCard(pipe: pipe, onEdit: onEditSelec),
       generateNewPipe: () => ModelPipe.emptyPlaceholder(),
     );
   }

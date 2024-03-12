@@ -2,19 +2,19 @@
 
 part of '../pipe.dart';
 
-class ModelPipe extends Equatable implements Pipe {
+class ModelPipe implements Pipe {
   @override
-  final String name;
+  String name;
   @override
   final String description;
   @override
-  final String mustacheName;
+  String mustacheName;
   @override
   final String pipeId;
 
-  final List<TextPipe> textPipes;
-  final List<BooleanPipe> booleanPipes;
-  final List<ModelPipe> modelPipes;
+  List<TextPipe> textPipes;
+  List<BooleanPipe> booleanPipes;
+  List<ModelPipe> modelPipes;
 
   /// Returns true if the pipe dosen't have any pipe inside it
   bool isEmpty() {
@@ -39,22 +39,6 @@ class ModelPipe extends Equatable implements Pipe {
         booleanPipes = const [],
         modelPipes = const [],
         pipeId = const Uuid().v1();
-
-  @override
-  bool get stringify => true;
-
-  @override
-  List<Object> get props {
-    return [
-      name,
-      description,
-      mustacheName,
-      pipeId,
-      textPipes,
-      booleanPipes,
-      modelPipes,
-    ];
-  }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{

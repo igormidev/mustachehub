@@ -1,9 +1,12 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mason/mason.dart';
 import 'package:mustache_hub_core/mustache_hub_core.dart';
 import 'package:mustachehub/create/data/adapters/token_identifier_text_display_adapter.dart';
+import 'package:mustachehub/create/presenter/mixins/default_id_caster.dart';
 import 'package:mustachehub/create/presenter/state/edit_model_info_display_state.dart';
 
-class EditModelInfoDisplayCubit extends Cubit<EditModelInfoDisplayState> {
+class EditModelInfoDisplayCubit extends Cubit<EditModelInfoDisplayState>
+    with DefaultIdCaster {
   final TokenIdentifierTextDisplayAdapter _toDisplayAdapter;
   EditModelInfoDisplayCubit()
       : _toDisplayAdapter = TokenIdentifierTextDisplayAdapter(),
@@ -36,58 +39,62 @@ class EditModelInfoDisplayCubit extends Cubit<EditModelInfoDisplayState> {
     );
     if (model == null) return;
 
-    ModelPipe? newModel;
+    bool didAddedPipeToParentName = false;
+
     if (model.pipeId == id) {
-      newModel = model.copyWith(
-        name: newName,
-      );
+      model.name = newName;
+      didAddedPipeToParentName = true;
     } else {
-      newModel = _recursiveUpdatePipeModeNamelWithId(
+      didAddedPipeToParentName = _recursiveUpdatePipeModeNamelWithId(
         model: model,
         newName: newName,
         id: id,
       );
     }
 
-    if (newModel == null) return;
+    if (didAddedPipeToParentName == false) return;
+    final textPipe = model.isEmpty()
+        ? ''
+        : _toDisplayAdapter.toDisplayText(
+            textPipes: model.textPipes,
+            booleanPipes: model.booleanPipes,
+            modelPipes: model.modelPipes,
+          );
 
     emit(EditModelInfoDisplayState.withDisplayText(
-      displayText: _toDisplayAdapter.toDisplayText(
-        textPipes: newModel.textPipes,
-        booleanPipes: newModel.booleanPipes,
-        modelPipes: newModel.modelPipes,
-      ),
-      currentModel: newModel,
+      displayText: textPipe,
+      currentModel: model.copyWith(),
       subModelPaths: [],
     ));
   }
 
-  ModelPipe? _recursiveUpdatePipeModeNamelWithId({
+  bool _recursiveUpdatePipeModeNamelWithId({
     required ModelPipe model,
     required String newName,
     required String id,
   }) {
     if (model.pipeId == id) {
-      return model.copyWith(
-        name: newName,
-      );
+      model.name = newName;
+      model.mustacheName =
+          tryValidCast(newName)?.camelCase ?? newName.camelCase;
+
+      return true;
     } else {
       for (final subModel in model.modelPipes) {
-        final result = _recursiveUpdatePipeModeNamelWithId(
+        final didFindParentName = _recursiveUpdatePipeModeNamelWithId(
           model: subModel,
           newName: newName,
           id: id,
         );
-        final didFindParentName = result != null;
         if (didFindParentName) {
-          return result;
+          return didFindParentName;
         } else {
           continue;
         }
       }
     }
 
-    return null;
+    return false;
   }
 
   void removeLastSubModelPath() {
@@ -123,82 +130,71 @@ class EditModelInfoDisplayCubit extends Cubit<EditModelInfoDisplayState> {
     bool didAddedPipeToParentName = false;
     if (model.pipeId == pipeId) {
       if (T == TextPipe) {
-        model = model.copyWith(
-          textPipes: pipes as List<TextPipe>,
-        );
+        model.textPipes = pipes as List<TextPipe>;
       } else if (T == BooleanPipe) {
-        model = model.copyWith(
-          booleanPipes: pipes as List<BooleanPipe>,
-        );
+        model.booleanPipes = pipes as List<BooleanPipe>;
       } else if (T == ModelPipe) {
-        model = model.copyWith(
-          modelPipes: pipes as List<ModelPipe>,
-        );
+        model.modelPipes = pipes as List<ModelPipe>;
       }
+      didAddedPipeToParentName = true;
     } else {
       for (final subModel in model.modelPipes) {
-        final newModel = _recursiveAddWhereParentNameIsNotNull(
+        final didFindParentName = _recursiveAddWhereParentNameIsNotNull(
           model: subModel,
           pipeId: pipeId,
           pipes: pipes,
         );
-        if (newModel != null) {
-          model = newModel;
-          didAddedPipeToParentName = true;
+        if (didFindParentName) {
+          didAddedPipeToParentName = didFindParentName;
           break;
         }
       }
     }
 
-    if (model == null || didAddedPipeToParentName) return;
+    if (didAddedPipeToParentName == false) return;
 
     emit(EditModelInfoDisplayState.withDisplayText(
-      displayText: _toDisplayAdapter.toDisplayText(
-        textPipes: model.textPipes,
-        booleanPipes: model.booleanPipes,
-        modelPipes: model.modelPipes,
-      ),
-      currentModel: model,
+      displayText: model.isEmpty()
+          ? ''
+          : _toDisplayAdapter.toDisplayText(
+              textPipes: model.textPipes,
+              booleanPipes: model.booleanPipes,
+              modelPipes: model.modelPipes,
+            ),
+      currentModel: model.copyWith(),
       subModelPaths: [],
     ));
   }
 
-  ModelPipe? _recursiveAddWhereParentNameIsNotNull<T extends Pipe>({
+  bool _recursiveAddWhereParentNameIsNotNull<T extends Pipe>({
     required ModelPipe model,
     required String pipeId,
     required List<T> pipes,
   }) {
     if (model.pipeId == pipeId) {
       if (T == TextPipe) {
-        model = model.copyWith(
-          textPipes: pipes as List<TextPipe>,
-        );
+        model.textPipes = pipes as List<TextPipe>;
       } else if (T == BooleanPipe) {
-        model = model.copyWith(
-          booleanPipes: pipes as List<BooleanPipe>,
-        );
+        model.booleanPipes = pipes as List<BooleanPipe>;
       } else if (T == ModelPipe) {
-        model = model.copyWith(
-          modelPipes: pipes as List<ModelPipe>,
-        );
+        model.modelPipes = pipes as List<ModelPipe>;
       }
-      return model;
+      return true;
     } else {
       for (final subModel in model.modelPipes) {
-        final result = _recursiveAddWhereParentNameIsNotNull(
+        final didFindParentName = _recursiveAddWhereParentNameIsNotNull(
           model: subModel,
           pipeId: pipeId,
           pipes: pipes,
         );
-        final didFindParentName = result != null;
         if (didFindParentName) {
-          return result;
+          return didFindParentName;
         } else {
           continue;
         }
       }
     }
 
-    return null;
+    return false;
   }
 }
