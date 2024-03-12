@@ -62,10 +62,12 @@ class EditModelInfoDisplayCubit extends Cubit<EditModelInfoDisplayState>
           );
 
     emit(EditModelInfoDisplayState.withDisplayText(
-      displayText: textPipe,
-      currentModel: model.copyWith(),
-      subModelPaths: [],
-    ));
+        displayText: textPipe,
+        currentModel: model.copyWith(),
+        subModelPaths: state.mapOrNull(
+              withDisplayText: (val) => val.subModelPaths,
+            ) ??
+            []));
   }
 
   bool _recursiveUpdatePipeModeNamelWithId({
@@ -154,16 +156,18 @@ class EditModelInfoDisplayCubit extends Cubit<EditModelInfoDisplayState>
     if (didAddedPipeToParentName == false) return;
 
     emit(EditModelInfoDisplayState.withDisplayText(
-      displayText: model.isEmpty()
-          ? ''
-          : _toDisplayAdapter.toDisplayText(
-              textPipes: model.textPipes,
-              booleanPipes: model.booleanPipes,
-              modelPipes: model.modelPipes,
-            ),
-      currentModel: model.copyWith(),
-      subModelPaths: [],
-    ));
+        displayText: model.isEmpty()
+            ? ''
+            : _toDisplayAdapter.toDisplayText(
+                textPipes: model.textPipes,
+                booleanPipes: model.booleanPipes,
+                modelPipes: model.modelPipes,
+              ),
+        currentModel: model.copyWith(),
+        subModelPaths: state.mapOrNull(
+              withDisplayText: (val) => val.subModelPaths,
+            ) ??
+            []));
   }
 
   bool _recursiveAddWhereParentNameIsNotNull<T extends Pipe>({

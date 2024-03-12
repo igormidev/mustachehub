@@ -32,7 +32,7 @@ class ModelPageviewBuilder extends StatefulWidget {
 
 class _ModelPageviewBuilderState extends State<ModelPageviewBuilder>
     with BaseVariablesCreationCardMethods, DefaultIdCaster {
-  final ValueNotifier<List<Widget>> pages = ValueNotifier([]);
+  final ValueNotifier<List<PipeFormFieldCardWrapper>> pages = ValueNotifier([]);
 
   @override
   void dispose() {
@@ -42,6 +42,7 @@ class _ModelPageviewBuilderState extends State<ModelPageviewBuilder>
 
   @override
   Widget build(BuildContext context) {
+    final editCubit = context.read<EditModelInfoDisplayCubit>();
     return BaseVariableCreatorCard<ModelPipe>(
       addNewText: 'Add a new model variable',
       retriveCreatedPipes: widget.retriveCreatedPipes,
@@ -49,7 +50,7 @@ class _ModelPageviewBuilderState extends State<ModelPageviewBuilder>
       initialList: widget.initialList,
       type: ListType.sliverBuildDelegate,
       editPipeBuilder: (pipe, saveEditFunc, onDeleteItem) {
-        context.read<EditModelInfoDisplayCubit>().startEditingInfo(pipe);
+        editCubit.startEditingInfo(pipe);
 
         nameEC.text = pipe.name;
         descriptionEC.text = pipe.description;
@@ -82,14 +83,22 @@ class _ModelPageviewBuilderState extends State<ModelPageviewBuilder>
                   withDisplayText: (value) => value.subModelPaths,
                 ),
                 builder: (context, subModelPaths) {
-                  if (subModelPaths == null || subModelPaths.isEmpty) {
+                  if (subModelPaths == null ||
+                      subModelPaths.isEmpty ||
+                      (subModelPaths.length == 1 &&
+                          subModelPaths.first.isEmpty)) {
                     return SizedBox.fromSize();
                   }
 
                   return Row(
                     children: [
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          final lastField =
+                              (pages.value.last).child as ModelPipeFormfield;
+                          lastField.save();
+                          editCubit.removeLastSubModelPath();
+                        },
                         icon: const Icon(Icons.arrow_back),
                       ),
                       Expanded(
@@ -179,7 +188,8 @@ class ModelBaseCreator extends StatefulWidget {
   final GlobalKey<FormState> formKey;
   final List<ModelPipe> initialList;
   final void Function(List<ModelPipe> pipes) retriveCreatedPipes;
-  final void Function(Widget child) addNewModelToNavigationCallback;
+  final void Function(PipeFormFieldCardWrapper child)
+      addNewModelToNavigationCallback;
   final void Function() popOutModelFromNavigationCallback;
   const ModelBaseCreator({
     super.key,
@@ -268,7 +278,8 @@ class ModelPipeFormfield extends StatefulWidget {
     List<BooleanPipe> booleanPipes,
     List<ModelPipe> modelPipes,
   ) onSave;
-  final void Function(Widget child) addNewModelToNavigationCallback;
+  final void Function(PipeFormFieldCardWrapper child)
+      addNewModelToNavigationCallback;
   final void Function() popOutModelFromNavigationCallback;
   final GlobalKey<FormState> formKey;
   final ModelPipe pipe;
@@ -295,6 +306,10 @@ class ModelPipeFormfield extends StatefulWidget {
 
   @override
   State<ModelPipeFormfield> createState() => _ModelPipeFormfieldState();
+
+  void save() {
+    onSave(textPipes, booleanPipes, modelPipes);
+  }
 }
 
 class _ModelPipeFormfieldState extends State<ModelPipeFormfield> {
@@ -333,7 +348,7 @@ class _ModelPipeFormfieldState extends State<ModelPipeFormfield> {
         widget.popOutModelFromNavigationCallback();
       },
       onSave: () {
-        widget.onSave(widget.textPipes, widget.booleanPipes, widget.modelPipes);
+        widget.save();
         widget.popOutModelFromNavigationCallback();
       },
       pipe: widget.pipe,
