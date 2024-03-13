@@ -4,7 +4,6 @@ import 'package:mustachehub/create/data/adapters/token_identifier_text_display_a
 
 void main() {
   final tokenIdentifierTextDisplayAdapter = TokenIdentifierTextDisplayAdapter();
-
   test(
     'Should show all texts, booleans and models text with no target identifiers',
     () async {

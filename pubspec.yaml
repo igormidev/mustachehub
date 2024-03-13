@@ -28,6 +28,7 @@ dependencies:
   enchanted_regex: ^1.0.5
   hydrated_bloc: ^9.1.3 
   go_router: ^13.0.1
+  google_fonts: ^6.2.1
   enchanted_collection: 1.3.0
   simple_platform: ^1.0.1
   image_network: ^2.5.4+1

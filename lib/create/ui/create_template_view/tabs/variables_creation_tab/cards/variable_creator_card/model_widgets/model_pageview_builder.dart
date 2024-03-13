@@ -80,7 +80,8 @@ class _ModelPageviewBuilderState extends State<ModelPageviewBuilder>
               BlocSelector<EditModelInfoDisplayCubit, EditModelInfoDisplayState,
                   List<String>?>(
                 selector: (state) => state.mapOrNull(
-                  withDisplayText: (value) => value.subModelPaths,
+                  withDisplayText: (value) =>
+                      value.subModelPaths.map((e) => e.name).toList(),
                 ),
                 builder: (context, subModelPaths) {
                   if (subModelPaths == null ||
@@ -228,7 +229,7 @@ class _ModelBaseCreatorState extends State<ModelBaseCreator>
         nameEC.text = pipe.name;
         descriptionEC.text = pipe.description;
 
-        editCubit.addNewSubModelPath(pipe.mustacheName);
+        editCubit.addNewSubModelPath(pipe.mustacheName, pipe.pipeId);
 
         widget.addNewModelToNavigationCallback(PipeFormFieldCardWrapper(
           type: widget.type,
@@ -343,6 +344,7 @@ class _ModelPipeFormfieldState extends State<ModelPipeFormfield> {
       formKey: widget.formKey,
       nameEC: widget.nameEC,
       descriptionEC: widget.descriptionEC,
+      isScrollable: true,
       onDelete: () {
         widget.onDelete();
         widget.popOutModelFromNavigationCallback();

@@ -40,7 +40,7 @@ class PipeFormfield extends StatelessWidget
   final GlobalKey<FormState> formKey;
   final Widget? optionWidget;
   final Pipe pipe;
-  final bool isColumn;
+  final bool isScrollable;
 
   PipeFormfield({
     super.key,
@@ -50,7 +50,7 @@ class PipeFormfield extends StatelessWidget
     required this.onSave,
     required this.formKey,
     required this.pipe,
-    this.isColumn = true,
+    this.isScrollable = false,
     this.optionWidget,
     this.children = const [],
   });
@@ -131,7 +131,7 @@ class PipeFormfield extends StatelessWidget
       ),
     ];
 
-    if (isColumn) {
+    if (isScrollable == false) {
       return Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,

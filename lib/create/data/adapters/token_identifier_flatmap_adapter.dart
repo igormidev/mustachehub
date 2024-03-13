@@ -1,5 +1,5 @@
 import 'package:mustache_hub_core/mustache_hub_core.dart';
-import 'package:text_analyser/src/models/token_identifier.dart';
+import 'package:text_analyser/text_analyser.dart';
 
 class TokenIdentifierFlatMapAdapter {
   const TokenIdentifierFlatMapAdapter();

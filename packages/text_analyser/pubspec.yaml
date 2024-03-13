@@ -10,13 +10,13 @@ dependency_overrides:
   uuid: ^4.2.2
   mustachex: 
     path: ../../cloned_apis/mustachex  
-  enchanted_collection:
+  enchanted_collection: 1.3.0
 
 # Add regular dependencies here.
 dependencies:
   enchanted_regex: ^1.0.6
   freezed_annotation: ^2.4.1 
-  enchanted_collection:
+  enchanted_collection: 1.3.0
   mustache_hub_core:
     path: ../mustache_hub_core
   mustachex:

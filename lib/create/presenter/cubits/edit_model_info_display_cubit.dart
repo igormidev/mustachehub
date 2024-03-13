@@ -18,6 +18,7 @@ class EditModelInfoDisplayCubit extends Cubit<EditModelInfoDisplayState>
       displayText: pipe.isEmpty()
           ? ''
           : _toDisplayAdapter.toDisplayText(
+              title: null,
               textPipes: pipe.textPipes,
               booleanPipes: pipe.booleanPipes,
               modelPipes: pipe.modelPipes,
@@ -43,6 +44,8 @@ class EditModelInfoDisplayCubit extends Cubit<EditModelInfoDisplayState>
 
     if (model.pipeId == id) {
       model.name = newName;
+      model.mustacheName =
+          tryValidCast(newName)?.camelCase ?? newName.camelCase;
       didAddedPipeToParentName = true;
     } else {
       didAddedPipeToParentName = _recursiveUpdatePipeModeNamelWithId(
@@ -56,18 +59,36 @@ class EditModelInfoDisplayCubit extends Cubit<EditModelInfoDisplayState>
     final textPipe = model.isEmpty()
         ? ''
         : _toDisplayAdapter.toDisplayText(
+            title: model.mustacheName,
             textPipes: model.textPipes,
             booleanPipes: model.booleanPipes,
             modelPipes: model.modelPipes,
           );
 
-    emit(EditModelInfoDisplayState.withDisplayText(
+    final List<SubModelPath> subModelPath = [
+      ...?state.mapOrNull(
+        withDisplayText: (val) => val.subModelPaths,
+      ),
+    ];
+
+    final int indexOfPathWithReferenceId = subModelPath.indexWhere(
+      (element) => element.pipeIdReference == id,
+    );
+
+    if (indexOfPathWithReferenceId != -1) {
+      subModelPath[indexOfPathWithReferenceId] =
+          subModelPath[indexOfPathWithReferenceId].copyWith(
+        name: newName,
+      );
+    }
+
+    emit(
+      EditModelInfoDisplayState.withDisplayText(
         displayText: textPipe,
         currentModel: model.copyWith(),
-        subModelPaths: state.mapOrNull(
-              withDisplayText: (val) => val.subModelPaths,
-            ) ??
-            []));
+        subModelPaths: subModelPath,
+      ),
+    );
   }
 
   bool _recursiveUpdatePipeModeNamelWithId({
@@ -111,10 +132,16 @@ class EditModelInfoDisplayCubit extends Cubit<EditModelInfoDisplayState>
     ));
   }
 
-  void addNewSubModelPath(String newPath) {
+  void addNewSubModelPath(String newPath, String pipeIdReference) {
     emit(state.map(
       withDisplayText: (val) => val.copyWith(
-        subModelPaths: [...val.subModelPaths, newPath],
+        subModelPaths: [
+          ...val.subModelPaths,
+          SubModelPath(
+            name: newPath,
+            pipeIdReference: pipeIdReference,
+          ),
+        ],
       ),
       normal: (s) => s,
     ));
@@ -159,6 +186,7 @@ class EditModelInfoDisplayCubit extends Cubit<EditModelInfoDisplayState>
         displayText: model.isEmpty()
             ? ''
             : _toDisplayAdapter.toDisplayText(
+                title: model.mustacheName,
                 textPipes: model.textPipes,
                 booleanPipes: model.booleanPipes,
                 modelPipes: model.modelPipes,

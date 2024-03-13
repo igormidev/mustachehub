@@ -45,8 +45,11 @@ class TokenIdentifierTextDisplayAdapter {
     required final List<BooleanPipe> booleanPipes,
     required final List<ModelPipe> modelPipes,
     List<String>? targetIdentifiersName,
+    final String? title,
   }) {
-    String response = '📦 Current variables options';
+    String response =
+        title != null && title.isBlank ? title : '📦 Current variables options';
+
     response += _displayTextFromModel(
       innerPaddingCount: [],
       targetIdentifiers: targetIdentifiersName,
