@@ -89,5 +89,11 @@ flutter:
     - assets/visual_identity/logo.PNG
     - assets/lottie/auth/
     - assets/lottie/account/
+    - assets/lottie/settings/
     - assets/lottie/
-    - assets/ 
+
+  fonts:
+    - family: MenloRegular
+      fonts:
+        - asset: assets/font/Menlo-Regular-400.ttf
+          weight: 100

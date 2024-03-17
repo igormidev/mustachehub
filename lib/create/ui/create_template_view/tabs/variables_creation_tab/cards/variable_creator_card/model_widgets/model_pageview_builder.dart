@@ -72,7 +72,11 @@ class _ModelPageviewBuilderState extends State<ModelPageviewBuilder>
                     alignment: Alignment.bottomLeft,
                     child: SelectableText(
                       displayText,
-                      style: Theme.of(context).textTheme.bodyMedium,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontFamily: 'MenloRegular',
+                        fontFamilyFallback: <String>["Courier"],
+                      ),
                     ),
                   );
                 },

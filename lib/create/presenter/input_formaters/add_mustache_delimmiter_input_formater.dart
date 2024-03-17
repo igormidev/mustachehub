@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:mustachehub/create/presenter/cubits/suggestion_cubit.dart';
@@ -47,11 +46,11 @@ class AddMustacheDelimmiterInputFormatter extends TextInputFormatter {
         .replaceRange(newValue.selection.start, newValue.selection.end, '{}}');
 
     if (didTappedDellimiter) {
-      try {
-        setSuggestionFromCurrentCursor(newText, newValue.selection.start + 1);
-      } catch (_, s) {
-        log(_.toString(), stackTrace: s);
-      }
+      // try {
+      setSuggestionFromCurrentCursor(newText, newValue.selection.start + 1);
+      // } catch (_, s) {
+      // log(_.toString(), stackTrace: s);
+      // }
 
       return newValue.copyWith(
         text: newText,

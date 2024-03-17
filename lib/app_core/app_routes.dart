@@ -53,6 +53,7 @@ import 'package:mustachehub/generate/data/adapters/dto_adapter.dart';
 import 'package:mustachehub/generate/presenter/cubits/content_cubit.dart';
 import 'package:mustachehub/generate/presenter/cubits/form_stats_cubit.dart';
 import 'package:mustachehub/generate/presenter/cubits/payload_cubit.dart';
+import 'package:mustachehub/settings/ui/views/settings_view/settings_view.dart';
 import 'package:text_analyser/text_analyser.dart';
 
 class NavigatorService {
@@ -321,15 +322,7 @@ final router = GoRouter(
           path: '/settings',
           parentNavigatorKey: NavigatorService.i.dashboardNavigatorKey,
           builder: (context, state) {
-            return Scaffold(
-              appBar: AppBar(
-                title: const Text('Settings'),
-              ),
-              drawer: context.drawerOrNull,
-              body: Container(
-                color: Colors.pink[300],
-              ),
-            );
+            return const SettingsView();
           },
         ),
         ShellRoute(

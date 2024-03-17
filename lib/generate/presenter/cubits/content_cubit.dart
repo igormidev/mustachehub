@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mustache_hub_core/mustache_hub_core.dart';
 import 'package:mustachehub/generate/data/adapters/dto_adapter.dart';
@@ -44,8 +43,7 @@ class ContentCubit extends Cubit<ContentState> with MustacheTextMixin {
         return emit(ContentState.failureGeneratingText());
       }
       return emit(ContentState.withGeneratedText(content: output));
-    } catch (error, stackTrace) {
-      log(error.toString(), stackTrace: stackTrace);
+    } catch (error) {
       return emit(ContentState.failureGeneratingText());
     }
   }

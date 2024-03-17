@@ -1,9 +1,7 @@
 import 'package:test/test.dart';
 
 void main() {
-  test('text analyser ...', () {
-    // TODO: Implement test
-  });
+  test('text analyser ...', () {});
 }
 
 final testInput =

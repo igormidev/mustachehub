@@ -59,17 +59,17 @@ class ModelPipe implements Pipe {
       mustacheName: map['mustacheName'] as String,
       pipeId: map['pipeId'] as String,
       textPipes: List<TextPipe>.from(
-        (map['textPipes'] as List<int>).map<TextPipe>(
+        (map['textPipes'] as List<dynamic>).map<TextPipe>(
           (x) => TextPipe.fromMap(x as Map<String, dynamic>),
         ),
       ),
       booleanPipes: List<BooleanPipe>.from(
-        (map['booleanPipes'] as List<int>).map<BooleanPipe>(
+        (map['booleanPipes'] as List<dynamic>).map<BooleanPipe>(
           (x) => BooleanPipe.fromMap(x as Map<String, dynamic>),
         ),
       ),
       modelPipes: List<ModelPipe>.from(
-        (map['modelPipes'] as List<int>).map<ModelPipe>(
+        (map['modelPipes'] as List<dynamic>).map<ModelPipe>(
           (x) => ModelPipe.fromMap(x as Map<String, dynamic>),
         ),
       ),

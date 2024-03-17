@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:mustache_hub_core/mustache_hub_core.dart';
 import 'package:mustachehub/create/data/adapters/token_identifier_flatmap_adapter.dart';
@@ -71,8 +69,9 @@ class VariablesCubit extends HydratedCubit<VariablesState> {
     try {
       final jsonmap = VariablesState.fromMap(json);
       return jsonmap;
-    } catch (e, s) {
-      log(e.toString(), stackTrace: s);
+    } catch (e) {
+      // } catch (e, s) {
+      // log(e.toString(), stackTrace: s);
     }
     return null;
   }

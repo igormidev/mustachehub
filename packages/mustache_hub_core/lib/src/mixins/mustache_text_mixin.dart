@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:mason/mason.dart';
 
 mixin MustacheTextMixin {
@@ -8,8 +7,9 @@ mixin MustacheTextMixin {
   ) {
     try {
       return content.render(payload);
-    } catch (error, stackTrace) {
-      log(error.toString(), stackTrace: stackTrace);
+    } catch (error) {
+      // } catch (error, stackTrace) {
+      // log(error.toString(), stackTrace: stackTrace);
       return null;
     }
   }
