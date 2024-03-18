@@ -75,7 +75,7 @@ class VariablesCreationTab extends StatelessWidget {
                 bloc.updateModelVariables(modelPipes: pipes);
               },
             ),
-            const SliverToBoxAdapter(child: SizedBox(height: 20)),
+            const SliverToBoxAdapter(child: SizedBox(height: 40)),
           ],
         ),
       ),

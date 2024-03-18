@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mustachehub/create/ui/create_template_view/methods/open_save_dialog_.dart';
 import 'package:mustachehub/create/ui/create_template_view/tabs/template_input_form_tab_view/template_input_form_tab_view.dart';
 import 'package:mustachehub/create/ui/create_template_view/tabs/template_output_tab_view/template_output_tab_view.dart';
 import 'package:mustachehub/create/ui/create_template_view/tabs/text_context_tab/text_content_tab.dart';
@@ -9,7 +10,7 @@ import 'package:mustachehub/create/ui/create_template_view/widgets/create_templa
 import 'package:mustachehub/dashboard/ui/navigation_widgets/dashboard_drawer/dashboard_drawer.dart';
 
 class CreateTemplateView extends StatelessWidget
-    with TemplateViewOpenTestBottomsheetMethod {
+    with TemplateViewOpenTestBottomsheetMethod, OpenSaveDialog {
   const CreateTemplateView({super.key});
 
   @override
@@ -17,7 +18,7 @@ class CreateTemplateView extends StatelessWidget
     return LayoutBuilder(
       builder: (context, constraints) {
         final width = constraints.maxWidth;
-        final willShowTestButton = 900 < width && width <= 1300;
+        final willShowTestButton = 900 < width && width <= 1850;
 
         return Scaffold(
           drawer: context.drawerOrNull,
@@ -31,7 +32,7 @@ class CreateTemplateView extends StatelessWidget
                   icon: const Icon(Icons.science_rounded),
                 ),
               IconButton(
-                onPressed: () {},
+                onPressed: () => openSaveDialog(context),
                 tooltip: 'Save template',
                 icon: const Icon(
                   Icons.save_rounded,
@@ -58,7 +59,15 @@ class CreateTemplateView extends StatelessWidget
                     const VerticalDivider(width: 20),
                     const Expanded(child: TextContentTab()),
                     const VerticalDivider(width: 20),
-                    const Expanded(child: TemplateInputFormPageView()),
+                    Expanded(
+                      child: Column(
+                        children: [
+                          const Expanded(child: TemplateInputFormPageView()),
+                          const Divider(),
+                          Expanded(child: TemplateOutputTabView()),
+                        ],
+                      ),
+                    ),
                   ],
                 );
               } else {

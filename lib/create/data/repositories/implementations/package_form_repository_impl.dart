@@ -16,7 +16,7 @@ class PackageFormRepositoryImpl implements IPackageFormRepository {
     required PackageInfo packageInfo,
     required Template template,
   }) {
-    return Future.value(PackageFormState.sucess());
+    return Future.value(PackageFormState.success());
   }
 
   @override
@@ -25,6 +25,6 @@ class PackageFormRepositoryImpl implements IPackageFormRepository {
     required PackageInfo packageInfo,
     required Template template,
   }) {
-    return Future.value(PackageFormState.sucess());
+    return Future.value(PackageFormState.success());
   }
 }

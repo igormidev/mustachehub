@@ -18,8 +18,7 @@ class ColorOption extends StatelessWidget {
   Widget build(BuildContext context) {
     final bloc = context.read<ThemeCubit>();
     final isSelected = bloc.state.color == Color(color.value);
-    print(
-        'isSelected: $isSelected | color: ${bloc.state.color} <=> ${Color(color.value)}');
+
     return InkWell(
       onTap: () {
         bloc.selectColor(color);
