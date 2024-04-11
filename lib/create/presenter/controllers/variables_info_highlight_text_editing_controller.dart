@@ -112,6 +112,38 @@ class VariablesInfoHighlightTextEditingController
     notifyListeners();
   }
 
+  @override
+  set value(TextEditingValue newValue) {
+    if (value.text != newValue.text) {
+      final TextEditingValue tev = value;
+      final int oldCursorPos = tev.selection.base.offset;
+      final int newCursorPos = newValue.selection.base.offset;
+      final bool isRemoving = oldCursorPos > newCursorPos;
+
+      final isControlZ = value.selection.start == value.selection.end;
+      final selectedAreaRemovedText = isControlZ
+          ? null
+          : value.text.substring(value.selection.start, value.selection.end);
+      print('CONTROL Z: $selectedAreaRemovedText');
+
+      final amoutErased = value.text.length - newValue.text.length;
+      print('AMOUNT ERASED: $amoutErased');
+
+      final String prefixText =
+          tev.text.substring(0, oldCursorPos - (isRemoving ? amoutErased : 0));
+      final String typedText = isRemoving
+          ? value.text.substring(newCursorPos, oldCursorPos)
+          : newValue.text.substring(oldCursorPos, newCursorPos);
+      final String suffixText = newValue.text.substring(newCursorPos);
+      // print('BEFORE: ${value.text} ($prefixText)');
+      // print('NEXT: ${newValue.text} ($suffixText)');
+      print('($prefixText) ($typedText) ($suffixText)');
+      print('-----------------');
+    }
+    // bananadoceigualmeu
+    super.value = newValue;
+  }
+
   TextStyle? _txStyle;
   TextStyle? get txStyle => _txStyle;
   set txStyle(TextStyle? value) {
@@ -138,6 +170,14 @@ class VariablesInfoHighlightTextEditingController
     _txStyle ??= style;
 
     final cacheIsStillValid = cacheText == value.text && cacheSpans.isNotEmpty;
+
+    // final TextEditingValue tev = value;
+    // final int cursorPos = tev.selection.base.offset;
+
+    // final String selectedText = selectedTextPayload.text;
+    // final String prefixText = tev.text.substring(0, cursorPos);
+    // final String suffixText = tev.text.substring(cursorPos);
+
     if (cacheIsStillValid) {
       return TextSpan(children: cacheSpans);
     } else {
