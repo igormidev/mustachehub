@@ -1,15 +1,13 @@
 import 'package:mustache_hub_core/mustache_hub_core.dart';
-import 'package:mustachehub/create/presenter/state/package_form_state.dart';
+import 'package:mustachehub/create/presenter/state/template_upload_state.dart';
 
 abstract class IPackageFormRepository {
-  Future<PackageFormState> createPackage({
+  Future<TemplateUploadState> createPackage({
     required PackageInfo packageInfo,
-    required Template template,
+    required ExpectedPayload expectedPayload,
   });
 
-  Future<PackageFormState> updatePackage({
-    required String packageId,
-    required PackageInfo packageInfo,
+  Future<TemplateUploadState> updatePackage({
     required Template template,
   });
 }

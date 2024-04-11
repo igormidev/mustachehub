@@ -1,30 +1,42 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mustache_hub_core/mustache_hub_core.dart';
 import 'package:mustachehub/create/data/repositories/interfaces/i_package_form_repository.dart';
-import 'package:mustachehub/create/presenter/state/package_form_state.dart';
+import 'package:mustachehub/create/presenter/state/template_upload_state.dart';
+import 'package:uuid/uuid.dart';
 
 class PackageFormRepositoryImpl implements IPackageFormRepository {
-  // ignore: unused_field
   final FirebaseFirestore _firestore;
+  final Uuid _uuid;
 
   PackageFormRepositoryImpl({
     FirebaseFirestore? firestore,
-  }) : _firestore = firestore ?? FirebaseFirestore.instance;
+    Uuid? uuid,
+  })  : _firestore = firestore ?? FirebaseFirestore.instance,
+        _uuid = uuid ?? const Uuid();
 
   @override
-  Future<PackageFormState> createPackage({
+  Future<TemplateUploadState> createPackage({
     required PackageInfo packageInfo,
-    required Template template,
+    required ExpectedPayload expectedPayload,
   }) {
-    return Future.value(PackageFormState.success());
+    final randomValue = _uuid.v4();
+    final packageDoc = _firestore.doc('packages/$randomValue');
+    packageDoc.set({
+      'info': packageInfo.toJson(),
+      'template': expectedPayload.toJson(),
+    });
+
+    return Future.value(TemplateUploadState.success());
   }
 
   @override
-  Future<PackageFormState> updatePackage({
-    required String packageId,
-    required PackageInfo packageInfo,
+  Future<TemplateUploadState> updatePackage({
     required Template template,
   }) {
-    return Future.value(PackageFormState.success());
+    _firestore.doc('packages/${template.id}').update({
+      'packageInfo': template.info.toJson(),
+      'expectedPayload': template.payload.toJson(),
+    });
+    return Future.value(TemplateUploadState.success());
   }
 }

@@ -1,69 +1,41 @@
 import 'package:hydrated_bloc/hydrated_bloc.dart';
-import 'package:mustache_hub_core/mustache_hub_core.dart';
-import 'package:mustachehub/create/data/repositories/interfaces/i_package_form_repository.dart';
+import 'package:mustachehub/create/data/dtos/package_form_data.dart';
 import 'package:mustachehub/create/presenter/state/package_form_state.dart';
 
 class PackageFormCubit extends HydratedCubit<PackageFormState> {
-  final IPackageFormRepository _repository;
-
-  PackageFormCubit({required IPackageFormRepository repository})
-      : _repository = repository,
-        super(PackageFormState.normal(name: '', description: ''));
+  PackageFormCubit() : super(PackageFormState.loading());
 
   void setStateToNormal() {
-    emit(PackageFormState.normal(name: '', description: ''));
+    emit(PackageFormState.loading());
   }
 
   void updateNameAndDescription({
     required String name,
     required String description,
   }) {
+    final PackageFormData? newFormData = state.mapOrNull(normal: (state) {
+      return state.formData.map(
+        creatingFromZero: (value) {
+          return PackageFormData.creatingFromZero(
+            title: name,
+            description: description,
+          );
+        },
+        editingMyPackage: (value) {
+          return PackageFormData.editingMyPackage(
+            title: name,
+            description: description,
+            previousInfoPackage: value.previousInfoPackage,
+          );
+        },
+      );
+    });
+
+    if (newFormData == null) return;
+
     emit(
-      PackageFormState.normal(name: name, description: description),
+      PackageFormState.normal(formData: newFormData),
     );
-  }
-
-  Future<void> createPackage({
-    required Template template,
-  }) async {
-    final PackageInfo? packageInfo = _getPackageInfo();
-    if (packageInfo == null) return;
-    final response = await _repository.createPackage(
-      packageInfo: packageInfo,
-      template: template,
-    );
-
-    emit(response);
-  }
-
-  Future<void> updatePackage({
-    required String packageId,
-    required Template template,
-  }) async {
-    final PackageInfo? packageInfo = _getPackageInfo();
-    if (packageInfo == null) return;
-    final response = await _repository.updatePackage(
-      packageId: packageId,
-      packageInfo: packageInfo,
-      template: template,
-    );
-
-    emit(response);
-  }
-
-  PackageInfo? _getPackageInfo() {
-    final packageInfo = state.mapOrNull(
-      normal: (s) => PackageInfo(
-        name: s.name,
-        description: s.description,
-      ),
-      error: (s) => PackageInfo(
-        name: s.name,
-        description: s.description,
-      ),
-    );
-
-    return packageInfo;
   }
 
   @override

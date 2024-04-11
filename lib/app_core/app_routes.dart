@@ -33,13 +33,17 @@ import 'package:mustachehub/auth/ui/views/signin_view/signin_view.dart';
 import 'package:mustachehub/create/data/adapters/token_identifier_flatmap_adapter.dart';
 import 'package:mustachehub/create/data/adapters/token_identifier_text_display_adapter.dart';
 import 'package:mustachehub/create/data/repositories/implementations/package_form_repository_impl.dart';
+import 'package:mustachehub/create/data/repositories/implementations/template_repository_impl.dart';
 import 'package:mustachehub/create/data/repositories/interfaces/i_package_form_repository.dart';
+import 'package:mustachehub/create/data/repositories/interfaces/i_template_repository.dart';
 import 'package:mustachehub/create/presenter/cubits/content_string_cubit.dart';
+import 'package:mustachehub/create/presenter/cubits/current_template_type_cubit.dart';
 import 'package:mustachehub/create/presenter/cubits/edit_model_info_display_cubit.dart';
 import 'package:mustachehub/create/presenter/cubits/fields_text_size_cubit.dart';
 import 'package:mustachehub/create/presenter/cubits/package_form_cubit.dart';
 import 'package:mustachehub/create/presenter/cubits/suggestion_cubit.dart';
 import 'package:mustachehub/create/presenter/cubits/tab_controll_cubit.dart';
+import 'package:mustachehub/create/presenter/cubits/template_upload_cubit.dart';
 import 'package:mustachehub/create/presenter/cubits/variables_cubit.dart';
 import 'package:mustachehub/create/ui/create_template_view/create_template_view.dart';
 import 'package:mustachehub/dashboard/data/repositories/implementations/user_fetch_repository_impl.dart';
@@ -161,6 +165,7 @@ final router = GoRouter(
           path: '/createMustache',
           parentNavigatorKey: NavigatorService.i.dashboardNavigatorKey,
           builder: (context, state) {
+            final packageId = state.pathParameters['packageId'];
             return MultiBlocProvider(
               providers: [
                 // Repositories
@@ -176,15 +181,24 @@ final router = GoRouter(
                 RepositoryProvider<TextAnalyserBase>(
                   create: (context) => const TextAnalyserBase(),
                 ),
+                RepositoryProvider<ITemplateRepository>(
+                  create: (context) => TemplateRepositoryImpl(),
+                ),
 
                 BlocProvider(create: (context) => ContentStringCubit()),
-                BlocProvider(create: (context) => FieldsTextSizeCubit()),
-                BlocProvider(create: (context) => EditModelInfoDisplayCubit()),
                 BlocProvider(
-                  create: (context) => PackageFormCubit(
+                  create: (context) => CurrentTemplateTypeCubit(
+                    templateRepository: context.read<ITemplateRepository>(),
+                  ),
+                ),
+                BlocProvider(
+                  create: (context) => TemplateUploadCubit(
                     repository: context.read<IPackageFormRepository>(),
                   ),
                 ),
+                BlocProvider(create: (context) => FieldsTextSizeCubit()),
+                BlocProvider(create: (context) => EditModelInfoDisplayCubit()),
+                BlocProvider(create: (context) => PackageFormCubit()),
                 BlocProvider(
                   create: (context) => SuggestionCubit(
                     textAnalyser: context.read<TextAnalyserBase>(),
@@ -217,7 +231,9 @@ final router = GoRouter(
                   ),
                 ),
               ],
-              child: const CreateTemplateView(),
+              child: CreateTemplateView(
+                packageId: packageId,
+              ),
             );
           },
         ),

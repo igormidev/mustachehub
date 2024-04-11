@@ -163,7 +163,7 @@ class _TextContentTabState extends State<TextContentTab> {
                   return TextFormField(
                     focusNode: textfieldFocusNode,
                     controller: controller,
-                    maxLines: null,
+                    maxLines: 10,
                     style: style,
                     decoration: InputDecoration(
                       contentPadding: const EdgeInsets.symmetric(
@@ -184,7 +184,9 @@ class _TextContentTabState extends State<TextContentTab> {
                           optionsController.showOptionsMenuWithWrapperBuilder(
                             suggestionCardBuilder: (
                               BuildContext dialogContext,
-                              listTilesWithOptionsBuilder,
+                              Widget Function(
+                                List<VariableImplementation> value,
+                              ) listTilesWithOptionsBuilder,
                             ) {
                               return BlocProvider<SuggestionCubit>.value(
                                 value: bloc,

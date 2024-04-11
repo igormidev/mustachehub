@@ -17,6 +17,12 @@ class VariablesState {
     required this.modelPipes,
   });
 
+  ExpectedPayload get getExpectedPayload => ExpectedPayload(
+        textPipes: textPipes,
+        booleanPipes: booleanPipes,
+        modelPipes: modelPipes,
+      );
+
   Map<String, dynamic> toMap() {
     final tokenInJsonFormat =
         flatMap.map((key, value) => MapEntry(key, value.toJson()));

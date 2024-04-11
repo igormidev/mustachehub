@@ -7,7 +7,7 @@ environment:
   sdk: ^3.2.3
 
 dependency_overrides: 
-  uuid: ^4.2.2
+  uuid: ^4.3.3
   mustachex: 
     path: ../../cloned_apis/mustachex  
   enchanted_collection: 1.3.0

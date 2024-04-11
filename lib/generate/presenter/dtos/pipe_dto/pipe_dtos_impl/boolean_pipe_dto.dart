@@ -1,3 +1,5 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+
 part of '../pipe_dto.dart';
 
 class BooleanPipeDto extends Equatable implements PipeDTO<BooleanPipe, bool> {
@@ -26,4 +28,23 @@ class BooleanPipeDto extends Equatable implements PipeDTO<BooleanPipe, bool> {
 
   @override
   List<Object> get props => [pipe, payloadValue];
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'pipe': pipe.toMap(),
+      'payloadValue': payloadValue,
+    };
+  }
+
+  factory BooleanPipeDto.fromMap(Map<String, dynamic> map) {
+    return BooleanPipeDto(
+      pipe: BooleanPipe.fromMap(map['pipe'] as Map<String, dynamic>),
+      payloadValue: map['payloadValue'] as bool,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory BooleanPipeDto.fromJson(String source) =>
+      BooleanPipeDto.fromMap(json.decode(source) as Map<String, dynamic>);
 }

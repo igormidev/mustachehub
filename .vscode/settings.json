@@ -6,7 +6,7 @@
         "**/*.g.dart": true,
         "**/*.h.dart": true,
         "**/android/": true,
-        "**/ios/": true,
+        // "**/ios/": true,
         "**/linux/": true,
         // "**/macos/": true,
         "**/build/": true,
