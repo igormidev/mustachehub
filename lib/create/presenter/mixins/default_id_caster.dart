@@ -14,8 +14,8 @@ mixin DefaultIdCaster {
     final validRegex = RegExp(r'^[a-zA-Z ]+$');
 
     final newValue = value
-        .replaceAll(RegExp('ã|à|á|â|å|ä|ā|æ'), 'a')
-        .replaceAll(RegExp('Ã|À|Á|Â|Å|Ä|Ā|Æ'), 'A')
+        .replaceAll(RegExp('ã|à|á|â|ă|å|ä|ā|æ|ą'), 'a')
+        .replaceAll(RegExp('Ã|À|Á|Â|Ă|Å|Ä|Ā|Æ|Ą'), 'A')
         .replaceAll(RegExp('ó|ò|ô|ö|õ|ō|ø|œ'), 'o')
         .replaceAll(RegExp('Ó|Ò|Ô|Ö|Õ|Ō|Ø|Œ'), 'O')
         .replaceAll(RegExp('ú|ù|ū'), 'u')

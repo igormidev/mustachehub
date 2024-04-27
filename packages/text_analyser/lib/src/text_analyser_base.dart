@@ -85,8 +85,14 @@ class TextAnalyserBase {
 
         final TokenIdentifier? tokenIdentifier = flatMap[group.content];
 
+        final offset = TextOffset(
+          start: group.globalStart,
+          end: group.globalEnd,
+        );
+
         if (tokenIdentifier == null) {
           segments[index] = AnalysedSegment.declarationOfUncatalogedVariable(
+            offset: offset,
             segmentText: group.fullMatchText,
           );
           return;
@@ -117,6 +123,7 @@ class TextAnalyserBase {
         /// Only models can have delimiters indicators
         if (hasDelimiter && isModel == false && isBoolean == false) {
           final seg = AnalysedSegment.nonModelVariableWithOpenOrCloseDelimmiter(
+            offset: offset,
             segmentText: group.fullMatchText,
           );
           segments[index] = seg;
@@ -125,6 +132,7 @@ class TextAnalyserBase {
 
         if ((isModel || isBoolean) && hasDelimiter == false) {
           segments[index] = AnalysedSegment.invalidMapDeclaration(
+            offset: offset,
             segmentText: group.fullMatchText,
           );
           return;
@@ -139,6 +147,7 @@ class TextAnalyserBase {
           final isRootTokenIdentifier = tokenIdentifier.parrentName == null;
           if (isRootTokenIdentifier) {
             segments[index] = AnalysedSegment.validDeclaration(
+              offset: offset,
               segmentText: group.fullMatchText,
             );
             return;
@@ -183,6 +192,7 @@ class TextAnalyserBase {
           if (openDeclarations == null || openDeclarations.isEmpty) {
             segments[index] =
                 AnalysedSegment.booleanDeclarationCloseWithoutOpen(
+              offset: offset,
               segmentText: group.fullMatchText,
             );
           } else {
@@ -191,10 +201,12 @@ class TextAnalyserBase {
 
             segments[openDeclaration.indexInSegment] =
                 AnalysedSegment.validDeclaration(
+              offset: offset,
               segmentText: openDeclaration.findedGroup.fullMatchText,
             );
 
             segments[index] = AnalysedSegment.validDeclaration(
+              offset: offset,
               segmentText: group.fullMatchText,
             );
           }
@@ -222,6 +234,7 @@ class TextAnalyserBase {
 
           if (openDeclarations == null || openDeclarations.isEmpty) {
             segments[index] = AnalysedSegment.modelDeclarationCloseWithoutOpen(
+              offset: offset,
               segmentText: group.fullMatchText,
             );
             return;
@@ -231,6 +244,7 @@ class TextAnalyserBase {
               openDeclarations.removeLast();
 
           segments[index] = AnalysedSegment.validDeclaration(
+            offset: offset,
             segmentText: group.fullMatchText,
           );
 
@@ -270,7 +284,13 @@ class TextAnalyserBase {
       onNonMatch: (text) {
         index++;
 
-        segments[index] = AnalysedSegment.text(segmentText: text);
+        segments[index] = AnalysedSegment.text(
+          offset: TextOffset(
+            start: text.globalStart,
+            end: text.globalEnd,
+          ),
+          segmentText: text.content,
+        );
       },
     );
 
@@ -278,46 +298,66 @@ class TextAnalyserBase {
       for (final declaration in declarations) {
         segments[declaration.indexInSegment] =
             AnalysedSegment.modelDeclarationOpenWithoutClose(
+          offset: TextOffset(
+            start: declaration.findedGroup.globalStart,
+            end: declaration.findedGroup.globalEnd,
+          ),
           segmentText: declaration.findedGroup.fullMatchText,
         );
       }
     });
 
-    notDefininedOpenBooleanSegments.forEach((content, declarations) {
-      for (final declaration in declarations) {
-        segments[declaration.indexInSegment] =
-            AnalysedSegment.booleanDeclarationOpenWithoutClose(
-          segmentText: declaration.findedGroup.fullMatchText,
-        );
-      }
-    });
-
-    notDefininedNonModelSegments.forEach((content, declarations) {
-      for (final declaration in declarations) {
-        final List<ToAnalyseScope>? scopesPattern =
-            modelScopes[declaration.tokenIdentifier.parrentName];
-
-        final isDeclarationInCorrectScope =
-            scopesPattern?.any((ToAnalyseScope analysisModel) {
-          return analysisModel.scope.startDeclaration.end <
-                  declaration.findedGroup.globalStart &&
-              declaration.findedGroup.globalEnd <
-                  analysisModel.scope.endDeclaration.start;
-        });
-
-        if (isDeclarationInCorrectScope == true) {
+    notDefininedOpenBooleanSegments.forEach(
+      (content, declarations) {
+        for (final declaration in declarations) {
           segments[declaration.indexInSegment] =
-              AnalysedSegment.validDeclaration(
-            segmentText: declaration.findedGroup.fullMatchText,
-          );
-        } else {
-          segments[declaration.indexInSegment] =
-              AnalysedSegment.variableExistsButCannotBeUsedInThisContext(
+              AnalysedSegment.booleanDeclarationOpenWithoutClose(
+            offset: TextOffset(
+              start: declaration.findedGroup.globalStart,
+              end: declaration.findedGroup.globalEnd,
+            ),
             segmentText: declaration.findedGroup.fullMatchText,
           );
         }
-      }
-    });
+      },
+    );
+
+    notDefininedNonModelSegments.forEach(
+      (content, declarations) {
+        for (final declaration in declarations) {
+          final List<ToAnalyseScope>? scopesPattern =
+              modelScopes[declaration.tokenIdentifier.parrentName];
+
+          final isDeclarationInCorrectScope =
+              scopesPattern?.any((ToAnalyseScope analysisModel) {
+            return analysisModel.scope.startDeclaration.end <
+                    declaration.findedGroup.globalStart &&
+                declaration.findedGroup.globalEnd <
+                    analysisModel.scope.endDeclaration.start;
+          });
+
+          if (isDeclarationInCorrectScope == true) {
+            segments[declaration.indexInSegment] =
+                AnalysedSegment.validDeclaration(
+              offset: TextOffset(
+                start: declaration.findedGroup.globalStart,
+                end: declaration.findedGroup.globalEnd,
+              ),
+              segmentText: declaration.findedGroup.fullMatchText,
+            );
+          } else {
+            segments[declaration.indexInSegment] =
+                AnalysedSegment.variableExistsButCannotBeUsedInThisContext(
+              offset: TextOffset(
+                start: declaration.findedGroup.globalStart,
+                end: declaration.findedGroup.globalEnd,
+              ),
+              segmentText: declaration.findedGroup.fullMatchText,
+            );
+          }
+        }
+      },
+    );
 
     final sortedSegmentsEntries = segments
         .castToList((key, value) => MapEntry(key, value))

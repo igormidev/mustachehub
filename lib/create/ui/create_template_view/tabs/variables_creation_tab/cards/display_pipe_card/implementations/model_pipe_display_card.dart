@@ -21,7 +21,7 @@ class ModelPipeDisplayCard extends StatelessWidget {
     if (pipe == null) return SizedBox.fromSize();
 
     final text = _toDisplayAdapter.toDisplayText(
-      title: pipe!.mustacheName,
+      title: pipe!.name,
       textPipes: pipe!.textPipes,
       booleanPipes: pipe!.booleanPipes,
       modelPipes: pipe!.modelPipes,

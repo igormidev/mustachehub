@@ -8,6 +8,7 @@ abstract class AnalysedSegment with _$AnalysedSegment {
   /// Only text.
   factory AnalysedSegment.text({
     // ✅
+    required TextOffset offset,
     required String segmentText,
   }) = _AnalysedSegmentText;
 
@@ -15,6 +16,7 @@ abstract class AnalysedSegment with _$AnalysedSegment {
   /// Can be for text, boolean or model (etc...).
   factory AnalysedSegment.validDeclaration({
     // ✅
+    required TextOffset offset,
     required String segmentText,
   }) = _AnalysedSegmentDeclaration;
 
@@ -24,6 +26,7 @@ abstract class AnalysedSegment with _$AnalysedSegment {
   /// does not contain ether '#' or '/' after the '{{' ).
   factory AnalysedSegment.invalidMapDeclaration({
     // ✅
+    required TextOffset offset,
     required String segmentText,
   }) = _AnalysedSegmentInvalidMapDeclaration;
 
@@ -31,6 +34,7 @@ abstract class AnalysedSegment with _$AnalysedSegment {
   /// the text dosen't have an corresponding close declaration match. It is invalid.
   factory AnalysedSegment.modelDeclarationOpenWithoutClose({
     // ✅
+    required TextOffset offset,
     required String segmentText,
   }) = _AnalysedSegmentModelDeclarationOpenWithoutClose;
 
@@ -38,6 +42,7 @@ abstract class AnalysedSegment with _$AnalysedSegment {
   /// the text dosen't have an corresponding open declaration match. It is invalid.
   factory AnalysedSegment.modelDeclarationCloseWithoutOpen({
     // ✅
+    required TextOffset offset,
     required String segmentText,
   }) = _AnalysedSegmentModelDeclarationCloseWithoutOpen;
 
@@ -45,6 +50,7 @@ abstract class AnalysedSegment with _$AnalysedSegment {
   /// the text dosen't have an corresponding close declaration match. It is invalid.
   factory AnalysedSegment.booleanDeclarationOpenWithoutClose({
     // ✅
+    required TextOffset offset,
     required String segmentText,
   }) = _AnalysedSegmentBooleanDeclarationOpenWithoutClose;
 
@@ -52,6 +58,7 @@ abstract class AnalysedSegment with _$AnalysedSegment {
   /// the text dosen't have an corresponding open declaration match. It is invalid.
   factory AnalysedSegment.booleanDeclarationCloseWithoutOpen({
     // ✅
+    required TextOffset offset,
     required String segmentText,
   }) = _AnalysedSegmentBooleanDeclarationCloseWithoutOpen;
 
@@ -60,7 +67,7 @@ abstract class AnalysedSegment with _$AnalysedSegment {
   /// open or close delimiters sirgil indicator.
   factory AnalysedSegment.nonModelVariableWithOpenOrCloseDelimmiter({
     // ✅
-
+    required TextOffset offset,
     required String segmentText,
   }) = _AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiter;
 
@@ -68,6 +75,7 @@ abstract class AnalysedSegment with _$AnalysedSegment {
   /// cataloged (that is: has not been created by the user)
   factory AnalysedSegment.declarationOfUncatalogedVariable({
     // ✅
+    required TextOffset offset,
     required String segmentText,
   }) = _AnalysedSegmentDeclarationOfUncatalogedVariable;
 
@@ -76,6 +84,7 @@ abstract class AnalysedSegment with _$AnalysedSegment {
   /// variable of a model outside of the model scope.
   factory AnalysedSegment.variableExistsButCannotBeUsedInThisContext({
     // ✅
+    required TextOffset offset,
     required String segmentText,
   }) = _AnalysedSegmentVariableExistsButCannotBeUsedInThisContext;
 }
@@ -114,3 +123,13 @@ enum SegmentType {
   variableExistsButCannotBeUsedInThisContext;
 }
 */
+
+class TextOffset {
+  final int start;
+  final int end;
+
+  const TextOffset({
+    required this.start,
+    required this.end,
+  });
+}
