@@ -13,6 +13,8 @@ import 'package:mustachehub/create/presenter/state/fields_text_size_state.dart';
 import 'package:mustachehub/create/presenter/state/suggestion_state.dart';
 import 'package:mustachehub/create/presenter/state/variables_state.dart';
 import 'package:mustachehub/create/ui/create_template_view/tabs/variables_creation_tab/widgets/headers/text_content_header.dart';
+import 'package:mustachehub/settings/interactor/cubit/theme_cubit.dart';
+import 'package:mustachehub/settings/interactor/state/theme_state.dart';
 import 'package:mustachex/mustachex.dart';
 import 'package:text_analyser/text_analyser.dart';
 
@@ -35,8 +37,11 @@ class _TextContentTabState extends State<TextContentTab> {
 
     final contentCubit = context.read<ContentStringCubit>();
     controller = VariablesInfoHighlightTextEditingController(
+      textAnalyserBase: const TextAnalyserBase(),
       text: contentCubit.state.currentText,
     );
+
+    controller.setFlatMap(context.read<VariablesCubit>().state.flatMap);
 
     optionsController = OptionsController<VariableImplementation>(
       textfieldFocusNode: textfieldFocusNode,
@@ -45,11 +50,11 @@ class _TextContentTabState extends State<TextContentTab> {
       // optionAsString: (option) => option.name,
       optionAsString: (option) => option.map(
         boolean: (value) => value.booleanImplementation.map(
-          invertedValue: (impl) {
-            return '^${value.booleanTokenIdentifier.name}';
-          },
           normalValue: (impl) {
             return '#${value.booleanTokenIdentifier.name}';
+          },
+          invertedValue: (impl) {
+            return '^${value.booleanTokenIdentifier.name}';
           },
         ),
         text: (value) => value.textTokenIdentifier.name,
@@ -76,10 +81,10 @@ class _TextContentTabState extends State<TextContentTab> {
             boolean: (value) {
               final name = value.booleanTokenIdentifier.name;
               return value.booleanImplementation.map(
-                invertedValue: (_) {
+                normalValue: (_) {
                   return '#$name}}{{/$name';
                 },
-                normalValue: (_) {
+                invertedValue: (_) {
                   return '^$name}}{{/$name';
                 },
               );
@@ -95,6 +100,9 @@ class _TextContentTabState extends State<TextContentTab> {
     Future.delayed(const Duration(milliseconds: 200), () {
       if (!mounted) return;
       _notifyContentCubit(contentCubit, contentCubit.state.currentText, 0);
+    });
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      controller.setCacheCS(Theme.of(context).colorScheme);
     });
   }
 
@@ -115,27 +123,14 @@ class _TextContentTabState extends State<TextContentTab> {
 
     return MultiBlocListener(
       listeners: [
-        BlocListener<SuggestionCubit, SuggestionState>(
-          listener: (context, state) {
-            state.maybeMap(
-              withIdentifiers: (value) {
-                controller.segmentsToTextInline(
-                  value.segments,
-                  context,
-                );
-              },
-              orElse: () {},
-            );
+        BlocListener<ThemeCubit, ThemeState>(
+          listener: (context, _) {
+            controller.setCacheCS(Theme.of(context).colorScheme);
           },
         ),
         BlocListener<VariablesCubit, VariablesState>(
           listener: (context, state) {
-            final sugestionCubit = context.read<SuggestionCubit>();
-            sugestionCubit.setSuggestions(
-              input: controller.text,
-              indexAtText: controller.selection.start,
-              flatMap: state.flatMap,
-            );
+            controller.setFlatMap(state.flatMap);
           },
         ),
       ],
@@ -157,8 +152,6 @@ class _TextContentTabState extends State<TextContentTab> {
                         height: 1,
                         fontSize: varState.testStringTextSize,
                       );
-
-                  controller.txStyle = style;
 
                   return TextFormField(
                     focusNode: textfieldFocusNode,
@@ -215,17 +208,20 @@ class _TextContentTabState extends State<TextContentTab> {
     );
   }
 
-  void _notifyContentCubit(ContentStringCubit contentCubit, String text,
-      [int? indexAtText]) {
-    try {
-      final sugestionCubit = context.read<SuggestionCubit>();
-      final varCubit = context.read<VariablesCubit>();
-      sugestionCubit.setSuggestions(
-        input: controller.text,
-        indexAtText: indexAtText ?? controller.selection.start,
-        flatMap: varCubit.state.flatMap,
-      );
-    } catch (_, __) {}
+  void _notifyContentCubit(
+    ContentStringCubit contentCubit,
+    String text, [
+    int? indexAtText,
+  ]) {
+    // try {
+    //   final sugestionCubit = context.read<SuggestionCubit>();
+    //   final varCubit = context.read<VariablesCubit>();
+    //   sugestionCubit.setSuggestions(
+    //     input: controller.text,
+    //     indexAtText: indexAtText ?? controller.selection.start,
+    //     flatMap: varCubit.state.flatMap,
+    //   );
+    // } catch (_, __) {}
     try {
       final parser = Parser(text, null, '{{ }}');
       final tokens = parser.getTokens();
@@ -266,9 +262,8 @@ class SuggestionCard extends StatelessWidget {
             );
           },
           withIdentifiers: (value) {
-            return listTilesWithOptionsBuilder(
-              value.tokenIdentifiers.toList(),
-            );
+            final items = value.tokenIdentifiers.toList();
+            return listTilesWithOptionsBuilder(items);
           },
           errorOccurred: (value) {
             return const Column(
