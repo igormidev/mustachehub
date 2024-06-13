@@ -75,7 +75,7 @@ class TextAnalyserBase {
         notDefininedOpenBooleanSegments = {};
 
     final Map<String, List<ToAnalyseDeclarationText>>
-        notDefininedNonModelSegments = {};
+        notDefininedTextsInModelSegments = {};
 
     printDetails() {
       // return;
@@ -83,18 +83,21 @@ class TextAnalyserBase {
 The {{#person}}
 
 asds {{name}} 
-{{/person}}
+{{/person}} 
 */
 
       print('--------------$index--------------');
       print(segments.entries
           .map((e) => '${e.key}: "${e.value.segmentText}"')
           .join('\n'));
-      print('then open model segments');
-      print(notDefininedOpenModelSegments.entries
+      print('then open model segments ******');
+      print(notDefininedTextsInModelSegments.entries
           .map((e) => '${e.key}: ${e.value}')
           .join('\n'));
-      print('nonDefinedLenght: ${notDefininedOpenModelSegments.length}');
+      // print(notDefininedOpenModelSegments.entries
+      //     .map((e) => '${e.key}: ${e.value}')
+      //     .join('\n'));
+      // print('nonDefinedLenght: ${notDefininedOpenModelSegments.length}');
     }
 
     /// First role of analysis
@@ -180,13 +183,13 @@ asds {{name}}
             );
           } else {
             final bool dontExistSegmentYet =
-                notDefininedNonModelSegments.containsKey(group.content) ==
+                notDefininedTextsInModelSegments.containsKey(group.content) ==
                     false;
-            if (dontExistSegmentYet == false) {
-              notDefininedNonModelSegments[group.content] = [];
+            if (dontExistSegmentYet) {
+              notDefininedTextsInModelSegments[group.content] = [];
             }
 
-            notDefininedNonModelSegments[group.content]?.add(
+            notDefininedTextsInModelSegments[group.content]?.add(
               ToAnalyseDeclarationText(
                 tokenIdentifier: tokenIdentifier as TextTokenIdentifier,
                 findedGroup: group,
@@ -198,8 +201,11 @@ asds {{name}}
           return;
         } else if (isBoolean) {
           // Now, we need to now if the boolean has a open and close declaration in somewhere in the text.
-          if (notDefininedOpenBooleanSegments.containsKey(group.content) ==
-              false) {
+
+          final bool dontExistSegmentYet =
+              notDefininedOpenBooleanSegments.containsKey(group.content) ==
+                  false;
+          if (dontExistSegmentYet) {
             notDefininedOpenBooleanSegments[group.content] = [];
           }
 
@@ -365,9 +371,12 @@ asds {{name}}
       },
     );
 
-    notDefininedNonModelSegments.forEach(
+    // Now, let's check if the text declarations that need
+    // to be inside a model scope are valid.
+    //
+    notDefininedTextsInModelSegments.forEach(
       (content, declarations) {
-        for (final declaration in declarations) {
+        for (final ToAnalyseDeclarationText declaration in declarations) {
           final List<ToAnalyseScope>? scopesPattern =
               modelScopes[declaration.tokenIdentifier.parrentName];
 
