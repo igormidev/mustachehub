@@ -41,10 +41,10 @@ class LoginPage extends StatelessWidget {
             const SizedBox(height: 20),
             const Center(
               child: SizedBox(
-                width: 474,
+                width: 476,
                 child: FittedBox(
                   child: SizedBox(
-                    width: 474,
+                    width: 476,
                     child: LoginFormAndButtonsSection(),
                   ),
                 ),

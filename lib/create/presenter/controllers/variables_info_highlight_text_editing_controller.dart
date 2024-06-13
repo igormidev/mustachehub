@@ -33,7 +33,6 @@ class VariablesInfoHighlightTextEditingController
     if (cS == null) return null;
 
     return newCacheSegments.map<InlineSpan>((AnalysedSegment analysedSegment) {
-      analysedSegment.segmentText;
       return analysedSegment.map(
         text: (value) {
           return TextSpan(
@@ -46,7 +45,6 @@ class VariablesInfoHighlightTextEditingController
             color: cS.primary,
             backgroundColor: cS.primaryContainer,
           );
-          // children: value.segmentText.characters.map((e) => TextSpan(text: e)).toList(),
           return TextSpan(
             children: value.segmentText.characters.map((e) {
               return TooltipSpan(
@@ -168,7 +166,7 @@ class VariablesInfoHighlightTextEditingController
                 message:
                     'Declaration of uncataloged variable.\n\nThat means you are trying to use a variable that was not declared before.\nTo fix this, you need to create the variable before using it. You can create text, boolean or model variables.',
                 inlineSpan: TextSpan(
-                  text: value.segmentText,
+                  text: e,
                   style: defaultStyle.copyWith(
                     color: cS.error,
                     backgroundColor: cS.errorContainer,
@@ -185,7 +183,7 @@ class VariablesInfoHighlightTextEditingController
                 message:
                     'Variable exists but cannot be used in this context.\n\nThat means you are trying to use a variable that can\'t be used in that place. For instance; text variable of a model that is trying to be use outside the scope of it.\nWhat is a scope?\nExemple: {{^Person}}declare_persons_variable_only_here{{/Person}}',
                 inlineSpan: TextSpan(
-                  text: value.segmentText,
+                  text: e,
                   style: defaultStyle.copyWith(
                     color: cS.error,
                     backgroundColor: cS.errorContainer,

@@ -1,3 +1,4 @@
+import 'package:commom_states/states/session_state.dart';
 import 'package:dart_debouncer/dart_debouncer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -5,6 +6,7 @@ import 'package:media_query_core/media_query_core.dart';
 import 'package:mustache_hub_core/mustache_hub_core.dart';
 import 'package:mustachehub/app_core/extensions/default_state_extension.dart';
 import 'package:mustachehub/app_core/theme/components/mustache_button_loader.dart';
+import 'package:mustachehub/app_core/theme/dialogs_api/implementations/show_need_to_log_in_dialog.dart';
 import 'package:mustachehub/app_core/utils/device_utils.dart';
 import 'package:mustachehub/auth/ui/widgets/signin_animation.dart';
 import 'package:mustachehub/create/presenter/cubits/content_string_cubit.dart';
@@ -182,50 +184,47 @@ class _SaveTemplateBottomSheetState extends State<SaveTemplateBottomSheet>
                         onPressed: isLoading
                             ? null
                             : () {
-                                _debouncer
-                                    .garanteedExecutionAfterDebounceFinished(
-                                  () {
-                                    if (_formKey.currentState?.validate() !=
-                                        true) {
-                                      return;
-                                    }
-                                    final uploadCubit =
-                                        context.read<TemplateUploadCubit>();
+                                if (!context.isUserLoggedIn) {
+                                  showNeedToLogInDialog(context);
+                                  return;
+                                }
 
-                                    final expectectedPayload = widget
-                                        .variablesCubit
-                                        .state
-                                        .getExpectedPayload;
+                                if (_formKey.currentState?.validate() != true) {
+                                  return;
+                                }
+                                final uploadCubit =
+                                    context.read<TemplateUploadCubit>();
 
-                                    final newPackageInfo = widget
-                                        .packageFormCubit.state.packageInfo;
+                                final expectectedPayload = widget
+                                    .variablesCubit.state.getExpectedPayload;
 
-                                    if (newPackageInfo == null) return;
+                                final newPackageInfo =
+                                    widget.packageFormCubit.state.packageInfo;
 
-                                    if (isEditing == false) {
-                                      final id = context
-                                          .read<CurrentTemplateTypeCubit>()
-                                          .state
-                                          .mapOrNull(
-                                            withExistingTemplate: (value) =>
-                                                value.template.id,
-                                          );
-                                      if (id == null) return;
-                                      uploadCubit.updatePackage(
-                                        template: Template(
-                                          id: id,
-                                          info: newPackageInfo,
-                                          payload: expectectedPayload,
-                                        ),
+                                if (newPackageInfo == null) return;
+
+                                if (isEditing == false) {
+                                  final id = context
+                                      .read<CurrentTemplateTypeCubit>()
+                                      .state
+                                      .mapOrNull(
+                                        withExistingTemplate: (value) =>
+                                            value.template.id,
                                       );
-                                    } else {
-                                      uploadCubit.createPackage(
-                                        packageInfo: newPackageInfo,
-                                        expectedPayload: expectectedPayload,
-                                      );
-                                    }
-                                  },
-                                );
+                                  if (id == null) return;
+                                  uploadCubit.updatePackage(
+                                    template: Template(
+                                      id: id,
+                                      info: newPackageInfo,
+                                      payload: expectectedPayload,
+                                    ),
+                                  );
+                                } else {
+                                  uploadCubit.createPackage(
+                                    packageInfo: newPackageInfo,
+                                    expectedPayload: expectectedPayload,
+                                  );
+                                }
                               },
                       );
                     },

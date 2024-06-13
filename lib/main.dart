@@ -20,6 +20,8 @@ void main() async {
         : await getApplicationDocumentsDirectory(),
   );
 
+  // await HydratedBloc.storage.clear();
+
   runApp(const MyApp());
 }
 

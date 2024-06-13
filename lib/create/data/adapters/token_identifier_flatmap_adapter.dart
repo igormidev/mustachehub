@@ -38,14 +38,14 @@ class TokenIdentifierFlatMapAdapter {
     response.addAll(Map.fromEntries(booleans));
 
     for (final modelPipe in modelPipes) {
-      response.addAll(_flatModelPipe(modelPipe.mustacheName, modelPipe));
+      response.addAll(_flatModelPipe(null, modelPipe));
     }
 
     return response;
   }
 
   Map<String, TokenIdentifier> _flatModelPipe(
-    String parrentName,
+    String? parrentName,
     ModelPipe modelPipe,
   ) {
     final Map<String, TokenIdentifier> response = {};
@@ -90,13 +90,6 @@ class TokenIdentifierFlatMapAdapter {
 
     for (final model in modelPipe.modelPipes) {
       response.addAll({
-        model.mustacheName: TokenIdentifier.model(
-          parrentName: modelPipe.mustacheName,
-          name: model.mustacheName,
-          textsNames: model.textPipes.map((e) => e.mustacheName).toList(),
-          booleanNames: model.booleanPipes.map((e) => e.mustacheName).toList(),
-          subModelsNames: model.modelPipes.map((e) => e.mustacheName).toList(),
-        ),
         ..._flatModelPipe(model.mustacheName, model),
       });
     }

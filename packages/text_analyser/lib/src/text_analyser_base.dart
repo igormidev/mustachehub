@@ -1,5 +1,6 @@
-import 'package:enchanted_regex/enchanted_regex.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:enchanted_collection/enchanted_collection.dart';
+import 'package:enchanted_regex/enchanted_regex.dart';
 import 'package:text_analyser/src/models/analysed_segment.dart';
 import 'package:text_analyser/src/models/token_identifier.dart';
 import 'package:text_analyser/src/models/variable_implementation.dart';
@@ -76,12 +77,36 @@ class TextAnalyserBase {
     final Map<String, List<ToAnalyseDeclarationText>>
         notDefininedNonModelSegments = {};
 
+    printDetails() {
+      // return;
+/*
+The {{#person}}
+
+asds {{name}} 
+{{/person}}
+*/
+
+      print('--------------$index--------------');
+      print(segments.entries
+          .map((e) => '${e.key}: "${e.value.segmentText}"')
+          .join('\n'));
+      print('then open model segments');
+      print(notDefininedOpenModelSegments.entries
+          .map((e) => '${e.key}: ${e.value}')
+          .join('\n'));
+      print('nonDefinedLenght: ${notDefininedOpenModelSegments.length}');
+    }
+
     /// First role of analysis
     input.forEachNamedGroup(
       regExp,
       willContainBeforeAndAfterContentAsNonMatch: false,
       onMatch: (FindedGroup group) {
         index++;
+
+        if (index == 3) {
+          print('isIndex => $index');
+        }
 
         final TokenIdentifier? tokenIdentifier = flatMap[group.content];
 
@@ -95,6 +120,7 @@ class TextAnalyserBase {
             offset: offset,
             segmentText: group.fullMatchText,
           );
+          printDetails();
           return;
         }
 
@@ -127,6 +153,7 @@ class TextAnalyserBase {
             segmentText: group.fullMatchText,
           );
           segments[index] = seg;
+          printDetails();
           return;
         }
 
@@ -135,6 +162,7 @@ class TextAnalyserBase {
             offset: offset,
             segmentText: group.fullMatchText,
           );
+          printDetails();
           return;
         }
 
@@ -150,7 +178,6 @@ class TextAnalyserBase {
               offset: offset,
               segmentText: group.fullMatchText,
             );
-            return;
           } else {
             final bool dontExistSegmentYet =
                 notDefininedNonModelSegments.containsKey(group.content) ==
@@ -167,6 +194,7 @@ class TextAnalyserBase {
               ),
             );
           }
+          printDetails();
           return;
         } else if (isBoolean) {
           // Now, we need to now if the boolean has a open and close declaration in somewhere in the text.
@@ -183,6 +211,7 @@ class TextAnalyserBase {
                 indexInSegment: index,
               ),
             );
+            printDetails();
             return;
           }
 
@@ -197,7 +226,7 @@ class TextAnalyserBase {
             );
           } else {
             final ToAnalyseDeclarationBoolean openDeclaration =
-                openDeclarations.removeLast();
+                notDefininedOpenBooleanSegments[group.content]!.removeLast();
 
             segments[openDeclaration.indexInSegment] =
                 AnalysedSegment.validDeclaration(
@@ -211,6 +240,7 @@ class TextAnalyserBase {
             );
           }
 
+          printDetails();
           return;
         }
 
@@ -227,6 +257,7 @@ class TextAnalyserBase {
               indexInSegment: index,
             ),
           );
+          printDetails();
           return;
         } else {
           final List<ToAnalyseDeclarationModel>? openDeclarations =
@@ -237,15 +268,25 @@ class TextAnalyserBase {
               offset: offset,
               segmentText: group.fullMatchText,
             );
+            printDetails();
             return;
           }
 
           final ToAnalyseDeclarationModel openDeclaration =
-              openDeclarations.removeLast();
+              notDefininedOpenModelSegments[group.content]!.removeLast();
 
           segments[index] = AnalysedSegment.validDeclaration(
             offset: offset,
             segmentText: group.fullMatchText,
+          );
+
+          segments[openDeclaration.indexInSegment] =
+              AnalysedSegment.validDeclaration(
+            offset: TextOffset(
+              start: openDeclaration.findedGroup.globalStart,
+              end: openDeclaration.findedGroup.globalEnd,
+            ),
+            segmentText: openDeclaration.findedGroup.fullMatchText,
           );
 
           final IdentifierScope scope = IdentifierScope(
@@ -277,7 +318,7 @@ class TextAnalyserBase {
           if (isIndexAtTextWithinScope) {
             validScopesIdentifier.add(tokenIdentifier as ModelTokenIdentifier);
           }
-
+          printDetails();
           return;
         }
       },
@@ -291,8 +332,10 @@ class TextAnalyserBase {
           ),
           segmentText: text.content,
         );
+        printDetails();
       },
     );
+    print('-----END------$index-----END------');
 
     notDefininedOpenModelSegments.forEach((content, declarations) {
       for (final declaration in declarations) {
@@ -438,6 +481,10 @@ class ToAnalyseDeclarationModel {
     required this.findedGroup,
     required this.indexInSegment,
   });
+
+  @override
+  String toString() =>
+      'ToAnalyseDeclarationModel(tokenIdentifier: $tokenIdentifier, findedGroup: $findedGroup, indexInSegment: $indexInSegment)';
 }
 
 class ToAnalyseDeclarationBoolean {
