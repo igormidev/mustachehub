@@ -69,6 +69,7 @@ class _TextVariablesCreationWidgetState
                         nameEC.text.camelCase,
                     isRequired: isRequired.value,
                   ),
+                  () {},
                 ),
               ),
             );

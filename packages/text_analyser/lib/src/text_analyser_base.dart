@@ -88,14 +88,14 @@ asds {{name}}
 {{/person}} 
 */
 
-      print('--------------$index--------------');
-      print(segments.entries
-          .map((e) => '${e.key}: "${e.value.segmentText}"')
-          .join('\n'));
-      print('then open model segments ******');
-      print(notDefininedTextsInModelSegments.entries
-          .map((e) => '${e.key}: ${e.value}')
-          .join('\n'));
+      // print('--------------$index--------------');
+      // print(segments.entries
+      //     .map((e) => '${e.key}: "${e.value.segmentText}"')
+      //     .join('\n'));
+      // print('then open model segments ******');
+      // print(notDefininedTextsInModelSegments.entries
+      //     .map((e) => '${e.key}: ${e.value}')
+      //     .join('\n'));
       // print(notDefininedOpenModelSegments.entries
       //     .map((e) => '${e.key}: ${e.value}')
       //     .join('\n'));

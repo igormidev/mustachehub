@@ -56,6 +56,7 @@ class _BooleanVariablesCreationWidgetState
                 mustacheName: tryValidCast(nameEC.text)?.camelCase ??
                     nameEC.text.camelCase,
               ),
+              () {},
             ),
           ),
         );

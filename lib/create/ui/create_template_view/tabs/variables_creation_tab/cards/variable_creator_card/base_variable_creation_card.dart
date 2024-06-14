@@ -10,13 +10,19 @@ class BaseVariableCreatorCard<T extends Pipe> extends StatefulWidget {
 
   final Widget Function(
     T pipe,
-    void Function(T pipe) saveEditFunc,
+    void Function(
+      T pipe,
+      void Function() afterSaveFunction,
+    ) saveEditFunc,
     void Function() onDeleteItem,
   )? editPipeBuilder;
 
   final void Function(
     T pipe,
-    void Function(T pipe) saveEditFunc,
+    void Function(
+      T pipe,
+      void Function() afterSaveFunction,
+    ) saveEditFunc,
     void Function() onDeleteItem,
   )? onEditPipeClicked;
 
@@ -89,7 +95,10 @@ class _BaseVariableCreatorCardState<T extends Pipe>
     if (innerSelectedIndex == null) return;
     final pipe = pipesStateVN.value[innerSelectedIndex];
 
-    void listUpdate(T pipe) {
+    void listUpdate(
+      T pipe,
+      void Function() afterSaveFunction,
+    ) {
       final innerIndex = selectedIndex.value;
       if (innerIndex == null) return;
 
@@ -112,7 +121,8 @@ class _BaseVariableCreatorCardState<T extends Pipe>
       newList[innerIndex] = pipe;
       pipesStateVN.value = newList;
       selectedIndex.value = null;
-      return widget.retriveCreatedPipes(newList);
+      widget.retriveCreatedPipes(newList);
+      afterSaveFunction();
     }
 
     void onDeleteItem() {
@@ -169,14 +179,15 @@ class _BaseVariableCreatorCardState<T extends Pipe>
               final pipe = pipes[index];
 
               if (isSelected) {
-                void listUpdate(T pipe) {
+                void listUpdate(
+                  T pipe,
+                  void Function() afterSaveFunction,
+                ) {
                   final innerIndex = selectedIndex.value;
                   if (innerIndex == null) return;
 
                   if (pipe is ModelPipe) {
-                    final areAllPipesEmpty = pipe.textPipes.isEmpty &&
-                        pipe.booleanPipes.isEmpty &&
-                        pipe.modelPipes.isEmpty;
+                    final areAllPipesEmpty = pipe.isEmpty();
 
                     if (areAllPipesEmpty) {
                       ScaffoldMessenger.of(context).showSnackBar(
@@ -194,7 +205,8 @@ class _BaseVariableCreatorCardState<T extends Pipe>
                   newList[innerIndex] = pipe;
                   pipesStateVN.value = newList;
                   selectedIndex.value = null;
-                  return widget.retriveCreatedPipes(newList);
+                  widget.retriveCreatedPipes(newList);
+                  afterSaveFunction();
                 }
 
                 void onDeleteItem() {

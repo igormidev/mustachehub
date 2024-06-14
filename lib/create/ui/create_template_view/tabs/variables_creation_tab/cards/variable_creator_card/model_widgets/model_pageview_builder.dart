@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:mason/mason.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -51,7 +52,6 @@ class _ModelPageviewBuilderState extends State<ModelPageviewBuilder>
       type: ListType.sliverBuildDelegate,
       editPipeBuilder: (pipe, saveEditFunc, onDeleteItem) {
         editCubit.startEditingInfo(pipe);
-
         nameEC.text = pipe.name;
         descriptionEC.text = pipe.description;
         return PipeFormFieldCardWrapper(
@@ -101,8 +101,7 @@ class _ModelPageviewBuilderState extends State<ModelPageviewBuilder>
                         onPressed: () {
                           final lastField =
                               (pages.value.last).child as ModelPipeFormfield;
-                          lastField.save();
-                          editCubit.removeLastSubModelPath();
+                          lastField.save(editCubit.removeLastSubModelPath);
                         },
                         icon: const Icon(Icons.arrow_back),
                       ),
@@ -116,65 +115,83 @@ class _ModelPageviewBuilderState extends State<ModelPageviewBuilder>
                   );
                 },
               ),
-              SizedBox(
-                height: 700,
-                child: ValueListenableBuilder(
-                  valueListenable: pages,
-                  child: ModelPipeFormfield(
-                    parentId: null,
-                    formKey: widget.formKey,
-                    nameEC: nameEC,
-                    descriptionEC: descriptionEC,
-                    onDelete: onDeleteItem,
-                    popOutModelFromNavigationCallback: () {
-                      final newList = [...pages.value]..removeLast();
-                      pages.value = newList;
-                    },
-                    pipe: pipe,
-                    addNewModelToNavigationCallback: (child) {
-                      pages.value = [...pages.value, child];
-                    },
-                    onSave: (
-                      textPipes,
-                      booleanPipes,
-                      modelPipes,
-                    ) {
-                      final newModelPipe = ModelPipe(
-                        name: nameEC.text,
-                        description: descriptionEC.text,
-                        mustacheName: tryValidCast(nameEC.text)?.camelCase ??
-                            nameEC.text.camelCase,
-                        textPipes: textPipes,
-                        booleanPipes: booleanPipes,
-                        modelPipes: modelPipes,
-                      );
-                      return saveEditFunc(newModelPipe);
-                    },
-                  ),
-                  builder: (context, children, child) {
-                    return Navigator(
-                      onPopPage: (route, result) {
-                        onDeleteItem();
-                        final newList = [...pages.value]..removeLast();
-                        pages.value = newList;
-                        setState(() {});
-                        return true;
-                      },
-                      pages: [
-                        MaterialPage(
-                          key: const ValueKey('root'),
-                          child: child!,
-                        ),
-                        ...children.mapper((value, isFirst, isLast, index) {
-                          return MaterialPage(
-                            key: ValueKey(index),
-                            child: value,
-                          );
-                        }),
-                      ],
+              ValueListenableBuilder(
+                valueListenable: pages,
+                child: ModelPipeFormfield(
+                  parentId: null,
+                  formKey: widget.formKey,
+                  nameEC: nameEC,
+                  descriptionEC: descriptionEC,
+                  onDelete: onDeleteItem,
+                  popOutModelFromNavigationCallback: () {
+                    final newList = [...pages.value]..removeLast();
+                    pages.value = newList;
+                  },
+                  pipe: pipe,
+                  addNewModelToNavigationCallback: (child) {
+                    pages.value = [...pages.value, child];
+                  },
+                  onSave: (
+                    textPipes,
+                    booleanPipes,
+                    modelPipes,
+                    afterSaveFunction,
+                  ) {
+                    final newModelPipe = ModelPipe(
+                      name: nameEC.text,
+                      description: descriptionEC.text,
+                      mustacheName: tryValidCast(nameEC.text)?.camelCase ??
+                          nameEC.text.camelCase,
+                      textPipes: textPipes,
+                      booleanPipes: booleanPipes,
+                      modelPipes: modelPipes,
                     );
+                    return saveEditFunc(newModelPipe, afterSaveFunction);
                   },
                 ),
+                builder: (context, children, child) {
+                  // if (children.isNotEmpty) return children.last;
+                  // if (children.isEmpty) return child!;
+
+                  return Stack(
+                    children: [
+                      Opacity(
+                        opacity: children.isEmpty ? 1 : 0,
+                        child: child!,
+                      ),
+                      ...children.mapper((child, isFirst, isLast, index) {
+                        return Opacity(
+                          opacity: isLast ? 1 : 0,
+                          child: child,
+                        );
+                      }),
+
+                      // if (children.isEmpty) child!,
+                      // if (children.isNotEmpty) children.last
+                    ],
+                  );
+                  // return Navigator(
+                  //   onPopPage: (route, result) {
+                  //     onDeleteItem();
+                  //     final newList = [...pages.value]..removeLast();
+                  //     pages.value = newList;
+                  //     setState(() {});
+                  //     return true;
+                  //   },
+                  //   pages: [
+                  //     MaterialPage(
+                  //       key: const ValueKey('root'),
+                  //       child: child,
+                  //     ),
+                  //     ...children.mapper((value, isFirst, isLast, index) {
+                  //       return MaterialPage(
+                  //         key: ValueKey(index),
+                  //         child: value,
+                  //       );
+                  //     }),
+                  //   ],
+                  // );
+                },
               ),
             ],
           ),
@@ -246,12 +263,16 @@ class _ModelBaseCreatorState extends State<ModelBaseCreator>
             pipe: pipe,
             addNewModelToNavigationCallback:
                 widget.addNewModelToNavigationCallback,
-            popOutModelFromNavigationCallback:
-                widget.popOutModelFromNavigationCallback,
+            popOutModelFromNavigationCallback: () {
+              FocusScope.of(context).requestFocus(FocusNode());
+
+              widget.popOutModelFromNavigationCallback();
+            },
             onSave: (
               textPipes,
               booleanPipes,
               modelPipes,
+              afterSaveFunction,
             ) {
               final newModelPipe = ModelPipe(
                 name: nameEC.text,
@@ -262,7 +283,7 @@ class _ModelBaseCreatorState extends State<ModelBaseCreator>
                 booleanPipes: booleanPipes,
                 modelPipes: modelPipes,
               );
-              return saveEditFunc(newModelPipe);
+              saveEditFunc(newModelPipe, afterSaveFunction);
             },
           ),
         ));
@@ -282,6 +303,7 @@ class ModelPipeFormfield extends StatefulWidget {
     List<TextPipe> textPipes,
     List<BooleanPipe> booleanPipes,
     List<ModelPipe> modelPipes,
+    void Function() afterSaveFunction,
   ) onSave;
   final void Function(PipeFormFieldCardWrapper child)
       addNewModelToNavigationCallback;
@@ -312,8 +334,10 @@ class ModelPipeFormfield extends StatefulWidget {
   @override
   State<ModelPipeFormfield> createState() => _ModelPipeFormfieldState();
 
-  void save() {
-    onSave(textPipes, booleanPipes, modelPipes);
+  void save(
+    void Function() afterSaveFunction,
+  ) {
+    onSave(textPipes, booleanPipes, modelPipes, afterSaveFunction);
   }
 }
 
@@ -348,14 +372,13 @@ class _ModelPipeFormfieldState extends State<ModelPipeFormfield> {
       formKey: widget.formKey,
       nameEC: widget.nameEC,
       descriptionEC: widget.descriptionEC,
-      isScrollable: true,
+      isScrollable: false,
       onDelete: () {
         widget.onDelete();
         widget.popOutModelFromNavigationCallback();
       },
       onSave: () {
-        widget.save();
-        widget.popOutModelFromNavigationCallback();
+        widget.save(widget.popOutModelFromNavigationCallback);
       },
       pipe: widget.pipe,
       children: [
