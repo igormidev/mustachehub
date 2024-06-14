@@ -76,9 +76,11 @@ class TextAnalyserBase {
 
     final Map<String, List<ToAnalyseDeclarationText>>
         notDefininedTextsInModelSegments = {};
+    final Map<String, List<ToAnalyseDeclarationBooleanCluster>>
+        notDefininedBooleansInModelSegments = {};
 
     printDetails() {
-      // return;
+      return;
 /*
 The {{#person}}
 
@@ -233,16 +235,45 @@ asds {{name}}
           } else {
             final ToAnalyseDeclarationBoolean openDeclaration =
                 notDefininedOpenBooleanSegments[group.content]!.removeLast();
+            final isRootTokenIdentifier = tokenIdentifier.parrentName == null;
+            if (isRootTokenIdentifier) {
+              segments[openDeclaration.indexInSegment] =
+                  AnalysedSegment.validDeclaration(
+                offset: offset,
+                segmentText: openDeclaration.findedGroup.fullMatchText,
+              );
 
-            segments[openDeclaration.indexInSegment] =
-                AnalysedSegment.validDeclaration(
-              offset: offset,
-              segmentText: openDeclaration.findedGroup.fullMatchText,
+              segments[index] = AnalysedSegment.validDeclaration(
+                offset: offset,
+                segmentText: group.fullMatchText,
+              );
+              return;
+            }
+
+            final bool dontExistBooleanSegmentYet =
+                notDefininedBooleansInModelSegments
+                        .containsKey(group.content) ==
+                    false;
+
+            if (dontExistBooleanSegmentYet) {
+              notDefininedBooleansInModelSegments[group.content] = [];
+            }
+
+            final scope = ToAnalyseDeclarationBooleanCluster(
+              open: ToAnalyseDeclarationBoolean(
+                tokenIdentifier: openDeclaration.tokenIdentifier,
+                findedGroup: openDeclaration.findedGroup,
+                indexInSegment: openDeclaration.indexInSegment,
+              ),
+              close: ToAnalyseDeclarationBoolean(
+                tokenIdentifier: tokenIdentifier as BooleanTokenIdentifier,
+                findedGroup: group,
+                indexInSegment: index,
+              ),
             );
 
-            segments[index] = AnalysedSegment.validDeclaration(
-              offset: offset,
-              segmentText: group.fullMatchText,
+            notDefininedBooleansInModelSegments[group.content]?.add(
+              scope,
             );
           }
 
@@ -341,7 +372,6 @@ asds {{name}}
         printDetails();
       },
     );
-    print('-----END------$index-----END------');
 
     notDefininedOpenModelSegments.forEach((content, declarations) {
       for (final declaration in declarations) {
@@ -373,10 +403,13 @@ asds {{name}}
 
     // Now, let's check if the text declarations that need
     // to be inside a model scope are valid.
-    //
+    // To be valid they need to be inside there model scope.
     notDefininedTextsInModelSegments.forEach(
-      (content, declarations) {
+      (_, List<ToAnalyseDeclarationText> declarations) {
+        // Let's check each text declaration
         for (final ToAnalyseDeclarationText declaration in declarations) {
+          // Get the analyse scope of the parrent of the text declaration.
+          // That is: The model scope the text is inside.
           final List<ToAnalyseScope>? scopesPattern =
               modelScopes[declaration.tokenIdentifier.parrentName];
 
@@ -405,6 +438,65 @@ asds {{name}}
                 end: declaration.findedGroup.globalEnd,
               ),
               segmentText: declaration.findedGroup.fullMatchText,
+            );
+          }
+        }
+      },
+    );
+
+    // Now, let's check if the boolean declarations that need
+    // to be inside a model scope are valid.
+    // To be valid they need to be inside there model scope.
+    notDefininedBooleansInModelSegments.forEach(
+      (_, List<ToAnalyseDeclarationBooleanCluster> declarations) {
+        for (final ToAnalyseDeclarationBooleanCluster declaration
+            in declarations) {
+          final List<ToAnalyseScope>? scopesPattern =
+              modelScopes[declaration.open.tokenIdentifier.parrentName];
+
+          final isDeclarationInCorrectScope =
+              scopesPattern?.any((ToAnalyseScope analysisModel) {
+            return analysisModel.scope.startDeclaration.end <
+                    declaration.open.findedGroup.globalStart &&
+                declaration.close.findedGroup.globalEnd <
+                    analysisModel.scope.endDeclaration.start;
+          });
+
+          if (isDeclarationInCorrectScope == true) {
+            segments[declaration.open.indexInSegment] =
+                AnalysedSegment.validDeclaration(
+              offset: TextOffset(
+                start: declaration.open.findedGroup.globalStart,
+                end: declaration.open.findedGroup.globalEnd,
+              ),
+              segmentText: declaration.open.findedGroup.fullMatchText,
+            );
+
+            segments[declaration.close.indexInSegment] =
+                AnalysedSegment.validDeclaration(
+              offset: TextOffset(
+                start: declaration.close.findedGroup.globalStart,
+                end: declaration.close.findedGroup.globalEnd,
+              ),
+              segmentText: declaration.close.findedGroup.fullMatchText,
+            );
+          } else {
+            segments[declaration.open.indexInSegment] =
+                AnalysedSegment.variableExistsButCannotBeUsedInThisContext(
+              offset: TextOffset(
+                start: declaration.open.findedGroup.globalStart,
+                end: declaration.open.findedGroup.globalEnd,
+              ),
+              segmentText: declaration.open.findedGroup.fullMatchText,
+            );
+
+            segments[declaration.close.indexInSegment] =
+                AnalysedSegment.variableExistsButCannotBeUsedInThisContext(
+              offset: TextOffset(
+                start: declaration.close.findedGroup.globalStart,
+                end: declaration.close.findedGroup.globalEnd,
+              ),
+              segmentText: declaration.close.findedGroup.fullMatchText,
             );
           }
         }
@@ -504,6 +596,15 @@ class ToAnalyseDeclarationBoolean {
     required this.tokenIdentifier,
     required this.findedGroup,
     required this.indexInSegment,
+  });
+}
+
+class ToAnalyseDeclarationBooleanCluster {
+  final ToAnalyseDeclarationBoolean open;
+  final ToAnalyseDeclarationBoolean close;
+  const ToAnalyseDeclarationBooleanCluster({
+    required this.open,
+    required this.close,
   });
 }
 

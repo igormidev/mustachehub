@@ -1,5 +1,8 @@
+import 'package:enchanted_collection/enchanted_collection.dart';
 import 'package:test/test.dart';
 import 'package:text_analyser/text_analyser.dart';
+
+import 'package:collection/collection.dart';
 
 void main() {
   final tester = TextAnalyserBase();
@@ -24,6 +27,30 @@ asds {{name}}
       },
     );
 
+    final text = response?.segments.map((e) => e.segmentText).toList();
+    final first = text?.removeEmpty;
+    final second = [
+      'The ',
+      '{{#person}}',
+      '''
+
+asds ''',
+      '{{name}}',
+      '''
+''',
+      '{{/person}}',
+    ].removeEmpty;
+    final isTheSame = const ListEquality().equals(
+      first,
+      second,
+    );
+    expect(isTheSame, true);
+
     print(response);
   });
+}
+
+extension on List<String> {
+  List<String> get removeEmpty =>
+      where((element) => !element.contains('\n') && element != '').toList();
 }
