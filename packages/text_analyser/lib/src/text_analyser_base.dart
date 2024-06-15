@@ -1,19 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:enchanted_collection/enchanted_collection.dart';
 import 'package:enchanted_regex/enchanted_regex.dart';
+import 'package:text_analyser/src/models/analysed_response.dart';
 import 'package:text_analyser/src/models/analysed_segment.dart';
 import 'package:text_analyser/src/models/token_identifier.dart';
 import 'package:text_analyser/src/models/variable_implementation.dart';
-
-class AnalysedResponse {
-  final Set<VariableImplementation> tokenIdentifiers;
-  final List<AnalysedSegment> segments;
-
-  const AnalysedResponse({
-    required this.tokenIdentifiers,
-    required this.segments,
-  });
-}
 
 class TextAnalyserBase {
   const TextAnalyserBase();
@@ -74,6 +65,8 @@ class TextAnalyserBase {
     final Map<String, List<ToAnalyseDeclarationBoolean>>
         notDefininedOpenBooleanSegments = {};
 
+    final List<List<ToAnalyseDeclarationModelCluster>>
+        notDefininedModelsInModelSegments = [];
     final Map<String, List<ToAnalyseDeclarationText>>
         notDefininedTextsInModelSegments = {};
     final Map<String, List<ToAnalyseDeclarationBooleanCluster>>
@@ -81,9 +74,13 @@ class TextAnalyserBase {
 
     printDetails() {
       return;
-/*
-The {{#person}}
+      print('--------------$index--------------');
+      print(
+          '\n${notDefininedModelsInModelSegments.map((e) => e.first.open.findedGroup.content).join('\n')}');
 
+/* 
+The {{#person}}
+ 
 asds {{name}} 
 {{/person}} 
 */
@@ -102,6 +99,42 @@ asds {{name}}
       // print('nonDefinedLenght: ${notDefininedOpenModelSegments.length}');
     }
 
+    void setScope({
+      required TokenIdentifier? tokenIdentifier,
+      required FindedGroup startFindedGroup,
+      required FindedGroup endFindedGroup,
+    }) {
+      final IdentifierScope scope = IdentifierScope(
+        startDeclaration: IdentifierDeclaration(
+          start: startFindedGroup.globalStart,
+          end: startFindedGroup.globalEnd,
+        ),
+        endDeclaration: IdentifierDeclaration(
+          start: endFindedGroup.globalStart,
+          end: endFindedGroup.globalEnd,
+        ),
+        identifier: endFindedGroup.content,
+      );
+
+      final scopesDir = modelScopes[scope.identifier];
+      if (scopesDir == null) {
+        modelScopes[scope.identifier] = [];
+      }
+
+      modelScopes[scope.identifier]?.add(ToAnalyseScope(
+        indexInSegment: modelScopes.keys.length + 1,
+        scope: scope,
+      ));
+
+      final bool isIndexAtTextWithinScope =
+          scope.startDeclaration.end < indexAtText &&
+              indexAtText < scope.endDeclaration.start;
+
+      if (isIndexAtTextWithinScope) {
+        validScopesIdentifier.add(tokenIdentifier as ModelTokenIdentifier);
+      }
+    }
+
     /// First role of analysis
     input.forEachNamedGroup(
       regExp,
@@ -109,7 +142,7 @@ asds {{name}}
       onMatch: (FindedGroup group) {
         index++;
 
-        if (index == 3) {
+        if (index == 5) {
           print('isIndex => $index');
         }
 
@@ -312,49 +345,50 @@ asds {{name}}
           final ToAnalyseDeclarationModel openDeclaration =
               notDefininedOpenModelSegments[group.content]!.removeLast();
 
-          segments[index] = AnalysedSegment.validDeclaration(
-            offset: offset,
-            segmentText: group.fullMatchText,
-          );
+          if (tokenIdentifier.parrentName == null) {
+            segments[index] = AnalysedSegment.validDeclaration(
+              offset: offset,
+              segmentText: group.fullMatchText,
+            );
 
-          segments[openDeclaration.indexInSegment] =
-              AnalysedSegment.validDeclaration(
-            offset: TextOffset(
-              start: openDeclaration.findedGroup.globalStart,
-              end: openDeclaration.findedGroup.globalEnd,
-            ),
-            segmentText: openDeclaration.findedGroup.fullMatchText,
-          );
+            segments[openDeclaration.indexInSegment] =
+                AnalysedSegment.validDeclaration(
+              offset: TextOffset(
+                start: openDeclaration.findedGroup.globalStart,
+                end: openDeclaration.findedGroup.globalEnd,
+              ),
+              segmentText: openDeclaration.findedGroup.fullMatchText,
+            );
+            setScope(
+              tokenIdentifier: tokenIdentifier,
+              startFindedGroup: openDeclaration.findedGroup,
+              endFindedGroup: group,
+            );
+          } else {
+            final cluster = ToAnalyseDeclarationModelCluster(
+              open: openDeclaration,
+              close: ToAnalyseDeclarationModel(
+                tokenIdentifier: tokenIdentifier as ModelTokenIdentifier,
+                findedGroup: group,
+                indexInSegment: index,
+              ),
+            );
+            final int segmentIndex =
+                notDefininedModelsInModelSegments.indexWhere((element) =>
+                    element.isNotEmpty &&
+                    element.first.open.findedGroup.content == group.content);
 
-          final IdentifierScope scope = IdentifierScope(
-            startDeclaration: IdentifierDeclaration(
-              start: openDeclaration.findedGroup.globalStart,
-              end: openDeclaration.findedGroup.globalEnd,
-            ),
-            endDeclaration: IdentifierDeclaration(
-              start: group.globalStart,
-              end: group.globalEnd,
-            ),
-            identifier: group.content,
-          );
+            final bool dontExistSegmentYet = segmentIndex == -1;
 
-          final scopesDir = modelScopes[scope.identifier];
-          if (scopesDir == null) {
-            modelScopes[scope.identifier] = [];
+            if (dontExistSegmentYet) {
+              notDefininedModelsInModelSegments.add([cluster]);
+            } else {
+              notDefininedModelsInModelSegments[segmentIndex].add(
+                cluster,
+              );
+            }
           }
 
-          modelScopes[scope.identifier]?.add(ToAnalyseScope(
-            indexInSegment: modelScopes.keys.length + 1,
-            scope: scope,
-          ));
-
-          final bool isIndexAtTextWithinScope =
-              scope.startDeclaration.end < indexAtText &&
-                  indexAtText < scope.endDeclaration.start;
-
-          if (isIndexAtTextWithinScope) {
-            validScopesIdentifier.add(tokenIdentifier as ModelTokenIdentifier);
-          }
           printDetails();
           return;
         }
@@ -400,6 +434,90 @@ asds {{name}}
         }
       },
     );
+
+    // Now, let's check if the model declarations that need
+    // to be inside a model scope are valid.
+    // To be valid they need to be inside there model scope.
+
+    // print(
+    //     'before => ${notDefininedModelsInModelSegments.map((e) => e.first.open.findedGroup.content).join('\n')}');
+    notDefininedModelsInModelSegments.sort(
+      (a, b) {
+        if (a.isEmpty && b.isNotEmpty) {
+          return 1;
+        } else if (a.isNotEmpty && b.isEmpty) {
+          return -1;
+        } else if (a.isEmpty && b.isEmpty) {
+          return 0;
+        } else {
+          return a.first.open.findedGroup.globalStart
+              .compareTo(b.first.open.findedGroup.globalStart);
+        }
+      },
+    );
+    // print(
+    //     'after => ${notDefininedModelsInModelSegments.map((e) => e.first.open.findedGroup.content).join('\n')}');
+    for (final List<ToAnalyseDeclarationModelCluster> declarations
+        in notDefininedModelsInModelSegments) {
+      // in notDefininedModelsInModelSegments.reversed) {
+      for (final ToAnalyseDeclarationModelCluster declaration in declarations) {
+        final List<ToAnalyseScope>? scopesPattern =
+            modelScopes[declaration.open.tokenIdentifier.parrentName];
+
+        final isDeclarationInCorrectScope =
+            scopesPattern?.any((ToAnalyseScope analysisModel) {
+          return analysisModel.scope.startDeclaration.end <
+                  declaration.open.findedGroup.globalStart &&
+              declaration.close.findedGroup.globalEnd <
+                  analysisModel.scope.endDeclaration.start;
+        });
+
+        if (isDeclarationInCorrectScope == true) {
+          segments[declaration.open.indexInSegment] =
+              AnalysedSegment.validDeclaration(
+            offset: TextOffset(
+              start: declaration.open.findedGroup.globalStart,
+              end: declaration.open.findedGroup.globalEnd,
+            ),
+            segmentText: declaration.open.findedGroup.fullMatchText,
+          );
+
+          segments[declaration.close.indexInSegment] =
+              AnalysedSegment.validDeclaration(
+            offset: TextOffset(
+              start: declaration.close.findedGroup.globalStart,
+              end: declaration.close.findedGroup.globalEnd,
+            ),
+            segmentText: declaration.close.findedGroup.fullMatchText,
+          );
+
+          setScope(
+            tokenIdentifier: declaration.open.tokenIdentifier,
+            startFindedGroup: declaration.open.findedGroup,
+            endFindedGroup: declaration.close.findedGroup,
+          );
+        } else {
+          segments[declaration.open.indexInSegment] =
+              AnalysedSegment.variableExistsButCannotBeUsedInThisContext(
+            offset: TextOffset(
+              start: declaration.open.findedGroup.globalStart,
+              end: declaration.open.findedGroup.globalEnd,
+            ),
+            segmentText: declaration.open.findedGroup.fullMatchText,
+          );
+
+          segments[declaration.close.indexInSegment] =
+              AnalysedSegment.variableExistsButCannotBeUsedInThisContext(
+            offset: TextOffset(
+              start: declaration.close.findedGroup.globalStart,
+              end: declaration.close.findedGroup.globalEnd,
+            ),
+            segmentText: declaration.close.findedGroup.fullMatchText,
+          );
+        }
+      }
+    }
+    print('###################################');
 
     // Now, let's check if the text declarations that need
     // to be inside a model scope are valid.
@@ -586,6 +704,15 @@ class ToAnalyseDeclarationModel {
   @override
   String toString() =>
       'ToAnalyseDeclarationModel(tokenIdentifier: $tokenIdentifier, findedGroup: $findedGroup, indexInSegment: $indexInSegment)';
+}
+
+class ToAnalyseDeclarationModelCluster {
+  final ToAnalyseDeclarationModel open;
+  final ToAnalyseDeclarationModel close;
+  const ToAnalyseDeclarationModelCluster({
+    required this.open,
+    required this.close,
+  });
 }
 
 class ToAnalyseDeclarationBoolean {

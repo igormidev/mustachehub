@@ -170,27 +170,6 @@ class _ModelPageviewBuilderState extends State<ModelPageviewBuilder>
                       // if (children.isNotEmpty) children.last
                     ],
                   );
-                  // return Navigator(
-                  //   onPopPage: (route, result) {
-                  //     onDeleteItem();
-                  //     final newList = [...pages.value]..removeLast();
-                  //     pages.value = newList;
-                  //     setState(() {});
-                  //     return true;
-                  //   },
-                  //   pages: [
-                  //     MaterialPage(
-                  //       key: const ValueKey('root'),
-                  //       child: child,
-                  //     ),
-                  //     ...children.mapper((value, isFirst, isLast, index) {
-                  //       return MaterialPage(
-                  //         key: ValueKey(index),
-                  //         child: value,
-                  //       );
-                  //     }),
-                  //   ],
-                  // );
                 },
               ),
             ],

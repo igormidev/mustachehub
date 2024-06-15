@@ -90,7 +90,7 @@ class TokenIdentifierFlatMapAdapter {
 
     for (final model in modelPipe.modelPipes) {
       response.addAll({
-        ..._flatModelPipe(model.mustacheName, model),
+        ..._flatModelPipe(modelPipe.mustacheName, model),
       });
     }
 

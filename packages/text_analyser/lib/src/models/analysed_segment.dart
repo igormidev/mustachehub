@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'analysed_segment.freezed.dart';
@@ -132,4 +133,7 @@ class TextOffset {
     required this.start,
     required this.end,
   });
+
+  @override
+  String toString() => 'TextOffset(start: $start, end: $end)';
 }
