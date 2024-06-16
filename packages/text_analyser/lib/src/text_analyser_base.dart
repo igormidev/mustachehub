@@ -74,9 +74,9 @@ class TextAnalyserBase {
 
     printDetails() {
       return;
-      print('--------------$index--------------');
-      print(
-          '\n${notDefininedModelsInModelSegments.map((e) => e.first.open.findedGroup.content).join('\n')}');
+      // print('--------------$index--------------');
+      // print(
+      //     '\n${notDefininedModelsInModelSegments.map((e) => e.first.open.findedGroup.content).join('\n')}');
 
 /* 
 The {{#person}}
@@ -141,10 +141,6 @@ asds {{name}}
       willContainBeforeAndAfterContentAsNonMatch: false,
       onMatch: (FindedGroup group) {
         index++;
-
-        if (index == 5) {
-          print('isIndex => $index');
-        }
 
         final TokenIdentifier? tokenIdentifier = flatMap[group.content];
 
@@ -517,7 +513,6 @@ asds {{name}}
         }
       }
     }
-    print('###################################');
 
     // Now, let's check if the text declarations that need
     // to be inside a model scope are valid.

@@ -47,7 +47,7 @@ class TextPipeForm extends StatelessWidget {
                 PopupMenuItem(
                   enabled: false,
                   child: DropdownMenu<int?>(
-                    width: 200,
+                    width: 150,
                     leadingIcon: const Tooltip(
                       message: 'Select how much textfields will be show in '
                           'one the row.\nIf set to auto, will pick '
@@ -55,7 +55,7 @@ class TextPipeForm extends StatelessWidget {
                           'much space you have in screen.',
                       child: Icon(Icons.help),
                     ),
-                    label: const Text('Variables per row'),
+                    label: const Text('Items per row'),
                     onSelected: (value) {
                       context.read<FormStatsCubit>().changeGridSize(value);
                     },
@@ -95,15 +95,24 @@ class TextPipeForm extends StatelessWidget {
 
                     return Column(
                       mainAxisSize: MainAxisSize.min,
-                      children: [
-                        ...pipes
-                            .splitIntoGroups(groupSplit)
-                            .map((List<TextPipeDto> pipesCluster) {
-                          return Padding(
-                            padding: const EdgeInsets.only(bottom: 8.0),
-                            child: Row(
-                              children: pipesCluster.map((pipe) {
-                                return Expanded(
+                      children: pipes
+                          .splitIntoGroups(groupSplit)
+                          .map((List<TextPipeDto> pipesCluster) {
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 8.0),
+                          child: Row(
+                            children: pipesCluster.mapper((
+                              TextPipeDto pipe,
+                              bool isFirst,
+                              bool isLast,
+                              int index,
+                            ) {
+                              return Expanded(
+                                child: Padding(
+                                  padding: EdgeInsets.only(
+                                    left: isFirst ? 0 : 4,
+                                    right: isLast ? 0 : 4,
+                                  ),
                                   child: TextPipeTextfield(
                                     pipeDto: pipe,
                                     onChangedCallback: (text) async {
@@ -115,12 +124,12 @@ class TextPipeForm extends StatelessWidget {
                                       );
                                     },
                                   ),
-                                );
-                              }).toList(),
-                            ),
-                          );
-                        }),
-                      ],
+                                ),
+                              );
+                            }),
+                          ),
+                        );
+                      }).toList(),
                     );
                   },
                 );

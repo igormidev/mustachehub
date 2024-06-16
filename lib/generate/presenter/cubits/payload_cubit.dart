@@ -5,7 +5,7 @@ import 'package:mustachehub/generate/data/adapters/dto_adapter.dart';
 import 'package:mustachehub/generate/presenter/cubits/content_cubit.dart';
 import 'package:mustachehub/generate/presenter/dtos/expected_payload_dto.dart';
 import 'package:mustachehub/generate/presenter/dtos/pipe_dto/pipe_dto.dart';
-import 'package:mustachehub/generate/presenter/states/payload_state.dart'; 
+import 'package:mustachehub/generate/presenter/states/payload_state.dart';
 
 class PayloadCubit extends Cubit<PayloadState> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -72,6 +72,7 @@ class PayloadCubit extends Cubit<PayloadState> {
       generatorData,
       prevPayloadDto?.textDtos,
       prevPayloadDto?.booleanDtos,
+      prevPayloadDto?.modelDtos,
     );
 
     await updateContent(
@@ -80,6 +81,7 @@ class PayloadCubit extends Cubit<PayloadState> {
       expectedPayloadDto: ExpectedPayloadDto(
         textDtos: updatedPipeDtos.textPipes,
         booleanDtos: updatedPipeDtos.boolPipes,
+        modelDtos: updatedPipeDtos.modelPipes,
       ),
     );
   }

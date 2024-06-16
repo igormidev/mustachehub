@@ -23,10 +23,12 @@ class DtoAdapter {
   ({
     List<TextPipeDto> textPipes,
     List<BooleanPipeDto> boolPipes,
+    List<ModelPipeDto> modelPipes,
   }) dtosFromTemplate(
     ExpectedPayload generatorData,
     List<TextPipeDto>? oldTextsDtos,
     List<BooleanPipeDto>? oldBoolDtos,
+    List<ModelPipeDto>? oldModelDtos,
   ) {
     final List<TextPipeDto> textsResponse = [];
     final List<BooleanPipeDto> booleanResponse = [];
@@ -38,14 +40,13 @@ class DtoAdapter {
       _calculateBooleansPipe(generatorData.booleanPipes, oldBoolDtos),
     );
 
-    final modelResponse = _calculateModelsPipe(
-      generatorData.modelPipes,
-      oldTextsDtos,
-      oldBoolDtos,
-    );
-    textsResponse.addAll(modelResponse.$1);
-    booleanResponse.addAll(modelResponse.$2);
+    final List<ModelPipeDto> modelResponse =
+        _calculateModelsPipe(generatorData.modelPipes, oldModelDtos);
 
-    return (textPipes: textsResponse, boolPipes: booleanResponse);
+    return (
+      textPipes: textsResponse,
+      boolPipes: booleanResponse,
+      modelPipes: modelResponse,
+    );
   }
 }

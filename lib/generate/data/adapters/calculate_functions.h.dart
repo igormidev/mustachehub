@@ -1,32 +1,26 @@
 part of 'dto_adapter.dart';
 
-(
-  List<TextPipeDto> textPipes,
-  List<BooleanPipeDto> boolPipes,
-) _calculateModelsPipe(
+List<ModelPipeDto> _calculateModelsPipe(
   List<ModelPipe> pipes,
-  List<TextPipeDto>? oldTextsDtos,
-  List<BooleanPipeDto>? oldBoolDtos,
+  List<ModelPipeDto>? oldModelDtos,
 ) {
-  final List<TextPipeDto> textsResponse = [];
-  final List<BooleanPipeDto> booleanResponse = [];
+  final List<ModelPipeDto> modelResponse = [];
 
   for (final ModelPipe pipe in pipes) {
-    textsResponse.addAll(_calculateTextsPipe(pipe.textPipes, oldTextsDtos));
-    booleanResponse.addAll(
-      _calculateBooleansPipe(pipe.booleanPipes, oldBoolDtos),
+    final cacheValue = oldModelDtos?.singleWhereOrNull(
+      (dto) => dto.pipe.pipeId == pipe.pipeId,
     );
-
-    final modelResponse = _calculateModelsPipe(
-      pipe.modelPipes,
-      oldTextsDtos,
-      oldBoolDtos,
+    final ModelPipeDto pipeDto = ModelPipeDto(
+      pipe: pipe,
+      payloadValue: cacheValue?.payloadValue,
+      texts: _calculateTextsPipe(pipe.textPipes, cacheValue?.texts),
+      booleans: _calculateBooleansPipe(pipe.booleanPipes, cacheValue?.booleans),
+      subModels: _calculateModelsPipe(pipe.modelPipes, cacheValue?.subModels),
     );
-    textsResponse.addAll(modelResponse.$1);
-    booleanResponse.addAll(modelResponse.$2);
+    modelResponse.add(pipeDto);
   }
 
-  return (textsResponse, booleanResponse);
+  return modelResponse;
 }
 
 List<TextPipeDto> _calculateTextsPipe(
