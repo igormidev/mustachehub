@@ -25,26 +25,3 @@ Map<String, dynamic> _getBoolPayloads(
 
   return payload;
 }
-
-Map<String, dynamic> _getMapPayloads(
-  List<ModelPipe> pipes,
-  List<TextPipeDto> textDtos,
-  List<BooleanPipeDto> booleanDtos,
-) {
-  final Map<String, dynamic> payload = {};
-
-  for (final ModelPipe modelPipe in pipes) {
-    switch (modelPipe) {
-      case TextPipe():
-        payload.addAll(_getTextPayloads(modelPipe.textPipes, textDtos));
-      case BooleanPipe():
-        payload.addAll(_getBoolPayloads(modelPipe.booleanPipes, booleanDtos));
-      case ModelPipe():
-        payload.addAll(
-          _getMapPayloads(modelPipe.modelPipes, textDtos, booleanDtos),
-        );
-    }
-  }
-
-  return payload;
-}

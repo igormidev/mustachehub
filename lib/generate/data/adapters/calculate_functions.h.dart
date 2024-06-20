@@ -10,13 +10,12 @@ List<ModelPipeDto> _calculateModelsPipe(
     final cacheValue = oldModelDtos?.singleWhereOrNull(
       (dto) => dto.pipe.pipeId == pipe.pipeId,
     );
+
     final ModelPipeDto pipeDto = ModelPipeDto(
       pipe: pipe,
-      payloadValue: cacheValue?.payloadValue,
-      texts: _calculateTextsPipe(pipe.textPipes, cacheValue?.texts),
-      booleans: _calculateBooleansPipe(pipe.booleanPipes, cacheValue?.booleans),
-      subModels: _calculateModelsPipe(pipe.modelPipes, cacheValue?.subModels),
+      items: cacheValue?.items ?? [],
     );
+
     modelResponse.add(pipeDto);
   }
 

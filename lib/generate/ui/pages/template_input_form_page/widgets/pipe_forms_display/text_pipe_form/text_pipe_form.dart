@@ -1,16 +1,15 @@
-import 'package:dart_debouncer/dart_debouncer.dart';
 import 'package:enchanted_collection/enchanted_collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mustache_hub_core/mustache_hub_core.dart';
 import 'package:mustachehub/app_core/theme/default_widgets/custom_header.dart';
-import 'package:mustachehub/app_core/theme/default_widgets/debounce_widget.dart';
 import 'package:mustachehub/generate/presenter/cubits/form_stats_cubit.dart';
 import 'package:mustachehub/generate/presenter/cubits/payload_cubit.dart';
 import 'package:mustachehub/generate/presenter/dtos/pipe_dto/pipe_dto.dart';
 import 'package:mustachehub/generate/presenter/states/form_stats_state.dart';
 import 'package:mustachehub/generate/presenter/states/payload_state.dart';
+import 'package:mustachehub/generate/ui/pages/template_input_form_page/widgets/pipe_forms_display/text_pipe_form/widgets/text_pipe_form_field.dart';
 
 class TextPipeForm extends StatelessWidget {
   final String content;
@@ -102,7 +101,7 @@ class TextPipeForm extends StatelessWidget {
                           padding: const EdgeInsets.only(bottom: 8.0),
                           child: Row(
                             children: pipesCluster.mapper((
-                              TextPipeDto pipe,
+                              TextPipeDto dto,
                               bool isFirst,
                               bool isLast,
                               int index,
@@ -113,13 +112,13 @@ class TextPipeForm extends StatelessWidget {
                                     left: isFirst ? 0 : 4,
                                     right: isLast ? 0 : 4,
                                   ),
-                                  child: TextPipeTextfield(
-                                    pipeDto: pipe,
+                                  child: TextPipeFormField(
+                                    pipeDto: dto,
                                     onChangedCallback: (text) async {
                                       return await bloc.addTextPayloadValue(
                                         content: content,
                                         generatorData: expectedPayload,
-                                        pipe: pipe.pipe,
+                                        pipe: dto.pipe,
                                         value: text,
                                       );
                                     },
@@ -137,49 +136,6 @@ class TextPipeForm extends StatelessWidget {
             ),
           ],
         );
-      },
-    );
-  }
-}
-
-class TextPipeTextfield extends StatelessWidget with ValidatorsMixins {
-  final TextPipeDto pipeDto;
-  final Future<void> Function(String? text) onChangedCallback;
-  final Debouncer debouncer =
-      Debouncer(timerDuration: const Duration(milliseconds: 1200));
-
-  TextPipeTextfield({
-    super.key,
-    required this.pipeDto,
-    required this.onChangedCallback,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return TextFormField(
-      initialValue: pipeDto.payloadValue,
-      decoration: InputDecoration(
-        labelText: pipeDto.pipe.name,
-        hintText: pipeDto.pipe.description,
-        suffixIcon: DebounceWidget(
-          debouncer,
-          child: Tooltip(
-            message: pipeDto.pipe.description,
-            child: const Icon(Icons.info),
-          ),
-        ),
-      ),
-      autovalidateMode: AutovalidateMode.always,
-      validator: (String? value) {
-        if (pipeDto.pipe.isRequired) return isNotEmpty(value);
-
-        return null;
-      },
-      onChanged: (value) {
-        debouncer.resetDebounce(() async {
-          final text = value.isEmpty == true ? null : value;
-          onChangedCallback(text);
-        });
       },
     );
   }

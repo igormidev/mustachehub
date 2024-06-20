@@ -86,6 +86,15 @@ class PayloadCubit extends Cubit<PayloadState> {
     );
   }
 
+  void setStateToPendingRequiredFields() {
+    final data = state.expectedPayloadDto;
+    if (data == null) return;
+
+    emit(PayloadState.withRequiredFieldsPendency(
+      expectedPayloadDto: data,
+    ));
+  }
+
   Future<void> addTextPayloadValue({
     required String content,
     required ExpectedPayload generatorData,
@@ -109,15 +118,6 @@ class PayloadCubit extends Cubit<PayloadState> {
     );
   }
 
-  void setStateToPendingRequiredFields() {
-    final data = state.expectedPayloadDto;
-    if (data == null) return;
-
-    emit(PayloadState.withRequiredFieldsPendency(
-      expectedPayloadDto: data,
-    ));
-  }
-
   Future<void> addBooleanPayloadValue({
     required String content,
     required ExpectedPayload expectedPayload,
@@ -137,6 +137,29 @@ class PayloadCubit extends Cubit<PayloadState> {
       expectedPayload: expectedPayload,
       expectedPayloadDto: payloadDto.copyWith(
         booleanDtos: newDtos,
+      ),
+    );
+  }
+
+  Future<void> addModelPayloadValue({
+    required String content,
+    required ExpectedPayload expectedPayload,
+    required ModelPipeDto newPipeDTO,
+  }) async {
+    final ExpectedPayloadDto? payloadDto = state.expectedPayloadDto;
+
+    if (payloadDto == null) return;
+
+    final List<ModelPipeDto> newDtos = [...payloadDto.modelDtos];
+    final index =
+        newDtos.indexWhere((dto) => dto.pipe.pipeId == newPipeDTO.pipe.pipeId);
+    newDtos[index] = newPipeDTO;
+
+    await updateContent(
+      content: content,
+      expectedPayload: expectedPayload,
+      expectedPayloadDto: payloadDto.copyWith(
+        modelDtos: newDtos,
       ),
     );
   }

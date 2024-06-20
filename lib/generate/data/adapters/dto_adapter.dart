@@ -12,11 +12,15 @@ class DtoAdapter {
     required List<ModelPipe> models,
     required List<TextPipeDto> textDtos,
     required List<BooleanPipeDto> booleanDtos,
+    required List<ModelPipeDto> modelDtos,
   }) {
     final Map<String, dynamic> payload = {};
     payload.addAll(_getTextPayloads(texts, textDtos));
     payload.addAll(_getBoolPayloads(booleans, booleanDtos));
-    payload.addAll(_getMapPayloads(models, textDtos, booleanDtos));
+    for (final model in modelDtos) {
+      payload[model.pipe.mustacheName] = model.payloadValue;
+    }
+
     return payload;
   }
 

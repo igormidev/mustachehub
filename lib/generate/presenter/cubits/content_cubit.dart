@@ -36,6 +36,7 @@ class ContentCubit extends Cubit<ContentState> with MustacheTextMixin {
         models: expectedPayload.modelPipes,
         textDtos: expectedPayloadDTO.textDtos,
         booleanDtos: expectedPayloadDTO.booleanDtos,
+        modelDtos: expectedPayloadDTO.modelDtos,
       );
 
       final output = getMustacheText(content, payload);
