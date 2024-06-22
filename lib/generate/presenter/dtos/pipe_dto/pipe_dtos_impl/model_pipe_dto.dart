@@ -37,21 +37,27 @@ class ModelPipeDto extends Equatable
   @override
   final List<ModelPipeDTOPayload> payloadValue;
 
-  /// Will deeply search from the model with the [id]
+  /// Will deeply search from the model with the [pipeId]
   /// and when found will edit with with the [mapFunc]
   /// and return the new model ( simular with copywith,
   /// same model but with that value edited). Will return null
-  /// if the model with the [id] is not found.
+  /// if the model with the [pipeId] is not found.
   ModelPipeDto? deepEdit<P extends Pipe, V>({
     required String modelId,
-    required String id,
+    required String pipeId,
     required PipeDTO<P, V> Function(PipeDTO<P, V> oldValue) mapFunc,
   }) {
+    // ignore: unnecessary_this
+    if (this.pipe.pipeId == pipeId) {
+      return (mapFunc(this as PipeDTO<P, V>) as ModelPipeDto);
+    }
+
     for (final payload in payloadValue) {
       if (payload.uuid != modelId) continue;
+
       if (P is TextPipe && V is String) {
         for (final textDTO in payload.texts) {
-          if (textDTO.pipe.pipeId == id) {
+          if (textDTO.pipe.pipeId == pipeId) {
             return copyWith(
               payloadValue: [
                 for (final item in payloadValue)
@@ -59,7 +65,7 @@ class ModelPipeDto extends Equatable
                     payload.copyWith(
                       texts: [
                         for (final text in payload.texts)
-                          if (text.pipe.pipeId == id)
+                          if (text.pipe.pipeId == pipeId)
                             mapFunc(text as PipeDTO<P, V>) as TextPipeDto
                           else
                             text,
@@ -75,7 +81,7 @@ class ModelPipeDto extends Equatable
 
       if (P is BooleanPipe && V is bool) {
         for (final booleanDTO in payload.booleans) {
-          if (booleanDTO.pipe.pipeId == id) {
+          if (booleanDTO.pipe.pipeId == pipeId) {
             return copyWith(
               payloadValue: [
                 for (final item in payloadValue)
@@ -83,7 +89,7 @@ class ModelPipeDto extends Equatable
                     payload.copyWith(
                       booleans: [
                         for (final boolean in payload.booleans)
-                          if (boolean.pipe.pipeId == id)
+                          if (boolean.pipe.pipeId == pipeId)
                             mapFunc(boolean as PipeDTO<P, V>) as BooleanPipeDto
                           else
                             boolean,
@@ -98,7 +104,7 @@ class ModelPipeDto extends Equatable
       }
 
       for (final modelDTO in payload.subModels) {
-        if (modelDTO.pipe.pipeId == id) {
+        if (modelDTO.pipe.pipeId == pipeId) {
           return copyWith(
             payloadValue: [
               for (final item in payloadValue)
@@ -106,7 +112,7 @@ class ModelPipeDto extends Equatable
                   payload.copyWith(
                     subModels: [
                       for (final model in payload.subModels)
-                        if (model.pipe.pipeId == id)
+                        if (model.pipe.pipeId == pipeId)
                           mapFunc(model as PipeDTO<P, V>) as ModelPipeDto
                         else
                           model,
@@ -123,7 +129,7 @@ class ModelPipeDto extends Equatable
       for (final modelDTO in payload.subModels) {
         final newModel = modelDTO.deepEdit(
           modelId: modelId,
-          id: id,
+          pipeId: pipeId,
           mapFunc: mapFunc,
         );
 
@@ -135,7 +141,7 @@ class ModelPipeDto extends Equatable
                   payload.copyWith(
                     subModels: [
                       for (final model in payload.subModels)
-                        if (model.pipe.pipeId == id) newModel else model,
+                        if (model.pipe.pipeId == pipeId) newModel else model,
                     ],
                   )
                 else
@@ -199,7 +205,7 @@ class ModelPipeDTOPayload {
   });
 
   factory ModelPipeDTOPayload.fromModelPipe(ModelPipe modelPipe) {
-    return ModelPipeDTOPayload(uuid: modelPipe.pipeId, texts: [
+    return ModelPipeDTOPayload(uuid: const Uuid().v4(), texts: [
       for (final item in modelPipe.textPipes)
         TextPipeDto(
           pipe: item,
@@ -232,39 +238,4 @@ class ModelPipeDTOPayload {
       booleans: booleans ?? this.booleans,
     );
   }
-
-  // Map<String, dynamic> toMap() {
-  //   return <String, dynamic>{
-  //     'uuid': uuid,
-  //     'subModels': subModels.map((x) => x.toMap()).toList(),
-  //     'texts': texts.map((x) => x.toMap()).toList(),
-  //     'booleans': booleans.map((x) => x.toMap()).toList(),
-  //   };
-  // }
-
-  // factory ModelPipeDTOPayload.fromMap(Map<String, dynamic> map) {
-  //   return ModelPipeDTOPayload(
-  //     uuid: map['uuid'] as String,
-  //     subModels: List<ModelPipeDto>.from(
-  //       (map['subModels'] as List<int>).map<ModelPipeDto>(
-  //         (x) => ModelPipeDto.fromMap(x as Map<String, dynamic>),
-  //       ),
-  //     ),
-  //     texts: List<TextPipeDto>.from(
-  //       (map['texts'] as List<int>).map<TextPipeDto>(
-  //         (x) => TextPipeDto.fromMap(x as Map<String, dynamic>),
-  //       ),
-  //     ),
-  //     booleans: List<BooleanPipeDto>.from(
-  //       (map['booleans'] as List<int>).map<BooleanPipeDto>(
-  //         (x) => BooleanPipeDto.fromMap(x as Map<String, dynamic>),
-  //       ),
-  //     ),
-  //   );
-  // }
-
-  // String toJson() => json.encode(toMap());
-
-  // factory ModelPipeDTOPayload.fromJson(String source) =>
-  //     ModelPipeDTOPayload.fromMap(json.decode(source) as Map<String, dynamic>);
 }

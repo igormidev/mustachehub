@@ -138,6 +138,7 @@ final router = GoRouter(
             return Scaffold(
               appBar: AppBar(
                 title: const Text('Collection'),
+                actions: const [Icon(Icons.create_new_folder_rounded)],
               ),
               drawer: context.drawerOrNull,
               body: Container(
