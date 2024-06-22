@@ -47,246 +47,240 @@ class ModelPipeForm extends StatelessWidget {
                 ...pipes.map(
                   (ModelPipeDto pipeDTO) {
                     return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 8, horizontal: 16),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .secondaryContainer,
-                            ),
-                            child: Text(
-                              pipeDTO.pipe.name,
-                              style: Theme.of(context).textTheme.headlineMedium,
-                            ),
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 8, horizontal: 16),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            color: Theme.of(context)
+                                .colorScheme
+                                .secondaryContainer,
                           ),
-                          const SizedBox(height: 8),
-                          ...pipeDTO.payloadValue
-                              .map((ModelPipeDTOPayload modelPipeDTOPayload) {
-                            final treeNode =
-                                TreeNode<PipeDTO>.root(data: pipeDTO);
-                            treeNode
-                                .addAll(_getModelPipes(modelPipeDTOPayload));
+                          child: Text(
+                            pipeDTO.pipe.name,
+                            style: Theme.of(context).textTheme.headlineMedium,
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        ...pipeDTO.payloadValue
+                            .map((ModelPipeDTOPayload modelPipeDTOPayload) {
+                          final treeNode =
+                              TreeNode<PipeDTO>.root(data: pipeDTO);
+                          treeNode.addAll(_getModelPipes(modelPipeDTOPayload));
 
-                            return SizedBox(
-                              width: constraints.maxWidth,
-                              child: TreeView.simpleTyped<PipeDTO,
-                                  TreeNode<PipeDTO>>(
-                                tree: treeNode,
-                                showRootNode: true,
-                                shrinkWrap: true,
-                                expansionBehavior:
-                                    ExpansionBehavior.scrollToLastChild,
-                                indentation: const Indentation(),
-                                expansionIndicatorBuilder: (context, node) {
-                                  if (node.isRoot) {
-                                    return PlusMinusIndicator(
-                                      tree: node,
-                                      alignment: Alignment.centerLeft,
-                                      color: Colors.grey[700],
-                                    );
-                                  }
-
-                                  return ChevronIndicator.rightDown(
+                          return SizedBox(
+                            width: constraints.maxWidth,
+                            child: TreeView.simpleTyped<PipeDTO,
+                                TreeNode<PipeDTO>>(
+                              tree: treeNode,
+                              showRootNode: true,
+                              shrinkWrap: true,
+                              expansionBehavior:
+                                  ExpansionBehavior.scrollToLastChild,
+                              indentation: const Indentation(),
+                              expansionIndicatorBuilder: (context, node) {
+                                if (node.isRoot) {
+                                  return PlusMinusIndicator(
                                     tree: node,
                                     alignment: Alignment.centerLeft,
                                     color: Colors.grey[700],
                                   );
-                                },
-                                builder: (context, TreeNode<PipeDTO> node) {
-                                  final dto = node.data;
-                                  final String title = switch (dto) {
-                                    null => 'N/A',
-                                    TextPipeDto() => dto.pipe.name,
-                                    BooleanPipeDto() => dto.pipe.name,
-                                    ModelPipeDto() => dto.pipe.name,
-                                  };
-                                  final String subtitle = switch (dto) {
-                                    null => 'N/A',
-                                    TextPipeDto() => 'Text',
-                                    BooleanPipeDto() => 'Boolean',
-                                    ModelPipeDto() => 'Model',
-                                  };
-                                  final IconData icon = switch (dto) {
-                                    null => Icons.radio_button_unchecked_sharp,
-                                    TextPipeDto() => Icons.text_fields,
-                                    BooleanPipeDto() =>
-                                      Icons.compare_arrows_rounded,
-                                    ModelPipeDto() => Icons.folder,
-                                  };
-                                  return Padding(
-                                    padding: const EdgeInsets.only(left: 16.0),
-                                    child: switch (dto) {
-                                      null => throw UnimplementedError(),
-                                      TextPipeDto() => Padding(
-                                          padding: const EdgeInsets.only(
-                                            top: 4,
-                                            bottom: 4,
-                                          ),
-                                          child: TextPipeFormField(
-                                            pipeDto: dto,
-                                            onChangedCallback:
-                                                (String? text) async {
-                                              if (text == null) return;
+                                }
 
-                                              final ModelPipeDto? editedPipe =
-                                                  pipeDTO.deepEdit<TextPipe,
-                                                      String>(
-                                                modelId: pipeDTO.pipe.pipeId,
-                                                id: dto.pipe.pipeId,
-                                                mapFunc: (
-                                                  PipeDTO<TextPipe, String>
-                                                      pipe,
-                                                ) {
-                                                  return pipe.copyWith(
-                                                    payloadValue: text,
-                                                  );
-                                                },
-                                              );
-                                              if (editedPipe == null) return;
-
-                                              await bloc.addModelPayloadValue(
-                                                content: content,
-                                                expectedPayload:
-                                                    expectedPayload,
-                                                newPipeDTO: editedPipe,
-                                                // pipe: pipeDTO.pipe,
-                                                // value: editedPipe.payloadValue,
-                                              );
-                                            },
-                                          ),
+                                return ChevronIndicator.rightDown(
+                                  tree: node,
+                                  alignment: Alignment.centerLeft,
+                                  color: Colors.grey[700],
+                                );
+                              },
+                              builder: (context, TreeNode<PipeDTO> node) {
+                                final dto = node.data;
+                                final String title = switch (dto) {
+                                  null => 'N/A',
+                                  TextPipeDto() => dto.pipe.name,
+                                  BooleanPipeDto() => dto.pipe.name,
+                                  ModelPipeDto() => dto.pipe.name,
+                                };
+                                final String subtitle = switch (dto) {
+                                  null => 'N/A',
+                                  TextPipeDto() => 'Text',
+                                  BooleanPipeDto() => 'Boolean',
+                                  ModelPipeDto() => 'Model',
+                                };
+                                final IconData icon = switch (dto) {
+                                  null => Icons.radio_button_unchecked_sharp,
+                                  TextPipeDto() => Icons.text_fields,
+                                  BooleanPipeDto() =>
+                                    Icons.compare_arrows_rounded,
+                                  ModelPipeDto() => Icons.folder,
+                                };
+                                return Padding(
+                                  padding: const EdgeInsets.only(left: 16.0),
+                                  child: switch (dto) {
+                                    null => throw UnimplementedError(),
+                                    TextPipeDto() => Padding(
+                                        padding: const EdgeInsets.only(
+                                          top: 4,
+                                          bottom: 4,
                                         ),
-                                      BooleanPipeDto() => Padding(
-                                          padding: const EdgeInsets.only(
-                                            top: 4,
-                                            bottom: 4,
-                                          ),
-                                          child: BooleanPipeSwitchFormField(
-                                            pipeDto: dto,
-                                            onChangedCallback: (value) async {
-                                              final ModelPipeDto? editedPipe =
-                                                  pipeDTO.deepEdit<BooleanPipe,
-                                                      bool>(
-                                                modelId: pipeDTO.pipe.pipeId,
-                                                id: dto.pipe.pipeId,
-                                                mapFunc: (
-                                                  PipeDTO<BooleanPipe, bool>
-                                                      pipe,
-                                                ) {
-                                                  return pipe.copyWith(
-                                                    payloadValue: value,
-                                                  );
-                                                },
-                                              );
+                                        child: TextPipeFormField(
+                                          pipeDto: dto,
+                                          onChangedCallback:
+                                              (String? text) async {
+                                            if (text == null) return;
 
-                                              if (editedPipe == null) return;
-
-                                              await bloc.addModelPayloadValue(
-                                                content: content,
-                                                expectedPayload:
-                                                    expectedPayload,
-                                                newPipeDTO: editedPipe,
-                                                // pipe: pipeDTO.pipe,
-                                                // value: editedPipe.payloadValue,
-                                              );
-                                            },
-                                          ),
-                                        ),
-                                      ModelPipeDto() => ListTile(
-                                          title: Text(title),
-                                          subtitle: Text(subtitle),
-                                          leading: Padding(
-                                            padding:
-                                                const EdgeInsets.only(top: 8.0),
-                                            child: Icon(icon),
-                                          ),
-                                          trailing: Builder(builder: (context) {
-                                            final isRoot = dto.pipe.pipeId ==
-                                                pipeDTO.pipe.pipeId;
-                                            if (isRoot) {
-                                              return SizedBox.fromSize();
-                                            }
-
-                                            return SizedBox(
-                                              width: 100,
-                                              height: 100,
-                                              child: AddNewButton(
-                                                onTap: () {
-                                                  final ModelPipeDto?
-                                                      editedPipe =
-                                                      pipeDTO.deepEdit<
-                                                          ModelPipe,
-                                                          List<
-                                                              ModelPipeDTOPayload>>(
-                                                    modelId:
-                                                        pipeDTO.pipe.pipeId,
-                                                    id: dto.pipe.pipeId,
-                                                    mapFunc: (
-                                                      PipeDTO<
-                                                              ModelPipe,
-                                                              List<
-                                                                  ModelPipeDTOPayload>>
-                                                          pipe,
-                                                    ) {
-                                                      return pipe.copyWith(
-                                                        payloadValue: [
-                                                          ...?pipe.payloadValue,
-                                                          ModelPipeDTOPayload
-                                                              .fromModelPipe(
-                                                            pipe.pipe,
-                                                          )
-                                                        ],
-                                                      );
-                                                    },
-                                                  );
-
-                                                  if (editedPipe == null) {
-                                                    return;
-                                                  }
-
-                                                  bloc.addModelPayloadValue(
-                                                    content: content,
-                                                    expectedPayload:
-                                                        expectedPayload,
-                                                    newPipeDTO: editedPipe,
-                                                  );
-                                                },
-                                                tooltip:
-                                                    'Add new "${pipeDTO.pipe.name}" model variable',
-                                              ),
+                                            final ModelPipeDto? editedPipe =
+                                                pipeDTO
+                                                    .deepEdit<TextPipe, String>(
+                                              modelId: pipeDTO.pipe.pipeId,
+                                              id: dto.pipe.pipeId,
+                                              mapFunc: (
+                                                PipeDTO<TextPipe, String> pipe,
+                                              ) {
+                                                return pipe.copyWith(
+                                                  payloadValue: text,
+                                                );
+                                              },
                                             );
-                                          }),
-                                        ),
-                                    },
-                                  );
-                                },
-                              ),
-                            );
-                          }).toList(),
-                          const SizedBox(height: 8),
-                          AddNewButton(
-                            onTap: () {
-                              bloc.addModelPayloadValue(
-                                content: content,
-                                expectedPayload: expectedPayload,
-                                newPipeDTO: pipeDTO.copyWith(payloadValue: [
-                                  ...pipeDTO.payloadValue,
+                                            if (editedPipe == null) return;
 
-                                  // Initial from the model pipe
-                                  ModelPipeDTOPayload.fromModelPipe(
-                                    pipeDTO.pipe,
-                                  ),
-                                ]),
-                              );
-                            },
-                            tooltip: 'Add new "${pipeDTO.pipe.name}"'
-                                ' model variable',
-                          ),
-                          const Divider(),
-                        ]);
+                                            await bloc.addModelPayloadValue(
+                                              content: content,
+                                              expectedPayload: expectedPayload,
+                                              newPipeDTO: editedPipe,
+                                              // pipe: pipeDTO.pipe,
+                                              // value: editedPipe.payloadValue,
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                    BooleanPipeDto() => Padding(
+                                        padding: const EdgeInsets.only(
+                                          top: 4,
+                                          bottom: 4,
+                                        ),
+                                        child: BooleanPipeSwitchFormField(
+                                          pipeDto: dto,
+                                          onChangedCallback: (value) async {
+                                            final ModelPipeDto? editedPipe =
+                                                pipeDTO.deepEdit<BooleanPipe,
+                                                    bool>(
+                                              modelId: pipeDTO.pipe.pipeId,
+                                              id: dto.pipe.pipeId,
+                                              mapFunc: (
+                                                PipeDTO<BooleanPipe, bool> pipe,
+                                              ) {
+                                                return pipe.copyWith(
+                                                  payloadValue: value,
+                                                );
+                                              },
+                                            );
+
+                                            if (editedPipe == null) return;
+
+                                            await bloc.addModelPayloadValue(
+                                              content: content,
+                                              expectedPayload: expectedPayload,
+                                              newPipeDTO: editedPipe,
+                                              // pipe: pipeDTO.pipe,
+                                              // value: editedPipe.payloadValue,
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                    ModelPipeDto() => ListTile(
+                                        title: Text(title),
+                                        subtitle: Text(subtitle),
+                                        leading: Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 8.0),
+                                          child: Icon(icon),
+                                        ),
+                                        trailing: Builder(builder: (context) {
+                                          final isRoot = dto.pipe.pipeId ==
+                                              pipeDTO.pipe.pipeId;
+                                          if (isRoot) {
+                                            return SizedBox.fromSize();
+                                          }
+
+                                          return SizedBox(
+                                            width: 100,
+                                            height: 100,
+                                            child: AddNewButton(
+                                              onTap: () {
+                                                final ModelPipeDto? editedPipe =
+                                                    pipeDTO.deepEdit<
+                                                        ModelPipe,
+                                                        List<
+                                                            ModelPipeDTOPayload>>(
+                                                  modelId: pipeDTO.pipe.pipeId,
+                                                  id: dto.pipe.pipeId,
+                                                  mapFunc: (
+                                                    PipeDTO<
+                                                            ModelPipe,
+                                                            List<
+                                                                ModelPipeDTOPayload>>
+                                                        pipe,
+                                                  ) {
+                                                    return pipe.copyWith(
+                                                      payloadValue: [
+                                                        ...?pipe.payloadValue,
+                                                        ModelPipeDTOPayload
+                                                            .fromModelPipe(
+                                                          pipe.pipe,
+                                                        )
+                                                      ],
+                                                    );
+                                                  },
+                                                );
+
+                                                if (editedPipe == null) {
+                                                  return;
+                                                }
+
+                                                bloc.addModelPayloadValue(
+                                                  content: content,
+                                                  expectedPayload:
+                                                      expectedPayload,
+                                                  newPipeDTO: editedPipe,
+                                                );
+                                              },
+                                              tooltip:
+                                                  'Add new "${pipeDTO.pipe.name}" model variable',
+                                            ),
+                                          );
+                                        }),
+                                      ),
+                                  },
+                                );
+                              },
+                            ),
+                          );
+                        }).toList(),
+                        const SizedBox(height: 8),
+                        AddNewButton(
+                          onTap: () {
+                            bloc.addModelPayloadValue(
+                              content: content,
+                              expectedPayload: expectedPayload,
+                              newPipeDTO: pipeDTO.copyWith(payloadValue: [
+                                ...pipeDTO.payloadValue,
+
+                                // Initial from the model pipe
+                                ModelPipeDTOPayload.fromModelPipe(
+                                  pipeDTO.pipe,
+                                ),
+                              ]),
+                            );
+                          },
+                          tooltip: 'Add new "${pipeDTO.pipe.name}"'
+                              ' model variable',
+                        ),
+                        const Divider(),
+                      ],
+                    );
                   },
                 ).toList(),
               ],
