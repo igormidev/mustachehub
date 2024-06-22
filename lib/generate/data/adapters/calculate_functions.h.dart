@@ -13,7 +13,7 @@ List<ModelPipeDto> _calculateModelsPipe(
 
     final ModelPipeDto pipeDto = ModelPipeDto(
       pipe: pipe,
-      items: cacheValue?.items ?? [],
+      payloadValue: cacheValue?.payloadValue ?? [],
     );
 
     modelResponse.add(pipeDto);

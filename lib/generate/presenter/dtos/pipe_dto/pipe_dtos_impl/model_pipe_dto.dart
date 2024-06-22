@@ -1,14 +1,14 @@
 part of '../pipe_dto.dart';
 
 class ModelPipeDto extends Equatable
-    implements PipeDTO<ModelPipe, List<Map<String, dynamic>>> {
+    implements PipeDTO<ModelPipe, List<ModelPipeDTOPayload>> {
   @override
   final ModelPipe pipe;
-  @override
-  List<Map<String, dynamic>> get payloadValue {
+
+  List<Map<String, dynamic>> get mapValue {
     final List<Map<String, dynamic>> response = [];
 
-    for (final item in items) {
+    for (final item in payloadValue) {
       final Map<String, dynamic> itemResponse = {};
 
       for (final textDTO in item.texts) {
@@ -31,10 +31,11 @@ class ModelPipeDto extends Equatable
 
   const ModelPipeDto({
     required this.pipe,
-    required this.items,
+    required this.payloadValue,
   });
 
-  final List<ModelPipeDTOPayload> items;
+  @override
+  final List<ModelPipeDTOPayload> payloadValue;
 
   /// Will deeply search from the model with the [id]
   /// and when found will edit with with the [mapFunc]
@@ -46,14 +47,14 @@ class ModelPipeDto extends Equatable
     required String id,
     required PipeDTO<P, V> Function(PipeDTO<P, V> oldValue) mapFunc,
   }) {
-    for (final payload in items) {
+    for (final payload in payloadValue) {
       if (payload.uuid != modelId) continue;
       if (P is TextPipe && V is String) {
         for (final textDTO in payload.texts) {
           if (textDTO.pipe.pipeId == id) {
             return copyWith(
-              items: [
-                for (final item in items)
+              payloadValue: [
+                for (final item in payloadValue)
                   if (item.uuid == modelId)
                     payload.copyWith(
                       texts: [
@@ -76,8 +77,8 @@ class ModelPipeDto extends Equatable
         for (final booleanDTO in payload.booleans) {
           if (booleanDTO.pipe.pipeId == id) {
             return copyWith(
-              items: [
-                for (final item in items)
+              payloadValue: [
+                for (final item in payloadValue)
                   if (item.uuid == modelId)
                     payload.copyWith(
                       booleans: [
@@ -99,8 +100,8 @@ class ModelPipeDto extends Equatable
       for (final modelDTO in payload.subModels) {
         if (modelDTO.pipe.pipeId == id) {
           return copyWith(
-            items: [
-              for (final item in items)
+            payloadValue: [
+              for (final item in payloadValue)
                 if (item.uuid == modelId)
                   payload.copyWith(
                     subModels: [
@@ -128,8 +129,8 @@ class ModelPipeDto extends Equatable
 
         if (newModel != null) {
           return copyWith(
-            items: [
-              for (final item in items)
+            payloadValue: [
+              for (final item in payloadValue)
                 if (item.uuid == modelId)
                   payload.copyWith(
                     subModels: [
@@ -151,40 +152,38 @@ class ModelPipeDto extends Equatable
   }
 
   @override
-  ModelPipeDto copyWith({
-    ModelPipe? pipe,
-    List<ModelPipeDTOPayload>? items,
-    List<Map<String, dynamic>> payloadValue = const [],
-  }) {
-    return ModelPipeDto(
-      pipe: pipe ?? this.pipe,
-      items: items ?? this.items,
-    );
-  }
-
-  @override
   List<Object?> get props => [
         pipe,
-        items,
+        payloadValue,
       ];
 
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'pipe': pipe.toMap(),
-      'items': items.map((ModelPipeDTOPayload x) => x.toMap()).toList(),
-    };
-  }
-
-  factory ModelPipeDto.fromMap(Map<String, dynamic> map) {
+  @override
+  ModelPipeDto copyWith({
+    required List<ModelPipeDTOPayload> payloadValue,
+  }) {
     return ModelPipeDto(
-      pipe: ModelPipe.fromMap(map['pipe'] as Map<String, dynamic>),
-      items: List<ModelPipeDTOPayload>.from(
-        (map['items'] as List<int>).map<ModelPipeDTOPayload>(
-          (x) => ModelPipeDTOPayload.fromMap(x as Map<String, dynamic>),
-        ),
-      ),
+      pipe: pipe,
+      payloadValue: payloadValue,
     );
   }
+
+  // Map<String, dynamic> toMap() {
+  //   return <String, dynamic>{
+  //     'pipe': pipe.toMap(),
+  //     'items': items.map((ModelPipeDTOPayload x) => x.toMap()).toList(),
+  //   };
+  // }
+
+  // factory ModelPipeDto.fromMap(Map<String, dynamic> map) {
+  //   return ModelPipeDto(
+  //     pipe: ModelPipe.fromMap(map['pipe'] as Map<String, dynamic>),
+  //     items: List<ModelPipeDTOPayload>.from(
+  //       (map['items'] as List<int>).map<ModelPipeDTOPayload>(
+  //         (x) => ModelPipeDTOPayload.fromMap(x as Map<String, dynamic>),
+  //       ),
+  //     ),
+  //   );
+  // }
 }
 
 class ModelPipeDTOPayload {
@@ -199,24 +198,24 @@ class ModelPipeDTOPayload {
     required this.booleans,
   });
 
-  factory ModelPipeDTOPayload.fromModelPipe(ModelPipeDto modelPipeDTO) {
-    return ModelPipeDTOPayload(uuid: modelPipeDTO.pipe.pipeId, texts: [
-      for (final item in modelPipeDTO.pipe.textPipes)
+  factory ModelPipeDTOPayload.fromModelPipe(ModelPipe modelPipe) {
+    return ModelPipeDTOPayload(uuid: modelPipe.pipeId, texts: [
+      for (final item in modelPipe.textPipes)
         TextPipeDto(
           pipe: item,
           payloadValue: '',
         ),
     ], booleans: [
-      for (final item in modelPipeDTO.pipe.booleanPipes)
+      for (final item in modelPipe.booleanPipes)
         BooleanPipeDto(
           pipe: item,
           payloadValue: false,
         ),
     ], subModels: [
-      for (final item in modelPipeDTO.pipe.modelPipes)
+      for (final item in modelPipe.modelPipes)
         ModelPipeDto(
           pipe: item,
-          items: const [],
+          payloadValue: const [],
         ),
     ]);
   }
@@ -234,38 +233,38 @@ class ModelPipeDTOPayload {
     );
   }
 
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'uuid': uuid,
-      'subModels': subModels.map((x) => x.toMap()).toList(),
-      'texts': texts.map((x) => x.toMap()).toList(),
-      'booleans': booleans.map((x) => x.toMap()).toList(),
-    };
-  }
+  // Map<String, dynamic> toMap() {
+  //   return <String, dynamic>{
+  //     'uuid': uuid,
+  //     'subModels': subModels.map((x) => x.toMap()).toList(),
+  //     'texts': texts.map((x) => x.toMap()).toList(),
+  //     'booleans': booleans.map((x) => x.toMap()).toList(),
+  //   };
+  // }
 
-  factory ModelPipeDTOPayload.fromMap(Map<String, dynamic> map) {
-    return ModelPipeDTOPayload(
-      uuid: map['uuid'] as String,
-      subModels: List<ModelPipeDto>.from(
-        (map['subModels'] as List<int>).map<ModelPipeDto>(
-          (x) => ModelPipeDto.fromMap(x as Map<String, dynamic>),
-        ),
-      ),
-      texts: List<TextPipeDto>.from(
-        (map['texts'] as List<int>).map<TextPipeDto>(
-          (x) => TextPipeDto.fromMap(x as Map<String, dynamic>),
-        ),
-      ),
-      booleans: List<BooleanPipeDto>.from(
-        (map['booleans'] as List<int>).map<BooleanPipeDto>(
-          (x) => BooleanPipeDto.fromMap(x as Map<String, dynamic>),
-        ),
-      ),
-    );
-  }
+  // factory ModelPipeDTOPayload.fromMap(Map<String, dynamic> map) {
+  //   return ModelPipeDTOPayload(
+  //     uuid: map['uuid'] as String,
+  //     subModels: List<ModelPipeDto>.from(
+  //       (map['subModels'] as List<int>).map<ModelPipeDto>(
+  //         (x) => ModelPipeDto.fromMap(x as Map<String, dynamic>),
+  //       ),
+  //     ),
+  //     texts: List<TextPipeDto>.from(
+  //       (map['texts'] as List<int>).map<TextPipeDto>(
+  //         (x) => TextPipeDto.fromMap(x as Map<String, dynamic>),
+  //       ),
+  //     ),
+  //     booleans: List<BooleanPipeDto>.from(
+  //       (map['booleans'] as List<int>).map<BooleanPipeDto>(
+  //         (x) => BooleanPipeDto.fromMap(x as Map<String, dynamic>),
+  //       ),
+  //     ),
+  //   );
+  // }
 
-  String toJson() => json.encode(toMap());
+  // String toJson() => json.encode(toMap());
 
-  factory ModelPipeDTOPayload.fromJson(String source) =>
-      ModelPipeDTOPayload.fromMap(json.decode(source) as Map<String, dynamic>);
+  // factory ModelPipeDTOPayload.fromJson(String source) =>
+  //     ModelPipeDTOPayload.fromMap(json.decode(source) as Map<String, dynamic>);
 }

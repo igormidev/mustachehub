@@ -64,7 +64,7 @@ class ModelPipeForm extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(height: 8),
-                          ...pipeDTO.items
+                          ...pipeDTO.payloadValue
                               .map((ModelPipeDTOPayload modelPipeDTOPayload) {
                             final treeNode =
                                 TreeNode<PipeDTO>.root(data: pipeDTO);
@@ -136,7 +136,7 @@ class ModelPipeForm extends StatelessWidget {
                                                   pipeDTO.deepEdit<TextPipe,
                                                       String>(
                                                 modelId: pipeDTO.pipe.pipeId,
-                                                id: pipeDTO.pipe.pipeId,
+                                                id: dto.pipe.pipeId,
                                                 mapFunc: (
                                                   PipeDTO<TextPipe, String>
                                                       pipe,
@@ -171,7 +171,7 @@ class ModelPipeForm extends StatelessWidget {
                                                   pipeDTO.deepEdit<BooleanPipe,
                                                       bool>(
                                                 modelId: pipeDTO.pipe.pipeId,
-                                                id: pipeDTO.pipe.pipeId,
+                                                id: dto.pipe.pipeId,
                                                 mapFunc: (
                                                   PipeDTO<BooleanPipe, bool>
                                                       pipe,
@@ -203,37 +203,62 @@ class ModelPipeForm extends StatelessWidget {
                                                 const EdgeInsets.only(top: 8.0),
                                             child: Icon(icon),
                                           ),
-                                          trailing: SizedBox(
-                                            width: 100,
-                                            height: 100,
-                                            child: AddNewButton(
-                                              onTap: () {
-                                                final ModelPipeDto? editedPipe =
-                                                    pipeDTO.deepEdit<ModelPipe,
-                                                        ModelPipeDTOPayload>(
-                                                  modelId: pipeDTO.pipe.pipeId,
-                                                  id: pipeDTO.pipe.pipeId,
-                                                  mapFunc: (
-                                                    PipeDTO<ModelPipe,
-                                                            ModelPipeDTOPayload>
-                                                        pipe,
-                                                  ) {
-                                                    return pipe.copyWith(
-                                                      items: [
-                                                        ...pipe.items,
-                                                        ModelPipeDTOPayload
-                                                            .fromModelPipe(
+                                          trailing: Builder(builder: (context) {
+                                            final isRoot = dto.pipe.pipeId ==
+                                                pipeDTO.pipe.pipeId;
+                                            if (isRoot) {
+                                              return SizedBox.fromSize();
+                                            }
+
+                                            return SizedBox(
+                                              width: 100,
+                                              height: 100,
+                                              child: AddNewButton(
+                                                onTap: () {
+                                                  final ModelPipeDto?
+                                                      editedPipe =
+                                                      pipeDTO.deepEdit<
+                                                          ModelPipe,
+                                                          List<
+                                                              ModelPipeDTOPayload>>(
+                                                    modelId:
+                                                        pipeDTO.pipe.pipeId,
+                                                    id: dto.pipe.pipeId,
+                                                    mapFunc: (
+                                                      PipeDTO<
+                                                              ModelPipe,
+                                                              List<
+                                                                  ModelPipeDTOPayload>>
                                                           pipe,
-                                                        ),
-                                                      ],
-                                                    );
-                                                  },
-                                                );
-                                              },
-                                              tooltip:
-                                                  'Add new "${pipeDTO.pipe.name}" model variable',
-                                            ),
-                                          ),
+                                                    ) {
+                                                      return pipe.copyWith(
+                                                        payloadValue: [
+                                                          ...?pipe.payloadValue,
+                                                          ModelPipeDTOPayload
+                                                              .fromModelPipe(
+                                                            pipe.pipe,
+                                                          )
+                                                        ],
+                                                      );
+                                                    },
+                                                  );
+
+                                                  if (editedPipe == null) {
+                                                    return;
+                                                  }
+
+                                                  bloc.addModelPayloadValue(
+                                                    content: content,
+                                                    expectedPayload:
+                                                        expectedPayload,
+                                                    newPipeDTO: editedPipe,
+                                                  );
+                                                },
+                                                tooltip:
+                                                    'Add new "${pipeDTO.pipe.name}" model variable',
+                                              ),
+                                            );
+                                          }),
                                         ),
                                     },
                                   );
@@ -247,12 +272,12 @@ class ModelPipeForm extends StatelessWidget {
                               bloc.addModelPayloadValue(
                                 content: content,
                                 expectedPayload: expectedPayload,
-                                newPipeDTO: pipeDTO.copyWith(items: [
-                                  ...pipeDTO.items,
+                                newPipeDTO: pipeDTO.copyWith(payloadValue: [
+                                  ...pipeDTO.payloadValue,
 
                                   // Initial from the model pipe
                                   ModelPipeDTOPayload.fromModelPipe(
-                                    pipeDTO,
+                                    pipeDTO.pipe,
                                   ),
                                 ]),
                               );
@@ -286,7 +311,7 @@ Iterable<Node> _getModelPipes(ModelPipeDTOPayload pipe) {
         data: e,
       );
 
-      final subModels = e.items.map((e) => _getModelPipes(e));
+      final subModels = e.payloadValue.map((e) => _getModelPipes(e));
 
       // modelDTO.addAll(subModels.expand((element) => element));
       for (final subModel in subModels) {
