@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mustache_hub_core/mustache_hub_core.dart';
+import 'package:mustachehub/generate/presenter/cubits/payload_cubit.dart';
 import 'package:mustachehub/generate/presenter/dtos/pipe_dto/pipe_dto.dart';
 import 'package:mustachehub/generate/presenter/dtos/tree_node_generate_pipe_dto.dart';
 
@@ -30,22 +32,8 @@ class ModelGenerateNodeBuilder extends StatelessWidget {
       trailing: IconButton(
         icon: const Icon(Icons.delete),
         onPressed: () {
-          final ModelPipeDto? editedPipe =
-              rootModelDTO.deepEdit<ModelPipe, List<ModelPipeDTOPayload>>(
-            modelId: rootModelDTO.pipe.pipeId,
+          final ModelPipeDto? editedPipe = rootModelDTO.deleteModel(
             pipeId: dto.pipe.pipeId,
-            mapFunc: (
-              PipeDTO<ModelPipe, List<ModelPipeDTOPayload>> pipe,
-            ) {
-              return pipe.copyWith(
-                payloadValue: [
-                  ...pipe.payloadValue!
-                      .where(
-                          (element) => element.pipe.pipeId != dto.pipe.pipeId)
-                      .toList(),
-                ],
-              );
-            },
           );
 
           if (editedPipe == null) {

@@ -18,7 +18,7 @@ class DtoAdapter {
     payload.addAll(_getTextPayloads(texts, textDtos));
     payload.addAll(_getBoolPayloads(booleans, booleanDtos));
     for (final model in modelDtos) {
-      payload[model.pipe.mustacheName] = model.payloadValue;
+      payload[model.pipe.mustacheName] = model.mapValue;
     }
 
     return payload;

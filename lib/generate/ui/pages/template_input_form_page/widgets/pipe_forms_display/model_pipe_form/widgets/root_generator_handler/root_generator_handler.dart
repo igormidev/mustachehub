@@ -33,6 +33,7 @@ class RootGeneratorHandler extends StatelessWidget {
             content: content,
             expectedPayload: expectedPayload,
             referenceModelDTO: value.referenceModelDTO,
+            structureDTONode: value,
           );
         },
         textNode: (TreeNodeGeneratePipeDtoPipeText value) {
@@ -48,7 +49,7 @@ class RootGeneratorHandler extends StatelessWidget {
             rootModelDTO: rootModelDTO,
             content: content,
             expectedPayload: expectedPayload,
-            textDTONode: value,
+            booleanDTONode: value,
           );
         },
         model: (TreeNodeGeneratePipeDtoPipeModel value) {

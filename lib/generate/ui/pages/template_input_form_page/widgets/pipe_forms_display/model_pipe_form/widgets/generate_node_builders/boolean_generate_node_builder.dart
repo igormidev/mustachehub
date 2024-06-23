@@ -10,10 +10,10 @@ class BooleanGenerateNodeBuilder extends StatelessWidget {
   final ModelPipeDto rootModelDTO;
   final String content;
   final ExpectedPayload expectedPayload;
-  final TreeNodeGeneratePipeDtoPipeBoolean textDTONode;
+  final TreeNodeGeneratePipeDtoPipeBoolean booleanDTONode;
   const BooleanGenerateNodeBuilder({
     super.key,
-    required this.textDTONode,
+    required this.booleanDTONode,
     required this.rootModelDTO,
     required this.content,
     required this.expectedPayload,
@@ -22,7 +22,7 @@ class BooleanGenerateNodeBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bloc = context.read<PayloadCubit>();
-    final dto = textDTONode.pipeDTO;
+    final dto = booleanDTONode.pipeDTO;
 
     return Padding(
       padding: const EdgeInsets.only(
@@ -34,7 +34,7 @@ class BooleanGenerateNodeBuilder extends StatelessWidget {
         onChangedCallback: (value) async {
           final ModelPipeDto? editedPipe =
               rootModelDTO.deepEdit<BooleanPipe, bool>(
-            modelId: rootModelDTO.pipe.pipeId,
+            payloadId: booleanDTONode.payloadUUID,
             pipeId: dto.pipe.pipeId,
             mapFunc: (
               PipeDTO<BooleanPipe, bool> pipe,

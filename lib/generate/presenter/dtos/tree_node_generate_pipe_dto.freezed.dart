@@ -16,33 +16,39 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$TreeNodeGeneratePipeDto {
+  String? get payloadUUID => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(ModelPipeDto referenceModelDTO) structureNode,
-    required TResult Function(TextPipeDto pipeDTO) textNode,
-    required TResult Function(BooleanPipeDto pipeDTO) boolean,
     required TResult Function(
-            ModelPipeDto pipeDTO, int index, ModelPipeDTOPayload payload)
+            String? payloadUUID, ModelPipeDto referenceModelDTO)
+        structureNode,
+    required TResult Function(String payloadUUID, TextPipeDto pipeDTO) textNode,
+    required TResult Function(String payloadUUID, BooleanPipeDto pipeDTO)
+        boolean,
+    required TResult Function(String payloadUUID, ModelPipeDto pipeDTO,
+            int index, ModelPipeDTOPayload payload)
         model,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(ModelPipeDto referenceModelDTO)? structureNode,
-    TResult? Function(TextPipeDto pipeDTO)? textNode,
-    TResult? Function(BooleanPipeDto pipeDTO)? boolean,
-    TResult? Function(
-            ModelPipeDto pipeDTO, int index, ModelPipeDTOPayload payload)?
+    TResult? Function(String? payloadUUID, ModelPipeDto referenceModelDTO)?
+        structureNode,
+    TResult? Function(String payloadUUID, TextPipeDto pipeDTO)? textNode,
+    TResult? Function(String payloadUUID, BooleanPipeDto pipeDTO)? boolean,
+    TResult? Function(String payloadUUID, ModelPipeDto pipeDTO, int index,
+            ModelPipeDTOPayload payload)?
         model,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(ModelPipeDto referenceModelDTO)? structureNode,
-    TResult Function(TextPipeDto pipeDTO)? textNode,
-    TResult Function(BooleanPipeDto pipeDTO)? boolean,
-    TResult Function(
-            ModelPipeDto pipeDTO, int index, ModelPipeDTOPayload payload)?
+    TResult Function(String? payloadUUID, ModelPipeDto referenceModelDTO)?
+        structureNode,
+    TResult Function(String payloadUUID, TextPipeDto pipeDTO)? textNode,
+    TResult Function(String payloadUUID, BooleanPipeDto pipeDTO)? boolean,
+    TResult Function(String payloadUUID, ModelPipeDto pipeDTO, int index,
+            ModelPipeDTOPayload payload)?
         model,
     required TResult orElse(),
   }) =>
@@ -74,6 +80,10 @@ mixin _$TreeNodeGeneratePipeDto {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $TreeNodeGeneratePipeDtoCopyWith<TreeNodeGeneratePipeDto> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -81,6 +91,8 @@ abstract class $TreeNodeGeneratePipeDtoCopyWith<$Res> {
   factory $TreeNodeGeneratePipeDtoCopyWith(TreeNodeGeneratePipeDto value,
           $Res Function(TreeNodeGeneratePipeDto) then) =
       _$TreeNodeGeneratePipeDtoCopyWithImpl<$Res, TreeNodeGeneratePipeDto>;
+  @useResult
+  $Res call({String payloadUUID});
 }
 
 /// @nodoc
@@ -93,16 +105,31 @@ class _$TreeNodeGeneratePipeDtoCopyWithImpl<$Res,
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? payloadUUID = null,
+  }) {
+    return _then(_value.copyWith(
+      payloadUUID: null == payloadUUID
+          ? _value.payloadUUID!
+          : payloadUUID // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
 }
 
 /// @nodoc
-abstract class _$$TreeNodeGeneratePipeDtoStructureNodeImplCopyWith<$Res> {
+abstract class _$$TreeNodeGeneratePipeDtoStructureNodeImplCopyWith<$Res>
+    implements $TreeNodeGeneratePipeDtoCopyWith<$Res> {
   factory _$$TreeNodeGeneratePipeDtoStructureNodeImplCopyWith(
           _$TreeNodeGeneratePipeDtoStructureNodeImpl value,
           $Res Function(_$TreeNodeGeneratePipeDtoStructureNodeImpl) then) =
       __$$TreeNodeGeneratePipeDtoStructureNodeImplCopyWithImpl<$Res>;
+  @override
   @useResult
-  $Res call({ModelPipeDto referenceModelDTO});
+  $Res call({String? payloadUUID, ModelPipeDto referenceModelDTO});
 }
 
 /// @nodoc
@@ -118,9 +145,14 @@ class __$$TreeNodeGeneratePipeDtoStructureNodeImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? payloadUUID = freezed,
     Object? referenceModelDTO = null,
   }) {
     return _then(_$TreeNodeGeneratePipeDtoStructureNodeImpl(
+      payloadUUID: freezed == payloadUUID
+          ? _value.payloadUUID
+          : payloadUUID // ignore: cast_nullable_to_non_nullable
+              as String?,
       referenceModelDTO: null == referenceModelDTO
           ? _value.referenceModelDTO
           : referenceModelDTO // ignore: cast_nullable_to_non_nullable
@@ -133,14 +165,17 @@ class __$$TreeNodeGeneratePipeDtoStructureNodeImplCopyWithImpl<$Res>
 
 class _$TreeNodeGeneratePipeDtoStructureNodeImpl
     implements TreeNodeGeneratePipeDtoStructureNode {
-  _$TreeNodeGeneratePipeDtoStructureNodeImpl({required this.referenceModelDTO});
+  _$TreeNodeGeneratePipeDtoStructureNodeImpl(
+      {required this.payloadUUID, required this.referenceModelDTO});
 
+  @override
+  final String? payloadUUID;
   @override
   final ModelPipeDto referenceModelDTO;
 
   @override
   String toString() {
-    return 'TreeNodeGeneratePipeDto.structureNode(referenceModelDTO: $referenceModelDTO)';
+    return 'TreeNodeGeneratePipeDto.structureNode(payloadUUID: $payloadUUID, referenceModelDTO: $referenceModelDTO)';
   }
 
   @override
@@ -148,12 +183,14 @@ class _$TreeNodeGeneratePipeDtoStructureNodeImpl
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TreeNodeGeneratePipeDtoStructureNodeImpl &&
+            (identical(other.payloadUUID, payloadUUID) ||
+                other.payloadUUID == payloadUUID) &&
             (identical(other.referenceModelDTO, referenceModelDTO) ||
                 other.referenceModelDTO == referenceModelDTO));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, referenceModelDTO);
+  int get hashCode => Object.hash(runtimeType, payloadUUID, referenceModelDTO);
 
   @JsonKey(ignore: true)
   @override
@@ -166,42 +203,47 @@ class _$TreeNodeGeneratePipeDtoStructureNodeImpl
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(ModelPipeDto referenceModelDTO) structureNode,
-    required TResult Function(TextPipeDto pipeDTO) textNode,
-    required TResult Function(BooleanPipeDto pipeDTO) boolean,
     required TResult Function(
-            ModelPipeDto pipeDTO, int index, ModelPipeDTOPayload payload)
+            String? payloadUUID, ModelPipeDto referenceModelDTO)
+        structureNode,
+    required TResult Function(String payloadUUID, TextPipeDto pipeDTO) textNode,
+    required TResult Function(String payloadUUID, BooleanPipeDto pipeDTO)
+        boolean,
+    required TResult Function(String payloadUUID, ModelPipeDto pipeDTO,
+            int index, ModelPipeDTOPayload payload)
         model,
   }) {
-    return structureNode(referenceModelDTO);
+    return structureNode(payloadUUID, referenceModelDTO);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(ModelPipeDto referenceModelDTO)? structureNode,
-    TResult? Function(TextPipeDto pipeDTO)? textNode,
-    TResult? Function(BooleanPipeDto pipeDTO)? boolean,
-    TResult? Function(
-            ModelPipeDto pipeDTO, int index, ModelPipeDTOPayload payload)?
+    TResult? Function(String? payloadUUID, ModelPipeDto referenceModelDTO)?
+        structureNode,
+    TResult? Function(String payloadUUID, TextPipeDto pipeDTO)? textNode,
+    TResult? Function(String payloadUUID, BooleanPipeDto pipeDTO)? boolean,
+    TResult? Function(String payloadUUID, ModelPipeDto pipeDTO, int index,
+            ModelPipeDTOPayload payload)?
         model,
   }) {
-    return structureNode?.call(referenceModelDTO);
+    return structureNode?.call(payloadUUID, referenceModelDTO);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(ModelPipeDto referenceModelDTO)? structureNode,
-    TResult Function(TextPipeDto pipeDTO)? textNode,
-    TResult Function(BooleanPipeDto pipeDTO)? boolean,
-    TResult Function(
-            ModelPipeDto pipeDTO, int index, ModelPipeDTOPayload payload)?
+    TResult Function(String? payloadUUID, ModelPipeDto referenceModelDTO)?
+        structureNode,
+    TResult Function(String payloadUUID, TextPipeDto pipeDTO)? textNode,
+    TResult Function(String payloadUUID, BooleanPipeDto pipeDTO)? boolean,
+    TResult Function(String payloadUUID, ModelPipeDto pipeDTO, int index,
+            ModelPipeDTOPayload payload)?
         model,
     required TResult orElse(),
   }) {
     if (structureNode != null) {
-      return structureNode(referenceModelDTO);
+      return structureNode(payloadUUID, referenceModelDTO);
     }
     return orElse();
   }
@@ -249,10 +291,14 @@ class _$TreeNodeGeneratePipeDtoStructureNodeImpl
 abstract class TreeNodeGeneratePipeDtoStructureNode
     implements TreeNodeGeneratePipeDto {
   factory TreeNodeGeneratePipeDtoStructureNode(
-          {required final ModelPipeDto referenceModelDTO}) =
+          {required final String? payloadUUID,
+          required final ModelPipeDto referenceModelDTO}) =
       _$TreeNodeGeneratePipeDtoStructureNodeImpl;
 
+  @override
+  String? get payloadUUID;
   ModelPipeDto get referenceModelDTO;
+  @override
   @JsonKey(ignore: true)
   _$$TreeNodeGeneratePipeDtoStructureNodeImplCopyWith<
           _$TreeNodeGeneratePipeDtoStructureNodeImpl>
@@ -260,13 +306,15 @@ abstract class TreeNodeGeneratePipeDtoStructureNode
 }
 
 /// @nodoc
-abstract class _$$TreeNodeGeneratePipeDtoPipeTextImplCopyWith<$Res> {
+abstract class _$$TreeNodeGeneratePipeDtoPipeTextImplCopyWith<$Res>
+    implements $TreeNodeGeneratePipeDtoCopyWith<$Res> {
   factory _$$TreeNodeGeneratePipeDtoPipeTextImplCopyWith(
           _$TreeNodeGeneratePipeDtoPipeTextImpl value,
           $Res Function(_$TreeNodeGeneratePipeDtoPipeTextImpl) then) =
       __$$TreeNodeGeneratePipeDtoPipeTextImplCopyWithImpl<$Res>;
+  @override
   @useResult
-  $Res call({TextPipeDto pipeDTO});
+  $Res call({String payloadUUID, TextPipeDto pipeDTO});
 }
 
 /// @nodoc
@@ -282,9 +330,14 @@ class __$$TreeNodeGeneratePipeDtoPipeTextImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? payloadUUID = null,
     Object? pipeDTO = null,
   }) {
     return _then(_$TreeNodeGeneratePipeDtoPipeTextImpl(
+      payloadUUID: null == payloadUUID
+          ? _value.payloadUUID
+          : payloadUUID // ignore: cast_nullable_to_non_nullable
+              as String,
       pipeDTO: null == pipeDTO
           ? _value.pipeDTO
           : pipeDTO // ignore: cast_nullable_to_non_nullable
@@ -297,14 +350,17 @@ class __$$TreeNodeGeneratePipeDtoPipeTextImplCopyWithImpl<$Res>
 
 class _$TreeNodeGeneratePipeDtoPipeTextImpl
     implements TreeNodeGeneratePipeDtoPipeText {
-  _$TreeNodeGeneratePipeDtoPipeTextImpl({required this.pipeDTO});
+  _$TreeNodeGeneratePipeDtoPipeTextImpl(
+      {required this.payloadUUID, required this.pipeDTO});
 
+  @override
+  final String payloadUUID;
   @override
   final TextPipeDto pipeDTO;
 
   @override
   String toString() {
-    return 'TreeNodeGeneratePipeDto.textNode(pipeDTO: $pipeDTO)';
+    return 'TreeNodeGeneratePipeDto.textNode(payloadUUID: $payloadUUID, pipeDTO: $pipeDTO)';
   }
 
   @override
@@ -312,11 +368,13 @@ class _$TreeNodeGeneratePipeDtoPipeTextImpl
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TreeNodeGeneratePipeDtoPipeTextImpl &&
+            (identical(other.payloadUUID, payloadUUID) ||
+                other.payloadUUID == payloadUUID) &&
             (identical(other.pipeDTO, pipeDTO) || other.pipeDTO == pipeDTO));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, pipeDTO);
+  int get hashCode => Object.hash(runtimeType, payloadUUID, pipeDTO);
 
   @JsonKey(ignore: true)
   @override
@@ -329,42 +387,47 @@ class _$TreeNodeGeneratePipeDtoPipeTextImpl
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(ModelPipeDto referenceModelDTO) structureNode,
-    required TResult Function(TextPipeDto pipeDTO) textNode,
-    required TResult Function(BooleanPipeDto pipeDTO) boolean,
     required TResult Function(
-            ModelPipeDto pipeDTO, int index, ModelPipeDTOPayload payload)
+            String? payloadUUID, ModelPipeDto referenceModelDTO)
+        structureNode,
+    required TResult Function(String payloadUUID, TextPipeDto pipeDTO) textNode,
+    required TResult Function(String payloadUUID, BooleanPipeDto pipeDTO)
+        boolean,
+    required TResult Function(String payloadUUID, ModelPipeDto pipeDTO,
+            int index, ModelPipeDTOPayload payload)
         model,
   }) {
-    return textNode(pipeDTO);
+    return textNode(payloadUUID, pipeDTO);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(ModelPipeDto referenceModelDTO)? structureNode,
-    TResult? Function(TextPipeDto pipeDTO)? textNode,
-    TResult? Function(BooleanPipeDto pipeDTO)? boolean,
-    TResult? Function(
-            ModelPipeDto pipeDTO, int index, ModelPipeDTOPayload payload)?
+    TResult? Function(String? payloadUUID, ModelPipeDto referenceModelDTO)?
+        structureNode,
+    TResult? Function(String payloadUUID, TextPipeDto pipeDTO)? textNode,
+    TResult? Function(String payloadUUID, BooleanPipeDto pipeDTO)? boolean,
+    TResult? Function(String payloadUUID, ModelPipeDto pipeDTO, int index,
+            ModelPipeDTOPayload payload)?
         model,
   }) {
-    return textNode?.call(pipeDTO);
+    return textNode?.call(payloadUUID, pipeDTO);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(ModelPipeDto referenceModelDTO)? structureNode,
-    TResult Function(TextPipeDto pipeDTO)? textNode,
-    TResult Function(BooleanPipeDto pipeDTO)? boolean,
-    TResult Function(
-            ModelPipeDto pipeDTO, int index, ModelPipeDTOPayload payload)?
+    TResult Function(String? payloadUUID, ModelPipeDto referenceModelDTO)?
+        structureNode,
+    TResult Function(String payloadUUID, TextPipeDto pipeDTO)? textNode,
+    TResult Function(String payloadUUID, BooleanPipeDto pipeDTO)? boolean,
+    TResult Function(String payloadUUID, ModelPipeDto pipeDTO, int index,
+            ModelPipeDTOPayload payload)?
         model,
     required TResult orElse(),
   }) {
     if (textNode != null) {
-      return textNode(pipeDTO);
+      return textNode(payloadUUID, pipeDTO);
     }
     return orElse();
   }
@@ -412,10 +475,14 @@ class _$TreeNodeGeneratePipeDtoPipeTextImpl
 abstract class TreeNodeGeneratePipeDtoPipeText
     implements TreeNodeGeneratePipeDto {
   factory TreeNodeGeneratePipeDtoPipeText(
-          {required final TextPipeDto pipeDTO}) =
+          {required final String payloadUUID,
+          required final TextPipeDto pipeDTO}) =
       _$TreeNodeGeneratePipeDtoPipeTextImpl;
 
+  @override
+  String get payloadUUID;
   TextPipeDto get pipeDTO;
+  @override
   @JsonKey(ignore: true)
   _$$TreeNodeGeneratePipeDtoPipeTextImplCopyWith<
           _$TreeNodeGeneratePipeDtoPipeTextImpl>
@@ -423,13 +490,15 @@ abstract class TreeNodeGeneratePipeDtoPipeText
 }
 
 /// @nodoc
-abstract class _$$TreeNodeGeneratePipeDtoPipeBooleanImplCopyWith<$Res> {
+abstract class _$$TreeNodeGeneratePipeDtoPipeBooleanImplCopyWith<$Res>
+    implements $TreeNodeGeneratePipeDtoCopyWith<$Res> {
   factory _$$TreeNodeGeneratePipeDtoPipeBooleanImplCopyWith(
           _$TreeNodeGeneratePipeDtoPipeBooleanImpl value,
           $Res Function(_$TreeNodeGeneratePipeDtoPipeBooleanImpl) then) =
       __$$TreeNodeGeneratePipeDtoPipeBooleanImplCopyWithImpl<$Res>;
+  @override
   @useResult
-  $Res call({BooleanPipeDto pipeDTO});
+  $Res call({String payloadUUID, BooleanPipeDto pipeDTO});
 }
 
 /// @nodoc
@@ -445,9 +514,14 @@ class __$$TreeNodeGeneratePipeDtoPipeBooleanImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? payloadUUID = null,
     Object? pipeDTO = null,
   }) {
     return _then(_$TreeNodeGeneratePipeDtoPipeBooleanImpl(
+      payloadUUID: null == payloadUUID
+          ? _value.payloadUUID
+          : payloadUUID // ignore: cast_nullable_to_non_nullable
+              as String,
       pipeDTO: null == pipeDTO
           ? _value.pipeDTO
           : pipeDTO // ignore: cast_nullable_to_non_nullable
@@ -460,14 +534,17 @@ class __$$TreeNodeGeneratePipeDtoPipeBooleanImplCopyWithImpl<$Res>
 
 class _$TreeNodeGeneratePipeDtoPipeBooleanImpl
     implements TreeNodeGeneratePipeDtoPipeBoolean {
-  _$TreeNodeGeneratePipeDtoPipeBooleanImpl({required this.pipeDTO});
+  _$TreeNodeGeneratePipeDtoPipeBooleanImpl(
+      {required this.payloadUUID, required this.pipeDTO});
 
+  @override
+  final String payloadUUID;
   @override
   final BooleanPipeDto pipeDTO;
 
   @override
   String toString() {
-    return 'TreeNodeGeneratePipeDto.boolean(pipeDTO: $pipeDTO)';
+    return 'TreeNodeGeneratePipeDto.boolean(payloadUUID: $payloadUUID, pipeDTO: $pipeDTO)';
   }
 
   @override
@@ -475,11 +552,13 @@ class _$TreeNodeGeneratePipeDtoPipeBooleanImpl
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TreeNodeGeneratePipeDtoPipeBooleanImpl &&
+            (identical(other.payloadUUID, payloadUUID) ||
+                other.payloadUUID == payloadUUID) &&
             (identical(other.pipeDTO, pipeDTO) || other.pipeDTO == pipeDTO));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, pipeDTO);
+  int get hashCode => Object.hash(runtimeType, payloadUUID, pipeDTO);
 
   @JsonKey(ignore: true)
   @override
@@ -492,42 +571,47 @@ class _$TreeNodeGeneratePipeDtoPipeBooleanImpl
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(ModelPipeDto referenceModelDTO) structureNode,
-    required TResult Function(TextPipeDto pipeDTO) textNode,
-    required TResult Function(BooleanPipeDto pipeDTO) boolean,
     required TResult Function(
-            ModelPipeDto pipeDTO, int index, ModelPipeDTOPayload payload)
+            String? payloadUUID, ModelPipeDto referenceModelDTO)
+        structureNode,
+    required TResult Function(String payloadUUID, TextPipeDto pipeDTO) textNode,
+    required TResult Function(String payloadUUID, BooleanPipeDto pipeDTO)
+        boolean,
+    required TResult Function(String payloadUUID, ModelPipeDto pipeDTO,
+            int index, ModelPipeDTOPayload payload)
         model,
   }) {
-    return boolean(pipeDTO);
+    return boolean(payloadUUID, pipeDTO);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(ModelPipeDto referenceModelDTO)? structureNode,
-    TResult? Function(TextPipeDto pipeDTO)? textNode,
-    TResult? Function(BooleanPipeDto pipeDTO)? boolean,
-    TResult? Function(
-            ModelPipeDto pipeDTO, int index, ModelPipeDTOPayload payload)?
+    TResult? Function(String? payloadUUID, ModelPipeDto referenceModelDTO)?
+        structureNode,
+    TResult? Function(String payloadUUID, TextPipeDto pipeDTO)? textNode,
+    TResult? Function(String payloadUUID, BooleanPipeDto pipeDTO)? boolean,
+    TResult? Function(String payloadUUID, ModelPipeDto pipeDTO, int index,
+            ModelPipeDTOPayload payload)?
         model,
   }) {
-    return boolean?.call(pipeDTO);
+    return boolean?.call(payloadUUID, pipeDTO);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(ModelPipeDto referenceModelDTO)? structureNode,
-    TResult Function(TextPipeDto pipeDTO)? textNode,
-    TResult Function(BooleanPipeDto pipeDTO)? boolean,
-    TResult Function(
-            ModelPipeDto pipeDTO, int index, ModelPipeDTOPayload payload)?
+    TResult Function(String? payloadUUID, ModelPipeDto referenceModelDTO)?
+        structureNode,
+    TResult Function(String payloadUUID, TextPipeDto pipeDTO)? textNode,
+    TResult Function(String payloadUUID, BooleanPipeDto pipeDTO)? boolean,
+    TResult Function(String payloadUUID, ModelPipeDto pipeDTO, int index,
+            ModelPipeDTOPayload payload)?
         model,
     required TResult orElse(),
   }) {
     if (boolean != null) {
-      return boolean(pipeDTO);
+      return boolean(payloadUUID, pipeDTO);
     }
     return orElse();
   }
@@ -575,10 +659,14 @@ class _$TreeNodeGeneratePipeDtoPipeBooleanImpl
 abstract class TreeNodeGeneratePipeDtoPipeBoolean
     implements TreeNodeGeneratePipeDto {
   factory TreeNodeGeneratePipeDtoPipeBoolean(
-          {required final BooleanPipeDto pipeDTO}) =
+          {required final String payloadUUID,
+          required final BooleanPipeDto pipeDTO}) =
       _$TreeNodeGeneratePipeDtoPipeBooleanImpl;
 
+  @override
+  String get payloadUUID;
   BooleanPipeDto get pipeDTO;
+  @override
   @JsonKey(ignore: true)
   _$$TreeNodeGeneratePipeDtoPipeBooleanImplCopyWith<
           _$TreeNodeGeneratePipeDtoPipeBooleanImpl>
@@ -586,13 +674,19 @@ abstract class TreeNodeGeneratePipeDtoPipeBoolean
 }
 
 /// @nodoc
-abstract class _$$TreeNodeGeneratePipeDtoPipeModelImplCopyWith<$Res> {
+abstract class _$$TreeNodeGeneratePipeDtoPipeModelImplCopyWith<$Res>
+    implements $TreeNodeGeneratePipeDtoCopyWith<$Res> {
   factory _$$TreeNodeGeneratePipeDtoPipeModelImplCopyWith(
           _$TreeNodeGeneratePipeDtoPipeModelImpl value,
           $Res Function(_$TreeNodeGeneratePipeDtoPipeModelImpl) then) =
       __$$TreeNodeGeneratePipeDtoPipeModelImplCopyWithImpl<$Res>;
+  @override
   @useResult
-  $Res call({ModelPipeDto pipeDTO, int index, ModelPipeDTOPayload payload});
+  $Res call(
+      {String payloadUUID,
+      ModelPipeDto pipeDTO,
+      int index,
+      ModelPipeDTOPayload payload});
 }
 
 /// @nodoc
@@ -608,11 +702,16 @@ class __$$TreeNodeGeneratePipeDtoPipeModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? payloadUUID = null,
     Object? pipeDTO = null,
     Object? index = null,
     Object? payload = null,
   }) {
     return _then(_$TreeNodeGeneratePipeDtoPipeModelImpl(
+      payloadUUID: null == payloadUUID
+          ? _value.payloadUUID
+          : payloadUUID // ignore: cast_nullable_to_non_nullable
+              as String,
       pipeDTO: null == pipeDTO
           ? _value.pipeDTO
           : pipeDTO // ignore: cast_nullable_to_non_nullable
@@ -634,8 +733,13 @@ class __$$TreeNodeGeneratePipeDtoPipeModelImplCopyWithImpl<$Res>
 class _$TreeNodeGeneratePipeDtoPipeModelImpl
     implements TreeNodeGeneratePipeDtoPipeModel {
   _$TreeNodeGeneratePipeDtoPipeModelImpl(
-      {required this.pipeDTO, required this.index, required this.payload});
+      {required this.payloadUUID,
+      required this.pipeDTO,
+      required this.index,
+      required this.payload});
 
+  @override
+  final String payloadUUID;
   @override
   final ModelPipeDto pipeDTO;
   @override
@@ -645,7 +749,7 @@ class _$TreeNodeGeneratePipeDtoPipeModelImpl
 
   @override
   String toString() {
-    return 'TreeNodeGeneratePipeDto.model(pipeDTO: $pipeDTO, index: $index, payload: $payload)';
+    return 'TreeNodeGeneratePipeDto.model(payloadUUID: $payloadUUID, pipeDTO: $pipeDTO, index: $index, payload: $payload)';
   }
 
   @override
@@ -653,13 +757,16 @@ class _$TreeNodeGeneratePipeDtoPipeModelImpl
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TreeNodeGeneratePipeDtoPipeModelImpl &&
+            (identical(other.payloadUUID, payloadUUID) ||
+                other.payloadUUID == payloadUUID) &&
             (identical(other.pipeDTO, pipeDTO) || other.pipeDTO == pipeDTO) &&
             (identical(other.index, index) || other.index == index) &&
             (identical(other.payload, payload) || other.payload == payload));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, pipeDTO, index, payload);
+  int get hashCode =>
+      Object.hash(runtimeType, payloadUUID, pipeDTO, index, payload);
 
   @JsonKey(ignore: true)
   @override
@@ -672,42 +779,47 @@ class _$TreeNodeGeneratePipeDtoPipeModelImpl
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(ModelPipeDto referenceModelDTO) structureNode,
-    required TResult Function(TextPipeDto pipeDTO) textNode,
-    required TResult Function(BooleanPipeDto pipeDTO) boolean,
     required TResult Function(
-            ModelPipeDto pipeDTO, int index, ModelPipeDTOPayload payload)
+            String? payloadUUID, ModelPipeDto referenceModelDTO)
+        structureNode,
+    required TResult Function(String payloadUUID, TextPipeDto pipeDTO) textNode,
+    required TResult Function(String payloadUUID, BooleanPipeDto pipeDTO)
+        boolean,
+    required TResult Function(String payloadUUID, ModelPipeDto pipeDTO,
+            int index, ModelPipeDTOPayload payload)
         model,
   }) {
-    return model(pipeDTO, index, payload);
+    return model(payloadUUID, pipeDTO, index, payload);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(ModelPipeDto referenceModelDTO)? structureNode,
-    TResult? Function(TextPipeDto pipeDTO)? textNode,
-    TResult? Function(BooleanPipeDto pipeDTO)? boolean,
-    TResult? Function(
-            ModelPipeDto pipeDTO, int index, ModelPipeDTOPayload payload)?
+    TResult? Function(String? payloadUUID, ModelPipeDto referenceModelDTO)?
+        structureNode,
+    TResult? Function(String payloadUUID, TextPipeDto pipeDTO)? textNode,
+    TResult? Function(String payloadUUID, BooleanPipeDto pipeDTO)? boolean,
+    TResult? Function(String payloadUUID, ModelPipeDto pipeDTO, int index,
+            ModelPipeDTOPayload payload)?
         model,
   }) {
-    return model?.call(pipeDTO, index, payload);
+    return model?.call(payloadUUID, pipeDTO, index, payload);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(ModelPipeDto referenceModelDTO)? structureNode,
-    TResult Function(TextPipeDto pipeDTO)? textNode,
-    TResult Function(BooleanPipeDto pipeDTO)? boolean,
-    TResult Function(
-            ModelPipeDto pipeDTO, int index, ModelPipeDTOPayload payload)?
+    TResult Function(String? payloadUUID, ModelPipeDto referenceModelDTO)?
+        structureNode,
+    TResult Function(String payloadUUID, TextPipeDto pipeDTO)? textNode,
+    TResult Function(String payloadUUID, BooleanPipeDto pipeDTO)? boolean,
+    TResult Function(String payloadUUID, ModelPipeDto pipeDTO, int index,
+            ModelPipeDTOPayload payload)?
         model,
     required TResult orElse(),
   }) {
     if (model != null) {
-      return model(pipeDTO, index, payload);
+      return model(payloadUUID, pipeDTO, index, payload);
     }
     return orElse();
   }
@@ -755,14 +867,18 @@ class _$TreeNodeGeneratePipeDtoPipeModelImpl
 abstract class TreeNodeGeneratePipeDtoPipeModel
     implements TreeNodeGeneratePipeDto {
   factory TreeNodeGeneratePipeDtoPipeModel(
-          {required final ModelPipeDto pipeDTO,
+          {required final String payloadUUID,
+          required final ModelPipeDto pipeDTO,
           required final int index,
           required final ModelPipeDTOPayload payload}) =
       _$TreeNodeGeneratePipeDtoPipeModelImpl;
 
+  @override
+  String get payloadUUID;
   ModelPipeDto get pipeDTO;
   int get index;
   ModelPipeDTOPayload get payload;
+  @override
   @JsonKey(ignore: true)
   _$$TreeNodeGeneratePipeDtoPipeModelImplCopyWith<
           _$TreeNodeGeneratePipeDtoPipeModelImpl>

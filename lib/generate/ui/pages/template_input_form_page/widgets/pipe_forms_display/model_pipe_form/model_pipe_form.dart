@@ -45,6 +45,7 @@ class ModelPipeForm extends StatelessWidget {
                   (ModelPipeDto pipeDTO) {
                     final StructureDTONode treeNode = StructureDTONode.root(
                       data: TreeNodeGeneratePipeDtoStructureNode(
+                        payloadUUID: null,
                         referenceModelDTO: pipeDTO,
                       ),
                     );
@@ -127,6 +128,7 @@ Iterable<Node> _getNodesFromStructure(
 
     final modelNode = ModelDTONode(
       data: TreeNodeGeneratePipeDtoPipeModel(
+        payloadUUID: value.uuid,
         pipeDTO: structure.referenceModelDTO,
         index: index,
         payload: value,
@@ -141,26 +143,33 @@ Iterable<Node> _getNodesFromStructure(
 }
 
 Iterable<Node> _getNodesFromModel(
-  TreeNodeGeneratePipeDtoPipeModel model,
+  TreeNodeGeneratePipeDtoPipeModel modelDTO,
 ) {
   final List<Node> nodes = [];
 
-  for (final text in model.payload.texts) {
+  for (final text in modelDTO.payload.texts) {
     nodes.add(TextDTONode(
-      data: TreeNodeGeneratePipeDtoPipeText(pipeDTO: text),
+      data: TreeNodeGeneratePipeDtoPipeText(
+        pipeDTO: text,
+        payloadUUID: modelDTO.payload.uuid,
+      ),
     ));
   }
 
-  for (final boolean in model.payload.booleans) {
+  for (final boolean in modelDTO.payload.booleans) {
     nodes.add(BooleanDTONode(
-      data: TreeNodeGeneratePipeDtoPipeBoolean(pipeDTO: boolean),
+      data: TreeNodeGeneratePipeDtoPipeBoolean(
+        pipeDTO: boolean,
+        payloadUUID: modelDTO.payload.uuid,
+      ),
     ));
   }
 
-  for (final model in model.payload.subModels) {
+  for (final model in modelDTO.payload.subModels) {
     final structureNode = StructureDTONode(
       data: TreeNodeGeneratePipeDtoStructureNode(
         referenceModelDTO: model,
+        payloadUUID: modelDTO.payload.uuid,
       ),
     );
 

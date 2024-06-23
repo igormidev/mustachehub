@@ -38,12 +38,51 @@ class ModelPipeDto extends Equatable
   final List<ModelPipeDTOPayload> payloadValue;
 
   /// Will deeply search from the model with the [pipeId]
+  ModelPipeDto? deleteModel({
+    required String pipeId,
+  }) {
+    for (final modelDTO in payloadValue) {
+      if (modelDTO.uuid == pipeId) {
+        return copyWith(
+          payloadValue: [
+            for (final item in payloadValue)
+              if (item.uuid != pipeId) item,
+          ],
+        );
+      }
+
+      for (final subModel in modelDTO.subModels) {
+        final newModel = subModel.deleteModel(pipeId: pipeId);
+
+        if (newModel != null) {
+          return copyWith(
+            payloadValue: [
+              for (final item in payloadValue)
+                if (item.uuid == modelDTO.uuid)
+                  modelDTO.copyWith(
+                    subModels: [
+                      for (final model in modelDTO.subModels)
+                        if (model.pipe.pipeId == pipeId) newModel else model,
+                    ],
+                  )
+                else
+                  item,
+            ],
+          );
+        }
+      }
+    }
+
+    return null;
+  }
+
+  /// Will deeply search from the model with the [pipeId]
   /// and when found will edit with with the [mapFunc]
   /// and return the new model ( simular with copywith,
   /// same model but with that value edited). Will return null
   /// if the model with the [pipeId] is not found.
   ModelPipeDto? deepEdit<P extends Pipe, V>({
-    required String modelId,
+    required String payloadId,
     required String pipeId,
     required PipeDTO<P, V> Function(PipeDTO<P, V> oldValue) mapFunc,
   }) {
@@ -51,17 +90,14 @@ class ModelPipeDto extends Equatable
     if (this.pipe.pipeId == pipeId) {
       return (mapFunc(this as PipeDTO<P, V>) as ModelPipeDto);
     }
-
     for (final payload in payloadValue) {
-      if (payload.uuid != modelId) continue;
-
-      if (P is TextPipe && V is String) {
+      if (P == TextPipe && V == String) {
         for (final textDTO in payload.texts) {
           if (textDTO.pipe.pipeId == pipeId) {
             return copyWith(
               payloadValue: [
                 for (final item in payloadValue)
-                  if (item.uuid == modelId)
+                  if (item.uuid == payloadId)
                     payload.copyWith(
                       texts: [
                         for (final text in payload.texts)
@@ -79,13 +115,13 @@ class ModelPipeDto extends Equatable
         }
       }
 
-      if (P is BooleanPipe && V is bool) {
+      if (P == BooleanPipe && V == bool) {
         for (final booleanDTO in payload.booleans) {
           if (booleanDTO.pipe.pipeId == pipeId) {
             return copyWith(
               payloadValue: [
                 for (final item in payloadValue)
-                  if (item.uuid == modelId)
+                  if (item.uuid == payloadId)
                     payload.copyWith(
                       booleans: [
                         for (final boolean in payload.booleans)
@@ -108,7 +144,7 @@ class ModelPipeDto extends Equatable
           return copyWith(
             payloadValue: [
               for (final item in payloadValue)
-                if (item.uuid == modelId)
+                if (item.uuid == payloadId)
                   payload.copyWith(
                     subModels: [
                       for (final model in payload.subModels)
@@ -128,7 +164,7 @@ class ModelPipeDto extends Equatable
       // Now, let's recursively search in the submodels
       for (final modelDTO in payload.subModels) {
         final newModel = modelDTO.deepEdit(
-          modelId: modelId,
+          payloadId: payloadId,
           pipeId: pipeId,
           mapFunc: mapFunc,
         );
@@ -137,11 +173,14 @@ class ModelPipeDto extends Equatable
           return copyWith(
             payloadValue: [
               for (final item in payloadValue)
-                if (item.uuid == modelId)
+                if (item.uuid == payload.uuid)
                   payload.copyWith(
                     subModels: [
                       for (final model in payload.subModels)
-                        if (model.pipe.pipeId == pipeId) newModel else model,
+                        if (model.pipe.pipeId == newModel.pipe.pipeId)
+                          newModel
+                        else
+                          model,
                     ],
                   )
                 else
@@ -150,8 +189,6 @@ class ModelPipeDto extends Equatable
           );
         }
       }
-
-      return null;
     }
 
     return null;
