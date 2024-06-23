@@ -40,7 +40,6 @@ class ModelPipeForm extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const CustomHeader(headerTitle: 'Model variables payload'),
-                const SizedBox(height: 32),
                 ...pipes.map(
                   (ModelPipeDto pipeDTO) {
                     final StructureDTONode treeNode = StructureDTONode.root(
@@ -122,11 +121,16 @@ Iterable<Node> _getNodesFromStructure(
 ) {
   final List<Node> nodes = [];
 
+  final List<ModelPipeDTOPayload> payloads =
+      structure.referenceModelDTO.payloadValue;
+
   int index = 0;
-  for (final value in structure.referenceModelDTO.payloadValue) {
+
+  for (final ModelPipeDTOPayload value in payloads) {
     index++;
 
     final modelNode = ModelDTONode(
+      key: value.uuid,
       data: TreeNodeGeneratePipeDtoPipeModel(
         payloadUUID: value.uuid,
         pipeDTO: structure.referenceModelDTO,
@@ -147,8 +151,9 @@ Iterable<Node> _getNodesFromModel(
 ) {
   final List<Node> nodes = [];
 
-  for (final text in modelDTO.payload.texts) {
+  for (final TextPipeDto text in modelDTO.payload.texts) {
     nodes.add(TextDTONode(
+      key: text.uuid,
       data: TreeNodeGeneratePipeDtoPipeText(
         pipeDTO: text,
         payloadUUID: modelDTO.payload.uuid,
@@ -156,8 +161,9 @@ Iterable<Node> _getNodesFromModel(
     ));
   }
 
-  for (final boolean in modelDTO.payload.booleans) {
+  for (final BooleanPipeDto boolean in modelDTO.payload.booleans) {
     nodes.add(BooleanDTONode(
+      key: boolean.uuid,
       data: TreeNodeGeneratePipeDtoPipeBoolean(
         pipeDTO: boolean,
         payloadUUID: modelDTO.payload.uuid,
@@ -165,8 +171,9 @@ Iterable<Node> _getNodesFromModel(
     ));
   }
 
-  for (final model in modelDTO.payload.subModels) {
+  for (final ModelPipeDto model in modelDTO.payload.subModels) {
     final structureNode = StructureDTONode(
+      key: model.uuid,
       data: TreeNodeGeneratePipeDtoStructureNode(
         referenceModelDTO: model,
         payloadUUID: modelDTO.payload.uuid,

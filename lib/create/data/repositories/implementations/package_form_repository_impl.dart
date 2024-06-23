@@ -18,12 +18,13 @@ class PackageFormRepositoryImpl implements IPackageFormRepository {
   Future<TemplateUploadState> createPackage({
     required PackageInfo packageInfo,
     required ExpectedPayload expectedPayload,
-  }) {
+  }) async {
+    final payload = expectedPayload.toJson();
     final randomValue = _uuid.v4();
     final packageDoc = _firestore.doc('packages/$randomValue');
-    packageDoc.set({
+    await packageDoc.set({
       'info': packageInfo.toJson(),
-      'template': expectedPayload.toJson(),
+      'template': payload,
     });
 
     return Future.value(TemplateUploadState.success());
@@ -32,10 +33,11 @@ class PackageFormRepositoryImpl implements IPackageFormRepository {
   @override
   Future<TemplateUploadState> updatePackage({
     required Template template,
-  }) {
-    _firestore.doc('packages/${template.id}').update({
+  }) async {
+    final payload = template.payload.toJson();
+    await _firestore.doc('packages/${template.id}').update({
       'packageInfo': template.info.toJson(),
-      'expectedPayload': template.payload.toJson(),
+      'expectedPayload': payload,
     });
     return Future.value(TemplateUploadState.success());
   }

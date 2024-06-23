@@ -59,14 +59,6 @@ class _MustacheMaterialAppState extends State<MustacheMaterialApp> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<ThemeCubit>(
-          create: (context) => ThemeCubit(),
-        ),
-        BlocProvider<SessionCubit>.value(value: sessionCubit),
-        BlocProvider<LoadingCubit>(create: (context) => LoadingCubit()),
-        BlocProvider<NavigationPossibilitiesCubit>(
-          create: (context) => NavigationPossibilitiesCubit(),
-        ),
         RepositoryProvider<FirebaseAuth>(
           create: (context) => FirebaseAuth.instance,
         ),
@@ -75,6 +67,14 @@ class _MustacheMaterialAppState extends State<MustacheMaterialApp> {
         ),
         RepositoryProvider<FirebaseStorage>(
           create: (context) => FirebaseStorage.instance,
+        ),
+        BlocProvider<ThemeCubit>(
+          create: (context) => ThemeCubit(),
+        ),
+        BlocProvider<SessionCubit>.value(value: sessionCubit),
+        BlocProvider<LoadingCubit>(create: (context) => LoadingCubit()),
+        BlocProvider<NavigationPossibilitiesCubit>(
+          create: (context) => NavigationPossibilitiesCubit(),
         ),
       ],
       child: BlocBuilder<ThemeCubit, ThemeState>(

@@ -20,7 +20,7 @@ class ModelPipeDto extends Equatable
       }
 
       for (final modelDTO in item.subModels) {
-        itemResponse[modelDTO.pipe.mustacheName] = modelDTO.payloadValue;
+        itemResponse[modelDTO.pipe.mustacheName] = modelDTO.mapValue;
       }
 
       response.add(itemResponse);
@@ -32,7 +32,11 @@ class ModelPipeDto extends Equatable
   const ModelPipeDto({
     required this.pipe,
     required this.payloadValue,
+    required this.uuid,
   });
+
+  @override
+  final String uuid;
 
   @override
   final List<ModelPipeDTOPayload> payloadValue;
@@ -205,28 +209,11 @@ class ModelPipeDto extends Equatable
     required List<ModelPipeDTOPayload> payloadValue,
   }) {
     return ModelPipeDto(
+      uuid: uuid,
       pipe: pipe,
       payloadValue: payloadValue,
     );
   }
-
-  // Map<String, dynamic> toMap() {
-  //   return <String, dynamic>{
-  //     'pipe': pipe.toMap(),
-  //     'items': items.map((ModelPipeDTOPayload x) => x.toMap()).toList(),
-  //   };
-  // }
-
-  // factory ModelPipeDto.fromMap(Map<String, dynamic> map) {
-  //   return ModelPipeDto(
-  //     pipe: ModelPipe.fromMap(map['pipe'] as Map<String, dynamic>),
-  //     items: List<ModelPipeDTOPayload>.from(
-  //       (map['items'] as List<int>).map<ModelPipeDTOPayload>(
-  //         (x) => ModelPipeDTOPayload.fromMap(x as Map<String, dynamic>),
-  //       ),
-  //     ),
-  //   );
-  // }
 }
 
 class ModelPipeDTOPayload {
@@ -234,7 +221,7 @@ class ModelPipeDTOPayload {
   final List<ModelPipeDto> subModels;
   final List<TextPipeDto> texts;
   final List<BooleanPipeDto> booleans;
-  const ModelPipeDTOPayload({
+  const ModelPipeDTOPayload._({
     required this.uuid,
     required this.subModels,
     required this.texts,
@@ -242,21 +229,25 @@ class ModelPipeDTOPayload {
   });
 
   factory ModelPipeDTOPayload.fromModelPipe(ModelPipe modelPipe) {
-    return ModelPipeDTOPayload(uuid: const Uuid().v4(), texts: [
+    const uuid = Uuid();
+    return ModelPipeDTOPayload._(uuid: const Uuid().v4(), texts: [
       for (final item in modelPipe.textPipes)
         TextPipeDto(
+          uuid: uuid.v4(),
           pipe: item,
           payloadValue: '',
         ),
     ], booleans: [
       for (final item in modelPipe.booleanPipes)
         BooleanPipeDto(
+          uuid: uuid.v4(),
           pipe: item,
           payloadValue: false,
         ),
     ], subModels: [
       for (final item in modelPipe.modelPipes)
         ModelPipeDto(
+          uuid: uuid.v4(),
           pipe: item,
           payloadValue: const [],
         ),
@@ -268,7 +259,7 @@ class ModelPipeDTOPayload {
     List<TextPipeDto>? texts,
     List<BooleanPipeDto>? booleans,
   }) {
-    return ModelPipeDTOPayload(
+    return ModelPipeDTOPayload._(
       uuid: uuid,
       subModels: subModels ?? this.subModels,
       texts: texts ?? this.texts,

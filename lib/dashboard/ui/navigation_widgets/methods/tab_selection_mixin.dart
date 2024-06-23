@@ -7,9 +7,10 @@ import 'package:mustachehub/dashboard/presenter/cubits/navigation_possibilities_
 
 mixin TabSelectionMixin {
   void onTabSelected(
-      int index,
-      List<EDashboardNavigationPossibilities> possibilities,
-      BuildContext context) {
+    int index,
+    List<EDashboardNavigationPossibilities> possibilities,
+    BuildContext context,
+  ) {
     if (context.isSessionStateDetermined == false) return;
 
     final EDashboardNavigationPossibilities choosedPossibility =

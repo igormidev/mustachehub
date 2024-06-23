@@ -205,6 +205,10 @@ class VariablesInfoHighlightTextEditingController
 
   Map<String, TokenIdentifier>? get flatMap => _flatMap;
 
+  void update() {
+    notifyListeners();
+  }
+
   void setCacheCS(ColorScheme colorScheme) {
     _cacheCS = colorScheme;
     notifyListeners();
@@ -227,7 +231,7 @@ class VariablesInfoHighlightTextEditingController
     if (flatMap != null) {
       final response = _textAnalyserBase.getMatchClusters(
         typeText,
-        cursorIndexAtText,
+        cursorIndexAtText == -1 ? 0 : cursorIndexAtText,
         flatMap!,
       );
 

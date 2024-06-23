@@ -13,6 +13,7 @@ List<ModelPipeDto> _calculateModelsPipe(
 
     final ModelPipeDto pipeDto = ModelPipeDto(
       pipe: pipe,
+      uuid: cacheValue?.uuid ?? const Uuid().v4(),
       payloadValue: cacheValue?.payloadValue ?? [],
     );
 
@@ -35,6 +36,7 @@ List<TextPipeDto> _calculateTextsPipe(
     final pipeDto = TextPipeDto(
       pipe: pipe,
       payloadValue: cacheValue?.payloadValue,
+      uuid: cacheValue?.uuid ?? const Uuid().v4(),
     );
     response.add(pipeDto);
   }
@@ -53,6 +55,7 @@ List<BooleanPipeDto> _calculateBooleansPipe(
       (dto) => dto.pipe.pipeId == pipe.pipeId,
     );
     final pipeDto = BooleanPipeDto(
+      uuid: cacheValue?.uuid ?? const Uuid().v4(),
       pipe: pipe,
       payloadValue: cacheValue?.payloadValue ?? false,
     );

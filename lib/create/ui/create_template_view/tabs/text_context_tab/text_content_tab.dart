@@ -104,6 +104,12 @@ class _TextContentTabState extends State<TextContentTab> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       controller.setCacheCS(Theme.of(context).colorScheme);
     });
+    Future.delayed(
+      const Duration(seconds: 1),
+      () {
+        controller.update();
+      },
+    );
   }
 
   @override

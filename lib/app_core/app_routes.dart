@@ -185,7 +185,22 @@ final router = GoRouter(
                 RepositoryProvider<ITemplateRepository>(
                   create: (context) => TemplateRepositoryImpl(),
                 ),
-
+                // RepositoryProvider<IPackageFormRepository>(
+                //   create: (context) => PackageFormRepositoryImpl(),
+                // ),
+                // RepositoryProvider<ITemplateRepository>(
+                //   create: (context) => TemplateRepositoryImpl(),
+                // ),
+                // BlocProvider<TemplateUploadCubit>(
+                //   create: (context) => TemplateUploadCubit(
+                //     repository: context.read<IPackageFormRepository>(),
+                //   ),
+                // ),
+                // BlocProvider<CurrentTemplateTypeCubit>(
+                //   create: (context) => CurrentTemplateTypeCubit(
+                //     templateRepository: context.read<ITemplateRepository>(),
+                //   ),
+                // ),
                 BlocProvider(create: (context) => ContentStringCubit()),
                 BlocProvider(
                   create: (context) => CurrentTemplateTypeCubit(

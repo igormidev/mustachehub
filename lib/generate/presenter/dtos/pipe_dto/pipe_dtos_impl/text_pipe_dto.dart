@@ -3,11 +3,14 @@ part of '../pipe_dto.dart';
 
 class TextPipeDto extends Equatable implements PipeDTO<TextPipe, String> {
   @override
+  final String uuid;
+  @override
   final TextPipe pipe;
   @override
   final String? payloadValue;
 
   const TextPipeDto({
+    required this.uuid,
     required this.pipe,
     required this.payloadValue,
   });
@@ -17,6 +20,7 @@ class TextPipeDto extends Equatable implements PipeDTO<TextPipe, String> {
     required String? payloadValue,
   }) {
     return TextPipeDto(
+      uuid: uuid,
       pipe: pipe,
       payloadValue: payloadValue,
     );
@@ -30,6 +34,7 @@ class TextPipeDto extends Equatable implements PipeDTO<TextPipe, String> {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
+      'uuid': uuid,
       'pipe': pipe.toMap(),
       'payloadValue': payloadValue,
     };
@@ -37,6 +42,7 @@ class TextPipeDto extends Equatable implements PipeDTO<TextPipe, String> {
 
   factory TextPipeDto.fromMap(Map<String, dynamic> map) {
     return TextPipeDto(
+      uuid: map['uuid'] as String,
       pipe: TextPipe.fromMap(map['pipe'] as Map<String, dynamic>),
       payloadValue:
           map['payloadValue'] != null ? map['payloadValue'] as String : null,

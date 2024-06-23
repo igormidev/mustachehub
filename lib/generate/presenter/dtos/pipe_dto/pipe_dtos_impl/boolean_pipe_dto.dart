@@ -4,11 +4,14 @@ part of '../pipe_dto.dart';
 
 class BooleanPipeDto extends Equatable implements PipeDTO<BooleanPipe, bool> {
   @override
+  final String uuid;
+  @override
   final BooleanPipe pipe;
   @override
   final bool payloadValue;
 
   const BooleanPipeDto({
+    required this.uuid,
     required this.pipe,
     required this.payloadValue,
   });
@@ -18,6 +21,7 @@ class BooleanPipeDto extends Equatable implements PipeDTO<BooleanPipe, bool> {
     required bool payloadValue,
   }) {
     return BooleanPipeDto(
+      uuid: uuid,
       pipe: pipe,
       payloadValue: payloadValue,
     );
@@ -31,6 +35,7 @@ class BooleanPipeDto extends Equatable implements PipeDTO<BooleanPipe, bool> {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
+      'uuid': uuid,
       'pipe': pipe.toMap(),
       'payloadValue': payloadValue,
     };
@@ -38,6 +43,7 @@ class BooleanPipeDto extends Equatable implements PipeDTO<BooleanPipe, bool> {
 
   factory BooleanPipeDto.fromMap(Map<String, dynamic> map) {
     return BooleanPipeDto(
+      uuid: map['uuid'] as String,
       pipe: BooleanPipe.fromMap(map['pipe'] as Map<String, dynamic>),
       payloadValue: map['payloadValue'] as bool,
     );

@@ -1,6 +1,7 @@
 import 'package:mustache_hub_core/mustache_hub_core.dart';
 import 'package:mustachehub/generate/presenter/dtos/pipe_dto/pipe_dto.dart';
 import 'package:enchanted_collection/enchanted_collection.dart';
+import 'package:uuid/uuid.dart';
 
 part 'get_functions.h.dart';
 part 'calculate_functions.h.dart';

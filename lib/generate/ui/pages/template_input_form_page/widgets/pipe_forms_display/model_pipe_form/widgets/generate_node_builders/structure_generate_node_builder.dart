@@ -65,7 +65,7 @@ class StructureGenerateNodeBuilder extends StatelessWidget {
                         ...?pipe.payloadValue,
                         ModelPipeDTOPayload.fromModelPipe(
                           pipe.pipe,
-                        )
+                        ),
                       ],
                     );
                   },

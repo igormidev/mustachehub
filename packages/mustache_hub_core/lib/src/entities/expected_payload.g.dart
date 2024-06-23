@@ -23,7 +23,7 @@ _$ExpectedPayloadImpl _$$ExpectedPayloadImplFromJson(
 Map<String, dynamic> _$$ExpectedPayloadImplToJson(
         _$ExpectedPayloadImpl instance) =>
     <String, dynamic>{
-      'textPipes': instance.textPipes,
-      'booleanPipes': instance.booleanPipes,
-      'modelPipes': instance.modelPipes,
+      'textPipes': instance.textPipes.map((e) => e.toJson()).toList(),
+      'booleanPipes': instance.booleanPipes.map((e) => e.toJson()).toList(),
+      'modelPipes': instance.modelPipes.map((e) => e.toJson()).toList(),
     };

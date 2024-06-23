@@ -14,7 +14,7 @@ class TitleAndDescriptionSnackbar extends SnackBar {
               Text(
                 text,
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      color: Theme.of(context).colorScheme.error,
+                      color: Theme.of(context).colorScheme.primary,
                       fontWeight: FontWeight.bold,
                     ),
               ),
@@ -22,14 +22,14 @@ class TitleAndDescriptionSnackbar extends SnackBar {
               Text(
                 description,
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: Theme.of(context).colorScheme.onErrorContainer,
+                      color: Theme.of(context).colorScheme.onPrimaryContainer,
                     ),
               ),
             ],
           ),
           action: SnackBarAction(
             label: 'Ok',
-            textColor: Theme.of(context).colorScheme.onError,
+            textColor: Theme.of(context).colorScheme.primaryContainer,
             backgroundColor: Theme.of(context).colorScheme.error.withAlpha(100),
             onPressed: () {
               ScaffoldMessenger.of(context).hideCurrentSnackBar();

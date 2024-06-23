@@ -145,8 +145,9 @@ class AccountPage extends StatelessWidget {
                       ListTile(
                         title: const Text('Validate email'),
                         subtitle: RichText(
-                          text: const TextSpan(
-                            children: [
+                          text: TextSpan(
+                            style: Theme.of(context).textTheme.bodyMedium,
+                            children: const [
                               TextSpan(
                                 text: 'Your email is not validated. This is a ',
                               ),

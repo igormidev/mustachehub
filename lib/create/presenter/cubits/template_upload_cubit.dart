@@ -15,6 +15,7 @@ class TemplateUploadCubit extends Cubit<TemplateUploadState>
   Future<void> updatePackage({
     required Template template,
   }) async {
+    emit(TemplateUploadState.loading());
     final response = await _repository.updatePackage(
       template: template,
     );
@@ -26,6 +27,7 @@ class TemplateUploadCubit extends Cubit<TemplateUploadState>
     required PackageInfo packageInfo,
     required ExpectedPayload expectedPayload,
   }) async {
+    emit(TemplateUploadState.loading());
     final response = await _repository.createPackage(
       packageInfo: packageInfo,
       expectedPayload: expectedPayload,

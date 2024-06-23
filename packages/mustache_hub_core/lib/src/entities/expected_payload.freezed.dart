@@ -123,7 +123,8 @@ class __$$ExpectedPayloadImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true)
 class _$ExpectedPayloadImpl implements _ExpectedPayload {
   _$ExpectedPayloadImpl(
       {required final List<TextPipe> textPipes,

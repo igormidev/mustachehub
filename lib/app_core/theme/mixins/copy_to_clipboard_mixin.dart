@@ -13,7 +13,7 @@ mixin CopyToClipboardMixin {
     }
 
     final text =
-        data == null ? "Copied to clipboard!" : "No output text to be copied";
+        data == null ? "No output text to be copied" : "Copied to clipboard!";
 
     if (kIsWeb) {
       final backgroundColor = data == null
@@ -37,18 +37,16 @@ mixin CopyToClipboardMixin {
     } else {
       ScaffoldMessenger.of(context)
         ..hideCurrentSnackBar()
-        ..showSnackBar(
-          data == null
-              ? SnackBar(
-                  content: Text(text),
-                  duration: const Duration(seconds: 1),
-                )
-              : ErrorSnackBar(
-                  context: context,
-                  text: text,
-                  duration: const Duration(seconds: 2),
-                ),
-        );
+        ..showSnackBar(data == null
+            ? ErrorSnackBar(
+                context: context,
+                text: text,
+                duration: const Duration(seconds: 2),
+              )
+            : SnackBar(
+                content: Text(text),
+                duration: const Duration(seconds: 1),
+              ));
     }
   }
 }
