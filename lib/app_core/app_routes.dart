@@ -17,7 +17,6 @@ import 'package:mustachehub/account/presenter/cubit/image_selector_cubit.dart';
 import 'package:mustachehub/account/presenter/cubit/log_out_cubit.dart';
 import 'package:mustachehub/account/ui/pages/account_page/account_page.dart';
 import 'package:mustachehub/account/ui/pages/account_page/pages/account_image_select_page/account_image_select_page.dart';
-import 'package:mustachehub/app_core/mustache_material_app.dart';
 import 'package:mustachehub/auth/data/repositories/implementations/log_in_repository_impl.dart';
 import 'package:mustachehub/auth/data/repositories/implementations/pass_recovery_repository_impl.dart';
 import 'package:mustachehub/auth/data/repositories/implementations/sign_in_repository_impl.dart';
@@ -31,12 +30,35 @@ import 'package:mustachehub/auth/ui/views/auth_desktop_view/auth_desktop_view.da
 import 'package:mustachehub/auth/ui/views/login_view/login_view.dart';
 import 'package:mustachehub/auth/ui/views/pass_recovery_view/pass_recovery_view.dart';
 import 'package:mustachehub/auth/ui/views/signin_view/signin_view.dart';
+import 'package:mustachehub/create/data/adapters/token_identifier_flatmap_adapter.dart';
+import 'package:mustachehub/create/data/adapters/token_identifier_text_display_adapter.dart';
+import 'package:mustachehub/create/data/repositories/implementations/package_form_repository_impl.dart';
+import 'package:mustachehub/create/data/repositories/implementations/template_repository_impl.dart';
+import 'package:mustachehub/create/data/repositories/interfaces/i_package_form_repository.dart';
+import 'package:mustachehub/create/data/repositories/interfaces/i_template_repository.dart';
+import 'package:mustachehub/create/presenter/cubits/content_string_cubit.dart';
+import 'package:mustachehub/create/presenter/cubits/current_template_type_cubit.dart';
+import 'package:mustachehub/create/presenter/cubits/edit_model_info_display_cubit.dart';
+import 'package:mustachehub/create/presenter/cubits/fields_text_size_cubit.dart';
+import 'package:mustachehub/create/presenter/cubits/package_form_cubit.dart';
+import 'package:mustachehub/create/presenter/cubits/suggestion_cubit.dart';
+import 'package:mustachehub/create/presenter/cubits/tab_controll_cubit.dart';
+import 'package:mustachehub/create/presenter/cubits/template_upload_cubit.dart';
+import 'package:mustachehub/create/presenter/cubits/variables_cubit.dart';
+import 'package:mustachehub/create/ui/create_template_view/create_template_view.dart';
 import 'package:mustachehub/dashboard/data/repositories/implementations/user_fetch_repository_impl.dart';
 import 'package:mustachehub/dashboard/data/repositories/interfaces/i_user_fetch_repository.dart';
 import 'package:mustachehub/dashboard/presenter/cubits/user_fetch_cubit.dart';
+import 'package:mustachehub/dashboard/ui/navigation_widgets/dashboard_drawer/dashboard_drawer.dart';
 import 'package:mustachehub/dashboard/ui/pages/not_found_404_page/not_found_404_page.dart';
 import 'package:mustachehub/dashboard/ui/view/dashboard_view/dashboard_view.dart';
 import 'package:mustachehub/dashboard/ui/view/spash_view/splash_view.dart';
+import 'package:mustachehub/generate/data/adapters/dto_adapter.dart';
+import 'package:mustachehub/generate/presenter/cubits/content_cubit.dart';
+import 'package:mustachehub/generate/presenter/cubits/form_stats_cubit.dart';
+import 'package:mustachehub/generate/presenter/cubits/payload_cubit.dart';
+import 'package:mustachehub/settings/ui/views/settings_view/settings_view.dart';
+import 'package:text_analyser/text_analyser.dart';
 
 class NavigatorService {
   static NavigatorService? _instance;
@@ -113,8 +135,15 @@ final router = GoRouter(
           path: '/collection',
           parentNavigatorKey: NavigatorService.i.dashboardNavigatorKey,
           builder: (context, state) {
-            return Container(
-              color: Colors.green[300],
+            return Scaffold(
+              appBar: AppBar(
+                title: const Text('Collection'),
+                actions: const [Icon(Icons.create_new_folder_rounded)],
+              ),
+              drawer: context.drawerOrNull,
+              body: Container(
+                color: Colors.green[300],
+              ),
             );
           },
         ),
@@ -122,13 +151,13 @@ final router = GoRouter(
           path: '/generateText',
           parentNavigatorKey: NavigatorService.i.dashboardNavigatorKey,
           builder: (context, state) {
-            return Container(
-              color: Colors.blueGrey,
-              child: const Center(
-                child: Text(
-                  'OPA',
-                  style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
-                ),
+            return Scaffold(
+              appBar: AppBar(
+                title: const Text('Generate text'),
+              ),
+              drawer: context.drawerOrNull,
+              body: Container(
+                color: Colors.brown[400],
               ),
             );
           },
@@ -137,8 +166,90 @@ final router = GoRouter(
           path: '/createMustache',
           parentNavigatorKey: NavigatorService.i.dashboardNavigatorKey,
           builder: (context, state) {
-            return Container(
-              color: Colors.brown[400],
+            final packageId = state.pathParameters['packageId'];
+            return MultiBlocProvider(
+              providers: [
+                // Repositories
+                RepositoryProvider<IPackageFormRepository>(
+                  create: (context) => PackageFormRepositoryImpl(),
+                ),
+                RepositoryProvider<TokenIdentifierFlatMapAdapter>(
+                  create: (context) => const TokenIdentifierFlatMapAdapter(),
+                ),
+                RepositoryProvider<TokenIdentifierTextDisplayAdapter>(
+                  create: (context) => TokenIdentifierTextDisplayAdapter(),
+                ),
+                RepositoryProvider<TextAnalyserBase>(
+                  create: (context) => const TextAnalyserBase(),
+                ),
+                RepositoryProvider<ITemplateRepository>(
+                  create: (context) => TemplateRepositoryImpl(),
+                ),
+                // RepositoryProvider<IPackageFormRepository>(
+                //   create: (context) => PackageFormRepositoryImpl(),
+                // ),
+                // RepositoryProvider<ITemplateRepository>(
+                //   create: (context) => TemplateRepositoryImpl(),
+                // ),
+                // BlocProvider<TemplateUploadCubit>(
+                //   create: (context) => TemplateUploadCubit(
+                //     repository: context.read<IPackageFormRepository>(),
+                //   ),
+                // ),
+                // BlocProvider<CurrentTemplateTypeCubit>(
+                //   create: (context) => CurrentTemplateTypeCubit(
+                //     templateRepository: context.read<ITemplateRepository>(),
+                //   ),
+                // ),
+                BlocProvider(create: (context) => ContentStringCubit()),
+                BlocProvider(
+                  create: (context) => CurrentTemplateTypeCubit(
+                    templateRepository: context.read<ITemplateRepository>(),
+                  ),
+                ),
+                BlocProvider(
+                  create: (context) => TemplateUploadCubit(
+                    repository: context.read<IPackageFormRepository>(),
+                  ),
+                ),
+                BlocProvider(create: (context) => FieldsTextSizeCubit()),
+                BlocProvider(create: (context) => EditModelInfoDisplayCubit()),
+                BlocProvider(create: (context) => PackageFormCubit()),
+                BlocProvider(
+                  create: (context) => SuggestionCubit(
+                    textAnalyser: context.read<TextAnalyserBase>(),
+                  ),
+                ),
+                BlocProvider(create: (context) => TabControllCubit()),
+                BlocProvider<VariablesCubit>(
+                  create: (context) => VariablesCubit(
+                    tokenIdentifierFlatMapAdapter:
+                        context.read<TokenIdentifierFlatMapAdapter>(),
+                  ),
+                ),
+
+                /// Generator and test
+                RepositoryProvider<DtoAdapter>(
+                  create: (context) => DtoAdapter(),
+                ),
+                BlocProvider<ContentCubit>(
+                  create: (context) => ContentCubit(
+                    dtoAdapter: context.read<DtoAdapter>(),
+                  ),
+                ),
+                BlocProvider<FormStatsCubit>(
+                  create: (context) => FormStatsCubit(),
+                ),
+                BlocProvider<PayloadCubit>(
+                  create: (context) => PayloadCubit(
+                    dtoAdapter: context.read<DtoAdapter>(),
+                    outputCubit: context.read<ContentCubit>(),
+                  ),
+                ),
+              ],
+              child: CreateTemplateView(
+                packageId: packageId,
+              ),
             );
           },
         ),
@@ -228,8 +339,14 @@ final router = GoRouter(
           path: '/becamePremium',
           parentNavigatorKey: NavigatorService.i.dashboardNavigatorKey,
           builder: (context, state) {
-            return Container(
-              color: Colors.amber[300],
+            return Scaffold(
+              appBar: AppBar(
+                title: const Text('Became premium'),
+              ),
+              drawer: context.drawerOrNull,
+              body: Container(
+                color: Colors.amber[300],
+              ),
             );
           },
         ),
@@ -237,9 +354,7 @@ final router = GoRouter(
           path: '/settings',
           parentNavigatorKey: NavigatorService.i.dashboardNavigatorKey,
           builder: (context, state) {
-            return Container(
-              color: Colors.pink[300],
-            );
+            return const SettingsView();
           },
         ),
         ShellRoute(

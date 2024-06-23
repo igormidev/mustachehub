@@ -4,19 +4,31 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:mustachehub/app_core/theme/components/error_snack_bar.dart';
 
 mixin CopyToClipboardMixin {
-  void copyText(String data, BuildContext context) {
-    unawaited(Clipboard.setData(ClipboardData(text: data)));
+  void copyText(String? data, BuildContext context) {
+    if (data != null) {
+      unawaited(Clipboard.setData(ClipboardData(text: data)));
+    }
+
+    final text =
+        data == null ? "No output text to be copied" : "Copied to clipboard!";
 
     if (kIsWeb) {
-      final backgroundColor = Theme.of(context).colorScheme.primaryContainer;
+      final backgroundColor = data == null
+          ? Theme.of(context).colorScheme.primaryContainer
+          : Theme.of(context).colorScheme.errorContainer;
+
       final String hex = ColorToHex(backgroundColor).toHexNumber();
+
       Fluttertoast.showToast(
-        msg: "Copied to clipboard!",
+        msg: text,
         gravity: ToastGravity.TOP,
         backgroundColor: backgroundColor,
-        textColor: Theme.of(context).colorScheme.onPrimaryContainer,
+        textColor: data == null
+            ? Theme.of(context).colorScheme.onPrimaryContainer
+            : Theme.of(context).colorScheme.onErrorContainer,
         fontSize: 16,
         webPosition: "left",
         timeInSecForIosWeb: 2,
@@ -25,12 +37,16 @@ mixin CopyToClipboardMixin {
     } else {
       ScaffoldMessenger.of(context)
         ..hideCurrentSnackBar()
-        ..showSnackBar(
-          const SnackBar(
-            content: Text('Copied to clipboard!'),
-            duration: Duration(seconds: 1),
-          ),
-        );
+        ..showSnackBar(data == null
+            ? ErrorSnackBar(
+                context: context,
+                text: text,
+                duration: const Duration(seconds: 2),
+              )
+            : SnackBar(
+                content: Text(text),
+                duration: const Duration(seconds: 1),
+              ));
     }
   }
 }

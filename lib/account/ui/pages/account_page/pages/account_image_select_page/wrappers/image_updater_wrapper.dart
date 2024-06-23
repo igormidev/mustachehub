@@ -38,7 +38,6 @@ class ImageUpdaterWrapper extends StatelessWidget {
           imageSelectorUploadSuccess: (state) {
             final sessionCubit = context.read<SessionCubit>();
             final imageSelectorCubit = context.read<ImageSelectorCubit>();
-            print('newImage: ${state.uploadedUrl}');
             sessionCubit.updateUserPhoto(
               state.uploadedUrl,
             );

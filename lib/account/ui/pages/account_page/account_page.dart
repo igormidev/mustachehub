@@ -14,7 +14,6 @@ import 'package:mustachehub/account/ui/pages/account_page/widgets/user_info/user
 import 'package:mustachehub/account/ui/pages/account_page/wrappers/log_out_redirect_wrapper.dart';
 import 'package:mustachehub/account/ui/pages/account_page/account_wrappers_agregator.dart';
 import 'package:mustachehub/account/ui/widgets/user_display_circle_avatar.dart';
-import 'package:mustachehub/app_core/app_routes.dart';
 
 class AccountPage extends StatelessWidget {
   final AccountInfo accountInfo;
@@ -67,8 +66,9 @@ class AccountPage extends StatelessWidget {
                               alignment: Alignment.bottomRight,
                               child: CircleAvatar(
                                 radius: 20,
-                                backgroundColor:
-                                    Theme.of(context).colorScheme.secondary,
+                                backgroundColor: Theme.of(
+                                  context,
+                                ).colorScheme.secondary,
                                 child: IconButton(
                                   onPressed: () {
                                     context.push('/account/changeProfileImage');
@@ -145,8 +145,9 @@ class AccountPage extends StatelessWidget {
                       ListTile(
                         title: const Text('Validate email'),
                         subtitle: RichText(
-                          text: const TextSpan(
-                            children: [
+                          text: TextSpan(
+                            style: Theme.of(context).textTheme.bodyMedium,
+                            children: const [
                               TextSpan(
                                 text: 'Your email is not validated. This is a ',
                               ),

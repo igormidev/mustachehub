@@ -1,0 +1,137 @@
+{
+    // Use o IntelliSense para saber mais sobre os atributos possíveis.
+    // Focalizar para exibir as descrições dos atributos existentes.
+    // Para obter mais informações, acesse: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "mustachehub",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "mustachehub (profile mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "mustachehub (release mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "commom_states",
+            "cwd": "packages/commom_states",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "commom_states (profile mode)",
+            "cwd": "packages/commom_states",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "commom_states (release mode)",
+            "cwd": "packages/commom_states",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "media_query_core",
+            "cwd": "packages/media_query_core",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "media_query_core (profile mode)",
+            "cwd": "packages/media_query_core",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "media_query_core (release mode)",
+            "cwd": "packages/media_query_core",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "micro_navigation_core",
+            "cwd": "packages/micro_navigation_core",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "micro_navigation_core (profile mode)",
+            "cwd": "packages/micro_navigation_core",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "micro_navigation_core (release mode)",
+            "cwd": "packages/micro_navigation_core",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "mustache_firebase_references",
+            "cwd": "packages/mustache_firebase_references",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "mustache_firebase_references (profile mode)",
+            "cwd": "packages/mustache_firebase_references",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "mustache_firebase_references (release mode)",
+            "cwd": "packages/mustache_firebase_references",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "mustache_hub_core",
+            "cwd": "packages/mustache_hub_core",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "mustache_source_service",
+            "cwd": "packages/mustache_source_service",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "mustache_source_service (profile mode)",
+            "cwd": "packages/mustache_source_service",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "mustache_source_service (release mode)",
+            "cwd": "packages/mustache_source_service",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "text_analyser",
+            "cwd": "packages/text_analyser",
+            "request": "launch",
+            "type": "dart"
+        }
+    ]
+}

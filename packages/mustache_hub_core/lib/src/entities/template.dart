@@ -1,21 +1,17 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:equatable/equatable.dart';
-import 'package:mustache_hub_core/src/entities/expected_payload.dart';
-import 'package:mustache_hub_core/src/entities/package_info.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:mustache_hub_core/mustache_hub_core.dart';
 
-class Template extends Equatable {
-  final String id;
-  final PackageInfo info;
-  final ExpectedPayload payload;
-  const Template({
-    required this.id,
-    required this.info,
-    required this.payload,
-  });
+part 'template.freezed.dart';
+part 'template.g.dart';
 
-  @override
-  bool get stringify => true;
+@freezed
+abstract class Template with _$Template {
+  factory Template({
+    required String id,
+    required PackageInfo info,
+    required ExpectedPayload payload,
+  }) = _Template;
 
-  @override
-  List<Object> get props => [id, info, payload];
+  factory Template.fromJson(Map<String, dynamic> json) =>
+      _$TemplateFromJson(json);
 }

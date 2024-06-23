@@ -56,7 +56,6 @@ class VisibilityWidthBased extends StatelessWidget {
 
             final isWithinRange =
                 isMinSizeSmallerThenMaxWidth && isMaxSizeBiggerThenMaxWidth;
-
             return Visibility(
               visible: isWithinRange,
               replacement: replacement ?? childrenNil,

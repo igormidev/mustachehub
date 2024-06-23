@@ -2,19 +2,24 @@
 
 part of '../pipe.dart';
 
-class ModelPipe extends Equatable implements Pipe {
+class ModelPipe implements Pipe {
   @override
-  final String name;
+  String name;
   @override
   final String description;
   @override
-  final String mustacheName;
+  String mustacheName;
   @override
   final String pipeId;
 
-  final List<TextPipe> textPipes;
-  final List<BooleanPipe> booleanPipes;
-  final List<ModelPipe> modelPipes;
+  List<TextPipe> textPipes;
+  List<BooleanPipe> booleanPipes;
+  List<ModelPipe> modelPipes;
+
+  /// Returns true if the pipe dosen't have any pipe inside it
+  bool isEmpty() {
+    return textPipes.isEmpty && booleanPipes.isEmpty && modelPipes.isEmpty;
+  }
 
   ModelPipe({
     String? pipeId,
@@ -35,22 +40,6 @@ class ModelPipe extends Equatable implements Pipe {
         modelPipes = const [],
         pipeId = const Uuid().v1();
 
-  @override
-  bool get stringify => true;
-
-  @override
-  List<Object> get props {
-    return [
-      name,
-      description,
-      mustacheName,
-      pipeId,
-      textPipes,
-      booleanPipes,
-      modelPipes,
-    ];
-  }
-
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'name': name,
@@ -70,17 +59,17 @@ class ModelPipe extends Equatable implements Pipe {
       mustacheName: map['mustacheName'] as String,
       pipeId: map['pipeId'] as String,
       textPipes: List<TextPipe>.from(
-        (map['textPipes'] as List<int>).map<TextPipe>(
+        (map['textPipes'] as List<dynamic>).map<TextPipe>(
           (x) => TextPipe.fromMap(x as Map<String, dynamic>),
         ),
       ),
       booleanPipes: List<BooleanPipe>.from(
-        (map['booleanPipes'] as List<int>).map<BooleanPipe>(
+        (map['booleanPipes'] as List<dynamic>).map<BooleanPipe>(
           (x) => BooleanPipe.fromMap(x as Map<String, dynamic>),
         ),
       ),
       modelPipes: List<ModelPipe>.from(
-        (map['modelPipes'] as List<int>).map<ModelPipe>(
+        (map['modelPipes'] as List<dynamic>).map<ModelPipe>(
           (x) => ModelPipe.fromMap(x as Map<String, dynamic>),
         ),
       ),
@@ -91,4 +80,24 @@ class ModelPipe extends Equatable implements Pipe {
 
   factory ModelPipe.fromJson(String source) =>
       ModelPipe.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  ModelPipe copyWith({
+    String? name,
+    String? description,
+    String? mustacheName,
+    String? pipeId,
+    List<TextPipe>? textPipes,
+    List<BooleanPipe>? booleanPipes,
+    List<ModelPipe>? modelPipes,
+  }) {
+    return ModelPipe(
+      name: name ?? this.name,
+      description: description ?? this.description,
+      mustacheName: mustacheName ?? this.mustacheName,
+      pipeId: pipeId ?? this.pipeId,
+      textPipes: textPipes ?? this.textPipes,
+      booleanPipes: booleanPipes ?? this.booleanPipes,
+      modelPipes: modelPipes ?? this.modelPipes,
+    );
+  }
 }

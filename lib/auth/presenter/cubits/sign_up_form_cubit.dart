@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mustachehub/auth/presenter/cubits/login_form_cubit.dart';
+import 'package:mustachehub/app_core/mixins/global_loader_definer.dart';
 import 'package:mustachehub/auth/presenter/states/sign_up_form_state.dart';
 import 'package:mustachehub/auth/data/repositories/interfaces/i_sign_in_repository.dart';
 

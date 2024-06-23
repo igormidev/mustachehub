@@ -9,6 +9,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mustachehub/app_core/app_routes.dart';
 import 'package:mustachehub/dashboard/data/entities/e_navigation_possibilities.dart';
 import 'package:mustachehub/dashboard/presenter/cubits/navigation_possibilities_cubit.dart';
+import 'package:mustachehub/settings/interactor/cubit/theme_cubit.dart';
+import 'package:mustachehub/settings/interactor/state/theme_state.dart';
 
 class MustacheMaterialApp extends StatefulWidget {
   const MustacheMaterialApp({super.key});
@@ -57,12 +59,6 @@ class _MustacheMaterialAppState extends State<MustacheMaterialApp> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<SessionCubit>.value(value: sessionCubit),
-        // BlocProvider<SessionCubit>(create: (context) => SessionCubit()),
-        BlocProvider<LoadingCubit>(create: (context) => LoadingCubit()),
-        BlocProvider<NavigationPossibilitiesCubit>(
-          create: (context) => NavigationPossibilitiesCubit(),
-        ),
         RepositoryProvider<FirebaseAuth>(
           create: (context) => FirebaseAuth.instance,
         ),
@@ -72,75 +68,87 @@ class _MustacheMaterialAppState extends State<MustacheMaterialApp> {
         RepositoryProvider<FirebaseStorage>(
           create: (context) => FirebaseStorage.instance,
         ),
+        BlocProvider<ThemeCubit>(
+          create: (context) => ThemeCubit(),
+        ),
+        BlocProvider<SessionCubit>.value(value: sessionCubit),
+        BlocProvider<LoadingCubit>(create: (context) => LoadingCubit()),
+        BlocProvider<NavigationPossibilitiesCubit>(
+          create: (context) => NavigationPossibilitiesCubit(),
+        ),
       ],
-      child: Builder(builder: (context) {
-        final colorScheme = ColorScheme.fromSeed(seedColor: Colors.purple);
-        return BlocListener<LoadingCubit, LoadingState>(
-          listener: (context, state) {
-            state.map(
-              processing: (value) {
-                _isClicable.value = false;
-              },
-              done: (value) {
-                _isClicable.value = true;
-              },
-            );
-          },
-          child: ValueListenableBuilder<bool>(
-            valueListenable: _isClicable,
-            builder: (context, value, child) {
-              return IgnorePointer(
-                ignoring: value == false,
-                child: child,
+      child: BlocBuilder<ThemeCubit, ThemeState>(
+        builder: (context, themeState) {
+          final colorScheme = ColorScheme.fromSeed(
+            seedColor: themeState.color,
+            brightness: themeState.brightness,
+          );
+          return BlocListener<LoadingCubit, LoadingState>(
+            listener: (context, state) {
+              state.map(
+                processing: (value) {
+                  _isClicable.value = false;
+                },
+                done: (value) {
+                  _isClicable.value = true;
+                },
               );
             },
-            child: MaterialApp.router(
-              title: 'Mustache Hub',
-              key: NavigatorService.i.materialApp,
-              theme: ThemeData(
-                colorScheme: colorScheme,
-                snackBarTheme: SnackBarThemeData(
-                  backgroundColor: colorScheme.secondaryContainer,
-                  contentTextStyle: TextStyle(
-                    color: colorScheme.onSecondaryContainer,
+            child: ValueListenableBuilder<bool>(
+              valueListenable: _isClicable,
+              builder: (context, value, child) {
+                return IgnorePointer(
+                  ignoring: value == false,
+                  child: child,
+                );
+              },
+              child: MaterialApp.router(
+                title: 'Mustache Hub',
+                key: NavigatorService.i.materialApp,
+                theme: ThemeData(
+                  colorScheme: colorScheme,
+                  snackBarTheme: SnackBarThemeData(
+                    backgroundColor: colorScheme.secondaryContainer,
+                    contentTextStyle: TextStyle(
+                      color: colorScheme.onSecondaryContainer,
+                    ),
                   ),
-                ),
-                inputDecorationTheme: InputDecorationTheme(
-                  border: const OutlineInputBorder(
-                    borderSide: BorderSide.none,
-                    borderRadius: BorderRadius.all(Radius.circular(8)),
+                  inputDecorationTheme: InputDecorationTheme(
+                    border: const OutlineInputBorder(
+                      // borderSide: BorderSide.none,
+                      borderRadius: BorderRadius.all(Radius.circular(8)),
+                    ),
+                    filled: true,
+                    fillColor: colorScheme.secondaryContainer.withAlpha(80),
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 12),
                   ),
-                  filled: true,
-                  fillColor: colorScheme.secondaryContainer,
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 12),
-                ),
-                outlinedButtonTheme: OutlinedButtonThemeData(
-                  style: OutlinedButton.styleFrom(
-                    minimumSize: const Size(double.infinity, 55),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.0),
+                  outlinedButtonTheme: OutlinedButtonThemeData(
+                    style: OutlinedButton.styleFrom(
+                      minimumSize: const Size(double.infinity, 55),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                    ),
+                  ),
+                  filledButtonTheme: FilledButtonThemeData(
+                    style: FilledButton.styleFrom(
+                      minimumSize: const Size(double.infinity, 55),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      textStyle:
+                          Theme.of(context).textTheme.titleMedium?.copyWith(
+                                color: Theme.of(context).colorScheme.onPrimary,
+                              ),
                     ),
                   ),
                 ),
-                filledButtonTheme: FilledButtonThemeData(
-                  style: FilledButton.styleFrom(
-                    minimumSize: const Size(double.infinity, 55),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    textStyle:
-                        Theme.of(context).textTheme.titleMedium?.copyWith(
-                              color: Theme.of(context).colorScheme.onPrimary,
-                            ),
-                  ),
-                ),
+                routerConfig: router,
               ),
-              routerConfig: router,
-              // routerConfig: appRouter(context.read<SessionCubit>()),
             ),
-          ),
-        );
-      }),
+          );
+        },
+      ),
     );
   }
 }

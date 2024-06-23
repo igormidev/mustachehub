@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mustachehub/account/data/entities/e_image_type.dart';
 import 'package:mustachehub/account/data/respositories/interfaces/i_image_repository.dart';
 import 'package:mustachehub/account/presenter/state/image_selector_state.dart';
-import 'package:mustachehub/auth/presenter/cubits/login_form_cubit.dart';
+import 'package:mustachehub/app_core/mixins/global_loader_definer.dart';
 
 class ImageSelectorCubit extends Cubit<ImageSelectorState>
     with GlobalLoadingEnforcer<ImageSelectorState> {

@@ -1,6 +1,5 @@
-import 'package:commom_states/states/loading_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mustachehub/app_core/app_routes.dart';
+import 'package:mustachehub/app_core/mixins/global_loader_definer.dart';
 import 'package:mustachehub/auth/data/repositories/interfaces/i_log_in_repository.dart';
 import 'package:mustachehub/auth/presenter/states/login_form_state.dart';
 
@@ -36,19 +35,5 @@ class LoginFormCubit extends Cubit<LoginFormState>
     emit(LoginFormState.loadingWithGoogle());
     await Future.delayed(const Duration(seconds: 3));
     emit(LoginFormState.success());
-  }
-}
-
-mixin GlobalLoadingEnforcer<T> on Cubit<T> {
-  @override
-  void onChange(Change<T> change) {
-    super.onChange(change);
-    final t = change.nextState.toString().toLowerCase();
-    final isLoading = t.contains('loading') || t.contains('processing');
-    if (isLoading) {
-      NavigatorService.i.rootNavigatorKey.currentContext!.setGlobalLoading();
-    } else {
-      NavigatorService.i.rootNavigatorKey.currentContext!.endGlobalLoading();
-    }
   }
 }
