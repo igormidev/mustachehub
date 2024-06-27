@@ -6,18 +6,6 @@ part of 'current_template_type_state.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$CurrentTemplateTypeStateLoadingImpl
-    _$$CurrentTemplateTypeStateLoadingImplFromJson(Map<String, dynamic> json) =>
-        _$CurrentTemplateTypeStateLoadingImpl(
-          $type: json['runtimeType'] as String?,
-        );
-
-Map<String, dynamic> _$$CurrentTemplateTypeStateLoadingImplToJson(
-        _$CurrentTemplateTypeStateLoadingImpl instance) =>
-    <String, dynamic>{
-      'runtimeType': instance.$type,
-    };
-
 _$CurrentTemplateTypeStateWithNewTemplateImpl
     _$$CurrentTemplateTypeStateWithNewTemplateImplFromJson(
             Map<String, dynamic> json) =>

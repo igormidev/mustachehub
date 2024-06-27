@@ -29,16 +29,5 @@ mixin DashboardViewMethods on State<DashboardView> {
           .read<NavigationPossibilitiesCubit>()
           .setDashboardEnum(context, dashboard);
     }
-
-    // if (currentUri.path.startsWith('/splash')) {
-    //   WidgetsBinding.instance.addPostFrameCallback((_) {
-    //     final scaffoldContext = scaffoldKey.currentContext;
-    //     if (scaffoldContext != null) return;
-    //     final context =
-    //     GoRouter.of(scaffoldContext)
-    //         .routeInformationProvider
-    //         .removeListener(_dashbaordNavigationUpdater);
-    //   });
-    // }
   }
 }

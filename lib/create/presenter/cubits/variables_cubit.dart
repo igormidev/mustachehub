@@ -1,7 +1,7 @@
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:mustache_hub_core/mustache_hub_core.dart';
 import 'package:mustachehub/create/data/adapters/token_identifier_flatmap_adapter.dart';
-import 'package:mustachehub/create/presenter/state/variables_state.dart';
+import 'package:mustachehub/create/presenter/states/variables_state.dart';
 
 class VariablesCubit extends HydratedCubit<VariablesState> {
   final TokenIdentifierFlatMapAdapter _tokenIdentifierFlatMapAdapter;

@@ -7,7 +7,7 @@ part of 'theme_state.dart';
 // **************************************************************************
 
 _$NormalImpl _$$NormalImplFromJson(Map<String, dynamic> json) => _$NormalImpl(
-      colorValue: json['colorValue'] as int,
+      colorValue: (json['colorValue'] as num).toInt(),
       brightness: $enumDecode(_$BrightnessEnumMap, json['brightness']),
     );
 

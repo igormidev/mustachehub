@@ -113,6 +113,17 @@ class _MustacheMaterialAppState extends State<MustacheMaterialApp> {
                       color: colorScheme.onSecondaryContainer,
                     ),
                   ),
+                  dividerColor: Theme.of(context).colorScheme.outlineVariant,
+                  listTileTheme: Theme.of(context).listTileTheme.copyWith(
+                        tileColor:
+                            Theme.of(context).colorScheme.primaryContainer,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
+                  iconTheme: Theme.of(context).iconTheme.copyWith(
+                        color: Theme.of(context).colorScheme.outline,
+                      ),
                   inputDecorationTheme: InputDecorationTheme(
                     border: const OutlineInputBorder(
                       // borderSide: BorderSide.none,

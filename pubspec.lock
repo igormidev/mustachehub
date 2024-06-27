@@ -209,6 +209,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.18.0"
+  commom_source:
+    dependency: "direct main"
+    description:
+      path: "packages/commom_source"
+      relative: true
+    source: path
+    version: "0.0.1"
   commom_states:
     dependency: "direct main"
     description:
@@ -1058,6 +1065,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.2.5"
+  result_dart:
+    dependency: transitive
+    description:
+      name: result_dart
+      sha256: "3c69c864a08df0f413a86be211d07405e9a53cc1ac111e3cc8365845a0fb5288"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.1"
   scroll_to_index:
     dependency: transitive
     description:

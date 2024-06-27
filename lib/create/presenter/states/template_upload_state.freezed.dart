@@ -20,24 +20,28 @@ mixin _$TemplateUploadState {
   TResult when<TResult extends Object?>({
     required TResult Function() normal,
     required TResult Function() loading,
-    required TResult Function() withError,
-    required TResult Function() success,
+    required TResult Function(String message) withError,
+    required TResult Function(
+            UserCollectionRoot newCollectionWithUpdatedPackages)
+        success,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? normal,
     TResult? Function()? loading,
-    TResult? Function()? withError,
-    TResult? Function()? success,
+    TResult? Function(String message)? withError,
+    TResult? Function(UserCollectionRoot newCollectionWithUpdatedPackages)?
+        success,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? normal,
     TResult Function()? loading,
-    TResult Function()? withError,
-    TResult Function()? success,
+    TResult Function(String message)? withError,
+    TResult Function(UserCollectionRoot newCollectionWithUpdatedPackages)?
+        success,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -130,8 +134,10 @@ class _$TemplateUploadStateNormalImpl implements _TemplateUploadStateNormal {
   TResult when<TResult extends Object?>({
     required TResult Function() normal,
     required TResult Function() loading,
-    required TResult Function() withError,
-    required TResult Function() success,
+    required TResult Function(String message) withError,
+    required TResult Function(
+            UserCollectionRoot newCollectionWithUpdatedPackages)
+        success,
   }) {
     return normal();
   }
@@ -141,8 +147,9 @@ class _$TemplateUploadStateNormalImpl implements _TemplateUploadStateNormal {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? normal,
     TResult? Function()? loading,
-    TResult? Function()? withError,
-    TResult? Function()? success,
+    TResult? Function(String message)? withError,
+    TResult? Function(UserCollectionRoot newCollectionWithUpdatedPackages)?
+        success,
   }) {
     return normal?.call();
   }
@@ -152,8 +159,9 @@ class _$TemplateUploadStateNormalImpl implements _TemplateUploadStateNormal {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? normal,
     TResult Function()? loading,
-    TResult Function()? withError,
-    TResult Function()? success,
+    TResult Function(String message)? withError,
+    TResult Function(UserCollectionRoot newCollectionWithUpdatedPackages)?
+        success,
     required TResult orElse(),
   }) {
     if (normal != null) {
@@ -248,8 +256,10 @@ class _$TemplateUploadStateLoadingImpl implements _TemplateUploadStateLoading {
   TResult when<TResult extends Object?>({
     required TResult Function() normal,
     required TResult Function() loading,
-    required TResult Function() withError,
-    required TResult Function() success,
+    required TResult Function(String message) withError,
+    required TResult Function(
+            UserCollectionRoot newCollectionWithUpdatedPackages)
+        success,
   }) {
     return loading();
   }
@@ -259,8 +269,9 @@ class _$TemplateUploadStateLoadingImpl implements _TemplateUploadStateLoading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? normal,
     TResult? Function()? loading,
-    TResult? Function()? withError,
-    TResult? Function()? success,
+    TResult? Function(String message)? withError,
+    TResult? Function(UserCollectionRoot newCollectionWithUpdatedPackages)?
+        success,
   }) {
     return loading?.call();
   }
@@ -270,8 +281,9 @@ class _$TemplateUploadStateLoadingImpl implements _TemplateUploadStateLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? normal,
     TResult Function()? loading,
-    TResult Function()? withError,
-    TResult Function()? success,
+    TResult Function(String message)? withError,
+    TResult Function(UserCollectionRoot newCollectionWithUpdatedPackages)?
+        success,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -328,6 +340,8 @@ abstract class _$$TemplateUploadStateWithErrorImplCopyWith<$Res> {
           _$TemplateUploadStateWithErrorImpl value,
           $Res Function(_$TemplateUploadStateWithErrorImpl) then) =
       __$$TemplateUploadStateWithErrorImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String message});
 }
 
 /// @nodoc
@@ -339,38 +353,65 @@ class __$$TemplateUploadStateWithErrorImplCopyWithImpl<$Res>
       _$TemplateUploadStateWithErrorImpl _value,
       $Res Function(_$TemplateUploadStateWithErrorImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? message = null,
+  }) {
+    return _then(_$TemplateUploadStateWithErrorImpl(
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$TemplateUploadStateWithErrorImpl
     implements _TemplateUploadStateWithError {
-  _$TemplateUploadStateWithErrorImpl();
+  _$TemplateUploadStateWithErrorImpl({required this.message});
+
+  @override
+  final String message;
 
   @override
   String toString() {
-    return 'TemplateUploadState.withError()';
+    return 'TemplateUploadState.withError(message: $message)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TemplateUploadStateWithErrorImpl);
+            other is _$TemplateUploadStateWithErrorImpl &&
+            (identical(other.message, message) || other.message == message));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, message);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$TemplateUploadStateWithErrorImplCopyWith<
+          _$TemplateUploadStateWithErrorImpl>
+      get copyWith => __$$TemplateUploadStateWithErrorImplCopyWithImpl<
+          _$TemplateUploadStateWithErrorImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() normal,
     required TResult Function() loading,
-    required TResult Function() withError,
-    required TResult Function() success,
+    required TResult Function(String message) withError,
+    required TResult Function(
+            UserCollectionRoot newCollectionWithUpdatedPackages)
+        success,
   }) {
-    return withError();
+    return withError(message);
   }
 
   @override
@@ -378,10 +419,11 @@ class _$TemplateUploadStateWithErrorImpl
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? normal,
     TResult? Function()? loading,
-    TResult? Function()? withError,
-    TResult? Function()? success,
+    TResult? Function(String message)? withError,
+    TResult? Function(UserCollectionRoot newCollectionWithUpdatedPackages)?
+        success,
   }) {
-    return withError?.call();
+    return withError?.call(message);
   }
 
   @override
@@ -389,12 +431,13 @@ class _$TemplateUploadStateWithErrorImpl
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? normal,
     TResult Function()? loading,
-    TResult Function()? withError,
-    TResult Function()? success,
+    TResult Function(String message)? withError,
+    TResult Function(UserCollectionRoot newCollectionWithUpdatedPackages)?
+        success,
     required TResult orElse(),
   }) {
     if (withError != null) {
-      return withError();
+      return withError(message);
     }
     return orElse();
   }
@@ -438,7 +481,14 @@ class _$TemplateUploadStateWithErrorImpl
 }
 
 abstract class _TemplateUploadStateWithError implements TemplateUploadState {
-  factory _TemplateUploadStateWithError() = _$TemplateUploadStateWithErrorImpl;
+  factory _TemplateUploadStateWithError({required final String message}) =
+      _$TemplateUploadStateWithErrorImpl;
+
+  String get message;
+  @JsonKey(ignore: true)
+  _$$TemplateUploadStateWithErrorImplCopyWith<
+          _$TemplateUploadStateWithErrorImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -447,6 +497,8 @@ abstract class _$$TemplateUploadStateSuccessImplCopyWith<$Res> {
           _$TemplateUploadStateSuccessImpl value,
           $Res Function(_$TemplateUploadStateSuccessImpl) then) =
       __$$TemplateUploadStateSuccessImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({UserCollectionRoot newCollectionWithUpdatedPackages});
 }
 
 /// @nodoc
@@ -458,37 +510,68 @@ class __$$TemplateUploadStateSuccessImplCopyWithImpl<$Res>
       _$TemplateUploadStateSuccessImpl _value,
       $Res Function(_$TemplateUploadStateSuccessImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? newCollectionWithUpdatedPackages = null,
+  }) {
+    return _then(_$TemplateUploadStateSuccessImpl(
+      newCollectionWithUpdatedPackages: null == newCollectionWithUpdatedPackages
+          ? _value.newCollectionWithUpdatedPackages
+          : newCollectionWithUpdatedPackages // ignore: cast_nullable_to_non_nullable
+              as UserCollectionRoot,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$TemplateUploadStateSuccessImpl implements _TemplateUploadStateSuccess {
-  _$TemplateUploadStateSuccessImpl();
+  _$TemplateUploadStateSuccessImpl(
+      {required this.newCollectionWithUpdatedPackages});
+
+  @override
+  final UserCollectionRoot newCollectionWithUpdatedPackages;
 
   @override
   String toString() {
-    return 'TemplateUploadState.success()';
+    return 'TemplateUploadState.success(newCollectionWithUpdatedPackages: $newCollectionWithUpdatedPackages)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TemplateUploadStateSuccessImpl);
+            other is _$TemplateUploadStateSuccessImpl &&
+            (identical(other.newCollectionWithUpdatedPackages,
+                    newCollectionWithUpdatedPackages) ||
+                other.newCollectionWithUpdatedPackages ==
+                    newCollectionWithUpdatedPackages));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      Object.hash(runtimeType, newCollectionWithUpdatedPackages);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$TemplateUploadStateSuccessImplCopyWith<_$TemplateUploadStateSuccessImpl>
+      get copyWith => __$$TemplateUploadStateSuccessImplCopyWithImpl<
+          _$TemplateUploadStateSuccessImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() normal,
     required TResult Function() loading,
-    required TResult Function() withError,
-    required TResult Function() success,
+    required TResult Function(String message) withError,
+    required TResult Function(
+            UserCollectionRoot newCollectionWithUpdatedPackages)
+        success,
   }) {
-    return success();
+    return success(newCollectionWithUpdatedPackages);
   }
 
   @override
@@ -496,10 +579,11 @@ class _$TemplateUploadStateSuccessImpl implements _TemplateUploadStateSuccess {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? normal,
     TResult? Function()? loading,
-    TResult? Function()? withError,
-    TResult? Function()? success,
+    TResult? Function(String message)? withError,
+    TResult? Function(UserCollectionRoot newCollectionWithUpdatedPackages)?
+        success,
   }) {
-    return success?.call();
+    return success?.call(newCollectionWithUpdatedPackages);
   }
 
   @override
@@ -507,12 +591,13 @@ class _$TemplateUploadStateSuccessImpl implements _TemplateUploadStateSuccess {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? normal,
     TResult Function()? loading,
-    TResult Function()? withError,
-    TResult Function()? success,
+    TResult Function(String message)? withError,
+    TResult Function(UserCollectionRoot newCollectionWithUpdatedPackages)?
+        success,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success();
+      return success(newCollectionWithUpdatedPackages);
     }
     return orElse();
   }
@@ -556,5 +641,12 @@ class _$TemplateUploadStateSuccessImpl implements _TemplateUploadStateSuccess {
 }
 
 abstract class _TemplateUploadStateSuccess implements TemplateUploadState {
-  factory _TemplateUploadStateSuccess() = _$TemplateUploadStateSuccessImpl;
+  factory _TemplateUploadStateSuccess(
+      {required final UserCollectionRoot
+          newCollectionWithUpdatedPackages}) = _$TemplateUploadStateSuccessImpl;
+
+  UserCollectionRoot get newCollectionWithUpdatedPackages;
+  @JsonKey(ignore: true)
+  _$$TemplateUploadStateSuccessImplCopyWith<_$TemplateUploadStateSuccessImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

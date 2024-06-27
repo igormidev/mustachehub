@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mustachehub/create/presenter/state/suggestion_state.dart';
+import 'package:mustachehub/create/presenter/states/suggestion_state.dart';
 import 'package:text_analyser/text_analyser.dart';
 
 class SuggestionCubit extends Cubit<SuggestionState> {

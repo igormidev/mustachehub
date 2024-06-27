@@ -1,5 +1,5 @@
 import 'package:hydrated_bloc/hydrated_bloc.dart';
-import 'package:mustachehub/create/presenter/state/content_string_state.dart';
+import 'package:mustachehub/create/presenter/states/content_string_state.dart';
 import 'package:mustachex/mustachex.dart';
 
 class ContentStringCubit extends HydratedCubit<ContentStringState> {

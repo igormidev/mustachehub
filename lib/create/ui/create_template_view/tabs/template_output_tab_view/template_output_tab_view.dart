@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mustache_hub_core/mustache_hub_core.dart';
 import 'package:mustachehub/create/presenter/cubits/content_string_cubit.dart';
 import 'package:mustachehub/create/presenter/cubits/variables_cubit.dart';
-import 'package:mustachehub/create/presenter/state/content_string_state.dart';
-import 'package:mustachehub/create/presenter/state/variables_state.dart';
+import 'package:mustachehub/create/presenter/states/content_string_state.dart';
+import 'package:mustachehub/create/presenter/states/variables_state.dart';
 import 'package:mustachehub/generate/ui/pages/text_output_page/text_output_page.dart';
 
 class TemplateOutputTabView extends StatelessWidget {

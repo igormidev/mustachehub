@@ -2,7 +2,7 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:mustache_hub_core/mustache_hub_core.dart';
 import 'package:mustachehub/app_core/mixins/global_loader_definer.dart';
 import 'package:mustachehub/create/data/repositories/interfaces/i_package_form_repository.dart';
-import 'package:mustachehub/create/presenter/state/template_upload_state.dart';
+import 'package:mustachehub/create/presenter/states/template_upload_state.dart';
 
 class TemplateUploadCubit extends Cubit<TemplateUploadState>
     with GlobalLoadingEnforcer {

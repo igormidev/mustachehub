@@ -9,9 +9,9 @@ import 'package:mustachehub/create/presenter/cubits/fields_text_size_cubit.dart'
 import 'package:mustachehub/create/presenter/cubits/suggestion_cubit.dart';
 import 'package:mustachehub/create/presenter/cubits/variables_cubit.dart';
 import 'package:mustachehub/create/presenter/input_formaters/add_mustache_delimmiter_input_formater.dart';
-import 'package:mustachehub/create/presenter/state/fields_text_size_state.dart';
-import 'package:mustachehub/create/presenter/state/suggestion_state.dart';
-import 'package:mustachehub/create/presenter/state/variables_state.dart';
+import 'package:mustachehub/create/presenter/states/fields_text_size_state.dart';
+import 'package:mustachehub/create/presenter/states/suggestion_state.dart';
+import 'package:mustachehub/create/presenter/states/variables_state.dart';
 import 'package:mustachehub/create/ui/create_template_view/tabs/variables_creation_tab/widgets/headers/text_content_header.dart';
 import 'package:mustachehub/settings/interactor/cubit/theme_cubit.dart';
 import 'package:mustachehub/settings/interactor/state/theme_state.dart';

@@ -17,8 +17,6 @@ final _privateConstructorUsedError = UnsupportedError(
 CurrentTemplateTypeState _$CurrentTemplateTypeStateFromJson(
     Map<String, dynamic> json) {
   switch (json['runtimeType']) {
-    case 'loading':
-      return _CurrentTemplateTypeStateLoading.fromJson(json);
     case 'creating':
       return _CurrentTemplateTypeStateWithNewTemplate.fromJson(json);
     case 'withExistingTemplate':
@@ -37,21 +35,18 @@ CurrentTemplateTypeState _$CurrentTemplateTypeStateFromJson(
 mixin _$CurrentTemplateTypeState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() loading,
     required TResult Function() creating,
     required TResult Function(Template template) withExistingTemplate,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loading,
     TResult? Function()? creating,
     TResult? Function(Template template)? withExistingTemplate,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
     TResult Function()? creating,
     TResult Function(Template template)? withExistingTemplate,
     required TResult orElse(),
@@ -59,7 +54,6 @@ mixin _$CurrentTemplateTypeState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_CurrentTemplateTypeStateLoading value) loading,
     required TResult Function(_CurrentTemplateTypeStateWithNewTemplate value)
         creating,
     required TResult Function(
@@ -69,7 +63,6 @@ mixin _$CurrentTemplateTypeState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_CurrentTemplateTypeStateLoading value)? loading,
     TResult? Function(_CurrentTemplateTypeStateWithNewTemplate value)? creating,
     TResult? Function(_CurrentTemplateTypeStateWithExistingTemplate value)?
         withExistingTemplate,
@@ -77,7 +70,6 @@ mixin _$CurrentTemplateTypeState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_CurrentTemplateTypeStateLoading value)? loading,
     TResult Function(_CurrentTemplateTypeStateWithNewTemplate value)? creating,
     TResult Function(_CurrentTemplateTypeStateWithExistingTemplate value)?
         withExistingTemplate,
@@ -104,145 +96,6 @@ class _$CurrentTemplateTypeStateCopyWithImpl<$Res,
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-}
-
-/// @nodoc
-abstract class _$$CurrentTemplateTypeStateLoadingImplCopyWith<$Res> {
-  factory _$$CurrentTemplateTypeStateLoadingImplCopyWith(
-          _$CurrentTemplateTypeStateLoadingImpl value,
-          $Res Function(_$CurrentTemplateTypeStateLoadingImpl) then) =
-      __$$CurrentTemplateTypeStateLoadingImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$CurrentTemplateTypeStateLoadingImplCopyWithImpl<$Res>
-    extends _$CurrentTemplateTypeStateCopyWithImpl<$Res,
-        _$CurrentTemplateTypeStateLoadingImpl>
-    implements _$$CurrentTemplateTypeStateLoadingImplCopyWith<$Res> {
-  __$$CurrentTemplateTypeStateLoadingImplCopyWithImpl(
-      _$CurrentTemplateTypeStateLoadingImpl _value,
-      $Res Function(_$CurrentTemplateTypeStateLoadingImpl) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$CurrentTemplateTypeStateLoadingImpl
-    implements _CurrentTemplateTypeStateLoading {
-  _$CurrentTemplateTypeStateLoadingImpl({final String? $type})
-      : $type = $type ?? 'loading';
-
-  factory _$CurrentTemplateTypeStateLoadingImpl.fromJson(
-          Map<String, dynamic> json) =>
-      _$$CurrentTemplateTypeStateLoadingImplFromJson(json);
-
-  @JsonKey(name: 'runtimeType')
-  final String $type;
-
-  @override
-  String toString() {
-    return 'CurrentTemplateTypeState.loading()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$CurrentTemplateTypeStateLoadingImpl);
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loading,
-    required TResult Function() creating,
-    required TResult Function(Template template) withExistingTemplate,
-  }) {
-    return loading();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loading,
-    TResult? Function()? creating,
-    TResult? Function(Template template)? withExistingTemplate,
-  }) {
-    return loading?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function()? creating,
-    TResult Function(Template template)? withExistingTemplate,
-    required TResult orElse(),
-  }) {
-    if (loading != null) {
-      return loading();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_CurrentTemplateTypeStateLoading value) loading,
-    required TResult Function(_CurrentTemplateTypeStateWithNewTemplate value)
-        creating,
-    required TResult Function(
-            _CurrentTemplateTypeStateWithExistingTemplate value)
-        withExistingTemplate,
-  }) {
-    return loading(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_CurrentTemplateTypeStateLoading value)? loading,
-    TResult? Function(_CurrentTemplateTypeStateWithNewTemplate value)? creating,
-    TResult? Function(_CurrentTemplateTypeStateWithExistingTemplate value)?
-        withExistingTemplate,
-  }) {
-    return loading?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_CurrentTemplateTypeStateLoading value)? loading,
-    TResult Function(_CurrentTemplateTypeStateWithNewTemplate value)? creating,
-    TResult Function(_CurrentTemplateTypeStateWithExistingTemplate value)?
-        withExistingTemplate,
-    required TResult orElse(),
-  }) {
-    if (loading != null) {
-      return loading(this);
-    }
-    return orElse();
-  }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$CurrentTemplateTypeStateLoadingImplToJson(
-      this,
-    );
-  }
-}
-
-abstract class _CurrentTemplateTypeStateLoading
-    implements CurrentTemplateTypeState {
-  factory _CurrentTemplateTypeStateLoading() =
-      _$CurrentTemplateTypeStateLoadingImpl;
-
-  factory _CurrentTemplateTypeStateLoading.fromJson(Map<String, dynamic> json) =
-      _$CurrentTemplateTypeStateLoadingImpl.fromJson;
 }
 
 /// @nodoc
@@ -297,7 +150,6 @@ class _$CurrentTemplateTypeStateWithNewTemplateImpl
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() loading,
     required TResult Function() creating,
     required TResult Function(Template template) withExistingTemplate,
   }) {
@@ -307,7 +159,6 @@ class _$CurrentTemplateTypeStateWithNewTemplateImpl
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loading,
     TResult? Function()? creating,
     TResult? Function(Template template)? withExistingTemplate,
   }) {
@@ -317,7 +168,6 @@ class _$CurrentTemplateTypeStateWithNewTemplateImpl
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
     TResult Function()? creating,
     TResult Function(Template template)? withExistingTemplate,
     required TResult orElse(),
@@ -331,7 +181,6 @@ class _$CurrentTemplateTypeStateWithNewTemplateImpl
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_CurrentTemplateTypeStateLoading value) loading,
     required TResult Function(_CurrentTemplateTypeStateWithNewTemplate value)
         creating,
     required TResult Function(
@@ -344,7 +193,6 @@ class _$CurrentTemplateTypeStateWithNewTemplateImpl
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_CurrentTemplateTypeStateLoading value)? loading,
     TResult? Function(_CurrentTemplateTypeStateWithNewTemplate value)? creating,
     TResult? Function(_CurrentTemplateTypeStateWithExistingTemplate value)?
         withExistingTemplate,
@@ -355,7 +203,6 @@ class _$CurrentTemplateTypeStateWithNewTemplateImpl
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_CurrentTemplateTypeStateLoading value)? loading,
     TResult Function(_CurrentTemplateTypeStateWithNewTemplate value)? creating,
     TResult Function(_CurrentTemplateTypeStateWithExistingTemplate value)?
         withExistingTemplate,
@@ -481,7 +328,6 @@ class _$CurrentTemplateTypeStateWithExistingTemplateImpl
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() loading,
     required TResult Function() creating,
     required TResult Function(Template template) withExistingTemplate,
   }) {
@@ -491,7 +337,6 @@ class _$CurrentTemplateTypeStateWithExistingTemplateImpl
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loading,
     TResult? Function()? creating,
     TResult? Function(Template template)? withExistingTemplate,
   }) {
@@ -501,7 +346,6 @@ class _$CurrentTemplateTypeStateWithExistingTemplateImpl
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
     TResult Function()? creating,
     TResult Function(Template template)? withExistingTemplate,
     required TResult orElse(),
@@ -515,7 +359,6 @@ class _$CurrentTemplateTypeStateWithExistingTemplateImpl
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_CurrentTemplateTypeStateLoading value) loading,
     required TResult Function(_CurrentTemplateTypeStateWithNewTemplate value)
         creating,
     required TResult Function(
@@ -528,7 +371,6 @@ class _$CurrentTemplateTypeStateWithExistingTemplateImpl
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_CurrentTemplateTypeStateLoading value)? loading,
     TResult? Function(_CurrentTemplateTypeStateWithNewTemplate value)? creating,
     TResult? Function(_CurrentTemplateTypeStateWithExistingTemplate value)?
         withExistingTemplate,
@@ -539,7 +381,6 @@ class _$CurrentTemplateTypeStateWithExistingTemplateImpl
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_CurrentTemplateTypeStateLoading value)? loading,
     TResult Function(_CurrentTemplateTypeStateWithNewTemplate value)? creating,
     TResult Function(_CurrentTemplateTypeStateWithExistingTemplate value)?
         withExistingTemplate,

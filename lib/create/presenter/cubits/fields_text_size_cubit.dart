@@ -1,5 +1,5 @@
 import 'package:hydrated_bloc/hydrated_bloc.dart';
-import 'package:mustachehub/create/presenter/state/fields_text_size_state.dart';
+import 'package:mustachehub/create/presenter/states/fields_text_size_state.dart';
 
 class FieldsTextSizeCubit extends HydratedCubit<FieldsTextSizeState> {
   FieldsTextSizeCubit()

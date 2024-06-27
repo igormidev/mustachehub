@@ -6,7 +6,6 @@ part 'current_template_type_state.g.dart';
 
 @freezed
 abstract class CurrentTemplateTypeState with _$CurrentTemplateTypeState {
-  factory CurrentTemplateTypeState.loading() = _CurrentTemplateTypeStateLoading;
   factory CurrentTemplateTypeState.creating() =
       _CurrentTemplateTypeStateWithNewTemplate;
   factory CurrentTemplateTypeState.withExistingTemplate({

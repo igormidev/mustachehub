@@ -3,7 +3,7 @@ import 'package:mason/mason.dart';
 import 'package:mustache_hub_core/mustache_hub_core.dart';
 import 'package:mustachehub/create/data/adapters/token_identifier_text_display_adapter.dart';
 import 'package:mustachehub/create/presenter/mixins/default_id_caster.dart';
-import 'package:mustachehub/create/presenter/state/edit_model_info_display_state.dart';
+import 'package:mustachehub/create/presenter/states/edit_model_info_display_state.dart';
 
 class EditModelInfoDisplayCubit extends Cubit<EditModelInfoDisplayState>
     with DefaultIdCaster {

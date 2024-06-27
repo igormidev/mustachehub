@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:commom_source/commom_source.dart';
 import 'package:commom_states/cubits/session_cubit.dart';
+import 'package:commom_states/cubits/user_collections_cubit.dart';
 import 'package:commom_states/states/session_state.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -30,12 +32,10 @@ import 'package:mustachehub/auth/ui/views/auth_desktop_view/auth_desktop_view.da
 import 'package:mustachehub/auth/ui/views/login_view/login_view.dart';
 import 'package:mustachehub/auth/ui/views/pass_recovery_view/pass_recovery_view.dart';
 import 'package:mustachehub/auth/ui/views/signin_view/signin_view.dart';
+import 'package:mustachehub/collection/ui/views/templates_tree_view/templates_tree_view.dart';
 import 'package:mustachehub/create/data/adapters/token_identifier_flatmap_adapter.dart';
 import 'package:mustachehub/create/data/adapters/token_identifier_text_display_adapter.dart';
-import 'package:mustachehub/create/data/repositories/implementations/package_form_repository_impl.dart';
-import 'package:mustachehub/create/data/repositories/implementations/template_repository_impl.dart';
 import 'package:mustachehub/create/data/repositories/interfaces/i_package_form_repository.dart';
-import 'package:mustachehub/create/data/repositories/interfaces/i_template_repository.dart';
 import 'package:mustachehub/create/presenter/cubits/content_string_cubit.dart';
 import 'package:mustachehub/create/presenter/cubits/current_template_type_cubit.dart';
 import 'package:mustachehub/create/presenter/cubits/edit_model_info_display_cubit.dart';
@@ -57,6 +57,7 @@ import 'package:mustachehub/generate/data/adapters/dto_adapter.dart';
 import 'package:mustachehub/generate/presenter/cubits/content_cubit.dart';
 import 'package:mustachehub/generate/presenter/cubits/form_stats_cubit.dart';
 import 'package:mustachehub/generate/presenter/cubits/payload_cubit.dart';
+import 'package:mustachehub/generate/ui/views/generate_template_view/generate_template_view.dart';
 import 'package:mustachehub/settings/ui/views/settings_view/settings_view.dart';
 import 'package:text_analyser/text_analyser.dart';
 
@@ -135,31 +136,14 @@ final router = GoRouter(
           path: '/collection',
           parentNavigatorKey: NavigatorService.i.dashboardNavigatorKey,
           builder: (context, state) {
-            return Scaffold(
-              appBar: AppBar(
-                title: const Text('Collection'),
-                actions: const [Icon(Icons.create_new_folder_rounded)],
-              ),
-              drawer: context.drawerOrNull,
-              body: Container(
-                color: Colors.green[300],
-              ),
-            );
+            return const TemplatesTreeView();
           },
         ),
         GoRoute(
           path: '/generateText',
           parentNavigatorKey: NavigatorService.i.dashboardNavigatorKey,
           builder: (context, state) {
-            return Scaffold(
-              appBar: AppBar(
-                title: const Text('Generate text'),
-              ),
-              drawer: context.drawerOrNull,
-              body: Container(
-                color: Colors.brown[400],
-              ),
-            );
+            return const GenerateTemplateView();
           },
         ),
         GoRoute(
@@ -170,9 +154,6 @@ final router = GoRouter(
             return MultiBlocProvider(
               providers: [
                 // Repositories
-                RepositoryProvider<IPackageFormRepository>(
-                  create: (context) => PackageFormRepositoryImpl(),
-                ),
                 RepositoryProvider<TokenIdentifierFlatMapAdapter>(
                   create: (context) => const TokenIdentifierFlatMapAdapter(),
                 ),
@@ -184,6 +165,10 @@ final router = GoRouter(
                 ),
                 RepositoryProvider<ITemplateRepository>(
                   create: (context) => TemplateRepositoryImpl(),
+                ),
+                RepositoryProvider<IUserCollectionRepository>(
+                  create: (context) => UserCollectionRepositoryImpl(
+                      templateRepository: context.read<ITemplateRepository>()),
                 ),
                 // RepositoryProvider<IPackageFormRepository>(
                 //   create: (context) => PackageFormRepositoryImpl(),
@@ -203,15 +188,18 @@ final router = GoRouter(
                 // ),
                 BlocProvider(create: (context) => ContentStringCubit()),
                 BlocProvider(
-                  create: (context) => CurrentTemplateTypeCubit(
-                    templateRepository: context.read<ITemplateRepository>(),
-                  ),
+                  create: (context) => CurrentTemplateTypeCubit(),
                 ),
                 BlocProvider(
                   create: (context) => TemplateUploadCubit(
                     repository: context.read<IPackageFormRepository>(),
                   ),
                 ),
+                BlocProvider(
+                    create: (context) => UserCollectionsCubit(
+                          userCollectionRepository:
+                              context.read<IUserCollectionRepository>(),
+                        )),
                 BlocProvider(create: (context) => FieldsTextSizeCubit()),
                 BlocProvider(create: (context) => EditModelInfoDisplayCubit()),
                 BlocProvider(create: (context) => PackageFormCubit()),

@@ -1,44 +1,135 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mustache_hub_core/mustache_hub_core.dart';
+import 'package:commom_source/commom_source.dart';
 import 'package:mustachehub/create/data/repositories/interfaces/i_package_form_repository.dart';
-import 'package:mustachehub/create/presenter/state/template_upload_state.dart';
+import 'package:mustachehub/create/presenter/states/template_upload_state.dart';
 import 'package:uuid/uuid.dart';
 
 class PackageFormRepositoryImpl implements IPackageFormRepository {
+  final IUserCollectionRepository _userTemplatesRepository;
   final FirebaseFirestore _firestore;
   final Uuid _uuid;
+  final FirebaseAuth _auth;
 
   PackageFormRepositoryImpl({
     FirebaseFirestore? firestore,
+    FirebaseAuth? auth,
+    required IUserCollectionRepository userTemplatesRepository,
     Uuid? uuid,
   })  : _firestore = firestore ?? FirebaseFirestore.instance,
-        _uuid = uuid ?? const Uuid();
+        _uuid = uuid ?? const Uuid(),
+        _auth = auth ?? FirebaseAuth.instance,
+        _userTemplatesRepository = userTemplatesRepository;
 
   @override
   Future<TemplateUploadState> createPackage({
     required PackageInfo packageInfo,
     required ExpectedPayload expectedPayload,
   }) async {
-    final payload = expectedPayload.toJson();
-    final randomValue = _uuid.v4();
-    final packageDoc = _firestore.doc('packages/$randomValue');
-    await packageDoc.set({
-      'info': packageInfo.toJson(),
-      'template': payload,
-    });
+    final now = DateTime.now();
+    final userId = _auth.currentUser?.uid;
+    if (userId == null) {
+      return TemplateUploadState.withError(
+        message: SourceError.notLoggedIn().message,
+      );
+    }
 
-    return Future.value(TemplateUploadState.success());
+    return _wrapper(
+      mapper: (UserCollectionRoot collection) async {
+        final uuid = _uuid.v4();
+        final template = Template(
+          id: uuid,
+          info: packageInfo,
+          metadata: TemplateMetadata(
+            createdAt: now,
+            updatedAt: now,
+            isPrivate: false,
+            usersPermission: {
+              userId: TemplatePermissions.fullAccess.name,
+            },
+          ),
+          payload: expectedPayload,
+        );
+
+        final newCollection = collection.copyWith(
+          children: [
+            ...collection.children,
+            UserCollection.file(
+              template: template,
+            ),
+          ],
+        );
+
+        final collectionRef = _firestore.collection('collection').doc(userId);
+        final templateRef = _firestore.collection('template').doc(template.id);
+        await _firestore.runTransaction((transaction) async {
+          transaction
+              .set(collectionRef, newCollection.toIndexes.toJson())
+              .set(templateRef, template.toJson());
+        });
+
+        return TemplateUploadState.success(
+          newCollectionWithUpdatedPackages: newCollection,
+        );
+      },
+    );
   }
 
   @override
   Future<TemplateUploadState> updatePackage({
     required Template template,
   }) async {
-    final payload = template.payload.toJson();
-    await _firestore.doc('packages/${template.id}').update({
-      'packageInfo': template.info.toJson(),
-      'expectedPayload': payload,
+    final now = DateTime.now();
+    final userId = _auth.currentUser?.uid;
+    if (userId == null) {
+      return TemplateUploadState.withError(
+        message: SourceError.notLoggedIn().message,
+      );
+    }
+
+    return _wrapper(
+      mapper: (UserCollectionRoot collection) async {
+        final UserCollectionRoot newCollection =
+            collection.deepEditTemplateWithId(
+          template.id,
+          (oldTemplate) => template.copyWith(
+            info: template.info,
+            payload: template.payload,
+            metadata:
+                template.metadata.copyWith(updatedAt: now, usersPermission: {
+              ...oldTemplate.metadata.usersPermission,
+              userId: TemplatePermissions.fullAccess.name,
+            }),
+          ),
+        );
+
+        final collectionRef = _firestore.collection('collection').doc(userId);
+        final templateRef = _firestore.collection('template').doc(template.id);
+        await _firestore.runTransaction((transaction) async {
+          transaction
+              .set(collectionRef, newCollection.toIndexes.toJson())
+              .set(templateRef, template.toJson());
+        });
+
+        return TemplateUploadState.success(
+          newCollectionWithUpdatedPackages: newCollection,
+        );
+      },
+    );
+  }
+
+  Future<TemplateUploadState> _wrapper({
+    required Future<TemplateUploadState> Function(
+            UserCollectionRoot newCollection)
+        mapper,
+  }) async {
+    final newestUserCollection =
+        await _userTemplatesRepository.getUserCollection();
+    return newestUserCollection.fold(mapper, (SourceError failure) {
+      return TemplateUploadState.withError(
+        message: failure.message,
+      );
     });
-    return Future.value(TemplateUploadState.success());
   }
 }

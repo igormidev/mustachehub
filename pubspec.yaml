@@ -44,6 +44,8 @@ dependencies:
   path_provider: ^2.1.2
   media_query_core:
     path: packages/media_query_core
+  commom_source:
+    path: packages/commom_source
   mustache_hub_core:
     path: packages/mustache_hub_core
   commom_states:

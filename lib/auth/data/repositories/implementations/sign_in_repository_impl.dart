@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:mustache_hub_core/mustache_hub_core.dart';
 import 'package:mustachehub/auth/data/repositories/interfaces/i_sign_in_repository.dart';
 import 'package:mustachehub/auth/data/repositories/mixins/manege_firebase_auth_error_mixin.dart';
 import 'package:mustachehub/auth/presenter/states/sign_up_form_state.dart';
@@ -38,11 +39,19 @@ class SignInRepositoryImpl
 
         await userCredential.user?.updateDisplayName(userName);
 
-        await _firestore
-            .collection('/accountsInfo/')
-            .doc(userCredential.user?.uid)
-            .set({
-          "tier": 0,
+        final newIndexesCollection = UserCollectionIndexes.root(children: []);
+
+        final userId = userCredential.user?.uid;
+
+        final accountInfoRef =
+            _firestore.collection('/accountsInfo/').doc(userId);
+        final collectionRef = _firestore.collection('collection').doc(userId);
+
+        await _firestore.runTransaction((transaction) async {
+          transaction.set(accountInfoRef, {"tier": 0}).set(
+            collectionRef,
+            newIndexesCollection.toJson(),
+          );
         });
 
         return SignUpFormState.success();

@@ -1,7 +1,7 @@
-import 'package:mustachehub/create/presenter/state/current_template_type_state.dart';
+// import 'package:mustachehub/create/presenter/states/current_template_type_state.dart';
 
-abstract class ITemplateRepository {
-  Future<CurrentTemplateTypeState> getTemplate({
-    required String packageId,
-  });
-}
+// abstract class ITemplateRepository {
+//   Future<CurrentTemplateTypeState> getTemplate({
+//     required String packageId,
+//   });
+// }

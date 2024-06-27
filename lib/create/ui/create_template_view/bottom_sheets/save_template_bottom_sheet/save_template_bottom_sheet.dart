@@ -14,8 +14,8 @@ import 'package:mustachehub/create/presenter/cubits/current_template_type_cubit.
 import 'package:mustachehub/create/presenter/cubits/package_form_cubit.dart';
 import 'package:mustachehub/create/presenter/cubits/template_upload_cubit.dart';
 import 'package:mustachehub/create/presenter/cubits/variables_cubit.dart';
-import 'package:mustachehub/create/presenter/state/package_form_state.dart';
-import 'package:mustachehub/create/presenter/state/template_upload_state.dart';
+import 'package:mustachehub/create/presenter/states/package_form_state.dart';
+import 'package:mustachehub/create/presenter/states/template_upload_state.dart';
 import 'package:mustachehub/create/ui/create_template_view/bottom_sheets/save_template_bottom_sheet/wrappers/template_upload_success_wrapper.dart';
 
 class SaveTemplateBottomSheet extends StatefulWidget {
@@ -191,7 +191,9 @@ class _SaveTemplateBottomSheetState extends State<SaveTemplateBottomSheet>
                           onPressed: isLoading
                               ? null
                               : () {
-                                  if (!context.isUserLoggedIn) {
+                                  final userUUID = context.userProfile()?.id;
+                                  if (!context.isUserLoggedIn ||
+                                      userUUID == null) {
                                     showNeedToLogInDialog(context);
                                     return;
                                   }
@@ -210,18 +212,28 @@ class _SaveTemplateBottomSheetState extends State<SaveTemplateBottomSheet>
                                   if (newPackageInfo == null) return;
 
                                   if (isEditing) {
-                                    final id = widget
+                                    final template = widget
                                         .currentTemplateTypeCubit.state
                                         .mapOrNull(
                                       withExistingTemplate: (value) =>
-                                          value.template.id,
+                                          value.template,
                                     );
-                                    if (id == null) return;
+                                    final id = template?.id;
+                                    final metadata = template?.metadata;
+                                    if (id == null || metadata == null) return;
                                     widget.templateUploadCubit.updatePackage(
                                       template: Template(
                                         id: id,
                                         info: newPackageInfo,
                                         payload: expectectedPayload,
+                                        metadata: metadata.copyWith(
+                                          // usersPermission: {
+                                          //   ...metadata.usersPermission,
+                                          //   userUUID: TemplatePermissions
+                                          //       .fullAccess.name,
+                                          // },
+                                          updatedAt: DateTime.now(),
+                                        ),
                                       ),
                                     );
                                   } else {
