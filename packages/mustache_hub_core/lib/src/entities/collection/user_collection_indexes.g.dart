@@ -22,7 +22,7 @@ Map<String, dynamic> _$$UserCollectionIndexesFolderImplToJson(
     <String, dynamic>{
       'name': instance.name,
       'description': instance.description,
-      'children': instance.children,
+      'children': instance.children.map((e) => e.toJson()).toList(),
       'runtimeType': instance.$type,
     };
 
@@ -52,6 +52,6 @@ _$UserCollectionIndexesRootImpl _$$UserCollectionIndexesRootImplFromJson(
 Map<String, dynamic> _$$UserCollectionIndexesRootImplToJson(
         _$UserCollectionIndexesRootImpl instance) =>
     <String, dynamic>{
-      'children': instance.children,
+      'children': instance.children.map((e) => e.toJson()).toList(),
       'runtimeType': instance.$type,
     };

@@ -24,11 +24,13 @@ class TemplateUploadCubit extends Cubit<TemplateUploadState>
   }
 
   Future<void> createPackage({
+    required String content,
     required PackageInfo packageInfo,
     required ExpectedPayload expectedPayload,
   }) async {
     emit(TemplateUploadState.loading());
     final response = await _repository.createPackage(
+      content: content,
       packageInfo: packageInfo,
       expectedPayload: expectedPayload,
     );

@@ -68,7 +68,8 @@ class UserCollectionRepositoryImpl implements IUserCollectionRepository {
       }
 
       Future<Result<UserCollectionFile, SourceError>> getUserCollectionFile(
-          String templateUuid) async {
+        String templateUuid,
+      ) async {
         final templateResult = await _templateRepository.getTemplate(
           templateId: templateUuid,
         );

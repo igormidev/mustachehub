@@ -8,6 +8,7 @@ part 'current_template_type_state.g.dart';
 abstract class CurrentTemplateTypeState with _$CurrentTemplateTypeState {
   factory CurrentTemplateTypeState.creating() =
       _CurrentTemplateTypeStateWithNewTemplate;
+
   factory CurrentTemplateTypeState.withExistingTemplate({
     required Template template,
   }) = _CurrentTemplateTypeStateWithExistingTemplate;

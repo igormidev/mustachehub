@@ -1,8 +1,37 @@
+import 'package:commom_states/cubits/user_collections_cubit.dart';
+import 'package:commom_states/states/user_collections_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mustachehub/dashboard/ui/navigation_widgets/dashboard_drawer/dashboard_drawer.dart';
+import 'package:mustachehub/generate/presenter/cubits/selected_template_cubit.dart';
+import 'package:mustachehub/generate/ui/views/generate_template_view/facades/selected_template_facade/selected_template_facade.dart';
+import 'package:mustachehub/generate/ui/views/generate_template_view/generate_template_methods.dart';
 
-class GenerateTemplateView extends StatelessWidget {
-  const GenerateTemplateView({super.key});
+class GenerateTemplateView extends StatefulWidget {
+  final String? templateUUID;
+  const GenerateTemplateView({
+    Key? key,
+    required this.templateUUID,
+  }) : super(key: key);
+
+  @override
+  State<GenerateTemplateView> createState() => _GenerateTemplateViewState();
+}
+
+class _GenerateTemplateViewState extends State<GenerateTemplateView>
+    with GenerateTemplateMethods {
+  @override
+  void initState() {
+    super.initState();
+    if (widget.templateUUID != null) {
+      final selectedTemplate = context.read<SelectedTemplateCubit>();
+      selectedTemplate.unselect();
+    }
+
+    final userCollection = context.read<UserCollectionsCubit>();
+    final UserCollectionsState state = userCollection.state;
+    setCurrentCollection(state);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -11,12 +40,7 @@ class GenerateTemplateView extends StatelessWidget {
         title: const Text('Generate text'),
       ),
       drawer: context.drawerOrNull,
-      body: Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 500),
-          child: const Text(''),
-        ),
-      ),
+      body: const SelectedTemplateFacade(),
     );
   }
 }

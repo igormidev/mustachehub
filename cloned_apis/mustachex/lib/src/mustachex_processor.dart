@@ -114,14 +114,14 @@ class MustachexProcessor {
       {_PartialsResolver? partialsResolver}) async {
     if (_sourceCache[source] == null) {
       _sourceCache[source] = {
-        'template': Template(source,
+        'templates': Template(source,
             lenient: false,
             partialResolver: partialsResolver,
             htmlEscapeValues: false),
         'variables': _mustacheVars(source)
       };
     }
-    Template template = _sourceCache[source]!['template'];
+    Template template = _sourceCache[source]!['templates'];
     Map variables = _sourceCache[source]!['variables'];
     var vars = Map.from(resolverVars);
     vars.addAll(mustache_recase.cases);

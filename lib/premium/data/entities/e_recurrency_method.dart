@@ -1,0 +1,4 @@
+enum ERecurrencyMethod {
+  monthly,
+  yearly;
+}

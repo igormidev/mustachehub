@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:mustache_hub_core/mustache_hub_core.dart';
-
+import 'package:collection/collection.dart' show IterableExtension;
 part 'user_collection.freezed.dart';
 part 'user_collection.g.dart';
 
@@ -82,9 +82,49 @@ extension FolderExtension on UserCollectionFolder {
       ],
     );
   }
+
+  Template? getTemplateWithId(String uuid) {
+    final child = children
+        .whereType<UserCollectionFile>()
+        .firstWhereOrNull((e) => e.template.id == uuid)
+        ?.template;
+
+    if (child != null) {
+      return child;
+    }
+
+    for (final e in children.whereType<UserCollectionFolder>()) {
+      final child = e.getTemplateWithId(uuid);
+      if (child != null) {
+        return child;
+      }
+    }
+
+    return null;
+  }
 }
 
 extension RootExtension on UserCollectionRoot {
+  Template? getTemplateWithId(String uuid) {
+    final child = children
+        .whereType<UserCollectionFile>()
+        .firstWhereOrNull((e) => e.template.id == uuid)
+        ?.template;
+
+    if (child != null) {
+      return child;
+    }
+
+    for (final e in children.whereType<UserCollectionFolder>()) {
+      final child = e.getTemplateWithId(uuid);
+      if (child != null) {
+        return child;
+      }
+    }
+
+    return null;
+  }
+
   UserCollectionRoot deepDeleteFolderWith(String uuid) {
     return copyWith(
       children: [

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mustache_hub_core/mustache_hub_core.dart';
 
 class FileNodeFacadeFace extends StatelessWidget {
@@ -10,6 +11,11 @@ class FileNodeFacadeFace extends StatelessWidget {
     return ListTile(
       title: Text(file.template.info.name),
       isThreeLine: true,
+      onTap: () {
+        context.goNamed('/generateText', pathParameters: {
+          'templateId': file.template.id,
+        });
+      },
       subtitle: Text(
           'Updated at: ${file.template.metadata.updatedAt}. ${file.template.info.description}'),
       // subtitle: Text(file.packageInfo.info.description),

@@ -7,6 +7,7 @@ export 'src/entities/session/account_tier.dart';
 export 'src/entities/session/user_profile.dart';
 export 'src/entities/package_info.dart';
 export 'src/entities/template_metadata.dart';
+export 'src/entities/premium_tier.dart';
 export 'src/entities/pipe/pipe.dart';
 export 'src/core/custom_exception.dart';
 export 'src/entities/collection/user_collection.dart';

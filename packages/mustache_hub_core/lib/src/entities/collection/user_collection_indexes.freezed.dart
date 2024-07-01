@@ -153,7 +153,8 @@ class __$$UserCollectionIndexesFolderImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true)
 class _$UserCollectionIndexesFolderImpl implements UserCollectionIndexesFolder {
   _$UserCollectionIndexesFolderImpl(
       {required this.name,
@@ -345,7 +346,8 @@ class __$$UserCollectionIndexesFileImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true)
 class _$UserCollectionIndexesFileImpl implements UserCollectionIndexesFile {
   _$UserCollectionIndexesFileImpl(
       {required this.templateUuid, final String? $type})
@@ -515,7 +517,8 @@ class __$$UserCollectionIndexesRootImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true)
 class _$UserCollectionIndexesRootImpl implements UserCollectionIndexesRoot {
   _$UserCollectionIndexesRootImpl(
       {required final List<UserCollectionIndexes> children,

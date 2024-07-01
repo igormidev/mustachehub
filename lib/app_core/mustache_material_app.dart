@@ -1,14 +1,22 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:commom_source/commom_source.dart';
 import 'package:commom_states/commom_states.dart';
 import 'package:commom_states/cubits/loading_cubit.dart';
+import 'package:commom_states/cubits/user_collections_cubit.dart';
 import 'package:commom_states/states/loading_state.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mustachehub/app_core/app_routes.dart';
+import 'package:mustachehub/collection/presenter/cubits/collection_node_cubit.dart';
+import 'package:mustachehub/create/data/repositories/implementations/package_form_repository_impl.dart';
+import 'package:mustachehub/create/data/repositories/interfaces/i_package_form_repository.dart';
+import 'package:mustachehub/create/presenter/cubits/content_string_cubit.dart';
+import 'package:mustachehub/create/presenter/cubits/template_upload_cubit.dart';
 import 'package:mustachehub/dashboard/data/entities/e_navigation_possibilities.dart';
 import 'package:mustachehub/dashboard/presenter/cubits/navigation_possibilities_cubit.dart';
+import 'package:mustachehub/generate/presenter/cubits/selected_template_cubit.dart';
 import 'package:mustachehub/settings/interactor/cubit/theme_cubit.dart';
 import 'package:mustachehub/settings/interactor/state/theme_state.dart';
 
@@ -68,11 +76,43 @@ class _MustacheMaterialAppState extends State<MustacheMaterialApp> {
         RepositoryProvider<FirebaseStorage>(
           create: (context) => FirebaseStorage.instance,
         ),
+        RepositoryProvider<ITemplateRepository>(
+          create: (context) => TemplateRepositoryImpl(),
+        ),
+        RepositoryProvider<IUserCollectionRepository>(
+          create: (context) => UserCollectionRepositoryImpl(
+            templateRepository: context.read<ITemplateRepository>(),
+          ),
+        ),
+        RepositoryProvider<IPackageFormRepository>(
+          create: (context) => PackageFormRepositoryImpl(
+            userTemplatesRepository: context.read<IUserCollectionRepository>(),
+          ),
+        ),
+        BlocProvider<TemplateUploadCubit>(
+          create: (context) => TemplateUploadCubit(
+            repository: context.read<IPackageFormRepository>(),
+          ),
+        ),
         BlocProvider<ThemeCubit>(
           create: (context) => ThemeCubit(),
         ),
+        BlocProvider<SelectedTemplateCubit>(
+          create: (context) => SelectedTemplateCubit(),
+        ),
+        BlocProvider<CollectionNodeCubit>(
+          create: (context) => CollectionNodeCubit(),
+        ),
+        BlocProvider<ContentStringCubit>(
+          create: (context) => ContentStringCubit(),
+        ),
         BlocProvider<SessionCubit>.value(value: sessionCubit),
         BlocProvider<LoadingCubit>(create: (context) => LoadingCubit()),
+        BlocProvider<UserCollectionsCubit>(
+          create: (context) => UserCollectionsCubit(
+            userCollectionRepository: context.read<IUserCollectionRepository>(),
+          ),
+        ),
         BlocProvider<NavigationPossibilitiesCubit>(
           create: (context) => NavigationPossibilitiesCubit(),
         ),

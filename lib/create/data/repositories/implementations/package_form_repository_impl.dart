@@ -24,6 +24,7 @@ class PackageFormRepositoryImpl implements IPackageFormRepository {
 
   @override
   Future<TemplateUploadState> createPackage({
+    required String content,
     required PackageInfo packageInfo,
     required ExpectedPayload expectedPayload,
   }) async {
@@ -41,6 +42,7 @@ class PackageFormRepositoryImpl implements IPackageFormRepository {
         final template = Template(
           id: uuid,
           info: packageInfo,
+          content: content,
           metadata: TemplateMetadata(
             createdAt: now,
             updatedAt: now,
@@ -62,11 +64,13 @@ class PackageFormRepositoryImpl implements IPackageFormRepository {
         );
 
         final collectionRef = _firestore.collection('collection').doc(userId);
-        final templateRef = _firestore.collection('template').doc(template.id);
+        final templateRef = _firestore.collection('templates').doc(template.id);
+        final indexesJson = newCollection.toIndexes.toJson();
+        final templateJson = template.toJson();
         await _firestore.runTransaction((transaction) async {
           transaction
-              .set(collectionRef, newCollection.toIndexes.toJson())
-              .set(templateRef, template.toJson());
+              .set(collectionRef, indexesJson)
+              .set(templateRef, templateJson);
         });
 
         return TemplateUploadState.success(
@@ -82,7 +86,8 @@ class PackageFormRepositoryImpl implements IPackageFormRepository {
   }) async {
     final now = DateTime.now();
     final userId = _auth.currentUser?.uid;
-    if (userId == null) {
+    final userEmail = _auth.currentUser?.uid;
+    if (userId == null || userEmail == null) {
       return TemplateUploadState.withError(
         message: SourceError.notLoggedIn().message,
       );
@@ -99,13 +104,13 @@ class PackageFormRepositoryImpl implements IPackageFormRepository {
             metadata:
                 template.metadata.copyWith(updatedAt: now, usersPermission: {
               ...oldTemplate.metadata.usersPermission,
-              userId: TemplatePermissions.fullAccess.name,
+              userEmail: TemplatePermissions.fullAccess.name,
             }),
           ),
         );
 
         final collectionRef = _firestore.collection('collection').doc(userId);
-        final templateRef = _firestore.collection('template').doc(template.id);
+        final templateRef = _firestore.collection('templates').doc(template.id);
         await _firestore.runTransaction((transaction) async {
           transaction
               .set(collectionRef, newCollection.toIndexes.toJson())
