@@ -35,10 +35,10 @@ class SigninTab extends StatelessWidget {
               const SizedBox(height: 25),
               const Center(
                 child: SizedBox(
-                  width: 480,
+                  width: 500,
                   child: FittedBox(
                     child: SizedBox(
-                      width: 480,
+                      width: 500,
                       child: SigninFormAndButtonsSection(),
                     ),
                   ),

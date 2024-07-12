@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mustache_hub_core/mustache_hub_core.dart';
 import 'package:mustachehub/collection/presenter/states/collection_nodes_state.dart';
+import 'package:uuid/uuid.dart';
 
 class CollectionNodeCubit extends Cubit<CollectionNodesState> {
   CollectionNodeCubit() : super(CollectionNodesState.empty());
@@ -33,7 +34,17 @@ class CollectionNodeCubit extends Cubit<CollectionNodesState> {
         else
           TreeNodeCollection(data: element),
     ]);
+    final prevState = state.mapOrNull(
+      withData: (value) => value.treeNode,
+    );
 
-    emit(CollectionNodesState.withData(treeNode: node));
+    print('isSame: ${prevState == node}');
+
+    emit(
+      CollectionNodesState.withData(
+        treeNode: node,
+        uuid: const Uuid().v4(),
+      ),
+    );
   }
 }

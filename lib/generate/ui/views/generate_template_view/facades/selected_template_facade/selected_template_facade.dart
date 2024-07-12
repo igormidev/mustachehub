@@ -23,8 +23,11 @@ class SelectedTemplateFacade extends StatelessWidget {
           return const SelectedTemplateEmptyFace();
         }
 
-        return TextOutputGeneratorView.fromTemplate(
-          template: template,
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: TextOutputGeneratorView.fromTemplate(
+            template: template,
+          ),
         );
       },
     );

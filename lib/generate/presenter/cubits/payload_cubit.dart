@@ -151,8 +151,7 @@ class PayloadCubit extends Cubit<PayloadState> {
     if (payloadDto == null) return;
 
     final List<ModelPipeDto> newDtos = [...payloadDto.modelDtos];
-    final index =
-        newDtos.indexWhere((dto) => dto.pipe.pipeId == newPipeDTO.pipe.pipeId);
+    final index = newDtos.indexWhere((dto) => dto.uuid == newPipeDTO.uuid);
     newDtos[index] = newPipeDTO;
 
     await updateContent(

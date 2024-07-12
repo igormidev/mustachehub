@@ -30,7 +30,8 @@ class PackageFormRepositoryImpl implements IPackageFormRepository {
   }) async {
     final now = DateTime.now();
     final userId = _auth.currentUser?.uid;
-    if (userId == null) {
+    final userEmail = _auth.currentUser?.email;
+    if (userId == null || userEmail == null) {
       return TemplateUploadState.withError(
         message: SourceError.notLoggedIn().message,
       );
@@ -48,7 +49,7 @@ class PackageFormRepositoryImpl implements IPackageFormRepository {
             updatedAt: now,
             isPrivate: false,
             usersPermission: {
-              userId: TemplatePermissions.fullAccess.name,
+              userEmail: TemplatePermissions.fullAccess.name,
             },
           ),
           payload: expectedPayload,

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mustache_hub_core/mustache_hub_core.dart';
+import 'package:mustachehub/app_core/theme/dialogs_api/implementations/confirm_dialog.dart';
+import 'package:mustachehub/create/presenter/mixins/clear_all_data_mixin.dart';
 import 'package:mustachehub/create/ui/create_template_view/methods/open_save_dialog_.dart';
 import 'package:mustachehub/create/ui/create_template_view/tabs/template_input_form_tab_view/template_input_form_tab_view.dart';
 import 'package:mustachehub/create/ui/create_template_view/tabs/template_output_tab_view/template_output_tab_view.dart';
@@ -11,15 +14,18 @@ import 'package:mustachehub/create/ui/create_template_view/wrappers/set_initial_
 import 'package:mustachehub/dashboard/ui/navigation_widgets/dashboard_drawer/dashboard_drawer.dart';
 
 class CreateTemplateView extends StatefulWidget {
-  final String? packageId;
-  const CreateTemplateView({super.key, required this.packageId});
+  final Template? template;
+  const CreateTemplateView({super.key, required this.template});
 
   @override
   State<CreateTemplateView> createState() => _CreateTemplateViewState();
 }
 
 class _CreateTemplateViewState extends State<CreateTemplateView>
-    with TemplateViewOpenTestBottomsheetMethod, OpenSaveDialog {
+    with
+        TemplateViewOpenTestBottomsheetMethod,
+        OpenSaveDialog,
+        ClearAllDataMixin {
   @override
   Widget build(BuildContext context) {
     return SetInitialStateWrapper(
@@ -34,8 +40,21 @@ class _CreateTemplateViewState extends State<CreateTemplateView>
               centerTitle: true,
               title: const Text('Create mustache template'),
               actions: [
+                IconButton(
+                  tooltip: 'Clear all',
+                  onPressed: () async {
+                    final confirm = await confirmDialog(context);
+
+                    if (confirm == true) {
+                      // ignore: use_build_context_synchronously
+                      clearAllDependencies(context);
+                    }
+                  },
+                  icon: const Icon(Icons.cleaning_services_outlined),
+                ),
                 if (willShowTestButton)
                   IconButton(
+                    tooltip: 'Test template',
                     onPressed: () => openTestDialog(context),
                     icon: const Icon(Icons.science_rounded),
                   ),

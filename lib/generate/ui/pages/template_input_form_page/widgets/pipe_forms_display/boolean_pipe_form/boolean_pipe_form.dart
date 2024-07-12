@@ -38,7 +38,7 @@ class BooleanPipeForm extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const CustomHeader(headerTitle: 'Boolean variables payload'),
+            const CustomHeader(headerTitle: 'Boolean variables'),
             const SizedBox(height: 8),
             Wrap(
               spacing: 8,

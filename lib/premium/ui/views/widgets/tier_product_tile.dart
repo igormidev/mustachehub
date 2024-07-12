@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:mustache_hub_core/mustache_hub_core.dart';
 import 'package:mustachehub/premium/data/extensions/premium_tier_extension.dart';
 import 'package:mustachehub/premium/ui/views/widgets/price_display.dart';
@@ -88,7 +89,15 @@ class TierProductTile extends StatelessWidget {
                       style: Theme.of(context).textTheme.labelSmall,
                     ),
                   ),
-                ),
+                )
+                    .animate(
+                      delay: 1.seconds,
+                      onPlay: (controller) => controller.repeat(),
+                    )
+                    .then(delay: 1.seconds)
+                    .shimmer(
+                      duration: 1.seconds,
+                    ),
               ),
             ),
           ],

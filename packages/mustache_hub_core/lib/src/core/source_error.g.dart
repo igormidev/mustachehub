@@ -76,3 +76,18 @@ Map<String, dynamic> _$$SourceErrorDontExistAnyDataImplToJson(
       'message': instance.message,
       'runtimeType': instance.$type,
     };
+
+_$SourceErrorDontHaveAccessImpl _$$SourceErrorDontHaveAccessImplFromJson(
+        Map<String, dynamic> json) =>
+    _$SourceErrorDontHaveAccessImpl(
+      message:
+          json['message'] as String? ?? 'You need have access to this datga',
+      $type: json['runtimeType'] as String?,
+    );
+
+Map<String, dynamic> _$$SourceErrorDontHaveAccessImplToJson(
+        _$SourceErrorDontHaveAccessImpl instance) =>
+    <String, dynamic>{
+      'message': instance.message,
+      'runtimeType': instance.$type,
+    };

@@ -99,7 +99,7 @@ class _AuthDesktopViewState extends State<AuthDesktopView>
                     ),
                   ),
                   ConstrainedBox(
-                    constraints: const BoxConstraints(maxWidth: 520),
+                    constraints: const BoxConstraints(maxWidth: 550),
                     child: widget.navigator,
                   ),
                 ],

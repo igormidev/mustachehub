@@ -71,7 +71,7 @@ class DashboardDrawer extends StatelessWidget with TabSelectionMixin {
                 if (user.urlDisplayImage == null) {
                   return Padding(
                     padding: const EdgeInsets.symmetric(
-                      horizontal: 20,
+                      horizontal: 12,
                       vertical: 8,
                     ),
                     child: OutlinedButton.icon(

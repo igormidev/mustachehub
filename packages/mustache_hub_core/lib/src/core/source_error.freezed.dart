@@ -26,6 +26,8 @@ SourceError _$SourceErrorFromJson(Map<String, dynamic> json) {
       return _SourceErrorNotLoggedIn.fromJson(json);
     case 'dontExistAnyData':
       return _SourceErrorDontExistAnyData.fromJson(json);
+    case 'dontHaveAccess':
+      return _SourceErrorDontHaveAccess.fromJson(json);
 
     default:
       throw CheckedFromJsonException(json, 'runtimeType', 'SourceError',
@@ -43,6 +45,7 @@ mixin _$SourceError {
     required TResult Function(String message) notFound,
     required TResult Function(String message) notLoggedIn,
     required TResult Function(String message) dontExistAnyData,
+    required TResult Function(String message) dontHaveAccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -52,6 +55,7 @@ mixin _$SourceError {
     TResult? Function(String message)? notFound,
     TResult? Function(String message)? notLoggedIn,
     TResult? Function(String message)? dontExistAnyData,
+    TResult? Function(String message)? dontHaveAccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -61,6 +65,7 @@ mixin _$SourceError {
     TResult Function(String message)? notFound,
     TResult Function(String message)? notLoggedIn,
     TResult Function(String message)? dontExistAnyData,
+    TResult Function(String message)? dontHaveAccess,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -72,6 +77,7 @@ mixin _$SourceError {
     required TResult Function(_SourceErrorNotLoggedIn value) notLoggedIn,
     required TResult Function(_SourceErrorDontExistAnyData value)
         dontExistAnyData,
+    required TResult Function(_SourceErrorDontHaveAccess value) dontHaveAccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -81,6 +87,7 @@ mixin _$SourceError {
     TResult? Function(_SourceErrorNotFound value)? notFound,
     TResult? Function(_SourceErrorNotLoggedIn value)? notLoggedIn,
     TResult? Function(_SourceErrorDontExistAnyData value)? dontExistAnyData,
+    TResult? Function(_SourceErrorDontHaveAccess value)? dontHaveAccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -90,6 +97,7 @@ mixin _$SourceError {
     TResult Function(_SourceErrorNotFound value)? notFound,
     TResult Function(_SourceErrorNotLoggedIn value)? notLoggedIn,
     TResult Function(_SourceErrorDontExistAnyData value)? dontExistAnyData,
+    TResult Function(_SourceErrorDontHaveAccess value)? dontHaveAccess,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -212,6 +220,7 @@ class _$SourceErrorStandardImpl implements _SourceErrorStandard {
     required TResult Function(String message) notFound,
     required TResult Function(String message) notLoggedIn,
     required TResult Function(String message) dontExistAnyData,
+    required TResult Function(String message) dontHaveAccess,
   }) {
     return standard(message);
   }
@@ -224,6 +233,7 @@ class _$SourceErrorStandardImpl implements _SourceErrorStandard {
     TResult? Function(String message)? notFound,
     TResult? Function(String message)? notLoggedIn,
     TResult? Function(String message)? dontExistAnyData,
+    TResult? Function(String message)? dontHaveAccess,
   }) {
     return standard?.call(message);
   }
@@ -236,6 +246,7 @@ class _$SourceErrorStandardImpl implements _SourceErrorStandard {
     TResult Function(String message)? notFound,
     TResult Function(String message)? notLoggedIn,
     TResult Function(String message)? dontExistAnyData,
+    TResult Function(String message)? dontHaveAccess,
     required TResult orElse(),
   }) {
     if (standard != null) {
@@ -253,6 +264,7 @@ class _$SourceErrorStandardImpl implements _SourceErrorStandard {
     required TResult Function(_SourceErrorNotLoggedIn value) notLoggedIn,
     required TResult Function(_SourceErrorDontExistAnyData value)
         dontExistAnyData,
+    required TResult Function(_SourceErrorDontHaveAccess value) dontHaveAccess,
   }) {
     return standard(this);
   }
@@ -265,6 +277,7 @@ class _$SourceErrorStandardImpl implements _SourceErrorStandard {
     TResult? Function(_SourceErrorNotFound value)? notFound,
     TResult? Function(_SourceErrorNotLoggedIn value)? notLoggedIn,
     TResult? Function(_SourceErrorDontExistAnyData value)? dontExistAnyData,
+    TResult? Function(_SourceErrorDontHaveAccess value)? dontHaveAccess,
   }) {
     return standard?.call(this);
   }
@@ -277,6 +290,7 @@ class _$SourceErrorStandardImpl implements _SourceErrorStandard {
     TResult Function(_SourceErrorNotFound value)? notFound,
     TResult Function(_SourceErrorNotLoggedIn value)? notLoggedIn,
     TResult Function(_SourceErrorDontExistAnyData value)? dontExistAnyData,
+    TResult Function(_SourceErrorDontHaveAccess value)? dontHaveAccess,
     required TResult orElse(),
   }) {
     if (standard != null) {
@@ -388,6 +402,7 @@ class _$SourceErrorCastImpl implements _SourceErrorCast {
     required TResult Function(String message) notFound,
     required TResult Function(String message) notLoggedIn,
     required TResult Function(String message) dontExistAnyData,
+    required TResult Function(String message) dontHaveAccess,
   }) {
     return cast(message);
   }
@@ -400,6 +415,7 @@ class _$SourceErrorCastImpl implements _SourceErrorCast {
     TResult? Function(String message)? notFound,
     TResult? Function(String message)? notLoggedIn,
     TResult? Function(String message)? dontExistAnyData,
+    TResult? Function(String message)? dontHaveAccess,
   }) {
     return cast?.call(message);
   }
@@ -412,6 +428,7 @@ class _$SourceErrorCastImpl implements _SourceErrorCast {
     TResult Function(String message)? notFound,
     TResult Function(String message)? notLoggedIn,
     TResult Function(String message)? dontExistAnyData,
+    TResult Function(String message)? dontHaveAccess,
     required TResult orElse(),
   }) {
     if (cast != null) {
@@ -429,6 +446,7 @@ class _$SourceErrorCastImpl implements _SourceErrorCast {
     required TResult Function(_SourceErrorNotLoggedIn value) notLoggedIn,
     required TResult Function(_SourceErrorDontExistAnyData value)
         dontExistAnyData,
+    required TResult Function(_SourceErrorDontHaveAccess value) dontHaveAccess,
   }) {
     return cast(this);
   }
@@ -441,6 +459,7 @@ class _$SourceErrorCastImpl implements _SourceErrorCast {
     TResult? Function(_SourceErrorNotFound value)? notFound,
     TResult? Function(_SourceErrorNotLoggedIn value)? notLoggedIn,
     TResult? Function(_SourceErrorDontExistAnyData value)? dontExistAnyData,
+    TResult? Function(_SourceErrorDontHaveAccess value)? dontHaveAccess,
   }) {
     return cast?.call(this);
   }
@@ -453,6 +472,7 @@ class _$SourceErrorCastImpl implements _SourceErrorCast {
     TResult Function(_SourceErrorNotFound value)? notFound,
     TResult Function(_SourceErrorNotLoggedIn value)? notLoggedIn,
     TResult Function(_SourceErrorDontExistAnyData value)? dontExistAnyData,
+    TResult Function(_SourceErrorDontHaveAccess value)? dontHaveAccess,
     required TResult orElse(),
   }) {
     if (cast != null) {
@@ -564,6 +584,7 @@ class _$SourceErrorNotFoundImpl implements _SourceErrorNotFound {
     required TResult Function(String message) notFound,
     required TResult Function(String message) notLoggedIn,
     required TResult Function(String message) dontExistAnyData,
+    required TResult Function(String message) dontHaveAccess,
   }) {
     return notFound(message);
   }
@@ -576,6 +597,7 @@ class _$SourceErrorNotFoundImpl implements _SourceErrorNotFound {
     TResult? Function(String message)? notFound,
     TResult? Function(String message)? notLoggedIn,
     TResult? Function(String message)? dontExistAnyData,
+    TResult? Function(String message)? dontHaveAccess,
   }) {
     return notFound?.call(message);
   }
@@ -588,6 +610,7 @@ class _$SourceErrorNotFoundImpl implements _SourceErrorNotFound {
     TResult Function(String message)? notFound,
     TResult Function(String message)? notLoggedIn,
     TResult Function(String message)? dontExistAnyData,
+    TResult Function(String message)? dontHaveAccess,
     required TResult orElse(),
   }) {
     if (notFound != null) {
@@ -605,6 +628,7 @@ class _$SourceErrorNotFoundImpl implements _SourceErrorNotFound {
     required TResult Function(_SourceErrorNotLoggedIn value) notLoggedIn,
     required TResult Function(_SourceErrorDontExistAnyData value)
         dontExistAnyData,
+    required TResult Function(_SourceErrorDontHaveAccess value) dontHaveAccess,
   }) {
     return notFound(this);
   }
@@ -617,6 +641,7 @@ class _$SourceErrorNotFoundImpl implements _SourceErrorNotFound {
     TResult? Function(_SourceErrorNotFound value)? notFound,
     TResult? Function(_SourceErrorNotLoggedIn value)? notLoggedIn,
     TResult? Function(_SourceErrorDontExistAnyData value)? dontExistAnyData,
+    TResult? Function(_SourceErrorDontHaveAccess value)? dontHaveAccess,
   }) {
     return notFound?.call(this);
   }
@@ -629,6 +654,7 @@ class _$SourceErrorNotFoundImpl implements _SourceErrorNotFound {
     TResult Function(_SourceErrorNotFound value)? notFound,
     TResult Function(_SourceErrorNotLoggedIn value)? notLoggedIn,
     TResult Function(_SourceErrorDontExistAnyData value)? dontExistAnyData,
+    TResult Function(_SourceErrorDontHaveAccess value)? dontHaveAccess,
     required TResult orElse(),
   }) {
     if (notFound != null) {
@@ -745,6 +771,7 @@ class _$SourceErrorNotLoggedInImpl implements _SourceErrorNotLoggedIn {
     required TResult Function(String message) notFound,
     required TResult Function(String message) notLoggedIn,
     required TResult Function(String message) dontExistAnyData,
+    required TResult Function(String message) dontHaveAccess,
   }) {
     return notLoggedIn(message);
   }
@@ -757,6 +784,7 @@ class _$SourceErrorNotLoggedInImpl implements _SourceErrorNotLoggedIn {
     TResult? Function(String message)? notFound,
     TResult? Function(String message)? notLoggedIn,
     TResult? Function(String message)? dontExistAnyData,
+    TResult? Function(String message)? dontHaveAccess,
   }) {
     return notLoggedIn?.call(message);
   }
@@ -769,6 +797,7 @@ class _$SourceErrorNotLoggedInImpl implements _SourceErrorNotLoggedIn {
     TResult Function(String message)? notFound,
     TResult Function(String message)? notLoggedIn,
     TResult Function(String message)? dontExistAnyData,
+    TResult Function(String message)? dontHaveAccess,
     required TResult orElse(),
   }) {
     if (notLoggedIn != null) {
@@ -786,6 +815,7 @@ class _$SourceErrorNotLoggedInImpl implements _SourceErrorNotLoggedIn {
     required TResult Function(_SourceErrorNotLoggedIn value) notLoggedIn,
     required TResult Function(_SourceErrorDontExistAnyData value)
         dontExistAnyData,
+    required TResult Function(_SourceErrorDontHaveAccess value) dontHaveAccess,
   }) {
     return notLoggedIn(this);
   }
@@ -798,6 +828,7 @@ class _$SourceErrorNotLoggedInImpl implements _SourceErrorNotLoggedIn {
     TResult? Function(_SourceErrorNotFound value)? notFound,
     TResult? Function(_SourceErrorNotLoggedIn value)? notLoggedIn,
     TResult? Function(_SourceErrorDontExistAnyData value)? dontExistAnyData,
+    TResult? Function(_SourceErrorDontHaveAccess value)? dontHaveAccess,
   }) {
     return notLoggedIn?.call(this);
   }
@@ -810,6 +841,7 @@ class _$SourceErrorNotLoggedInImpl implements _SourceErrorNotLoggedIn {
     TResult Function(_SourceErrorNotFound value)? notFound,
     TResult Function(_SourceErrorNotLoggedIn value)? notLoggedIn,
     TResult Function(_SourceErrorDontExistAnyData value)? dontExistAnyData,
+    TResult Function(_SourceErrorDontHaveAccess value)? dontHaveAccess,
     required TResult orElse(),
   }) {
     if (notLoggedIn != null) {
@@ -926,6 +958,7 @@ class _$SourceErrorDontExistAnyDataImpl
     required TResult Function(String message) notFound,
     required TResult Function(String message) notLoggedIn,
     required TResult Function(String message) dontExistAnyData,
+    required TResult Function(String message) dontHaveAccess,
   }) {
     return dontExistAnyData(message);
   }
@@ -938,6 +971,7 @@ class _$SourceErrorDontExistAnyDataImpl
     TResult? Function(String message)? notFound,
     TResult? Function(String message)? notLoggedIn,
     TResult? Function(String message)? dontExistAnyData,
+    TResult? Function(String message)? dontHaveAccess,
   }) {
     return dontExistAnyData?.call(message);
   }
@@ -950,6 +984,7 @@ class _$SourceErrorDontExistAnyDataImpl
     TResult Function(String message)? notFound,
     TResult Function(String message)? notLoggedIn,
     TResult Function(String message)? dontExistAnyData,
+    TResult Function(String message)? dontHaveAccess,
     required TResult orElse(),
   }) {
     if (dontExistAnyData != null) {
@@ -967,6 +1002,7 @@ class _$SourceErrorDontExistAnyDataImpl
     required TResult Function(_SourceErrorNotLoggedIn value) notLoggedIn,
     required TResult Function(_SourceErrorDontExistAnyData value)
         dontExistAnyData,
+    required TResult Function(_SourceErrorDontHaveAccess value) dontHaveAccess,
   }) {
     return dontExistAnyData(this);
   }
@@ -979,6 +1015,7 @@ class _$SourceErrorDontExistAnyDataImpl
     TResult? Function(_SourceErrorNotFound value)? notFound,
     TResult? Function(_SourceErrorNotLoggedIn value)? notLoggedIn,
     TResult? Function(_SourceErrorDontExistAnyData value)? dontExistAnyData,
+    TResult? Function(_SourceErrorDontHaveAccess value)? dontHaveAccess,
   }) {
     return dontExistAnyData?.call(this);
   }
@@ -991,6 +1028,7 @@ class _$SourceErrorDontExistAnyDataImpl
     TResult Function(_SourceErrorNotFound value)? notFound,
     TResult Function(_SourceErrorNotLoggedIn value)? notLoggedIn,
     TResult Function(_SourceErrorDontExistAnyData value)? dontExistAnyData,
+    TResult Function(_SourceErrorDontHaveAccess value)? dontHaveAccess,
     required TResult orElse(),
   }) {
     if (dontExistAnyData != null) {
@@ -1019,5 +1057,192 @@ abstract class _SourceErrorDontExistAnyData implements SourceError {
   @override
   @JsonKey(ignore: true)
   _$$SourceErrorDontExistAnyDataImplCopyWith<_$SourceErrorDontExistAnyDataImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$SourceErrorDontHaveAccessImplCopyWith<$Res>
+    implements $SourceErrorCopyWith<$Res> {
+  factory _$$SourceErrorDontHaveAccessImplCopyWith(
+          _$SourceErrorDontHaveAccessImpl value,
+          $Res Function(_$SourceErrorDontHaveAccessImpl) then) =
+      __$$SourceErrorDontHaveAccessImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String message});
+}
+
+/// @nodoc
+class __$$SourceErrorDontHaveAccessImplCopyWithImpl<$Res>
+    extends _$SourceErrorCopyWithImpl<$Res, _$SourceErrorDontHaveAccessImpl>
+    implements _$$SourceErrorDontHaveAccessImplCopyWith<$Res> {
+  __$$SourceErrorDontHaveAccessImplCopyWithImpl(
+      _$SourceErrorDontHaveAccessImpl _value,
+      $Res Function(_$SourceErrorDontHaveAccessImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? message = null,
+  }) {
+    return _then(_$SourceErrorDontHaveAccessImpl(
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$SourceErrorDontHaveAccessImpl implements _SourceErrorDontHaveAccess {
+  _$SourceErrorDontHaveAccessImpl(
+      {this.message = 'You need have access to this datga',
+      final String? $type})
+      : $type = $type ?? 'dontHaveAccess';
+
+  factory _$SourceErrorDontHaveAccessImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SourceErrorDontHaveAccessImplFromJson(json);
+
+  @override
+  @JsonKey()
+  final String message;
+
+  @JsonKey(name: 'runtimeType')
+  final String $type;
+
+  @override
+  String toString() {
+    return 'SourceError.dontHaveAccess(message: $message)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SourceErrorDontHaveAccessImpl &&
+            (identical(other.message, message) || other.message == message));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, message);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SourceErrorDontHaveAccessImplCopyWith<_$SourceErrorDontHaveAccessImpl>
+      get copyWith => __$$SourceErrorDontHaveAccessImplCopyWithImpl<
+          _$SourceErrorDontHaveAccessImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String message) standard,
+    required TResult Function(String message) cast,
+    required TResult Function(String message) notFound,
+    required TResult Function(String message) notLoggedIn,
+    required TResult Function(String message) dontExistAnyData,
+    required TResult Function(String message) dontHaveAccess,
+  }) {
+    return dontHaveAccess(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String message)? standard,
+    TResult? Function(String message)? cast,
+    TResult? Function(String message)? notFound,
+    TResult? Function(String message)? notLoggedIn,
+    TResult? Function(String message)? dontExistAnyData,
+    TResult? Function(String message)? dontHaveAccess,
+  }) {
+    return dontHaveAccess?.call(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String message)? standard,
+    TResult Function(String message)? cast,
+    TResult Function(String message)? notFound,
+    TResult Function(String message)? notLoggedIn,
+    TResult Function(String message)? dontExistAnyData,
+    TResult Function(String message)? dontHaveAccess,
+    required TResult orElse(),
+  }) {
+    if (dontHaveAccess != null) {
+      return dontHaveAccess(message);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_SourceErrorStandard value) standard,
+    required TResult Function(_SourceErrorCast value) cast,
+    required TResult Function(_SourceErrorNotFound value) notFound,
+    required TResult Function(_SourceErrorNotLoggedIn value) notLoggedIn,
+    required TResult Function(_SourceErrorDontExistAnyData value)
+        dontExistAnyData,
+    required TResult Function(_SourceErrorDontHaveAccess value) dontHaveAccess,
+  }) {
+    return dontHaveAccess(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_SourceErrorStandard value)? standard,
+    TResult? Function(_SourceErrorCast value)? cast,
+    TResult? Function(_SourceErrorNotFound value)? notFound,
+    TResult? Function(_SourceErrorNotLoggedIn value)? notLoggedIn,
+    TResult? Function(_SourceErrorDontExistAnyData value)? dontExistAnyData,
+    TResult? Function(_SourceErrorDontHaveAccess value)? dontHaveAccess,
+  }) {
+    return dontHaveAccess?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_SourceErrorStandard value)? standard,
+    TResult Function(_SourceErrorCast value)? cast,
+    TResult Function(_SourceErrorNotFound value)? notFound,
+    TResult Function(_SourceErrorNotLoggedIn value)? notLoggedIn,
+    TResult Function(_SourceErrorDontExistAnyData value)? dontExistAnyData,
+    TResult Function(_SourceErrorDontHaveAccess value)? dontHaveAccess,
+    required TResult orElse(),
+  }) {
+    if (dontHaveAccess != null) {
+      return dontHaveAccess(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$SourceErrorDontHaveAccessImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _SourceErrorDontHaveAccess implements SourceError {
+  factory _SourceErrorDontHaveAccess({final String message}) =
+      _$SourceErrorDontHaveAccessImpl;
+
+  factory _SourceErrorDontHaveAccess.fromJson(Map<String, dynamic> json) =
+      _$SourceErrorDontHaveAccessImpl.fromJson;
+
+  @override
+  String get message;
+  @override
+  @JsonKey(ignore: true)
+  _$$SourceErrorDontHaveAccessImplCopyWith<_$SourceErrorDontHaveAccessImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

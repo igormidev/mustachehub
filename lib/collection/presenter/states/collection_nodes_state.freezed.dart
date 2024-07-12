@@ -19,19 +19,20 @@ mixin _$CollectionNodesState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() empty,
-    required TResult Function(TreeNode<UserCollection> treeNode) withData,
+    required TResult Function(String uuid, TreeNode<UserCollection> treeNode)
+        withData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? empty,
-    TResult? Function(TreeNode<UserCollection> treeNode)? withData,
+    TResult? Function(String uuid, TreeNode<UserCollection> treeNode)? withData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? empty,
-    TResult Function(TreeNode<UserCollection> treeNode)? withData,
+    TResult Function(String uuid, TreeNode<UserCollection> treeNode)? withData,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -118,7 +119,8 @@ class _$CollectionNodesStateEmptyImpl implements _CollectionNodesStateEmpty {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() empty,
-    required TResult Function(TreeNode<UserCollection> treeNode) withData,
+    required TResult Function(String uuid, TreeNode<UserCollection> treeNode)
+        withData,
   }) {
     return empty();
   }
@@ -127,7 +129,7 @@ class _$CollectionNodesStateEmptyImpl implements _CollectionNodesStateEmpty {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? empty,
-    TResult? Function(TreeNode<UserCollection> treeNode)? withData,
+    TResult? Function(String uuid, TreeNode<UserCollection> treeNode)? withData,
   }) {
     return empty?.call();
   }
@@ -136,7 +138,7 @@ class _$CollectionNodesStateEmptyImpl implements _CollectionNodesStateEmpty {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? empty,
-    TResult Function(TreeNode<UserCollection> treeNode)? withData,
+    TResult Function(String uuid, TreeNode<UserCollection> treeNode)? withData,
     required TResult orElse(),
   }) {
     if (empty != null) {
@@ -188,7 +190,7 @@ abstract class _$$CollectionNodesStateWithDataImplCopyWith<$Res> {
           $Res Function(_$CollectionNodesStateWithDataImpl) then) =
       __$$CollectionNodesStateWithDataImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({TreeNode<UserCollection> treeNode});
+  $Res call({String uuid, TreeNode<UserCollection> treeNode});
 }
 
 /// @nodoc
@@ -204,9 +206,14 @@ class __$$CollectionNodesStateWithDataImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? uuid = null,
     Object? treeNode = null,
   }) {
     return _then(_$CollectionNodesStateWithDataImpl(
+      uuid: null == uuid
+          ? _value.uuid
+          : uuid // ignore: cast_nullable_to_non_nullable
+              as String,
       treeNode: null == treeNode
           ? _value.treeNode
           : treeNode // ignore: cast_nullable_to_non_nullable
@@ -219,14 +226,17 @@ class __$$CollectionNodesStateWithDataImplCopyWithImpl<$Res>
 
 class _$CollectionNodesStateWithDataImpl
     implements _CollectionNodesStateWithData {
-  _$CollectionNodesStateWithDataImpl({required this.treeNode});
+  _$CollectionNodesStateWithDataImpl(
+      {required this.uuid, required this.treeNode});
 
+  @override
+  final String uuid;
   @override
   final TreeNode<UserCollection> treeNode;
 
   @override
   String toString() {
-    return 'CollectionNodesState.withData(treeNode: $treeNode)';
+    return 'CollectionNodesState.withData(uuid: $uuid, treeNode: $treeNode)';
   }
 
   @override
@@ -234,12 +244,13 @@ class _$CollectionNodesStateWithDataImpl
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CollectionNodesStateWithDataImpl &&
+            (identical(other.uuid, uuid) || other.uuid == uuid) &&
             (identical(other.treeNode, treeNode) ||
                 other.treeNode == treeNode));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, treeNode);
+  int get hashCode => Object.hash(runtimeType, uuid, treeNode);
 
   @JsonKey(ignore: true)
   @override
@@ -253,29 +264,30 @@ class _$CollectionNodesStateWithDataImpl
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() empty,
-    required TResult Function(TreeNode<UserCollection> treeNode) withData,
+    required TResult Function(String uuid, TreeNode<UserCollection> treeNode)
+        withData,
   }) {
-    return withData(treeNode);
+    return withData(uuid, treeNode);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? empty,
-    TResult? Function(TreeNode<UserCollection> treeNode)? withData,
+    TResult? Function(String uuid, TreeNode<UserCollection> treeNode)? withData,
   }) {
-    return withData?.call(treeNode);
+    return withData?.call(uuid, treeNode);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? empty,
-    TResult Function(TreeNode<UserCollection> treeNode)? withData,
+    TResult Function(String uuid, TreeNode<UserCollection> treeNode)? withData,
     required TResult orElse(),
   }) {
     if (withData != null) {
-      return withData(treeNode);
+      return withData(uuid, treeNode);
     }
     return orElse();
   }
@@ -314,9 +326,11 @@ class _$CollectionNodesStateWithDataImpl
 
 abstract class _CollectionNodesStateWithData implements CollectionNodesState {
   factory _CollectionNodesStateWithData(
-          {required final TreeNode<UserCollection> treeNode}) =
+          {required final String uuid,
+          required final TreeNode<UserCollection> treeNode}) =
       _$CollectionNodesStateWithDataImpl;
 
+  String get uuid;
   TreeNode<UserCollection> get treeNode;
   @JsonKey(ignore: true)
   _$$CollectionNodesStateWithDataImplCopyWith<

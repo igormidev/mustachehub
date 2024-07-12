@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mustache_hub_core/mustache_hub_core.dart';
 import 'package:result_dart/result_dart.dart';
 import 'package:uuid/uuid.dart';
-
 import '../template_repository/i_template_repository.dart';
 import 'i_user_collection_repository.dart';
 
@@ -76,15 +75,21 @@ class UserCollectionRepositoryImpl implements IUserCollectionRepository {
 
         return templateResult
             .map(
-              (template) => UserCollectionFile(template: template),
-            )
+          (template) => UserCollectionFile(template: template),
+        )
             .flatMapError(
-              (error) => SourceError.standard(
-                message:
-                    'Fatal failure while trying to get template from server. '
-                    'Try again later. If the error persists, please contact support.',
-              ).toFailure(),
-            );
+          (error) {
+            if (error.dontHaveAccess) {
+              return error.toFailure();
+            }
+
+            return SourceError.standard(
+              message:
+                  'Fatal failure while trying to get template from server. '
+                  'Try again later. If the error persists, please contact support.',
+            ).toFailure();
+          },
+        );
       }
 
       Future<Result<UserCollectionFolder, SourceError>> getUserCollectionFolder(
@@ -97,7 +102,6 @@ class UserCollectionRepositoryImpl implements IUserCollectionRepository {
           // If error, return error
           final possibleError = await node.mapOrNull<Future<SourceError?>>(
             folder: (value) async {
-              // final List<UserCollection> children = [];
               final List<UserCollection> children = [];
 
               for (final child in value.children) {
@@ -125,7 +129,9 @@ class UserCollectionRepositoryImpl implements IUserCollectionRepository {
                 );
 
                 if (res != null) {
-                  return res;
+                  if (!res.dontHaveAccess) {
+                    return res;
+                  }
                 }
               }
 
@@ -153,7 +159,9 @@ class UserCollectionRepositoryImpl implements IUserCollectionRepository {
           );
 
           if (possibleError != null) {
-            return possibleError.toFailure();
+            if (!possibleError.dontHaveAccess) {
+              return possibleError.toFailure();
+            }
           }
         }
 
@@ -185,7 +193,9 @@ class UserCollectionRepositoryImpl implements IUserCollectionRepository {
         });
 
         if (resp != null) {
-          return resp.toFailure();
+          if (!resp.dontHaveAccess) {
+            return resp.toFailure();
+          }
         }
       }
 
@@ -200,7 +210,9 @@ class UserCollectionRepositoryImpl implements IUserCollectionRepository {
         });
 
         if (resp != null) {
-          return resp.toFailure();
+          if (!resp.dontHaveAccess) {
+            return resp.toFailure();
+          }
         }
       }
 

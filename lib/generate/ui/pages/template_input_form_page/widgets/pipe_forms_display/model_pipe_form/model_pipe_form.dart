@@ -39,7 +39,10 @@ class ModelPipeForm extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const CustomHeader(headerTitle: 'Model variables payload'),
+                const SizedBox(height: 8),
+                const Divider(height: 8),
+                const SizedBox(height: 8),
+                const CustomHeader(headerTitle: 'Model variables'),
                 ...pipes.map(
                   (ModelPipeDto pipeDTO) {
                     final StructureDTONode treeNode = StructureDTONode.root(
@@ -96,8 +99,6 @@ class ModelPipeForm extends StatelessWidget {
                             },
                           ),
                         ),
-                        const SizedBox(height: 8),
-                        const Divider(),
                       ],
                     );
                   },

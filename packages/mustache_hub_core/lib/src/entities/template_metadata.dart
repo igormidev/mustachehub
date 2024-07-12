@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'template_metadata.freezed.dart';
@@ -14,6 +15,16 @@ abstract class TemplateMetadata with _$TemplateMetadata {
 
   factory TemplateMetadata.fromJson(Map<String, dynamic> json) =>
       _$TemplateMetadataFromJson(json);
+}
+
+extension TemplateMetadataExtension on TemplateMetadata {
+   TemplatePermissions? permissionWithId(String? id) {
+    if (id == null) return null;
+    final permissionText = usersPermission[id];
+    if (permissionText == null) return null;
+    return TemplatePermissions.values
+        .firstWhereOrNull((element) => element.name == permissionText);
+  }
 }
 
 enum TemplatePermissions {

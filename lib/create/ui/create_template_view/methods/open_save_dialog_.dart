@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mustachehub/app_core/theme/components/custom_bottom_sheet.dart';
+import 'package:mustachehub/create/presenter/cubits/cleaning_dependencies_cubit.dart';
 import 'package:mustachehub/create/presenter/cubits/content_string_cubit.dart';
 import 'package:mustachehub/create/presenter/cubits/current_template_type_cubit.dart';
 import 'package:mustachehub/create/presenter/cubits/package_form_cubit.dart';
@@ -15,6 +16,7 @@ mixin OpenSaveDialog {
     final packageFormCubit = context.read<PackageFormCubit>();
     final currentTemplateTypeCubit = context.read<CurrentTemplateTypeCubit>();
     final templateUploadCubit = context.read<TemplateUploadCubit>();
+    final cleaningDependenciesCubit = context.read<CleaningDependenciesCubit>();
 
     showCustomBottomSheet(
       context: context,
@@ -26,6 +28,7 @@ mixin OpenSaveDialog {
         variablesCubit: variablesCubit,
         templateUploadCubit: templateUploadCubit,
         packageFormCubit: packageFormCubit,
+        cleaningDependenciesCubit: cleaningDependenciesCubit,
       ),
     );
   }

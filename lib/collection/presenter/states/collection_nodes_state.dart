@@ -9,6 +9,7 @@ abstract class CollectionNodesState with _$CollectionNodesState {
   factory CollectionNodesState.empty() = _CollectionNodesStateEmpty;
 
   factory CollectionNodesState.withData({
+    required String uuid,
     required TreeNodeCollection treeNode,
   }) = _CollectionNodesStateWithData;
 }

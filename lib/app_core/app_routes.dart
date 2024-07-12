@@ -2,13 +2,13 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:commom_source/commom_source.dart';
 import 'package:commom_states/cubits/session_cubit.dart';
-import 'package:commom_states/cubits/user_collections_cubit.dart';
 import 'package:commom_states/states/session_state.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mustache_hub_core/mustache_hub_core.dart';
 import 'package:mustachehub/account/data/respositories/implementations/account_repository_impl.dart';
 import 'package:mustachehub/account/data/respositories/implementations/image_repository_impl.dart';
 import 'package:mustachehub/account/data/respositories/interfaces/i_account_repository.dart';
@@ -32,10 +32,12 @@ import 'package:mustachehub/auth/ui/views/auth_desktop_view/auth_desktop_view.da
 import 'package:mustachehub/auth/ui/views/login_view/login_view.dart';
 import 'package:mustachehub/auth/ui/views/pass_recovery_view/pass_recovery_view.dart';
 import 'package:mustachehub/auth/ui/views/signin_view/signin_view.dart';
+import 'package:mustachehub/collection/presenter/cubits/delete_collection_cubit.dart';
 import 'package:mustachehub/collection/ui/views/templates_tree_view/templates_tree_view.dart';
 import 'package:mustachehub/create/data/adapters/token_identifier_flatmap_adapter.dart';
 import 'package:mustachehub/create/data/adapters/token_identifier_text_display_adapter.dart';
 import 'package:mustachehub/create/data/repositories/interfaces/i_package_form_repository.dart';
+import 'package:mustachehub/create/presenter/cubits/cleaning_dependencies_cubit.dart';
 import 'package:mustachehub/create/presenter/cubits/content_string_cubit.dart';
 import 'package:mustachehub/create/presenter/cubits/current_template_type_cubit.dart';
 import 'package:mustachehub/create/presenter/cubits/edit_model_info_display_cubit.dart';
@@ -137,16 +139,45 @@ final router = GoRouter(
           path: '/collection',
           parentNavigatorKey: NavigatorService.i.dashboardNavigatorKey,
           builder: (context, state) {
-            return const TemplatesTreeView();
+            return MultiBlocProvider(providers: [
+              RepositoryProvider<DeleteCollectionCubit>(
+                create: (context) => DeleteCollectionCubit(
+                  userCollectionRepository:
+                      context.read<IUserCollectionRepository>(),
+                ),
+              ),
+            ], child: const TemplatesTreeView());
           },
         ),
         GoRoute(
           path: '/generateText',
           parentNavigatorKey: NavigatorService.i.dashboardNavigatorKey,
           builder: (context, state) {
-            final templateId = state.pathParameters['templateId'];
-            return GenerateTemplateView(
-              templateUUID: templateId,
+            final templateId = state.uri.queryParameters['templateId'];
+            return MultiBlocProvider(
+              providers: [
+                /// Generator and test
+                RepositoryProvider<DtoAdapter>(
+                  create: (context) => DtoAdapter(),
+                ),
+                BlocProvider<ContentCubit>(
+                  create: (context) => ContentCubit(
+                    dtoAdapter: context.read<DtoAdapter>(),
+                  ),
+                ),
+                BlocProvider<FormStatsCubit>(
+                  create: (context) => FormStatsCubit(),
+                ),
+                BlocProvider<PayloadCubit>(
+                  create: (context) => PayloadCubit(
+                    dtoAdapter: context.read<DtoAdapter>(),
+                    outputCubit: context.read<ContentCubit>(),
+                  ),
+                ),
+              ],
+              child: GenerateTemplateView(
+                templateUUID: templateId,
+              ),
             );
           },
         ),
@@ -154,7 +185,10 @@ final router = GoRouter(
           path: '/createMustache',
           parentNavigatorKey: NavigatorService.i.dashboardNavigatorKey,
           builder: (context, state) {
-            final packageId = state.pathParameters['packageId'];
+            final extra = state.extra;
+            final Template? template =
+                (extra != null && extra is Template) ? extra : null;
+
             return MultiBlocProvider(
               providers: [
                 // Repositories
@@ -179,12 +213,8 @@ final router = GoRouter(
                     repository: context.read<IPackageFormRepository>(),
                   ),
                 ),
-                BlocProvider(
-                    create: (context) => UserCollectionsCubit(
-                          userCollectionRepository:
-                              context.read<IUserCollectionRepository>(),
-                        )),
                 BlocProvider(create: (context) => FieldsTextSizeCubit()),
+                BlocProvider(create: (context) => CleaningDependenciesCubit()),
                 BlocProvider(create: (context) => EditModelInfoDisplayCubit()),
                 BlocProvider(create: (context) => PackageFormCubit()),
                 BlocProvider(
@@ -220,7 +250,7 @@ final router = GoRouter(
                 ),
               ],
               child: CreateTemplateView(
-                packageId: packageId,
+                template: template,
               ),
             );
           },

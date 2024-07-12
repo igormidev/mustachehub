@@ -55,12 +55,19 @@ class _FinalWidget extends StatelessWidget {
     return ListView(
       children: [
         TextPipeForm(expectedPayload: generatorData, content: content),
-        const Divider(height: 8),
-        const SizedBox(height: 8),
+        if (generatorData.textPipes.isNotEmpty &&
+            generatorData.booleanPipes.isNotEmpty) ...[
+          const Divider(height: 8),
+          const SizedBox(height: 8),
+        ],
         BooleanPipeForm(expectedPayload: generatorData, content: content),
-        const SizedBox(height: 8),
-        const Divider(height: 8),
-        const SizedBox(height: 8),
+        if ((generatorData.textPipes.isNotEmpty ||
+                generatorData.booleanPipes.isNotEmpty) &&
+            generatorData.modelPipes.isNotEmpty) ...[
+          const SizedBox(height: 8),
+          const Divider(height: 8),
+          const SizedBox(height: 8),
+        ],
         ModelPipeForm(expectedPayload: generatorData, content: content),
         const SizedBox(height: 80),
       ],

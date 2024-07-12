@@ -40,7 +40,7 @@ class TemplateRepositoryImpl implements ITemplateRepository {
         if (template.metadata.usersPermission.containsKey(userEmail)) {
           return template.toSuccess();
         } else {
-          return SourceError.dontExistAnyData(
+          return SourceError.dontHaveAccess(
                   message: 'No data found. Maybe you are trying '
                       'to access an private template. If that is '
                       'the case, please check if you have the '

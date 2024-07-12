@@ -114,10 +114,10 @@ class _TextContentTabState extends State<TextContentTab> {
 
   @override
   void dispose() {
-    super.dispose();
     controller.dispose();
     optionsController.dispose();
     decouncer.dispose();
+    super.dispose();
   }
 
   @override

@@ -25,6 +25,18 @@ abstract class SourceError with _$SourceError {
     required String message,
   }) = _SourceErrorDontExistAnyData;
 
+  factory SourceError.dontHaveAccess({
+    @Default('You need have access to this datga') String message,
+  }) = _SourceErrorDontHaveAccess;
+
   factory SourceError.fromJson(Map<String, dynamic> json) =>
       _$SourceErrorFromJson(json);
+}
+
+extension SourceErrorX on SourceError {
+  bool get dontHaveAccess => this is _SourceErrorDontHaveAccess;
+  bool get dontExistAnyData => this is _SourceErrorDontExistAnyData;
+  bool get notLoggedIn => this is _SourceErrorNotLoggedIn;
+  bool get notFound => this is _SourceErrorNotFound;
+  bool get castError => this is _SourceErrorCast;
 }

@@ -11,7 +11,7 @@ class UserCollectionsCubit extends HydratedCubit<UserCollectionsState> {
         super(UserCollectionsState.loading());
 
   void setNewCollection(UserCollectionRoot root) async {
-    emit(UserCollectionsState.processing(
+    emit(UserCollectionsState.withData(
       userCollections: root,
     ));
   }
