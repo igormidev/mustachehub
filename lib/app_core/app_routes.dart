@@ -58,6 +58,7 @@ import 'package:mustachehub/generate/data/adapters/dto_adapter.dart';
 import 'package:mustachehub/generate/presenter/cubits/content_cubit.dart';
 import 'package:mustachehub/generate/presenter/cubits/form_stats_cubit.dart';
 import 'package:mustachehub/generate/presenter/cubits/payload_cubit.dart';
+import 'package:mustachehub/generate/presenter/cubits/template_fetch_cubit.dart';
 import 'package:mustachehub/generate/ui/views/generate_template_view/generate_template_view.dart';
 import 'package:mustachehub/premium/presenter/cubit/billing_configurations_cubit.dart';
 import 'package:mustachehub/premium/ui/views/became_premium_view.dart';
@@ -174,6 +175,14 @@ final router = GoRouter(
                     outputCubit: context.read<ContentCubit>(),
                   ),
                 ),
+                RepositoryProvider<ITemplateRepository>(
+                  create: (context) => TemplateRepositoryImpl(),
+                ),
+                BlocProvider<TemplateFetchCubit>(
+                  create: (context) => TemplateFetchCubit(
+                    templateRepository: context.read<ITemplateRepository>(),
+                  ),
+                ),
               ],
               child: GenerateTemplateView(
                 templateUUID: templateId,
@@ -188,6 +197,8 @@ final router = GoRouter(
             final extra = state.extra;
             final Template? template =
                 (extra != null && extra is Template) ? extra : null;
+
+            // final templateId = state.uri.queryParameters['templateId'];
 
             return MultiBlocProvider(
               providers: [

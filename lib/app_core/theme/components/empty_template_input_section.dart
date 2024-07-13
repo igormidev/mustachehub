@@ -27,6 +27,15 @@ class EmptyIndicatorSection extends StatelessWidget {
     this.children = const [],
   }) : assetName = 'assets/lottie/error_widget.json';
 
+  const EmptyIndicatorSection.loading({
+    super.key,
+    required this.text,
+    this.willHaveCircleAvatarInDarkMode = false,
+    this.margin,
+    this.sholdRepeat = true,
+    this.children = const [],
+  }) : assetName = 'assets/lottie/visual_identity.json';
+
   @override
   Widget build(BuildContext context) {
     return Padding(
