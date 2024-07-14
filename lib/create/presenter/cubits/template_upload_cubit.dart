@@ -12,6 +12,10 @@ class TemplateUploadCubit extends Cubit<TemplateUploadState>
       : _repository = repository,
         super(TemplateUploadState.normal());
 
+  void setNormal() {
+    emit(TemplateUploadState.normal());
+  }
+
   Future<void> updatePackage({
     required Template template,
   }) async {

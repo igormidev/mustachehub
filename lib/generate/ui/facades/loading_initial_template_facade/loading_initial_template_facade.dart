@@ -5,8 +5,8 @@ import 'package:mustachehub/generate/presenter/cubits/template_fetch_cubit.dart'
 import 'package:mustachehub/generate/presenter/states/template_fetch_state.dart';
 
 class LoadingInitialTemplateFacade extends StatelessWidget {
-  final Widget widget;
-  const LoadingInitialTemplateFacade({super.key, required this.widget});
+  final Widget child;
+  const LoadingInitialTemplateFacade({super.key, required this.child});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class LoadingInitialTemplateFacade extends StatelessWidget {
         );
 
         return state.when(
-          initial: () => widget,
+          initial: () => child,
           withError: (errorMessage) => EmptyIndicatorSection.error(
             text: errorMessage,
             willHaveCircleAvatarInDarkMode: false,

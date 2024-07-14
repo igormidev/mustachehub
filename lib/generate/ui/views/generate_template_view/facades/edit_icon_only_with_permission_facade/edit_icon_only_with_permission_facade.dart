@@ -24,7 +24,7 @@ class EditIconOnlyWithPermissionFacade extends StatelessWidget {
 
         final TemplatePermissions? permission =
             template?.metadata.permissionWithId(userEmail);
-            
+
         if (template == null ||
             ![TemplatePermissions.allowWrite, TemplatePermissions.fullAccess]
                 .contains(permission)) {
@@ -35,7 +35,7 @@ class EditIconOnlyWithPermissionFacade extends StatelessWidget {
           padding: const EdgeInsets.only(right: 16),
           child: IconButton(
             onPressed: () {
-              context.go('/createMustache', extra: template);
+              context.go('/createMustache?templateId=${template.id}');
             },
             icon: const Icon(Icons.edit),
           ),

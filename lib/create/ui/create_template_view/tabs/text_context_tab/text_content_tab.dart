@@ -15,7 +15,6 @@ import 'package:mustachehub/create/presenter/states/variables_state.dart';
 import 'package:mustachehub/create/ui/create_template_view/tabs/variables_creation_tab/widgets/headers/text_content_header.dart';
 import 'package:mustachehub/settings/interactor/cubit/theme_cubit.dart';
 import 'package:mustachehub/settings/interactor/state/theme_state.dart';
-import 'package:mustachex/mustachex.dart';
 import 'package:text_analyser/text_analyser.dart';
 
 class TextContentTab extends StatefulWidget {
@@ -99,7 +98,7 @@ class _TextContentTabState extends State<TextContentTab> {
     );
     Future.delayed(const Duration(milliseconds: 200), () {
       if (!mounted) return;
-      _notifyContentCubit(contentCubit, contentCubit.state.currentText, 0);
+      _notifyContentCubit(contentCubit, contentCubit.state.currentText);
     });
     WidgetsBinding.instance.addPostFrameCallback((_) {
       controller.setCacheCS(Theme.of(context).colorScheme);
@@ -214,32 +213,8 @@ class _TextContentTabState extends State<TextContentTab> {
     );
   }
 
-  void _notifyContentCubit(
-    ContentStringCubit contentCubit,
-    String text, [
-    int? indexAtText,
-  ]) {
-    // try {
-    //   final sugestionCubit = context.read<SuggestionCubit>();
-    //   final varCubit = context.read<VariablesCubit>();
-    //   sugestionCubit.setSuggestions(
-    //     input: controller.text,
-    //     indexAtText: indexAtText ?? controller.selection.start,
-    //     flatMap: varCubit.state.flatMap,
-    //   );
-    // } catch (_, __) {}
-    try {
-      final parser = Parser(text, null, '{{ }}');
-      final tokens = parser.getTokens();
-      contentCubit.registerTextWithTokens(
-        newText: text,
-        tokens: tokens,
-      );
-    } catch (_, __) {
-      contentCubit.registerNormalText(
-        newText: text,
-      );
-    }
+  void _notifyContentCubit(ContentStringCubit contentCubit, String text) {
+    contentCubit.setCubit(text);
   }
 }
 

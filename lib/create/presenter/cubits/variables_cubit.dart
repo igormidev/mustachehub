@@ -16,6 +16,33 @@ class VariablesCubit extends HydratedCubit<VariablesState> {
           modelPipes: [],
         ));
 
+  void setInitial() {
+    emit(const VariablesState(
+      flatMap: {},
+      textPipes: [],
+      booleanPipes: [],
+      modelPipes: [],
+    ));
+  }
+
+  void set({
+    required List<TextPipe> textPipes,
+    required List<BooleanPipe> booleanPipes,
+    required List<ModelPipe> modelPipes,
+  }) {
+    final flatMap = _tokenIdentifierFlatMapAdapter.toFlatMap(
+      textPipes: textPipes,
+      booleanPipes: booleanPipes,
+      modelPipes: modelPipes,
+    );
+    emit(VariablesState(
+      flatMap: flatMap,
+      textPipes: textPipes,
+      booleanPipes: booleanPipes,
+      modelPipes: modelPipes,
+    ));
+  }
+
   void updateTextVariables({
     required List<TextPipe> textPipes,
   }) {

@@ -25,10 +25,10 @@ class _SetInitialStateWrapperState extends State<SetInitialStateWrapper> {
   void initState() {
     super.initState();
     final state = context.read<CurrentTemplateTypeCubit>().state;
-    _updateFormCubit(state);
+    updateFormCubit(state);
   }
 
-  void _updateFormCubit(CurrentTemplateTypeState state) {
+  void updateFormCubit(CurrentTemplateTypeState state) {
     final packageForm = context.read<PackageFormCubit>();
     if (!packageForm.state.isStateLoading) {
       return;
@@ -56,7 +56,7 @@ class _SetInitialStateWrapperState extends State<SetInitialStateWrapper> {
   Widget build(BuildContext context) {
     return BlocListener<CurrentTemplateTypeCubit, CurrentTemplateTypeState>(
       listener: (context, state) {
-        _updateFormCubit(state);
+        updateFormCubit(state);
       },
       child: widget.child,
     );

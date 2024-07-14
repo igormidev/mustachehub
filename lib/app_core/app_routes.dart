@@ -8,7 +8,6 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mustache_hub_core/mustache_hub_core.dart';
 import 'package:mustachehub/account/data/respositories/implementations/account_repository_impl.dart';
 import 'package:mustachehub/account/data/respositories/implementations/image_repository_impl.dart';
 import 'package:mustachehub/account/data/respositories/interfaces/i_account_repository.dart';
@@ -41,6 +40,7 @@ import 'package:mustachehub/create/presenter/cubits/cleaning_dependencies_cubit.
 import 'package:mustachehub/create/presenter/cubits/content_string_cubit.dart';
 import 'package:mustachehub/create/presenter/cubits/current_template_type_cubit.dart';
 import 'package:mustachehub/create/presenter/cubits/edit_model_info_display_cubit.dart';
+import 'package:mustachehub/create/presenter/cubits/editable_template_fetch_cubit.dart';
 import 'package:mustachehub/create/presenter/cubits/fields_text_size_cubit.dart';
 import 'package:mustachehub/create/presenter/cubits/package_form_cubit.dart';
 import 'package:mustachehub/create/presenter/cubits/suggestion_cubit.dart';
@@ -194,11 +194,7 @@ final router = GoRouter(
           path: '/createMustache',
           parentNavigatorKey: NavigatorService.i.dashboardNavigatorKey,
           builder: (context, state) {
-            final extra = state.extra;
-            final Template? template =
-                (extra != null && extra is Template) ? extra : null;
-
-            // final templateId = state.uri.queryParameters['templateId'];
+            final templateId = state.uri.queryParameters['templateId'];
 
             return MultiBlocProvider(
               providers: [
@@ -253,6 +249,11 @@ final router = GoRouter(
                 BlocProvider<FormStatsCubit>(
                   create: (context) => FormStatsCubit(),
                 ),
+                BlocProvider<EditableTemplateFetchCubit>(
+                  create: (context) => EditableTemplateFetchCubit(
+                    templateRepository: context.read<ITemplateRepository>(),
+                  ),
+                ),
                 BlocProvider<PayloadCubit>(
                   create: (context) => PayloadCubit(
                     dtoAdapter: context.read<DtoAdapter>(),
@@ -261,7 +262,7 @@ final router = GoRouter(
                 ),
               ],
               child: CreateTemplateView(
-                template: template,
+                templateId: templateId,
               ),
             );
           },
