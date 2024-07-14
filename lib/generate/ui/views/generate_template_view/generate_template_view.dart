@@ -19,6 +19,7 @@ class _GenerateTemplateViewState extends State<GenerateTemplateView> {
   @override
   Widget build(BuildContext context) {
     return LoadInitialTemplateWrapper(
+      templateUUID: widget.templateUUID,
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Generate text'),

@@ -5,6 +5,7 @@ import 'package:commom_states/states/user_collections_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mustache_hub_core/mustache_hub_core.dart';
+import 'package:mustachehub/create/data/dtos/package_form_data.dart';
 import 'package:mustachehub/create/presenter/cubits/content_string_cubit.dart';
 import 'package:mustachehub/create/presenter/cubits/current_template_type_cubit.dart';
 import 'package:mustachehub/create/presenter/cubits/editable_template_fetch_cubit.dart';
@@ -66,9 +67,12 @@ mixin LoadEditableTemplateMethods
 
     // Set the package info
     final packageInfoCubit = context.read<PackageFormCubit>();
-    packageInfoCubit.updateNameAndDescription(
-      name: template.info.name,
-      description: template.info.description,
+    packageInfoCubit.set(
+      newFormData: PackageFormData.editingMyPackage(
+        title: template.info.name,
+        description: template.info.description,
+        previousInfoPackage: template.info,
+      ),
     );
 
     // Set variables

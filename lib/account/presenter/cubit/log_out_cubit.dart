@@ -1,4 +1,4 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:mustachehub/account/data/respositories/interfaces/i_account_repository.dart';
 import 'package:mustachehub/account/presenter/state/log_out_state.dart';
 
@@ -13,6 +13,7 @@ class LogOutCubit extends Cubit<LogOutState> {
   Future<void> logOut() async {
     emit(LogOutState.loading());
     await Future.delayed(const Duration(seconds: 1));
+    await HydratedBloc.storage.clear();
     final response = await _accountRepository.logOut();
     emit(response);
   }

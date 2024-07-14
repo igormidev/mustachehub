@@ -50,21 +50,21 @@ extension FolderExtension on UserCollectionFolder {
     );
   }
 
-  UserCollectionFolder deepEdit(
-    Template Function(Template oldPackage) templateMapper,
-  ) {
-    return copyWith(
-      children: [
-        for (final e in children)
-          if (e is UserCollectionFolder)
-            e.deepEdit(templateMapper)
-          else if (e is UserCollectionFile && e.template.id != uuid)
-            UserCollectionFile(
-              template: templateMapper(e.template),
-            ),
-      ],
-    );
-  }
+  // UserCollectionFolder deepEdit(
+  //   Template Function(Template oldPackage) templateMapper,
+  // ) {
+  //   return copyWith(
+  //     children: [
+  //       for (final e in children)
+  //         if (e is UserCollectionFolder)
+  //           e.deepEdit(templateMapper)
+  //         else if (e is UserCollectionFile && e.template.id != uuid)
+  //           UserCollectionFile(
+  //             template: templateMapper(e.template),
+  //           ),
+  //     ],
+  //   );
+  // }
 
   UserCollectionFolder deepEditTemplateWithId(
     String uuid,
@@ -75,10 +75,12 @@ extension FolderExtension on UserCollectionFolder {
         for (final e in children)
           if (e is UserCollectionFolder)
             e.deepEditTemplateWithId(uuid, templateMapper)
-          else if (e is UserCollectionFile && e.template.id != uuid)
+          else if (e is UserCollectionFile && e.template.id == uuid)
             UserCollectionFile(
               template: templateMapper(e.template),
-            ),
+            )
+          else
+            e,
       ],
     );
   }
@@ -149,21 +151,21 @@ extension RootExtension on UserCollectionRoot {
     );
   }
 
-  UserCollectionRoot deepEdit(
-    Template Function(Template oldPackage) templateInfoMapper,
-  ) {
-    return copyWith(
-      children: [
-        for (final e in children)
-          if (e is UserCollectionFolder)
-            e.deepEdit(templateInfoMapper)
-          else if (e is UserCollectionFile)
-            UserCollectionFile(
-              template: templateInfoMapper(e.template),
-            ),
-      ],
-    );
-  }
+  // UserCollectionRoot deepEdit(
+  //   Template Function(Template oldPackage) templateInfoMapper,
+  // ) {
+  //   return copyWith(
+  //     children: [
+  //       for (final e in children)
+  //         if (e is UserCollectionFolder)
+  //           e.deepEdit(templateInfoMapper)
+  //         else if (e is UserCollectionFile)
+  //           UserCollectionFile(
+  //             template: templateInfoMapper(e.template),
+  //           ),
+  //     ],
+  //   );
+  // }
 
   UserCollectionRoot deepEditTemplateWithId(
     String uuid,
@@ -174,10 +176,12 @@ extension RootExtension on UserCollectionRoot {
         for (final e in children)
           if (e is UserCollectionFolder)
             e.deepEditTemplateWithId(uuid, templateInfoMapper)
-          else if (e is UserCollectionFile && e.template.id != uuid)
+          else if (e is UserCollectionFile && e.template.id == uuid)
             UserCollectionFile(
               template: templateInfoMapper(e.template),
-            ),
+            )
+          else
+            e,
       ],
     );
   }

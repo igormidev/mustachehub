@@ -4,10 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:media_query_core/reactiveness/is_loading_bloc.dart';
 import 'package:mustache_hub_core/mustache_hub_core.dart';
 import 'package:mustachehub/account/presenter/cubit/change_password_cubit.dart';
-import 'package:mustachehub/account/presenter/cubit/email_verification_cubit.dart';
 import 'package:mustachehub/account/presenter/cubit/log_out_cubit.dart';
 import 'package:mustachehub/account/presenter/state/change_password_state.dart';
-import 'package:mustachehub/account/presenter/state/email_verification_state.dart';
 import 'package:mustachehub/account/presenter/state/log_out_state.dart';
 import 'package:mustachehub/account/ui/pages/account_page/dialogs/change_password_form_dialog/change_password_form_dialog.dart';
 import 'package:mustachehub/account/ui/pages/account_page/widgets/user_info/user_info_text.dart';
@@ -126,41 +124,41 @@ class AccountPage extends StatelessWidget {
                       );
                     },
                   ),
-                  const SizedBox(height: 8),
-                  if (userProfile.isEmailVerified == false)
-                    ListTile(
-                      title: const Text('Validate email'),
-                      subtitle: RichText(
-                        text: TextSpan(
-                          style: Theme.of(context).textTheme.bodyMedium,
-                          children: const [
-                            TextSpan(
-                              text: 'Your email is not validated. This is a ',
-                            ),
-                            TextSpan(
-                              text: 'security measure',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontStyle: FontStyle.italic,
-                                decoration: TextDecoration.underline,
-                              ),
-                            ),
-                            TextSpan(
-                              text: '. Please validate it.',
-                            ),
-                          ],
-                        ),
-                      ),
-                      trailing: const IsLoadingBloc<EmailVerificationCubit,
-                          EmailVerificationState>(
-                        child: Icon(Icons.email),
-                      ),
-                      onTap: () {
-                        context
-                            .read<EmailVerificationCubit>()
-                            .sendEmailVerification();
-                      },
-                    ),
+                  // const SizedBox(height: 8),
+                  // if (userProfile.isEmailVerified == false)
+                  //   ListTile(
+                  //     title: const Text('Validate email'),
+                  //     subtitle: RichText(
+                  //       text: TextSpan(
+                  //         style: Theme.of(context).textTheme.bodyMedium,
+                  //         children: const [
+                  //           TextSpan(
+                  //             text: 'Your email is not validated. This is a ',
+                  //           ),
+                  //           TextSpan(
+                  //             text: 'security measure',
+                  //             style: TextStyle(
+                  //               fontWeight: FontWeight.bold,
+                  //               fontStyle: FontStyle.italic,
+                  //               decoration: TextDecoration.underline,
+                  //             ),
+                  //           ),
+                  //           TextSpan(
+                  //             text: '. Please validate it.',
+                  //           ),
+                  //         ],
+                  //       ),
+                  //     ),
+                  //     trailing: const IsLoadingBloc<EmailVerificationCubit,
+                  //         EmailVerificationState>(
+                  //       child: Icon(Icons.email),
+                  //     ),
+                  //     onTap: () {
+                  //       context
+                  //           .read<EmailVerificationCubit>()
+                  //           .sendEmailVerification();
+                  //     },
+                  //   ),
                   const SizedBox(height: 8),
                   ListTile(
                     title: const Text('Log out'),

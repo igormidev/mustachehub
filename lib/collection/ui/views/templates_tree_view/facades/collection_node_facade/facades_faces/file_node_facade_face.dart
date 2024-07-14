@@ -44,7 +44,9 @@ class FileNodeFacadeFace extends StatelessWidget {
             onPressed: isDeleting
                 ? null
                 : () async {
-                    final confirm = await confirmDialog(context);
+                    final confirm = await confirmDialog(context,
+                        description:
+                            'This will permanently delete the template.');
 
                     if (confirm == false) return;
                     if (!context.mounted) return;

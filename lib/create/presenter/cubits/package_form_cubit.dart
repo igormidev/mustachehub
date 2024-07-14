@@ -13,6 +13,14 @@ class PackageFormCubit extends HydratedCubit<PackageFormState> {
     emit(PackageFormState.normal(formData: formData));
   }
 
+  void set({
+    required PackageFormData newFormData,
+  }) {
+    emit(
+      PackageFormState.normal(formData: newFormData),
+    );
+  }
+
   void updateNameAndDescription({
     required String name,
     required String description,

@@ -41,15 +41,14 @@
 
 import 'package:flutter/material.dart';
 
-Future<bool> confirmDialog(BuildContext context) async {
+Future<bool> confirmDialog(BuildContext context,
+    {required String description}) async {
   return await showDialog<bool>(
         context: context,
         builder: (context) {
           return AlertDialog(
             title: const Text('Are you sure?'),
-            content: const Text(
-              'This will clear all the data you have entered.',
-            ),
+            content: Text(description),
             actions: [
               TextButton(
                 onPressed: () => Navigator.of(context).pop(false),

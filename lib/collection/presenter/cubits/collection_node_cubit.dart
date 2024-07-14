@@ -34,11 +34,6 @@ class CollectionNodeCubit extends Cubit<CollectionNodesState> {
         else
           TreeNodeCollection(data: element),
     ]);
-    final prevState = state.mapOrNull(
-      withData: (value) => value.treeNode,
-    );
-
-    print('isSame: ${prevState == node}');
 
     emit(
       CollectionNodesState.withData(

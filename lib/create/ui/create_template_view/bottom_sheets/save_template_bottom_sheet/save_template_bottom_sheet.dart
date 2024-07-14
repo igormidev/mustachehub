@@ -12,7 +12,10 @@ import 'package:mustachehub/auth/ui/widgets/signin_animation.dart';
 import 'package:mustachehub/create/presenter/cubits/cleaning_dependencies_cubit.dart';
 import 'package:mustachehub/create/presenter/cubits/content_string_cubit.dart';
 import 'package:mustachehub/create/presenter/cubits/current_template_type_cubit.dart';
+import 'package:mustachehub/create/presenter/cubits/edit_model_info_display_cubit.dart';
 import 'package:mustachehub/create/presenter/cubits/package_form_cubit.dart';
+import 'package:mustachehub/create/presenter/cubits/suggestion_cubit.dart';
+import 'package:mustachehub/create/presenter/cubits/tab_controll_cubit.dart';
 import 'package:mustachehub/create/presenter/cubits/template_upload_cubit.dart';
 import 'package:mustachehub/create/presenter/cubits/variables_cubit.dart';
 import 'package:mustachehub/create/presenter/states/cleaning_dependencies_state.dart';
@@ -31,6 +34,9 @@ class SaveTemplateBottomSheet extends StatefulWidget {
   final TemplateUploadCubit templateUploadCubit;
   final PackageFormCubit packageFormCubit;
   final CleaningDependenciesCubit cleaningDependenciesCubit;
+  final EditModelInfoDisplayCubit editModelInfoDisplayCubit;
+  final SuggestionCubit suggestionCubit;
+  final TabControllCubit tabControllCubit;
   const SaveTemplateBottomSheet({
     super.key,
     required this.contentCubit,
@@ -39,6 +45,9 @@ class SaveTemplateBottomSheet extends StatefulWidget {
     required this.templateUploadCubit,
     required this.packageFormCubit,
     required this.cleaningDependenciesCubit,
+    required this.editModelInfoDisplayCubit,
+    required this.suggestionCubit,
+    required this.tabControllCubit,
   });
 
   @override
@@ -53,12 +62,33 @@ class _SaveTemplateBottomSheetState extends State<SaveTemplateBottomSheet>
     return Center(
       child: MultiBlocProvider(
         providers: [
-          BlocProvider.value(value: widget.contentCubit),
-          BlocProvider.value(value: widget.currentTemplateTypeCubit),
-          BlocProvider.value(value: widget.variablesCubit),
-          BlocProvider.value(value: widget.templateUploadCubit),
-          BlocProvider.value(value: widget.packageFormCubit),
-          BlocProvider.value(value: widget.cleaningDependenciesCubit),
+          BlocProvider<ContentStringCubit>.value(
+            value: widget.contentCubit,
+          ),
+          BlocProvider<CurrentTemplateTypeCubit>.value(
+            value: widget.currentTemplateTypeCubit,
+          ),
+          BlocProvider<VariablesCubit>.value(
+            value: widget.variablesCubit,
+          ),
+          BlocProvider<TemplateUploadCubit>.value(
+            value: widget.templateUploadCubit,
+          ),
+          BlocProvider<PackageFormCubit>.value(
+            value: widget.packageFormCubit,
+          ),
+          BlocProvider<CleaningDependenciesCubit>.value(
+            value: widget.cleaningDependenciesCubit,
+          ),
+          BlocProvider<EditModelInfoDisplayCubit>.value(
+            value: widget.editModelInfoDisplayCubit,
+          ),
+          BlocProvider<TabControllCubit>.value(
+            value: widget.tabControllCubit,
+          ),
+          BlocProvider<SuggestionCubit>.value(
+            value: widget.suggestionCubit,
+          ),
         ],
         child: CleanDependenciesAfterSuccessWrapper(
           child: TemplateUploadSuccessWrapper(

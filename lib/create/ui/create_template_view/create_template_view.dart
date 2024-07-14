@@ -56,7 +56,9 @@ class _CreateTemplateViewState extends State<CreateTemplateView>
                         return IconButton(
                           tooltip: 'Clear all',
                           onPressed: () async {
-                            final confirm = await confirmDialog(context);
+                            final confirm = await confirmDialog(context,
+                                description:
+                                    'This will clear all the data you have entered.');
 
                             if (confirm == true) {
                               if (context.mounted) {

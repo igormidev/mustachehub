@@ -1,7 +1,11 @@
 import 'package:commom_states/states/session_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mustache_hub_core/mustache_hub_core.dart';
 import 'package:mustachehub/account/presenter/cubit/change_password_cubit.dart';
+import 'package:mustachehub/account/presenter/state/change_password_state.dart';
+import 'package:mustachehub/app_core/extensions/default_state_extension.dart';
+import 'package:mustachehub/app_core/theme/components/mustache_button_loader.dart';
 part 'change_password_form_dialog_methods.dart';
 
 class ChangePasswordFormDialog extends StatefulWidget {
@@ -70,10 +74,17 @@ class _ChangePasswordFormDialogState extends State<ChangePasswordFormDialog>
               const SizedBox(height: 20),
               Row(
                 children: [
-                  ElevatedButton(
-                    onPressed: changePassword,
-                    child: const Text('Change password'),
-                  ),
+                  BlocBuilder<ChangePasswordCubit, ChangePasswordState>(
+                      builder: (context, state) {
+                    final isLoading = state.isStateLoading;
+                    return ElevatedButton.icon(
+                      onPressed: isLoading ? null : changePassword,
+                      icon: isLoading
+                          ? const MustacheButtonLoader()
+                          : const Icon(Icons.save),
+                      label: const Text('Change password'),
+                    );
+                  }),
                   TextButton(
                     onPressed: () => Navigator.pop(context),
                     child: const Text('Close'),

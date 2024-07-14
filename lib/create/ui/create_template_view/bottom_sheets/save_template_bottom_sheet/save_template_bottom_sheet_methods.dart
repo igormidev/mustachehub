@@ -54,7 +54,7 @@ mixin SaveTemplateBottomSheetMethods on State<SaveTemplateBottomSheet> {
     });
   }
 
-  _onSaveTemplate() {
+  void _onSaveTemplate() {
     final userUUID = context.userProfile()?.id;
     if (!context.isUserLoggedIn || userUUID == null) {
       showNeedToLogInDialog(context);

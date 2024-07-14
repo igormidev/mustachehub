@@ -41,6 +41,7 @@ class ChangePasswordRedirectWrapper extends StatelessWidget
             return;
           },
           success: (value) {
+            Navigator.of(context).pop();
             ScaffoldMessenger.of(context)
               ..hideCurrentSnackBar()
               ..showSnackBar(

@@ -10,7 +10,10 @@ import 'package:mustachehub/create/presenter/states/cleaning_dependencies_state.
 class CleanDependenciesAfterSuccessWrapper extends StatelessWidget
     with ClearAllDataMixin {
   final Widget child;
-  const CleanDependenciesAfterSuccessWrapper({super.key, required this.child});
+  const CleanDependenciesAfterSuccessWrapper({
+    super.key,
+    required this.child,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -18,8 +21,8 @@ class CleanDependenciesAfterSuccessWrapper extends StatelessWidget
       listener: (context, state) async {
         await state.mapOrNull(
           cleaningDependencies: (value) async {
+            await clearAllDependencies(context);
             Navigator.of(context).pop();
-            clearAllDependencies(context);
             context.read<CleaningDependenciesCubit>().setEndClean();
           },
           endClean: (value) {

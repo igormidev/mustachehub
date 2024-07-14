@@ -102,6 +102,7 @@ class PackageFormRepositoryImpl implements IPackageFormRepository {
           (oldTemplate) => template.copyWith(
             info: template.info,
             payload: template.payload,
+            content: template.content,
             metadata:
                 template.metadata.copyWith(updatedAt: now, usersPermission: {
               ...oldTemplate.metadata.usersPermission,
