@@ -23,10 +23,8 @@ class DeleteCollectionCubit extends Cubit<DeleteCollectionState>
     emit(DeleteCollectionState.loadingDeleting(
       deletingTargetTemplateUUID: templateUUID,
     ));
-
-    final newRootWithotDeletedItem = root.deepDeleteFileWith(templateUUID);
-    final response = await _userCollectionRepository.updateUserCollection(
-      newCollection: newRootWithotDeletedItem,
+    final response = await _userCollectionRepository.deleteUserCollection(
+      templateUUID: templateUUID,
     );
 
     response.fold(

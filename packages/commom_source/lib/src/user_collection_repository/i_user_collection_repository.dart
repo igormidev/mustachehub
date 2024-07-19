@@ -7,4 +7,7 @@ abstract class IUserCollectionRepository {
   Future<Result<UserCollectionRoot, SourceError>> updateUserCollection({
     required UserCollection newCollection,
   });
+  Future<Result<UserCollectionRoot, SourceError>> deleteUserCollection({
+    required String templateUUID,
+  });
 }

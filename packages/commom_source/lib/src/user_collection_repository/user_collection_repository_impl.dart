@@ -270,4 +270,49 @@ class UserCollectionRepositoryImpl implements IUserCollectionRepository {
       ).toFailure();
     }
   }
+
+  @override
+  Future<Result<UserCollectionRoot, SourceError>> deleteUserCollection({
+    required String templateUUID,
+  }) async {
+    try {
+      final userId = _auth.currentUser?.uid;
+      if (userId == null) {
+        return SourceError.notLoggedIn().toFailure();
+      }
+
+      final userCollection = await getUserCollection();
+
+      return userCollection.fold(
+        (userCollection) async {
+          final newRootWithotDeletedItem =
+              userCollection.deepDeleteFileWith(templateUUID);
+
+          final collectionRef = _firestore.collection('collection').doc(userId);
+          final templateRef =
+              collectionRef.collection('templates').doc(templateUUID);
+
+          await _firestore.runTransaction((transaction) async {
+            transaction
+                .set(
+                  collectionRef,
+                  newRootWithotDeletedItem.toIndexes.toJson(),
+                  SetOptions(merge: true),
+                )
+                .delete(templateRef);
+          });
+
+          return updateUserCollection(newCollection: newRootWithotDeletedItem);
+        },
+        (error) {
+          return error.toFailure();
+        },
+      );
+    } catch (_) {
+      return SourceError.standard(
+        message: 'Fatal failure while trying to delete collection in server. '
+            'Try again later. If the error persists, please contact support.',
+      ).toFailure();
+    }
+  }
 }

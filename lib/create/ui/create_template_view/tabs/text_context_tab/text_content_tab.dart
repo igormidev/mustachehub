@@ -161,7 +161,7 @@ class _TextContentTabState extends State<TextContentTab> {
                   return TextFormField(
                     focusNode: textfieldFocusNode,
                     controller: controller,
-                    maxLines: 10,
+                    maxLines: 30,
                     style: style,
                     decoration: InputDecoration(
                       contentPadding: const EdgeInsets.symmetric(
@@ -171,6 +171,8 @@ class _TextContentTabState extends State<TextContentTab> {
                       ),
                       fillColor: Theme.of(context).colorScheme.onInverseSurface,
                       filled: true,
+                      hintText:
+                          'Type your text here. Use {{}} to add variables.\nJust tap "{" after creating a variable...',
                     ),
                     textAlignVertical: TextAlignVertical.top,
                     inputFormatters: [

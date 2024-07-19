@@ -94,12 +94,12 @@ class AccountPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 20),
-                  ListTile(
-                    title: const Text('Manege credit cards'),
-                    trailing: const Icon(Icons.credit_card),
-                    onTap: () {},
-                  ),
+                  // const SizedBox(height: 20),
+                  // ListTile(
+                  //   title: const Text('Manege credit cards'),
+                  //   trailing: const Icon(Icons.credit_card),
+                  //   onTap: () {},
+                  // ),
                   const SizedBox(height: 8),
                   ListTile(
                     title: const Text('Change password'),
@@ -107,18 +107,25 @@ class AccountPage extends StatelessWidget {
                         ChangePasswordState>(
                       child: Icon(Icons.lock),
                     ),
-                    onTap: () {
+                    onTap: () async {
                       final changePassCubit =
                           context.read<ChangePasswordCubit>();
 
-                      showModalBottomSheet(
+                      await showModalBottomSheet(
                         context: context,
                         constraints: const BoxConstraints(
                           maxWidth: double.maxFinite,
                         ),
                         builder: (context) {
-                          return ChangePasswordFormDialog(
-                            changePasswordCubit: changePassCubit,
+                          return MultiBlocProvider(
+                            providers: [
+                              BlocProvider.value(
+                                value: changePassCubit,
+                              )
+                            ],
+                            child: ChangePasswordFormDialog(
+                              changePasswordCubit: changePassCubit,
+                            ),
                           );
                         },
                       );
