@@ -22,6 +22,8 @@ Template _$TemplateFromJson(Map<String, dynamic> json) {
 mixin _$Template {
   String get id => throw _privateConstructorUsedError;
   PackageInfo get info => throw _privateConstructorUsedError;
+  String get content => throw _privateConstructorUsedError;
+  TemplateMetadata get metadata => throw _privateConstructorUsedError;
   ExpectedPayload get payload => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -35,9 +37,15 @@ abstract class $TemplateCopyWith<$Res> {
   factory $TemplateCopyWith(Template value, $Res Function(Template) then) =
       _$TemplateCopyWithImpl<$Res, Template>;
   @useResult
-  $Res call({String id, PackageInfo info, ExpectedPayload payload});
+  $Res call(
+      {String id,
+      PackageInfo info,
+      String content,
+      TemplateMetadata metadata,
+      ExpectedPayload payload});
 
   $PackageInfoCopyWith<$Res> get info;
+  $TemplateMetadataCopyWith<$Res> get metadata;
   $ExpectedPayloadCopyWith<$Res> get payload;
 }
 
@@ -56,6 +64,8 @@ class _$TemplateCopyWithImpl<$Res, $Val extends Template>
   $Res call({
     Object? id = null,
     Object? info = null,
+    Object? content = null,
+    Object? metadata = null,
     Object? payload = null,
   }) {
     return _then(_value.copyWith(
@@ -67,6 +77,14 @@ class _$TemplateCopyWithImpl<$Res, $Val extends Template>
           ? _value.info
           : info // ignore: cast_nullable_to_non_nullable
               as PackageInfo,
+      content: null == content
+          ? _value.content
+          : content // ignore: cast_nullable_to_non_nullable
+              as String,
+      metadata: null == metadata
+          ? _value.metadata
+          : metadata // ignore: cast_nullable_to_non_nullable
+              as TemplateMetadata,
       payload: null == payload
           ? _value.payload
           : payload // ignore: cast_nullable_to_non_nullable
@@ -79,6 +97,14 @@ class _$TemplateCopyWithImpl<$Res, $Val extends Template>
   $PackageInfoCopyWith<$Res> get info {
     return $PackageInfoCopyWith<$Res>(_value.info, (value) {
       return _then(_value.copyWith(info: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $TemplateMetadataCopyWith<$Res> get metadata {
+    return $TemplateMetadataCopyWith<$Res>(_value.metadata, (value) {
+      return _then(_value.copyWith(metadata: value) as $Val);
     });
   }
 
@@ -99,10 +125,17 @@ abstract class _$$TemplateImplCopyWith<$Res>
       __$$TemplateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, PackageInfo info, ExpectedPayload payload});
+  $Res call(
+      {String id,
+      PackageInfo info,
+      String content,
+      TemplateMetadata metadata,
+      ExpectedPayload payload});
 
   @override
   $PackageInfoCopyWith<$Res> get info;
+  @override
+  $TemplateMetadataCopyWith<$Res> get metadata;
   @override
   $ExpectedPayloadCopyWith<$Res> get payload;
 }
@@ -120,6 +153,8 @@ class __$$TemplateImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? info = null,
+    Object? content = null,
+    Object? metadata = null,
     Object? payload = null,
   }) {
     return _then(_$TemplateImpl(
@@ -131,6 +166,14 @@ class __$$TemplateImplCopyWithImpl<$Res>
           ? _value.info
           : info // ignore: cast_nullable_to_non_nullable
               as PackageInfo,
+      content: null == content
+          ? _value.content
+          : content // ignore: cast_nullable_to_non_nullable
+              as String,
+      metadata: null == metadata
+          ? _value.metadata
+          : metadata // ignore: cast_nullable_to_non_nullable
+              as TemplateMetadata,
       payload: null == payload
           ? _value.payload
           : payload // ignore: cast_nullable_to_non_nullable
@@ -140,9 +183,15 @@ class __$$TemplateImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true)
 class _$TemplateImpl implements _Template {
-  _$TemplateImpl({required this.id, required this.info, required this.payload});
+  _$TemplateImpl(
+      {required this.id,
+      required this.info,
+      required this.content,
+      required this.metadata,
+      required this.payload});
 
   factory _$TemplateImpl.fromJson(Map<String, dynamic> json) =>
       _$$TemplateImplFromJson(json);
@@ -152,11 +201,15 @@ class _$TemplateImpl implements _Template {
   @override
   final PackageInfo info;
   @override
+  final String content;
+  @override
+  final TemplateMetadata metadata;
+  @override
   final ExpectedPayload payload;
 
   @override
   String toString() {
-    return 'Template(id: $id, info: $info, payload: $payload)';
+    return 'Template(id: $id, info: $info, content: $content, metadata: $metadata, payload: $payload)';
   }
 
   @override
@@ -166,12 +219,16 @@ class _$TemplateImpl implements _Template {
             other is _$TemplateImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.info, info) || other.info == info) &&
+            (identical(other.content, content) || other.content == content) &&
+            (identical(other.metadata, metadata) ||
+                other.metadata == metadata) &&
             (identical(other.payload, payload) || other.payload == payload));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, info, payload);
+  int get hashCode =>
+      Object.hash(runtimeType, id, info, content, metadata, payload);
 
   @JsonKey(ignore: true)
   @override
@@ -191,6 +248,8 @@ abstract class _Template implements Template {
   factory _Template(
       {required final String id,
       required final PackageInfo info,
+      required final String content,
+      required final TemplateMetadata metadata,
       required final ExpectedPayload payload}) = _$TemplateImpl;
 
   factory _Template.fromJson(Map<String, dynamic> json) =
@@ -200,6 +259,10 @@ abstract class _Template implements Template {
   String get id;
   @override
   PackageInfo get info;
+  @override
+  String get content;
+  @override
+  TemplateMetadata get metadata;
   @override
   ExpectedPayload get payload;
   @override

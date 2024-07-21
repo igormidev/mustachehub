@@ -8,6 +8,7 @@ import 'package:mustachehub/generate/ui/pages/template_input_form_page/widgets/p
 import 'package:mustachehub/generate/ui/pages/template_input_form_page/widgets/pipe_forms_display/model_pipe_form/widgets/generate_node_builders/structure_generate_node_builder.dart';
 import 'package:mustachehub/generate/ui/pages/template_input_form_page/widgets/pipe_forms_display/model_pipe_form/widgets/generate_node_builders/text_generate_node_builder.dart';
 
+// TODO(igor): Change for facade pattern
 class RootGeneratorHandler extends StatelessWidget {
   final String content;
   final ExpectedPayload expectedPayload;

@@ -22,12 +22,16 @@ dependencies:
     path: ../mustache_hub_core
   micro_navigation_core:
     path: ../micro_navigation_core
+  commom_source:
+    path: ../commom_source
+  hydrated_bloc:
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
   build_runner: ^2.3.3 
+  json_serializable: ^6.7.1
   freezed: ^2.3.2
 
 flutter:

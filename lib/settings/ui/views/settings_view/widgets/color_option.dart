@@ -1,8 +1,19 @@
+import 'package:dart_debouncer/dart_debouncer.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mustachehub/app_core/extensions/context_extensions.dart';
 import 'package:mustachehub/settings/interactor/cubit/theme_cubit.dart';
 import 'package:mustachehub/settings/interactor/state/theme_state.dart';
+
+class _LogColor {
+  static final Debouncer debouncer = Debouncer(timerDuration: 1.seconds);
+  static void logEventName() {
+    debouncer.resetDebounce(() {
+      FirebaseAnalytics.instance.logEvent(name: 'color_switched');
+    });
+  }
+}
 
 class ColorOption extends StatelessWidget {
   const ColorOption({
@@ -21,6 +32,7 @@ class ColorOption extends StatelessWidget {
 
     return InkWell(
       onTap: () {
+        _LogColor.logEventName();
         bloc.selectColor(color);
       },
       child: SizedBox(

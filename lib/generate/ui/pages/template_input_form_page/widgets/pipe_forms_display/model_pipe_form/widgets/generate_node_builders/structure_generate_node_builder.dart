@@ -55,8 +55,8 @@ class StructureGenerateNodeBuilder extends StatelessWidget {
               } else {
                 editedPipe =
                     rootModelDTO.deepEdit<ModelPipe, List<ModelPipeDTOPayload>>(
-                  payloadId: payloadUUID,
-                  pipeId: referenceModelDTO.pipe.pipeId,
+                  // payloadId: payloadUUID,
+                  pipeDtoUUID: referenceModelDTO.uuid,
                   mapFunc: (
                     PipeDTO<ModelPipe, List<ModelPipeDTOPayload>> pipe,
                   ) {

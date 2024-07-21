@@ -29,8 +29,6 @@ class TitleAndDescriptionSnackbar extends SnackBar {
           ),
           action: SnackBarAction(
             label: 'Ok',
-            textColor: Theme.of(context).colorScheme.primaryContainer,
-            backgroundColor: Theme.of(context).colorScheme.error.withAlpha(100),
             onPressed: () {
               ScaffoldMessenger.of(context).hideCurrentSnackBar();
             },

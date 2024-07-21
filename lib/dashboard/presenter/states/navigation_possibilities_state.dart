@@ -15,7 +15,7 @@ abstract class NavigationPossibilitiesState
       EDashboardNavigationPossibilities.generateText,
       EDashboardNavigationPossibilities.createMustache,
       EDashboardNavigationPossibilities.account,
-      EDashboardNavigationPossibilities.becamePremium,
+      // EDashboardNavigationPossibilities.becamePremium,
       EDashboardNavigationPossibilities.settings,
     ])
     List<EDashboardNavigationPossibilities> possibilities,

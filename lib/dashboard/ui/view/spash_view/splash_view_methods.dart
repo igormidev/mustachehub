@@ -4,11 +4,10 @@ mixin SplashViewMethods on State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Durations.extralong1, () {
+    Future.delayed(Durations.extralong1, () async {
       if (mounted) {
         final fetchUserCubit = context.read<UserFetchCubit>();
-
-        fetchUserCubit.fetchUser();
+        await fetchUserCubit.fetchUser();
       }
     });
   }

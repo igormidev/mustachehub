@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:media_query_core/reactiveness/boolean_toggle_wrapper.dart';
-import 'package:media_query_core/reactiveness/is_loading_bloc.dart';
 import 'package:mustache_hub_core/mustache_hub_core.dart';
 import 'package:mustachehub/auth/presenter/cubits/login_form_cubit.dart';
 import 'package:mustachehub/auth/presenter/states/login_form_state.dart';
@@ -62,13 +61,24 @@ class _LoginFormAndButtonsSectionState extends State<LoginFormAndButtonsSection>
           const SizedBox(height: 20),
           BlocBuilder<LoginFormCubit, LoginFormState>(
             builder: (context, state) {
+              final isCredentialsLoading = state.maybeMap(
+                loadingWithCredentials: (_) => true,
+                orElse: () => false,
+              );
+
               return FilledButton(
                 onPressed: state.maybeMap(
                   loadingWithCredentials: null,
                   orElse: () => _makeLogin,
                 ),
-                child: const IsLoadingBloc<LoginFormCubit, LoginFormState>(
-                  child: Text('Enter'),
+                child: Builder(
+                  builder: (context) {
+                    if (isCredentialsLoading) {
+                      return const CircularProgressIndicator.adaptive();
+                    }
+
+                    return const Text('Enter');
+                  },
                 ),
               );
             },

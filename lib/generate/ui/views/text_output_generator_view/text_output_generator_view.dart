@@ -16,6 +16,19 @@ class TextOutputGeneratorView extends StatefulWidget {
     required this.generatorData,
   });
 
+  TextOutputGeneratorView.fromTemplate({
+    Key? key,
+    required Template template,
+  }) : this(
+          key: key,
+          content: template.content,
+          generatorData: ExpectedPayload(
+            textPipes: template.payload.textPipes,
+            booleanPipes: template.payload.booleanPipes,
+            modelPipes: template.payload.modelPipes,
+          ),
+        );
+
   @override
   State<TextOutputGeneratorView> createState() =>
       _TextOutputGeneratorViewState();

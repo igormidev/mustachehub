@@ -41,7 +41,7 @@ class TextPipeForm extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CustomHeader(
-              headerTitle: 'Text variables payload',
+              headerTitle: 'Text variables',
               moreOptions: [
                 PopupMenuItem(
                   enabled: false,

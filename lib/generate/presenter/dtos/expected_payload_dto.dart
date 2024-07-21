@@ -38,29 +38,28 @@ class ExpectedPayloadDto extends Equatable {
     return <String, dynamic>{
       'textDtos': textDtos.map((x) => x.toMap()).toList(),
       'booleanDtos': booleanDtos.map((x) => x.toMap()).toList(),
-      // 'modelDtos': modelDtos.map((x) => x.toMap()).toList(),
+      'modelDtos': modelDtos.map((x) => x.toMap()).toList(),
     };
   }
 
   factory ExpectedPayloadDto.fromMap(Map<String, dynamic> map) {
     return ExpectedPayloadDto(
-        textDtos: List<TextPipeDto>.from(
-          (map['textDtos'] as List<int>).map<TextPipeDto>(
-            (x) => TextPipeDto.fromMap(x as Map<String, dynamic>),
-          ),
+      textDtos: List<TextPipeDto>.from(
+        (map['textDtos'] as List<int>).map<TextPipeDto>(
+          (x) => TextPipeDto.fromMap(x as Map<String, dynamic>),
         ),
-        booleanDtos: List<BooleanPipeDto>.from(
-          (map['booleanDtos'] as List<int>).map<BooleanPipeDto>(
-            (x) => BooleanPipeDto.fromMap(x as Map<String, dynamic>),
-          ),
+      ),
+      booleanDtos: List<BooleanPipeDto>.from(
+        (map['booleanDtos'] as List<int>).map<BooleanPipeDto>(
+          (x) => BooleanPipeDto.fromMap(x as Map<String, dynamic>),
         ),
-        modelDtos: const []
-        // modelDtos: List<ModelPipeDto>.from(
-        //   (map['modelDtos'] as List<int>).map<ModelPipeDto>(
-        //     (x) => ModelPipeDto.fromMap(x as Map<String, dynamic>),
-        //   ),
-        // ),
-        );
+      ),
+      modelDtos: List<ModelPipeDto>.from(
+        (map['modelDtos'] as List<int>).map<ModelPipeDto>(
+          (x) => ModelPipeDto.fromMap(x as Map<String, dynamic>),
+        ),
+      ),
+    );
   }
 
   String toJson() => json.encode(toMap());

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:commom_source/commom_source.dart';
 import 'package:commom_states/cubits/session_cubit.dart';
 import 'package:commom_states/states/session_state.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -30,15 +31,16 @@ import 'package:mustachehub/auth/ui/views/auth_desktop_view/auth_desktop_view.da
 import 'package:mustachehub/auth/ui/views/login_view/login_view.dart';
 import 'package:mustachehub/auth/ui/views/pass_recovery_view/pass_recovery_view.dart';
 import 'package:mustachehub/auth/ui/views/signin_view/signin_view.dart';
+import 'package:mustachehub/collection/presenter/cubits/delete_collection_cubit.dart';
+import 'package:mustachehub/collection/ui/views/templates_tree_view/templates_tree_view.dart';
 import 'package:mustachehub/create/data/adapters/token_identifier_flatmap_adapter.dart';
 import 'package:mustachehub/create/data/adapters/token_identifier_text_display_adapter.dart';
-import 'package:mustachehub/create/data/repositories/implementations/package_form_repository_impl.dart';
-import 'package:mustachehub/create/data/repositories/implementations/template_repository_impl.dart';
 import 'package:mustachehub/create/data/repositories/interfaces/i_package_form_repository.dart';
-import 'package:mustachehub/create/data/repositories/interfaces/i_template_repository.dart';
+import 'package:mustachehub/create/presenter/cubits/cleaning_dependencies_cubit.dart';
 import 'package:mustachehub/create/presenter/cubits/content_string_cubit.dart';
 import 'package:mustachehub/create/presenter/cubits/current_template_type_cubit.dart';
 import 'package:mustachehub/create/presenter/cubits/edit_model_info_display_cubit.dart';
+import 'package:mustachehub/create/presenter/cubits/editable_template_fetch_cubit.dart';
 import 'package:mustachehub/create/presenter/cubits/fields_text_size_cubit.dart';
 import 'package:mustachehub/create/presenter/cubits/package_form_cubit.dart';
 import 'package:mustachehub/create/presenter/cubits/suggestion_cubit.dart';
@@ -49,7 +51,6 @@ import 'package:mustachehub/create/ui/create_template_view/create_template_view.
 import 'package:mustachehub/dashboard/data/repositories/implementations/user_fetch_repository_impl.dart';
 import 'package:mustachehub/dashboard/data/repositories/interfaces/i_user_fetch_repository.dart';
 import 'package:mustachehub/dashboard/presenter/cubits/user_fetch_cubit.dart';
-import 'package:mustachehub/dashboard/ui/navigation_widgets/dashboard_drawer/dashboard_drawer.dart';
 import 'package:mustachehub/dashboard/ui/pages/not_found_404_page/not_found_404_page.dart';
 import 'package:mustachehub/dashboard/ui/view/dashboard_view/dashboard_view.dart';
 import 'package:mustachehub/dashboard/ui/view/spash_view/splash_view.dart';
@@ -57,6 +58,10 @@ import 'package:mustachehub/generate/data/adapters/dto_adapter.dart';
 import 'package:mustachehub/generate/presenter/cubits/content_cubit.dart';
 import 'package:mustachehub/generate/presenter/cubits/form_stats_cubit.dart';
 import 'package:mustachehub/generate/presenter/cubits/payload_cubit.dart';
+import 'package:mustachehub/generate/presenter/cubits/template_fetch_cubit.dart';
+import 'package:mustachehub/generate/ui/views/generate_template_view/generate_template_view.dart';
+import 'package:mustachehub/premium/presenter/cubit/billing_configurations_cubit.dart';
+import 'package:mustachehub/premium/ui/views/became_premium_view.dart';
 import 'package:mustachehub/settings/ui/views/settings_view/settings_view.dart';
 import 'package:text_analyser/text_analyser.dart';
 
@@ -135,29 +140,52 @@ final router = GoRouter(
           path: '/collection',
           parentNavigatorKey: NavigatorService.i.dashboardNavigatorKey,
           builder: (context, state) {
-            return Scaffold(
-              appBar: AppBar(
-                title: const Text('Collection'),
-                actions: const [Icon(Icons.create_new_folder_rounded)],
+            return MultiBlocProvider(providers: [
+              RepositoryProvider<DeleteCollectionCubit>(
+                create: (context) => DeleteCollectionCubit(
+                  userCollectionRepository:
+                      context.read<IUserCollectionRepository>(),
+                ),
               ),
-              drawer: context.drawerOrNull,
-              body: Container(
-                color: Colors.green[300],
-              ),
-            );
+            ], child: const TemplatesTreeView());
           },
         ),
         GoRoute(
           path: '/generateText',
           parentNavigatorKey: NavigatorService.i.dashboardNavigatorKey,
           builder: (context, state) {
-            return Scaffold(
-              appBar: AppBar(
-                title: const Text('Generate text'),
-              ),
-              drawer: context.drawerOrNull,
-              body: Container(
-                color: Colors.brown[400],
+            final templateId = state.uri.queryParameters['templateId'];
+            return MultiBlocProvider(
+              providers: [
+                /// Generator and test
+                RepositoryProvider<DtoAdapter>(
+                  create: (context) => DtoAdapter(),
+                ),
+                BlocProvider<ContentCubit>(
+                  create: (context) => ContentCubit(
+                    dtoAdapter: context.read<DtoAdapter>(),
+                  ),
+                ),
+                BlocProvider<FormStatsCubit>(
+                  create: (context) => FormStatsCubit(),
+                ),
+                BlocProvider<PayloadCubit>(
+                  create: (context) => PayloadCubit(
+                    dtoAdapter: context.read<DtoAdapter>(),
+                    outputCubit: context.read<ContentCubit>(),
+                  ),
+                ),
+                RepositoryProvider<ITemplateRepository>(
+                  create: (context) => TemplateRepositoryImpl(),
+                ),
+                BlocProvider<TemplateFetchCubit>(
+                  create: (context) => TemplateFetchCubit(
+                    templateRepository: context.read<ITemplateRepository>(),
+                  ),
+                ),
+              ],
+              child: GenerateTemplateView(
+                templateUUID: templateId,
               ),
             );
           },
@@ -166,13 +194,11 @@ final router = GoRouter(
           path: '/createMustache',
           parentNavigatorKey: NavigatorService.i.dashboardNavigatorKey,
           builder: (context, state) {
-            final packageId = state.pathParameters['packageId'];
+            final templateId = state.uri.queryParameters['templateId'];
+
             return MultiBlocProvider(
               providers: [
                 // Repositories
-                RepositoryProvider<IPackageFormRepository>(
-                  create: (context) => PackageFormRepositoryImpl(),
-                ),
                 RepositoryProvider<TokenIdentifierFlatMapAdapter>(
                   create: (context) => const TokenIdentifierFlatMapAdapter(),
                 ),
@@ -185,27 +211,9 @@ final router = GoRouter(
                 RepositoryProvider<ITemplateRepository>(
                   create: (context) => TemplateRepositoryImpl(),
                 ),
-                // RepositoryProvider<IPackageFormRepository>(
-                //   create: (context) => PackageFormRepositoryImpl(),
-                // ),
-                // RepositoryProvider<ITemplateRepository>(
-                //   create: (context) => TemplateRepositoryImpl(),
-                // ),
-                // BlocProvider<TemplateUploadCubit>(
-                //   create: (context) => TemplateUploadCubit(
-                //     repository: context.read<IPackageFormRepository>(),
-                //   ),
-                // ),
-                // BlocProvider<CurrentTemplateTypeCubit>(
-                //   create: (context) => CurrentTemplateTypeCubit(
-                //     templateRepository: context.read<ITemplateRepository>(),
-                //   ),
-                // ),
                 BlocProvider(create: (context) => ContentStringCubit()),
                 BlocProvider(
-                  create: (context) => CurrentTemplateTypeCubit(
-                    templateRepository: context.read<ITemplateRepository>(),
-                  ),
+                  create: (context) => CurrentTemplateTypeCubit(),
                 ),
                 BlocProvider(
                   create: (context) => TemplateUploadCubit(
@@ -213,6 +221,7 @@ final router = GoRouter(
                   ),
                 ),
                 BlocProvider(create: (context) => FieldsTextSizeCubit()),
+                BlocProvider(create: (context) => CleaningDependenciesCubit()),
                 BlocProvider(create: (context) => EditModelInfoDisplayCubit()),
                 BlocProvider(create: (context) => PackageFormCubit()),
                 BlocProvider(
@@ -240,6 +249,11 @@ final router = GoRouter(
                 BlocProvider<FormStatsCubit>(
                   create: (context) => FormStatsCubit(),
                 ),
+                BlocProvider<EditableTemplateFetchCubit>(
+                  create: (context) => EditableTemplateFetchCubit(
+                    templateRepository: context.read<ITemplateRepository>(),
+                  ),
+                ),
                 BlocProvider<PayloadCubit>(
                   create: (context) => PayloadCubit(
                     dtoAdapter: context.read<DtoAdapter>(),
@@ -248,7 +262,7 @@ final router = GoRouter(
                 ),
               ],
               child: CreateTemplateView(
-                packageId: packageId,
+                templateId: templateId,
               ),
             );
           },
@@ -339,14 +353,13 @@ final router = GoRouter(
           path: '/becamePremium',
           parentNavigatorKey: NavigatorService.i.dashboardNavigatorKey,
           builder: (context, state) {
-            return Scaffold(
-              appBar: AppBar(
-                title: const Text('Became premium'),
-              ),
-              drawer: context.drawerOrNull,
-              body: Container(
-                color: Colors.amber[300],
-              ),
+            return MultiBlocProvider(
+              providers: [
+                BlocProvider<BillingConfigurationsCubit>(
+                  create: (context) => BillingConfigurationsCubit(),
+                )
+              ],
+              child: const BecamePremiumView(),
             );
           },
         ),

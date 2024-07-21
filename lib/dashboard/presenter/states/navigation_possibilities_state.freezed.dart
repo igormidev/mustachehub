@@ -267,7 +267,6 @@ class _$LoggedInImpl implements LoggedIn {
         EDashboardNavigationPossibilities.generateText,
         EDashboardNavigationPossibilities.createMustache,
         EDashboardNavigationPossibilities.account,
-        EDashboardNavigationPossibilities.becamePremium,
         EDashboardNavigationPossibilities.settings
       ]})
       : _possibilities = possibilities;

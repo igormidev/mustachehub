@@ -7,6 +7,7 @@ import 'package:mustachehub/dashboard/data/entities/e_navigation_possibilities.d
 import 'package:mustachehub/dashboard/presenter/cubits/navigation_possibilities_cubit.dart';
 import 'package:mustachehub/dashboard/ui/navigation_widgets/dashboard_drawer/dashboard_drawer.dart';
 import 'package:mustachehub/dashboard/ui/navigation_widgets/dashboard_rail/dashboard_rail.dart';
+import 'package:mustachehub/dashboard/ui/view/dashboard_view/wrappers/load_user_collections_wrapper.dart';
 
 part 'dashboard_view_methods.dart';
 
@@ -21,25 +22,25 @@ class DashboardView extends StatefulWidget {
   State<DashboardView> createState() => _DashboardViewState();
 }
 
-class _DashboardViewState extends State<DashboardView>
-// with DashboardViewMethods
-{
+class _DashboardViewState extends State<DashboardView> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Row(
-        children: [
-          const VisibilityWidthBased.fromMediaQueryScreenWidth(
-            minimumWidth: ScreenSize.x900,
-            maximumWidth: ScreenSize.x1300,
-            child: DashboardRail(),
-          ),
-          const VisibilityWidthBased.fromMediaQueryScreenWidth(
-            minimumWidth: ScreenSize.x1300,
-            child: DashboardDrawer(),
-          ),
-          Expanded(child: widget.navigator),
-        ],
+    return LoadUserCollectionsWrapper(
+      child: Scaffold(
+        body: Row(
+          children: [
+            const VisibilityWidthBased.fromMediaQueryScreenWidth(
+              minimumWidth: ScreenSize.x900,
+              maximumWidth: ScreenSize.x1300,
+              child: DashboardRail(),
+            ),
+            const VisibilityWidthBased.fromMediaQueryScreenWidth(
+              minimumWidth: ScreenSize.x1300,
+              child: DashboardDrawer(),
+            ),
+            Expanded(child: widget.navigator),
+          ],
+        ),
       ),
     );
   }

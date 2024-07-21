@@ -2,10 +2,12 @@ part of 'login_form_and_buttons_section.dart';
 
 mixin LoginFormAndButtonsSectionMethods on State<LoginFormAndButtonsSection> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController _emailEC =
-      TextEditingController(text: 'igor_midev@outlook.com');
-  final TextEditingController _passwordEC =
-      TextEditingController(text: 'Teste@123');
+  final TextEditingController _emailEC = TextEditingController(
+      // text: 'igor_midev@outlook.com',
+      );
+  final TextEditingController _passwordEC = TextEditingController(
+      // text: 'Teste@123',
+      );
 
   LoginFormCubit get loginCubit => context.read<LoginFormCubit>();
 
@@ -32,12 +34,30 @@ mixin LoginFormAndButtonsSectionMethods on State<LoginFormAndButtonsSection> {
 
   Future<void> _makeLoginWithFacebook() async {
     FocusScope.of(context).unfocus();
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(
+        const SnackBar(
+          content: Text(
+              'This feature is not available yet. Use default login instead'),
+        ),
+      );
+    return;
 
     await loginCubit.logInWithFacebook();
   }
 
   Future<void> _makeLoginWithGoogle() async {
     FocusScope.of(context).unfocus();
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(
+        const SnackBar(
+          content: Text(
+              'This feature is not available yet. Use default login instead'),
+        ),
+      );
+    return;
 
     await loginCubit.logInWithGoogle();
   }

@@ -1,6 +1,6 @@
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:mustachehub/create/data/dtos/package_form_data.dart';
-import 'package:mustachehub/create/presenter/state/package_form_state.dart';
+import 'package:mustachehub/create/presenter/states/package_form_state.dart';
 
 class PackageFormCubit extends HydratedCubit<PackageFormState> {
   PackageFormCubit() : super(PackageFormState.loading());
@@ -11,6 +11,14 @@ class PackageFormCubit extends HydratedCubit<PackageFormState> {
 
   void setInitial(PackageFormData formData) {
     emit(PackageFormState.normal(formData: formData));
+  }
+
+  void set({
+    required PackageFormData newFormData,
+  }) {
+    emit(
+      PackageFormState.normal(formData: newFormData),
+    );
   }
 
   void updateNameAndDescription({

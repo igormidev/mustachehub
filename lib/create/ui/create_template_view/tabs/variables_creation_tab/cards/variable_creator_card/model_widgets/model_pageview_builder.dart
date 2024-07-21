@@ -5,7 +5,7 @@ import 'package:dart_debouncer/dart_debouncer.dart';
 import 'package:mustache_hub_core/mustache_hub_core.dart';
 import 'package:enchanted_collection/enchanted_collection.dart';
 import 'package:mustachehub/create/presenter/mixins/default_id_caster.dart';
-import 'package:mustachehub/create/presenter/state/edit_model_info_display_state.dart';
+import 'package:mustachehub/create/presenter/states/edit_model_info_display_state.dart';
 import 'package:mustachehub/create/presenter/cubits/edit_model_info_display_cubit.dart';
 import 'package:mustachehub/create/ui/create_template_view/tabs/variables_creation_tab/cards/variable_creator_card/base_variable_creation_card.dart';
 import 'package:mustachehub/create/ui/create_template_view/tabs/variables_creation_tab/cards/display_pipe_card/implementations/model_pipe_display_card.dart';
@@ -395,7 +395,7 @@ class _ModelPipeFormfieldState extends State<ModelPipeFormfield> {
         const SizedBox(height: 6),
         const Divider(),
         Text(
-          'Add boolean variables in model:',
+          'Add conditional variables in model:',
           style: Theme.of(context).textTheme.titleMedium,
         ),
         BooleanVariablesCreationWidget(

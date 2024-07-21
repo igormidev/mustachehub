@@ -9,13 +9,12 @@ import 'package:mustachehub/create/presenter/cubits/fields_text_size_cubit.dart'
 import 'package:mustachehub/create/presenter/cubits/suggestion_cubit.dart';
 import 'package:mustachehub/create/presenter/cubits/variables_cubit.dart';
 import 'package:mustachehub/create/presenter/input_formaters/add_mustache_delimmiter_input_formater.dart';
-import 'package:mustachehub/create/presenter/state/fields_text_size_state.dart';
-import 'package:mustachehub/create/presenter/state/suggestion_state.dart';
-import 'package:mustachehub/create/presenter/state/variables_state.dart';
+import 'package:mustachehub/create/presenter/states/fields_text_size_state.dart';
+import 'package:mustachehub/create/presenter/states/suggestion_state.dart';
+import 'package:mustachehub/create/presenter/states/variables_state.dart';
 import 'package:mustachehub/create/ui/create_template_view/tabs/variables_creation_tab/widgets/headers/text_content_header.dart';
 import 'package:mustachehub/settings/interactor/cubit/theme_cubit.dart';
 import 'package:mustachehub/settings/interactor/state/theme_state.dart';
-import 'package:mustachex/mustachex.dart';
 import 'package:text_analyser/text_analyser.dart';
 
 class TextContentTab extends StatefulWidget {
@@ -99,7 +98,7 @@ class _TextContentTabState extends State<TextContentTab> {
     );
     Future.delayed(const Duration(milliseconds: 200), () {
       if (!mounted) return;
-      _notifyContentCubit(contentCubit, contentCubit.state.currentText, 0);
+      _notifyContentCubit(contentCubit, contentCubit.state.currentText);
     });
     WidgetsBinding.instance.addPostFrameCallback((_) {
       controller.setCacheCS(Theme.of(context).colorScheme);
@@ -114,10 +113,10 @@ class _TextContentTabState extends State<TextContentTab> {
 
   @override
   void dispose() {
-    super.dispose();
     controller.dispose();
     optionsController.dispose();
     decouncer.dispose();
+    super.dispose();
   }
 
   @override
@@ -162,7 +161,7 @@ class _TextContentTabState extends State<TextContentTab> {
                   return TextFormField(
                     focusNode: textfieldFocusNode,
                     controller: controller,
-                    maxLines: 10,
+                    maxLines: 30,
                     style: style,
                     decoration: InputDecoration(
                       contentPadding: const EdgeInsets.symmetric(
@@ -172,6 +171,8 @@ class _TextContentTabState extends State<TextContentTab> {
                       ),
                       fillColor: Theme.of(context).colorScheme.onInverseSurface,
                       filled: true,
+                      hintText:
+                          'Type your text here. Use {{}} to add variables.\nJust tap "{" after creating a variable...',
                     ),
                     textAlignVertical: TextAlignVertical.top,
                     inputFormatters: [
@@ -214,32 +215,8 @@ class _TextContentTabState extends State<TextContentTab> {
     );
   }
 
-  void _notifyContentCubit(
-    ContentStringCubit contentCubit,
-    String text, [
-    int? indexAtText,
-  ]) {
-    // try {
-    //   final sugestionCubit = context.read<SuggestionCubit>();
-    //   final varCubit = context.read<VariablesCubit>();
-    //   sugestionCubit.setSuggestions(
-    //     input: controller.text,
-    //     indexAtText: indexAtText ?? controller.selection.start,
-    //     flatMap: varCubit.state.flatMap,
-    //   );
-    // } catch (_, __) {}
-    try {
-      final parser = Parser(text, null, '{{ }}');
-      final tokens = parser.getTokens();
-      contentCubit.registerTextWithTokens(
-        newText: text,
-        tokens: tokens,
-      );
-    } catch (_, __) {
-      contentCubit.registerNormalText(
-        newText: text,
-      );
-    }
+  void _notifyContentCubit(ContentStringCubit contentCubit, String text) {
+    contentCubit.setCubit(text);
   }
 }
 
