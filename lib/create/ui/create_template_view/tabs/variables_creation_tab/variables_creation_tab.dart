@@ -42,9 +42,9 @@ class VariablesCreationTab extends StatelessWidget {
             ),
             const SliverToBoxAdapter(child: SizedBox(height: 4)),
             const PipeCreationHeader(
-              headerTitle: 'Boolean variables (True or false)',
+              headerTitle: 'Conditional variables (True or false)',
               subtitleSubtitle:
-                  'Boolean variables are characterized by being able '
+                  'Conditional variables are characterized by being able '
                   'to assume a value of true or false. You can use this '
                   'conditional to make logic in the construction of your text.',
             ),

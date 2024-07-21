@@ -33,12 +33,30 @@ mixin SignInFormAndButtonsSectionMethods on State<SigninFormAndButtonsSection> {
   Future<void> _createAccountWithFacebook() async {
     FocusScope.of(context).unfocus();
 
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(
+        const SnackBar(
+          content: Text(
+              'This feature is not available yet. Use default login instead'),
+        ),
+      );
+    return;
     await signInCubit.createUserWithFacebook();
   }
 
   Future<void> _createAccountWithGoogle() async {
     FocusScope.of(context).unfocus();
 
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(
+        const SnackBar(
+          content: Text(
+              'This feature is not available yet. Use default login instead'),
+        ),
+      );
+    return;
     await signInCubit.createUserWithGoogle();
   }
 

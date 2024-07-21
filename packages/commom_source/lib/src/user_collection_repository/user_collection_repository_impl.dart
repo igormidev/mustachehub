@@ -290,16 +290,14 @@ class UserCollectionRepositoryImpl implements IUserCollectionRepository {
 
           final collectionRef = _firestore.collection('collection').doc(userId);
           final templateRef =
-              collectionRef.collection('templates').doc(templateUUID);
+              _firestore.collection('templates').doc(templateUUID);
 
           await _firestore.runTransaction((transaction) async {
-            transaction
-                .set(
+            transaction.delete(templateRef).set(
                   collectionRef,
                   newRootWithotDeletedItem.toIndexes.toJson(),
                   SetOptions(merge: true),
-                )
-                .delete(templateRef);
+                );
           });
 
           return updateUserCollection(newCollection: newRootWithotDeletedItem);

@@ -74,7 +74,7 @@
 //         const SizedBox(height: 6),
 //         const Divider(),
 //         Text(
-//           'Add boolean variables in model:',
+//           'Add conditional variables in model:',
 //           style: Theme.of(context).textTheme.titleMedium,
 //         ),
 //         BooleanVariablesCreationWidget(

@@ -41,8 +41,11 @@
 
 import 'package:flutter/material.dart';
 
-Future<bool> confirmDialog(BuildContext context,
-    {required String description}) async {
+Future<bool> confirmDialog(
+  BuildContext context, {
+  required String description,
+  String? continueLabelText,
+}) async {
   return await showDialog<bool>(
         context: context,
         builder: (context) {
@@ -56,7 +59,7 @@ Future<bool> confirmDialog(BuildContext context,
               ),
               TextButton(
                 onPressed: () => Navigator.of(context).pop(true),
-                child: const Text('Clear'),
+                child: Text(continueLabelText ?? 'Continue'),
               ),
             ],
           );

@@ -36,6 +36,7 @@ class BooleanGenerateNodeBuilder extends StatelessWidget {
               rootModelDTO.deepEdit<BooleanPipe, bool>(
             payloadId: booleanDTONode.payloadUUID,
             pipeId: dto.pipe.pipeId,
+            pipeDtoUUID: dto.uuid,
             mapFunc: (
               PipeDTO<BooleanPipe, bool> pipe,
             ) {

@@ -40,8 +40,6 @@ class ModelPipeForm extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 8),
-                const Divider(height: 8),
-                const SizedBox(height: 8),
                 const CustomHeader(headerTitle: 'Model variables'),
                 ...pipes.map(
                   (ModelPipeDto pipeDTO) {

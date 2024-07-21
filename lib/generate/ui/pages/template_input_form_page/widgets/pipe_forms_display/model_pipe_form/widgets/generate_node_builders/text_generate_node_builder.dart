@@ -38,6 +38,7 @@ class TextGenerateNodeBuilder extends StatelessWidget {
               rootModelDTO.deepEdit<TextPipe, String>(
             payloadId: textDTONode.payloadUUID,
             pipeId: dto.pipe.pipeId,
+            pipeDtoUUID: dto.uuid,
             mapFunc: (
               PipeDTO<TextPipe, String> pipe,
             ) {
