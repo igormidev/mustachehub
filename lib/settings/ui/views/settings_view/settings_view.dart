@@ -1,3 +1,4 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:media_query_core/responsiveness/visibility_width_based.dart';
@@ -19,6 +20,11 @@ class SettingsView extends StatelessWidget {
     final settingsWidget = [
       InkWell(
         onTap: () {
+          if (isDark) {
+            FirebaseAnalytics.instance.logEvent(name: 'switch_to_light_mode');
+          } else {
+            FirebaseAnalytics.instance.logEvent(name: 'switch_to_dark_mode');
+          }
           bloc.selectBrightness(
             isDark ? Brightness.light : Brightness.dark,
           );

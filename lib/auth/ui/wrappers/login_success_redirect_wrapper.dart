@@ -1,3 +1,4 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -18,7 +19,7 @@ class LoginSuccessRedirectWrapper extends StatelessWidget {
     return BlocListener<LoginFormCubit, LoginFormState>(
       listener: (context, state) {
         state.mapOrNull(
-          error: (value) {
+          error: (value) async {
             final error = value.error;
             ScaffoldMessenger.of(context)
               ..hideCurrentSnackBar()
@@ -32,7 +33,8 @@ class LoginSuccessRedirectWrapper extends StatelessWidget {
               );
             return;
           },
-          success: (value) {
+          success: (value) async {
+            FirebaseAnalytics.instance.logLogin();
             context.go('/splash');
           },
         );

@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mustache_hub_core/mustache_hub_core.dart';
@@ -115,6 +116,9 @@ class _FinalWidget extends StatelessWidget with CopyToClipboardMixin {
                     onPressed: () async {
                       final outputCubit = context.read<ContentCubit>();
                       final content = outputCubit.state.content;
+
+                      FirebaseAnalytics.instance
+                          .logEvent(name: 'output_copied');
                       copyText(content, context);
                     },
                   ),
@@ -123,7 +127,7 @@ class _FinalWidget extends StatelessWidget with CopyToClipboardMixin {
               const SizedBox(height: 4),
               Container(
                 decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.surfaceVariant,
+                  color: Theme.of(context).colorScheme.surfaceContainerHighest,
                   borderRadius: BorderRadius.circular(24),
                 ),
                 padding: const EdgeInsets.all(8),

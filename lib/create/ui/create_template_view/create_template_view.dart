@@ -1,3 +1,4 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mustachehub/app_core/theme/dialogs_api/implementations/confirm_dialog.dart';
@@ -65,6 +66,8 @@ class _CreateTemplateViewState extends State<CreateTemplateView>
 
                             if (confirm == true) {
                               if (context.mounted) {
+                                FirebaseAnalytics.instance
+                                    .logEvent(name: 'clear_all_data');
                                 clearAllDependencies(context);
                               }
                             }

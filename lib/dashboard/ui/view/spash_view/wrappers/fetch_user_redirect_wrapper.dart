@@ -1,5 +1,6 @@
 import 'package:commom_states/cubits/session_cubit.dart';
 import 'package:commom_states/states/session_state.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -23,6 +24,7 @@ class FetchUserRedirectWrapper extends StatelessWidget {
       listener: (context, state) {
         state.mapOrNull(
           doneWithoutUser: (_) {
+            FirebaseAnalytics.instance.logAppOpen();
             final sessionCubit = context.read<SessionCubit>();
             final dashboardCubit = context.read<NavigationPossibilitiesCubit>();
 
@@ -39,6 +41,7 @@ class FetchUserRedirectWrapper extends StatelessWidget {
             );
           },
           doneWithUser: (value) {
+            FirebaseAnalytics.instance.logAppOpen();
             final sessionCubit = context.read<SessionCubit>();
             final dashboardCubit = context.read<NavigationPossibilitiesCubit>();
 

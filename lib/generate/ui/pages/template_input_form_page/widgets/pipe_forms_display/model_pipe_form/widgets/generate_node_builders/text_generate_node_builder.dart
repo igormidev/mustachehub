@@ -48,6 +48,7 @@ class TextGenerateNodeBuilder extends StatelessWidget {
             },
           );
           if (editedPipe == null) return;
+          return;
 
           await bloc.addModelPayloadValue(
             content: content,
