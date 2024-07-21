@@ -36,8 +36,7 @@ class TextGenerateNodeBuilder extends StatelessWidget {
 
           final ModelPipeDto? editedPipe =
               rootModelDTO.deepEdit<TextPipe, String>(
-            payloadId: textDTONode.payloadUUID,
-            pipeId: dto.pipe.pipeId,
+            // payloadId: textDTONode.payloadUUID,
             pipeDtoUUID: dto.uuid,
             mapFunc: (
               PipeDTO<TextPipe, String> pipe,
@@ -48,7 +47,7 @@ class TextGenerateNodeBuilder extends StatelessWidget {
             },
           );
           if (editedPipe == null) return;
-          return;
+          // return;
 
           await bloc.addModelPayloadValue(
             content: content,

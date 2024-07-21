@@ -34,8 +34,7 @@ class BooleanGenerateNodeBuilder extends StatelessWidget {
         onChangedCallback: (value) async {
           final ModelPipeDto? editedPipe =
               rootModelDTO.deepEdit<BooleanPipe, bool>(
-            payloadId: booleanDTONode.payloadUUID,
-            pipeId: dto.pipe.pipeId,
+            // payloadId: booleanDTONode.payloadUUID,
             pipeDtoUUID: dto.uuid,
             mapFunc: (
               PipeDTO<BooleanPipe, bool> pipe,

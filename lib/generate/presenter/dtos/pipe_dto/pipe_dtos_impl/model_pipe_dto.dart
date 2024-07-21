@@ -88,23 +88,22 @@ class ModelPipeDto extends Equatable
   /// same model but with that value edited). Will return null
   /// if the model with the [pipeId] is not found.
   ModelPipeDto? deepEdit<P extends Pipe, V>({
-    required String payloadId,
-    required String pipeId,
+    // required String payloadId,
     required String pipeDtoUUID,
     required PipeDTO<P, V> Function(PipeDTO<P, V> oldValue) mapFunc,
   }) {
     // ignore: unnecessary_this
-    if (this.pipe.pipeId == pipeId) {
+    if (this.uuid == pipeDtoUUID) {
       return (mapFunc(this as PipeDTO<P, V>) as ModelPipeDto);
     }
     for (final payload in payloadValue) {
       if (P == TextPipe && V == String) {
         for (final textDTO in payload.texts) {
-          if (textDTO.pipe.pipeId == pipeId) {
+          if (textDTO.uuid == pipeDtoUUID) {
             return copyWith(
               payloadValue: [
                 for (final item in payloadValue)
-                  if (item.uuid == payloadId)
+                  if (item.uuid == payload.uuid)
                     payload.copyWith(
                       texts: [
                         for (final text in payload.texts)
@@ -124,11 +123,11 @@ class ModelPipeDto extends Equatable
 
       if (P == BooleanPipe && V == bool) {
         for (final booleanDTO in payload.booleans) {
-          if (booleanDTO.pipe.pipeId == pipeId) {
+          if (booleanDTO.uuid == pipeDtoUUID) {
             return copyWith(
               payloadValue: [
                 for (final item in payloadValue)
-                  if (item.uuid == payloadId)
+                  if (item.uuid == booleanDTO.uuid)
                     payload.copyWith(
                       booleans: [
                         for (final boolean in payload.booleans)
@@ -147,11 +146,11 @@ class ModelPipeDto extends Equatable
       }
 
       for (final modelDTO in payload.subModels) {
-        if (modelDTO.pipe.pipeId == pipeId) {
+        if (modelDTO.uuid == pipeDtoUUID) {
           return copyWith(
             payloadValue: [
               for (final item in payloadValue)
-                if (item.uuid == payloadId)
+                if (item.uuid == modelDTO.uuid)
                   payload.copyWith(
                     subModels: [
                       for (final model in payload.subModels)
@@ -171,8 +170,8 @@ class ModelPipeDto extends Equatable
       // Now, let's recursively search in the submodels
       for (final modelDTO in payload.subModels) {
         final newModel = modelDTO.deepEdit(
-          payloadId: payloadId,
-          pipeId: pipeId,
+          // payloadId: payloadId,
+          // pipeId: pipeId,
           pipeDtoUUID: pipeDtoUUID,
           mapFunc: mapFunc,
         );
