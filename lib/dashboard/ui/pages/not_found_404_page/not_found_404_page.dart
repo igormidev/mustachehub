@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
 
 class NotFound404Page extends StatelessWidget {
@@ -83,6 +84,19 @@ class NotFound404Page extends StatelessWidget {
               Text(
                 'Page not found',
                 style: Theme.of(context).textTheme.displaySmall,
+              ),
+              const SizedBox(height: 16),
+              Center(
+                child: SizedBox(
+                  width: 160,
+                  child: FilledButton.icon(
+                    icon: const Icon(Icons.restart_alt_rounded),
+                    onPressed: () {
+                      context.go('/splash');
+                    },
+                    label: const Text('Go to home'),
+                  ),
+                ),
               ),
             ],
           ),

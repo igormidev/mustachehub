@@ -83,13 +83,15 @@ class NavigatorService {
   );
 }
 
+String? redirectTo;
 final router = GoRouter(
   debugLogDiagnostics: true,
   navigatorKey: NavigatorService.i.rootNavigatorKey,
   // refreshListenable: GoRouterRefreshStream(sessionCubit.stream),
   redirect: (context, state) {
-    final isInitialScreen = state.matchedLocation == '/splash';
+    final isInitialScreen = state.matchedLocation.contains('/splash');
     if (isInitialScreen == false && !context.isSessionStateDetermined) {
+      redirectTo = '${state.uri}';
       return '/splash';
     }
 
@@ -98,11 +100,17 @@ final router = GoRouter(
   onException: (context, state, router) {
     router.replace('/not-found');
   },
+  // https://mustachehub.com/#/generateText?templateId=319a7c50-8483-42bd-a4a0-15bf5d6aad2c
+  // initialLocation:
+  //     '/generateText?templateId=319a7c50-8483-42bd-a4a0-15bf5d6aad2c',
   initialLocation: '/splash',
   routes: [
     GoRoute(
       path: '/splash',
       builder: (context, state) {
+        // ?redirectTo=/collection
+
+        // final redirectToLink = state.uri.queryParameters['redirectTo'];
         return MultiBlocProvider(
           providers: [
             RepositoryProvider<IUserFetchRepository>(
@@ -117,8 +125,8 @@ final router = GoRouter(
               ),
             ),
           ],
-          child: const SplashScreen(
-            targetRoute: null,
+          child: SplashScreen(
+            redirectToLink: redirectTo,
           ),
         );
       },
