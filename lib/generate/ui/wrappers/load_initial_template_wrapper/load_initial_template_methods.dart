@@ -17,7 +17,7 @@ mixin LoadInitialTemplateMethods on State<LoadInitialTemplateWrapper> {
     setCurrentCollection();
   }
 
-  void setCurrentCollection() {
+  void setCurrentCollection() async {
     final String? templateUUID = widget.templateUUID;
 
     final selectedTemplate = context.read<SelectedTemplateCubit>();
@@ -27,6 +27,7 @@ mixin LoadInitialTemplateMethods on State<LoadInitialTemplateWrapper> {
     );
 
     if (selectedTemplateModel != null && templateUUID == null) {
+      await Future.delayed(const Duration(milliseconds: 300));
       context.go('/generateText?templateId=${selectedTemplateModel.id}');
       return;
     }

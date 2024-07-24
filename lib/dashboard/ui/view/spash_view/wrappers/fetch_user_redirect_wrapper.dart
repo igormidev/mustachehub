@@ -25,6 +25,9 @@ class FetchUserRedirectWrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<UserFetchCubit, UserFetchState>(
       listener: (context, state) {
+        final d = redirectToLink;
+        final cleanLink =
+            d == null ? null : (d.contains('#') == true ? d.split('#')[1] : d);
         state.mapOrNull(
           doneWithoutUser: (_) async {
             try {
@@ -42,9 +45,9 @@ class FetchUserRedirectWrapper extends StatelessWidget {
             );
             sessionCubit.setSessionState(SessionState.guest());
 
-            if (redirectToLink != null) {
-              context.go(redirectToLink!);
+            if (cleanLink != null && cleanLink.isNotEmpty) {
               redirectTo = null;
+              context.go(cleanLink);
               return;
             }
 
@@ -68,9 +71,9 @@ class FetchUserRedirectWrapper extends StatelessWidget {
               user: value.userInfo,
             ));
 
-            if (redirectToLink != null) {
-              context.go(redirectToLink!);
+            if (cleanLink != null && cleanLink.isNotEmpty) {
               redirectTo = null;
+              context.go(cleanLink);
               return;
             }
 

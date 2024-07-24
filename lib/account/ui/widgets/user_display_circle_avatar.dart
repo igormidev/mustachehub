@@ -41,6 +41,10 @@ class UserDisplayCircleAvatar extends StatelessWidget {
                   : const EdgeInsets.all(8),
               child: SizedBox.expand(
                 child: BlocBuilder<SessionCubit, SessionState>(
+                  buildWhen: (previous, current) {
+                    return previous.userProfile()?.urlDisplayImage !=
+                        current.userProfile()?.urlDisplayImage;
+                  },
                   builder: (context, state) {
                     final user = state.userProfile();
                     final displayImage = user?.urlDisplayImage;

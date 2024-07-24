@@ -84,6 +84,7 @@ class NavigatorService {
 }
 
 String? redirectTo;
+
 final router = GoRouter(
   debugLogDiagnostics: true,
   navigatorKey: NavigatorService.i.rootNavigatorKey,
@@ -138,7 +139,13 @@ final router = GoRouter(
       parentNavigatorKey: NavigatorService.i.rootNavigatorKey,
       navigatorKey: NavigatorService.i.dashboardNavigatorKey,
       builder: (BuildContext context, GoRouterState state, Widget child) {
-        return DashboardView(navigator: child);
+        return DashboardView(
+            navigator: Builder(
+          key: UniqueKey(),
+          builder: (context) {
+            return child;
+          },
+        ));
       },
       routes: [
         GoRoute(

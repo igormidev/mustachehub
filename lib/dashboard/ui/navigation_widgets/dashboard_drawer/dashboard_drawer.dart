@@ -59,6 +59,7 @@ class DashboardDrawer extends StatelessWidget with TabSelectionMixin {
                 }
               },
               child: const UserDisplayCircleAvatar.normalSize(
+                key: ValueKey('image_not_mutable'),
                 width: 160,
                 height: 160,
               ),

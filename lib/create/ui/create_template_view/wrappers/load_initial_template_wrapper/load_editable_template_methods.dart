@@ -23,7 +23,7 @@ mixin LoadEditableTemplateMethods
     setCurrentCollection();
   }
 
-  void setCurrentCollection() {
+  void setCurrentCollection() async {
     final String? templateUUID = widget.templateUUID;
 
     final selectedTemplate = context.read<CurrentTemplateTypeCubit>();
@@ -33,6 +33,7 @@ mixin LoadEditableTemplateMethods
     );
 
     if (selectedTemplateModel != null && templateUUID == null) {
+      await Future.delayed(const Duration(milliseconds: 300));
       context.go('/createMustache?templateId=${selectedTemplateModel.id}');
       return;
     }

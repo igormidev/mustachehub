@@ -16,6 +16,7 @@ import 'package:mustachehub/create/presenter/cubits/content_string_cubit.dart';
 import 'package:mustachehub/create/presenter/cubits/template_upload_cubit.dart';
 import 'package:mustachehub/dashboard/data/entities/e_navigation_possibilities.dart';
 import 'package:mustachehub/dashboard/presenter/cubits/navigation_possibilities_cubit.dart';
+import 'package:mustachehub/dashboard/ui/view/dashboard_view/wrappers/load_user_collections_wrapper.dart';
 import 'package:mustachehub/generate/presenter/cubits/selected_template_cubit.dart';
 import 'package:mustachehub/settings/interactor/cubit/theme_cubit.dart';
 import 'package:mustachehub/settings/interactor/state/theme_state.dart';
@@ -123,78 +124,83 @@ class _MustacheMaterialAppState extends State<MustacheMaterialApp> {
             seedColor: themeState.color,
             brightness: themeState.brightness,
           );
-          return BlocListener<LoadingCubit, LoadingState>(
-            listener: (context, state) {
-              state.map(
-                processing: (value) {
-                  _isClicable.value = false;
-                },
-                done: (value) {
-                  _isClicable.value = true;
-                },
-              );
-            },
-            child: ValueListenableBuilder<bool>(
-              valueListenable: _isClicable,
-              builder: (context, value, child) {
-                return IgnorePointer(
-                  ignoring: value == false,
-                  child: child,
+          return LoadUserCollectionsWrapper(
+            child: BlocListener<LoadingCubit, LoadingState>(
+              listener: (context, state) {
+                state.map(
+                  processing: (value) {
+                    _isClicable.value = false;
+                  },
+                  done: (value) {
+                    _isClicable.value = true;
+                  },
                 );
               },
-              child: MaterialApp.router(
-                title: 'Mustache Hub',
-                key: NavigatorService.i.materialApp,
-                theme: ThemeData(
-                  colorScheme: colorScheme,
-                  snackBarTheme: SnackBarThemeData(
-                    backgroundColor: colorScheme.secondaryContainer,
-                    contentTextStyle: TextStyle(
-                      color: colorScheme.onSecondaryContainer,
-                    ),
-                  ),
-                  dividerColor: Theme.of(context).colorScheme.outlineVariant,
-                  // listTileTheme: Theme.of(context).listTileTheme.copyWith(
-                  //       tileColor:
-                  //           Theme.of(context).colorScheme.primaryContainer,
-                  //       shape: RoundedRectangleBorder(
-                  //         borderRadius: BorderRadius.circular(8),
-                  //       ),
-                  //     ),
-                  iconTheme: Theme.of(context).iconTheme.copyWith(
-                        color: Theme.of(context).colorScheme.outline,
-                      ),
-                  inputDecorationTheme: InputDecorationTheme(
-                    border: const OutlineInputBorder(
-                      // borderSide: BorderSide.none,
-                      borderRadius: BorderRadius.all(Radius.circular(8)),
-                    ),
-                    filled: true,
-                    fillColor: colorScheme.secondaryContainer.withAlpha(80),
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 12),
-                  ),
-                  outlinedButtonTheme: OutlinedButtonThemeData(
-                    style: OutlinedButton.styleFrom(
-                      minimumSize: const Size(double.infinity, 55),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8.0),
+              child: ValueListenableBuilder<bool>(
+                valueListenable: _isClicable,
+                builder: (context, value, child) {
+                  return IgnorePointer(
+                    ignoring: value == false,
+                    child: child,
+                  );
+                },
+                child: MaterialApp.router(
+                  title: 'Mustache Hub',
+                  key: NavigatorService.i.materialApp,
+                  theme: ThemeData(
+                    colorScheme: colorScheme,
+                    snackBarTheme: SnackBarThemeData(
+                      backgroundColor: colorScheme.secondaryContainer,
+                      contentTextStyle: TextStyle(
+                        color: colorScheme.onSecondaryContainer,
                       ),
                     ),
-                  ),
-                  filledButtonTheme: FilledButtonThemeData(
-                    style: FilledButton.styleFrom(
-                      minimumSize: const Size(double.infinity, 55),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8.0),
+                    dividerColor: Theme.of(context).colorScheme.outlineVariant,
+                    // listTileTheme: Theme.of(context).listTileTheme.copyWith(
+                    //       tileColor:
+                    //           Theme.of(context).colorScheme.primaryContainer,
+                    //       shape: RoundedRectangleBorder(
+                    //         borderRadius: BorderRadius.circular(8),
+                    //       ),
+                    //     ),
+                    iconTheme: Theme.of(context).iconTheme.copyWith(
+                          color: Theme.of(context).colorScheme.outline,
+                        ),
+                    inputDecorationTheme: InputDecorationTheme(
+                      border: const OutlineInputBorder(
+                        // borderSide: BorderSide.none,
+                        borderRadius: BorderRadius.all(Radius.circular(8)),
                       ),
-                      textStyle:
-                          Theme.of(context).textTheme.titleMedium?.copyWith(
-                                color: Theme.of(context).colorScheme.onPrimary,
-                              ),
+                      filled: true,
+                      fillColor: colorScheme.secondaryContainer.withAlpha(80),
+                      contentPadding:
+                          const EdgeInsets.symmetric(horizontal: 12),
+                    ),
+                    outlinedButtonTheme: OutlinedButtonThemeData(
+                      style: OutlinedButton.styleFrom(
+                        minimumSize: const Size(double.infinity, 55),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                      ),
+                    ),
+                    filledButtonTheme: FilledButtonThemeData(
+                      style: FilledButton.styleFrom(
+                        minimumSize: const Size(double.infinity, 55),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        textStyle: Theme.of(context)
+                            .textTheme
+                            .titleMedium
+                            ?.copyWith(
+                              color: Theme.of(context).colorScheme.onPrimary,
+                            ),
+                      ),
                     ),
                   ),
+                  routerConfig: router,
                 ),
-                routerConfig: router,
               ),
             ),
           );
