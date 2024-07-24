@@ -39,7 +39,7 @@ enum EDashboardNavigationPossibilities {
 
   // ignore: non_constant_identifier_names
   static EDashboardNavigationPossibilities DEFAULT_POSSIBILITY =
-      EDashboardNavigationPossibilities.collection;
+      EDashboardNavigationPossibilities.createMustache;
 
   static EDashboardNavigationPossibilities? fromString(String name) {
     return EDashboardNavigationPossibilities.values.singleWhereOrNull(

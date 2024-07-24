@@ -23,8 +23,11 @@ class FetchUserRedirectWrapper extends StatelessWidget {
     return BlocListener<UserFetchCubit, UserFetchState>(
       listener: (context, state) {
         state.mapOrNull(
-          doneWithoutUser: (_) {
-            FirebaseAnalytics.instance.logAppOpen();
+          doneWithoutUser: (_) async {
+            try {
+              await FirebaseAnalytics.instance.logAppOpen();
+            } catch (_) {}
+            if (!context.mounted) return;
             final sessionCubit = context.read<SessionCubit>();
             final dashboardCubit = context.read<NavigationPossibilitiesCubit>();
 
