@@ -100,9 +100,6 @@ final router = GoRouter(
   onException: (context, state, router) {
     router.replace('/not-found');
   },
-  // https://mustachehub.com/#/generateText?templateId=319a7c50-8483-42bd-a4a0-15bf5d6aad2c
-  // initialLocation:
-  //     '/generateText?templateId=319a7c50-8483-42bd-a4a0-15bf5d6aad2c',
   initialLocation: '/splash',
   routes: [
     GoRoute(

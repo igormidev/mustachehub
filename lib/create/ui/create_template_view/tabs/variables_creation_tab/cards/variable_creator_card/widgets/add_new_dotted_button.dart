@@ -32,7 +32,7 @@ class AddNewButton extends StatelessWidget {
               child: Container(
                 margin: const EdgeInsets.all(2.0),
                 decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.surfaceVariant,
+                  color: Theme.of(context).colorScheme.surfaceContainerHighest,
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: const Center(

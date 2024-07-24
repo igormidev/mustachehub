@@ -18,35 +18,39 @@ class ShareTemplateIcon extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.only(right: 16),
-      child: OutlinedButton.icon(
-        onPressed: () {
-          showMessageDialog(
-            context,
-            title: 'Template link copied ✅',
-            description: 'Now, you can share the link'
-                ' of the template with any one',
-            actions: [
-              DialogAction(
-                text: 'Ok',
-                onPressed: () async {
-                  await Clipboard.setData(
-                    ClipboardData(
-                        text:
-                            'https://mustachehub.com/#/generateText?templateId=$currentTemplateId'),
-                  );
-                  if (!context.mounted) return;
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Link copied to clipboard'),
-                    ),
-                  );
-                },
-              ),
-            ],
-          );
-        },
-        label: const Text('Share template'),
-        icon: const Icon(Icons.share),
+      child: SizedBox(
+        width: 180,
+        height: 40,
+        child: OutlinedButton.icon(
+          onPressed: () {
+            showMessageDialog(
+              context,
+              title: 'Template link copied ✅',
+              description: 'Now, you can share the link'
+                  ' of the template with any one',
+              actions: [
+                DialogAction(
+                  text: 'Ok',
+                  onPressed: () async {
+                    await Clipboard.setData(
+                      ClipboardData(
+                          text:
+                              'https://mustachehub.com/#/generateText?templateId=$currentTemplateId'),
+                    );
+                    if (!context.mounted) return;
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Link copied to clipboard'),
+                      ),
+                    );
+                  },
+                ),
+              ],
+            );
+          },
+          label: const Text('Share template'),
+          icon: const Icon(Icons.share),
+        ),
       ),
     );
   }
