@@ -83,13 +83,15 @@ class NavigatorService {
   );
 }
 
+String? redirectTo;
 final router = GoRouter(
   debugLogDiagnostics: true,
   navigatorKey: NavigatorService.i.rootNavigatorKey,
   // refreshListenable: GoRouterRefreshStream(sessionCubit.stream),
   redirect: (context, state) {
-    final isInitialScreen = state.matchedLocation == '/splash';
+    final isInitialScreen = state.matchedLocation.contains('/splash');
     if (isInitialScreen == false && !context.isSessionStateDetermined) {
+      redirectTo = '${state.uri}';
       return '/splash';
     }
 
@@ -103,6 +105,9 @@ final router = GoRouter(
     GoRoute(
       path: '/splash',
       builder: (context, state) {
+        // ?redirectTo=/collection
+
+        // final redirectToLink = state.uri.queryParameters['redirectTo'];
         return MultiBlocProvider(
           providers: [
             RepositoryProvider<IUserFetchRepository>(
@@ -117,8 +122,8 @@ final router = GoRouter(
               ),
             ),
           ],
-          child: const SplashScreen(
-            targetRoute: null,
+          child: SplashScreen(
+            redirectToLink: redirectTo,
           ),
         );
       },

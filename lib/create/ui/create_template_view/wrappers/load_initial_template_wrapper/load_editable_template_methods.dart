@@ -4,6 +4,7 @@ import 'package:commom_states/cubits/user_collections_cubit.dart';
 import 'package:commom_states/states/user_collections_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mustache_hub_core/mustache_hub_core.dart';
 import 'package:mustachehub/create/data/dtos/package_form_data.dart';
 import 'package:mustachehub/create/presenter/cubits/content_string_cubit.dart';
@@ -24,6 +25,17 @@ mixin LoadEditableTemplateMethods
 
   void setCurrentCollection() {
     final String? templateUUID = widget.templateUUID;
+
+    final selectedTemplate = context.read<CurrentTemplateTypeCubit>();
+    final Template? selectedTemplateModel = selectedTemplate.state.map(
+      withExistingTemplate: (value) => value.template,
+      creating: (_) => null,
+    );
+
+    if (selectedTemplateModel != null && templateUUID == null) {
+      context.go('/createMustache?templateId=${selectedTemplateModel.id}');
+      return;
+    }
 
     final userCollection = context.read<UserCollectionsCubit>();
     final UserCollectionsState state = userCollection.state;

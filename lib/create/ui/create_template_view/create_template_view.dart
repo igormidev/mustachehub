@@ -14,7 +14,7 @@ import 'package:mustachehub/create/ui/create_template_view/methods/template_view
 import 'package:mustachehub/create/ui/create_template_view/views/create_template_tab_view/create_template_tab_view.dart';
 import 'package:mustachehub/create/ui/create_template_view/widgets/create_template_bottom_navigation_bar/create_template_bottom_navigation_bar.dart';
 import 'package:mustachehub/create/ui/create_template_view/wrappers/load_initial_template_wrapper/load_editable_template_wrapper.dart';
-import 'package:mustachehub/create/ui/create_template_view/wrappers/set_initial_state_wrapper.dart';
+import 'package:mustachehub/create/ui/create_template_view/wrappers/set_initial_state_wrapper/set_initial_state_wrapper.dart';
 import 'package:mustachehub/dashboard/ui/navigation_widgets/dashboard_drawer/dashboard_drawer.dart';
 
 class CreateTemplateView extends StatefulWidget {
@@ -47,7 +47,17 @@ class _CreateTemplateViewState extends State<CreateTemplateView>
               drawer: context.drawerOrNull,
               appBar: AppBar(
                 centerTitle: true,
-                title: const Text('Create mustache template'),
+                title: BlocBuilder<CurrentTemplateTypeCubit,
+                    CurrentTemplateTypeState>(builder: (context, state) {
+                  return state.map(
+                    withExistingTemplate: (value) {
+                      return const Text('Edit mustache template');
+                    },
+                    creating: (_) {
+                      return const Text('Create mustache template');
+                    },
+                  );
+                }),
                 actions: [
                   BlocBuilder<CurrentTemplateTypeCubit,
                       CurrentTemplateTypeState>(builder: (context, state) {

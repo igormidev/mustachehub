@@ -4,6 +4,7 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mustachehub/app_core/app_routes.dart';
 import 'package:mustachehub/app_core/theme/components/error_snack_bar.dart';
 import 'package:mustachehub/dashboard/data/entities/e_navigation_possibilities.dart';
 import 'package:mustachehub/dashboard/presenter/cubits/navigation_possibilities_cubit.dart';
@@ -12,10 +13,12 @@ import 'package:mustachehub/dashboard/presenter/states/navigation_possibilities_
 import 'package:mustachehub/dashboard/presenter/states/user_fetch_state.dart';
 
 class FetchUserRedirectWrapper extends StatelessWidget {
+  final String? redirectToLink;
   final Widget child;
   const FetchUserRedirectWrapper({
     super.key,
     required this.child,
+    required this.redirectToLink,
   });
 
   @override
@@ -23,8 +26,11 @@ class FetchUserRedirectWrapper extends StatelessWidget {
     return BlocListener<UserFetchCubit, UserFetchState>(
       listener: (context, state) {
         state.mapOrNull(
-          doneWithoutUser: (_) {
-            FirebaseAnalytics.instance.logAppOpen();
+          doneWithoutUser: (_) async {
+            try {
+              await FirebaseAnalytics.instance.logAppOpen();
+            } catch (_) {}
+            if (!context.mounted) return;
             final sessionCubit = context.read<SessionCubit>();
             final dashboardCubit = context.read<NavigationPossibilitiesCubit>();
 
@@ -35,6 +41,12 @@ class FetchUserRedirectWrapper extends StatelessWidget {
               ),
             );
             sessionCubit.setSessionState(SessionState.guest());
+
+            if (redirectToLink != null) {
+              context.go(redirectToLink!);
+              redirectTo = null;
+              return;
+            }
 
             context.go(
               '/${EDashboardNavigationPossibilities.DEFAULT_POSSIBILITY.name}',
@@ -55,6 +67,12 @@ class FetchUserRedirectWrapper extends StatelessWidget {
               account: value.accountInfo,
               user: value.userInfo,
             ));
+
+            if (redirectToLink != null) {
+              context.go(redirectToLink!);
+              redirectTo = null;
+              return;
+            }
 
             context.go(
               '/${EDashboardNavigationPossibilities.DEFAULT_POSSIBILITY.name}',

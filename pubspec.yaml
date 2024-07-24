@@ -1,5 +1,5 @@
 name: mustachehub
-description: "A new Flutter project."
+description: "A easy, logic-less text template viewer/builder."
 publish_to: 'none'
 
 version: 1.0.0+1
