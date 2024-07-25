@@ -9,5 +9,11 @@
             "flutterMode": "debug",
             // "args": ["--web --wasm"]
         },
+        {
+            "name": "Flutter clean dependencies",
+            "command": "sudo flutter clean && rm -rf pubspec.lock && cd macos && rm -rf Podfile.lock && pod cache clean --all && pod deintegrate && cd .. && flutter pub get && cd macos && pod setup && pod install && pod repo update && cd .. && killall node",
+            "request": "launch",
+            "type": "node-terminal"
+        },
     ]
 }

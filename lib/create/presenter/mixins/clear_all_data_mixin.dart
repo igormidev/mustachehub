@@ -10,7 +10,7 @@ import 'package:mustachehub/create/presenter/cubits/template_upload_cubit.dart';
 import 'package:mustachehub/create/presenter/cubits/variables_cubit.dart';
 
 mixin ClearAllDataMixin {
-  Future<void> clearAllDependencies(BuildContext context) async {
+  void clearAllDependencies(BuildContext context) {
     context.read<ContentStringCubit>().resetToDefault();
     context
         .read<CurrentTemplateTypeCubit>()
@@ -21,8 +21,6 @@ mixin ClearAllDataMixin {
     context.read<TabControllCubit>().changeTab(0);
     context.read<TemplateUploadCubit>().setNormal();
     context.read<VariablesCubit>().setInitial();
-
-    await Future.delayed(const Duration(milliseconds: 1000));
 
     // await context.read<ContentStringCubit>().clear();
     // await context.read<CurrentTemplateTypeCubit>().clear();

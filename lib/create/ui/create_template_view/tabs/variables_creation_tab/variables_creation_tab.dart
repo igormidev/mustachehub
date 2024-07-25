@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mustachehub/create/presenter/cubits/variables_cubit.dart';
+import 'package:mustachehub/create/presenter/states/variables_state.dart';
 import 'package:mustachehub/create/ui/create_template_view/tabs/variables_creation_tab/cards/variable_creator_card/model_widgets/model_pageview_builder.dart';
 import 'package:mustachehub/create/ui/create_template_view/tabs/variables_creation_tab/widgets/headers/base_sliver_pipe_creation_header.dart';
 import 'package:mustachehub/create/ui/create_template_view/tabs/variables_creation_tab/cards/variable_creator_card/implementations/boolean_variable_creation_card.dart';
@@ -13,7 +14,6 @@ class VariablesCreationTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bloc = context.read<VariablesCubit>();
-    final state = bloc.state;
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -27,11 +27,15 @@ class VariablesCreationTab extends StatelessWidget {
                   'A text variable that the user will need to fill in.',
             ),
             const SliverToBoxAdapter(child: SizedBox(height: 4)),
-            TextVariablesCreationWidget(
-              formKey: formKey,
-              initialList: state.textPipes,
-              retriveCreatedPipes: (pipes) {
-                bloc.updateTextVariables(textPipes: pipes);
+            BlocBuilder<VariablesCubit, VariablesState>(
+              builder: (context, state) {
+                return TextVariablesCreationWidget(
+                  formKey: formKey,
+                  initialList: state.textPipes,
+                  retriveCreatedPipes: (pipes) {
+                    bloc.updateTextVariables(textPipes: pipes);
+                  },
+                );
               },
             ),
             const SliverToBoxAdapter(
@@ -48,11 +52,15 @@ class VariablesCreationTab extends StatelessWidget {
                   'to assume a value of true or false. You can use this '
                   'conditional to make logic in the construction of your text.',
             ),
-            BooleanVariablesCreationWidget(
-              formKey: formKey,
-              initialList: state.booleanPipes,
-              retriveCreatedPipes: (pipes) {
-                bloc.updateBooleanVariables(booleanPipes: pipes);
+            BlocBuilder<VariablesCubit, VariablesState>(
+              builder: (context, state) {
+                return BooleanVariablesCreationWidget(
+                  formKey: formKey,
+                  initialList: state.booleanPipes,
+                  retriveCreatedPipes: (pipes) {
+                    bloc.updateBooleanVariables(booleanPipes: pipes);
+                  },
+                );
               },
             ),
             const SliverToBoxAdapter(
@@ -68,11 +76,15 @@ class VariablesCreationTab extends StatelessWidget {
                   'in each template field. A model can be like. For '
                   'example: a model of a person with variables name, age, height, etc...',
             ),
-            ModelPageviewBuilder(
-              formKey: formKey,
-              initialList: state.modelPipes,
-              retriveCreatedPipes: (pipes) {
-                bloc.updateModelVariables(modelPipes: pipes);
+            BlocBuilder<VariablesCubit, VariablesState>(
+              builder: (context, state) {
+                return ModelPageviewBuilder(
+                  formKey: formKey,
+                  initialList: state.modelPipes,
+                  retriveCreatedPipes: (pipes) {
+                    bloc.updateModelVariables(modelPipes: pipes);
+                  },
+                );
               },
             ),
             const SliverToBoxAdapter(child: SizedBox(height: 40)),
