@@ -65,7 +65,7 @@ mixin LoadEditableTemplateMethods
     setTemplateInAllDependencies(template);
   }
 
-  void setTemplateInAllDependencies(Template template) {
+  void setTemplateInAllDependencies(Template template) async {
     clearAllDependencies(context);
 
     // Set the text

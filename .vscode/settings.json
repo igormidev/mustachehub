@@ -8,7 +8,7 @@
         "**/android/": true,
         "**/ios/": true,
         "**/linux/": true,
-        "**/macos/": true,
+        // "**/macos/": true,
         // "**/build/": true,
         // "**/web/": true,
         "**/windows/": true,

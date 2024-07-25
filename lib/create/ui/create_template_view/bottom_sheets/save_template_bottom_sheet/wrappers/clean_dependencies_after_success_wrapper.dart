@@ -21,7 +21,8 @@ class CleanDependenciesAfterSuccessWrapper extends StatelessWidget
       listener: (context, state) async {
         await state.mapOrNull(
           cleaningDependencies: (value) async {
-            await clearAllDependencies(context);
+            clearAllDependencies(context);
+            await Future.delayed(const Duration(milliseconds: 450));
             Navigator.of(context).pop();
             context.read<CleaningDependenciesCubit>().setEndClean();
           },

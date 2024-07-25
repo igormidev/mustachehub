@@ -1,6 +1,7 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mustachehub/app_core/theme/dialogs_api/implementations/confirm_dialog.dart';
 import 'package:mustachehub/create/presenter/cubits/current_template_type_cubit.dart';
 import 'package:mustachehub/create/presenter/mixins/clear_all_data_mixin.dart';
@@ -16,6 +17,7 @@ import 'package:mustachehub/create/ui/create_template_view/widgets/create_templa
 import 'package:mustachehub/create/ui/create_template_view/wrappers/load_initial_template_wrapper/load_editable_template_wrapper.dart';
 import 'package:mustachehub/create/ui/create_template_view/wrappers/set_initial_state_wrapper/set_initial_state_wrapper.dart';
 import 'package:mustachehub/dashboard/ui/navigation_widgets/dashboard_drawer/dashboard_drawer.dart';
+import 'package:uuid/uuid.dart';
 
 class CreateTemplateView extends StatefulWidget {
   final String? templateId;
@@ -69,16 +71,26 @@ class _CreateTemplateViewState extends State<CreateTemplateView>
                           onPressed: () async {
                             final confirm = await confirmDialog(
                               context,
-                              description:
-                                  'This will clear all the data you have entered.',
+                              description: 'This will clear all the '
+                                  'data you have entered.',
                               continueLabelText: 'Clear',
                             );
 
                             if (confirm == true) {
                               if (context.mounted) {
+                                clearAllDependencies(context);
+                                // For some reason, the route is not being updated
+                                // when the user clears all the data. So we need to
+                                // pass a random value to the route to force the
+                                // the update of the route in go router.
+                                final randomJustToUpdate = const Uuid().v4();
+                                if (context.mounted) {
+                                  context.go('/createMustache',
+                                      extra: randomJustToUpdate);
+                                }
+
                                 FirebaseAnalytics.instance
                                     .logEvent(name: 'clear_all_data');
-                                clearAllDependencies(context);
                               }
                             }
                           },
