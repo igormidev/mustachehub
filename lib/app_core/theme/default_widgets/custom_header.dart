@@ -102,9 +102,12 @@ class CustomHeader extends StatelessWidget {
         ),
         if (subtitleWidget != null) subtitleWidget!,
         if (headerSubtitle != null)
-          Text(
-            headerSubtitle ?? '',
-            style: Theme.of(context).textTheme.bodyMedium,
+          Padding(
+            padding: const EdgeInsets.only(top: 6.0),
+            child: Text(
+              headerSubtitle ?? '',
+              style: Theme.of(context).textTheme.bodyMedium,
+            ),
           ),
       ],
     );

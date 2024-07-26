@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:media_query_core/responsiveness/visibility_width_based.dart';
 import 'package:mustachehub/dashboard/ui/navigation_widgets/dashboard_drawer/dashboard_drawer.dart';
 import 'package:mustachehub/dashboard/ui/navigation_widgets/dashboard_rail/dashboard_rail.dart';
-import 'package:mustachehub/dashboard/ui/view/dashboard_view/wrappers/load_user_collections_wrapper.dart';
 
 class DashboardView extends StatefulWidget {
   final Widget navigator;

@@ -19,6 +19,21 @@ class PipeCreationHeader extends StatelessWidget {
           headerTitle: headerTitle,
           headerSubtitle: subtitleSubtitle,
           color: Theme.of(context).colorScheme.primary,
+          children: [
+            Tooltip(
+              message: 'Display tutorial about how to use this variable',
+              child: ElevatedButton(
+                onPressed: () {},
+                child: const Row(
+                  children: [
+                    Text('How to use'),
+                    SizedBox(width: 4),
+                    Icon(Icons.help),
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
