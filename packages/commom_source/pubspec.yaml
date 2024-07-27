@@ -13,16 +13,16 @@ dependencies:
   mustache_hub_core:
     path: ../mustache_hub_core
   result_dart:
-  uuid: ^4.3.3
-  firebase_core: ^3.2.0
-  firebase_auth: ^5.1.2
-  firebase_storage: ^12.1.1
-  cloud_firestore: ^5.1.0
+  uuid:
+  firebase_core:
+  firebase_auth:
+  firebase_storage:
+  cloud_firestore:
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^3.0.0
+  flutter_lints: 
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

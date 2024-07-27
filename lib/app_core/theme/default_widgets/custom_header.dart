@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+// sudo chown -R $USER /opt/homebrew/Caskroom/flutter/3.22.3/flutter
+// sudo chown -R $USER:$USER /opt/homebrew/Caskroom/flutter/3.22.3/flutter
 class CustomHeader extends StatelessWidget {
   final String headerTitle;
   final Color? color;
@@ -114,6 +116,8 @@ class CustomHeader extends StatelessWidget {
   }
 }
 
+// sudo chown -R $USER:$USER /opt/homebrew/bin/flutter
+// sudo chown -R $USER:$USER /opt/flutter
 class CustomActionHeader extends StatelessWidget {
   final IconData iconData;
   final String tooltip;
