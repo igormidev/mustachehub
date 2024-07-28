@@ -70,11 +70,10 @@ class VariablesCreationTab extends StatelessWidget {
               ),
             ),
             const PipeCreationHeader(
-              headerTitle: 'List of models variables',
+              headerTitle: 'List of items variables',
               subtitleSubtitle:
-                  'A list of templates that the user will need to fill '
-                  'in each template field. A model can be like. For '
-                  'example: a model of a person with variables name, age, height, etc...',
+                  'A list of items. Each item can have any type of variable in it. A item can be, for '
+                  'example: a item of a person with variables name, age, height, etc...',
             ),
             BlocBuilder<VariablesCubit, VariablesState>(
               builder: (context, state) {

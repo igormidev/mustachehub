@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 class SizedBoxApearDelay extends StatefulWidget {
@@ -19,16 +21,20 @@ class SizedBoxApearDelay extends StatefulWidget {
 
 class _SizedBoxApearDelayState extends State<SizedBoxApearDelay> {
   bool _isSizedBoxVisible = false;
+  // final Completer<bool> _isSizedBoxVisible = Completer<bool>();
   @override
   void initState() {
     super.initState();
-    Future.delayed(widget.duration, () {
-      if (context.mounted && mounted) {
-        setState(() {
-          _isSizedBoxVisible = true;
-        });
-      }
-    });
+    if (context.mounted && mounted) {
+      Future.delayed(widget.duration, () {
+        // if (context.mounted && mounted) {
+        if (context.mounted && mounted) {
+          setState(() {
+            _isSizedBoxVisible = true;
+          });
+        }
+      });
+    }
   }
 
   @override
