@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:mustachehub/app_core/theme/default_widgets/custom_header.dart';
+import 'package:mustachehub/create/data/enums/e_tutorial_sections.dart';
+import 'package:mustachehub/create/ui/create_template_view/methods/open_tutorial_dialog.dart';
 
-class PipeCreationHeader extends StatelessWidget {
+class PipeCreationHeader extends StatelessWidget with OpenTutorialDialog {
   final String headerTitle;
   final String subtitleSubtitle;
+  final ETutorialSection selectedSection;
   const PipeCreationHeader({
     super.key,
     required this.headerTitle,
     required this.subtitleSubtitle,
+    required this.selectedSection,
   });
 
   @override
@@ -23,7 +27,12 @@ class PipeCreationHeader extends StatelessWidget {
             Tooltip(
               message: 'Display tutorial about how to use this variable',
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  openTutorialDialog(
+                    context,
+                    section: selectedSection,
+                  );
+                },
                 child: const Row(
                   children: [
                     Text('How to use'),

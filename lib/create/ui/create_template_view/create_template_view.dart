@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:media_query_core/responsiveness/extensions_screen_breakpoint.dart';
 import 'package:media_query_core/responsiveness/visibility_width_based.dart';
 import 'package:mustachehub/app_core/theme/dialogs_api/implementations/confirm_dialog.dart';
+import 'package:mustachehub/create/data/enums/e_tutorial_sections.dart';
 import 'package:mustachehub/create/presenter/cubits/current_template_type_cubit.dart';
 import 'package:mustachehub/create/presenter/mixins/clear_all_data_mixin.dart';
 import 'package:mustachehub/create/presenter/states/current_template_type_state.dart';
@@ -65,7 +66,10 @@ class _CreateTemplateViewState extends State<CreateTemplateView>
                           width: 160,
                           height: 40,
                           child: OutlinedButton.icon(
-                            onPressed: () => openTutorialDialog(context),
+                            onPressed: () => openTutorialDialog(
+                              context,
+                              section: ETutorialSection.howToUseGuide,
+                            ),
                             style: OutlinedButton.styleFrom(
                               padding: EdgeInsets.zero,
                             ),
@@ -123,7 +127,10 @@ class _CreateTemplateViewState extends State<CreateTemplateView>
                     maximumWidth: ScreenSize.x900,
                     child: IconButton(
                       tooltip: 'Tutorial',
-                      onPressed: () => openTutorialDialog(context),
+                      onPressed: () => openTutorialDialog(
+                        context,
+                        section: ETutorialSection.howToUseGuide,
+                      ),
                       icon: const Icon(Icons.help),
                     ),
                   ),
