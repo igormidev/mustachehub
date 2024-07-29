@@ -2,11 +2,15 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:media_query_core/responsiveness/extensions_screen_breakpoint.dart';
+import 'package:media_query_core/responsiveness/visibility_width_based.dart';
 import 'package:mustachehub/app_core/theme/dialogs_api/implementations/confirm_dialog.dart';
+import 'package:mustachehub/create/data/enums/e_tutorial_sections.dart';
 import 'package:mustachehub/create/presenter/cubits/current_template_type_cubit.dart';
 import 'package:mustachehub/create/presenter/mixins/clear_all_data_mixin.dart';
 import 'package:mustachehub/create/presenter/states/current_template_type_state.dart';
 import 'package:mustachehub/create/ui/create_template_view/methods/open_save_dialog_.dart';
+import 'package:mustachehub/create/ui/create_template_view/methods/open_tutorial_dialog.dart';
 import 'package:mustachehub/create/ui/create_template_view/tabs/template_input_form_tab_view/template_input_form_tab_view.dart';
 import 'package:mustachehub/create/ui/create_template_view/tabs/template_output_tab_view/template_output_tab_view.dart';
 import 'package:mustachehub/create/ui/create_template_view/tabs/text_context_tab/text_content_tab.dart';
@@ -34,7 +38,8 @@ class _CreateTemplateViewState extends State<CreateTemplateView>
     with
         TemplateViewOpenTestBottomsheetMethod,
         OpenSaveDialog,
-        ClearAllDataMixin {
+        ClearAllDataMixin,
+        OpenTutorialDialog {
   @override
   Widget build(BuildContext context) {
     return LoadEditableTemplateWrapper(
@@ -49,18 +54,86 @@ class _CreateTemplateViewState extends State<CreateTemplateView>
               drawer: context.drawerOrNull,
               appBar: AppBar(
                 centerTitle: true,
+                leadingWidth: 176,
+                leading: VisibilityWidthBased.fromMediaQueryScreenWidth(
+                  minimumWidth: ScreenSize.x900,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 16),
+                    child: Center(
+                      child: Tooltip(
+                        message: 'Open tutorial dialog',
+                        child: SizedBox(
+                          width: 160,
+                          height: 40,
+                          child: OutlinedButton.icon(
+                            onPressed: () => openTutorialDialog(
+                              context,
+                              section: ETutorialSection.howToUseGuide,
+                            ),
+                            style: OutlinedButton.styleFrom(
+                              padding: EdgeInsets.zero,
+                            ),
+                            label: const Text('Help tutorial'),
+                            icon: const Icon(Icons.help),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
                 title: BlocBuilder<CurrentTemplateTypeCubit,
                     CurrentTemplateTypeState>(builder: (context, state) {
                   return state.map(
                     withExistingTemplate: (value) {
-                      return const Text('Edit mustache template');
+                      return Text(
+                        context.whenSizeIsSmallerThen<String>(
+                              size: ScreenSize.x900,
+                              child: 'Edit',
+                            ) ??
+                            'Edit mustache template',
+                      );
                     },
                     creating: (_) {
-                      return const Text('Create mustache template');
+                      return Text(
+                        context.whenSizeIsSmallerThen<String>(
+                              size: ScreenSize.x900,
+                              child: 'Create',
+                            ) ??
+                            'Create mustache template',
+                      );
                     },
                   );
                 }),
                 actions: [
+                  if (willShowTestButton)
+                    Padding(
+                      padding: const EdgeInsets.only(right: 16),
+                      child: Center(
+                        child: SizedBox(
+                          width: 160,
+                          height: 40,
+                          child: OutlinedButton.icon(
+                            onPressed: () => openTestDialog(context),
+                            style: OutlinedButton.styleFrom(
+                              padding: EdgeInsets.zero,
+                            ),
+                            label: const Text('Test template'),
+                            icon: const Icon(Icons.science_rounded),
+                          ),
+                        ),
+                      ),
+                    ),
+                  VisibilityWidthBased.fromMediaQueryScreenWidth(
+                    maximumWidth: ScreenSize.x900,
+                    child: IconButton(
+                      tooltip: 'Tutorial',
+                      onPressed: () => openTutorialDialog(
+                        context,
+                        section: ETutorialSection.howToUseGuide,
+                      ),
+                      icon: const Icon(Icons.help),
+                    ),
+                  ),
                   BlocBuilder<CurrentTemplateTypeCubit,
                       CurrentTemplateTypeState>(builder: (context, state) {
                     return state.map(
@@ -99,12 +172,6 @@ class _CreateTemplateViewState extends State<CreateTemplateView>
                       },
                     );
                   }),
-                  if (willShowTestButton)
-                    IconButton(
-                      tooltip: 'Test template',
-                      onPressed: () => openTestDialog(context),
-                      icon: const Icon(Icons.science_rounded),
-                    ),
                   IconButton(
                     onPressed: () => openSaveDialog(context),
                     tooltip: 'Save template',

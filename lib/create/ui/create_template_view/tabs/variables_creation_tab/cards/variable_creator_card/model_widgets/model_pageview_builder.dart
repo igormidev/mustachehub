@@ -44,7 +44,7 @@ class _ModelPageviewBuilderState extends State<ModelPageviewBuilder>
   Widget build(BuildContext context) {
     final editCubit = context.read<EditModelInfoDisplayCubit>();
     return BaseVariableCreatorCard<ModelPipe>(
-      addNewText: 'Add a new model variable',
+      addNewText: 'Add a new item variable',
       retriveCreatedPipes: widget.retriveCreatedPipes,
       formKey: widget.formKey,
       initialList: widget.initialList,
@@ -212,7 +212,7 @@ class _ModelBaseCreatorState extends State<ModelBaseCreator>
   Widget build(BuildContext context) {
     final editCubit = context.read<EditModelInfoDisplayCubit>();
     return BaseVariableCreatorCard<ModelPipe>(
-      addNewText: 'Add a new model variable',
+      addNewText: 'Add a new item variable',
       retriveCreatedPipes: widget.retriveCreatedPipes,
       initialList: widget.initialList,
       type: widget.type,
@@ -361,11 +361,11 @@ class _ModelPipeFormfieldState extends State<ModelPipeFormfield> {
       pipe: widget.pipe,
       children: [
         Text(
-          'Model variables:',
+          'Items variables:',
           style: Theme.of(context).textTheme.headlineMedium,
         ),
         Text(
-          'Fill bellow the variables that will be used in the model',
+          'Fill bellow the variables that will be used in the item',
           style: Theme.of(context).textTheme.bodyMedium,
         ),
         const Padding(
@@ -373,7 +373,7 @@ class _ModelPipeFormfieldState extends State<ModelPipeFormfield> {
           child: Divider(),
         ),
         Text(
-          'Add texts variables in model:',
+          'Add texts variables in item:',
           style: Theme.of(context).textTheme.titleMedium,
         ),
         TextVariablesCreationWidget(
@@ -395,7 +395,7 @@ class _ModelPipeFormfieldState extends State<ModelPipeFormfield> {
         const SizedBox(height: 6),
         const Divider(),
         Text(
-          'Add conditional variables in model:',
+          'Add conditional variables in item:',
           style: Theme.of(context).textTheme.titleMedium,
         ),
         BooleanVariablesCreationWidget(
@@ -417,7 +417,7 @@ class _ModelPipeFormfieldState extends State<ModelPipeFormfield> {
         const SizedBox(height: 6),
         const Divider(),
         Text(
-          'Add other list of models variable in model:',
+          'Add other list of items variable in item:',
           style: Theme.of(context).textTheme.titleMedium,
         ),
         ModelBaseCreator(

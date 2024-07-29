@@ -113,7 +113,7 @@ class VariablesInfoHighlightTextEditingController
             children: value.segmentText.characters.map((e) {
               return TooltipSpan(
                 message:
-                    'Model declaration open without an corresponding close declaration.\n\nThat means you are opening a model (using \'/\' caracter) without closing it later in the text.\nTo fix this, you need to create a "close model declaration" using the \'^\' caracter.\n\nExample of a valid model declaration: {{^Person}}{{/Person}}',
+                    'Item declaration open without an corresponding close declaration.\n\nThat means you are opening a item (using \'/\' caracter) without closing it later in the text.\nTo fix this, you need to create a "close item declaration" using the \'^\' caracter.\n\nExample of a valid item declaration: {{^Person}}{{/Person}}',
                 inlineSpan: TextSpan(
                   text: e,
                   style: defaultStyle.copyWith(
@@ -130,7 +130,7 @@ class VariablesInfoHighlightTextEditingController
             children: value.segmentText.characters.map((e) {
               return TooltipSpan(
                 message:
-                    'Model declaration close without an corresponding open declaration.\n\nThat means you are closing a model (using \'/\' caracter) without opening it first.\nTo fix this, you need to open a "open model declaration" using the \'^\' caracter.\n\nExample of a valid model declaration: {{^Person}}{{/Person}}',
+                    'Item declaration close without an corresponding open declaration.\n\nThat means you are closing a item (using \'/\' caracter) without opening it first.\nTo fix this, you need to open a "open item declaration" using the \'^\' caracter.\n\nExample of a valid item declaration: {{^Person}}{{/Person}}',
                 inlineSpan: TextSpan(
                   text: e,
                   style: defaultStyle.copyWith(
@@ -147,7 +147,7 @@ class VariablesInfoHighlightTextEditingController
             children: value.segmentText.characters.map((e) {
               return TooltipSpan(
                 message:
-                    'Model declaration close without an corresponding open declaration.\n\nThat means you are closing a model (using \'^\' caracter) without opening it first.\nTo fix this, you need to open a "open model declaration" using the \'\\\' caracter.\n\nExample of a valid model declaration: {{^Person}}{{/Person}}',
+                    'Item declaration close without an corresponding open declaration.\n\nThat means you are closing a item (using \'^\' caracter) without opening it first.\nTo fix this, you need to open a "open item declaration" using the \'\\\' caracter.\n\nExample of a valid item declaration: {{^Person}}{{/Person}}',
                 inlineSpan: TextSpan(
                   text: e,
                   style: defaultStyle.copyWith(
@@ -164,7 +164,7 @@ class VariablesInfoHighlightTextEditingController
             children: value.segmentText.characters.map((e) {
               return TooltipSpan(
                 message:
-                    'Declaration of uncataloged variable.\n\nThat means you are trying to use a variable that was not declared before.\nTo fix this, you need to create the variable before using it. You can create text, boolean or model variables.',
+                    'Declaration of uncataloged variable.\n\nThat means you are trying to use a variable that was not declared before.\nTo fix this, you need to create the variable before using it. You can create text, boolean or item variables.',
                 inlineSpan: TextSpan(
                   text: e,
                   style: defaultStyle.copyWith(
@@ -181,7 +181,7 @@ class VariablesInfoHighlightTextEditingController
             children: value.segmentText.characters.map((e) {
               return TooltipSpan(
                 message:
-                    'Variable exists but cannot be used in this context.\n\nThat means you are trying to use a variable that can\'t be used in that place. For instance; text variable of a model that is trying to be use outside the scope of it.\nWhat is a scope?\nExemple: {{^Person}}declare_persons_variable_only_here{{/Person}}',
+                    'Variable exists but cannot be used in this context.\n\nThat means you are trying to use a variable that can\'t be used in that place. For instance; text variable of a item that is trying to be use outside the scope of it.\nWhat is a scope?\nExemple: {{^Person}}declare_persons_variable_only_here{{/Person}}',
                 inlineSpan: TextSpan(
                   text: e,
                   style: defaultStyle.copyWith(

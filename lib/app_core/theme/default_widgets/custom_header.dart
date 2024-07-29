@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+// sudo chown -R $USER /opt/homebrew/Caskroom/flutter/3.22.3/flutter
+// sudo chown -R $USER:$USER /opt/homebrew/Caskroom/flutter/3.22.3/flutter
 class CustomHeader extends StatelessWidget {
   final String headerTitle;
   final Color? color;
@@ -102,15 +104,20 @@ class CustomHeader extends StatelessWidget {
         ),
         if (subtitleWidget != null) subtitleWidget!,
         if (headerSubtitle != null)
-          Text(
-            headerSubtitle ?? '',
-            style: Theme.of(context).textTheme.bodyMedium,
+          Padding(
+            padding: const EdgeInsets.only(top: 6.0),
+            child: Text(
+              headerSubtitle ?? '',
+              style: Theme.of(context).textTheme.bodyMedium,
+            ),
           ),
       ],
     );
   }
 }
 
+// sudo chown -R $USER:$USER /opt/homebrew/bin/flutter
+// sudo chown -R $USER:$USER /opt/flutter
 class CustomActionHeader extends StatelessWidget {
   final IconData iconData;
   final String tooltip;

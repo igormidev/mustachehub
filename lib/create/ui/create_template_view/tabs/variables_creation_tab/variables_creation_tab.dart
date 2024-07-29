@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mustachehub/create/data/enums/e_tutorial_sections.dart';
 import 'package:mustachehub/create/presenter/cubits/variables_cubit.dart';
 import 'package:mustachehub/create/presenter/states/variables_state.dart';
 import 'package:mustachehub/create/ui/create_template_view/tabs/variables_creation_tab/cards/variable_creator_card/model_widgets/model_pageview_builder.dart';
@@ -25,6 +26,7 @@ class VariablesCreationTab extends StatelessWidget {
               headerTitle: 'Text variables',
               subtitleSubtitle:
                   'A text variable that the user will need to fill in.',
+              selectedSection: ETutorialSection.textVariable,
             ),
             const SliverToBoxAdapter(child: SizedBox(height: 4)),
             BlocBuilder<VariablesCubit, VariablesState>(
@@ -51,6 +53,7 @@ class VariablesCreationTab extends StatelessWidget {
                   'Conditional variables are characterized by being able '
                   'to assume a value of true or false. You can use this '
                   'conditional to make logic in the construction of your text.',
+              selectedSection: ETutorialSection.conditionalVariable,
             ),
             BlocBuilder<VariablesCubit, VariablesState>(
               builder: (context, state) {
@@ -70,11 +73,11 @@ class VariablesCreationTab extends StatelessWidget {
               ),
             ),
             const PipeCreationHeader(
-              headerTitle: 'List of models variables',
+              headerTitle: 'List of items variables',
               subtitleSubtitle:
-                  'A list of templates that the user will need to fill '
-                  'in each template field. A model can be like. For '
-                  'example: a model of a person with variables name, age, height, etc...',
+                  'A list of items. Each item can have any type of variable in it. A item can be, for '
+                  'example: a item of a person with variables name, age, height, etc...',
+              selectedSection: ETutorialSection.listOfItemVariable,
             ),
             BlocBuilder<VariablesCubit, VariablesState>(
               builder: (context, state) {
