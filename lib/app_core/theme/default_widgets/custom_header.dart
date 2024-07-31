@@ -65,7 +65,7 @@ class CustomHeader extends StatelessWidget {
                 ),
               ),
             ),
-            if (actions != null) ...actions!.map((e) => e).toList(),
+            if (actions != null) ...actions!.map((e) => e),
             if (children != null) ...children!,
             if (moreOnPressed != null)
               IconButton(
@@ -116,8 +116,6 @@ class CustomHeader extends StatelessWidget {
   }
 }
 
-// sudo chown -R $USER:$USER /opt/homebrew/bin/flutter
-// sudo chown -R $USER:$USER /opt/flutter
 class CustomActionHeader extends StatelessWidget {
   final IconData iconData;
   final String tooltip;

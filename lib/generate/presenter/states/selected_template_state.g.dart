@@ -16,7 +16,7 @@ _$SelectedTemplateStateWithDataImpl
 Map<String, dynamic> _$$SelectedTemplateStateWithDataImplToJson(
         _$SelectedTemplateStateWithDataImpl instance) =>
     <String, dynamic>{
-      'template': instance.template,
+      'template': instance.template.toJson(),
       'runtimeType': instance.$type,
     };
 

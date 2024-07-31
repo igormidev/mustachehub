@@ -88,7 +88,7 @@ mixin SaveTemplateBottomSheetMethods on State<SaveTemplateBottomSheet> {
           id: id,
           info: newPackageInfo,
           payload: expectectedPayload,
-          content: contentState.currentText,
+          output: contentState.currentText,
           metadata: metadata.copyWith(
             // usersPermission: {
             //   ...metadata.usersPermission,
@@ -102,7 +102,7 @@ mixin SaveTemplateBottomSheetMethods on State<SaveTemplateBottomSheet> {
     } else {
       FirebaseAnalytics.instance.logEvent(name: 'template_create');
       widget.templateUploadCubit.createPackage(
-        content: contentState.currentText,
+        output: contentState.currentText,
         packageInfo: newPackageInfo,
         expectedPayload: expectectedPayload,
       );

@@ -24,7 +24,7 @@ class _TemplateInputFormPageViewState extends State<TemplateInputFormPageView>
     final contentState = context.read<ContentStringCubit>().state;
     setDependencies(
       context: context,
-      content: contentState.currentText,
+      output: contentState.currentText,
       textPipes: varState.textPipes,
       booleanPipes: varState.booleanPipes,
       modelPipes: varState.modelPipes,
@@ -39,7 +39,7 @@ class _TemplateInputFormPageViewState extends State<TemplateInputFormPageView>
         final varState = context.read<VariablesCubit>().state;
         setDependencies(
           context: context,
-          content: contentState.currentText,
+          output: contentState.currentText,
           textPipes: varState.textPipes,
           booleanPipes: varState.booleanPipes,
           modelPipes: varState.modelPipes,
@@ -50,7 +50,7 @@ class _TemplateInputFormPageViewState extends State<TemplateInputFormPageView>
           listener: (context, variablesCubit) async {
             setDependencies(
               context: context,
-              content: contentState.currentText,
+              output: contentState.currentText,
               textPipes: variablesCubit.textPipes,
               booleanPipes: variablesCubit.booleanPipes,
               modelPipes: variablesCubit.modelPipes,
@@ -63,7 +63,7 @@ class _TemplateInputFormPageViewState extends State<TemplateInputFormPageView>
                 booleanPipes: variablesCubit.booleanPipes,
                 modelPipes: variablesCubit.modelPipes,
               ),
-              content: contentState.currentText,
+              output: contentState.currentText,
             );
           },
         );

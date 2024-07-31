@@ -8,7 +8,7 @@ import 'package:mustachehub/generate/presenter/states/payload_state.dart';
 mixin SetGeneratorDependenciesMixin {
   Future<void> setDependencies({
     required BuildContext context,
-    required String content,
+    required ContentOutput output,
     required List<TextPipe> textPipes,
     required List<BooleanPipe> booleanPipes,
     required List<ModelPipe> modelPipes,
@@ -16,7 +16,7 @@ mixin SetGeneratorDependenciesMixin {
     final payloadCubit = context.read<PayloadCubit>();
     final outputCubit = context.read<ContentCubit>();
     await payloadCubit.updateContent(
-      content: content,
+      output: output,
       expectedPayload: ExpectedPayload(
         textPipes: textPipes,
         booleanPipes: booleanPipes,
@@ -25,7 +25,7 @@ mixin SetGeneratorDependenciesMixin {
       expectedPayloadDto: null,
     );
     if (payloadCubit.state is InitialPayloadState) {
-      outputCubit.setPendency(content);
+      outputCubit.setPendency(output);
     }
   }
 }

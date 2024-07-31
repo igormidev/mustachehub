@@ -12,7 +12,7 @@ abstract class Template with _$Template {
   factory Template({
     required String id,
     required PackageInfo info,
-    required String content,
+    required ContentOutput output,
     required TemplateMetadata metadata,
     required ExpectedPayload payload,
   }) = _Template;

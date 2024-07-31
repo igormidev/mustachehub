@@ -12,7 +12,7 @@ part of 'change_password_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ChangePasswordState {
@@ -104,6 +104,9 @@ class _$ChangePasswordStateCopyWithImpl<$Res, $Val extends ChangePasswordState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of ChangePasswordState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -123,6 +126,9 @@ class __$$ChangePasswordStateInitialImplCopyWithImpl<$Res>
       _$ChangePasswordStateInitialImpl _value,
       $Res Function(_$ChangePasswordStateInitialImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of ChangePasswordState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -261,6 +267,9 @@ class __$$ChangePasswordStateLoadingImplCopyWithImpl<$Res>
       _$ChangePasswordStateLoadingImpl _value,
       $Res Function(_$ChangePasswordStateLoadingImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of ChangePasswordState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -399,6 +408,9 @@ class __$$ChangePasswordStateWithNoUserErrorImplCopyWithImpl<$Res>
       _$ChangePasswordStateWithNoUserErrorImpl _value,
       $Res Function(_$ChangePasswordStateWithNoUserErrorImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of ChangePasswordState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -543,6 +555,8 @@ class __$$ChangePasswordStateWithErrorImplCopyWithImpl<$Res>
       $Res Function(_$ChangePasswordStateWithErrorImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ChangePasswordState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -582,7 +596,9 @@ class _$ChangePasswordStateWithErrorImpl
   @override
   int get hashCode => Object.hash(runtimeType, error);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ChangePasswordState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ChangePasswordStateWithErrorImplCopyWith<
@@ -691,7 +707,10 @@ abstract class _ChangePasswordStateWithError implements ChangePasswordState {
       _$ChangePasswordStateWithErrorImpl;
 
   CredentialAuthException get error;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ChangePasswordState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ChangePasswordStateWithErrorImplCopyWith<
           _$ChangePasswordStateWithErrorImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -714,6 +733,9 @@ class __$$ChangePasswordStateWithGenericErrorImplCopyWithImpl<$Res>
       _$ChangePasswordStateWithGenericErrorImpl _value,
       $Res Function(_$ChangePasswordStateWithGenericErrorImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of ChangePasswordState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -855,6 +877,9 @@ class __$$ChangePasswordStateSuccessImplCopyWithImpl<$Res>
       _$ChangePasswordStateSuccessImpl _value,
       $Res Function(_$ChangePasswordStateSuccessImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of ChangePasswordState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc

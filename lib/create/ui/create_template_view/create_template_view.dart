@@ -54,9 +54,12 @@ class _CreateTemplateViewState extends State<CreateTemplateView>
               drawer: context.drawerOrNull,
               appBar: AppBar(
                 centerTitle: true,
-                leadingWidth: 176,
-                leading: VisibilityWidthBased.fromMediaQueryScreenWidth(
-                  minimumWidth: ScreenSize.x900,
+                leadingWidth: context.whenSizeIsBiggerThen(
+                  size: ScreenSize.x900,
+                  child: 176,
+                ),
+                leading: context.whenSizeIsBiggerThen(
+                  size: ScreenSize.x900,
                   child: Padding(
                     padding: const EdgeInsets.only(left: 16),
                     child: Center(

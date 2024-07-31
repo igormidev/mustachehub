@@ -12,7 +12,7 @@ part of 'selected_template_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 SelectedTemplateState _$SelectedTemplateStateFromJson(
     Map<String, dynamic> json) {
@@ -72,6 +72,8 @@ mixin _$SelectedTemplateState {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  /// Serializes this SelectedTemplateState to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 }
 
@@ -92,6 +94,9 @@ class _$SelectedTemplateStateCopyWithImpl<$Res,
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of SelectedTemplateState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -116,6 +121,8 @@ class __$$SelectedTemplateStateWithDataImplCopyWithImpl<$Res>
       $Res Function(_$SelectedTemplateStateWithDataImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SelectedTemplateState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -129,6 +136,8 @@ class __$$SelectedTemplateStateWithDataImplCopyWithImpl<$Res>
     ));
   }
 
+  /// Create a copy of SelectedTemplateState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $TemplateCopyWith<$Res> get template {
@@ -139,7 +148,8 @@ class __$$SelectedTemplateStateWithDataImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true)
 class _$SelectedTemplateStateWithDataImpl
     implements _SelectedTemplateStateWithData {
   _$SelectedTemplateStateWithDataImpl(
@@ -170,11 +180,13 @@ class _$SelectedTemplateStateWithDataImpl
                 other.template == template));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, template);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SelectedTemplateState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SelectedTemplateStateWithDataImplCopyWith<
@@ -261,7 +273,10 @@ abstract class _SelectedTemplateStateWithData implements SelectedTemplateState {
       _$SelectedTemplateStateWithDataImpl.fromJson;
 
   Template get template;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of SelectedTemplateState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SelectedTemplateStateWithDataImplCopyWith<
           _$SelectedTemplateStateWithDataImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -284,6 +299,9 @@ class __$$SelectedTemplateStateUnselectedImplCopyWithImpl<$Res>
       _$SelectedTemplateStateUnselectedImpl _value,
       $Res Function(_$SelectedTemplateStateUnselectedImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of SelectedTemplateState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -312,7 +330,7 @@ class _$SelectedTemplateStateUnselectedImpl
             other is _$SelectedTemplateStateUnselectedImpl);
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => runtimeType.hashCode;
 

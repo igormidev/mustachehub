@@ -12,65 +12,54 @@ part of 'content_string_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 ContentStringState _$ContentStringStateFromJson(Map<String, dynamic> json) {
-  switch (json['runtimeType']) {
-    case 'normal':
-      return Normal.fromJson(json);
-    case 'withToken':
-      return WithToken.fromJson(json);
-
-    default:
-      throw CheckedFromJsonException(json, 'runtimeType', 'ContentStringState',
-          'Invalid union type "${json['runtimeType']}"!');
-  }
+  return Normal.fromJson(json);
 }
 
 /// @nodoc
 mixin _$ContentStringState {
-  String get currentText => throw _privateConstructorUsedError;
+  ContentOutput get currentText => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String currentText) normal,
-    required TResult Function(String currentText, List<Token> tokensInIt)
-        withToken,
+    required TResult Function(ContentOutput currentText) normal,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String currentText)? normal,
-    TResult? Function(String currentText, List<Token> tokensInIt)? withToken,
+    TResult? Function(ContentOutput currentText)? normal,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String currentText)? normal,
-    TResult Function(String currentText, List<Token> tokensInIt)? withToken,
+    TResult Function(ContentOutput currentText)? normal,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Normal value) normal,
-    required TResult Function(WithToken value) withToken,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Normal value)? normal,
-    TResult? Function(WithToken value)? withToken,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Normal value)? normal,
-    TResult Function(WithToken value)? withToken,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  /// Serializes this ContentStringState to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ContentStringState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ContentStringStateCopyWith<ContentStringState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -81,7 +70,9 @@ abstract class $ContentStringStateCopyWith<$Res> {
           ContentStringState value, $Res Function(ContentStringState) then) =
       _$ContentStringStateCopyWithImpl<$Res, ContentStringState>;
   @useResult
-  $Res call({String currentText});
+  $Res call({ContentOutput currentText});
+
+  $ContentOutputCopyWith<$Res> get currentText;
 }
 
 /// @nodoc
@@ -94,6 +85,8 @@ class _$ContentStringStateCopyWithImpl<$Res, $Val extends ContentStringState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ContentStringState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -103,8 +96,18 @@ class _$ContentStringStateCopyWithImpl<$Res, $Val extends ContentStringState>
       currentText: null == currentText
           ? _value.currentText
           : currentText // ignore: cast_nullable_to_non_nullable
-              as String,
+              as ContentOutput,
     ) as $Val);
+  }
+
+  /// Create a copy of ContentStringState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $ContentOutputCopyWith<$Res> get currentText {
+    return $ContentOutputCopyWith<$Res>(_value.currentText, (value) {
+      return _then(_value.copyWith(currentText: value) as $Val);
+    });
   }
 }
 
@@ -116,7 +119,10 @@ abstract class _$$NormalImplCopyWith<$Res>
       __$$NormalImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String currentText});
+  $Res call({ContentOutput currentText});
+
+  @override
+  $ContentOutputCopyWith<$Res> get currentText;
 }
 
 /// @nodoc
@@ -127,6 +133,8 @@ class __$$NormalImplCopyWithImpl<$Res>
       _$NormalImpl _value, $Res Function(_$NormalImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ContentStringState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -136,7 +144,7 @@ class __$$NormalImplCopyWithImpl<$Res>
       currentText: null == currentText
           ? _value.currentText
           : currentText // ignore: cast_nullable_to_non_nullable
-              as String,
+              as ContentOutput,
     ));
   }
 }
@@ -144,17 +152,13 @@ class __$$NormalImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$NormalImpl implements Normal {
-  const _$NormalImpl({required this.currentText, final String? $type})
-      : $type = $type ?? 'normal';
+  const _$NormalImpl({required this.currentText});
 
   factory _$NormalImpl.fromJson(Map<String, dynamic> json) =>
       _$$NormalImplFromJson(json);
 
   @override
-  final String currentText;
-
-  @JsonKey(name: 'runtimeType')
-  final String $type;
+  final ContentOutput currentText;
 
   @override
   String toString() {
@@ -170,11 +174,13 @@ class _$NormalImpl implements Normal {
                 other.currentText == currentText));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, currentText);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ContentStringState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$NormalImplCopyWith<_$NormalImpl> get copyWith =>
@@ -183,9 +189,7 @@ class _$NormalImpl implements Normal {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String currentText) normal,
-    required TResult Function(String currentText, List<Token> tokensInIt)
-        withToken,
+    required TResult Function(ContentOutput currentText) normal,
   }) {
     return normal(currentText);
   }
@@ -193,8 +197,7 @@ class _$NormalImpl implements Normal {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String currentText)? normal,
-    TResult? Function(String currentText, List<Token> tokensInIt)? withToken,
+    TResult? Function(ContentOutput currentText)? normal,
   }) {
     return normal?.call(currentText);
   }
@@ -202,8 +205,7 @@ class _$NormalImpl implements Normal {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String currentText)? normal,
-    TResult Function(String currentText, List<Token> tokensInIt)? withToken,
+    TResult Function(ContentOutput currentText)? normal,
     required TResult orElse(),
   }) {
     if (normal != null) {
@@ -216,7 +218,6 @@ class _$NormalImpl implements Normal {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Normal value) normal,
-    required TResult Function(WithToken value) withToken,
   }) {
     return normal(this);
   }
@@ -225,7 +226,6 @@ class _$NormalImpl implements Normal {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Normal value)? normal,
-    TResult? Function(WithToken value)? withToken,
   }) {
     return normal?.call(this);
   }
@@ -234,7 +234,6 @@ class _$NormalImpl implements Normal {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Normal value)? normal,
-    TResult Function(WithToken value)? withToken,
     required TResult orElse(),
   }) {
     if (normal != null) {
@@ -252,193 +251,18 @@ class _$NormalImpl implements Normal {
 }
 
 abstract class Normal implements ContentStringState {
-  const factory Normal({required final String currentText}) = _$NormalImpl;
+  const factory Normal({required final ContentOutput currentText}) =
+      _$NormalImpl;
 
   factory Normal.fromJson(Map<String, dynamic> json) = _$NormalImpl.fromJson;
 
   @override
-  String get currentText;
+  ContentOutput get currentText;
+
+  /// Create a copy of ContentStringState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$NormalImplCopyWith<_$NormalImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$WithTokenImplCopyWith<$Res>
-    implements $ContentStringStateCopyWith<$Res> {
-  factory _$$WithTokenImplCopyWith(
-          _$WithTokenImpl value, $Res Function(_$WithTokenImpl) then) =
-      __$$WithTokenImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({String currentText, List<Token> tokensInIt});
-}
-
-/// @nodoc
-class __$$WithTokenImplCopyWithImpl<$Res>
-    extends _$ContentStringStateCopyWithImpl<$Res, _$WithTokenImpl>
-    implements _$$WithTokenImplCopyWith<$Res> {
-  __$$WithTokenImplCopyWithImpl(
-      _$WithTokenImpl _value, $Res Function(_$WithTokenImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? currentText = null,
-    Object? tokensInIt = null,
-  }) {
-    return _then(_$WithTokenImpl(
-      currentText: null == currentText
-          ? _value.currentText
-          : currentText // ignore: cast_nullable_to_non_nullable
-              as String,
-      tokensInIt: null == tokensInIt
-          ? _value._tokensInIt
-          : tokensInIt // ignore: cast_nullable_to_non_nullable
-              as List<Token>,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$WithTokenImpl implements WithToken {
-  const _$WithTokenImpl(
-      {required this.currentText,
-      required final List<Token> tokensInIt,
-      final String? $type})
-      : _tokensInIt = tokensInIt,
-        $type = $type ?? 'withToken';
-
-  factory _$WithTokenImpl.fromJson(Map<String, dynamic> json) =>
-      _$$WithTokenImplFromJson(json);
-
-  @override
-  final String currentText;
-  final List<Token> _tokensInIt;
-  @override
-  List<Token> get tokensInIt {
-    if (_tokensInIt is EqualUnmodifiableListView) return _tokensInIt;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_tokensInIt);
-  }
-
-  @JsonKey(name: 'runtimeType')
-  final String $type;
-
-  @override
-  String toString() {
-    return 'ContentStringState.withToken(currentText: $currentText, tokensInIt: $tokensInIt)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$WithTokenImpl &&
-            (identical(other.currentText, currentText) ||
-                other.currentText == currentText) &&
-            const DeepCollectionEquality()
-                .equals(other._tokensInIt, _tokensInIt));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(runtimeType, currentText,
-      const DeepCollectionEquality().hash(_tokensInIt));
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$WithTokenImplCopyWith<_$WithTokenImpl> get copyWith =>
-      __$$WithTokenImplCopyWithImpl<_$WithTokenImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String currentText) normal,
-    required TResult Function(String currentText, List<Token> tokensInIt)
-        withToken,
-  }) {
-    return withToken(currentText, tokensInIt);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String currentText)? normal,
-    TResult? Function(String currentText, List<Token> tokensInIt)? withToken,
-  }) {
-    return withToken?.call(currentText, tokensInIt);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String currentText)? normal,
-    TResult Function(String currentText, List<Token> tokensInIt)? withToken,
-    required TResult orElse(),
-  }) {
-    if (withToken != null) {
-      return withToken(currentText, tokensInIt);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(Normal value) normal,
-    required TResult Function(WithToken value) withToken,
-  }) {
-    return withToken(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Normal value)? normal,
-    TResult? Function(WithToken value)? withToken,
-  }) {
-    return withToken?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(Normal value)? normal,
-    TResult Function(WithToken value)? withToken,
-    required TResult orElse(),
-  }) {
-    if (withToken != null) {
-      return withToken(this);
-    }
-    return orElse();
-  }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$WithTokenImplToJson(
-      this,
-    );
-  }
-}
-
-abstract class WithToken implements ContentStringState {
-  const factory WithToken(
-      {required final String currentText,
-      required final List<Token> tokensInIt}) = _$WithTokenImpl;
-
-  factory WithToken.fromJson(Map<String, dynamic> json) =
-      _$WithTokenImpl.fromJson;
-
-  @override
-  String get currentText;
-  List<Token> get tokensInIt;
-  @override
-  @JsonKey(ignore: true)
-  _$$WithTokenImplCopyWith<_$WithTokenImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

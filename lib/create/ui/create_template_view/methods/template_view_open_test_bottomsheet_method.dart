@@ -24,6 +24,7 @@ mixin TemplateViewOpenTestBottomsheetMethod {
         contextWithDependencies: context,
         child: TextOutputGeneratorView(
           content: contentState.currentText,
+          // content: contentState.currentText,
           generatorData: ExpectedPayload(
             textPipes: variablesState.textPipes,
             booleanPipes: variablesState.booleanPipes,

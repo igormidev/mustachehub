@@ -12,7 +12,7 @@ part of 'sign_up_form_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$SignUpFormState {
@@ -98,6 +98,9 @@ class _$SignUpFormStateCopyWithImpl<$Res, $Val extends SignUpFormState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of SignUpFormState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -114,6 +117,9 @@ class __$$InitialImplCopyWithImpl<$Res>
   __$$InitialImplCopyWithImpl(
       _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of SignUpFormState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -244,6 +250,9 @@ class __$$SignUpFormStateLoadingImplCopyWithImpl<$Res>
       _$SignUpFormStateLoadingImpl _value,
       $Res Function(_$SignUpFormStateLoadingImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of SignUpFormState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -375,6 +384,9 @@ class __$$SignUpFormStateFacebookImplCopyWithImpl<$Res>
       _$SignUpFormStateFacebookImpl _value,
       $Res Function(_$SignUpFormStateFacebookImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of SignUpFormState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -505,6 +517,9 @@ class __$$SignUpFormStateGoogleImplCopyWithImpl<$Res>
   __$$SignUpFormStateGoogleImplCopyWithImpl(_$SignUpFormStateGoogleImpl _value,
       $Res Function(_$SignUpFormStateGoogleImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of SignUpFormState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -637,6 +652,8 @@ class __$$SignUpFormStateErrorImplCopyWithImpl<$Res>
       $Res Function(_$SignUpFormStateErrorImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SignUpFormState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -675,7 +692,9 @@ class _$SignUpFormStateErrorImpl implements SignUpFormStateError {
   @override
   int get hashCode => Object.hash(runtimeType, error);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SignUpFormState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SignUpFormStateErrorImplCopyWith<_$SignUpFormStateErrorImpl>
@@ -777,7 +796,10 @@ abstract class SignUpFormStateError implements SignUpFormState {
       _$SignUpFormStateErrorImpl;
 
   CredentialAuthException get error;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of SignUpFormState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SignUpFormStateErrorImplCopyWith<_$SignUpFormStateErrorImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -796,6 +818,9 @@ class __$$SuccessImplCopyWithImpl<$Res>
   __$$SuccessImplCopyWithImpl(
       _$SuccessImpl _value, $Res Function(_$SuccessImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of SignUpFormState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc

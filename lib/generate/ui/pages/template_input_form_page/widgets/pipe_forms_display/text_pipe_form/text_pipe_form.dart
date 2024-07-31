@@ -12,11 +12,11 @@ import 'package:mustachehub/generate/presenter/states/payload_state.dart';
 import 'package:mustachehub/generate/ui/pages/template_input_form_page/widgets/pipe_forms_display/text_pipe_form/widgets/text_pipe_form_field.dart';
 
 class TextPipeForm extends StatelessWidget {
-  final String content;
+  final ContentOutput output;
   final ExpectedPayload expectedPayload;
   const TextPipeForm({
     super.key,
-    required this.content,
+    required this.output,
     required this.expectedPayload,
   });
 
@@ -116,7 +116,7 @@ class TextPipeForm extends StatelessWidget {
                                     pipeDto: dto,
                                     onChangedCallback: (text) async {
                                       return await bloc.addTextPayloadValue(
-                                        content: content,
+                                        output: output,
                                         generatorData: expectedPayload,
                                         pipe: dto.pipe,
                                         value: text,

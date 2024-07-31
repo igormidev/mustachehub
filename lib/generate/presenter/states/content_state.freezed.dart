@@ -12,31 +12,31 @@ part of 'content_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ContentState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() withContentPendency,
-    required TResult Function(String content) withGeneratedText,
-    required TResult Function(String content) withContentText,
+    required TResult Function(ContentOutputDto content) withGeneratedText,
+    required TResult Function(ContentOutputDto content) withContentText,
     required TResult Function() failureGeneratingText,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? withContentPendency,
-    TResult? Function(String content)? withGeneratedText,
-    TResult? Function(String content)? withContentText,
+    TResult? Function(ContentOutputDto content)? withGeneratedText,
+    TResult? Function(ContentOutputDto content)? withContentText,
     TResult? Function()? failureGeneratingText,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? withContentPendency,
-    TResult Function(String content)? withGeneratedText,
-    TResult Function(String content)? withContentText,
+    TResult Function(ContentOutputDto content)? withGeneratedText,
+    TResult Function(ContentOutputDto content)? withContentText,
     TResult Function()? failureGeneratingText,
     required TResult orElse(),
   }) =>
@@ -85,6 +85,9 @@ class _$ContentStateCopyWithImpl<$Res, $Val extends ContentState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of ContentState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -101,6 +104,9 @@ class __$$ContentStateImplCopyWithImpl<$Res>
   __$$ContentStateImplCopyWithImpl(
       _$ContentStateImpl _value, $Res Function(_$ContentStateImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of ContentState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -126,8 +132,8 @@ class _$ContentStateImpl implements _ContentState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() withContentPendency,
-    required TResult Function(String content) withGeneratedText,
-    required TResult Function(String content) withContentText,
+    required TResult Function(ContentOutputDto content) withGeneratedText,
+    required TResult Function(ContentOutputDto content) withContentText,
     required TResult Function() failureGeneratingText,
   }) {
     return withContentPendency();
@@ -137,8 +143,8 @@ class _$ContentStateImpl implements _ContentState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? withContentPendency,
-    TResult? Function(String content)? withGeneratedText,
-    TResult? Function(String content)? withContentText,
+    TResult? Function(ContentOutputDto content)? withGeneratedText,
+    TResult? Function(ContentOutputDto content)? withContentText,
     TResult? Function()? failureGeneratingText,
   }) {
     return withContentPendency?.call();
@@ -148,8 +154,8 @@ class _$ContentStateImpl implements _ContentState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? withContentPendency,
-    TResult Function(String content)? withGeneratedText,
-    TResult Function(String content)? withContentText,
+    TResult Function(ContentOutputDto content)? withGeneratedText,
+    TResult Function(ContentOutputDto content)? withContentText,
     TResult Function()? failureGeneratingText,
     required TResult orElse(),
   }) {
@@ -208,7 +214,9 @@ abstract class _$$WithGeneratedTextImplCopyWith<$Res> {
           $Res Function(_$WithGeneratedTextImpl) then) =
       __$$WithGeneratedTextImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String content});
+  $Res call({ContentOutputDto content});
+
+  $ContentOutputDtoCopyWith<$Res> get content;
 }
 
 /// @nodoc
@@ -219,6 +227,8 @@ class __$$WithGeneratedTextImplCopyWithImpl<$Res>
       $Res Function(_$WithGeneratedTextImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ContentState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -228,8 +238,18 @@ class __$$WithGeneratedTextImplCopyWithImpl<$Res>
       content: null == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
-              as String,
+              as ContentOutputDto,
     ));
+  }
+
+  /// Create a copy of ContentState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $ContentOutputDtoCopyWith<$Res> get content {
+    return $ContentOutputDtoCopyWith<$Res>(_value.content, (value) {
+      return _then(_value.copyWith(content: value));
+    });
   }
 }
 
@@ -239,7 +259,7 @@ class _$WithGeneratedTextImpl implements _WithGeneratedText {
   _$WithGeneratedTextImpl({required this.content});
 
   @override
-  final String content;
+  final ContentOutputDto content;
 
   @override
   String toString() {
@@ -257,7 +277,9 @@ class _$WithGeneratedTextImpl implements _WithGeneratedText {
   @override
   int get hashCode => Object.hash(runtimeType, content);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ContentState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$WithGeneratedTextImplCopyWith<_$WithGeneratedTextImpl> get copyWith =>
@@ -268,8 +290,8 @@ class _$WithGeneratedTextImpl implements _WithGeneratedText {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() withContentPendency,
-    required TResult Function(String content) withGeneratedText,
-    required TResult Function(String content) withContentText,
+    required TResult Function(ContentOutputDto content) withGeneratedText,
+    required TResult Function(ContentOutputDto content) withContentText,
     required TResult Function() failureGeneratingText,
   }) {
     return withGeneratedText(content);
@@ -279,8 +301,8 @@ class _$WithGeneratedTextImpl implements _WithGeneratedText {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? withContentPendency,
-    TResult? Function(String content)? withGeneratedText,
-    TResult? Function(String content)? withContentText,
+    TResult? Function(ContentOutputDto content)? withGeneratedText,
+    TResult? Function(ContentOutputDto content)? withContentText,
     TResult? Function()? failureGeneratingText,
   }) {
     return withGeneratedText?.call(content);
@@ -290,8 +312,8 @@ class _$WithGeneratedTextImpl implements _WithGeneratedText {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? withContentPendency,
-    TResult Function(String content)? withGeneratedText,
-    TResult Function(String content)? withContentText,
+    TResult Function(ContentOutputDto content)? withGeneratedText,
+    TResult Function(ContentOutputDto content)? withContentText,
     TResult Function()? failureGeneratingText,
     required TResult orElse(),
   }) {
@@ -341,11 +363,14 @@ class _$WithGeneratedTextImpl implements _WithGeneratedText {
 }
 
 abstract class _WithGeneratedText implements ContentState {
-  factory _WithGeneratedText({required final String content}) =
+  factory _WithGeneratedText({required final ContentOutputDto content}) =
       _$WithGeneratedTextImpl;
 
-  String get content;
-  @JsonKey(ignore: true)
+  ContentOutputDto get content;
+
+  /// Create a copy of ContentState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$WithGeneratedTextImplCopyWith<_$WithGeneratedTextImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -356,7 +381,9 @@ abstract class _$$WithContentTextImplCopyWith<$Res> {
           $Res Function(_$WithContentTextImpl) then) =
       __$$WithContentTextImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String content});
+  $Res call({ContentOutputDto content});
+
+  $ContentOutputDtoCopyWith<$Res> get content;
 }
 
 /// @nodoc
@@ -367,6 +394,8 @@ class __$$WithContentTextImplCopyWithImpl<$Res>
       _$WithContentTextImpl _value, $Res Function(_$WithContentTextImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ContentState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -376,8 +405,18 @@ class __$$WithContentTextImplCopyWithImpl<$Res>
       content: null == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
-              as String,
+              as ContentOutputDto,
     ));
+  }
+
+  /// Create a copy of ContentState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $ContentOutputDtoCopyWith<$Res> get content {
+    return $ContentOutputDtoCopyWith<$Res>(_value.content, (value) {
+      return _then(_value.copyWith(content: value));
+    });
   }
 }
 
@@ -387,7 +426,7 @@ class _$WithContentTextImpl implements _WithContentText {
   _$WithContentTextImpl({required this.content});
 
   @override
-  final String content;
+  final ContentOutputDto content;
 
   @override
   String toString() {
@@ -405,7 +444,9 @@ class _$WithContentTextImpl implements _WithContentText {
   @override
   int get hashCode => Object.hash(runtimeType, content);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ContentState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$WithContentTextImplCopyWith<_$WithContentTextImpl> get copyWith =>
@@ -416,8 +457,8 @@ class _$WithContentTextImpl implements _WithContentText {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() withContentPendency,
-    required TResult Function(String content) withGeneratedText,
-    required TResult Function(String content) withContentText,
+    required TResult Function(ContentOutputDto content) withGeneratedText,
+    required TResult Function(ContentOutputDto content) withContentText,
     required TResult Function() failureGeneratingText,
   }) {
     return withContentText(content);
@@ -427,8 +468,8 @@ class _$WithContentTextImpl implements _WithContentText {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? withContentPendency,
-    TResult? Function(String content)? withGeneratedText,
-    TResult? Function(String content)? withContentText,
+    TResult? Function(ContentOutputDto content)? withGeneratedText,
+    TResult? Function(ContentOutputDto content)? withContentText,
     TResult? Function()? failureGeneratingText,
   }) {
     return withContentText?.call(content);
@@ -438,8 +479,8 @@ class _$WithContentTextImpl implements _WithContentText {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? withContentPendency,
-    TResult Function(String content)? withGeneratedText,
-    TResult Function(String content)? withContentText,
+    TResult Function(ContentOutputDto content)? withGeneratedText,
+    TResult Function(ContentOutputDto content)? withContentText,
     TResult Function()? failureGeneratingText,
     required TResult orElse(),
   }) {
@@ -489,11 +530,14 @@ class _$WithContentTextImpl implements _WithContentText {
 }
 
 abstract class _WithContentText implements ContentState {
-  factory _WithContentText({required final String content}) =
+  factory _WithContentText({required final ContentOutputDto content}) =
       _$WithContentTextImpl;
 
-  String get content;
-  @JsonKey(ignore: true)
+  ContentOutputDto get content;
+
+  /// Create a copy of ContentState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$WithContentTextImplCopyWith<_$WithContentTextImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -513,6 +557,9 @@ class __$$FailureGeneratingTextImplCopyWithImpl<$Res>
   __$$FailureGeneratingTextImplCopyWithImpl(_$FailureGeneratingTextImpl _value,
       $Res Function(_$FailureGeneratingTextImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of ContentState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -539,8 +586,8 @@ class _$FailureGeneratingTextImpl implements _FailureGeneratingText {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() withContentPendency,
-    required TResult Function(String content) withGeneratedText,
-    required TResult Function(String content) withContentText,
+    required TResult Function(ContentOutputDto content) withGeneratedText,
+    required TResult Function(ContentOutputDto content) withContentText,
     required TResult Function() failureGeneratingText,
   }) {
     return failureGeneratingText();
@@ -550,8 +597,8 @@ class _$FailureGeneratingTextImpl implements _FailureGeneratingText {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? withContentPendency,
-    TResult? Function(String content)? withGeneratedText,
-    TResult? Function(String content)? withContentText,
+    TResult? Function(ContentOutputDto content)? withGeneratedText,
+    TResult? Function(ContentOutputDto content)? withContentText,
     TResult? Function()? failureGeneratingText,
   }) {
     return failureGeneratingText?.call();
@@ -561,8 +608,8 @@ class _$FailureGeneratingTextImpl implements _FailureGeneratingText {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? withContentPendency,
-    TResult Function(String content)? withGeneratedText,
-    TResult Function(String content)? withContentText,
+    TResult Function(ContentOutputDto content)? withGeneratedText,
+    TResult Function(ContentOutputDto content)? withContentText,
     TResult Function()? failureGeneratingText,
     required TResult orElse(),
   }) {

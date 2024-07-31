@@ -20,14 +20,14 @@ class PayloadCubit extends Cubit<PayloadState> {
         super(PayloadState.initial());
 
   Future<void> updateContent({
-    required String? content,
+    required ContentOutput? output,
     required ExpectedPayload expectedPayload,
     required ExpectedPayloadDto? expectedPayloadDto,
   }) async {
     if (expectedPayloadDto == null) {
       return await _addData(
         generatorData: expectedPayload,
-        content: content,
+        output: output,
       );
     }
 
@@ -48,14 +48,14 @@ class PayloadCubit extends Cubit<PayloadState> {
     }
 
     await _outputCubit.updateContent(
-      content: content,
+      output: output,
       expectedPayload: expectedPayload,
       expectedPayloadDTO: expectedPayloadDto,
     );
   }
 
   Future<void> _addData({
-    required String? content,
+    required ContentOutput? output,
     required ExpectedPayload generatorData,
   }) async {
     final areAllVariablesEmpty = generatorData.textPipes.isEmpty &&
@@ -76,7 +76,7 @@ class PayloadCubit extends Cubit<PayloadState> {
     );
 
     await updateContent(
-      content: content,
+      output: output,
       expectedPayload: generatorData,
       expectedPayloadDto: ExpectedPayloadDto(
         textDtos: updatedPipeDtos.textPipes,
@@ -96,7 +96,7 @@ class PayloadCubit extends Cubit<PayloadState> {
   }
 
   Future<void> addTextPayloadValue({
-    required String content,
+    required ContentOutput output,
     required ExpectedPayload generatorData,
     required TextPipe pipe,
     required String? value,
@@ -110,7 +110,7 @@ class PayloadCubit extends Cubit<PayloadState> {
     newDtos[index] = newDtos[index].copyWith(payloadValue: value);
 
     await updateContent(
-      content: content,
+      output: output,
       expectedPayload: generatorData,
       expectedPayloadDto: dataDto.copyWith(
         textDtos: newDtos,
@@ -119,7 +119,7 @@ class PayloadCubit extends Cubit<PayloadState> {
   }
 
   Future<void> addBooleanPayloadValue({
-    required String content,
+    required ContentOutput output,
     required ExpectedPayload expectedPayload,
     required BooleanPipe pipe,
     required bool value,
@@ -133,7 +133,7 @@ class PayloadCubit extends Cubit<PayloadState> {
     newDtos[index] = newDtos[index].copyWith(payloadValue: value);
 
     await updateContent(
-      content: content,
+      output: output,
       expectedPayload: expectedPayload,
       expectedPayloadDto: payloadDto.copyWith(
         booleanDtos: newDtos,
@@ -142,7 +142,7 @@ class PayloadCubit extends Cubit<PayloadState> {
   }
 
   Future<void> addModelPayloadValue({
-    required String content,
+    required ContentOutput output,
     required ExpectedPayload expectedPayload,
     required ModelPipeDto newPipeDTO,
   }) async {
@@ -155,7 +155,7 @@ class PayloadCubit extends Cubit<PayloadState> {
     newDtos[index] = newPipeDTO;
 
     await updateContent(
-      content: content,
+      output: output,
       expectedPayload: expectedPayload,
       expectedPayloadDto: payloadDto.copyWith(
         modelDtos: newDtos,

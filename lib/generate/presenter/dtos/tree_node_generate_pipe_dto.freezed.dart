@@ -12,7 +12,7 @@ part of 'tree_node_generate_pipe_dto.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$TreeNodeGeneratePipeDto {
@@ -81,7 +81,9 @@ mixin _$TreeNodeGeneratePipeDto {
   }) =>
       throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TreeNodeGeneratePipeDto
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TreeNodeGeneratePipeDtoCopyWith<TreeNodeGeneratePipeDto> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -106,6 +108,8 @@ class _$TreeNodeGeneratePipeDtoCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of TreeNodeGeneratePipeDto
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -142,6 +146,8 @@ class __$$TreeNodeGeneratePipeDtoStructureNodeImplCopyWithImpl<$Res>
       $Res Function(_$TreeNodeGeneratePipeDtoStructureNodeImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TreeNodeGeneratePipeDto
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -192,7 +198,9 @@ class _$TreeNodeGeneratePipeDtoStructureNodeImpl
   @override
   int get hashCode => Object.hash(runtimeType, payloadUUID, referenceModelDTO);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TreeNodeGeneratePipeDto
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TreeNodeGeneratePipeDtoStructureNodeImplCopyWith<
@@ -298,8 +306,11 @@ abstract class TreeNodeGeneratePipeDtoStructureNode
   @override
   String? get payloadUUID;
   ModelPipeDto get referenceModelDTO;
+
+  /// Create a copy of TreeNodeGeneratePipeDto
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TreeNodeGeneratePipeDtoStructureNodeImplCopyWith<
           _$TreeNodeGeneratePipeDtoStructureNodeImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -327,6 +338,8 @@ class __$$TreeNodeGeneratePipeDtoPipeTextImplCopyWithImpl<$Res>
       $Res Function(_$TreeNodeGeneratePipeDtoPipeTextImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TreeNodeGeneratePipeDto
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -376,7 +389,9 @@ class _$TreeNodeGeneratePipeDtoPipeTextImpl
   @override
   int get hashCode => Object.hash(runtimeType, payloadUUID, pipeDTO);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TreeNodeGeneratePipeDto
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TreeNodeGeneratePipeDtoPipeTextImplCopyWith<
@@ -482,8 +497,11 @@ abstract class TreeNodeGeneratePipeDtoPipeText
   @override
   String get payloadUUID;
   TextPipeDto get pipeDTO;
+
+  /// Create a copy of TreeNodeGeneratePipeDto
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TreeNodeGeneratePipeDtoPipeTextImplCopyWith<
           _$TreeNodeGeneratePipeDtoPipeTextImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -511,6 +529,8 @@ class __$$TreeNodeGeneratePipeDtoPipeBooleanImplCopyWithImpl<$Res>
       $Res Function(_$TreeNodeGeneratePipeDtoPipeBooleanImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TreeNodeGeneratePipeDto
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -560,7 +580,9 @@ class _$TreeNodeGeneratePipeDtoPipeBooleanImpl
   @override
   int get hashCode => Object.hash(runtimeType, payloadUUID, pipeDTO);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TreeNodeGeneratePipeDto
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TreeNodeGeneratePipeDtoPipeBooleanImplCopyWith<
@@ -666,8 +688,11 @@ abstract class TreeNodeGeneratePipeDtoPipeBoolean
   @override
   String get payloadUUID;
   BooleanPipeDto get pipeDTO;
+
+  /// Create a copy of TreeNodeGeneratePipeDto
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TreeNodeGeneratePipeDtoPipeBooleanImplCopyWith<
           _$TreeNodeGeneratePipeDtoPipeBooleanImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -699,6 +724,8 @@ class __$$TreeNodeGeneratePipeDtoPipeModelImplCopyWithImpl<$Res>
       $Res Function(_$TreeNodeGeneratePipeDtoPipeModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TreeNodeGeneratePipeDto
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -768,7 +795,9 @@ class _$TreeNodeGeneratePipeDtoPipeModelImpl
   int get hashCode =>
       Object.hash(runtimeType, payloadUUID, pipeDTO, index, payload);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TreeNodeGeneratePipeDto
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TreeNodeGeneratePipeDtoPipeModelImplCopyWith<
@@ -878,8 +907,11 @@ abstract class TreeNodeGeneratePipeDtoPipeModel
   ModelPipeDto get pipeDTO;
   int get index;
   ModelPipeDTOPayload get payload;
+
+  /// Create a copy of TreeNodeGeneratePipeDto
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TreeNodeGeneratePipeDtoPipeModelImplCopyWith<
           _$TreeNodeGeneratePipeDtoPipeModelImpl>
       get copyWith => throw _privateConstructorUsedError;

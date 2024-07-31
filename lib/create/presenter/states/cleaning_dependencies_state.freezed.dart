@@ -12,7 +12,7 @@ part of 'cleaning_dependencies_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 CleaningDependenciesState _$CleaningDependenciesStateFromJson(
     Map<String, dynamic> json) {
@@ -87,6 +87,8 @@ mixin _$CleaningDependenciesState {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  /// Serializes this CleaningDependenciesState to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 }
 
@@ -107,6 +109,9 @@ class _$CleaningDependenciesStateCopyWithImpl<$Res,
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of CleaningDependenciesState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -126,6 +131,9 @@ class __$$CleaningDependenciesStateNormalImplCopyWithImpl<$Res>
       _$CleaningDependenciesStateNormalImpl _value,
       $Res Function(_$CleaningDependenciesStateNormalImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of CleaningDependenciesState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -154,7 +162,7 @@ class _$CleaningDependenciesStateNormalImpl
             other is _$CleaningDependenciesStateNormalImpl);
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => runtimeType.hashCode;
 
@@ -275,6 +283,9 @@ class __$$CleaningDependenciesStateCleaningDependenciesLoadingImplCopyWithImpl<
       $Res Function(_$CleaningDependenciesStateCleaningDependenciesLoadingImpl)
           _then)
       : super(_value, _then);
+
+  /// Create a copy of CleaningDependenciesState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -305,7 +316,7 @@ class _$CleaningDependenciesStateCleaningDependenciesLoadingImpl
                 is _$CleaningDependenciesStateCleaningDependenciesLoadingImpl);
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => runtimeType.hashCode;
 
@@ -419,6 +430,9 @@ class __$$CleaningDependenciesStateEndCleanImplCopyWithImpl<$Res>
       _$CleaningDependenciesStateEndCleanImpl _value,
       $Res Function(_$CleaningDependenciesStateEndCleanImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of CleaningDependenciesState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -447,7 +461,7 @@ class _$CleaningDependenciesStateEndCleanImpl
             other is _$CleaningDependenciesStateEndCleanImpl);
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => runtimeType.hashCode;
 

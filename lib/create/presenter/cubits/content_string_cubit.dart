@@ -1,44 +1,37 @@
 import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:mustache_hub_core/mustache_hub_core.dart';
 import 'package:mustachehub/create/presenter/states/content_string_state.dart';
-import 'package:mustachex/mustachex.dart';
 
 class ContentStringCubit extends HydratedCubit<ContentStringState> {
   ContentStringCubit()
-      : super(const ContentStringState.normal(currentText: ''));
+      : super(ContentStringState.normal(
+            currentText: ContentOutput.listOfTexts()));
 
   void resetToDefault() {
-    emit(const ContentStringState.normal(currentText: ''));
+    emit(ContentStringState.normal(currentText: ContentOutput.listOfTexts()));
   }
 
-  void setCubit(String text) {
-    try {
-      final parser = Parser(text, null, '{{ }}');
-      final tokens = parser.getTokens();
-      registerTextWithTokens(
-        newText: text,
-        tokens: tokens,
-      );
-    } catch (_, __) {
-      _registerNormalText(
-        newText: text,
-      );
-    }
-  }
-
-  void _registerNormalText({
-    required String newText,
+  void setCubit({
+    required int index,
+    required String text,
   }) {
-    emit(ContentStringState.normal(currentText: newText));
+    final newTexts = state.currentText.texts;
+
+    newTexts[index] = text;
+
+    emit(
+      ContentStringState.normal(
+        currentText: ContentOutput.listOfTexts(texts: newTexts),
+      ),
+    );
   }
 
-  void registerTextWithTokens({
-    required String newText,
-    required List<Token> tokens,
-  }) {
-    emit(ContentStringState.withToken(
-      currentText: newText,
-      tokensInIt: tokens,
-    ));
+  void setStateFromOutput(ContentOutput output) {
+    emit(
+      ContentStringState.normal(
+        currentText: output,
+      ),
+    );
   }
 
   @override
