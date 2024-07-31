@@ -15,13 +15,37 @@ class ContentStringCubit extends HydratedCubit<ContentStringState> {
     required int index,
     required String text,
   }) {
-    final newTexts = state.currentText.texts;
+    final newTexts = [...state.currentText.texts];
 
     newTexts[index] = text;
 
     emit(
       ContentStringState.normal(
-        currentText: ContentOutput.listOfTexts(texts: newTexts),
+        currentText: ContentOutput.listOfTexts(texts: List.from(newTexts)),
+      ),
+    );
+  }
+
+  void addNew() {
+    final newTexts = [...state.currentText.texts];
+
+    newTexts.add('');
+
+    emit(
+      ContentStringState.normal(
+        currentText: ContentOutput.listOfTexts(texts: List.from(newTexts)),
+      ),
+    );
+  }
+
+  void removeAt(int index) {
+    final newTexts = [...state.currentText.texts];
+
+    newTexts.removeAt(index);
+
+    emit(
+      ContentStringState.normal(
+        currentText: ContentOutput.listOfTexts(texts: List.from(newTexts)),
       ),
     );
   }

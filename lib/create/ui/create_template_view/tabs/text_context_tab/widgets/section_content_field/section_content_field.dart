@@ -47,52 +47,55 @@ class SectionContentField extends StatelessWidget {
           fontSize: fontSize,
         );
 
-    return TextFormField(
-      focusNode: textfieldFocusNode,
-      controller: controller,
-      maxLines: 5,
-      style: style,
-      decoration: InputDecoration(
-        contentPadding:
-            const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-        border: const OutlineInputBorder(
-          borderSide: BorderSide.none,
+    return Padding(
+      padding: const EdgeInsets.only(top: 12.0),
+      child: TextFormField(
+        focusNode: textfieldFocusNode,
+        controller: controller,
+        maxLines: 5,
+        style: style,
+        decoration: InputDecoration(
+          contentPadding:
+              const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+          border: const OutlineInputBorder(
+            borderSide: BorderSide.none,
+          ),
+          fillColor: Theme.of(context).colorScheme.onInverseSurface,
+          filled: true,
+          hintText:
+              'Type your text here. Use {{}} to add variables.\nJust tap "{" after creating a variable...',
         ),
-        fillColor: Theme.of(context).colorScheme.onInverseSurface,
-        filled: true,
-        hintText:
-            'Type your text here. Use {{}} to add variables.\nJust tap "{" after creating a variable...',
+        textAlignVertical: TextAlignVertical.top,
+        inputFormatters: [
+          AddMustacheDelimmiterInputFormatter(
+            sugestionCubit: suggestionCubit,
+            varCubit: variablesCubit,
+            onAddedDellimiter: () {
+              final bloc = context.read<SuggestionCubit>();
+              optionsController.showOptionsMenuWithWrapperBuilder(
+                suggestionCardBuilder: (
+                  BuildContext dialogContext,
+                  Widget Function(
+                    List<VariableImplementation> value,
+                  ) listTilesWithOptionsBuilder,
+                ) {
+                  return BlocProvider<SuggestionCubit>.value(
+                    value: bloc,
+                    child: SuggestionCard(
+                      listTilesWithOptionsBuilder: listTilesWithOptionsBuilder,
+                    ),
+                  );
+                },
+              );
+            },
+          ),
+        ],
+        onChanged: (final String text) {
+          decouncer.resetDebounce(() {
+            notifyContentCubit(output: text, index: index);
+          });
+        },
       ),
-      textAlignVertical: TextAlignVertical.top,
-      inputFormatters: [
-        AddMustacheDelimmiterInputFormatter(
-          sugestionCubit: suggestionCubit,
-          varCubit: variablesCubit,
-          onAddedDellimiter: () {
-            final bloc = context.read<SuggestionCubit>();
-            optionsController.showOptionsMenuWithWrapperBuilder(
-              suggestionCardBuilder: (
-                BuildContext dialogContext,
-                Widget Function(
-                  List<VariableImplementation> value,
-                ) listTilesWithOptionsBuilder,
-              ) {
-                return BlocProvider<SuggestionCubit>.value(
-                  value: bloc,
-                  child: SuggestionCard(
-                    listTilesWithOptionsBuilder: listTilesWithOptionsBuilder,
-                  ),
-                );
-              },
-            );
-          },
-        ),
-      ],
-      onChanged: (final String text) {
-        decouncer.resetDebounce(() {
-          notifyContentCubit(output: text, index: index);
-        });
-      },
     );
   }
 }
