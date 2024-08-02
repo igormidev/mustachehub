@@ -24,7 +24,7 @@ class PackageFormRepositoryImpl implements IPackageFormRepository {
 
   @override
   Future<TemplateUploadState> createPackage({
-    required ContentOutput output,
+    required ContentInput output,
     required PackageInfo packageInfo,
     required ExpectedPayload expectedPayload,
   }) async {

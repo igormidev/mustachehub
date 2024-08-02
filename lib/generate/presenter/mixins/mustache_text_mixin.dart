@@ -4,7 +4,7 @@ import 'package:mustachehub/generate/presenter/dtos/content_output_dto.dart';
 
 mixin MustacheTextMixin {
   ContentOutputDto? getOutputDto({
-    required ContentOutput output,
+    required ContentInput output,
     required Map<String, dynamic> payload,
   }) {
     try {
@@ -19,12 +19,16 @@ mixin MustacheTextMixin {
     }
   }
 
-  List<String>? _getMustacheText(
-    List<String> content,
+  List<ContentTextSectionInput>? _getMustacheText(
+    List<ContentTextSectionInput> content,
     Map<String, dynamic> payload,
   ) {
     try {
-      return content.map((e) => e.render(payload)).toList();
+      return content.map((e) {
+        return e.copyWith(
+          content: e.content.render(payload),
+        );
+      }).toList();
     } catch (error) {
       // } catch (error, stackTrace) {
       // log(error.toString(), stackTrace: stackTrace);

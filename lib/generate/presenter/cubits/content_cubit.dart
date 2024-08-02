@@ -13,7 +13,7 @@ class ContentCubit extends Cubit<ContentState> with MustacheTextMixin {
         super(ContentState.withContentPendency());
 
   Future<void> updateContent({
-    required ContentOutput? output,
+    required ContentInput? output,
     required ExpectedPayload expectedPayload,
     required ExpectedPayloadDto? expectedPayloadDTO,
   }) async {
@@ -50,7 +50,7 @@ class ContentCubit extends Cubit<ContentState> with MustacheTextMixin {
     }
   }
 
-  void setPendency(ContentOutput output) {
+  void setPendency(ContentInput output) {
     try {
       final castedOutput = getOutputDto(output: output, payload: {});
       if (castedOutput == null) {

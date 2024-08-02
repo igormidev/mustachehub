@@ -15,7 +15,7 @@ import 'package:mustachehub/generate/presenter/states/payload_state.dart';
 
 class TextOutputPage extends StatelessWidget {
   final GlobalKey<FormState> formKey;
-  final ContentOutput output;
+  final ContentInput output;
   final ExpectedPayload expectedPayload;
 
   const TextOutputPage({
@@ -109,9 +109,9 @@ class _FinalWidget extends StatelessWidget with CopyToClipboardMixin {
               ),
               const SizedBox(height: 4),
               ...output.when(
-                string: (List<String> items) {
+                string: (List<ContentTextSectionInput> items) {
                   return items.map(
-                    (String text) {
+                    (ContentTextSectionInput text) {
                       return Container(
                         decoration: BoxDecoration(
                           color: Theme.of(context)
@@ -132,7 +132,7 @@ class _FinalWidget extends StatelessWidget with CopyToClipboardMixin {
                           ),
                           child: Align(
                             alignment: Alignment.topLeft,
-                            child: Text(text),
+                            child: Text(text.content),
                           ),
                         ),
                       );

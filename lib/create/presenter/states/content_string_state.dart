@@ -7,7 +7,7 @@ part 'content_string_state.g.dart';
 @freezed
 class ContentStringState with _$ContentStringState {
   const factory ContentStringState.normal({
-    required ContentOutput currentText,
+    required ContentInput currentText,
   }) = Normal;
 
   factory ContentStringState.fromJson(Map<String, Object?> json) =>

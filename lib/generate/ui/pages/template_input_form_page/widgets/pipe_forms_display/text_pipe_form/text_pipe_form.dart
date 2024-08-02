@@ -12,7 +12,7 @@ import 'package:mustachehub/generate/presenter/states/payload_state.dart';
 import 'package:mustachehub/generate/ui/pages/template_input_form_page/widgets/pipe_forms_display/text_pipe_form/widgets/text_pipe_form_field.dart';
 
 class TextPipeForm extends StatelessWidget {
-  final ContentOutput output;
+  final ContentInput output;
   final ExpectedPayload expectedPayload;
   const TextPipeForm({
     super.key,

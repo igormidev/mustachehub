@@ -8,7 +8,7 @@ part of 'content_string_state.dart';
 
 _$NormalImpl _$$NormalImplFromJson(Map<String, dynamic> json) => _$NormalImpl(
       currentText:
-          ContentOutput.fromJson(json['currentText'] as Map<String, dynamic>),
+          ContentInput.fromJson(json['currentText'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$NormalImplToJson(_$NormalImpl instance) =>

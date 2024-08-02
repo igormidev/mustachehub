@@ -8,7 +8,7 @@ import 'package:mustachehub/generate/ui/pages/template_input_form_page/widgets/p
 
 class TextGenerateNodeBuilder extends StatelessWidget {
   final ModelPipeDto rootModelDTO;
-  final ContentOutput output;
+  final ContentInput output;
   final ExpectedPayload expectedPayload;
   final TreeNodeGeneratePipeDtoPipeText textDTONode;
   const TextGenerateNodeBuilder({

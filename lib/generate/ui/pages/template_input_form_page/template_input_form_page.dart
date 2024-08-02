@@ -9,7 +9,7 @@ import 'package:mustachehub/generate/ui/pages/template_input_form_page/widgets/p
 import 'package:mustachehub/generate/ui/pages/template_input_form_page/widgets/pipe_forms_display/text_pipe_form/text_pipe_form.dart';
 
 class TemplateInputFormPage extends StatelessWidget {
-  final ContentOutput output;
+  final ContentInput output;
   final ExpectedPayload generatorData;
 
   const TemplateInputFormPage({
@@ -46,7 +46,7 @@ class TemplateInputFormPage extends StatelessWidget {
 }
 
 class _FinalWidget extends StatelessWidget {
-  final ContentOutput output;
+  final ContentInput output;
   final ExpectedPayload generatorData;
   const _FinalWidget(this.generatorData, this.output);
 

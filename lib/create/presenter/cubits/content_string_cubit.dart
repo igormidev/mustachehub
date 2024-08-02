@@ -1,27 +1,37 @@
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:mustache_hub_core/mustache_hub_core.dart';
 import 'package:mustachehub/create/presenter/states/content_string_state.dart';
+import 'package:uuid/uuid.dart';
 
 class ContentStringCubit extends HydratedCubit<ContentStringState> {
-  ContentStringCubit()
-      : super(ContentStringState.normal(
-            currentText: ContentOutput.listOfTexts()));
+  final Uuid _uuid;
+  ContentStringCubit({
+    required Uuid uuid,
+  })  : _uuid = uuid,
+        super(ContentStringState.normal(
+            currentText: ContentInput.listOfTexts(
+          texts: [ContentTextSectionInput(uuid: uuid.v7())],
+        )));
 
   void resetToDefault() {
-    emit(ContentStringState.normal(currentText: ContentOutput.listOfTexts()));
+    emit(ContentStringState.normal(
+        currentText: ContentInput.listOfTexts(
+      texts: [ContentTextSectionInput(uuid: _uuid.v7())],
+    )));
   }
 
   void setCubit({
-    required int index,
-    required String text,
+    required ContentTextSectionInput input,
   }) {
+    final String uuid = input.uuid;
     final newTexts = [...state.currentText.texts];
-
-    newTexts[index] = text;
+    final index = newTexts.indexWhere((element) => element.uuid == uuid);
+    if (index == -1) return;
+    newTexts[index] = input;
 
     emit(
       ContentStringState.normal(
-        currentText: ContentOutput.listOfTexts(texts: List.from(newTexts)),
+        currentText: ContentInput.listOfTexts(texts: List.from(newTexts)),
       ),
     );
   }
@@ -29,28 +39,28 @@ class ContentStringCubit extends HydratedCubit<ContentStringState> {
   void addNew() {
     final newTexts = [...state.currentText.texts];
 
-    newTexts.add('');
+    newTexts.add(ContentTextSectionInput(uuid: _uuid.v7()));
 
     emit(
       ContentStringState.normal(
-        currentText: ContentOutput.listOfTexts(texts: List.from(newTexts)),
+        currentText: ContentInput.listOfTexts(texts: List.from(newTexts)),
       ),
     );
   }
 
-  void removeAt(int index) {
+  void removeAt(String uuid) {
     final newTexts = [...state.currentText.texts];
 
-    newTexts.removeAt(index);
+    newTexts.removeWhere((element) => element.uuid == uuid);
 
     emit(
       ContentStringState.normal(
-        currentText: ContentOutput.listOfTexts(texts: List.from(newTexts)),
+        currentText: ContentInput.listOfTexts(texts: List.from(newTexts)),
       ),
     );
   }
 
-  void setStateFromOutput(ContentOutput output) {
+  void setStateFromOutput(ContentInput output) {
     emit(
       ContentStringState.normal(
         currentText: output,

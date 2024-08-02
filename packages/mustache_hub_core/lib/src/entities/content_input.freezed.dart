@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'content_output.dart';
+part of 'content_input.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,64 +14,64 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-ContentOutput _$ContentOutputFromJson(Map<String, dynamic> json) {
-  return _ContentOutput.fromJson(json);
+ContentInput _$ContentInputFromJson(Map<String, dynamic> json) {
+  return _ContentInput.fromJson(json);
 }
 
 /// @nodoc
-mixin _$ContentOutput {
-  List<String> get texts => throw _privateConstructorUsedError;
+mixin _$ContentInput {
+  List<ContentTextSectionInput> get texts => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<String> texts) listOfTexts,
+    required TResult Function(List<ContentTextSectionInput> texts) listOfTexts,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(List<String> texts)? listOfTexts,
+    TResult? Function(List<ContentTextSectionInput> texts)? listOfTexts,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<String> texts)? listOfTexts,
+    TResult Function(List<ContentTextSectionInput> texts)? listOfTexts,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_ContentOutput value) listOfTexts,
+    required TResult Function(_ContentInput value) listOfTexts,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_ContentOutput value)? listOfTexts,
+    TResult? Function(_ContentInput value)? listOfTexts,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_ContentOutput value)? listOfTexts,
+    TResult Function(_ContentInput value)? listOfTexts,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $ContentOutputCopyWith<ContentOutput> get copyWith =>
+  $ContentInputCopyWith<ContentInput> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ContentOutputCopyWith<$Res> {
-  factory $ContentOutputCopyWith(
-          ContentOutput value, $Res Function(ContentOutput) then) =
-      _$ContentOutputCopyWithImpl<$Res, ContentOutput>;
+abstract class $ContentInputCopyWith<$Res> {
+  factory $ContentInputCopyWith(
+          ContentInput value, $Res Function(ContentInput) then) =
+      _$ContentInputCopyWithImpl<$Res, ContentInput>;
   @useResult
-  $Res call({List<String> texts});
+  $Res call({List<ContentTextSectionInput> texts});
 }
 
 /// @nodoc
-class _$ContentOutputCopyWithImpl<$Res, $Val extends ContentOutput>
-    implements $ContentOutputCopyWith<$Res> {
-  _$ContentOutputCopyWithImpl(this._value, this._then);
+class _$ContentInputCopyWithImpl<$Res, $Val extends ContentInput>
+    implements $ContentInputCopyWith<$Res> {
+  _$ContentInputCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -87,28 +87,28 @@ class _$ContentOutputCopyWithImpl<$Res, $Val extends ContentOutput>
       texts: null == texts
           ? _value.texts
           : texts // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<ContentTextSectionInput>,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$ContentOutputImplCopyWith<$Res>
-    implements $ContentOutputCopyWith<$Res> {
-  factory _$$ContentOutputImplCopyWith(
-          _$ContentOutputImpl value, $Res Function(_$ContentOutputImpl) then) =
-      __$$ContentOutputImplCopyWithImpl<$Res>;
+abstract class _$$ContentInputImplCopyWith<$Res>
+    implements $ContentInputCopyWith<$Res> {
+  factory _$$ContentInputImplCopyWith(
+          _$ContentInputImpl value, $Res Function(_$ContentInputImpl) then) =
+      __$$ContentInputImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<String> texts});
+  $Res call({List<ContentTextSectionInput> texts});
 }
 
 /// @nodoc
-class __$$ContentOutputImplCopyWithImpl<$Res>
-    extends _$ContentOutputCopyWithImpl<$Res, _$ContentOutputImpl>
-    implements _$$ContentOutputImplCopyWith<$Res> {
-  __$$ContentOutputImplCopyWithImpl(
-      _$ContentOutputImpl _value, $Res Function(_$ContentOutputImpl) _then)
+class __$$ContentInputImplCopyWithImpl<$Res>
+    extends _$ContentInputCopyWithImpl<$Res, _$ContentInputImpl>
+    implements _$$ContentInputImplCopyWith<$Res> {
+  __$$ContentInputImplCopyWithImpl(
+      _$ContentInputImpl _value, $Res Function(_$ContentInputImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -116,27 +116,27 @@ class __$$ContentOutputImplCopyWithImpl<$Res>
   $Res call({
     Object? texts = null,
   }) {
-    return _then(_$ContentOutputImpl(
+    return _then(_$ContentInputImpl(
       texts: null == texts
           ? _value._texts
           : texts // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<ContentTextSectionInput>,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$ContentOutputImpl implements _ContentOutput {
-  _$ContentOutputImpl({final List<String> texts = const ['']}) : _texts = texts;
+class _$ContentInputImpl implements _ContentInput {
+  _$ContentInputImpl({required final List<ContentTextSectionInput> texts})
+      : _texts = texts;
 
-  factory _$ContentOutputImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ContentOutputImplFromJson(json);
+  factory _$ContentInputImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ContentInputImplFromJson(json);
 
-  final List<String> _texts;
+  final List<ContentTextSectionInput> _texts;
   @override
-  @JsonKey()
-  List<String> get texts {
+  List<ContentTextSectionInput> get texts {
     if (_texts is EqualUnmodifiableListView) return _texts;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_texts);
@@ -144,14 +144,14 @@ class _$ContentOutputImpl implements _ContentOutput {
 
   @override
   String toString() {
-    return 'ContentOutput.listOfTexts(texts: $texts)';
+    return 'ContentInput.listOfTexts(texts: $texts)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ContentOutputImpl &&
+            other is _$ContentInputImpl &&
             const DeepCollectionEquality().equals(other._texts, _texts));
   }
 
@@ -163,13 +163,13 @@ class _$ContentOutputImpl implements _ContentOutput {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$ContentOutputImplCopyWith<_$ContentOutputImpl> get copyWith =>
-      __$$ContentOutputImplCopyWithImpl<_$ContentOutputImpl>(this, _$identity);
+  _$$ContentInputImplCopyWith<_$ContentInputImpl> get copyWith =>
+      __$$ContentInputImplCopyWithImpl<_$ContentInputImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<String> texts) listOfTexts,
+    required TResult Function(List<ContentTextSectionInput> texts) listOfTexts,
   }) {
     return listOfTexts(texts);
   }
@@ -177,7 +177,7 @@ class _$ContentOutputImpl implements _ContentOutput {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(List<String> texts)? listOfTexts,
+    TResult? Function(List<ContentTextSectionInput> texts)? listOfTexts,
   }) {
     return listOfTexts?.call(texts);
   }
@@ -185,7 +185,7 @@ class _$ContentOutputImpl implements _ContentOutput {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<String> texts)? listOfTexts,
+    TResult Function(List<ContentTextSectionInput> texts)? listOfTexts,
     required TResult orElse(),
   }) {
     if (listOfTexts != null) {
@@ -197,7 +197,7 @@ class _$ContentOutputImpl implements _ContentOutput {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_ContentOutput value) listOfTexts,
+    required TResult Function(_ContentInput value) listOfTexts,
   }) {
     return listOfTexts(this);
   }
@@ -205,7 +205,7 @@ class _$ContentOutputImpl implements _ContentOutput {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_ContentOutput value)? listOfTexts,
+    TResult? Function(_ContentInput value)? listOfTexts,
   }) {
     return listOfTexts?.call(this);
   }
@@ -213,7 +213,7 @@ class _$ContentOutputImpl implements _ContentOutput {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_ContentOutput value)? listOfTexts,
+    TResult Function(_ContentInput value)? listOfTexts,
     required TResult orElse(),
   }) {
     if (listOfTexts != null) {
@@ -224,22 +224,23 @@ class _$ContentOutputImpl implements _ContentOutput {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ContentOutputImplToJson(
+    return _$$ContentInputImplToJson(
       this,
     );
   }
 }
 
-abstract class _ContentOutput implements ContentOutput {
-  factory _ContentOutput({final List<String> texts}) = _$ContentOutputImpl;
+abstract class _ContentInput implements ContentInput {
+  factory _ContentInput({required final List<ContentTextSectionInput> texts}) =
+      _$ContentInputImpl;
 
-  factory _ContentOutput.fromJson(Map<String, dynamic> json) =
-      _$ContentOutputImpl.fromJson;
+  factory _ContentInput.fromJson(Map<String, dynamic> json) =
+      _$ContentInputImpl.fromJson;
 
   @override
-  List<String> get texts;
+  List<ContentTextSectionInput> get texts;
   @override
   @JsonKey(ignore: true)
-  _$$ContentOutputImplCopyWith<_$ContentOutputImpl> get copyWith =>
+  _$$ContentInputImplCopyWith<_$ContentInputImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -10,7 +10,7 @@ _$TemplateImpl _$$TemplateImplFromJson(Map<String, dynamic> json) =>
     _$TemplateImpl(
       id: json['id'] as String,
       info: PackageInfo.fromJson(json['info'] as Map<String, dynamic>),
-      output: ContentOutput.fromJson(json['output'] as Map<String, dynamic>),
+      output: ContentInput.fromJson(json['output'] as Map<String, dynamic>),
       metadata:
           TemplateMetadata.fromJson(json['metadata'] as Map<String, dynamic>),
       payload:

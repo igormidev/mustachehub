@@ -8,7 +8,7 @@ import 'package:mustachehub/generate/ui/pages/text_output_page/text_output_page.
 
 class TextOutputGeneratorView extends StatefulWidget {
   final ExpectedPayload generatorData;
-  final ContentOutput content;
+  final ContentInput content;
 
   const TextOutputGeneratorView({
     super.key,

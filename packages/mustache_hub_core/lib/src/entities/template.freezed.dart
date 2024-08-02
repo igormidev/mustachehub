@@ -22,7 +22,7 @@ Template _$TemplateFromJson(Map<String, dynamic> json) {
 mixin _$Template {
   String get id => throw _privateConstructorUsedError;
   PackageInfo get info => throw _privateConstructorUsedError;
-  ContentOutput get output => throw _privateConstructorUsedError;
+  ContentInput get output => throw _privateConstructorUsedError;
   TemplateMetadata get metadata => throw _privateConstructorUsedError;
   ExpectedPayload get payload => throw _privateConstructorUsedError;
 
@@ -40,12 +40,12 @@ abstract class $TemplateCopyWith<$Res> {
   $Res call(
       {String id,
       PackageInfo info,
-      ContentOutput output,
+      ContentInput output,
       TemplateMetadata metadata,
       ExpectedPayload payload});
 
   $PackageInfoCopyWith<$Res> get info;
-  $ContentOutputCopyWith<$Res> get output;
+  $ContentInputCopyWith<$Res> get output;
   $TemplateMetadataCopyWith<$Res> get metadata;
   $ExpectedPayloadCopyWith<$Res> get payload;
 }
@@ -81,7 +81,7 @@ class _$TemplateCopyWithImpl<$Res, $Val extends Template>
       output: null == output
           ? _value.output
           : output // ignore: cast_nullable_to_non_nullable
-              as ContentOutput,
+              as ContentInput,
       metadata: null == metadata
           ? _value.metadata
           : metadata // ignore: cast_nullable_to_non_nullable
@@ -103,8 +103,8 @@ class _$TemplateCopyWithImpl<$Res, $Val extends Template>
 
   @override
   @pragma('vm:prefer-inline')
-  $ContentOutputCopyWith<$Res> get output {
-    return $ContentOutputCopyWith<$Res>(_value.output, (value) {
+  $ContentInputCopyWith<$Res> get output {
+    return $ContentInputCopyWith<$Res>(_value.output, (value) {
       return _then(_value.copyWith(output: value) as $Val);
     });
   }
@@ -137,14 +137,14 @@ abstract class _$$TemplateImplCopyWith<$Res>
   $Res call(
       {String id,
       PackageInfo info,
-      ContentOutput output,
+      ContentInput output,
       TemplateMetadata metadata,
       ExpectedPayload payload});
 
   @override
   $PackageInfoCopyWith<$Res> get info;
   @override
-  $ContentOutputCopyWith<$Res> get output;
+  $ContentInputCopyWith<$Res> get output;
   @override
   $TemplateMetadataCopyWith<$Res> get metadata;
   @override
@@ -180,7 +180,7 @@ class __$$TemplateImplCopyWithImpl<$Res>
       output: null == output
           ? _value.output
           : output // ignore: cast_nullable_to_non_nullable
-              as ContentOutput,
+              as ContentInput,
       metadata: null == metadata
           ? _value.metadata
           : metadata // ignore: cast_nullable_to_non_nullable
@@ -212,7 +212,7 @@ class _$TemplateImpl implements _Template {
   @override
   final PackageInfo info;
   @override
-  final ContentOutput output;
+  final ContentInput output;
   @override
   final TemplateMetadata metadata;
   @override
@@ -259,7 +259,7 @@ abstract class _Template implements Template {
   factory _Template(
       {required final String id,
       required final PackageInfo info,
-      required final ContentOutput output,
+      required final ContentInput output,
       required final TemplateMetadata metadata,
       required final ExpectedPayload payload}) = _$TemplateImpl;
 
@@ -271,7 +271,7 @@ abstract class _Template implements Template {
   @override
   PackageInfo get info;
   @override
-  ContentOutput get output;
+  ContentInput get output;
   @override
   TemplateMetadata get metadata;
   @override

@@ -8,7 +8,7 @@ import 'package:mustachehub/generate/presenter/dtos/tree_node_generate_pipe_dto.
 
 class StructureGenerateNodeBuilder extends StatelessWidget {
   final ModelPipeDto rootModelDTO;
-  final ContentOutput output;
+  final ContentInput output;
   final ExpectedPayload expectedPayload;
   final ModelPipeDto referenceModelDTO;
   final TreeNodeGeneratePipeDtoStructureNode structureDTONode;

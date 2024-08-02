@@ -20,7 +20,7 @@ class PayloadCubit extends Cubit<PayloadState> {
         super(PayloadState.initial());
 
   Future<void> updateContent({
-    required ContentOutput? output,
+    required ContentInput? output,
     required ExpectedPayload expectedPayload,
     required ExpectedPayloadDto? expectedPayloadDto,
   }) async {
@@ -55,7 +55,7 @@ class PayloadCubit extends Cubit<PayloadState> {
   }
 
   Future<void> _addData({
-    required ContentOutput? output,
+    required ContentInput? output,
     required ExpectedPayload generatorData,
   }) async {
     final areAllVariablesEmpty = generatorData.textPipes.isEmpty &&
@@ -96,7 +96,7 @@ class PayloadCubit extends Cubit<PayloadState> {
   }
 
   Future<void> addTextPayloadValue({
-    required ContentOutput output,
+    required ContentInput output,
     required ExpectedPayload generatorData,
     required TextPipe pipe,
     required String? value,
@@ -119,7 +119,7 @@ class PayloadCubit extends Cubit<PayloadState> {
   }
 
   Future<void> addBooleanPayloadValue({
-    required ContentOutput output,
+    required ContentInput output,
     required ExpectedPayload expectedPayload,
     required BooleanPipe pipe,
     required bool value,
@@ -142,7 +142,7 @@ class PayloadCubit extends Cubit<PayloadState> {
   }
 
   Future<void> addModelPayloadValue({
-    required ContentOutput output,
+    required ContentInput output,
     required ExpectedPayload expectedPayload,
     required ModelPipeDto newPipeDTO,
   }) async {

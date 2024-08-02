@@ -16,20 +16,21 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$ContentOutputDto {
-  List<String> get contents => throw _privateConstructorUsedError;
+  List<ContentTextSectionInput> get contents =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<String> contents) string,
+    required TResult Function(List<ContentTextSectionInput> contents) string,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(List<String> contents)? string,
+    TResult? Function(List<ContentTextSectionInput> contents)? string,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<String> contents)? string,
+    TResult Function(List<ContentTextSectionInput> contents)? string,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -63,7 +64,7 @@ abstract class $ContentOutputDtoCopyWith<$Res> {
           ContentOutputDto value, $Res Function(ContentOutputDto) then) =
       _$ContentOutputDtoCopyWithImpl<$Res, ContentOutputDto>;
   @useResult
-  $Res call({List<String> contents});
+  $Res call({List<ContentTextSectionInput> contents});
 }
 
 /// @nodoc
@@ -87,7 +88,7 @@ class _$ContentOutputDtoCopyWithImpl<$Res, $Val extends ContentOutputDto>
       contents: null == contents
           ? _value.contents
           : contents // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<ContentTextSectionInput>,
     ) as $Val);
   }
 }
@@ -101,7 +102,7 @@ abstract class _$$ContentOutputDtoStringImplCopyWith<$Res>
       __$$ContentOutputDtoStringImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<String> contents});
+  $Res call({List<ContentTextSectionInput> contents});
 }
 
 /// @nodoc
@@ -124,7 +125,7 @@ class __$$ContentOutputDtoStringImplCopyWithImpl<$Res>
       contents: null == contents
           ? _value._contents
           : contents // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<ContentTextSectionInput>,
     ));
   }
 }
@@ -132,13 +133,13 @@ class __$$ContentOutputDtoStringImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ContentOutputDtoStringImpl implements _ContentOutputDtoString {
-  _$ContentOutputDtoStringImpl({final List<String> contents = const ['']})
+  _$ContentOutputDtoStringImpl(
+      {required final List<ContentTextSectionInput> contents})
       : _contents = contents;
 
-  final List<String> _contents;
+  final List<ContentTextSectionInput> _contents;
   @override
-  @JsonKey()
-  List<String> get contents {
+  List<ContentTextSectionInput> get contents {
     if (_contents is EqualUnmodifiableListView) return _contents;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_contents);
@@ -173,7 +174,7 @@ class _$ContentOutputDtoStringImpl implements _ContentOutputDtoString {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<String> contents) string,
+    required TResult Function(List<ContentTextSectionInput> contents) string,
   }) {
     return string(contents);
   }
@@ -181,7 +182,7 @@ class _$ContentOutputDtoStringImpl implements _ContentOutputDtoString {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(List<String> contents)? string,
+    TResult? Function(List<ContentTextSectionInput> contents)? string,
   }) {
     return string?.call(contents);
   }
@@ -189,7 +190,7 @@ class _$ContentOutputDtoStringImpl implements _ContentOutputDtoString {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<String> contents)? string,
+    TResult Function(List<ContentTextSectionInput> contents)? string,
     required TResult orElse(),
   }) {
     if (string != null) {
@@ -228,11 +229,12 @@ class _$ContentOutputDtoStringImpl implements _ContentOutputDtoString {
 }
 
 abstract class _ContentOutputDtoString implements ContentOutputDto {
-  factory _ContentOutputDtoString({final List<String> contents}) =
+  factory _ContentOutputDtoString(
+          {required final List<ContentTextSectionInput> contents}) =
       _$ContentOutputDtoStringImpl;
 
   @override
-  List<String> get contents;
+  List<ContentTextSectionInput> get contents;
 
   /// Create a copy of ContentOutputDto
   /// with the given fields replaced by the non-null parameter values.

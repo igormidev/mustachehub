@@ -11,7 +11,7 @@ import 'package:mustachehub/generate/presenter/states/payload_state.dart';
 import 'package:mustachehub/generate/ui/pages/template_input_form_page/widgets/pipe_forms_display/model_pipe_form/widgets/root_generator_handler/root_generator_handler.dart';
 
 class ModelPipeForm extends StatelessWidget {
-  final ContentOutput output;
+  final ContentInput output;
   final ExpectedPayload expectedPayload;
   const ModelPipeForm({
     super.key,

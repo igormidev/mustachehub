@@ -28,7 +28,7 @@ class TemplateUploadCubit extends Cubit<TemplateUploadState>
   }
 
   Future<void> createPackage({
-    required ContentOutput output,
+    required ContentInput output,
     required PackageInfo packageInfo,
     required ExpectedPayload expectedPayload,
   }) async {

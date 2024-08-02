@@ -3,6 +3,7 @@ import 'package:dart_debouncer/dart_debouncer.dart';
 import 'package:enchanted_collection/enchanted_collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mustache_hub_core/mustache_hub_core.dart';
 import 'package:mustachehub/create/presenter/controllers/variables_info_highlight_text_editing_controller.dart';
 import 'package:mustachehub/create/presenter/cubits/content_string_cubit.dart';
 import 'package:mustachehub/create/presenter/cubits/fields_text_size_cubit.dart';
@@ -29,23 +30,24 @@ class TextContentTab extends StatefulWidget {
 
 class _TextContentTabState extends State<TextContentTab>
     with TextContentMethods {
-  // final FocusNode textfieldFocusNode = FocusNode();
-  // late final VariablesInfoHighlightTextEditingController controller;
-  // late final OptionsController<VariableImplementation> optionsController;
-  // final Debouncer decouncer = Debouncer(timerDuration: 800.ms);
-
   // TODO(IGOR): Extract this to a mixin
   @override
   void initState() {
     super.initState();
 
     final contentCubit = context.read<ContentStringCubit>();
+    didCreatedAtLeastOneVariable = ValueNotifier(
+      contentCubit.state.currentText.texts.isEmpty,
+    );
     setDependencies(contentCubit.state);
+    final varCubit = context.read<VariablesCubit>();
+    didCreatedAtLeastOneVariable.value = !varCubit.state.isBlank;
   }
 
   @override
   void dispose() {
     disposeAll();
+    didCreatedAtLeastOneVariable.dispose();
     super.dispose();
   }
 
@@ -56,6 +58,8 @@ class _TextContentTabState extends State<TextContentTab>
       cluster.decouncer.dispose();
     }
   }
+
+  late final ValueNotifier<bool> didCreatedAtLeastOneVariable;
 
   @override
   Widget build(BuildContext context) {
@@ -78,6 +82,9 @@ class _TextContentTabState extends State<TextContentTab>
             for (final cluster in dependencies) {
               cluster.controller.setFlatMap(state.flatMap);
             }
+
+            didCreatedAtLeastOneVariable.value = !state.isBlank;
+
             // controller.setFlatMap(state.flatMap);
           },
         ),
@@ -92,41 +99,67 @@ class _TextContentTabState extends State<TextContentTab>
         child: Column(
           children: [
             const TextContentHeader(),
-            BlocBuilder<FieldsTextSizeCubit, FieldsTextSizeState>(
-              bloc: sizeBloc,
-              builder: (context, varState) {
-                final fontSize = varState.testStringTextSize;
-                return Column(
-                  children: dependencies.mapper((
-                    EditDependenciesCluster cluster,
-                    bool isFirst,
-                    bool isLast,
-                    int index,
-                  ) {
-                    return SectionContentField(
-                      textfieldFocusNode: cluster.textfieldFocusNode,
-                      optionsController: cluster.optionsController,
-                      fontSize: fontSize,
-                      controller: cluster.controller,
-                      decouncer: cluster.decouncer,
-                      contentStringCubit: contentCubit,
-                      variablesCubit: varCubit,
-                      suggestionCubit: sugestionCubit,
-                      notifyContentCubit: notifyContentCubit,
-                      index: dependencies.indexOf(cluster),
+            Expanded(
+              child: ValueListenableBuilder(
+                valueListenable: didCreatedAtLeastOneVariable,
+                builder: (context, bool didCreatedAtLeastOneVariable, child) {
+                  if (didCreatedAtLeastOneVariable == false) {
+                    return Tooltip(
+                      triggerMode: TooltipTriggerMode.tap,
+                      message:
+                          'You must create at least one variable.\nCreate an text, condition or list of items variable.',
+                      child: IgnorePointer(
+                        child: Opacity(
+                          opacity: 0.7,
+                          child: child,
+                        ),
+                      ),
                     );
-                  }).toList(),
-                );
-              },
+                  }
+
+                  return child!;
+                },
+                child: BlocBuilder<FieldsTextSizeCubit, FieldsTextSizeState>(
+                  bloc: sizeBloc,
+                  builder: (context, varState) {
+                    final fontSize = varState.testStringTextSize;
+                    return ListView(
+                      children: [
+                        ...dependencies.mapper((
+                          EditDependenciesCluster cluster,
+                          bool isFirst,
+                          bool isLast,
+                          int index,
+                        ) {
+                          return SectionContentField(
+                            input: cluster.input,
+                            textfieldFocusNode: cluster.textfieldFocusNode,
+                            optionsController: cluster.optionsController,
+                            fontSize: fontSize,
+                            controller: cluster.controller,
+                            decouncer: cluster.decouncer,
+                            contentStringCubit: contentCubit,
+                            variablesCubit: varCubit,
+                            suggestionCubit: sugestionCubit,
+                            notifyContentCubit: notifyContentCubit,
+                          );
+                        }),
+                        const SizedBox(height: 8),
+                        AddNewButton(
+                          onTap: () {
+                            final contentCubit =
+                                context.read<ContentStringCubit>();
+
+                            contentCubit.addNew();
+                          },
+                          tooltip: 'Add a new content text',
+                        ),
+                      ],
+                    );
+                  },
+                ),
+              ),
             ),
-            const SizedBox(height: 8),
-            AddNewButton(
-              onTap: () {
-                final contentCubit = context.read<ContentStringCubit>();
-                contentCubit.addNew();
-              },
-              tooltip: 'Add a new content text',
-            )
           ],
         ),
       ),
@@ -183,11 +216,13 @@ class EditDependenciesCluster {
   final VariablesInfoHighlightTextEditingController controller;
   final OptionsController<VariableImplementation> optionsController;
   final Debouncer decouncer;
+  final ContentTextSectionInput input;
 
   const EditDependenciesCluster({
     required this.textfieldFocusNode,
     required this.controller,
     required this.optionsController,
     required this.decouncer,
+    required this.input,
   });
 }

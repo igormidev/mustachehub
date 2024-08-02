@@ -20,20 +20,20 @@ ContentStringState _$ContentStringStateFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ContentStringState {
-  ContentOutput get currentText => throw _privateConstructorUsedError;
+  ContentInput get currentText => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(ContentOutput currentText) normal,
+    required TResult Function(ContentInput currentText) normal,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(ContentOutput currentText)? normal,
+    TResult? Function(ContentInput currentText)? normal,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(ContentOutput currentText)? normal,
+    TResult Function(ContentInput currentText)? normal,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -70,9 +70,9 @@ abstract class $ContentStringStateCopyWith<$Res> {
           ContentStringState value, $Res Function(ContentStringState) then) =
       _$ContentStringStateCopyWithImpl<$Res, ContentStringState>;
   @useResult
-  $Res call({ContentOutput currentText});
+  $Res call({ContentInput currentText});
 
-  $ContentOutputCopyWith<$Res> get currentText;
+  $ContentInputCopyWith<$Res> get currentText;
 }
 
 /// @nodoc
@@ -96,7 +96,7 @@ class _$ContentStringStateCopyWithImpl<$Res, $Val extends ContentStringState>
       currentText: null == currentText
           ? _value.currentText
           : currentText // ignore: cast_nullable_to_non_nullable
-              as ContentOutput,
+              as ContentInput,
     ) as $Val);
   }
 
@@ -104,8 +104,8 @@ class _$ContentStringStateCopyWithImpl<$Res, $Val extends ContentStringState>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $ContentOutputCopyWith<$Res> get currentText {
-    return $ContentOutputCopyWith<$Res>(_value.currentText, (value) {
+  $ContentInputCopyWith<$Res> get currentText {
+    return $ContentInputCopyWith<$Res>(_value.currentText, (value) {
       return _then(_value.copyWith(currentText: value) as $Val);
     });
   }
@@ -119,10 +119,10 @@ abstract class _$$NormalImplCopyWith<$Res>
       __$$NormalImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({ContentOutput currentText});
+  $Res call({ContentInput currentText});
 
   @override
-  $ContentOutputCopyWith<$Res> get currentText;
+  $ContentInputCopyWith<$Res> get currentText;
 }
 
 /// @nodoc
@@ -144,7 +144,7 @@ class __$$NormalImplCopyWithImpl<$Res>
       currentText: null == currentText
           ? _value.currentText
           : currentText // ignore: cast_nullable_to_non_nullable
-              as ContentOutput,
+              as ContentInput,
     ));
   }
 }
@@ -158,7 +158,7 @@ class _$NormalImpl implements Normal {
       _$$NormalImplFromJson(json);
 
   @override
-  final ContentOutput currentText;
+  final ContentInput currentText;
 
   @override
   String toString() {
@@ -189,7 +189,7 @@ class _$NormalImpl implements Normal {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(ContentOutput currentText) normal,
+    required TResult Function(ContentInput currentText) normal,
   }) {
     return normal(currentText);
   }
@@ -197,7 +197,7 @@ class _$NormalImpl implements Normal {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(ContentOutput currentText)? normal,
+    TResult? Function(ContentInput currentText)? normal,
   }) {
     return normal?.call(currentText);
   }
@@ -205,7 +205,7 @@ class _$NormalImpl implements Normal {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(ContentOutput currentText)? normal,
+    TResult Function(ContentInput currentText)? normal,
     required TResult orElse(),
   }) {
     if (normal != null) {
@@ -251,13 +251,13 @@ class _$NormalImpl implements Normal {
 }
 
 abstract class Normal implements ContentStringState {
-  const factory Normal({required final ContentOutput currentText}) =
+  const factory Normal({required final ContentInput currentText}) =
       _$NormalImpl;
 
   factory Normal.fromJson(Map<String, dynamic> json) = _$NormalImpl.fromJson;
 
   @override
-  ContentOutput get currentText;
+  ContentInput get currentText;
 
   /// Create a copy of ContentStringState
   /// with the given fields replaced by the non-null parameter values.

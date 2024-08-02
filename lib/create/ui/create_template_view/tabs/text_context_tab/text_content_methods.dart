@@ -16,15 +16,12 @@ mixin TextContentMethods on State<TextContentTab> {
   void setDependencies(ContentStringState state) {
     dependencies = [];
     state.when(
-      normal: (ContentOutput textOutput) {
-        int index = -1;
-        for (final String output in textOutput.texts) {
-          index++;
-
+      normal: (ContentInput textOutput) {
+        for (final ContentTextSectionInput output in textOutput.texts) {
           final VariablesInfoHighlightTextEditingController controller =
               VariablesInfoHighlightTextEditingController(
             textAnalyserBase: const TextAnalyserBase(),
-            text: output,
+            text: output.content,
           );
 
           controller.setFlatMap(context.read<VariablesCubit>().state.flatMap);
@@ -53,7 +50,9 @@ mixin TextContentMethods on State<TextContentTab> {
               NavigatorService.i.dashboardNavigatorKey.currentContext!,
             ),
             onTextAddedCallback: (option, newEditingValue) {
-              notifyContentCubit(index: index, output: newEditingValue.text);
+              notifyContentCubit(
+                output: output.copyWith(content: newEditingValue.text),
+              );
             },
             selectInCursorParser: (option) {
               return InsertInCursorPayload(
@@ -90,7 +89,7 @@ mixin TextContentMethods on State<TextContentTab> {
 
           Future.delayed(const Duration(milliseconds: 200), () {
             if (!mounted) return;
-            notifyContentCubit(index: index, output: output);
+            notifyContentCubit(output: output);
           });
           WidgetsBinding.instance.addPostFrameCallback((_) {
             controller.setCacheCS(Theme.of(context).colorScheme);
@@ -107,6 +106,7 @@ mixin TextContentMethods on State<TextContentTab> {
               textfieldFocusNode: fieldNode,
               controller: controller,
               optionsController: optionsController,
+              input: output,
               decouncer: Debouncer(timerDuration: 800.ms),
             ),
           );
@@ -118,13 +118,11 @@ mixin TextContentMethods on State<TextContentTab> {
   }
 
   void notifyContentCubit({
-    required int index,
-    required String output,
+    required ContentTextSectionInput output,
   }) {
     final contentCubit = context.read<ContentStringCubit>();
     contentCubit.setCubit(
-      index: index,
-      text: output,
+      input: output,
     );
   }
 }

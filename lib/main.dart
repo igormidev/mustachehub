@@ -38,7 +38,7 @@ void main() async {
         : await getApplicationDocumentsDirectory(),
   );
 
-  await FirebaseAuth.instance.signOut();
+  // await FirebaseAuth.instance.signOut();
   await HydratedBloc.storage.clear();
 
   runApp(const MyApp());

@@ -2,6 +2,7 @@ import 'package:cursor_autocomplete_options/cursor_autocomplete_options.dart';
 import 'package:dart_debouncer/dart_debouncer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mustache_hub_core/mustache_hub_core.dart';
 import 'package:mustachehub/create/presenter/controllers/variables_info_highlight_text_editing_controller.dart';
 import 'package:mustachehub/create/presenter/cubits/content_string_cubit.dart';
 import 'package:mustachehub/create/presenter/cubits/suggestion_cubit.dart';
@@ -19,9 +20,11 @@ class SectionContentField extends StatelessWidget {
   final ContentStringCubit contentStringCubit;
   final VariablesCubit variablesCubit;
   final SuggestionCubit suggestionCubit;
-  final int index;
-  final Function({required int index, required String output})
-      notifyContentCubit;
+  final ContentTextSectionInput input;
+
+  final Function({
+    required ContentTextSectionInput output,
+  }) notifyContentCubit;
   // _notifyContentCubit({required int index, required String output});
 
   const SectionContentField({
@@ -34,8 +37,8 @@ class SectionContentField extends StatelessWidget {
     required this.contentStringCubit,
     required this.variablesCubit,
     required this.suggestionCubit,
-    required this.index,
     required this.notifyContentCubit,
+    required this.input,
   });
 
   @override
@@ -49,52 +52,76 @@ class SectionContentField extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.only(top: 12.0),
-      child: TextFormField(
-        focusNode: textfieldFocusNode,
-        controller: controller,
-        maxLines: 5,
-        style: style,
-        decoration: InputDecoration(
-          contentPadding:
-              const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-          border: const OutlineInputBorder(
-            borderSide: BorderSide.none,
+      child: Column(
+        children: [
+          TextFormField(
+            maxLines: 1,
+            style: style,
+            decoration: InputDecoration(
+              contentPadding: const EdgeInsets.symmetric(vertical: 8),
+              // isCollapsed: true,
+              isDense: true,
+              border: const OutlineInputBorder(
+                borderSide: BorderSide.none,
+              ),
+              fillColor: Theme.of(context).colorScheme.onInverseSurface,
+              filled: true,
+              hintText: 'Section title',
+            ),
           ),
-          fillColor: Theme.of(context).colorScheme.onInverseSurface,
-          filled: true,
-          hintText:
-              'Type your text here. Use {{}} to add variables.\nJust tap "{" after creating a variable...',
-        ),
-        textAlignVertical: TextAlignVertical.top,
-        inputFormatters: [
-          AddMustacheDelimmiterInputFormatter(
-            sugestionCubit: suggestionCubit,
-            varCubit: variablesCubit,
-            onAddedDellimiter: () {
-              final bloc = context.read<SuggestionCubit>();
-              optionsController.showOptionsMenuWithWrapperBuilder(
-                suggestionCardBuilder: (
-                  BuildContext dialogContext,
-                  Widget Function(
-                    List<VariableImplementation> value,
-                  ) listTilesWithOptionsBuilder,
-                ) {
-                  return BlocProvider<SuggestionCubit>.value(
-                    value: bloc,
-                    child: SuggestionCard(
-                      listTilesWithOptionsBuilder: listTilesWithOptionsBuilder,
-                    ),
+          const SizedBox(height: 8),
+          TextFormField(
+            focusNode: textfieldFocusNode,
+            controller: controller,
+            maxLines: 5,
+            style: style,
+            decoration: InputDecoration(
+              contentPadding:
+                  const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+              border: const OutlineInputBorder(
+                borderSide: BorderSide.none,
+              ),
+              fillColor: Theme.of(context).colorScheme.onInverseSurface,
+              filled: true,
+              hintText:
+                  'Type your text here. Use {{}} to add variables.\nJust tap "{" after creating a variable...',
+            ),
+            textAlignVertical: TextAlignVertical.top,
+            inputFormatters: [
+              AddMustacheDelimmiterInputFormatter(
+                sugestionCubit: suggestionCubit,
+                varCubit: variablesCubit,
+                onAddedDellimiter: () {
+                  final bloc = context.read<SuggestionCubit>();
+                  optionsController.showOptionsMenuWithWrapperBuilder(
+                    suggestionCardBuilder: (
+                      BuildContext dialogContext,
+                      Widget Function(
+                        List<VariableImplementation> value,
+                      ) listTilesWithOptionsBuilder,
+                    ) {
+                      return BlocProvider<SuggestionCubit>.value(
+                        value: bloc,
+                        child: SuggestionCard(
+                          listTilesWithOptionsBuilder:
+                              listTilesWithOptionsBuilder,
+                        ),
+                      );
+                    },
                   );
                 },
-              );
+              ),
+            ],
+            onChanged: (final String text) {
+              decouncer.resetDebounce(() {
+                final newContent = input.copyWith(
+                  content: text,
+                );
+                notifyContentCubit(output: newContent);
+              });
             },
           ),
         ],
-        onChanged: (final String text) {
-          decouncer.resetDebounce(() {
-            notifyContentCubit(output: text, index: index);
-          });
-        },
       ),
     );
   }

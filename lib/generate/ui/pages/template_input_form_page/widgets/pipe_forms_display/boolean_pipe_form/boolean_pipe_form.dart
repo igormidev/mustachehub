@@ -9,7 +9,7 @@ import 'package:mustachehub/generate/presenter/states/payload_state.dart';
 import 'package:mustachehub/generate/ui/pages/template_input_form_page/widgets/pipe_forms_display/boolean_pipe_form/widgets/boolean_pipe_switch_form_field.dart';
 
 class BooleanPipeForm extends StatelessWidget {
-  final ContentOutput output;
+  final ContentInput output;
   final ExpectedPayload expectedPayload;
   const BooleanPipeForm({
     super.key,
