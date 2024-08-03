@@ -13,8 +13,16 @@ import 'package:text_analyser/text_analyser.dart';
 
 mixin TextContentMethods on State<TextContentTab> {
   List<EditDependenciesCluster> dependencies = [];
+
   void setDependencies(ContentStringState state) {
+    // The uuid and the focus node of dependencies
+    final Map<String, FocusNode> cacheFocusNodes = {};
+    for (final d in dependencies) {
+      cacheFocusNodes[d.input.uuid] = d.textfieldFocusNode;
+    }
+
     dependencies = [];
+
     state.when(
       normal: (ContentInput textOutput) {
         int index = 0;
@@ -28,7 +36,8 @@ mixin TextContentMethods on State<TextContentTab> {
 
           controller.setFlatMap(context.read<VariablesCubit>().state.flatMap);
 
-          final fieldNode = FocusNode();
+          final cacheFieldNode = cacheFocusNodes[output.uuid];
+          final fieldNode = cacheFieldNode ?? FocusNode();
 
           final OptionsController<VariableImplementation> optionsController =
               OptionsController<VariableImplementation>(
