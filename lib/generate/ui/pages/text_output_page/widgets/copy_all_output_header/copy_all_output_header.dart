@@ -12,6 +12,10 @@ class CopyAllOutputHeader extends StatelessWidget
   Widget build(BuildContext context) {
     return CustomHeader(
       headerTitle: 'Output text',
+      headerSubtitle: 'Bellow is the generated text '
+          'after fullfiling the required variables'
+          'They are separed by sections. So you can '
+          'copy all of them at once or just one section',
       actions: [
         context.whenSizeIsSmallerThen(
           size: ScreenSize.x900,
