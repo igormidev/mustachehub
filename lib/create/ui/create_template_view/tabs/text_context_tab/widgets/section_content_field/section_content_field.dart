@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:cursor_autocomplete_options/cursor_autocomplete_options.dart';
 import 'package:dart_debouncer/dart_debouncer.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +9,7 @@ import 'package:mustachehub/create/presenter/cubits/content_string_cubit.dart';
 import 'package:mustachehub/create/presenter/cubits/suggestion_cubit.dart';
 import 'package:mustachehub/create/presenter/cubits/variables_cubit.dart';
 import 'package:mustachehub/create/presenter/input_formaters/add_mustache_delimmiter_input_formater.dart';
+import 'package:mustachehub/create/presenter/states/content_string_state.dart';
 import 'package:mustachehub/create/ui/create_template_view/tabs/text_context_tab/text_content_tab.dart';
 import 'package:text_analyser/text_analyser.dart';
 
@@ -85,17 +87,32 @@ class SectionContentField extends StatelessWidget with ValidatorsMixins {
                             scale: 0.7,
                             child: Tooltip(
                               message: 'Break line after previous section',
-                              child: Switch(
-                                value: willBreakLine,
-                                onChanged: (val) {
-                                  final newContent = input.copyWith(
-                                    content: controller.text,
-                                    title: titleController.text,
-                                    willBreakLine: !input.willBreakLine,
-                                  );
-                                  notifyContentCubit(output: newContent);
-                                },
-                              ),
+                              child: BlocBuilder<ContentStringCubit,
+                                      ContentStringState>(
+                                  builder: (context, state) {
+                                final willBreakLineState = state.map(
+                                  normal: (state) =>
+                                      state.currentText.texts
+                                          .singleWhereOrNull(
+                                            (element) =>
+                                                element.uuid == input.uuid,
+                                          )
+                                          ?.willBreakLine ??
+                                      willBreakLine,
+                                );
+
+                                return Switch(
+                                  value: willBreakLine,
+                                  onChanged: (val) {
+                                    final newContent = input.copyWith(
+                                      content: controller.text,
+                                      title: titleController.text,
+                                      willBreakLine: !willBreakLineState,
+                                    );
+                                    notifyContentCubit(output: newContent);
+                                  },
+                                );
+                              }),
                             ),
                           ),
                           const Tooltip(
@@ -118,7 +135,6 @@ class SectionContentField extends StatelessWidget with ValidatorsMixins {
                 final newContent = input.copyWith(
                   content: controller.text,
                   title: value,
-                  willBreakLine: willBreakLine,
                 );
                 notifyContentCubit(output: newContent);
               },
@@ -173,7 +189,6 @@ class SectionContentField extends StatelessWidget with ValidatorsMixins {
                 final newContent = input.copyWith(
                   content: text,
                   title: titleController.text,
-                  willBreakLine: willBreakLine,
                 );
                 notifyContentCubit(output: newContent);
               });

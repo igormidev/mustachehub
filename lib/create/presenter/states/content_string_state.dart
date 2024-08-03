@@ -13,3 +13,10 @@ class ContentStringState with _$ContentStringState {
   factory ContentStringState.fromJson(Map<String, Object?> json) =>
       _$ContentStringStateFromJson(json);
 }
+
+extension ContentStringStateEx on ContentStringState {
+  bool validate() {
+    return currentText.texts.every(
+        (element) => element.content.isNotEmpty && element.title.isNotEmpty);
+  }
+}

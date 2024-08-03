@@ -135,8 +135,8 @@ class _TextContentTabState extends State<TextContentTab>
                             int index,
                           ) {
                             return SectionContentField(
-                              key: ValueKey(index),
-                              // key: ValueKey(cluster.input.uuid),
+                              key: ValueKey(
+                                  index.toString() + cluster.input.uuid),
                               input: cluster.input,
                               titleController: cluster.titleController,
                               textfieldFocusNode: cluster.textfieldFocusNode,

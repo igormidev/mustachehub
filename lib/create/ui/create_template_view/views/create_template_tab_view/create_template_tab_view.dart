@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mustachehub/app_core/theme/components/error_snack_bar.dart';
+import 'package:mustachehub/create/presenter/cubits/content_string_cubit.dart';
 import 'package:mustachehub/create/presenter/cubits/tab_controll_cubit.dart';
+import 'package:mustachehub/create/presenter/states/content_string_state.dart';
 import 'package:mustachehub/create/ui/create_template_view/tabs/template_input_form_tab_view/template_input_form_tab_view.dart';
 import 'package:mustachehub/create/ui/create_template_view/tabs/text_context_tab/text_content_tab.dart';
 import 'package:mustachehub/create/ui/create_template_view/tabs/variables_creation_tab/variables_creation_tab.dart';
@@ -66,9 +68,10 @@ class _CreateTemplateTabViewState extends State<CreateTemplateTabView>
             child: Scaffold(
               body: const TemplateInputFormPageView(),
               floatingActionButton: FloatingActionButton.extended(
+                tooltip: 'See the text output preview',
                 onPressed: () {
                   final isContentValid =
-                      widget.formKey.currentState?.validate() ?? false;
+                      context.read<ContentStringCubit>().state.validate();
 
                   if (isContentValid == false) {
                     ScaffoldMessenger.of(context).showSnackBar(
@@ -81,6 +84,7 @@ class _CreateTemplateTabViewState extends State<CreateTemplateTabView>
                     );
                     return;
                   }
+
                   openTemplateOutputDialog(context);
                 },
                 label: const Text('See text'),

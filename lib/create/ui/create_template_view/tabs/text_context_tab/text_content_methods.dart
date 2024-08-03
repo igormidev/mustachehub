@@ -14,18 +14,26 @@ import 'package:text_analyser/text_analyser.dart';
 mixin TextContentMethods on State<TextContentTab> {
   List<EditDependenciesCluster> dependencies = [];
 
+  final Debouncer debouncer = Debouncer(timerDuration: 200.ms);
+
   void setDependencies(ContentStringState state) {
-    // The uuid and the focus node of dependencies
-    final Map<String, FocusNode> cacheFocusNodes = {};
-    for (final d in dependencies) {
-      cacheFocusNodes[d.input.uuid] = d.textfieldFocusNode;
-    }
-
-    dependencies = [];
-
     state.when(
       normal: (ContentInput textOutput) {
         int index = 0;
+
+        final reCalculationIsNeeded = dependencies.isEmpty ||
+            dependencies.length != textOutput.texts.length;
+        if (reCalculationIsNeeded == false) {
+          return;
+        }
+
+        // The uuid and the focus node of dependencies
+        final Map<String, FocusNode> cacheFocusNodes = {};
+        for (final d in dependencies) {
+          cacheFocusNodes[d.input.uuid] = d.textfieldFocusNode;
+        }
+
+        dependencies = [];
         for (final ContentTextSectionInput output in textOutput.texts) {
           index++;
           final VariablesInfoHighlightTextEditingController controller =

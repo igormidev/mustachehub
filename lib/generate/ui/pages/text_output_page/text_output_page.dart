@@ -1,17 +1,13 @@
-// ignore_for_file: use_build_context_synchronously
-
-import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mustache_hub_core/mustache_hub_core.dart';
 import 'package:mustachehub/app_core/theme/components/empty_template_input_section.dart';
-import 'package:mustachehub/app_core/theme/default_widgets/custom_header.dart';
-import 'package:mustachehub/app_core/theme/mixins/copy_to_clipboard_mixin.dart';
 import 'package:mustachehub/generate/presenter/cubits/content_cubit.dart';
 import 'package:mustachehub/generate/presenter/cubits/payload_cubit.dart';
 import 'package:mustachehub/generate/presenter/dtos/content_output_dto.dart';
 import 'package:mustachehub/generate/presenter/states/content_state.dart';
 import 'package:mustachehub/generate/presenter/states/payload_state.dart';
+import 'package:mustachehub/generate/ui/pages/text_output_page/widgets/copy_all_output_header/copy_all_output_header.dart';
 
 class TextOutputPage extends StatelessWidget {
   final GlobalKey<FormState> formKey;
@@ -60,7 +56,7 @@ class TextOutputPage extends StatelessWidget {
   }
 }
 
-class _FinalWidget extends StatelessWidget with CopyToClipboardMixin {
+class _FinalWidget extends StatelessWidget {
   final ContentOutputDto output;
   const _FinalWidget({
     required this.output,
@@ -90,23 +86,7 @@ class _FinalWidget extends StatelessWidget with CopyToClipboardMixin {
           ),
           child: Column(
             children: [
-              CustomHeader(
-                headerTitle: 'Output text',
-                actions: [
-                  CustomActionHeader(
-                    tooltip: 'Copy all output to clipboard',
-                    iconData: Icons.copy,
-                    onPressed: () async {
-                      final outputCubit = context.read<ContentCubit>();
-                      final content = outputCubit.state.content;
-
-                      FirebaseAnalytics.instance
-                          .logEvent(name: 'output_copied');
-                      copyText(content?.contents.join(), context);
-                    },
-                  ),
-                ],
-              ),
+              const CopyAllOutputHeader(),
               const SizedBox(height: 4),
               ...output.when(
                 string: (List<ContentTextSectionInput> items) {
@@ -120,6 +100,7 @@ class _FinalWidget extends StatelessWidget with CopyToClipboardMixin {
                           borderRadius: BorderRadius.circular(24),
                         ),
                         padding: const EdgeInsets.all(8),
+                        margin: const EdgeInsets.only(bottom: 16),
                         child: Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(16),

@@ -7,8 +7,10 @@ import 'package:media_query_core/responsiveness/visibility_width_based.dart';
 import 'package:mustachehub/app_core/theme/components/error_snack_bar.dart';
 import 'package:mustachehub/app_core/theme/dialogs_api/implementations/confirm_dialog.dart';
 import 'package:mustachehub/create/data/enums/e_tutorial_sections.dart';
+import 'package:mustachehub/create/presenter/cubits/content_string_cubit.dart';
 import 'package:mustachehub/create/presenter/cubits/current_template_type_cubit.dart';
 import 'package:mustachehub/create/presenter/mixins/clear_all_data_mixin.dart';
+import 'package:mustachehub/create/presenter/states/content_string_state.dart';
 import 'package:mustachehub/create/presenter/states/current_template_type_state.dart';
 import 'package:mustachehub/create/ui/create_template_view/methods/open_save_dialog_.dart';
 import 'package:mustachehub/create/ui/create_template_view/methods/open_tutorial_dialog.dart';
@@ -122,7 +124,10 @@ class _CreateTemplateViewState extends State<CreateTemplateView>
                               final isContentValid = _contentTypeFormKey
                                       .currentState
                                       ?.validate() ??
-                                  false;
+                                  context
+                                      .read<ContentStringCubit>()
+                                      .state
+                                      .validate();
 
                               if (isContentValid == false) {
                                 ScaffoldMessenger.of(context).showSnackBar(
@@ -197,8 +202,9 @@ class _CreateTemplateViewState extends State<CreateTemplateView>
                   }),
                   IconButton(
                     onPressed: () {
-                      final isContentValid =
-                          _contentTypeFormKey.currentState?.validate() ?? false;
+                      final isContentValid = _contentTypeFormKey.currentState
+                              ?.validate() ??
+                          context.read<ContentStringCubit>().state.validate();
 
                       if (isContentValid == false) {
                         ScaffoldMessenger.of(context).showSnackBar(
