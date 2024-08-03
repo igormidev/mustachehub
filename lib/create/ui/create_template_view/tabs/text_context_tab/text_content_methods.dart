@@ -17,7 +17,9 @@ mixin TextContentMethods on State<TextContentTab> {
     dependencies = [];
     state.when(
       normal: (ContentInput textOutput) {
+        int index = 0;
         for (final ContentTextSectionInput output in textOutput.texts) {
+          index++;
           final VariablesInfoHighlightTextEditingController controller =
               VariablesInfoHighlightTextEditingController(
             textAnalyserBase: const TextAnalyserBase(),
@@ -101,13 +103,28 @@ mixin TextContentMethods on State<TextContentTab> {
             },
           );
 
+          final titleController = TextEditingController(
+            text: output.title.isEmpty ? 'Section $index' : output.title,
+          );
+
+          // If only contains one section, we don't need to display that label
+          final willDisplayEditLabel = textOutput.texts.length > 1;
+
+          // Dont need to have break previous line option if it is
+          // the fisrt section and don't have a previous section
+          final willContainBreakLineToggleOption = index > 1;
+
           dependencies.add(
             EditDependenciesCluster(
               textfieldFocusNode: fieldNode,
+              titleController: titleController,
               controller: controller,
               optionsController: optionsController,
               input: output,
               decouncer: Debouncer(timerDuration: 800.ms),
+              willDisplayEditLabel: willDisplayEditLabel,
+              willContainBreakLineToggleOption:
+                  willContainBreakLineToggleOption,
             ),
           );
         }

@@ -39,7 +39,7 @@ void main() async {
   );
 
   // await FirebaseAuth.instance.signOut();
-  await HydratedBloc.storage.clear();
+  // await HydratedBloc.storage.clear();
 
   runApp(const MyApp());
 }

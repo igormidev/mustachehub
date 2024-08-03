@@ -22,7 +22,8 @@ import 'package:mustachehub/settings/interactor/state/theme_state.dart';
 import 'package:text_analyser/text_analyser.dart';
 
 class TextContentTab extends StatefulWidget {
-  const TextContentTab({super.key});
+  final GlobalKey<FormState> formKey;
+  const TextContentTab({super.key, required this.formKey});
 
   @override
   State<TextContentTab> createState() => _TextContentTabState();
@@ -123,38 +124,52 @@ class _TextContentTabState extends State<TextContentTab>
                   bloc: sizeBloc,
                   builder: (context, varState) {
                     final fontSize = varState.testStringTextSize;
-                    return ListView(
-                      children: [
-                        ...dependencies.mapper((
-                          EditDependenciesCluster cluster,
-                          bool isFirst,
-                          bool isLast,
-                          int index,
-                        ) {
-                          return SectionContentField(
-                            input: cluster.input,
-                            textfieldFocusNode: cluster.textfieldFocusNode,
-                            optionsController: cluster.optionsController,
-                            fontSize: fontSize,
-                            controller: cluster.controller,
-                            decouncer: cluster.decouncer,
-                            contentStringCubit: contentCubit,
-                            variablesCubit: varCubit,
-                            suggestionCubit: sugestionCubit,
-                            notifyContentCubit: notifyContentCubit,
-                          );
-                        }),
-                        const SizedBox(height: 8),
-                        AddNewButton(
-                          onTap: () {
-                            final contentCubit =
-                                context.read<ContentStringCubit>();
+                    return Form(
+                      key: widget.formKey,
+                      child: ListView(
+                        children: [
+                          ...dependencies.mapper((
+                            EditDependenciesCluster cluster,
+                            bool isFirst,
+                            bool isLast,
+                            int index,
+                          ) {
+                            return SectionContentField(
+                              input: cluster.input,
+                              titleController: cluster.titleController,
+                              textfieldFocusNode: cluster.textfieldFocusNode,
+                              optionsController: cluster.optionsController,
+                              fontSize: fontSize,
+                              controller: cluster.controller,
+                              decouncer: cluster.decouncer,
+                              contentStringCubit: contentCubit,
+                              variablesCubit: varCubit,
+                              suggestionCubit: sugestionCubit,
+                              notifyContentCubit: notifyContentCubit,
+                              willBreakLine: cluster.input.willBreakLine,
+                              willDisplayEditLabel:
+                                  cluster.willDisplayEditLabel,
+                              willContainBreakLineToggleOption:
+                                  cluster.willContainBreakLineToggleOption,
+                            );
+                          }),
+                          const SizedBox(height: 8),
+                          AddNewButton(
+                            onTap: () {
+                              final isValid =
+                                  widget.formKey.currentState!.validate();
+                              if (!isValid) {
+                                return;
+                              }
+                              final contentCubit =
+                                  context.read<ContentStringCubit>();
 
-                            contentCubit.addNew();
-                          },
-                          tooltip: 'Add a new content text',
-                        ),
-                      ],
+                              contentCubit.addNew();
+                            },
+                            tooltip: 'Add a new content text section',
+                          ),
+                        ],
+                      ),
                     );
                   },
                 ),
@@ -212,17 +227,23 @@ class SuggestionCard extends StatelessWidget {
 }
 
 class EditDependenciesCluster {
+  final bool willDisplayEditLabel;
+  final bool willContainBreakLineToggleOption;
   final FocusNode textfieldFocusNode;
+  final TextEditingController titleController;
   final VariablesInfoHighlightTextEditingController controller;
   final OptionsController<VariableImplementation> optionsController;
   final Debouncer decouncer;
   final ContentTextSectionInput input;
 
   const EditDependenciesCluster({
+    required this.titleController,
     required this.textfieldFocusNode,
     required this.controller,
     required this.optionsController,
     required this.decouncer,
     required this.input,
+    required this.willDisplayEditLabel,
+    required this.willContainBreakLineToggleOption,
   });
 }
