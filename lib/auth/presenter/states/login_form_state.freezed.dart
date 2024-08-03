@@ -12,7 +12,7 @@ part of 'login_form_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$LoginFormState {
@@ -98,6 +98,9 @@ class _$LoginFormStateCopyWithImpl<$Res, $Val extends LoginFormState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of LoginFormState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -114,6 +117,9 @@ class __$$InitialImplCopyWithImpl<$Res>
   __$$InitialImplCopyWithImpl(
       _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of LoginFormState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -243,6 +249,9 @@ class __$$LoginFormStateLoadingImplCopyWithImpl<$Res>
   __$$LoginFormStateLoadingImplCopyWithImpl(_$LoginFormStateLoadingImpl _value,
       $Res Function(_$LoginFormStateLoadingImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of LoginFormState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -374,6 +383,9 @@ class __$$LoginFormStateFacebookImplCopyWithImpl<$Res>
       _$LoginFormStateFacebookImpl _value,
       $Res Function(_$LoginFormStateFacebookImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of LoginFormState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -503,6 +515,9 @@ class __$$LoginFormStateGoogleImplCopyWithImpl<$Res>
   __$$LoginFormStateGoogleImplCopyWithImpl(_$LoginFormStateGoogleImpl _value,
       $Res Function(_$LoginFormStateGoogleImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of LoginFormState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -635,6 +650,8 @@ class __$$LoginFormStateErrorImplCopyWithImpl<$Res>
       $Res Function(_$LoginFormStateErrorImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of LoginFormState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -673,7 +690,9 @@ class _$LoginFormStateErrorImpl implements LoginFormStateError {
   @override
   int get hashCode => Object.hash(runtimeType, error);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of LoginFormState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$LoginFormStateErrorImplCopyWith<_$LoginFormStateErrorImpl> get copyWith =>
@@ -774,7 +793,10 @@ abstract class LoginFormStateError implements LoginFormState {
       _$LoginFormStateErrorImpl;
 
   CredentialAuthException get error;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of LoginFormState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$LoginFormStateErrorImplCopyWith<_$LoginFormStateErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -793,6 +815,9 @@ class __$$SuccessImplCopyWithImpl<$Res>
   __$$SuccessImplCopyWithImpl(
       _$SuccessImpl _value, $Res Function(_$SuccessImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of LoginFormState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc

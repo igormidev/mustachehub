@@ -1,3 +1,4 @@
+import 'package:enchanted_collection/enchanted_collection.dart';
 import 'package:flutter/material.dart';
 
 // sudo chown -R $USER /opt/homebrew/Caskroom/flutter/3.22.3/flutter
@@ -18,7 +19,7 @@ class CustomHeader extends StatelessWidget {
   final void Function()? deleteOnPressed;
   final void Function()? clearOnPressed;
 
-  final List<CustomActionHeader>? actions;
+  final List<CustomActionHeader?>? actions;
   final List<Widget>? children;
   final List<PopupMenuItem<void>> moreOptions;
 
@@ -65,7 +66,7 @@ class CustomHeader extends StatelessWidget {
                 ),
               ),
             ),
-            if (actions != null) ...actions!.map((e) => e).toList(),
+            if (actions != null) ...actions!.removeNull.map((e) => e),
             if (children != null) ...children!,
             if (moreOnPressed != null)
               IconButton(
@@ -116,8 +117,6 @@ class CustomHeader extends StatelessWidget {
   }
 }
 
-// sudo chown -R $USER:$USER /opt/homebrew/bin/flutter
-// sudo chown -R $USER:$USER /opt/flutter
 class CustomActionHeader extends StatelessWidget {
   final IconData iconData;
   final String tooltip;

@@ -12,7 +12,7 @@ part of 'email_verification_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$EmailVerificationState {
@@ -123,6 +123,9 @@ class _$EmailVerificationStateCopyWithImpl<$Res,
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of EmailVerificationState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -142,6 +145,9 @@ class __$$EmailVerificationStateInitialImplCopyWithImpl<$Res>
       _$EmailVerificationStateInitialImpl _value,
       $Res Function(_$EmailVerificationStateInitialImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of EmailVerificationState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -301,6 +307,9 @@ class __$$EmailVerificationStateWithGenericErrorImplCopyWithImpl<$Res>
       _$EmailVerificationStateWithGenericErrorImpl _value,
       $Res Function(_$EmailVerificationStateWithGenericErrorImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of EmailVerificationState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -460,6 +469,9 @@ class __$$EmailVerificationStateWithNoUserErrorImplCopyWithImpl<$Res>
       _$EmailVerificationStateWithNoUserErrorImpl _value,
       $Res Function(_$EmailVerificationStateWithNoUserErrorImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of EmailVerificationState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -622,6 +634,9 @@ class __$$EmailVerificationStateAlreadyValidatedEmailImplCopyWithImpl<$Res>
       _$EmailVerificationStateAlreadyValidatedEmailImpl _value,
       $Res Function(_$EmailVerificationStateAlreadyValidatedEmailImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of EmailVerificationState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -784,6 +799,8 @@ class __$$EmailVerificationStateWithErrorImplCopyWithImpl<$Res>
       $Res Function(_$EmailVerificationStateWithErrorImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of EmailVerificationState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -823,7 +840,9 @@ class _$EmailVerificationStateWithErrorImpl
   @override
   int get hashCode => Object.hash(runtimeType, error);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of EmailVerificationState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$EmailVerificationStateWithErrorImplCopyWith<
@@ -951,7 +970,10 @@ abstract class _EmailVerificationStateWithError
       _$EmailVerificationStateWithErrorImpl;
 
   CredentialAuthException get error;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of EmailVerificationState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$EmailVerificationStateWithErrorImplCopyWith<
           _$EmailVerificationStateWithErrorImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -974,6 +996,9 @@ class __$$EmailVerificationStateLoadingImplCopyWithImpl<$Res>
       _$EmailVerificationStateLoadingImpl _value,
       $Res Function(_$EmailVerificationStateLoadingImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of EmailVerificationState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -1141,6 +1166,9 @@ class __$$EmailVerificationStateSuccessSendingEmailVerificationImplCopyWithImpl<
       $Res Function(_$EmailVerificationStateSuccessSendingEmailVerificationImpl)
           _then)
       : super(_value, _then);
+
+  /// Create a copy of EmailVerificationState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc

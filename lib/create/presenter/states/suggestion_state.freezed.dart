@@ -12,7 +12,7 @@ part of 'suggestion_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$SuggestionState {
@@ -86,6 +86,9 @@ class _$SuggestionStateCopyWithImpl<$Res, $Val extends SuggestionState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of SuggestionState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -110,6 +113,8 @@ class __$$SuggestionStateWithIdentifiersImplCopyWithImpl<$Res>
       $Res Function(_$SuggestionStateWithIdentifiersImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SuggestionState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -176,7 +181,9 @@ class _$SuggestionStateWithIdentifiersImpl
       const DeepCollectionEquality().hash(_tokenIdentifiers),
       const DeepCollectionEquality().hash(_segments));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SuggestionState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SuggestionStateWithIdentifiersImplCopyWith<
@@ -269,7 +276,10 @@ abstract class _SuggestionStateWithIdentifiers implements SuggestionState {
 
   Set<VariableImplementation> get tokenIdentifiers;
   List<AnalysedSegment> get segments;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of SuggestionState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SuggestionStateWithIdentifiersImplCopyWith<
           _$SuggestionStateWithIdentifiersImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -291,6 +301,9 @@ class __$$SuggestionStateUndefinedImplCopyWithImpl<$Res>
       _$SuggestionStateUndefinedImpl _value,
       $Res Function(_$SuggestionStateUndefinedImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of SuggestionState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -411,6 +424,9 @@ class __$$SuggestionStateErrorOccurredImplCopyWithImpl<$Res>
       _$SuggestionStateErrorOccurredImpl _value,
       $Res Function(_$SuggestionStateErrorOccurredImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of SuggestionState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc

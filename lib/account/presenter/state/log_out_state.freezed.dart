@@ -12,7 +12,7 @@ part of 'log_out_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$LogOutState {
@@ -100,6 +100,9 @@ class _$LogOutStateCopyWithImpl<$Res, $Val extends LogOutState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of LogOutState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -116,6 +119,9 @@ class __$$LogOutInitialStateImplCopyWithImpl<$Res>
   __$$LogOutInitialStateImplCopyWithImpl(_$LogOutInitialStateImpl _value,
       $Res Function(_$LogOutInitialStateImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of LogOutState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -246,6 +252,9 @@ class __$$LogOutLoadingStateImplCopyWithImpl<$Res>
   __$$LogOutLoadingStateImplCopyWithImpl(_$LogOutLoadingStateImpl _value,
       $Res Function(_$LogOutLoadingStateImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of LogOutState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -378,6 +387,9 @@ class __$$LogOutStateWithGenericErrorImplCopyWithImpl<$Res>
       _$LogOutStateWithGenericErrorImpl _value,
       $Res Function(_$LogOutStateWithGenericErrorImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of LogOutState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -515,6 +527,8 @@ class __$$LogOutStateStateWithErrorImplCopyWithImpl<$Res>
       $Res Function(_$LogOutStateStateWithErrorImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of LogOutState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -553,7 +567,9 @@ class _$LogOutStateStateWithErrorImpl implements _LogOutStateStateWithError {
   @override
   int get hashCode => Object.hash(runtimeType, error);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of LogOutState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$LogOutStateStateWithErrorImplCopyWith<_$LogOutStateStateWithErrorImpl>
@@ -657,7 +673,10 @@ abstract class _LogOutStateStateWithError implements LogOutState {
       _$LogOutStateStateWithErrorImpl;
 
   CredentialAuthException get error;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of LogOutState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$LogOutStateStateWithErrorImplCopyWith<_$LogOutStateStateWithErrorImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -678,6 +697,9 @@ class __$$LogOutStateWithNoUserErrorImplCopyWithImpl<$Res>
       _$LogOutStateWithNoUserErrorImpl _value,
       $Res Function(_$LogOutStateWithNoUserErrorImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of LogOutState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -809,6 +831,9 @@ class __$$LogOutSuccessStateImplCopyWithImpl<$Res>
   __$$LogOutSuccessStateImplCopyWithImpl(_$LogOutSuccessStateImpl _value,
       $Res Function(_$LogOutSuccessStateImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of LogOutState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc

@@ -70,7 +70,7 @@ mixin LoadEditableTemplateMethods
 
     // Set the text
     final content = context.read<ContentStringCubit>();
-    content.setCubit(template.content);
+    content.setStateFromOutput(template.output);
 
     // Set the type/mode
     final currentTemplate = context.read<CurrentTemplateTypeCubit>();

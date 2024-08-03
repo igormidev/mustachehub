@@ -16,6 +16,7 @@ class PipeCreationHeader extends StatelessWidget with OpenTutorialDialog {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return SliverToBoxAdapter(
       child: Padding(
         padding: const EdgeInsets.only(top: 4.0),
@@ -27,6 +28,12 @@ class PipeCreationHeader extends StatelessWidget with OpenTutorialDialog {
             Tooltip(
               message: 'Display tutorial about how to use this variable',
               child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  alignment: Alignment.centerLeft,
+                  backgroundColor: colorScheme.tertiaryContainer,
+                  foregroundColor: colorScheme.tertiary,
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                ),
                 onPressed: () {
                   openTutorialDialog(
                     context,

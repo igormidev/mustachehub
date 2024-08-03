@@ -12,7 +12,7 @@ part of 'editable_template_fetch_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$EditableTemplateFetchState {
@@ -89,6 +89,9 @@ class _$EditableTemplateFetchStateCopyWithImpl<$Res,
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of EditableTemplateFetchState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -108,6 +111,9 @@ class __$$EditableTemplateFetchStateInitialImplCopyWithImpl<$Res>
       _$EditableTemplateFetchStateInitialImpl _value,
       $Res Function(_$EditableTemplateFetchStateInitialImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of EditableTemplateFetchState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -235,6 +241,8 @@ class __$$EditableTemplateFetchStateErrorImplCopyWithImpl<$Res>
       $Res Function(_$EditableTemplateFetchStateErrorImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of EditableTemplateFetchState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -274,7 +282,9 @@ class _$EditableTemplateFetchStateErrorImpl
   @override
   int get hashCode => Object.hash(runtimeType, error);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of EditableTemplateFetchState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$EditableTemplateFetchStateErrorImplCopyWith<
@@ -366,7 +376,10 @@ abstract class _EditableTemplateFetchStateError
       _$EditableTemplateFetchStateErrorImpl;
 
   String get error;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of EditableTemplateFetchState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$EditableTemplateFetchStateErrorImplCopyWith<
           _$EditableTemplateFetchStateErrorImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -389,6 +402,9 @@ class __$$EditableTemplateFetchStateLoadingImplCopyWithImpl<$Res>
       _$EditableTemplateFetchStateLoadingImpl _value,
       $Res Function(_$EditableTemplateFetchStateLoadingImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of EditableTemplateFetchState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -518,6 +534,8 @@ class __$$EditableTemplateFetchStateSuccessFetchImplCopyWithImpl<$Res>
       $Res Function(_$EditableTemplateFetchStateSuccessFetchImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of EditableTemplateFetchState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -531,6 +549,8 @@ class __$$EditableTemplateFetchStateSuccessFetchImplCopyWithImpl<$Res>
     ));
   }
 
+  /// Create a copy of EditableTemplateFetchState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $TemplateCopyWith<$Res> get template {
@@ -566,7 +586,9 @@ class _$EditableTemplateFetchStateSuccessFetchImpl
   @override
   int get hashCode => Object.hash(runtimeType, template);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of EditableTemplateFetchState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$EditableTemplateFetchStateSuccessFetchImplCopyWith<
@@ -660,7 +682,10 @@ abstract class _EditableTemplateFetchStateSuccessFetch
       _$EditableTemplateFetchStateSuccessFetchImpl;
 
   Template get template;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of EditableTemplateFetchState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$EditableTemplateFetchStateSuccessFetchImplCopyWith<
           _$EditableTemplateFetchStateSuccessFetchImpl>
       get copyWith => throw _privateConstructorUsedError;

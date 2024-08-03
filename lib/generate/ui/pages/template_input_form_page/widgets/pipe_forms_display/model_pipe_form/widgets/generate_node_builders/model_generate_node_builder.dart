@@ -7,13 +7,13 @@ import 'package:mustachehub/generate/presenter/dtos/tree_node_generate_pipe_dto.
 
 class ModelGenerateNodeBuilder extends StatelessWidget {
   final ModelPipeDto rootModelDTO;
-  final String content;
+  final ContentInput output;
   final ExpectedPayload expectedPayload;
   final TreeNodeGeneratePipeDtoPipeModel modelDTONode;
   const ModelGenerateNodeBuilder({
     super.key,
     required this.rootModelDTO,
-    required this.content,
+    required this.output,
     required this.expectedPayload,
     required this.modelDTONode,
   });
@@ -41,7 +41,7 @@ class ModelGenerateNodeBuilder extends StatelessWidget {
           }
 
           context.read<PayloadCubit>().addModelPayloadValue(
-                content: content,
+                output: output,
                 expectedPayload: expectedPayload,
                 newPipeDTO: editedPipe,
               );

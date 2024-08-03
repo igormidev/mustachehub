@@ -12,7 +12,7 @@ part of 'current_template_type_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 CurrentTemplateTypeState _$CurrentTemplateTypeStateFromJson(
     Map<String, dynamic> json) {
@@ -76,6 +76,8 @@ mixin _$CurrentTemplateTypeState {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  /// Serializes this CurrentTemplateTypeState to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 }
 
@@ -96,6 +98,9 @@ class _$CurrentTemplateTypeStateCopyWithImpl<$Res,
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of CurrentTemplateTypeState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -115,6 +120,9 @@ class __$$CurrentTemplateTypeStateWithNewTemplateImplCopyWithImpl<$Res>
       _$CurrentTemplateTypeStateWithNewTemplateImpl _value,
       $Res Function(_$CurrentTemplateTypeStateWithNewTemplateImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of CurrentTemplateTypeState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -143,7 +151,7 @@ class _$CurrentTemplateTypeStateWithNewTemplateImpl
             other is _$CurrentTemplateTypeStateWithNewTemplateImpl);
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => runtimeType.hashCode;
 
@@ -257,6 +265,8 @@ class __$$CurrentTemplateTypeStateWithExistingTemplateImplCopyWithImpl<$Res>
       $Res Function(_$CurrentTemplateTypeStateWithExistingTemplateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of CurrentTemplateTypeState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -270,6 +280,8 @@ class __$$CurrentTemplateTypeStateWithExistingTemplateImplCopyWithImpl<$Res>
     ));
   }
 
+  /// Create a copy of CurrentTemplateTypeState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $TemplateCopyWith<$Res> get template {
@@ -311,11 +323,13 @@ class _$CurrentTemplateTypeStateWithExistingTemplateImpl
                 other.template == template));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, template);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of CurrentTemplateTypeState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$CurrentTemplateTypeStateWithExistingTemplateImplCopyWith<
@@ -411,7 +425,10 @@ abstract class _CurrentTemplateTypeStateWithExistingTemplate
       _$CurrentTemplateTypeStateWithExistingTemplateImpl.fromJson;
 
   Template get template;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of CurrentTemplateTypeState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CurrentTemplateTypeStateWithExistingTemplateImplCopyWith<
           _$CurrentTemplateTypeStateWithExistingTemplateImpl>
       get copyWith => throw _privateConstructorUsedError;

@@ -12,7 +12,7 @@ part of 'image_selector_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ImageSelectorState {
@@ -103,6 +103,9 @@ class _$ImageSelectorStateCopyWithImpl<$Res, $Val extends ImageSelectorState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of ImageSelectorState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -119,6 +122,9 @@ class __$$WithoutImageImplCopyWithImpl<$Res>
   __$$WithoutImageImplCopyWithImpl(
       _$WithoutImageImpl _value, $Res Function(_$WithoutImageImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of ImageSelectorState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -255,6 +261,8 @@ class __$$WithImageImplCopyWithImpl<$Res>
       _$WithImageImpl _value, $Res Function(_$WithImageImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ImageSelectorState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -303,7 +311,9 @@ class _$WithImageImpl implements _WithImage {
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(image), imageType);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ImageSelectorState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$WithImageImplCopyWith<_$WithImageImpl> get copyWith =>
@@ -410,7 +420,10 @@ abstract class _WithImage implements ImageSelectorState {
 
   Uint8List get image;
   ImageType get imageType;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ImageSelectorState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$WithImageImplCopyWith<_$WithImageImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -435,6 +448,8 @@ class __$$ImageSelectorStateLoadingImplCopyWithImpl<$Res>
       $Res Function(_$ImageSelectorStateLoadingImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ImageSelectorState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -484,7 +499,9 @@ class _$ImageSelectorStateLoadingImpl implements ImageSelectorStateLoading {
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(image), imageType);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ImageSelectorState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ImageSelectorStateLoadingImplCopyWith<_$ImageSelectorStateLoadingImpl>
@@ -592,7 +609,10 @@ abstract class ImageSelectorStateLoading implements ImageSelectorState {
 
   Uint8List get image;
   ImageType get imageType;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ImageSelectorState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ImageSelectorStateLoadingImplCopyWith<_$ImageSelectorStateLoadingImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -621,6 +641,8 @@ class __$$ImageSelectorStateFailureImplCopyWithImpl<$Res>
       $Res Function(_$ImageSelectorStateFailureImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ImageSelectorState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -690,7 +712,9 @@ class _$ImageSelectorStateFailureImpl implements ImageSelectorStateFailure {
   int get hashCode => Object.hash(runtimeType, name, description, imageType,
       const DeepCollectionEquality().hash(image));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ImageSelectorState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ImageSelectorStateFailureImplCopyWith<_$ImageSelectorStateFailureImpl>
@@ -802,7 +826,10 @@ abstract class ImageSelectorStateFailure implements ImageSelectorState {
   String get description;
   ImageType? get imageType;
   Uint8List? get image;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ImageSelectorState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ImageSelectorStateFailureImplCopyWith<_$ImageSelectorStateFailureImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -827,6 +854,8 @@ class __$$ImageSelectorUploadSuccessImplCopyWithImpl<$Res>
       $Res Function(_$ImageSelectorUploadSuccessImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ImageSelectorState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -887,7 +916,9 @@ class _$ImageSelectorUploadSuccessImpl implements ImageSelectorUploadSuccess {
   int get hashCode => Object.hash(runtimeType, uploadedUrl,
       const DeepCollectionEquality().hash(image), imageType);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ImageSelectorState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ImageSelectorUploadSuccessImplCopyWith<_$ImageSelectorUploadSuccessImpl>
@@ -997,7 +1028,10 @@ abstract class ImageSelectorUploadSuccess implements ImageSelectorState {
   String get uploadedUrl;
   Uint8List get image;
   ImageType get imageType;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ImageSelectorState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ImageSelectorUploadSuccessImplCopyWith<_$ImageSelectorUploadSuccessImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

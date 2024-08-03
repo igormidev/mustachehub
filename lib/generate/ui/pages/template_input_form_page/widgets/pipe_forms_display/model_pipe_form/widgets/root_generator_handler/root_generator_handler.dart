@@ -10,14 +10,14 @@ import 'package:mustachehub/generate/ui/pages/template_input_form_page/widgets/p
 
 // TODO(igor): Change for facade pattern
 class RootGeneratorHandler extends StatelessWidget {
-  final String content;
+  final ContentInput output;
   final ExpectedPayload expectedPayload;
   final TreeNode<TreeNodeGeneratePipeDto> node;
   final ModelPipeDto rootModelDTO;
   const RootGeneratorHandler({
     super.key,
     required this.node,
-    required this.content,
+    required this.output,
     required this.expectedPayload,
     required this.rootModelDTO,
   });
@@ -31,7 +31,7 @@ class RootGeneratorHandler extends StatelessWidget {
         structureNode: (TreeNodeGeneratePipeDtoStructureNode value) {
           return StructureGenerateNodeBuilder(
             rootModelDTO: rootModelDTO,
-            content: content,
+            output: output,
             expectedPayload: expectedPayload,
             referenceModelDTO: value.referenceModelDTO,
             structureDTONode: value,
@@ -40,7 +40,7 @@ class RootGeneratorHandler extends StatelessWidget {
         textNode: (TreeNodeGeneratePipeDtoPipeText value) {
           return TextGenerateNodeBuilder(
             rootModelDTO: rootModelDTO,
-            content: content,
+            output: output,
             expectedPayload: expectedPayload,
             textDTONode: value,
           );
@@ -48,7 +48,7 @@ class RootGeneratorHandler extends StatelessWidget {
         boolean: (TreeNodeGeneratePipeDtoPipeBoolean value) {
           return BooleanGenerateNodeBuilder(
             rootModelDTO: rootModelDTO,
-            content: content,
+            output: output,
             expectedPayload: expectedPayload,
             booleanDTONode: value,
           );
@@ -56,7 +56,7 @@ class RootGeneratorHandler extends StatelessWidget {
         model: (TreeNodeGeneratePipeDtoPipeModel value) {
           return ModelGenerateNodeBuilder(
             rootModelDTO: rootModelDTO,
-            content: content,
+            output: output,
             expectedPayload: expectedPayload,
             modelDTONode: value,
           );
