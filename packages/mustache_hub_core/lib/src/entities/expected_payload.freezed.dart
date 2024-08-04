@@ -22,6 +22,7 @@ ExpectedPayload _$ExpectedPayloadFromJson(Map<String, dynamic> json) {
 mixin _$ExpectedPayload {
   List<TextPipe> get textPipes => throw _privateConstructorUsedError;
   List<BooleanPipe> get booleanPipes => throw _privateConstructorUsedError;
+  List<ChoicePipe> get choicePipes => throw _privateConstructorUsedError;
   List<ModelPipe> get modelPipes => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -39,6 +40,7 @@ abstract class $ExpectedPayloadCopyWith<$Res> {
   $Res call(
       {List<TextPipe> textPipes,
       List<BooleanPipe> booleanPipes,
+      List<ChoicePipe> choicePipes,
       List<ModelPipe> modelPipes});
 }
 
@@ -57,6 +59,7 @@ class _$ExpectedPayloadCopyWithImpl<$Res, $Val extends ExpectedPayload>
   $Res call({
     Object? textPipes = null,
     Object? booleanPipes = null,
+    Object? choicePipes = null,
     Object? modelPipes = null,
   }) {
     return _then(_value.copyWith(
@@ -68,6 +71,10 @@ class _$ExpectedPayloadCopyWithImpl<$Res, $Val extends ExpectedPayload>
           ? _value.booleanPipes
           : booleanPipes // ignore: cast_nullable_to_non_nullable
               as List<BooleanPipe>,
+      choicePipes: null == choicePipes
+          ? _value.choicePipes
+          : choicePipes // ignore: cast_nullable_to_non_nullable
+              as List<ChoicePipe>,
       modelPipes: null == modelPipes
           ? _value.modelPipes
           : modelPipes // ignore: cast_nullable_to_non_nullable
@@ -87,6 +94,7 @@ abstract class _$$ExpectedPayloadImplCopyWith<$Res>
   $Res call(
       {List<TextPipe> textPipes,
       List<BooleanPipe> booleanPipes,
+      List<ChoicePipe> choicePipes,
       List<ModelPipe> modelPipes});
 }
 
@@ -103,6 +111,7 @@ class __$$ExpectedPayloadImplCopyWithImpl<$Res>
   $Res call({
     Object? textPipes = null,
     Object? booleanPipes = null,
+    Object? choicePipes = null,
     Object? modelPipes = null,
   }) {
     return _then(_$ExpectedPayloadImpl(
@@ -114,6 +123,10 @@ class __$$ExpectedPayloadImplCopyWithImpl<$Res>
           ? _value._booleanPipes
           : booleanPipes // ignore: cast_nullable_to_non_nullable
               as List<BooleanPipe>,
+      choicePipes: null == choicePipes
+          ? _value._choicePipes
+          : choicePipes // ignore: cast_nullable_to_non_nullable
+              as List<ChoicePipe>,
       modelPipes: null == modelPipes
           ? _value._modelPipes
           : modelPipes // ignore: cast_nullable_to_non_nullable
@@ -129,9 +142,11 @@ class _$ExpectedPayloadImpl implements _ExpectedPayload {
   _$ExpectedPayloadImpl(
       {required final List<TextPipe> textPipes,
       required final List<BooleanPipe> booleanPipes,
+      required final List<ChoicePipe> choicePipes,
       required final List<ModelPipe> modelPipes})
       : _textPipes = textPipes,
         _booleanPipes = booleanPipes,
+        _choicePipes = choicePipes,
         _modelPipes = modelPipes;
 
   factory _$ExpectedPayloadImpl.fromJson(Map<String, dynamic> json) =>
@@ -153,6 +168,14 @@ class _$ExpectedPayloadImpl implements _ExpectedPayload {
     return EqualUnmodifiableListView(_booleanPipes);
   }
 
+  final List<ChoicePipe> _choicePipes;
+  @override
+  List<ChoicePipe> get choicePipes {
+    if (_choicePipes is EqualUnmodifiableListView) return _choicePipes;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_choicePipes);
+  }
+
   final List<ModelPipe> _modelPipes;
   @override
   List<ModelPipe> get modelPipes {
@@ -163,7 +186,7 @@ class _$ExpectedPayloadImpl implements _ExpectedPayload {
 
   @override
   String toString() {
-    return 'ExpectedPayload(textPipes: $textPipes, booleanPipes: $booleanPipes, modelPipes: $modelPipes)';
+    return 'ExpectedPayload(textPipes: $textPipes, booleanPipes: $booleanPipes, choicePipes: $choicePipes, modelPipes: $modelPipes)';
   }
 
   @override
@@ -176,6 +199,8 @@ class _$ExpectedPayloadImpl implements _ExpectedPayload {
             const DeepCollectionEquality()
                 .equals(other._booleanPipes, _booleanPipes) &&
             const DeepCollectionEquality()
+                .equals(other._choicePipes, _choicePipes) &&
+            const DeepCollectionEquality()
                 .equals(other._modelPipes, _modelPipes));
   }
 
@@ -185,6 +210,7 @@ class _$ExpectedPayloadImpl implements _ExpectedPayload {
       runtimeType,
       const DeepCollectionEquality().hash(_textPipes),
       const DeepCollectionEquality().hash(_booleanPipes),
+      const DeepCollectionEquality().hash(_choicePipes),
       const DeepCollectionEquality().hash(_modelPipes));
 
   @JsonKey(ignore: true)
@@ -206,6 +232,7 @@ abstract class _ExpectedPayload implements ExpectedPayload {
   factory _ExpectedPayload(
       {required final List<TextPipe> textPipes,
       required final List<BooleanPipe> booleanPipes,
+      required final List<ChoicePipe> choicePipes,
       required final List<ModelPipe> modelPipes}) = _$ExpectedPayloadImpl;
 
   factory _ExpectedPayload.fromJson(Map<String, dynamic> json) =
@@ -215,6 +242,8 @@ abstract class _ExpectedPayload implements ExpectedPayload {
   List<TextPipe> get textPipes;
   @override
   List<BooleanPipe> get booleanPipes;
+  @override
+  List<ChoicePipe> get choicePipes;
   @override
   List<ModelPipe> get modelPipes;
   @override

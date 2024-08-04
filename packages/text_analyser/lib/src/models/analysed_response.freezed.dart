@@ -20,7 +20,9 @@ mixin _$AnalysedResponse {
       throw _privateConstructorUsedError;
   List<AnalysedSegment> get segments => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AnalysedResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $AnalysedResponseCopyWith<AnalysedResponse> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -46,6 +48,8 @@ class _$AnalysedResponseCopyWithImpl<$Res, $Val extends AnalysedResponse>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of AnalysedResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -86,6 +90,8 @@ class __$$AnalysedResponseImplCopyWithImpl<$Res>
       $Res Function(_$AnalysedResponseImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AnalysedResponse
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -151,7 +157,9 @@ class _$AnalysedResponseImpl implements _AnalysedResponse {
       const DeepCollectionEquality().hash(_tokenIdentifiers),
       const DeepCollectionEquality().hash(_segments));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AnalysedResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AnalysedResponseImplCopyWith<_$AnalysedResponseImpl> get copyWith =>
@@ -168,8 +176,11 @@ abstract class _AnalysedResponse implements AnalysedResponse {
   Set<VariableImplementation> get tokenIdentifiers;
   @override
   List<AnalysedSegment> get segments;
+
+  /// Create a copy of AnalysedResponse
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AnalysedResponseImplCopyWith<_$AnalysedResponseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

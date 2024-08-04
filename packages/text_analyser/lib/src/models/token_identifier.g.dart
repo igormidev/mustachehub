@@ -38,6 +38,22 @@ Map<String, dynamic> _$$BooleanTokenIdentifierImplToJson(
       'runtimeType': instance.$type,
     };
 
+_$ChoiceTokenIdentifierImpl _$$ChoiceTokenIdentifierImplFromJson(
+        Map<String, dynamic> json) =>
+    _$ChoiceTokenIdentifierImpl(
+      parrentName: json['parrentName'] as String?,
+      name: json['name'] as String,
+      $type: json['runtimeType'] as String?,
+    );
+
+Map<String, dynamic> _$$ChoiceTokenIdentifierImplToJson(
+        _$ChoiceTokenIdentifierImpl instance) =>
+    <String, dynamic>{
+      'parrentName': instance.parrentName,
+      'name': instance.name,
+      'runtimeType': instance.$type,
+    };
+
 _$ModelTokenIdentifierImpl _$$ModelTokenIdentifierImplFromJson(
         Map<String, dynamic> json) =>
     _$ModelTokenIdentifierImpl(

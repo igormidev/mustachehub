@@ -34,9 +34,11 @@ class ContentCubit extends Cubit<ContentState> with MustacheTextMixin {
       final Map<String, dynamic> payload = _dtoAdapter.getPayloadFromDtos(
         texts: expectedPayload.textPipes,
         booleans: expectedPayload.booleanPipes,
+        choices: expectedPayload.choicePipes,
         models: expectedPayload.modelPipes,
         textDtos: expectedPayloadDTO.textDtos,
         booleanDtos: expectedPayloadDTO.booleanDtos,
+        choiceDtos: expectedPayloadDTO.choiceDtos,
         modelDtos: expectedPayloadDTO.modelDtos,
       );
 

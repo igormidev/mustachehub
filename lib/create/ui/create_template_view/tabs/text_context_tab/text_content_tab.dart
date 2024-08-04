@@ -107,8 +107,9 @@ class _TextContentTabState extends State<TextContentTab>
                   if (didCreatedAtLeastOneVariable == false) {
                     return Tooltip(
                       triggerMode: TooltipTriggerMode.tap,
-                      message:
-                          'You must create at least one variable.\nCreate an text, condition or list of items variable.',
+                      message: 'You must create at least one variable.\n'
+                          'Create an text, condition or '
+                          'list of items variable.',
                       child: IgnorePointer(
                         child: Opacity(
                           opacity: 0.7,

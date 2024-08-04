@@ -184,7 +184,7 @@ class _CreateTemplateViewState extends State<CreateTemplateView>
                                 // when the user clears all the data. So we need to
                                 // pass a random value to the route to force the
                                 // the update of the route in go router.
-                                final randomJustToUpdate = const Uuid().v4();
+                                final randomJustToUpdate = const Uuid().v7();
                                 if (context.mounted) {
                                   context.go('/createMustache',
                                       extra: randomJustToUpdate);
@@ -238,9 +238,10 @@ class _CreateTemplateViewState extends State<CreateTemplateView>
                         Expanded(child: VariablesCreationTab()),
                         const VerticalDivider(width: 20),
                         Expanded(
-                            child: TextContentTab(
-                          formKey: _contentTypeFormKey,
-                        )),
+                          child: TextContentTab(
+                            formKey: _contentTypeFormKey,
+                          ),
+                        ),
                       ],
                     );
                   } else if (1300 < width && width <= 1850) {
@@ -257,7 +258,8 @@ class _CreateTemplateViewState extends State<CreateTemplateView>
                           child: Column(
                             children: [
                               const Expanded(
-                                  child: TemplateInputFormPageView()),
+                                child: TemplateInputFormPageView(),
+                              ),
                               const Divider(),
                               Expanded(child: TemplateOutputTabView()),
                             ],

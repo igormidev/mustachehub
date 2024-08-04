@@ -167,7 +167,9 @@ mixin _$AnalysedSegment {
   }) =>
       throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AnalysedSegment
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $AnalysedSegmentCopyWith<AnalysedSegment> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -191,6 +193,8 @@ class _$AnalysedSegmentCopyWithImpl<$Res, $Val extends AnalysedSegment>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of AnalysedSegment
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -229,6 +233,8 @@ class __$$AnalysedSegmentTextImplCopyWithImpl<$Res>
       $Res Function(_$AnalysedSegmentTextImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AnalysedSegment
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -277,7 +283,9 @@ class _$AnalysedSegmentTextImpl implements _AnalysedSegmentText {
   @override
   int get hashCode => Object.hash(runtimeType, offset, segmentText);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AnalysedSegment
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AnalysedSegmentTextImplCopyWith<_$AnalysedSegmentTextImpl> get copyWith =>
@@ -461,12 +469,16 @@ abstract class _AnalysedSegmentText implements AnalysedSegment {
       {required final TextOffset offset,
       required final String segmentText}) = _$AnalysedSegmentTextImpl;
 
-  @override // ✅
+// ✅
+  @override
   TextOffset get offset;
   @override
   String get segmentText;
+
+  /// Create a copy of AnalysedSegment
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AnalysedSegmentTextImplCopyWith<_$AnalysedSegmentTextImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -493,6 +505,8 @@ class __$$AnalysedSegmentDeclarationImplCopyWithImpl<$Res>
       $Res Function(_$AnalysedSegmentDeclarationImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AnalysedSegment
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -542,7 +556,9 @@ class _$AnalysedSegmentDeclarationImpl implements _AnalysedSegmentDeclaration {
   @override
   int get hashCode => Object.hash(runtimeType, offset, segmentText);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AnalysedSegment
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AnalysedSegmentDeclarationImplCopyWith<_$AnalysedSegmentDeclarationImpl>
@@ -726,12 +742,16 @@ abstract class _AnalysedSegmentDeclaration implements AnalysedSegment {
       {required final TextOffset offset,
       required final String segmentText}) = _$AnalysedSegmentDeclarationImpl;
 
-  @override // ✅
+// ✅
+  @override
   TextOffset get offset;
   @override
   String get segmentText;
+
+  /// Create a copy of AnalysedSegment
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AnalysedSegmentDeclarationImplCopyWith<_$AnalysedSegmentDeclarationImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -758,6 +778,8 @@ class __$$AnalysedSegmentInvalidMapDeclarationImplCopyWithImpl<$Res>
       $Res Function(_$AnalysedSegmentInvalidMapDeclarationImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AnalysedSegment
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -808,7 +830,9 @@ class _$AnalysedSegmentInvalidMapDeclarationImpl
   @override
   int get hashCode => Object.hash(runtimeType, offset, segmentText);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AnalysedSegment
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AnalysedSegmentInvalidMapDeclarationImplCopyWith<
@@ -995,12 +1019,16 @@ abstract class _AnalysedSegmentInvalidMapDeclaration
           required final String segmentText}) =
       _$AnalysedSegmentInvalidMapDeclarationImpl;
 
-  @override // ✅
+// ✅
+  @override
   TextOffset get offset;
   @override
   String get segmentText;
+
+  /// Create a copy of AnalysedSegment
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AnalysedSegmentInvalidMapDeclarationImplCopyWith<
           _$AnalysedSegmentInvalidMapDeclarationImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -1031,6 +1059,8 @@ class __$$AnalysedSegmentModelDeclarationOpenWithoutCloseImplCopyWithImpl<$Res>
           _then)
       : super(_value, _then);
 
+  /// Create a copy of AnalysedSegment
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1081,7 +1111,9 @@ class _$AnalysedSegmentModelDeclarationOpenWithoutCloseImpl
   @override
   int get hashCode => Object.hash(runtimeType, offset, segmentText);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AnalysedSegment
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AnalysedSegmentModelDeclarationOpenWithoutCloseImplCopyWith<
@@ -1270,12 +1302,16 @@ abstract class _AnalysedSegmentModelDeclarationOpenWithoutClose
           required final String segmentText}) =
       _$AnalysedSegmentModelDeclarationOpenWithoutCloseImpl;
 
-  @override // ✅
+// ✅
+  @override
   TextOffset get offset;
   @override
   String get segmentText;
+
+  /// Create a copy of AnalysedSegment
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AnalysedSegmentModelDeclarationOpenWithoutCloseImplCopyWith<
           _$AnalysedSegmentModelDeclarationOpenWithoutCloseImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -1306,6 +1342,8 @@ class __$$AnalysedSegmentModelDeclarationCloseWithoutOpenImplCopyWithImpl<$Res>
           _then)
       : super(_value, _then);
 
+  /// Create a copy of AnalysedSegment
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1356,7 +1394,9 @@ class _$AnalysedSegmentModelDeclarationCloseWithoutOpenImpl
   @override
   int get hashCode => Object.hash(runtimeType, offset, segmentText);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AnalysedSegment
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AnalysedSegmentModelDeclarationCloseWithoutOpenImplCopyWith<
@@ -1545,12 +1585,16 @@ abstract class _AnalysedSegmentModelDeclarationCloseWithoutOpen
           required final String segmentText}) =
       _$AnalysedSegmentModelDeclarationCloseWithoutOpenImpl;
 
-  @override // ✅
+// ✅
+  @override
   TextOffset get offset;
   @override
   String get segmentText;
+
+  /// Create a copy of AnalysedSegment
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AnalysedSegmentModelDeclarationCloseWithoutOpenImplCopyWith<
           _$AnalysedSegmentModelDeclarationCloseWithoutOpenImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -1583,6 +1627,8 @@ class __$$AnalysedSegmentBooleanDeclarationOpenWithoutCloseImplCopyWithImpl<
           _then)
       : super(_value, _then);
 
+  /// Create a copy of AnalysedSegment
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1633,7 +1679,9 @@ class _$AnalysedSegmentBooleanDeclarationOpenWithoutCloseImpl
   @override
   int get hashCode => Object.hash(runtimeType, offset, segmentText);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AnalysedSegment
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AnalysedSegmentBooleanDeclarationOpenWithoutCloseImplCopyWith<
@@ -1822,12 +1870,16 @@ abstract class _AnalysedSegmentBooleanDeclarationOpenWithoutClose
           required final String segmentText}) =
       _$AnalysedSegmentBooleanDeclarationOpenWithoutCloseImpl;
 
-  @override // ✅
+// ✅
+  @override
   TextOffset get offset;
   @override
   String get segmentText;
+
+  /// Create a copy of AnalysedSegment
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AnalysedSegmentBooleanDeclarationOpenWithoutCloseImplCopyWith<
           _$AnalysedSegmentBooleanDeclarationOpenWithoutCloseImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -1860,6 +1912,8 @@ class __$$AnalysedSegmentBooleanDeclarationCloseWithoutOpenImplCopyWithImpl<
           _then)
       : super(_value, _then);
 
+  /// Create a copy of AnalysedSegment
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1910,7 +1964,9 @@ class _$AnalysedSegmentBooleanDeclarationCloseWithoutOpenImpl
   @override
   int get hashCode => Object.hash(runtimeType, offset, segmentText);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AnalysedSegment
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AnalysedSegmentBooleanDeclarationCloseWithoutOpenImplCopyWith<
@@ -2099,12 +2155,16 @@ abstract class _AnalysedSegmentBooleanDeclarationCloseWithoutOpen
           required final String segmentText}) =
       _$AnalysedSegmentBooleanDeclarationCloseWithoutOpenImpl;
 
-  @override // ✅
+// ✅
+  @override
   TextOffset get offset;
   @override
   String get segmentText;
+
+  /// Create a copy of AnalysedSegment
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AnalysedSegmentBooleanDeclarationCloseWithoutOpenImplCopyWith<
           _$AnalysedSegmentBooleanDeclarationCloseWithoutOpenImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -2140,6 +2200,8 @@ class __$$AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiterImplCopyWithIm
           _then)
       : super(_value, _then);
 
+  /// Create a copy of AnalysedSegment
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -2191,7 +2253,9 @@ class _$AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiterImpl
   @override
   int get hashCode => Object.hash(runtimeType, offset, segmentText);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AnalysedSegment
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiterImplCopyWith<
@@ -2380,12 +2444,16 @@ abstract class _AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiter
           required final String segmentText}) =
       _$AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiterImpl;
 
-  @override // ✅
+// ✅
+  @override
   TextOffset get offset;
   @override
   String get segmentText;
+
+  /// Create a copy of AnalysedSegment
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiterImplCopyWith<
           _$AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiterImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -2416,6 +2484,8 @@ class __$$AnalysedSegmentDeclarationOfUncatalogedVariableImplCopyWithImpl<$Res>
           _then)
       : super(_value, _then);
 
+  /// Create a copy of AnalysedSegment
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -2466,7 +2536,9 @@ class _$AnalysedSegmentDeclarationOfUncatalogedVariableImpl
   @override
   int get hashCode => Object.hash(runtimeType, offset, segmentText);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AnalysedSegment
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AnalysedSegmentDeclarationOfUncatalogedVariableImplCopyWith<
@@ -2655,12 +2727,16 @@ abstract class _AnalysedSegmentDeclarationOfUncatalogedVariable
           required final String segmentText}) =
       _$AnalysedSegmentDeclarationOfUncatalogedVariableImpl;
 
-  @override // ✅
+// ✅
+  @override
   TextOffset get offset;
   @override
   String get segmentText;
+
+  /// Create a copy of AnalysedSegment
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AnalysedSegmentDeclarationOfUncatalogedVariableImplCopyWith<
           _$AnalysedSegmentDeclarationOfUncatalogedVariableImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -2696,6 +2772,8 @@ class __$$AnalysedSegmentVariableExistsButCannotBeUsedInThisContextImplCopyWithI
           _then)
       : super(_value, _then);
 
+  /// Create a copy of AnalysedSegment
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -2748,7 +2826,9 @@ class _$AnalysedSegmentVariableExistsButCannotBeUsedInThisContextImpl
   @override
   int get hashCode => Object.hash(runtimeType, offset, segmentText);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AnalysedSegment
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AnalysedSegmentVariableExistsButCannotBeUsedInThisContextImplCopyWith<
@@ -2938,12 +3018,16 @@ abstract class _AnalysedSegmentVariableExistsButCannotBeUsedInThisContext
           required final String segmentText}) =
       _$AnalysedSegmentVariableExistsButCannotBeUsedInThisContextImpl;
 
-  @override // ✅
+// ✅
+  @override
   TextOffset get offset;
   @override
   String get segmentText;
+
+  /// Create a copy of AnalysedSegment
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AnalysedSegmentVariableExistsButCannotBeUsedInThisContextImplCopyWith<
           _$AnalysedSegmentVariableExistsButCannotBeUsedInThisContextImpl>
       get copyWith => throw _privateConstructorUsedError;

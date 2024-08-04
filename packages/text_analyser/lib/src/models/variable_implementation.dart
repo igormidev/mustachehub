@@ -15,6 +15,11 @@ abstract class VariableImplementation with _$VariableImplementation {
     required TextTokenIdentifier textTokenIdentifier,
   }) = VariableImplementationText;
 
+  factory VariableImplementation.choice({
+    required ChoiceTokenIdentifier choiceTokenIdentifier,
+    required ChoiceImplementation choiceImplementation,
+  }) = VariableImplementationChoice;
+
   factory VariableImplementation.model({
     required ModelTokenIdentifier modelTokenIdentifier,
   }) = VariableImplementationModel;
@@ -32,4 +37,14 @@ abstract class BooleanImplementation with _$BooleanImplementation {
 
   factory BooleanImplementation.fromJson(Map<String, dynamic> json) =>
       _$BooleanImplementationFromJson(json);
+}
+
+@freezed
+abstract class ChoiceImplementation with _$ChoiceImplementation {
+  factory ChoiceImplementation.normalValue() = _ChoiceImplementationNormalValue;
+  factory ChoiceImplementation.invertedValue() =
+      _ChoiceImplementationInvertedValue;
+
+  factory ChoiceImplementation.fromJson(Map<String, dynamic> json) =>
+      _$ChoiceImplementationFromJson(json);
 }

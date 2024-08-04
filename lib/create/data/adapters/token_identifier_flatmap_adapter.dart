@@ -7,6 +7,7 @@ class TokenIdentifierFlatMapAdapter {
   Map<String, TokenIdentifier> toFlatMap({
     required final List<TextPipe> textPipes,
     required final List<BooleanPipe> booleanPipes,
+    required final List<ChoicePipe> choicePipes,
     required final List<ModelPipe> modelPipes,
   }) {
     final Map<String, TokenIdentifier> response = {};

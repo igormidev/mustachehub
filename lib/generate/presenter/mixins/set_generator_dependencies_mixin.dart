@@ -11,6 +11,7 @@ mixin SetGeneratorDependenciesMixin {
     required ContentInput output,
     required List<TextPipe> textPipes,
     required List<BooleanPipe> booleanPipes,
+    required List<ChoicePipe> choicePipes,
     required List<ModelPipe> modelPipes,
   }) async {
     final payloadCubit = context.read<PayloadCubit>();
@@ -20,6 +21,7 @@ mixin SetGeneratorDependenciesMixin {
       expectedPayload: ExpectedPayload(
         textPipes: textPipes,
         booleanPipes: booleanPipes,
+        choicePipes: choicePipes,
         modelPipes: modelPipes,
       ),
       expectedPayloadDto: null,

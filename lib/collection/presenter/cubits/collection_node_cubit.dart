@@ -38,7 +38,7 @@ class CollectionNodeCubit extends Cubit<CollectionNodesState> {
     emit(
       CollectionNodesState.withData(
         treeNode: node,
-        uuid: const Uuid().v4(),
+        uuid: const Uuid().v7(),
       ),
     );
   }

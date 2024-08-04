@@ -14,12 +14,12 @@ import 'package:mustachehub/create/ui/create_template_view/tabs/variables_creati
 import 'package:mustachehub/create/ui/create_template_view/tabs/variables_creation_tab/cards/variable_creator_card/base_variables_creation_card_textfield_methods.dart';
 import 'package:mustachehub/create/ui/create_template_view/tabs/variables_creation_tab/cards/variable_creator_card/implementations/boolean_variable_creation_card.dart';
 
-class ModelPageviewBuilder extends StatefulWidget {
+class ModelVariableCreationWidget extends StatefulWidget {
   final GlobalKey<FormState> formKey;
   final List<ModelPipe> initialList;
   final void Function(List<ModelPipe> pipes) retriveCreatedPipes;
 
-  const ModelPageviewBuilder({
+  const ModelVariableCreationWidget({
     required this.retriveCreatedPipes,
     required this.initialList,
     required this.formKey,
@@ -27,10 +27,12 @@ class ModelPageviewBuilder extends StatefulWidget {
   });
 
   @override
-  State<ModelPageviewBuilder> createState() => _ModelPageviewBuilderState();
+  State<ModelVariableCreationWidget> createState() =>
+      _ModelVariableCreationWidgetState();
 }
 
-class _ModelPageviewBuilderState extends State<ModelPageviewBuilder>
+class _ModelVariableCreationWidgetState
+    extends State<ModelVariableCreationWidget>
     with BaseVariablesCreationCardMethods, DefaultIdCaster {
   final ValueNotifier<List<PipeFormFieldCardWrapper>> pages = ValueNotifier([]);
 

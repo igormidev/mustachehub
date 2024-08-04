@@ -22,6 +22,7 @@ class TemplateOutputTabView extends StatelessWidget {
           expectedPayload: ExpectedPayload(
             textPipes: variablesCubit.textPipes,
             booleanPipes: variablesCubit.booleanPipes,
+            choicePipes: variablesCubit.choicePipes,
             modelPipes: variablesCubit.modelPipes,
           ),
           formKey: formKey,

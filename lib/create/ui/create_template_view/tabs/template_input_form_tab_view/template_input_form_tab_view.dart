@@ -27,6 +27,7 @@ class _TemplateInputFormPageViewState extends State<TemplateInputFormPageView>
       output: contentState.currentText,
       textPipes: varState.textPipes,
       booleanPipes: varState.booleanPipes,
+      choicePipes: varState.choicePipes,
       modelPipes: varState.modelPipes,
     );
     super.initState();
@@ -42,6 +43,7 @@ class _TemplateInputFormPageViewState extends State<TemplateInputFormPageView>
           output: contentState.currentText,
           textPipes: varState.textPipes,
           booleanPipes: varState.booleanPipes,
+          choicePipes: varState.choicePipes,
           modelPipes: varState.modelPipes,
         );
       },
@@ -53,6 +55,7 @@ class _TemplateInputFormPageViewState extends State<TemplateInputFormPageView>
               output: contentState.currentText,
               textPipes: variablesCubit.textPipes,
               booleanPipes: variablesCubit.booleanPipes,
+              choicePipes: variablesCubit.choicePipes,
               modelPipes: variablesCubit.modelPipes,
             );
           },
@@ -61,6 +64,7 @@ class _TemplateInputFormPageViewState extends State<TemplateInputFormPageView>
               generatorData: ExpectedPayload(
                 textPipes: variablesCubit.textPipes,
                 booleanPipes: variablesCubit.booleanPipes,
+                choicePipes: variablesCubit.choicePipes,
                 modelPipes: variablesCubit.modelPipes,
               ),
               output: contentState.currentText,

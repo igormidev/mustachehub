@@ -11,6 +11,7 @@ abstract class ExpectedPayload with _$ExpectedPayload {
   factory ExpectedPayload({
     required List<TextPipe> textPipes,
     required List<BooleanPipe> booleanPipes,
+    required List<ChoicePipe> choicePipes,
     required List<ModelPipe> modelPipes,
   }) = _ExpectedPayload;
 

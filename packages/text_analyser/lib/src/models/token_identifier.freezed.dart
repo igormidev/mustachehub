@@ -20,6 +20,8 @@ TokenIdentifier _$TokenIdentifierFromJson(Map<String, dynamic> json) {
       return TextTokenIdentifier.fromJson(json);
     case 'boolean':
       return BooleanTokenIdentifier.fromJson(json);
+    case 'choice':
+      return ChoiceTokenIdentifier.fromJson(json);
     case 'model':
       return ModelTokenIdentifier.fromJson(json);
 
@@ -37,6 +39,7 @@ mixin _$TokenIdentifier {
   TResult when<TResult extends Object?>({
     required TResult Function(String? parrentName, String name) text,
     required TResult Function(String? parrentName, String name) boolean,
+    required TResult Function(String? parrentName, String name) choice,
     required TResult Function(
             String? parrentName,
             String name,
@@ -50,6 +53,7 @@ mixin _$TokenIdentifier {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String? parrentName, String name)? text,
     TResult? Function(String? parrentName, String name)? boolean,
+    TResult? Function(String? parrentName, String name)? choice,
     TResult? Function(String? parrentName, String name, List<String> textsNames,
             List<String> booleanNames, List<String> subModelsNames)?
         model,
@@ -59,6 +63,7 @@ mixin _$TokenIdentifier {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? parrentName, String name)? text,
     TResult Function(String? parrentName, String name)? boolean,
+    TResult Function(String? parrentName, String name)? choice,
     TResult Function(String? parrentName, String name, List<String> textsNames,
             List<String> booleanNames, List<String> subModelsNames)?
         model,
@@ -69,6 +74,7 @@ mixin _$TokenIdentifier {
   TResult map<TResult extends Object?>({
     required TResult Function(TextTokenIdentifier value) text,
     required TResult Function(BooleanTokenIdentifier value) boolean,
+    required TResult Function(ChoiceTokenIdentifier value) choice,
     required TResult Function(ModelTokenIdentifier value) model,
   }) =>
       throw _privateConstructorUsedError;
@@ -76,6 +82,7 @@ mixin _$TokenIdentifier {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(TextTokenIdentifier value)? text,
     TResult? Function(BooleanTokenIdentifier value)? boolean,
+    TResult? Function(ChoiceTokenIdentifier value)? choice,
     TResult? Function(ModelTokenIdentifier value)? model,
   }) =>
       throw _privateConstructorUsedError;
@@ -83,12 +90,18 @@ mixin _$TokenIdentifier {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(TextTokenIdentifier value)? text,
     TResult Function(BooleanTokenIdentifier value)? boolean,
+    TResult Function(ChoiceTokenIdentifier value)? choice,
     TResult Function(ModelTokenIdentifier value)? model,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  /// Serializes this TokenIdentifier to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TokenIdentifier
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TokenIdentifierCopyWith<TokenIdentifier> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -112,6 +125,8 @@ class _$TokenIdentifierCopyWithImpl<$Res, $Val extends TokenIdentifier>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of TokenIdentifier
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -150,6 +165,8 @@ class __$$TextTokenIdentifierImplCopyWithImpl<$Res>
       $Res Function(_$TextTokenIdentifierImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TokenIdentifier
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -202,11 +219,13 @@ class _$TextTokenIdentifierImpl implements TextTokenIdentifier {
             (identical(other.name, name) || other.name == name));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, parrentName, name);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TokenIdentifier
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TextTokenIdentifierImplCopyWith<_$TextTokenIdentifierImpl> get copyWith =>
@@ -218,6 +237,7 @@ class _$TextTokenIdentifierImpl implements TextTokenIdentifier {
   TResult when<TResult extends Object?>({
     required TResult Function(String? parrentName, String name) text,
     required TResult Function(String? parrentName, String name) boolean,
+    required TResult Function(String? parrentName, String name) choice,
     required TResult Function(
             String? parrentName,
             String name,
@@ -234,6 +254,7 @@ class _$TextTokenIdentifierImpl implements TextTokenIdentifier {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String? parrentName, String name)? text,
     TResult? Function(String? parrentName, String name)? boolean,
+    TResult? Function(String? parrentName, String name)? choice,
     TResult? Function(String? parrentName, String name, List<String> textsNames,
             List<String> booleanNames, List<String> subModelsNames)?
         model,
@@ -246,6 +267,7 @@ class _$TextTokenIdentifierImpl implements TextTokenIdentifier {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? parrentName, String name)? text,
     TResult Function(String? parrentName, String name)? boolean,
+    TResult Function(String? parrentName, String name)? choice,
     TResult Function(String? parrentName, String name, List<String> textsNames,
             List<String> booleanNames, List<String> subModelsNames)?
         model,
@@ -262,6 +284,7 @@ class _$TextTokenIdentifierImpl implements TextTokenIdentifier {
   TResult map<TResult extends Object?>({
     required TResult Function(TextTokenIdentifier value) text,
     required TResult Function(BooleanTokenIdentifier value) boolean,
+    required TResult Function(ChoiceTokenIdentifier value) choice,
     required TResult Function(ModelTokenIdentifier value) model,
   }) {
     return text(this);
@@ -272,6 +295,7 @@ class _$TextTokenIdentifierImpl implements TextTokenIdentifier {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(TextTokenIdentifier value)? text,
     TResult? Function(BooleanTokenIdentifier value)? boolean,
+    TResult? Function(ChoiceTokenIdentifier value)? choice,
     TResult? Function(ModelTokenIdentifier value)? model,
   }) {
     return text?.call(this);
@@ -282,6 +306,7 @@ class _$TextTokenIdentifierImpl implements TextTokenIdentifier {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(TextTokenIdentifier value)? text,
     TResult Function(BooleanTokenIdentifier value)? boolean,
+    TResult Function(ChoiceTokenIdentifier value)? choice,
     TResult Function(ModelTokenIdentifier value)? model,
     required TResult orElse(),
   }) {
@@ -311,8 +336,11 @@ abstract class TextTokenIdentifier implements TokenIdentifier {
   String? get parrentName;
   @override
   String get name;
+
+  /// Create a copy of TokenIdentifier
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TextTokenIdentifierImplCopyWith<_$TextTokenIdentifierImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -338,6 +366,8 @@ class __$$BooleanTokenIdentifierImplCopyWithImpl<$Res>
       $Res Function(_$BooleanTokenIdentifierImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TokenIdentifier
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -390,11 +420,13 @@ class _$BooleanTokenIdentifierImpl implements BooleanTokenIdentifier {
             (identical(other.name, name) || other.name == name));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, parrentName, name);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TokenIdentifier
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$BooleanTokenIdentifierImplCopyWith<_$BooleanTokenIdentifierImpl>
@@ -406,6 +438,7 @@ class _$BooleanTokenIdentifierImpl implements BooleanTokenIdentifier {
   TResult when<TResult extends Object?>({
     required TResult Function(String? parrentName, String name) text,
     required TResult Function(String? parrentName, String name) boolean,
+    required TResult Function(String? parrentName, String name) choice,
     required TResult Function(
             String? parrentName,
             String name,
@@ -422,6 +455,7 @@ class _$BooleanTokenIdentifierImpl implements BooleanTokenIdentifier {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String? parrentName, String name)? text,
     TResult? Function(String? parrentName, String name)? boolean,
+    TResult? Function(String? parrentName, String name)? choice,
     TResult? Function(String? parrentName, String name, List<String> textsNames,
             List<String> booleanNames, List<String> subModelsNames)?
         model,
@@ -434,6 +468,7 @@ class _$BooleanTokenIdentifierImpl implements BooleanTokenIdentifier {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? parrentName, String name)? text,
     TResult Function(String? parrentName, String name)? boolean,
+    TResult Function(String? parrentName, String name)? choice,
     TResult Function(String? parrentName, String name, List<String> textsNames,
             List<String> booleanNames, List<String> subModelsNames)?
         model,
@@ -450,6 +485,7 @@ class _$BooleanTokenIdentifierImpl implements BooleanTokenIdentifier {
   TResult map<TResult extends Object?>({
     required TResult Function(TextTokenIdentifier value) text,
     required TResult Function(BooleanTokenIdentifier value) boolean,
+    required TResult Function(ChoiceTokenIdentifier value) choice,
     required TResult Function(ModelTokenIdentifier value) model,
   }) {
     return boolean(this);
@@ -460,6 +496,7 @@ class _$BooleanTokenIdentifierImpl implements BooleanTokenIdentifier {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(TextTokenIdentifier value)? text,
     TResult? Function(BooleanTokenIdentifier value)? boolean,
+    TResult? Function(ChoiceTokenIdentifier value)? choice,
     TResult? Function(ModelTokenIdentifier value)? model,
   }) {
     return boolean?.call(this);
@@ -470,6 +507,7 @@ class _$BooleanTokenIdentifierImpl implements BooleanTokenIdentifier {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(TextTokenIdentifier value)? text,
     TResult Function(BooleanTokenIdentifier value)? boolean,
+    TResult Function(ChoiceTokenIdentifier value)? choice,
     TResult Function(ModelTokenIdentifier value)? model,
     required TResult orElse(),
   }) {
@@ -499,9 +537,212 @@ abstract class BooleanTokenIdentifier implements TokenIdentifier {
   String? get parrentName;
   @override
   String get name;
+
+  /// Create a copy of TokenIdentifier
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$BooleanTokenIdentifierImplCopyWith<_$BooleanTokenIdentifierImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ChoiceTokenIdentifierImplCopyWith<$Res>
+    implements $TokenIdentifierCopyWith<$Res> {
+  factory _$$ChoiceTokenIdentifierImplCopyWith(
+          _$ChoiceTokenIdentifierImpl value,
+          $Res Function(_$ChoiceTokenIdentifierImpl) then) =
+      __$$ChoiceTokenIdentifierImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String? parrentName, String name});
+}
+
+/// @nodoc
+class __$$ChoiceTokenIdentifierImplCopyWithImpl<$Res>
+    extends _$TokenIdentifierCopyWithImpl<$Res, _$ChoiceTokenIdentifierImpl>
+    implements _$$ChoiceTokenIdentifierImplCopyWith<$Res> {
+  __$$ChoiceTokenIdentifierImplCopyWithImpl(_$ChoiceTokenIdentifierImpl _value,
+      $Res Function(_$ChoiceTokenIdentifierImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of TokenIdentifier
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? parrentName = freezed,
+    Object? name = null,
+  }) {
+    return _then(_$ChoiceTokenIdentifierImpl(
+      parrentName: freezed == parrentName
+          ? _value.parrentName
+          : parrentName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$ChoiceTokenIdentifierImpl implements ChoiceTokenIdentifier {
+  const _$ChoiceTokenIdentifierImpl(
+      {required this.parrentName, required this.name, final String? $type})
+      : $type = $type ?? 'choice';
+
+  factory _$ChoiceTokenIdentifierImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ChoiceTokenIdentifierImplFromJson(json);
+
+  @override
+  final String? parrentName;
+  @override
+  final String name;
+
+  @JsonKey(name: 'runtimeType')
+  final String $type;
+
+  @override
+  String toString() {
+    return 'TokenIdentifier.choice(parrentName: $parrentName, name: $name)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ChoiceTokenIdentifierImpl &&
+            (identical(other.parrentName, parrentName) ||
+                other.parrentName == parrentName) &&
+            (identical(other.name, name) || other.name == name));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, parrentName, name);
+
+  /// Create a copy of TokenIdentifier
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ChoiceTokenIdentifierImplCopyWith<_$ChoiceTokenIdentifierImpl>
+      get copyWith => __$$ChoiceTokenIdentifierImplCopyWithImpl<
+          _$ChoiceTokenIdentifierImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String? parrentName, String name) text,
+    required TResult Function(String? parrentName, String name) boolean,
+    required TResult Function(String? parrentName, String name) choice,
+    required TResult Function(
+            String? parrentName,
+            String name,
+            List<String> textsNames,
+            List<String> booleanNames,
+            List<String> subModelsNames)
+        model,
+  }) {
+    return choice(parrentName, name);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String? parrentName, String name)? text,
+    TResult? Function(String? parrentName, String name)? boolean,
+    TResult? Function(String? parrentName, String name)? choice,
+    TResult? Function(String? parrentName, String name, List<String> textsNames,
+            List<String> booleanNames, List<String> subModelsNames)?
+        model,
+  }) {
+    return choice?.call(parrentName, name);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String? parrentName, String name)? text,
+    TResult Function(String? parrentName, String name)? boolean,
+    TResult Function(String? parrentName, String name)? choice,
+    TResult Function(String? parrentName, String name, List<String> textsNames,
+            List<String> booleanNames, List<String> subModelsNames)?
+        model,
+    required TResult orElse(),
+  }) {
+    if (choice != null) {
+      return choice(parrentName, name);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(TextTokenIdentifier value) text,
+    required TResult Function(BooleanTokenIdentifier value) boolean,
+    required TResult Function(ChoiceTokenIdentifier value) choice,
+    required TResult Function(ModelTokenIdentifier value) model,
+  }) {
+    return choice(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(TextTokenIdentifier value)? text,
+    TResult? Function(BooleanTokenIdentifier value)? boolean,
+    TResult? Function(ChoiceTokenIdentifier value)? choice,
+    TResult? Function(ModelTokenIdentifier value)? model,
+  }) {
+    return choice?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(TextTokenIdentifier value)? text,
+    TResult Function(BooleanTokenIdentifier value)? boolean,
+    TResult Function(ChoiceTokenIdentifier value)? choice,
+    TResult Function(ModelTokenIdentifier value)? model,
+    required TResult orElse(),
+  }) {
+    if (choice != null) {
+      return choice(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ChoiceTokenIdentifierImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class ChoiceTokenIdentifier implements TokenIdentifier {
+  const factory ChoiceTokenIdentifier(
+      {required final String? parrentName,
+      required final String name}) = _$ChoiceTokenIdentifierImpl;
+
+  factory ChoiceTokenIdentifier.fromJson(Map<String, dynamic> json) =
+      _$ChoiceTokenIdentifierImpl.fromJson;
+
+  @override
+  String? get parrentName;
+  @override
+  String get name;
+
+  /// Create a copy of TokenIdentifier
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ChoiceTokenIdentifierImplCopyWith<_$ChoiceTokenIdentifierImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -529,6 +770,8 @@ class __$$ModelTokenIdentifierImplCopyWithImpl<$Res>
       $Res Function(_$ModelTokenIdentifierImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TokenIdentifier
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -633,7 +876,7 @@ class _$ModelTokenIdentifierImpl implements ModelTokenIdentifier {
                 .equals(other._subModelsNames, _subModelsNames));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -643,7 +886,9 @@ class _$ModelTokenIdentifierImpl implements ModelTokenIdentifier {
       const DeepCollectionEquality().hash(_booleanNames),
       const DeepCollectionEquality().hash(_subModelsNames));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TokenIdentifier
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ModelTokenIdentifierImplCopyWith<_$ModelTokenIdentifierImpl>
@@ -656,6 +901,7 @@ class _$ModelTokenIdentifierImpl implements ModelTokenIdentifier {
   TResult when<TResult extends Object?>({
     required TResult Function(String? parrentName, String name) text,
     required TResult Function(String? parrentName, String name) boolean,
+    required TResult Function(String? parrentName, String name) choice,
     required TResult Function(
             String? parrentName,
             String name,
@@ -672,6 +918,7 @@ class _$ModelTokenIdentifierImpl implements ModelTokenIdentifier {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String? parrentName, String name)? text,
     TResult? Function(String? parrentName, String name)? boolean,
+    TResult? Function(String? parrentName, String name)? choice,
     TResult? Function(String? parrentName, String name, List<String> textsNames,
             List<String> booleanNames, List<String> subModelsNames)?
         model,
@@ -685,6 +932,7 @@ class _$ModelTokenIdentifierImpl implements ModelTokenIdentifier {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? parrentName, String name)? text,
     TResult Function(String? parrentName, String name)? boolean,
+    TResult Function(String? parrentName, String name)? choice,
     TResult Function(String? parrentName, String name, List<String> textsNames,
             List<String> booleanNames, List<String> subModelsNames)?
         model,
@@ -701,6 +949,7 @@ class _$ModelTokenIdentifierImpl implements ModelTokenIdentifier {
   TResult map<TResult extends Object?>({
     required TResult Function(TextTokenIdentifier value) text,
     required TResult Function(BooleanTokenIdentifier value) boolean,
+    required TResult Function(ChoiceTokenIdentifier value) choice,
     required TResult Function(ModelTokenIdentifier value) model,
   }) {
     return model(this);
@@ -711,6 +960,7 @@ class _$ModelTokenIdentifierImpl implements ModelTokenIdentifier {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(TextTokenIdentifier value)? text,
     TResult? Function(BooleanTokenIdentifier value)? boolean,
+    TResult? Function(ChoiceTokenIdentifier value)? choice,
     TResult? Function(ModelTokenIdentifier value)? model,
   }) {
     return model?.call(this);
@@ -721,6 +971,7 @@ class _$ModelTokenIdentifierImpl implements ModelTokenIdentifier {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(TextTokenIdentifier value)? text,
     TResult Function(BooleanTokenIdentifier value)? boolean,
+    TResult Function(ChoiceTokenIdentifier value)? choice,
     TResult Function(ModelTokenIdentifier value)? model,
     required TResult orElse(),
   }) {
@@ -756,8 +1007,11 @@ abstract class ModelTokenIdentifier implements TokenIdentifier {
   List<String> get textsNames;
   List<String> get booleanNames;
   List<String> get subModelsNames;
+
+  /// Create a copy of TokenIdentifier
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ModelTokenIdentifierImplCopyWith<_$ModelTokenIdentifierImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

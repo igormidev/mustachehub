@@ -21,6 +21,8 @@ VariableImplementation _$VariableImplementationFromJson(
       return VariableImplementationBoolean.fromJson(json);
     case 'text':
       return VariableImplementationText.fromJson(json);
+    case 'choice':
+      return VariableImplementationChoice.fromJson(json);
     case 'model':
       return VariableImplementationModel.fromJson(json);
 
@@ -41,6 +43,9 @@ mixin _$VariableImplementation {
             BooleanImplementation booleanImplementation)
         boolean,
     required TResult Function(TextTokenIdentifier textTokenIdentifier) text,
+    required TResult Function(ChoiceTokenIdentifier choiceTokenIdentifier,
+            ChoiceImplementation choiceImplementation)
+        choice,
     required TResult Function(ModelTokenIdentifier modelTokenIdentifier) model,
   }) =>
       throw _privateConstructorUsedError;
@@ -50,6 +55,9 @@ mixin _$VariableImplementation {
             BooleanImplementation booleanImplementation)?
         boolean,
     TResult? Function(TextTokenIdentifier textTokenIdentifier)? text,
+    TResult? Function(ChoiceTokenIdentifier choiceTokenIdentifier,
+            ChoiceImplementation choiceImplementation)?
+        choice,
     TResult? Function(ModelTokenIdentifier modelTokenIdentifier)? model,
   }) =>
       throw _privateConstructorUsedError;
@@ -59,6 +67,9 @@ mixin _$VariableImplementation {
             BooleanImplementation booleanImplementation)?
         boolean,
     TResult Function(TextTokenIdentifier textTokenIdentifier)? text,
+    TResult Function(ChoiceTokenIdentifier choiceTokenIdentifier,
+            ChoiceImplementation choiceImplementation)?
+        choice,
     TResult Function(ModelTokenIdentifier modelTokenIdentifier)? model,
     required TResult orElse(),
   }) =>
@@ -67,6 +78,7 @@ mixin _$VariableImplementation {
   TResult map<TResult extends Object?>({
     required TResult Function(VariableImplementationBoolean value) boolean,
     required TResult Function(VariableImplementationText value) text,
+    required TResult Function(VariableImplementationChoice value) choice,
     required TResult Function(VariableImplementationModel value) model,
   }) =>
       throw _privateConstructorUsedError;
@@ -74,6 +86,7 @@ mixin _$VariableImplementation {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(VariableImplementationBoolean value)? boolean,
     TResult? Function(VariableImplementationText value)? text,
+    TResult? Function(VariableImplementationChoice value)? choice,
     TResult? Function(VariableImplementationModel value)? model,
   }) =>
       throw _privateConstructorUsedError;
@@ -81,10 +94,13 @@ mixin _$VariableImplementation {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(VariableImplementationBoolean value)? boolean,
     TResult Function(VariableImplementationText value)? text,
+    TResult Function(VariableImplementationChoice value)? choice,
     TResult Function(VariableImplementationModel value)? model,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  /// Serializes this VariableImplementation to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 }
 
@@ -105,6 +121,9 @@ class _$VariableImplementationCopyWithImpl<$Res,
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of VariableImplementation
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -131,6 +150,8 @@ class __$$VariableImplementationBooleanImplCopyWithImpl<$Res>
       $Res Function(_$VariableImplementationBooleanImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of VariableImplementation
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -149,6 +170,8 @@ class __$$VariableImplementationBooleanImplCopyWithImpl<$Res>
     ));
   }
 
+  /// Create a copy of VariableImplementation
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $BooleanImplementationCopyWith<$Res> get booleanImplementation {
@@ -197,14 +220,16 @@ class _$VariableImplementationBooleanImpl
                 other.booleanImplementation == booleanImplementation));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(booleanTokenIdentifier),
       booleanImplementation);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of VariableImplementation
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$VariableImplementationBooleanImplCopyWith<
@@ -219,6 +244,9 @@ class _$VariableImplementationBooleanImpl
             BooleanImplementation booleanImplementation)
         boolean,
     required TResult Function(TextTokenIdentifier textTokenIdentifier) text,
+    required TResult Function(ChoiceTokenIdentifier choiceTokenIdentifier,
+            ChoiceImplementation choiceImplementation)
+        choice,
     required TResult Function(ModelTokenIdentifier modelTokenIdentifier) model,
   }) {
     return boolean(booleanTokenIdentifier, booleanImplementation);
@@ -231,6 +259,9 @@ class _$VariableImplementationBooleanImpl
             BooleanImplementation booleanImplementation)?
         boolean,
     TResult? Function(TextTokenIdentifier textTokenIdentifier)? text,
+    TResult? Function(ChoiceTokenIdentifier choiceTokenIdentifier,
+            ChoiceImplementation choiceImplementation)?
+        choice,
     TResult? Function(ModelTokenIdentifier modelTokenIdentifier)? model,
   }) {
     return boolean?.call(booleanTokenIdentifier, booleanImplementation);
@@ -243,6 +274,9 @@ class _$VariableImplementationBooleanImpl
             BooleanImplementation booleanImplementation)?
         boolean,
     TResult Function(TextTokenIdentifier textTokenIdentifier)? text,
+    TResult Function(ChoiceTokenIdentifier choiceTokenIdentifier,
+            ChoiceImplementation choiceImplementation)?
+        choice,
     TResult Function(ModelTokenIdentifier modelTokenIdentifier)? model,
     required TResult orElse(),
   }) {
@@ -257,6 +291,7 @@ class _$VariableImplementationBooleanImpl
   TResult map<TResult extends Object?>({
     required TResult Function(VariableImplementationBoolean value) boolean,
     required TResult Function(VariableImplementationText value) text,
+    required TResult Function(VariableImplementationChoice value) choice,
     required TResult Function(VariableImplementationModel value) model,
   }) {
     return boolean(this);
@@ -267,6 +302,7 @@ class _$VariableImplementationBooleanImpl
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(VariableImplementationBoolean value)? boolean,
     TResult? Function(VariableImplementationText value)? text,
+    TResult? Function(VariableImplementationChoice value)? choice,
     TResult? Function(VariableImplementationModel value)? model,
   }) {
     return boolean?.call(this);
@@ -277,6 +313,7 @@ class _$VariableImplementationBooleanImpl
   TResult maybeMap<TResult extends Object?>({
     TResult Function(VariableImplementationBoolean value)? boolean,
     TResult Function(VariableImplementationText value)? text,
+    TResult Function(VariableImplementationChoice value)? choice,
     TResult Function(VariableImplementationModel value)? model,
     required TResult orElse(),
   }) {
@@ -305,7 +342,10 @@ abstract class VariableImplementationBoolean implements VariableImplementation {
 
   BooleanTokenIdentifier get booleanTokenIdentifier;
   BooleanImplementation get booleanImplementation;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of VariableImplementation
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$VariableImplementationBooleanImplCopyWith<
           _$VariableImplementationBooleanImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -331,6 +371,8 @@ class __$$VariableImplementationTextImplCopyWithImpl<$Res>
       $Res Function(_$VariableImplementationTextImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of VariableImplementation
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -376,12 +418,14 @@ class _$VariableImplementationTextImpl implements VariableImplementationText {
                 .equals(other.textTokenIdentifier, textTokenIdentifier));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(textTokenIdentifier));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of VariableImplementation
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$VariableImplementationTextImplCopyWith<_$VariableImplementationTextImpl>
@@ -395,6 +439,9 @@ class _$VariableImplementationTextImpl implements VariableImplementationText {
             BooleanImplementation booleanImplementation)
         boolean,
     required TResult Function(TextTokenIdentifier textTokenIdentifier) text,
+    required TResult Function(ChoiceTokenIdentifier choiceTokenIdentifier,
+            ChoiceImplementation choiceImplementation)
+        choice,
     required TResult Function(ModelTokenIdentifier modelTokenIdentifier) model,
   }) {
     return text(textTokenIdentifier);
@@ -407,6 +454,9 @@ class _$VariableImplementationTextImpl implements VariableImplementationText {
             BooleanImplementation booleanImplementation)?
         boolean,
     TResult? Function(TextTokenIdentifier textTokenIdentifier)? text,
+    TResult? Function(ChoiceTokenIdentifier choiceTokenIdentifier,
+            ChoiceImplementation choiceImplementation)?
+        choice,
     TResult? Function(ModelTokenIdentifier modelTokenIdentifier)? model,
   }) {
     return text?.call(textTokenIdentifier);
@@ -419,6 +469,9 @@ class _$VariableImplementationTextImpl implements VariableImplementationText {
             BooleanImplementation booleanImplementation)?
         boolean,
     TResult Function(TextTokenIdentifier textTokenIdentifier)? text,
+    TResult Function(ChoiceTokenIdentifier choiceTokenIdentifier,
+            ChoiceImplementation choiceImplementation)?
+        choice,
     TResult Function(ModelTokenIdentifier modelTokenIdentifier)? model,
     required TResult orElse(),
   }) {
@@ -433,6 +486,7 @@ class _$VariableImplementationTextImpl implements VariableImplementationText {
   TResult map<TResult extends Object?>({
     required TResult Function(VariableImplementationBoolean value) boolean,
     required TResult Function(VariableImplementationText value) text,
+    required TResult Function(VariableImplementationChoice value) choice,
     required TResult Function(VariableImplementationModel value) model,
   }) {
     return text(this);
@@ -443,6 +497,7 @@ class _$VariableImplementationTextImpl implements VariableImplementationText {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(VariableImplementationBoolean value)? boolean,
     TResult? Function(VariableImplementationText value)? text,
+    TResult? Function(VariableImplementationChoice value)? choice,
     TResult? Function(VariableImplementationModel value)? model,
   }) {
     return text?.call(this);
@@ -453,6 +508,7 @@ class _$VariableImplementationTextImpl implements VariableImplementationText {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(VariableImplementationBoolean value)? boolean,
     TResult Function(VariableImplementationText value)? text,
+    TResult Function(VariableImplementationChoice value)? choice,
     TResult Function(VariableImplementationModel value)? model,
     required TResult orElse(),
   }) {
@@ -479,8 +535,236 @@ abstract class VariableImplementationText implements VariableImplementation {
       _$VariableImplementationTextImpl.fromJson;
 
   TextTokenIdentifier get textTokenIdentifier;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of VariableImplementation
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$VariableImplementationTextImplCopyWith<_$VariableImplementationTextImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$VariableImplementationChoiceImplCopyWith<$Res> {
+  factory _$$VariableImplementationChoiceImplCopyWith(
+          _$VariableImplementationChoiceImpl value,
+          $Res Function(_$VariableImplementationChoiceImpl) then) =
+      __$$VariableImplementationChoiceImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {ChoiceTokenIdentifier choiceTokenIdentifier,
+      ChoiceImplementation choiceImplementation});
+
+  $ChoiceImplementationCopyWith<$Res> get choiceImplementation;
+}
+
+/// @nodoc
+class __$$VariableImplementationChoiceImplCopyWithImpl<$Res>
+    extends _$VariableImplementationCopyWithImpl<$Res,
+        _$VariableImplementationChoiceImpl>
+    implements _$$VariableImplementationChoiceImplCopyWith<$Res> {
+  __$$VariableImplementationChoiceImplCopyWithImpl(
+      _$VariableImplementationChoiceImpl _value,
+      $Res Function(_$VariableImplementationChoiceImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of VariableImplementation
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? choiceTokenIdentifier = freezed,
+    Object? choiceImplementation = null,
+  }) {
+    return _then(_$VariableImplementationChoiceImpl(
+      choiceTokenIdentifier: freezed == choiceTokenIdentifier
+          ? _value.choiceTokenIdentifier
+          : choiceTokenIdentifier // ignore: cast_nullable_to_non_nullable
+              as ChoiceTokenIdentifier,
+      choiceImplementation: null == choiceImplementation
+          ? _value.choiceImplementation
+          : choiceImplementation // ignore: cast_nullable_to_non_nullable
+              as ChoiceImplementation,
+    ));
+  }
+
+  /// Create a copy of VariableImplementation
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $ChoiceImplementationCopyWith<$Res> get choiceImplementation {
+    return $ChoiceImplementationCopyWith<$Res>(_value.choiceImplementation,
+        (value) {
+      return _then(_value.copyWith(choiceImplementation: value));
+    });
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$VariableImplementationChoiceImpl
+    implements VariableImplementationChoice {
+  _$VariableImplementationChoiceImpl(
+      {required this.choiceTokenIdentifier,
+      required this.choiceImplementation,
+      final String? $type})
+      : $type = $type ?? 'choice';
+
+  factory _$VariableImplementationChoiceImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$VariableImplementationChoiceImplFromJson(json);
+
+  @override
+  final ChoiceTokenIdentifier choiceTokenIdentifier;
+  @override
+  final ChoiceImplementation choiceImplementation;
+
+  @JsonKey(name: 'runtimeType')
+  final String $type;
+
+  @override
+  String toString() {
+    return 'VariableImplementation.choice(choiceTokenIdentifier: $choiceTokenIdentifier, choiceImplementation: $choiceImplementation)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$VariableImplementationChoiceImpl &&
+            const DeepCollectionEquality()
+                .equals(other.choiceTokenIdentifier, choiceTokenIdentifier) &&
+            (identical(other.choiceImplementation, choiceImplementation) ||
+                other.choiceImplementation == choiceImplementation));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(choiceTokenIdentifier),
+      choiceImplementation);
+
+  /// Create a copy of VariableImplementation
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$VariableImplementationChoiceImplCopyWith<
+          _$VariableImplementationChoiceImpl>
+      get copyWith => __$$VariableImplementationChoiceImplCopyWithImpl<
+          _$VariableImplementationChoiceImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(BooleanTokenIdentifier booleanTokenIdentifier,
+            BooleanImplementation booleanImplementation)
+        boolean,
+    required TResult Function(TextTokenIdentifier textTokenIdentifier) text,
+    required TResult Function(ChoiceTokenIdentifier choiceTokenIdentifier,
+            ChoiceImplementation choiceImplementation)
+        choice,
+    required TResult Function(ModelTokenIdentifier modelTokenIdentifier) model,
+  }) {
+    return choice(choiceTokenIdentifier, choiceImplementation);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(BooleanTokenIdentifier booleanTokenIdentifier,
+            BooleanImplementation booleanImplementation)?
+        boolean,
+    TResult? Function(TextTokenIdentifier textTokenIdentifier)? text,
+    TResult? Function(ChoiceTokenIdentifier choiceTokenIdentifier,
+            ChoiceImplementation choiceImplementation)?
+        choice,
+    TResult? Function(ModelTokenIdentifier modelTokenIdentifier)? model,
+  }) {
+    return choice?.call(choiceTokenIdentifier, choiceImplementation);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(BooleanTokenIdentifier booleanTokenIdentifier,
+            BooleanImplementation booleanImplementation)?
+        boolean,
+    TResult Function(TextTokenIdentifier textTokenIdentifier)? text,
+    TResult Function(ChoiceTokenIdentifier choiceTokenIdentifier,
+            ChoiceImplementation choiceImplementation)?
+        choice,
+    TResult Function(ModelTokenIdentifier modelTokenIdentifier)? model,
+    required TResult orElse(),
+  }) {
+    if (choice != null) {
+      return choice(choiceTokenIdentifier, choiceImplementation);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(VariableImplementationBoolean value) boolean,
+    required TResult Function(VariableImplementationText value) text,
+    required TResult Function(VariableImplementationChoice value) choice,
+    required TResult Function(VariableImplementationModel value) model,
+  }) {
+    return choice(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(VariableImplementationBoolean value)? boolean,
+    TResult? Function(VariableImplementationText value)? text,
+    TResult? Function(VariableImplementationChoice value)? choice,
+    TResult? Function(VariableImplementationModel value)? model,
+  }) {
+    return choice?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(VariableImplementationBoolean value)? boolean,
+    TResult Function(VariableImplementationText value)? text,
+    TResult Function(VariableImplementationChoice value)? choice,
+    TResult Function(VariableImplementationModel value)? model,
+    required TResult orElse(),
+  }) {
+    if (choice != null) {
+      return choice(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$VariableImplementationChoiceImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class VariableImplementationChoice implements VariableImplementation {
+  factory VariableImplementationChoice(
+          {required final ChoiceTokenIdentifier choiceTokenIdentifier,
+          required final ChoiceImplementation choiceImplementation}) =
+      _$VariableImplementationChoiceImpl;
+
+  factory VariableImplementationChoice.fromJson(Map<String, dynamic> json) =
+      _$VariableImplementationChoiceImpl.fromJson;
+
+  ChoiceTokenIdentifier get choiceTokenIdentifier;
+  ChoiceImplementation get choiceImplementation;
+
+  /// Create a copy of VariableImplementation
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$VariableImplementationChoiceImplCopyWith<
+          _$VariableImplementationChoiceImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -504,6 +788,8 @@ class __$$VariableImplementationModelImplCopyWithImpl<$Res>
       $Res Function(_$VariableImplementationModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of VariableImplementation
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -549,12 +835,14 @@ class _$VariableImplementationModelImpl implements VariableImplementationModel {
                 .equals(other.modelTokenIdentifier, modelTokenIdentifier));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(modelTokenIdentifier));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of VariableImplementation
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$VariableImplementationModelImplCopyWith<_$VariableImplementationModelImpl>
@@ -568,6 +856,9 @@ class _$VariableImplementationModelImpl implements VariableImplementationModel {
             BooleanImplementation booleanImplementation)
         boolean,
     required TResult Function(TextTokenIdentifier textTokenIdentifier) text,
+    required TResult Function(ChoiceTokenIdentifier choiceTokenIdentifier,
+            ChoiceImplementation choiceImplementation)
+        choice,
     required TResult Function(ModelTokenIdentifier modelTokenIdentifier) model,
   }) {
     return model(modelTokenIdentifier);
@@ -580,6 +871,9 @@ class _$VariableImplementationModelImpl implements VariableImplementationModel {
             BooleanImplementation booleanImplementation)?
         boolean,
     TResult? Function(TextTokenIdentifier textTokenIdentifier)? text,
+    TResult? Function(ChoiceTokenIdentifier choiceTokenIdentifier,
+            ChoiceImplementation choiceImplementation)?
+        choice,
     TResult? Function(ModelTokenIdentifier modelTokenIdentifier)? model,
   }) {
     return model?.call(modelTokenIdentifier);
@@ -592,6 +886,9 @@ class _$VariableImplementationModelImpl implements VariableImplementationModel {
             BooleanImplementation booleanImplementation)?
         boolean,
     TResult Function(TextTokenIdentifier textTokenIdentifier)? text,
+    TResult Function(ChoiceTokenIdentifier choiceTokenIdentifier,
+            ChoiceImplementation choiceImplementation)?
+        choice,
     TResult Function(ModelTokenIdentifier modelTokenIdentifier)? model,
     required TResult orElse(),
   }) {
@@ -606,6 +903,7 @@ class _$VariableImplementationModelImpl implements VariableImplementationModel {
   TResult map<TResult extends Object?>({
     required TResult Function(VariableImplementationBoolean value) boolean,
     required TResult Function(VariableImplementationText value) text,
+    required TResult Function(VariableImplementationChoice value) choice,
     required TResult Function(VariableImplementationModel value) model,
   }) {
     return model(this);
@@ -616,6 +914,7 @@ class _$VariableImplementationModelImpl implements VariableImplementationModel {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(VariableImplementationBoolean value)? boolean,
     TResult? Function(VariableImplementationText value)? text,
+    TResult? Function(VariableImplementationChoice value)? choice,
     TResult? Function(VariableImplementationModel value)? model,
   }) {
     return model?.call(this);
@@ -626,6 +925,7 @@ class _$VariableImplementationModelImpl implements VariableImplementationModel {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(VariableImplementationBoolean value)? boolean,
     TResult Function(VariableImplementationText value)? text,
+    TResult Function(VariableImplementationChoice value)? choice,
     TResult Function(VariableImplementationModel value)? model,
     required TResult orElse(),
   }) {
@@ -652,7 +952,10 @@ abstract class VariableImplementationModel implements VariableImplementation {
       _$VariableImplementationModelImpl.fromJson;
 
   ModelTokenIdentifier get modelTokenIdentifier;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of VariableImplementation
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$VariableImplementationModelImplCopyWith<_$VariableImplementationModelImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -716,6 +1019,8 @@ mixin _$BooleanImplementation {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  /// Serializes this BooleanImplementation to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 }
 
@@ -736,6 +1041,9 @@ class _$BooleanImplementationCopyWithImpl<$Res,
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of BooleanImplementation
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -755,6 +1063,9 @@ class __$$BooleanImplementationInvertedValueImplCopyWithImpl<$Res>
       _$BooleanImplementationInvertedValueImpl _value,
       $Res Function(_$BooleanImplementationInvertedValueImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of BooleanImplementation
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -783,7 +1094,7 @@ class _$BooleanImplementationInvertedValueImpl
             other is _$BooleanImplementationInvertedValueImpl);
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => runtimeType.hashCode;
 
@@ -886,6 +1197,9 @@ class __$$BooleanImplementationNormalValueImplCopyWithImpl<$Res>
       _$BooleanImplementationNormalValueImpl _value,
       $Res Function(_$BooleanImplementationNormalValueImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of BooleanImplementation
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -914,7 +1228,7 @@ class _$BooleanImplementationNormalValueImpl
             other is _$BooleanImplementationNormalValueImpl);
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => runtimeType.hashCode;
 
@@ -998,4 +1312,356 @@ abstract class _BooleanImplementationNormalValue
   factory _BooleanImplementationNormalValue.fromJson(
           Map<String, dynamic> json) =
       _$BooleanImplementationNormalValueImpl.fromJson;
+}
+
+ChoiceImplementation _$ChoiceImplementationFromJson(Map<String, dynamic> json) {
+  switch (json['runtimeType']) {
+    case 'normalValue':
+      return _ChoiceImplementationNormalValue.fromJson(json);
+    case 'invertedValue':
+      return _ChoiceImplementationInvertedValue.fromJson(json);
+
+    default:
+      throw CheckedFromJsonException(
+          json,
+          'runtimeType',
+          'ChoiceImplementation',
+          'Invalid union type "${json['runtimeType']}"!');
+  }
+}
+
+/// @nodoc
+mixin _$ChoiceImplementation {
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() normalValue,
+    required TResult Function() invertedValue,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? normalValue,
+    TResult? Function()? invertedValue,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? normalValue,
+    TResult Function()? invertedValue,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_ChoiceImplementationNormalValue value)
+        normalValue,
+    required TResult Function(_ChoiceImplementationInvertedValue value)
+        invertedValue,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_ChoiceImplementationNormalValue value)? normalValue,
+    TResult? Function(_ChoiceImplementationInvertedValue value)? invertedValue,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_ChoiceImplementationNormalValue value)? normalValue,
+    TResult Function(_ChoiceImplementationInvertedValue value)? invertedValue,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+
+  /// Serializes this ChoiceImplementation to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ChoiceImplementationCopyWith<$Res> {
+  factory $ChoiceImplementationCopyWith(ChoiceImplementation value,
+          $Res Function(ChoiceImplementation) then) =
+      _$ChoiceImplementationCopyWithImpl<$Res, ChoiceImplementation>;
+}
+
+/// @nodoc
+class _$ChoiceImplementationCopyWithImpl<$Res,
+        $Val extends ChoiceImplementation>
+    implements $ChoiceImplementationCopyWith<$Res> {
+  _$ChoiceImplementationCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of ChoiceImplementation
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+abstract class _$$ChoiceImplementationNormalValueImplCopyWith<$Res> {
+  factory _$$ChoiceImplementationNormalValueImplCopyWith(
+          _$ChoiceImplementationNormalValueImpl value,
+          $Res Function(_$ChoiceImplementationNormalValueImpl) then) =
+      __$$ChoiceImplementationNormalValueImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ChoiceImplementationNormalValueImplCopyWithImpl<$Res>
+    extends _$ChoiceImplementationCopyWithImpl<$Res,
+        _$ChoiceImplementationNormalValueImpl>
+    implements _$$ChoiceImplementationNormalValueImplCopyWith<$Res> {
+  __$$ChoiceImplementationNormalValueImplCopyWithImpl(
+      _$ChoiceImplementationNormalValueImpl _value,
+      $Res Function(_$ChoiceImplementationNormalValueImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ChoiceImplementation
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$ChoiceImplementationNormalValueImpl
+    implements _ChoiceImplementationNormalValue {
+  _$ChoiceImplementationNormalValueImpl({final String? $type})
+      : $type = $type ?? 'normalValue';
+
+  factory _$ChoiceImplementationNormalValueImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$ChoiceImplementationNormalValueImplFromJson(json);
+
+  @JsonKey(name: 'runtimeType')
+  final String $type;
+
+  @override
+  String toString() {
+    return 'ChoiceImplementation.normalValue()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ChoiceImplementationNormalValueImpl);
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() normalValue,
+    required TResult Function() invertedValue,
+  }) {
+    return normalValue();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? normalValue,
+    TResult? Function()? invertedValue,
+  }) {
+    return normalValue?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? normalValue,
+    TResult Function()? invertedValue,
+    required TResult orElse(),
+  }) {
+    if (normalValue != null) {
+      return normalValue();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_ChoiceImplementationNormalValue value)
+        normalValue,
+    required TResult Function(_ChoiceImplementationInvertedValue value)
+        invertedValue,
+  }) {
+    return normalValue(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_ChoiceImplementationNormalValue value)? normalValue,
+    TResult? Function(_ChoiceImplementationInvertedValue value)? invertedValue,
+  }) {
+    return normalValue?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_ChoiceImplementationNormalValue value)? normalValue,
+    TResult Function(_ChoiceImplementationInvertedValue value)? invertedValue,
+    required TResult orElse(),
+  }) {
+    if (normalValue != null) {
+      return normalValue(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ChoiceImplementationNormalValueImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _ChoiceImplementationNormalValue
+    implements ChoiceImplementation {
+  factory _ChoiceImplementationNormalValue() =
+      _$ChoiceImplementationNormalValueImpl;
+
+  factory _ChoiceImplementationNormalValue.fromJson(Map<String, dynamic> json) =
+      _$ChoiceImplementationNormalValueImpl.fromJson;
+}
+
+/// @nodoc
+abstract class _$$ChoiceImplementationInvertedValueImplCopyWith<$Res> {
+  factory _$$ChoiceImplementationInvertedValueImplCopyWith(
+          _$ChoiceImplementationInvertedValueImpl value,
+          $Res Function(_$ChoiceImplementationInvertedValueImpl) then) =
+      __$$ChoiceImplementationInvertedValueImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ChoiceImplementationInvertedValueImplCopyWithImpl<$Res>
+    extends _$ChoiceImplementationCopyWithImpl<$Res,
+        _$ChoiceImplementationInvertedValueImpl>
+    implements _$$ChoiceImplementationInvertedValueImplCopyWith<$Res> {
+  __$$ChoiceImplementationInvertedValueImplCopyWithImpl(
+      _$ChoiceImplementationInvertedValueImpl _value,
+      $Res Function(_$ChoiceImplementationInvertedValueImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ChoiceImplementation
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$ChoiceImplementationInvertedValueImpl
+    implements _ChoiceImplementationInvertedValue {
+  _$ChoiceImplementationInvertedValueImpl({final String? $type})
+      : $type = $type ?? 'invertedValue';
+
+  factory _$ChoiceImplementationInvertedValueImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$ChoiceImplementationInvertedValueImplFromJson(json);
+
+  @JsonKey(name: 'runtimeType')
+  final String $type;
+
+  @override
+  String toString() {
+    return 'ChoiceImplementation.invertedValue()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ChoiceImplementationInvertedValueImpl);
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() normalValue,
+    required TResult Function() invertedValue,
+  }) {
+    return invertedValue();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? normalValue,
+    TResult? Function()? invertedValue,
+  }) {
+    return invertedValue?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? normalValue,
+    TResult Function()? invertedValue,
+    required TResult orElse(),
+  }) {
+    if (invertedValue != null) {
+      return invertedValue();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_ChoiceImplementationNormalValue value)
+        normalValue,
+    required TResult Function(_ChoiceImplementationInvertedValue value)
+        invertedValue,
+  }) {
+    return invertedValue(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_ChoiceImplementationNormalValue value)? normalValue,
+    TResult? Function(_ChoiceImplementationInvertedValue value)? invertedValue,
+  }) {
+    return invertedValue?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_ChoiceImplementationNormalValue value)? normalValue,
+    TResult Function(_ChoiceImplementationInvertedValue value)? invertedValue,
+    required TResult orElse(),
+  }) {
+    if (invertedValue != null) {
+      return invertedValue(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ChoiceImplementationInvertedValueImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _ChoiceImplementationInvertedValue
+    implements ChoiceImplementation {
+  factory _ChoiceImplementationInvertedValue() =
+      _$ChoiceImplementationInvertedValueImpl;
+
+  factory _ChoiceImplementationInvertedValue.fromJson(
+          Map<String, dynamic> json) =
+      _$ChoiceImplementationInvertedValueImpl.fromJson;
 }

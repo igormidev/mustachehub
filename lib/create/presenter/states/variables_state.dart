@@ -8,12 +8,14 @@ class VariablesState {
   final Map<String, TokenIdentifier> flatMap;
   final List<TextPipe> textPipes;
   final List<BooleanPipe> booleanPipes;
+  final List<ChoicePipe> choicePipes;
   final List<ModelPipe> modelPipes;
 
   const VariablesState({
     required this.flatMap,
     required this.textPipes,
     required this.booleanPipes,
+    required this.choicePipes,
     required this.modelPipes,
   });
 
@@ -21,6 +23,7 @@ class VariablesState {
         textPipes: textPipes,
         booleanPipes: booleanPipes,
         modelPipes: modelPipes,
+        choicePipes: choicePipes,
       );
 
   Map<String, dynamic> toMap() {
@@ -30,6 +33,7 @@ class VariablesState {
       'flatMap': tokenInJsonFormat,
       'textPipes': textPipes.map((x) => x.toMap()).toList(),
       'booleanPipes': booleanPipes.map((x) => x.toMap()).toList(),
+      'choicePipes': choicePipes.map((x) => x.toMap()).toList(),
       'modelPipes': modelPipes.map((x) => x.toMap()).toList(),
     };
   }
@@ -51,6 +55,11 @@ class VariablesState {
       booleanPipes: List<BooleanPipe>.from(
         (map['booleanPipes'] as List<dynamic>).cast<Map>().map<BooleanPipe>(
               (x) => BooleanPipe.fromMap(x as Map<String, dynamic>),
+            ),
+      ),
+      choicePipes: List<ChoicePipe>.from(
+        (map['choicePipes'] as List<dynamic>).cast<Map>().map<ChoicePipe>(
+              (x) => ChoicePipe.fromMap(x as Map<String, dynamic>),
             ),
       ),
       modelPipes: List<ModelPipe>.from(

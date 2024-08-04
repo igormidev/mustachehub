@@ -3,7 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mustachehub/create/data/enums/e_tutorial_sections.dart';
 import 'package:mustachehub/create/presenter/cubits/variables_cubit.dart';
 import 'package:mustachehub/create/presenter/states/variables_state.dart';
-import 'package:mustachehub/create/ui/create_template_view/tabs/variables_creation_tab/cards/variable_creator_card/model_widgets/model_pageview_builder.dart';
+import 'package:mustachehub/create/ui/create_template_view/tabs/variables_creation_tab/cards/variable_creator_card/implementations/choice_variable_creation_card.dart';
+import 'package:mustachehub/create/ui/create_template_view/tabs/variables_creation_tab/cards/variable_creator_card/implementations/model_pipe_formfield.dart';
 import 'package:mustachehub/create/ui/create_template_view/tabs/variables_creation_tab/widgets/headers/base_sliver_pipe_creation_header.dart';
 import 'package:mustachehub/create/ui/create_template_view/tabs/variables_creation_tab/cards/variable_creator_card/implementations/boolean_variable_creation_card.dart';
 import 'package:mustachehub/create/ui/create_template_view/tabs/variables_creation_tab/cards/variable_creator_card/implementations/text_variable_creation_card.dart';
@@ -25,7 +26,7 @@ class VariablesCreationTab extends StatelessWidget {
             const PipeCreationHeader(
               headerTitle: 'Text variables',
               subtitleSubtitle:
-                  'A text variable that the user will need to fill in.',
+                  'A text variable that the user will need to fill..',
               selectedSection: ETutorialSection.textVariable,
             ),
             const SliverToBoxAdapter(child: SizedBox(height: 4)),
@@ -36,6 +37,32 @@ class VariablesCreationTab extends StatelessWidget {
                   initialList: state.textPipes,
                   retriveCreatedPipes: (pipes) {
                     bloc.updateTextVariables(textPipes: pipes);
+                  },
+                );
+              },
+            ),
+            const SliverToBoxAdapter(
+              child: Padding(
+                padding: EdgeInsets.only(top: 8),
+                child: Divider(),
+              ),
+            ),
+            const PipeCreationHeader(
+              headerTitle: 'Choice variables',
+              subtitleSubtitle:
+                  'Choise variables are a list of enumerated choices. '
+                  'Who uses the template will have to choose one of the options '
+                  'and you can use that choise to make conditinals ou display the choice text.',
+              selectedSection: ETutorialSection.textVariable,
+            ),
+            const SliverToBoxAdapter(child: SizedBox(height: 4)),
+            BlocBuilder<VariablesCubit, VariablesState>(
+              builder: (context, state) {
+                return ChoiceVariableCreationCard(
+                  formKey: formKey,
+                  initialList: state.choicePipes,
+                  retriveCreatedPipes: (pipes) {
+                    bloc.updateChoiceVariables(choicePipes: pipes);
                   },
                 );
               },
@@ -81,7 +108,7 @@ class VariablesCreationTab extends StatelessWidget {
             ),
             BlocBuilder<VariablesCubit, VariablesState>(
               builder: (context, state) {
-                return ModelPageviewBuilder(
+                return ModelVariableCreationWidget(
                   formKey: formKey,
                   initialList: state.modelPipes,
                   retriveCreatedPipes: (pipes) {

@@ -62,23 +62,13 @@ class PipeFormfield extends StatelessWidget
     final widgets = <Widget>[
       const SizedBox(height: 8),
       TextFormField(
-        controller: descriptionEC,
-        decoration: InputDecoration(
-          label: const Text('Description'),
-          filled: true,
-          fillColor: Theme.of(context).colorScheme.onPrimary,
-        ),
-        minLines: 1,
-        maxLines: 3,
-        validator: isNotEmpty,
-      ),
-      const SizedBox(height: 8),
-      TextFormField(
+        focusNode: FocusNode()..requestFocus(),
         controller: nameEC,
         decoration: InputDecoration(
           label: const Text('Name'),
           filled: true,
           fillColor: Theme.of(context).colorScheme.onPrimary,
+          counterText: '',
         ),
         validator: (val) => combineValidators([
           () => isNotEmpty(val),
@@ -102,6 +92,21 @@ class PipeFormfield extends StatelessWidget
         ]),
         maxLength: 30,
       ),
+      const SizedBox(height: 8),
+      TextFormField(
+        controller: descriptionEC,
+        decoration: InputDecoration(
+          label: const Text('Description'),
+          filled: true,
+          fillColor: Theme.of(context).colorScheme.onPrimary,
+          counterText: '',
+        ),
+        minLines: 1,
+        maxLines: 3,
+        maxLength: 300,
+        validator: isNotEmpty,
+      ),
+      const SizedBox(height: 8),
       ...children,
       const SizedBox(height: 8),
       Row(

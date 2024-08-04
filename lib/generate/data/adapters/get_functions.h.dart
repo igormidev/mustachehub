@@ -25,3 +25,26 @@ Map<String, dynamic> _getBoolPayloads(
 
   return payload;
 }
+
+Map<String, dynamic> _getChoicePayloads(
+  List<ChoicePipe> pipes,
+  List<ChoicePipeDto> dtos,
+) {
+  final Map<String, dynamic> payload = {};
+
+  for (final choicePipe in pipes) {
+    final dto = dtos.firstWhere((dto) => dto.pipe.pipeId == choicePipe.pipeId);
+
+    final text = dto.payloadValue.choosedName;
+    payload.addAll({
+      choicePipe.mustacheName: {
+        'text': text,
+        ...dto.payloadValue.options.asMap().map((_, option) {
+          return MapEntry(option, text == option);
+        }),
+      },
+    });
+  }
+
+  return payload;
+}

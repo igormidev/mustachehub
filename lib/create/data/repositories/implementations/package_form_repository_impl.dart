@@ -39,7 +39,7 @@ class PackageFormRepositoryImpl implements IPackageFormRepository {
 
     return _wrapper(
       mapper: (UserCollectionRoot collection) async {
-        final uuid = _uuid.v4();
+        final uuid = _uuid.v7();
         final template = Template(
           id: uuid,
           info: packageInfo,

@@ -1,40 +1,38 @@
 part of '../pipe.dart';
 
-class TextPipe extends Equatable implements Pipe {
+class ChoicePipe extends Equatable implements Pipe {
   @override
   final String name;
+
   @override
   final String description;
+
   @override
   final String mustacheName;
+
   @override
   final String pipeId;
 
-  final bool isRequired;
+  /// The options that the user can choose between
+  final List<String> options;
 
-  TextPipe({
+  ChoicePipe({
     required this.name,
     required this.description,
     required this.mustacheName,
-    required this.isRequired,
+    required this.options,
     String? pipeId,
   }) : pipeId = pipeId ?? const Uuid().v7();
 
-  TextPipe.emptyPlaceholder()
+  ChoicePipe.emptyPlaceholder()
       : name = '',
         description = '',
         mustacheName = '',
         pipeId = const Uuid().v7(),
-        isRequired = false;
+        options = ['', ''];
 
   @override
-  List<Object> get props => [
-        name,
-        description,
-        mustacheName,
-        isRequired,
-        pipeId,
-      ];
+  List<Object> get props => [name, description, mustacheName, pipeId];
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -42,22 +40,24 @@ class TextPipe extends Equatable implements Pipe {
       'description': description,
       'mustacheName': mustacheName,
       'pipeId': pipeId,
-      'isRequired': isRequired,
+      'options': options,
     };
   }
 
-  factory TextPipe.fromMap(Map<String, dynamic> map) {
-    return TextPipe(
+  factory ChoicePipe.fromMap(Map<String, dynamic> map) {
+    return ChoicePipe(
       name: map['name'] as String,
       description: map['description'] as String,
       mustacheName: map['mustacheName'] as String,
       pipeId: map['pipeId'] as String,
-      isRequired: map['isRequired'] as bool,
+      options: List<String>.from(
+        (map['options'] as List<String>),
+      ),
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory TextPipe.fromJson(String source) =>
-      TextPipe.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory ChoicePipe.fromJson(String source) =>
+      ChoicePipe.fromMap(json.decode(source) as Map<String, dynamic>);
 }

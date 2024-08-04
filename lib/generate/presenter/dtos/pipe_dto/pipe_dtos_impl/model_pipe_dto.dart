@@ -264,24 +264,24 @@ class ModelPipeDTOPayload {
 
   factory ModelPipeDTOPayload.fromModelPipe(ModelPipe modelPipe) {
     const uuid = Uuid();
-    return ModelPipeDTOPayload._(uuid: '${uuid.v4()}${uuid.v1()}', texts: [
+    return ModelPipeDTOPayload._(uuid: '${uuid.v7()}${uuid.v7()}', texts: [
       for (final item in modelPipe.textPipes)
         TextPipeDto(
-          uuid: '${uuid.v4()}${uuid.v1()}',
+          uuid: '${uuid.v7()}${uuid.v7()}',
           pipe: item,
           payloadValue: '',
         ),
     ], booleans: [
       for (final item in modelPipe.booleanPipes)
         BooleanPipeDto(
-          uuid: '${uuid.v4()}${uuid.v1()}',
+          uuid: '${uuid.v7()}${uuid.v7()}',
           pipe: item,
           payloadValue: false,
         ),
     ], subModels: [
       for (final item in modelPipe.modelPipes)
         ModelPipeDto(
-          uuid: '${uuid.v4()}${uuid.v1()}',
+          uuid: '${uuid.v7()}${uuid.v7()}',
           pipe: item,
           payloadValue: const [],
         ),

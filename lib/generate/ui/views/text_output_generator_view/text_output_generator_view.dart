@@ -25,6 +25,7 @@ class TextOutputGeneratorView extends StatefulWidget {
           generatorData: ExpectedPayload(
             textPipes: template.payload.textPipes,
             booleanPipes: template.payload.booleanPipes,
+            choicePipes: template.payload.choicePipes,
             modelPipes: template.payload.modelPipes,
           ),
         );
@@ -45,6 +46,7 @@ class _TextOutputGeneratorViewState extends State<TextOutputGeneratorView>
         output: widget.content,
         textPipes: widget.generatorData.textPipes,
         booleanPipes: widget.generatorData.booleanPipes,
+        choicePipes: widget.generatorData.choicePipes,
         modelPipes: widget.generatorData.modelPipes,
       );
     });

@@ -1,14 +1,15 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-
 part of '../pipe.dart';
 
 class ModelPipe implements Pipe {
   @override
   String name;
+
   @override
   final String description;
+
   @override
   String mustacheName;
+
   @override
   final String pipeId;
 
@@ -29,7 +30,7 @@ class ModelPipe implements Pipe {
     required this.textPipes,
     required this.booleanPipes,
     required this.modelPipes,
-  }) : pipeId = pipeId ?? const Uuid().v1();
+  }) : pipeId = pipeId ?? const Uuid().v7();
 
   ModelPipe.emptyPlaceholder()
       : name = '',
@@ -38,7 +39,7 @@ class ModelPipe implements Pipe {
         textPipes = const [],
         booleanPipes = const [],
         modelPipes = const [],
-        pipeId = const Uuid().v1();
+        pipeId = const Uuid().v7();
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{

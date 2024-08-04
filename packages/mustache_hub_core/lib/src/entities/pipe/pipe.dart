@@ -4,6 +4,7 @@ import 'package:equatable/equatable.dart';
 
 part 'pipe_impl/text_pipe.dart';
 part 'pipe_impl/boolean_pipe.dart';
+part 'pipe_impl/choice_pipe.dart';
 part 'pipe_impl/model_pipe.dart';
 
 sealed class Pipe {

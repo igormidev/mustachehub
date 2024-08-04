@@ -137,7 +137,7 @@ class UserCollectionRepositoryImpl implements IUserCollectionRepository {
 
               folders.add(
                 UserCollectionFolder(
-                  uuid: _uuid.v4(),
+                  uuid: _uuid.v7(),
                   name: value.name,
                   description: value.description,
                   children: children,
@@ -166,7 +166,7 @@ class UserCollectionRepositoryImpl implements IUserCollectionRepository {
         }
 
         return UserCollectionFolder(
-          uuid: _uuid.v4(),
+          uuid: _uuid.v7(),
           name: collections.name,
           description: collections.description,
           children: [

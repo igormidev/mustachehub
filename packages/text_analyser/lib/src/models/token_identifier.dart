@@ -15,6 +15,11 @@ abstract class TokenIdentifier with _$TokenIdentifier {
     required String name,
   }) = BooleanTokenIdentifier;
 
+  const factory TokenIdentifier.choice({
+    required String? parrentName,
+    required String name,
+  }) = ChoiceTokenIdentifier;
+
   const factory TokenIdentifier.model({
     required String? parrentName,
     required String name,

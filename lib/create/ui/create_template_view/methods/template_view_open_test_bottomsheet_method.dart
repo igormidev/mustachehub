@@ -28,6 +28,7 @@ mixin TemplateViewOpenTestBottomsheetMethod {
           generatorData: ExpectedPayload(
             textPipes: variablesState.textPipes,
             booleanPipes: variablesState.booleanPipes,
+            choicePipes: variablesState.choicePipes,
             modelPipes: variablesState.modelPipes,
           ),
         ),

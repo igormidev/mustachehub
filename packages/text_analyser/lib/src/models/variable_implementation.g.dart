@@ -39,6 +39,24 @@ Map<String, dynamic> _$$VariableImplementationTextImplToJson(
       'runtimeType': instance.$type,
     };
 
+_$VariableImplementationChoiceImpl _$$VariableImplementationChoiceImplFromJson(
+        Map<String, dynamic> json) =>
+    _$VariableImplementationChoiceImpl(
+      choiceTokenIdentifier: ChoiceTokenIdentifier.fromJson(
+          json['choiceTokenIdentifier'] as Map<String, dynamic>),
+      choiceImplementation: ChoiceImplementation.fromJson(
+          json['choiceImplementation'] as Map<String, dynamic>),
+      $type: json['runtimeType'] as String?,
+    );
+
+Map<String, dynamic> _$$VariableImplementationChoiceImplToJson(
+        _$VariableImplementationChoiceImpl instance) =>
+    <String, dynamic>{
+      'choiceTokenIdentifier': instance.choiceTokenIdentifier,
+      'choiceImplementation': instance.choiceImplementation,
+      'runtimeType': instance.$type,
+    };
+
 _$VariableImplementationModelImpl _$$VariableImplementationModelImplFromJson(
         Map<String, dynamic> json) =>
     _$VariableImplementationModelImpl(
@@ -76,6 +94,31 @@ _$BooleanImplementationNormalValueImpl
 
 Map<String, dynamic> _$$BooleanImplementationNormalValueImplToJson(
         _$BooleanImplementationNormalValueImpl instance) =>
+    <String, dynamic>{
+      'runtimeType': instance.$type,
+    };
+
+_$ChoiceImplementationNormalValueImpl
+    _$$ChoiceImplementationNormalValueImplFromJson(Map<String, dynamic> json) =>
+        _$ChoiceImplementationNormalValueImpl(
+          $type: json['runtimeType'] as String?,
+        );
+
+Map<String, dynamic> _$$ChoiceImplementationNormalValueImplToJson(
+        _$ChoiceImplementationNormalValueImpl instance) =>
+    <String, dynamic>{
+      'runtimeType': instance.$type,
+    };
+
+_$ChoiceImplementationInvertedValueImpl
+    _$$ChoiceImplementationInvertedValueImplFromJson(
+            Map<String, dynamic> json) =>
+        _$ChoiceImplementationInvertedValueImpl(
+          $type: json['runtimeType'] as String?,
+        );
+
+Map<String, dynamic> _$$ChoiceImplementationInvertedValueImplToJson(
+        _$ChoiceImplementationInvertedValueImpl instance) =>
     <String, dynamic>{
       'runtimeType': instance.$type,
     };

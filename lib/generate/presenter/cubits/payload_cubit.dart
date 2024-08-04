@@ -69,10 +69,11 @@ class PayloadCubit extends Cubit<PayloadState> {
     final ExpectedPayloadDto? prevPayloadDto = state.expectedPayloadDto;
 
     final updatedPipeDtos = _dtoAdapter.dtosFromTemplate(
-      generatorData,
-      prevPayloadDto?.textDtos,
-      prevPayloadDto?.booleanDtos,
-      prevPayloadDto?.modelDtos,
+      generatorData: generatorData,
+      oldTextsDtos: prevPayloadDto?.textDtos,
+      oldBoolDtos: prevPayloadDto?.booleanDtos,
+      oldChoicePipes: prevPayloadDto?.choiceDtos,
+      oldModelDtos: prevPayloadDto?.modelDtos,
     );
 
     await updateContent(
@@ -81,6 +82,7 @@ class PayloadCubit extends Cubit<PayloadState> {
       expectedPayloadDto: ExpectedPayloadDto(
         textDtos: updatedPipeDtos.textPipes,
         booleanDtos: updatedPipeDtos.boolPipes,
+        choiceDtos: updatedPipeDtos.choicePipes,
         modelDtos: updatedPipeDtos.modelPipes,
       ),
     );

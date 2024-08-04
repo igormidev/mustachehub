@@ -15,13 +15,13 @@ class BooleanPipe extends Equatable implements Pipe {
     required this.description,
     required this.mustacheName,
     String? pipeId,
-  }) : pipeId = pipeId ?? const Uuid().v1();
+  }) : pipeId = pipeId ?? const Uuid().v7();
 
   BooleanPipe.emptyPlaceholder()
       : name = '',
         description = '',
         mustacheName = '',
-        pipeId = const Uuid().v1();
+        pipeId = const Uuid().v7();
 
   @override
   List<Object> get props => [

@@ -1,5 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
 import 'dart:async';
-
 import 'package:commom_states/cubits/user_collections_cubit.dart';
 import 'package:commom_states/states/user_collections_state.dart';
 import 'package:flutter/material.dart';
@@ -93,6 +93,7 @@ mixin LoadEditableTemplateMethods
     variableCubit.set(
       textPipes: template.payload.textPipes,
       booleanPipes: template.payload.booleanPipes,
+      choicePipes: template.payload.choicePipes,
       modelPipes: template.payload.modelPipes,
     );
   }

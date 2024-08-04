@@ -8,11 +8,13 @@ import 'package:mustachehub/generate/presenter/dtos/pipe_dto/pipe_dto.dart';
 class ExpectedPayloadDto extends Equatable {
   final List<TextPipeDto> textDtos;
   final List<BooleanPipeDto> booleanDtos;
+  final List<ChoicePipeDto> choiceDtos;
   final List<ModelPipeDto> modelDtos;
 
   const ExpectedPayloadDto({
     required this.textDtos,
     required this.booleanDtos,
+    required this.choiceDtos,
     required this.modelDtos,
   });
 
@@ -20,16 +22,18 @@ class ExpectedPayloadDto extends Equatable {
   bool get stringify => true;
 
   @override
-  List<Object> get props => [textDtos, booleanDtos, modelDtos];
+  List<Object> get props => [textDtos, booleanDtos, choiceDtos, modelDtos];
 
   ExpectedPayloadDto copyWith({
     List<TextPipeDto>? textDtos,
     List<BooleanPipeDto>? booleanDtos,
+    List<ChoicePipeDto>? choiceDtos,
     List<ModelPipeDto>? modelDtos,
   }) {
     return ExpectedPayloadDto(
       textDtos: textDtos ?? this.textDtos,
       booleanDtos: booleanDtos ?? this.booleanDtos,
+      choiceDtos: choiceDtos ?? this.choiceDtos,
       modelDtos: modelDtos ?? this.modelDtos,
     );
   }
@@ -52,6 +56,11 @@ class ExpectedPayloadDto extends Equatable {
       booleanDtos: List<BooleanPipeDto>.from(
         (map['booleanDtos'] as List<int>).map<BooleanPipeDto>(
           (x) => BooleanPipeDto.fromMap(x as Map<String, dynamic>),
+        ),
+      ),
+      choiceDtos: List<ChoicePipeDto>.from(
+        (map['choiceDtos'] as List<int>).map<ChoicePipeDto>(
+          (x) => ChoicePipeDto.fromMap(x as Map<String, dynamic>),
         ),
       ),
       modelDtos: List<ModelPipeDto>.from(

@@ -24,9 +24,9 @@ class TextAnalyserBase {
     flatMap.forEach((key, value) {
       if (value.parrentName == null) {
         value.map(
-          model: (model) {
-            validVariables.add(VariableImplementation.model(
-              modelTokenIdentifier: model,
+          text: (text) {
+            validVariables.add(VariableImplementation.text(
+              textTokenIdentifier: text,
             ));
           },
           boolean: (boolean) {
@@ -39,9 +39,19 @@ class TextAnalyserBase {
               booleanImplementation: BooleanImplementation.invertedValue(),
             ));
           },
-          text: (text) {
-            validVariables.add(VariableImplementation.text(
-              textTokenIdentifier: text,
+          choice: (choice) {
+            validVariables.add(VariableImplementation.choice(
+              choiceTokenIdentifier: choice,
+              choiceImplementation: ChoiceImplementation.normalValue(),
+            ));
+            validVariables.add(VariableImplementation.choice(
+              choiceTokenIdentifier: choice,
+              choiceImplementation: ChoiceImplementation.invertedValue(),
+            ));
+          },
+          model: (model) {
+            validVariables.add(VariableImplementation.model(
+              modelTokenIdentifier: model,
             ));
           },
         );

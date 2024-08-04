@@ -62,6 +62,14 @@ mixin TextContentMethods on State<TextContentTab> {
                   return '^${value.booleanTokenIdentifier.name}';
                 },
               ),
+              choice: (value) => value.choiceImplementation.map(
+                normalValue: (impl) {
+                  return '#${value.choiceTokenIdentifier.name}';
+                },
+                invertedValue: (impl) {
+                  return '^${value.choiceTokenIdentifier.name}';
+                },
+              ),
               text: (value) => value.textTokenIdentifier.name,
               model: (value) => '#${value.modelTokenIdentifier.name}',
             ),
@@ -79,6 +87,8 @@ mixin TextContentMethods on State<TextContentTab> {
                   text: (value) => 2,
                   boolean: (value) =>
                       -3 - value.booleanTokenIdentifier.name.length,
+                  choice: (value) =>
+                      -3 - value.choiceTokenIdentifier.name.length,
                   model: (value) => -3 - value.modelTokenIdentifier.name.length,
                 ),
                 text: option.map(
@@ -89,6 +99,17 @@ mixin TextContentMethods on State<TextContentTab> {
                   boolean: (value) {
                     final name = value.booleanTokenIdentifier.name;
                     return value.booleanImplementation.map(
+                      normalValue: (_) {
+                        return '#$name}}{{/$name';
+                      },
+                      invertedValue: (_) {
+                        return '^$name}}{{/$name';
+                      },
+                    );
+                  },
+                  choice: (value) {
+                    final name = value.choiceTokenIdentifier.name;
+                    return value.choiceImplementation.map(
                       normalValue: (_) {
                         return '#$name}}{{/$name';
                       },
