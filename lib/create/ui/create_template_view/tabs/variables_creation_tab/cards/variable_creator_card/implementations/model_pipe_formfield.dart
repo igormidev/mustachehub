@@ -135,6 +135,7 @@ class _ModelVariableCreationWidgetState
                   onSave: (
                     textPipes,
                     booleanPipes,
+                    choicePipes,
                     modelPipes,
                     afterSaveFunction,
                   ) {
@@ -145,6 +146,7 @@ class _ModelVariableCreationWidgetState
                           nameEC.text.camelCase,
                       textPipes: textPipes,
                       booleanPipes: booleanPipes,
+                      choicePipes: choicePipes,
                       modelPipes: modelPipes,
                     );
                     return saveEditFunc(newModelPipe, afterSaveFunction);
@@ -251,6 +253,7 @@ class _ModelBaseCreatorState extends State<ModelBaseCreator>
             onSave: (
               textPipes,
               booleanPipes,
+              choicePipes,
               modelPipes,
               afterSaveFunction,
             ) {
@@ -261,6 +264,7 @@ class _ModelBaseCreatorState extends State<ModelBaseCreator>
                     nameEC.text.camelCase,
                 textPipes: textPipes,
                 booleanPipes: booleanPipes,
+                choicePipes: choicePipes,
                 modelPipes: modelPipes,
               );
               saveEditFunc(newModelPipe, afterSaveFunction);
@@ -282,6 +286,7 @@ class ModelPipeFormfield extends StatefulWidget {
   final void Function(
     List<TextPipe> textPipes,
     List<BooleanPipe> booleanPipes,
+    List<ChoicePipe> choicePipes,
     List<ModelPipe> modelPipes,
     void Function() afterSaveFunction,
   ) onSave;
@@ -305,10 +310,12 @@ class ModelPipeFormfield extends StatefulWidget {
     required this.popOutModelFromNavigationCallback,
   })  : textPipes = [...pipe.textPipes],
         booleanPipes = [...pipe.booleanPipes],
+        choicePipes = [...pipe.choicePipes],
         modelPipes = [...pipe.modelPipes];
 
   final List<TextPipe> textPipes;
   final List<BooleanPipe> booleanPipes;
+  final List<ChoicePipe> choicePipes;
   final List<ModelPipe> modelPipes;
 
   @override
@@ -317,7 +324,7 @@ class ModelPipeFormfield extends StatefulWidget {
   void save(
     void Function() afterSaveFunction,
   ) {
-    onSave(textPipes, booleanPipes, modelPipes, afterSaveFunction);
+    onSave(textPipes, booleanPipes, choicePipes, modelPipes, afterSaveFunction);
   }
 }
 

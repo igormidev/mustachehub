@@ -16,9 +16,10 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$AnalysedResponse {
-  Set<VariableImplementation> get tokenIdentifiers =>
+  Set<ChoosableVariableImplementations> get choosableVariablesInCurrentScope =>
       throw _privateConstructorUsedError;
-  List<AnalysedSegment> get segments => throw _privateConstructorUsedError;
+  List<AnalysedSegmentStatus> get segmentsStates =>
+      throw _privateConstructorUsedError;
 
   /// Create a copy of AnalysedResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -34,8 +35,8 @@ abstract class $AnalysedResponseCopyWith<$Res> {
       _$AnalysedResponseCopyWithImpl<$Res, AnalysedResponse>;
   @useResult
   $Res call(
-      {Set<VariableImplementation> tokenIdentifiers,
-      List<AnalysedSegment> segments});
+      {Set<ChoosableVariableImplementations> choosableVariablesInCurrentScope,
+      List<AnalysedSegmentStatus> segmentsStates});
 }
 
 /// @nodoc
@@ -53,18 +54,18 @@ class _$AnalysedResponseCopyWithImpl<$Res, $Val extends AnalysedResponse>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? tokenIdentifiers = null,
-    Object? segments = null,
+    Object? choosableVariablesInCurrentScope = null,
+    Object? segmentsStates = null,
   }) {
     return _then(_value.copyWith(
-      tokenIdentifiers: null == tokenIdentifiers
-          ? _value.tokenIdentifiers
-          : tokenIdentifiers // ignore: cast_nullable_to_non_nullable
-              as Set<VariableImplementation>,
-      segments: null == segments
-          ? _value.segments
-          : segments // ignore: cast_nullable_to_non_nullable
-              as List<AnalysedSegment>,
+      choosableVariablesInCurrentScope: null == choosableVariablesInCurrentScope
+          ? _value.choosableVariablesInCurrentScope
+          : choosableVariablesInCurrentScope // ignore: cast_nullable_to_non_nullable
+              as Set<ChoosableVariableImplementations>,
+      segmentsStates: null == segmentsStates
+          ? _value.segmentsStates
+          : segmentsStates // ignore: cast_nullable_to_non_nullable
+              as List<AnalysedSegmentStatus>,
     ) as $Val);
   }
 }
@@ -78,8 +79,8 @@ abstract class _$$AnalysedResponseImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {Set<VariableImplementation> tokenIdentifiers,
-      List<AnalysedSegment> segments});
+      {Set<ChoosableVariableImplementations> choosableVariablesInCurrentScope,
+      List<AnalysedSegmentStatus> segmentsStates});
 }
 
 /// @nodoc
@@ -95,18 +96,18 @@ class __$$AnalysedResponseImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? tokenIdentifiers = null,
-    Object? segments = null,
+    Object? choosableVariablesInCurrentScope = null,
+    Object? segmentsStates = null,
   }) {
     return _then(_$AnalysedResponseImpl(
-      tokenIdentifiers: null == tokenIdentifiers
-          ? _value._tokenIdentifiers
-          : tokenIdentifiers // ignore: cast_nullable_to_non_nullable
-              as Set<VariableImplementation>,
-      segments: null == segments
-          ? _value._segments
-          : segments // ignore: cast_nullable_to_non_nullable
-              as List<AnalysedSegment>,
+      choosableVariablesInCurrentScope: null == choosableVariablesInCurrentScope
+          ? _value._choosableVariablesInCurrentScope
+          : choosableVariablesInCurrentScope // ignore: cast_nullable_to_non_nullable
+              as Set<ChoosableVariableImplementations>,
+      segmentsStates: null == segmentsStates
+          ? _value._segmentsStates
+          : segmentsStates // ignore: cast_nullable_to_non_nullable
+              as List<AnalysedSegmentStatus>,
     ));
   }
 }
@@ -115,30 +116,32 @@ class __$$AnalysedResponseImplCopyWithImpl<$Res>
 
 class _$AnalysedResponseImpl implements _AnalysedResponse {
   _$AnalysedResponseImpl(
-      {required final Set<VariableImplementation> tokenIdentifiers,
-      required final List<AnalysedSegment> segments})
-      : _tokenIdentifiers = tokenIdentifiers,
-        _segments = segments;
+      {required final Set<ChoosableVariableImplementations>
+          choosableVariablesInCurrentScope,
+      required final List<AnalysedSegmentStatus> segmentsStates})
+      : _choosableVariablesInCurrentScope = choosableVariablesInCurrentScope,
+        _segmentsStates = segmentsStates;
 
-  final Set<VariableImplementation> _tokenIdentifiers;
+  final Set<ChoosableVariableImplementations> _choosableVariablesInCurrentScope;
   @override
-  Set<VariableImplementation> get tokenIdentifiers {
-    if (_tokenIdentifiers is EqualUnmodifiableSetView) return _tokenIdentifiers;
+  Set<ChoosableVariableImplementations> get choosableVariablesInCurrentScope {
+    if (_choosableVariablesInCurrentScope is EqualUnmodifiableSetView)
+      return _choosableVariablesInCurrentScope;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableSetView(_tokenIdentifiers);
+    return EqualUnmodifiableSetView(_choosableVariablesInCurrentScope);
   }
 
-  final List<AnalysedSegment> _segments;
+  final List<AnalysedSegmentStatus> _segmentsStates;
   @override
-  List<AnalysedSegment> get segments {
-    if (_segments is EqualUnmodifiableListView) return _segments;
+  List<AnalysedSegmentStatus> get segmentsStates {
+    if (_segmentsStates is EqualUnmodifiableListView) return _segmentsStates;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_segments);
+    return EqualUnmodifiableListView(_segmentsStates);
   }
 
   @override
   String toString() {
-    return 'AnalysedResponse(tokenIdentifiers: $tokenIdentifiers, segments: $segments)';
+    return 'AnalysedResponse(choosableVariablesInCurrentScope: $choosableVariablesInCurrentScope, segmentsStates: $segmentsStates)';
   }
 
   @override
@@ -146,16 +149,18 @@ class _$AnalysedResponseImpl implements _AnalysedResponse {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AnalysedResponseImpl &&
+            const DeepCollectionEquality().equals(
+                other._choosableVariablesInCurrentScope,
+                _choosableVariablesInCurrentScope) &&
             const DeepCollectionEquality()
-                .equals(other._tokenIdentifiers, _tokenIdentifiers) &&
-            const DeepCollectionEquality().equals(other._segments, _segments));
+                .equals(other._segmentsStates, _segmentsStates));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(_tokenIdentifiers),
-      const DeepCollectionEquality().hash(_segments));
+      const DeepCollectionEquality().hash(_choosableVariablesInCurrentScope),
+      const DeepCollectionEquality().hash(_segmentsStates));
 
   /// Create a copy of AnalysedResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -169,13 +174,15 @@ class _$AnalysedResponseImpl implements _AnalysedResponse {
 
 abstract class _AnalysedResponse implements AnalysedResponse {
   factory _AnalysedResponse(
-      {required final Set<VariableImplementation> tokenIdentifiers,
-      required final List<AnalysedSegment> segments}) = _$AnalysedResponseImpl;
+          {required final Set<ChoosableVariableImplementations>
+              choosableVariablesInCurrentScope,
+          required final List<AnalysedSegmentStatus> segmentsStates}) =
+      _$AnalysedResponseImpl;
 
   @override
-  Set<VariableImplementation> get tokenIdentifiers;
+  Set<ChoosableVariableImplementations> get choosableVariablesInCurrentScope;
   @override
-  List<AnalysedSegment> get segments;
+  List<AnalysedSegmentStatus> get segmentsStates;
 
   /// Create a copy of AnalysedResponse
   /// with the given fields replaced by the non-null parameter values.

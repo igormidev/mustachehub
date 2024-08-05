@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'token_identifier.dart';
+part of 'variable_scope_parent_mapper.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

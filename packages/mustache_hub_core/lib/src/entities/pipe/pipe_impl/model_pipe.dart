@@ -15,6 +15,7 @@ class ModelPipe implements Pipe {
 
   List<TextPipe> textPipes;
   List<BooleanPipe> booleanPipes;
+  List<ChoicePipe> choicePipes;
   List<ModelPipe> modelPipes;
 
   /// Returns true if the pipe dosen't have any pipe inside it
@@ -29,6 +30,7 @@ class ModelPipe implements Pipe {
     required this.mustacheName,
     required this.textPipes,
     required this.booleanPipes,
+    required this.choicePipes,
     required this.modelPipes,
   }) : pipeId = pipeId ?? const Uuid().v7();
 
@@ -38,6 +40,7 @@ class ModelPipe implements Pipe {
         mustacheName = '',
         textPipes = const [],
         booleanPipes = const [],
+        choicePipes = const [],
         modelPipes = const [],
         pipeId = const Uuid().v7();
 
@@ -49,6 +52,7 @@ class ModelPipe implements Pipe {
       'pipeId': pipeId,
       'textPipes': textPipes.map((x) => x.toMap()).toList(),
       'booleanPipes': booleanPipes.map((x) => x.toMap()).toList(),
+      'choicePipes': choicePipes.map((x) => x.toMap()).toList(),
       'modelPipes': modelPipes.map((x) => x.toMap()).toList(),
     };
   }
@@ -67,6 +71,11 @@ class ModelPipe implements Pipe {
       booleanPipes: List<BooleanPipe>.from(
         (map['booleanPipes'] as List<dynamic>).map<BooleanPipe>(
           (x) => BooleanPipe.fromMap(x as Map<String, dynamic>),
+        ),
+      ),
+      choicePipes: List<ChoicePipe>.from(
+        (map['choicePipes'] as List<dynamic>).map<ChoicePipe>(
+          (x) => ChoicePipe.fromMap(x as Map<String, dynamic>),
         ),
       ),
       modelPipes: List<ModelPipe>.from(
@@ -89,6 +98,7 @@ class ModelPipe implements Pipe {
     String? pipeId,
     List<TextPipe>? textPipes,
     List<BooleanPipe>? booleanPipes,
+    List<ChoicePipe>? choicePipes,
     List<ModelPipe>? modelPipes,
   }) {
     return ModelPipe(
@@ -98,6 +108,7 @@ class ModelPipe implements Pipe {
       pipeId: pipeId ?? this.pipeId,
       textPipes: textPipes ?? this.textPipes,
       booleanPipes: booleanPipes ?? this.booleanPipes,
+      choicePipes: choicePipes ?? this.choicePipes,
       modelPipes: modelPipes ?? this.modelPipes,
     );
   }

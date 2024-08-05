@@ -47,8 +47,9 @@ mixin TextContentMethods on State<TextContentTab> {
           final cacheFieldNode = cacheFocusNodes[output.uuid];
           final fieldNode = cacheFieldNode ?? FocusNode();
 
-          final OptionsController<VariableImplementation> optionsController =
-              OptionsController<VariableImplementation>(
+          final OptionsController<ChoosableVariableImplementations>
+              optionsController =
+              OptionsController<ChoosableVariableImplementations>(
             textfieldFocusNode: fieldNode,
             textEditingController: controller,
             context: context,
@@ -56,22 +57,22 @@ mixin TextContentMethods on State<TextContentTab> {
             optionAsString: (option) => option.map(
               boolean: (value) => value.booleanImplementation.map(
                 normalValue: (impl) {
-                  return '#${value.booleanTokenIdentifier.name}';
+                  return '#${value.variableName}';
                 },
                 invertedValue: (impl) {
-                  return '^${value.booleanTokenIdentifier.name}';
+                  return '^${value.variableName}';
                 },
               ),
               choice: (value) => value.choiceImplementation.map(
                 normalValue: (impl) {
-                  return '#${value.choiceTokenIdentifier.name}';
+                  return '#${value.variableName}';
                 },
                 invertedValue: (impl) {
-                  return '^${value.choiceTokenIdentifier.name}';
+                  return '^${value.variableName}';
                 },
               ),
-              text: (value) => value.textTokenIdentifier.name,
-              model: (value) => '#${value.modelTokenIdentifier.name}',
+              text: (value) => value.variableName,
+              model: (value) => '#${value.variableName}',
             ),
             overlay: Overlay.of(
               NavigatorService.i.dashboardNavigatorKey.currentContext!,
@@ -85,19 +86,17 @@ mixin TextContentMethods on State<TextContentTab> {
               return InsertInCursorPayload(
                 cursorIndexChangeQuantity: option.map(
                   text: (value) => 2,
-                  boolean: (value) =>
-                      -3 - value.booleanTokenIdentifier.name.length,
-                  choice: (value) =>
-                      -3 - value.choiceTokenIdentifier.name.length,
-                  model: (value) => -3 - value.modelTokenIdentifier.name.length,
+                  boolean: (value) => -3 - value.variableName.length,
+                  choice: (value) => -3 - value.variableName.length,
+                  model: (value) => -3 - value.variableName.length,
                 ),
                 text: option.map(
                   text: (value) {
-                    final name = value.textTokenIdentifier.name;
+                    final name = value.variableName;
                     return name;
                   },
                   boolean: (value) {
-                    final name = value.booleanTokenIdentifier.name;
+                    final name = value.variableName;
                     return value.booleanImplementation.map(
                       normalValue: (_) {
                         return '#$name}}{{/$name';
@@ -108,7 +107,7 @@ mixin TextContentMethods on State<TextContentTab> {
                     );
                   },
                   choice: (value) {
-                    final name = value.choiceTokenIdentifier.name;
+                    final name = value.variableName;
                     return value.choiceImplementation.map(
                       normalValue: (_) {
                         return '#$name}}{{/$name';
@@ -119,7 +118,7 @@ mixin TextContentMethods on State<TextContentTab> {
                     );
                   },
                   model: (value) {
-                    final name = value.modelTokenIdentifier.name;
+                    final name = value.variableName;
                     return '#$name}}{{/$name';
                   },
                 ),
@@ -127,7 +126,7 @@ mixin TextContentMethods on State<TextContentTab> {
             },
           );
 
-          Future.delayed(const Duration(milliseconds: 200), () {
+          Future.delayed(const Duration(milliseconds: 100), () {
             if (!mounted) return;
             notifyContentCubit(output: output);
           });

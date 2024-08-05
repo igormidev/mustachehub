@@ -186,7 +186,7 @@ class _TextContentTabState extends State<TextContentTab>
 }
 
 class SuggestionCard extends StatelessWidget {
-  final Widget Function(List<VariableImplementation> options)
+  final Widget Function(List<ChoosableVariableImplementations> options)
       listTilesWithOptionsBuilder;
 
   const SuggestionCard({
@@ -235,7 +235,7 @@ class EditDependenciesCluster {
   final FocusNode textfieldFocusNode;
   final TextEditingController titleController;
   final VariablesInfoHighlightTextEditingController controller;
-  final OptionsController<VariableImplementation> optionsController;
+  final OptionsController<ChoosableVariableImplementations> optionsController;
   final Debouncer decouncer;
   final ContentTextSectionInput input;
 

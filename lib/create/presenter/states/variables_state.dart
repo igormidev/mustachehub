@@ -5,7 +5,7 @@ import 'package:mustache_hub_core/mustache_hub_core.dart';
 import 'package:text_analyser/text_analyser.dart';
 
 class VariablesState {
-  final Map<String, TokenIdentifier> flatMap;
+  final Map<String, VariableScopeParentMapper> flatMap;
   final List<TextPipe> textPipes;
   final List<BooleanPipe> booleanPipes;
   final List<ChoicePipe> choicePipes;
@@ -42,7 +42,7 @@ class VariablesState {
     final res = (map['flatMap'] as Map).cast<String, dynamic>().map(
           (key, value) => MapEntry(
             key,
-            TokenIdentifier.fromJson(value),
+            VariableScopeParentMapper.fromJson(value),
           ),
         );
     return VariablesState(

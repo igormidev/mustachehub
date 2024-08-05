@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'token_identifier.dart';
+part of 'variable_scope_parent_mapper.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,7 +14,8 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-TokenIdentifier _$TokenIdentifierFromJson(Map<String, dynamic> json) {
+VariableScopeParentMapper _$VariableScopeParentMapperFromJson(
+    Map<String, dynamic> json) {
   switch (json['runtimeType']) {
     case 'text':
       return TextTokenIdentifier.fromJson(json);
@@ -26,13 +27,16 @@ TokenIdentifier _$TokenIdentifierFromJson(Map<String, dynamic> json) {
       return ModelTokenIdentifier.fromJson(json);
 
     default:
-      throw CheckedFromJsonException(json, 'runtimeType', 'TokenIdentifier',
+      throw CheckedFromJsonException(
+          json,
+          'runtimeType',
+          'VariableScopeParentMapper',
           'Invalid union type "${json['runtimeType']}"!');
   }
 }
 
 /// @nodoc
-mixin _$TokenIdentifier {
+mixin _$VariableScopeParentMapper {
   String? get parrentName => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -96,36 +100,37 @@ mixin _$TokenIdentifier {
   }) =>
       throw _privateConstructorUsedError;
 
-  /// Serializes this TokenIdentifier to a JSON map.
+  /// Serializes this VariableScopeParentMapper to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
-  /// Create a copy of TokenIdentifier
+  /// Create a copy of VariableScopeParentMapper
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $TokenIdentifierCopyWith<TokenIdentifier> get copyWith =>
+  $VariableScopeParentMapperCopyWith<VariableScopeParentMapper> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $TokenIdentifierCopyWith<$Res> {
-  factory $TokenIdentifierCopyWith(
-          TokenIdentifier value, $Res Function(TokenIdentifier) then) =
-      _$TokenIdentifierCopyWithImpl<$Res, TokenIdentifier>;
+abstract class $VariableScopeParentMapperCopyWith<$Res> {
+  factory $VariableScopeParentMapperCopyWith(VariableScopeParentMapper value,
+          $Res Function(VariableScopeParentMapper) then) =
+      _$VariableScopeParentMapperCopyWithImpl<$Res, VariableScopeParentMapper>;
   @useResult
   $Res call({String? parrentName, String name});
 }
 
 /// @nodoc
-class _$TokenIdentifierCopyWithImpl<$Res, $Val extends TokenIdentifier>
-    implements $TokenIdentifierCopyWith<$Res> {
-  _$TokenIdentifierCopyWithImpl(this._value, this._then);
+class _$VariableScopeParentMapperCopyWithImpl<$Res,
+        $Val extends VariableScopeParentMapper>
+    implements $VariableScopeParentMapperCopyWith<$Res> {
+  _$VariableScopeParentMapperCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of TokenIdentifier
+  /// Create a copy of VariableScopeParentMapper
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -148,7 +153,7 @@ class _$TokenIdentifierCopyWithImpl<$Res, $Val extends TokenIdentifier>
 
 /// @nodoc
 abstract class _$$TextTokenIdentifierImplCopyWith<$Res>
-    implements $TokenIdentifierCopyWith<$Res> {
+    implements $VariableScopeParentMapperCopyWith<$Res> {
   factory _$$TextTokenIdentifierImplCopyWith(_$TextTokenIdentifierImpl value,
           $Res Function(_$TextTokenIdentifierImpl) then) =
       __$$TextTokenIdentifierImplCopyWithImpl<$Res>;
@@ -159,13 +164,14 @@ abstract class _$$TextTokenIdentifierImplCopyWith<$Res>
 
 /// @nodoc
 class __$$TextTokenIdentifierImplCopyWithImpl<$Res>
-    extends _$TokenIdentifierCopyWithImpl<$Res, _$TextTokenIdentifierImpl>
+    extends _$VariableScopeParentMapperCopyWithImpl<$Res,
+        _$TextTokenIdentifierImpl>
     implements _$$TextTokenIdentifierImplCopyWith<$Res> {
   __$$TextTokenIdentifierImplCopyWithImpl(_$TextTokenIdentifierImpl _value,
       $Res Function(_$TextTokenIdentifierImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of TokenIdentifier
+  /// Create a copy of VariableScopeParentMapper
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -206,7 +212,7 @@ class _$TextTokenIdentifierImpl implements TextTokenIdentifier {
 
   @override
   String toString() {
-    return 'TokenIdentifier.text(parrentName: $parrentName, name: $name)';
+    return 'VariableScopeParentMapper.text(parrentName: $parrentName, name: $name)';
   }
 
   @override
@@ -223,7 +229,7 @@ class _$TextTokenIdentifierImpl implements TextTokenIdentifier {
   @override
   int get hashCode => Object.hash(runtimeType, parrentName, name);
 
-  /// Create a copy of TokenIdentifier
+  /// Create a copy of VariableScopeParentMapper
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -324,7 +330,7 @@ class _$TextTokenIdentifierImpl implements TextTokenIdentifier {
   }
 }
 
-abstract class TextTokenIdentifier implements TokenIdentifier {
+abstract class TextTokenIdentifier implements VariableScopeParentMapper {
   const factory TextTokenIdentifier(
       {required final String? parrentName,
       required final String name}) = _$TextTokenIdentifierImpl;
@@ -337,7 +343,7 @@ abstract class TextTokenIdentifier implements TokenIdentifier {
   @override
   String get name;
 
-  /// Create a copy of TokenIdentifier
+  /// Create a copy of VariableScopeParentMapper
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -347,7 +353,7 @@ abstract class TextTokenIdentifier implements TokenIdentifier {
 
 /// @nodoc
 abstract class _$$BooleanTokenIdentifierImplCopyWith<$Res>
-    implements $TokenIdentifierCopyWith<$Res> {
+    implements $VariableScopeParentMapperCopyWith<$Res> {
   factory _$$BooleanTokenIdentifierImplCopyWith(
           _$BooleanTokenIdentifierImpl value,
           $Res Function(_$BooleanTokenIdentifierImpl) then) =
@@ -359,14 +365,15 @@ abstract class _$$BooleanTokenIdentifierImplCopyWith<$Res>
 
 /// @nodoc
 class __$$BooleanTokenIdentifierImplCopyWithImpl<$Res>
-    extends _$TokenIdentifierCopyWithImpl<$Res, _$BooleanTokenIdentifierImpl>
+    extends _$VariableScopeParentMapperCopyWithImpl<$Res,
+        _$BooleanTokenIdentifierImpl>
     implements _$$BooleanTokenIdentifierImplCopyWith<$Res> {
   __$$BooleanTokenIdentifierImplCopyWithImpl(
       _$BooleanTokenIdentifierImpl _value,
       $Res Function(_$BooleanTokenIdentifierImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of TokenIdentifier
+  /// Create a copy of VariableScopeParentMapper
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -407,7 +414,7 @@ class _$BooleanTokenIdentifierImpl implements BooleanTokenIdentifier {
 
   @override
   String toString() {
-    return 'TokenIdentifier.boolean(parrentName: $parrentName, name: $name)';
+    return 'VariableScopeParentMapper.boolean(parrentName: $parrentName, name: $name)';
   }
 
   @override
@@ -424,7 +431,7 @@ class _$BooleanTokenIdentifierImpl implements BooleanTokenIdentifier {
   @override
   int get hashCode => Object.hash(runtimeType, parrentName, name);
 
-  /// Create a copy of TokenIdentifier
+  /// Create a copy of VariableScopeParentMapper
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -525,7 +532,7 @@ class _$BooleanTokenIdentifierImpl implements BooleanTokenIdentifier {
   }
 }
 
-abstract class BooleanTokenIdentifier implements TokenIdentifier {
+abstract class BooleanTokenIdentifier implements VariableScopeParentMapper {
   const factory BooleanTokenIdentifier(
       {required final String? parrentName,
       required final String name}) = _$BooleanTokenIdentifierImpl;
@@ -538,7 +545,7 @@ abstract class BooleanTokenIdentifier implements TokenIdentifier {
   @override
   String get name;
 
-  /// Create a copy of TokenIdentifier
+  /// Create a copy of VariableScopeParentMapper
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -548,7 +555,7 @@ abstract class BooleanTokenIdentifier implements TokenIdentifier {
 
 /// @nodoc
 abstract class _$$ChoiceTokenIdentifierImplCopyWith<$Res>
-    implements $TokenIdentifierCopyWith<$Res> {
+    implements $VariableScopeParentMapperCopyWith<$Res> {
   factory _$$ChoiceTokenIdentifierImplCopyWith(
           _$ChoiceTokenIdentifierImpl value,
           $Res Function(_$ChoiceTokenIdentifierImpl) then) =
@@ -560,13 +567,14 @@ abstract class _$$ChoiceTokenIdentifierImplCopyWith<$Res>
 
 /// @nodoc
 class __$$ChoiceTokenIdentifierImplCopyWithImpl<$Res>
-    extends _$TokenIdentifierCopyWithImpl<$Res, _$ChoiceTokenIdentifierImpl>
+    extends _$VariableScopeParentMapperCopyWithImpl<$Res,
+        _$ChoiceTokenIdentifierImpl>
     implements _$$ChoiceTokenIdentifierImplCopyWith<$Res> {
   __$$ChoiceTokenIdentifierImplCopyWithImpl(_$ChoiceTokenIdentifierImpl _value,
       $Res Function(_$ChoiceTokenIdentifierImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of TokenIdentifier
+  /// Create a copy of VariableScopeParentMapper
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -607,7 +615,7 @@ class _$ChoiceTokenIdentifierImpl implements ChoiceTokenIdentifier {
 
   @override
   String toString() {
-    return 'TokenIdentifier.choice(parrentName: $parrentName, name: $name)';
+    return 'VariableScopeParentMapper.choice(parrentName: $parrentName, name: $name)';
   }
 
   @override
@@ -624,7 +632,7 @@ class _$ChoiceTokenIdentifierImpl implements ChoiceTokenIdentifier {
   @override
   int get hashCode => Object.hash(runtimeType, parrentName, name);
 
-  /// Create a copy of TokenIdentifier
+  /// Create a copy of VariableScopeParentMapper
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -725,7 +733,7 @@ class _$ChoiceTokenIdentifierImpl implements ChoiceTokenIdentifier {
   }
 }
 
-abstract class ChoiceTokenIdentifier implements TokenIdentifier {
+abstract class ChoiceTokenIdentifier implements VariableScopeParentMapper {
   const factory ChoiceTokenIdentifier(
       {required final String? parrentName,
       required final String name}) = _$ChoiceTokenIdentifierImpl;
@@ -738,7 +746,7 @@ abstract class ChoiceTokenIdentifier implements TokenIdentifier {
   @override
   String get name;
 
-  /// Create a copy of TokenIdentifier
+  /// Create a copy of VariableScopeParentMapper
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -748,7 +756,7 @@ abstract class ChoiceTokenIdentifier implements TokenIdentifier {
 
 /// @nodoc
 abstract class _$$ModelTokenIdentifierImplCopyWith<$Res>
-    implements $TokenIdentifierCopyWith<$Res> {
+    implements $VariableScopeParentMapperCopyWith<$Res> {
   factory _$$ModelTokenIdentifierImplCopyWith(_$ModelTokenIdentifierImpl value,
           $Res Function(_$ModelTokenIdentifierImpl) then) =
       __$$ModelTokenIdentifierImplCopyWithImpl<$Res>;
@@ -764,13 +772,14 @@ abstract class _$$ModelTokenIdentifierImplCopyWith<$Res>
 
 /// @nodoc
 class __$$ModelTokenIdentifierImplCopyWithImpl<$Res>
-    extends _$TokenIdentifierCopyWithImpl<$Res, _$ModelTokenIdentifierImpl>
+    extends _$VariableScopeParentMapperCopyWithImpl<$Res,
+        _$ModelTokenIdentifierImpl>
     implements _$$ModelTokenIdentifierImplCopyWith<$Res> {
   __$$ModelTokenIdentifierImplCopyWithImpl(_$ModelTokenIdentifierImpl _value,
       $Res Function(_$ModelTokenIdentifierImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of TokenIdentifier
+  /// Create a copy of VariableScopeParentMapper
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -857,7 +866,7 @@ class _$ModelTokenIdentifierImpl implements ModelTokenIdentifier {
 
   @override
   String toString() {
-    return 'TokenIdentifier.model(parrentName: $parrentName, name: $name, textsNames: $textsNames, booleanNames: $booleanNames, subModelsNames: $subModelsNames)';
+    return 'VariableScopeParentMapper.model(parrentName: $parrentName, name: $name, textsNames: $textsNames, booleanNames: $booleanNames, subModelsNames: $subModelsNames)';
   }
 
   @override
@@ -886,7 +895,7 @@ class _$ModelTokenIdentifierImpl implements ModelTokenIdentifier {
       const DeepCollectionEquality().hash(_booleanNames),
       const DeepCollectionEquality().hash(_subModelsNames));
 
-  /// Create a copy of TokenIdentifier
+  /// Create a copy of VariableScopeParentMapper
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -989,7 +998,7 @@ class _$ModelTokenIdentifierImpl implements ModelTokenIdentifier {
   }
 }
 
-abstract class ModelTokenIdentifier implements TokenIdentifier {
+abstract class ModelTokenIdentifier implements VariableScopeParentMapper {
   const factory ModelTokenIdentifier(
       {required final String? parrentName,
       required final String name,
@@ -1008,7 +1017,7 @@ abstract class ModelTokenIdentifier implements TokenIdentifier {
   List<String> get booleanNames;
   List<String> get subModelsNames;
 
-  /// Create a copy of TokenIdentifier
+  /// Create a copy of VariableScopeParentMapper
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)

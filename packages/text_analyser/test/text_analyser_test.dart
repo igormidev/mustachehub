@@ -1,4 +1,3 @@
-import 'package:mason/mason.dart';
 import 'package:mustachex/mustachex.dart';
 import 'package:test/test.dart';
 
@@ -28,24 +27,6 @@ void main() {
     // var output = template.renderString({
     //   'businessType': {'isEcomerce': 'Greg Lowe'}
     // });
-    return;
-
-    const input =
-        // '{{variable.camelCase()}}';
-        'Lets test some enums: {{variable.isCompact()}}';
-
-    final result = input.render(<String, dynamic>{
-      'variable': 'odontologia de mel',
-      'isCompact': (ctx) {
-        return ctx.renderString().camelCase;
-      },
-      'that': (ctx) {
-        return 'oad';
-        return ctx.renderString().camelCase;
-      },
-    });
-
-    print(result);
   });
 }
 

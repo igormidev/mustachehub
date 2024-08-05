@@ -1,4 +1,4 @@
-import 'package:mason/mason.dart';
+import 'package:mustachex/mustachex.dart' as mustachex;
 import 'package:mustache_hub_core/mustache_hub_core.dart';
 import 'package:mustachehub/generate/presenter/dtos/content_output_dto.dart';
 
@@ -24,9 +24,10 @@ mixin MustacheTextMixin {
     Map<String, dynamic> payload,
   ) {
     try {
-      return content.map((e) {
+      return content.map((ContentTextSectionInput e) {
         return e.copyWith(
-          content: e.content.render(payload),
+          content: mustachex.Template(e.content).renderString(payload),
+          // content: e.content.render(payload),
         );
       }).toList();
     } catch (error) {

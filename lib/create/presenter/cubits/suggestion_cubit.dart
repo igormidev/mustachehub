@@ -12,7 +12,7 @@ class SuggestionCubit extends Cubit<SuggestionState> {
   void setSuggestions({
     required String input,
     required int indexAtText,
-    required Map<String, TokenIdentifier> flatMap,
+    required Map<String, VariableScopeParentMapper> flatMap,
   }) {
     final response = _textAnalyser.getMatchClusters(
       input,
@@ -23,8 +23,8 @@ class SuggestionCubit extends Cubit<SuggestionState> {
       emit(SuggestionState.errorOccurred());
     } else {
       emit(SuggestionState.withIdentifiers(
-        tokenIdentifiers: response.tokenIdentifiers,
-        segments: response.segments,
+        tokenIdentifiers: response.choosableVariablesInCurrentScope,
+        segments: response.segmentsStates,
       ));
     }
   }

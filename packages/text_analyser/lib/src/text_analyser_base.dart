@@ -2,9 +2,11 @@
 import 'package:enchanted_collection/enchanted_collection.dart';
 import 'package:enchanted_regex/enchanted_regex.dart';
 import 'package:text_analyser/src/models/analysed_response.dart';
-import 'package:text_analyser/src/models/analysed_segment.dart';
-import 'package:text_analyser/src/models/token_identifier.dart';
-import 'package:text_analyser/src/models/variable_implementation.dart';
+import 'package:text_analyser/src/models/analysed_segment_status.dart';
+import 'package:text_analyser/src/models/choosable_variable_implementations/choosable_variable_implementations.dart';
+import 'package:text_analyser/src/models/choosable_variable_implementations/use_implementations_models/boolean_use_implementations.dart';
+import 'package:text_analyser/src/models/choosable_variable_implementations/use_implementations_models/choice_use_implementation.dart';
+import 'package:text_analyser/src/models/variable_scope_parent_mapper.dart';
 
 class TextAnalyserBase {
   const TextAnalyserBase();
@@ -12,7 +14,7 @@ class TextAnalyserBase {
   AnalysedResponse? getMatchClusters(
     String input,
     int indexAtText,
-    Map<String, TokenIdentifier> flatMap,
+    Map<String, VariableScopeParentMapper> flatMap,
   ) {
     final isIndexInText = indexAtText >= 0 && indexAtText <= input.length;
     if (isIndexInText == false) {
@@ -20,38 +22,51 @@ class TextAnalyserBase {
     }
 
     final Set<ModelTokenIdentifier> validScopesIdentifier = {};
-    final Set<VariableImplementation> validVariables = {};
+
+    /// Variables that can be used in the current context the mouse cursor is.
+    ///
+    /// This includes all root variables and the variables inside a model that
+    /// the textfield cursor is inside that model scole.
+    final Set<ChoosableVariableImplementations>
+        usableVariablesInCurrentContext = {};
+
     flatMap.forEach((key, value) {
       if (value.parrentName == null) {
         value.map(
-          text: (text) {
-            validVariables.add(VariableImplementation.text(
-              textTokenIdentifier: text,
+          model: (model) {
+            usableVariablesInCurrentContext
+                .add(ChoosableVariableImplementations.model(
+              variableName: model.name,
             ));
           },
           boolean: (boolean) {
-            validVariables.add(VariableImplementation.boolean(
-              booleanTokenIdentifier: boolean,
-              booleanImplementation: BooleanImplementation.normalValue(),
+            usableVariablesInCurrentContext
+                .add(ChoosableVariableImplementations.boolean(
+              variableName: boolean.name,
+              booleanImplementation: BooleanUseImplementation.normalValue(),
             ));
-            validVariables.add(VariableImplementation.boolean(
-              booleanTokenIdentifier: boolean,
-              booleanImplementation: BooleanImplementation.invertedValue(),
+            usableVariablesInCurrentContext
+                .add(ChoosableVariableImplementations.boolean(
+              variableName: boolean.name,
+              booleanImplementation: BooleanUseImplementation.invertedValue(),
             ));
           },
           choice: (choice) {
-            validVariables.add(VariableImplementation.choice(
-              choiceTokenIdentifier: choice,
-              choiceImplementation: ChoiceImplementation.normalValue(),
+            usableVariablesInCurrentContext
+                .add(ChoosableVariableImplementations.choice(
+              variableName: choice.name,
+              choiceImplementation: ChoiceUseImplementation.normalValue(),
             ));
-            validVariables.add(VariableImplementation.choice(
-              choiceTokenIdentifier: choice,
-              choiceImplementation: ChoiceImplementation.invertedValue(),
+            usableVariablesInCurrentContext
+                .add(ChoosableVariableImplementations.choice(
+              variableName: choice.name,
+              choiceImplementation: ChoiceUseImplementation.invertedValue(),
             ));
           },
-          model: (model) {
-            validVariables.add(VariableImplementation.model(
-              modelTokenIdentifier: model,
+          text: (text) {
+            usableVariablesInCurrentContext
+                .add(ChoosableVariableImplementations.text(
+              variableName: text.name,
             ));
           },
         );
@@ -62,7 +77,7 @@ class TextAnalyserBase {
 
     /// The index of the segment and the segment itself
     /// The index should be in increasing order (1, 2, 3, 4, ..., n)
-    final Map<int, AnalysedSegment> segments = {};
+    final Map<int, AnalysedSegmentStatus> segments = {};
 
     int index = -1;
 
@@ -82,35 +97,8 @@ class TextAnalyserBase {
     final Map<String, List<ToAnalyseDeclarationBooleanCluster>>
         notDefininedBooleansInModelSegments = {};
 
-    printDetails() {
-      return;
-      // print('--------------$index--------------');
-      // print(
-      //     '\n${notDefininedModelsInModelSegments.map((e) => e.first.open.findedGroup.content).join('\n')}');
-
-/* 
-The {{#person}}
- 
-asds {{name}} 
-{{/person}} 
-*/
-
-      // print('--------------$index--------------');
-      // print(segments.entries
-      //     .map((e) => '${e.key}: "${e.value.segmentText}"')
-      //     .join('\n'));
-      // print('then open model segments ******');
-      // print(notDefininedTextsInModelSegments.entries
-      //     .map((e) => '${e.key}: ${e.value}')
-      //     .join('\n'));
-      // print(notDefininedOpenModelSegments.entries
-      //     .map((e) => '${e.key}: ${e.value}')
-      //     .join('\n'));
-      // print('nonDefinedLenght: ${notDefininedOpenModelSegments.length}');
-    }
-
     void setScope({
-      required TokenIdentifier? tokenIdentifier,
+      required VariableScopeParentMapper? tokenIdentifier,
       required FindedGroup startFindedGroup,
       required FindedGroup endFindedGroup,
     }) {
@@ -152,7 +140,8 @@ asds {{name}}
       onMatch: (FindedGroup group) {
         index++;
 
-        final TokenIdentifier? tokenIdentifier = flatMap[group.content];
+        final VariableScopeParentMapper? tokenIdentifier =
+            flatMap[group.content];
 
         final offset = TextOffset(
           start: group.globalStart,
@@ -160,11 +149,11 @@ asds {{name}}
         );
 
         if (tokenIdentifier == null) {
-          segments[index] = AnalysedSegment.declarationOfUncatalogedVariable(
+          segments[index] =
+              AnalysedSegmentStatus.declarationOfUncatalogedVariable(
             offset: offset,
             segmentText: group.fullMatchText,
           );
-          printDetails();
           return;
         }
 
@@ -192,21 +181,22 @@ asds {{name}}
 
         /// Only models can have delimiters indicators
         if (hasDelimiter && isModel == false && isBoolean == false) {
-          final seg = AnalysedSegment.nonModelVariableWithOpenOrCloseDelimmiter(
+          final seg =
+              AnalysedSegmentStatus.nonModelVariableWithOpenOrCloseDelimmiter(
             offset: offset,
             segmentText: group.fullMatchText,
           );
           segments[index] = seg;
-          printDetails();
+
           return;
         }
 
         if ((isModel || isBoolean) && hasDelimiter == false) {
-          segments[index] = AnalysedSegment.invalidMapDeclaration(
+          segments[index] = AnalysedSegmentStatus.invalidMapDeclaration(
             offset: offset,
             segmentText: group.fullMatchText,
           );
-          printDetails();
+
           return;
         }
 
@@ -218,7 +208,7 @@ asds {{name}}
           // because they don't depend on a scope/context to be used. Can be used globally.
           final isRootTokenIdentifier = tokenIdentifier.parrentName == null;
           if (isRootTokenIdentifier) {
-            segments[index] = AnalysedSegment.validDeclaration(
+            segments[index] = AnalysedSegmentStatus.validDeclaration(
               offset: offset,
               segmentText: group.fullMatchText,
             );
@@ -238,7 +228,7 @@ asds {{name}}
               ),
             );
           }
-          printDetails();
+
           return;
         } else if (isBoolean) {
           // Now, we need to now if the boolean has a open and close declaration in somewhere in the text.
@@ -258,7 +248,7 @@ asds {{name}}
                 indexInSegment: index,
               ),
             );
-            printDetails();
+
             return;
           }
 
@@ -267,7 +257,7 @@ asds {{name}}
 
           if (openDeclarations == null || openDeclarations.isEmpty) {
             segments[index] =
-                AnalysedSegment.booleanDeclarationCloseWithoutOpen(
+                AnalysedSegmentStatus.booleanDeclarationCloseWithoutOpen(
               offset: offset,
               segmentText: group.fullMatchText,
             );
@@ -277,12 +267,12 @@ asds {{name}}
             final isRootTokenIdentifier = tokenIdentifier.parrentName == null;
             if (isRootTokenIdentifier) {
               segments[openDeclaration.indexInSegment] =
-                  AnalysedSegment.validDeclaration(
+                  AnalysedSegmentStatus.validDeclaration(
                 offset: offset,
                 segmentText: openDeclaration.findedGroup.fullMatchText,
               );
 
-              segments[index] = AnalysedSegment.validDeclaration(
+              segments[index] = AnalysedSegmentStatus.validDeclaration(
                 offset: offset,
                 segmentText: group.fullMatchText,
               );
@@ -316,7 +306,6 @@ asds {{name}}
             );
           }
 
-          printDetails();
           return;
         }
 
@@ -333,18 +322,19 @@ asds {{name}}
               indexInSegment: index,
             ),
           );
-          printDetails();
+
           return;
         } else {
           final List<ToAnalyseDeclarationModel>? openDeclarations =
               notDefininedOpenModelSegments[group.content];
 
           if (openDeclarations == null || openDeclarations.isEmpty) {
-            segments[index] = AnalysedSegment.modelDeclarationCloseWithoutOpen(
+            segments[index] =
+                AnalysedSegmentStatus.modelDeclarationCloseWithoutOpen(
               offset: offset,
               segmentText: group.fullMatchText,
             );
-            printDetails();
+
             return;
           }
 
@@ -352,13 +342,13 @@ asds {{name}}
               notDefininedOpenModelSegments[group.content]!.removeLast();
 
           if (tokenIdentifier.parrentName == null) {
-            segments[index] = AnalysedSegment.validDeclaration(
+            segments[index] = AnalysedSegmentStatus.validDeclaration(
               offset: offset,
               segmentText: group.fullMatchText,
             );
 
             segments[openDeclaration.indexInSegment] =
-                AnalysedSegment.validDeclaration(
+                AnalysedSegmentStatus.validDeclaration(
               offset: TextOffset(
                 start: openDeclaration.findedGroup.globalStart,
                 end: openDeclaration.findedGroup.globalEnd,
@@ -395,28 +385,26 @@ asds {{name}}
             }
           }
 
-          printDetails();
           return;
         }
       },
       onNonMatch: (text) {
         index++;
 
-        segments[index] = AnalysedSegment.text(
+        segments[index] = AnalysedSegmentStatus.normalText(
           offset: TextOffset(
             start: text.globalStart,
             end: text.globalEnd,
           ),
           segmentText: text.content,
         );
-        printDetails();
       },
     );
 
     notDefininedOpenModelSegments.forEach((content, declarations) {
       for (final declaration in declarations) {
         segments[declaration.indexInSegment] =
-            AnalysedSegment.modelDeclarationOpenWithoutClose(
+            AnalysedSegmentStatus.modelDeclarationOpenWithoutClose(
           offset: TextOffset(
             start: declaration.findedGroup.globalStart,
             end: declaration.findedGroup.globalEnd,
@@ -430,7 +418,7 @@ asds {{name}}
       (content, declarations) {
         for (final declaration in declarations) {
           segments[declaration.indexInSegment] =
-              AnalysedSegment.booleanDeclarationOpenWithoutClose(
+              AnalysedSegmentStatus.booleanDeclarationOpenWithoutClose(
             offset: TextOffset(
               start: declaration.findedGroup.globalStart,
               end: declaration.findedGroup.globalEnd,
@@ -445,8 +433,6 @@ asds {{name}}
     // to be inside a model scope are valid.
     // To be valid they need to be inside there model scope.
 
-    // print(
-    //     'before => ${notDefininedModelsInModelSegments.map((e) => e.first.open.findedGroup.content).join('\n')}');
     notDefininedModelsInModelSegments.sort(
       (a, b) {
         if (a.isEmpty && b.isNotEmpty) {
@@ -461,11 +447,9 @@ asds {{name}}
         }
       },
     );
-    // print(
-    //     'after => ${notDefininedModelsInModelSegments.map((e) => e.first.open.findedGroup.content).join('\n')}');
+
     for (final List<ToAnalyseDeclarationModelCluster> declarations
         in notDefininedModelsInModelSegments) {
-      // in notDefininedModelsInModelSegments.reversed) {
       for (final ToAnalyseDeclarationModelCluster declaration in declarations) {
         final List<ToAnalyseScope>? scopesPattern =
             modelScopes[declaration.open.tokenIdentifier.parrentName];
@@ -480,7 +464,7 @@ asds {{name}}
 
         if (isDeclarationInCorrectScope == true) {
           segments[declaration.open.indexInSegment] =
-              AnalysedSegment.validDeclaration(
+              AnalysedSegmentStatus.validDeclaration(
             offset: TextOffset(
               start: declaration.open.findedGroup.globalStart,
               end: declaration.open.findedGroup.globalEnd,
@@ -489,7 +473,7 @@ asds {{name}}
           );
 
           segments[declaration.close.indexInSegment] =
-              AnalysedSegment.validDeclaration(
+              AnalysedSegmentStatus.validDeclaration(
             offset: TextOffset(
               start: declaration.close.findedGroup.globalStart,
               end: declaration.close.findedGroup.globalEnd,
@@ -504,7 +488,7 @@ asds {{name}}
           );
         } else {
           segments[declaration.open.indexInSegment] =
-              AnalysedSegment.variableExistsButCannotBeUsedInThisContext(
+              AnalysedSegmentStatus.variableExistsButCannotBeUsedInThisContext(
             offset: TextOffset(
               start: declaration.open.findedGroup.globalStart,
               end: declaration.open.findedGroup.globalEnd,
@@ -513,7 +497,7 @@ asds {{name}}
           );
 
           segments[declaration.close.indexInSegment] =
-              AnalysedSegment.variableExistsButCannotBeUsedInThisContext(
+              AnalysedSegmentStatus.variableExistsButCannotBeUsedInThisContext(
             offset: TextOffset(
               start: declaration.close.findedGroup.globalStart,
               end: declaration.close.findedGroup.globalEnd,
@@ -546,7 +530,7 @@ asds {{name}}
 
           if (isDeclarationInCorrectScope == true) {
             segments[declaration.indexInSegment] =
-                AnalysedSegment.validDeclaration(
+                AnalysedSegmentStatus.validDeclaration(
               offset: TextOffset(
                 start: declaration.findedGroup.globalStart,
                 end: declaration.findedGroup.globalEnd,
@@ -554,8 +538,8 @@ asds {{name}}
               segmentText: declaration.findedGroup.fullMatchText,
             );
           } else {
-            segments[declaration.indexInSegment] =
-                AnalysedSegment.variableExistsButCannotBeUsedInThisContext(
+            segments[declaration.indexInSegment] = AnalysedSegmentStatus
+                .variableExistsButCannotBeUsedInThisContext(
               offset: TextOffset(
                 start: declaration.findedGroup.globalStart,
                 end: declaration.findedGroup.globalEnd,
@@ -587,7 +571,7 @@ asds {{name}}
 
           if (isDeclarationInCorrectScope == true) {
             segments[declaration.open.indexInSegment] =
-                AnalysedSegment.validDeclaration(
+                AnalysedSegmentStatus.validDeclaration(
               offset: TextOffset(
                 start: declaration.open.findedGroup.globalStart,
                 end: declaration.open.findedGroup.globalEnd,
@@ -596,7 +580,7 @@ asds {{name}}
             );
 
             segments[declaration.close.indexInSegment] =
-                AnalysedSegment.validDeclaration(
+                AnalysedSegmentStatus.validDeclaration(
               offset: TextOffset(
                 start: declaration.close.findedGroup.globalStart,
                 end: declaration.close.findedGroup.globalEnd,
@@ -604,8 +588,8 @@ asds {{name}}
               segmentText: declaration.close.findedGroup.fullMatchText,
             );
           } else {
-            segments[declaration.open.indexInSegment] =
-                AnalysedSegment.variableExistsButCannotBeUsedInThisContext(
+            segments[declaration.open.indexInSegment] = AnalysedSegmentStatus
+                .variableExistsButCannotBeUsedInThisContext(
               offset: TextOffset(
                 start: declaration.open.findedGroup.globalStart,
                 end: declaration.open.findedGroup.globalEnd,
@@ -613,8 +597,8 @@ asds {{name}}
               segmentText: declaration.open.findedGroup.fullMatchText,
             );
 
-            segments[declaration.close.indexInSegment] =
-                AnalysedSegment.variableExistsButCannotBeUsedInThisContext(
+            segments[declaration.close.indexInSegment] = AnalysedSegmentStatus
+                .variableExistsButCannotBeUsedInThisContext(
               offset: TextOffset(
                 start: declaration.close.findedGroup.globalStart,
                 end: declaration.close.findedGroup.globalEnd,
@@ -630,19 +614,21 @@ asds {{name}}
         .castToList((key, value) => MapEntry(key, value))
       ..sort((a, b) => a.key.compareTo(b.key));
 
-    final List<AnalysedSegment> sortedSegments =
+    final List<AnalysedSegmentStatus> sortedSegments =
         sortedSegmentsEntries.map((e) => e.value).toList();
 
     for (final ModelTokenIdentifier identifier in validScopesIdentifier) {
-      validVariables.add(VariableImplementation.model(
-        modelTokenIdentifier: identifier,
+      usableVariablesInCurrentContext
+          .add(ChoosableVariableImplementations.model(
+        variableName: identifier.name,
       ));
 
       for (final subModelName in identifier.subModelsNames) {
-        final isSubModelAlreadyDefined = validVariables.any((element) {
+        final isSubModelAlreadyDefined =
+            usableVariablesInCurrentContext.any((element) {
           return element.maybeMap(
             model: (value) {
-              return value.modelTokenIdentifier.name == subModelName;
+              return value.variableName == subModelName;
             },
             orElse: () => false,
           );
@@ -651,49 +637,54 @@ asds {{name}}
           continue;
         }
 
-        final TokenIdentifier? tokenIdentifier = flatMap[subModelName];
+        final VariableScopeParentMapper? tokenIdentifier =
+            flatMap[subModelName];
         if (tokenIdentifier == null ||
             tokenIdentifier is! ModelTokenIdentifier) {
           continue;
         }
 
-        validVariables.add(VariableImplementation.model(
-          modelTokenIdentifier: tokenIdentifier,
+        usableVariablesInCurrentContext
+            .add(ChoosableVariableImplementations.model(
+          variableName: tokenIdentifier.name,
         ));
       }
 
       for (final booleanName in identifier.booleanNames) {
-        validVariables.add(VariableImplementation.boolean(
-          booleanTokenIdentifier: BooleanTokenIdentifier(
-            parrentName: identifier.name,
-            name: booleanName,
-          ),
-          booleanImplementation: BooleanImplementation.normalValue(),
+        usableVariablesInCurrentContext
+            .add(ChoosableVariableImplementations.boolean(
+          variableName: booleanName,
+          booleanImplementation: BooleanUseImplementation.normalValue(),
         ));
-        validVariables.add(VariableImplementation.boolean(
-          booleanTokenIdentifier: BooleanTokenIdentifier(
-            parrentName: identifier.name,
-            name: booleanName,
-          ),
-          booleanImplementation: BooleanImplementation.invertedValue(),
+        usableVariablesInCurrentContext
+            .add(ChoosableVariableImplementations.boolean(
+          variableName: booleanName,
+          booleanImplementation: BooleanUseImplementation.invertedValue(),
         ));
       }
 
       for (final textName in identifier.textsNames) {
-        validVariables.add(VariableImplementation.text(
-          textTokenIdentifier: TextTokenIdentifier(
-            parrentName: identifier.name,
-            name: textName,
-          ),
+        usableVariablesInCurrentContext
+            .add(ChoosableVariableImplementations.text(
+          variableName: textName,
         ));
       }
     }
 
     return AnalysedResponse(
-      segments: sortedSegments,
-      tokenIdentifiers: validVariables,
+      segmentsStates: sortedSegments,
+      choosableVariablesInCurrentScope: usableVariablesInCurrentContext,
     );
   }
+}
+
+class ToAnalyseDeclarationModelCluster {
+  final ToAnalyseDeclarationModel open;
+  final ToAnalyseDeclarationModel close;
+  const ToAnalyseDeclarationModelCluster({
+    required this.open,
+    required this.close,
+  });
 }
 
 class ToAnalyseDeclarationModel {
@@ -704,19 +695,6 @@ class ToAnalyseDeclarationModel {
     required this.tokenIdentifier,
     required this.findedGroup,
     required this.indexInSegment,
-  });
-
-  @override
-  String toString() =>
-      'ToAnalyseDeclarationModel(tokenIdentifier: $tokenIdentifier, findedGroup: $findedGroup, indexInSegment: $indexInSegment)';
-}
-
-class ToAnalyseDeclarationModelCluster {
-  final ToAnalyseDeclarationModel open;
-  final ToAnalyseDeclarationModel close;
-  const ToAnalyseDeclarationModelCluster({
-    required this.open,
-    required this.close,
   });
 }
 
@@ -776,15 +754,6 @@ class IdentifierDeclaration {
   final int end;
 
   const IdentifierDeclaration({
-    required this.start,
-    required this.end,
-  });
-}
-
-class TextSegment {
-  final int start;
-  final int end;
-  const TextSegment({
     required this.start,
     required this.end,
   });

@@ -21,6 +21,7 @@ class EditModelInfoDisplayCubit extends Cubit<EditModelInfoDisplayState>
               title: null,
               textPipes: pipe.textPipes,
               booleanPipes: pipe.booleanPipes,
+              choicePipes: pipe.choicePipes,
               modelPipes: pipe.modelPipes,
             ),
       currentModel: pipe,
@@ -62,6 +63,7 @@ class EditModelInfoDisplayCubit extends Cubit<EditModelInfoDisplayState>
             title: model.mustacheName,
             textPipes: model.textPipes,
             booleanPipes: model.booleanPipes,
+            choicePipes: model.choicePipes,
             modelPipes: model.modelPipes,
           );
 
@@ -189,6 +191,7 @@ class EditModelInfoDisplayCubit extends Cubit<EditModelInfoDisplayState>
                 title: model.mustacheName,
                 textPipes: model.textPipes,
                 booleanPipes: model.booleanPipes,
+                choicePipes: model.choicePipes,
                 modelPipes: model.modelPipes,
               ),
         currentModel: model.copyWith(),

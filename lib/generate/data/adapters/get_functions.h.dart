@@ -35,11 +35,11 @@ Map<String, dynamic> _getChoicePayloads(
   for (final choicePipe in pipes) {
     final dto = dtos.firstWhere((dto) => dto.pipe.pipeId == choicePipe.pipeId);
 
-    final text = dto.payloadValue.choosedName;
+    final text = dto.payloadValue;
     payload.addAll({
       choicePipe.mustacheName: {
         'text': text,
-        ...dto.payloadValue.options.asMap().map((_, option) {
+        ...dto.pipe.options.asMap().map((_, option) {
           return MapEntry(option, text == option);
         }),
       },

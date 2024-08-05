@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'analysed_segment.dart';
+part of 'analysed_segment_status.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$AnalysedSegment {
+mixin _$AnalysedSegmentStatus {
 // ✅
   TextOffset get offset => throw _privateConstructorUsedError;
   String get segmentText => throw _privateConstructorUsedError;
@@ -90,8 +90,7 @@ mixin _$AnalysedSegment {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_AnalysedSegmentText value) text,
-    required TResult Function(_AnalysedSegmentDeclaration value)
-        validDeclaration,
+    required TResult Function(_AnalysedSegmentValid value) validDeclaration,
     required TResult Function(_AnalysedSegmentInvalidMapDeclaration value)
         invalidMapDeclaration,
     required TResult Function(
@@ -120,7 +119,7 @@ mixin _$AnalysedSegment {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_AnalysedSegmentText value)? text,
-    TResult? Function(_AnalysedSegmentDeclaration value)? validDeclaration,
+    TResult? Function(_AnalysedSegmentValid value)? validDeclaration,
     TResult? Function(_AnalysedSegmentInvalidMapDeclaration value)?
         invalidMapDeclaration,
     TResult? Function(_AnalysedSegmentModelDeclarationOpenWithoutClose value)?
@@ -144,7 +143,7 @@ mixin _$AnalysedSegment {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_AnalysedSegmentText value)? text,
-    TResult Function(_AnalysedSegmentDeclaration value)? validDeclaration,
+    TResult Function(_AnalysedSegmentValid value)? validDeclaration,
     TResult Function(_AnalysedSegmentInvalidMapDeclaration value)?
         invalidMapDeclaration,
     TResult Function(_AnalysedSegmentModelDeclarationOpenWithoutClose value)?
@@ -167,33 +166,34 @@ mixin _$AnalysedSegment {
   }) =>
       throw _privateConstructorUsedError;
 
-  /// Create a copy of AnalysedSegment
+  /// Create a copy of AnalysedSegmentStatus
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $AnalysedSegmentCopyWith<AnalysedSegment> get copyWith =>
+  $AnalysedSegmentStatusCopyWith<AnalysedSegmentStatus> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $AnalysedSegmentCopyWith<$Res> {
-  factory $AnalysedSegmentCopyWith(
-          AnalysedSegment value, $Res Function(AnalysedSegment) then) =
-      _$AnalysedSegmentCopyWithImpl<$Res, AnalysedSegment>;
+abstract class $AnalysedSegmentStatusCopyWith<$Res> {
+  factory $AnalysedSegmentStatusCopyWith(AnalysedSegmentStatus value,
+          $Res Function(AnalysedSegmentStatus) then) =
+      _$AnalysedSegmentStatusCopyWithImpl<$Res, AnalysedSegmentStatus>;
   @useResult
   $Res call({TextOffset offset, String segmentText});
 }
 
 /// @nodoc
-class _$AnalysedSegmentCopyWithImpl<$Res, $Val extends AnalysedSegment>
-    implements $AnalysedSegmentCopyWith<$Res> {
-  _$AnalysedSegmentCopyWithImpl(this._value, this._then);
+class _$AnalysedSegmentStatusCopyWithImpl<$Res,
+        $Val extends AnalysedSegmentStatus>
+    implements $AnalysedSegmentStatusCopyWith<$Res> {
+  _$AnalysedSegmentStatusCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of AnalysedSegment
+  /// Create a copy of AnalysedSegmentStatus
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -216,7 +216,7 @@ class _$AnalysedSegmentCopyWithImpl<$Res, $Val extends AnalysedSegment>
 
 /// @nodoc
 abstract class _$$AnalysedSegmentTextImplCopyWith<$Res>
-    implements $AnalysedSegmentCopyWith<$Res> {
+    implements $AnalysedSegmentStatusCopyWith<$Res> {
   factory _$$AnalysedSegmentTextImplCopyWith(_$AnalysedSegmentTextImpl value,
           $Res Function(_$AnalysedSegmentTextImpl) then) =
       __$$AnalysedSegmentTextImplCopyWithImpl<$Res>;
@@ -227,13 +227,13 @@ abstract class _$$AnalysedSegmentTextImplCopyWith<$Res>
 
 /// @nodoc
 class __$$AnalysedSegmentTextImplCopyWithImpl<$Res>
-    extends _$AnalysedSegmentCopyWithImpl<$Res, _$AnalysedSegmentTextImpl>
+    extends _$AnalysedSegmentStatusCopyWithImpl<$Res, _$AnalysedSegmentTextImpl>
     implements _$$AnalysedSegmentTextImplCopyWith<$Res> {
   __$$AnalysedSegmentTextImplCopyWithImpl(_$AnalysedSegmentTextImpl _value,
       $Res Function(_$AnalysedSegmentTextImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of AnalysedSegment
+  /// Create a copy of AnalysedSegmentStatus
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -267,7 +267,7 @@ class _$AnalysedSegmentTextImpl implements _AnalysedSegmentText {
 
   @override
   String toString() {
-    return 'AnalysedSegment.text(offset: $offset, segmentText: $segmentText)';
+    return 'AnalysedSegmentStatus.text(offset: $offset, segmentText: $segmentText)';
   }
 
   @override
@@ -283,7 +283,7 @@ class _$AnalysedSegmentTextImpl implements _AnalysedSegmentText {
   @override
   int get hashCode => Object.hash(runtimeType, offset, segmentText);
 
-  /// Create a copy of AnalysedSegment
+  /// Create a copy of AnalysedSegmentStatus
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -376,8 +376,7 @@ class _$AnalysedSegmentTextImpl implements _AnalysedSegmentText {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_AnalysedSegmentText value) text,
-    required TResult Function(_AnalysedSegmentDeclaration value)
-        validDeclaration,
+    required TResult Function(_AnalysedSegmentValid value) validDeclaration,
     required TResult Function(_AnalysedSegmentInvalidMapDeclaration value)
         invalidMapDeclaration,
     required TResult Function(
@@ -409,7 +408,7 @@ class _$AnalysedSegmentTextImpl implements _AnalysedSegmentText {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_AnalysedSegmentText value)? text,
-    TResult? Function(_AnalysedSegmentDeclaration value)? validDeclaration,
+    TResult? Function(_AnalysedSegmentValid value)? validDeclaration,
     TResult? Function(_AnalysedSegmentInvalidMapDeclaration value)?
         invalidMapDeclaration,
     TResult? Function(_AnalysedSegmentModelDeclarationOpenWithoutClose value)?
@@ -436,7 +435,7 @@ class _$AnalysedSegmentTextImpl implements _AnalysedSegmentText {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_AnalysedSegmentText value)? text,
-    TResult Function(_AnalysedSegmentDeclaration value)? validDeclaration,
+    TResult Function(_AnalysedSegmentValid value)? validDeclaration,
     TResult Function(_AnalysedSegmentInvalidMapDeclaration value)?
         invalidMapDeclaration,
     TResult Function(_AnalysedSegmentModelDeclarationOpenWithoutClose value)?
@@ -464,7 +463,7 @@ class _$AnalysedSegmentTextImpl implements _AnalysedSegmentText {
   }
 }
 
-abstract class _AnalysedSegmentText implements AnalysedSegment {
+abstract class _AnalysedSegmentText implements AnalysedSegmentStatus {
   factory _AnalysedSegmentText(
       {required final TextOffset offset,
       required final String segmentText}) = _$AnalysedSegmentTextImpl;
@@ -475,7 +474,7 @@ abstract class _AnalysedSegmentText implements AnalysedSegment {
   @override
   String get segmentText;
 
-  /// Create a copy of AnalysedSegment
+  /// Create a copy of AnalysedSegmentStatus
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -485,7 +484,7 @@ abstract class _AnalysedSegmentText implements AnalysedSegment {
 
 /// @nodoc
 abstract class _$$AnalysedSegmentDeclarationImplCopyWith<$Res>
-    implements $AnalysedSegmentCopyWith<$Res> {
+    implements $AnalysedSegmentStatusCopyWith<$Res> {
   factory _$$AnalysedSegmentDeclarationImplCopyWith(
           _$AnalysedSegmentDeclarationImpl value,
           $Res Function(_$AnalysedSegmentDeclarationImpl) then) =
@@ -497,7 +496,7 @@ abstract class _$$AnalysedSegmentDeclarationImplCopyWith<$Res>
 
 /// @nodoc
 class __$$AnalysedSegmentDeclarationImplCopyWithImpl<$Res>
-    extends _$AnalysedSegmentCopyWithImpl<$Res,
+    extends _$AnalysedSegmentStatusCopyWithImpl<$Res,
         _$AnalysedSegmentDeclarationImpl>
     implements _$$AnalysedSegmentDeclarationImplCopyWith<$Res> {
   __$$AnalysedSegmentDeclarationImplCopyWithImpl(
@@ -505,7 +504,7 @@ class __$$AnalysedSegmentDeclarationImplCopyWithImpl<$Res>
       $Res Function(_$AnalysedSegmentDeclarationImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of AnalysedSegment
+  /// Create a copy of AnalysedSegmentStatus
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -528,11 +527,10 @@ class __$$AnalysedSegmentDeclarationImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$AnalysedSegmentDeclarationImpl implements _AnalysedSegmentDeclaration {
+class _$AnalysedSegmentDeclarationImpl implements _AnalysedSegmentValid {
   _$AnalysedSegmentDeclarationImpl(
       {required this.offset, required this.segmentText});
 
-// ✅
   @override
   final TextOffset offset;
   @override
@@ -540,7 +538,7 @@ class _$AnalysedSegmentDeclarationImpl implements _AnalysedSegmentDeclaration {
 
   @override
   String toString() {
-    return 'AnalysedSegment.validDeclaration(offset: $offset, segmentText: $segmentText)';
+    return 'AnalysedSegmentStatus.validDeclaration(offset: $offset, segmentText: $segmentText)';
   }
 
   @override
@@ -556,7 +554,7 @@ class _$AnalysedSegmentDeclarationImpl implements _AnalysedSegmentDeclaration {
   @override
   int get hashCode => Object.hash(runtimeType, offset, segmentText);
 
-  /// Create a copy of AnalysedSegment
+  /// Create a copy of AnalysedSegmentStatus
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -649,8 +647,7 @@ class _$AnalysedSegmentDeclarationImpl implements _AnalysedSegmentDeclaration {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_AnalysedSegmentText value) text,
-    required TResult Function(_AnalysedSegmentDeclaration value)
-        validDeclaration,
+    required TResult Function(_AnalysedSegmentValid value) validDeclaration,
     required TResult Function(_AnalysedSegmentInvalidMapDeclaration value)
         invalidMapDeclaration,
     required TResult Function(
@@ -682,7 +679,7 @@ class _$AnalysedSegmentDeclarationImpl implements _AnalysedSegmentDeclaration {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_AnalysedSegmentText value)? text,
-    TResult? Function(_AnalysedSegmentDeclaration value)? validDeclaration,
+    TResult? Function(_AnalysedSegmentValid value)? validDeclaration,
     TResult? Function(_AnalysedSegmentInvalidMapDeclaration value)?
         invalidMapDeclaration,
     TResult? Function(_AnalysedSegmentModelDeclarationOpenWithoutClose value)?
@@ -709,7 +706,7 @@ class _$AnalysedSegmentDeclarationImpl implements _AnalysedSegmentDeclaration {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_AnalysedSegmentText value)? text,
-    TResult Function(_AnalysedSegmentDeclaration value)? validDeclaration,
+    TResult Function(_AnalysedSegmentValid value)? validDeclaration,
     TResult Function(_AnalysedSegmentInvalidMapDeclaration value)?
         invalidMapDeclaration,
     TResult Function(_AnalysedSegmentModelDeclarationOpenWithoutClose value)?
@@ -737,18 +734,17 @@ class _$AnalysedSegmentDeclarationImpl implements _AnalysedSegmentDeclaration {
   }
 }
 
-abstract class _AnalysedSegmentDeclaration implements AnalysedSegment {
-  factory _AnalysedSegmentDeclaration(
+abstract class _AnalysedSegmentValid implements AnalysedSegmentStatus {
+  factory _AnalysedSegmentValid(
       {required final TextOffset offset,
       required final String segmentText}) = _$AnalysedSegmentDeclarationImpl;
 
-// ✅
   @override
   TextOffset get offset;
   @override
   String get segmentText;
 
-  /// Create a copy of AnalysedSegment
+  /// Create a copy of AnalysedSegmentStatus
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -758,7 +754,7 @@ abstract class _AnalysedSegmentDeclaration implements AnalysedSegment {
 
 /// @nodoc
 abstract class _$$AnalysedSegmentInvalidMapDeclarationImplCopyWith<$Res>
-    implements $AnalysedSegmentCopyWith<$Res> {
+    implements $AnalysedSegmentStatusCopyWith<$Res> {
   factory _$$AnalysedSegmentInvalidMapDeclarationImplCopyWith(
           _$AnalysedSegmentInvalidMapDeclarationImpl value,
           $Res Function(_$AnalysedSegmentInvalidMapDeclarationImpl) then) =
@@ -770,7 +766,7 @@ abstract class _$$AnalysedSegmentInvalidMapDeclarationImplCopyWith<$Res>
 
 /// @nodoc
 class __$$AnalysedSegmentInvalidMapDeclarationImplCopyWithImpl<$Res>
-    extends _$AnalysedSegmentCopyWithImpl<$Res,
+    extends _$AnalysedSegmentStatusCopyWithImpl<$Res,
         _$AnalysedSegmentInvalidMapDeclarationImpl>
     implements _$$AnalysedSegmentInvalidMapDeclarationImplCopyWith<$Res> {
   __$$AnalysedSegmentInvalidMapDeclarationImplCopyWithImpl(
@@ -778,7 +774,7 @@ class __$$AnalysedSegmentInvalidMapDeclarationImplCopyWithImpl<$Res>
       $Res Function(_$AnalysedSegmentInvalidMapDeclarationImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of AnalysedSegment
+  /// Create a copy of AnalysedSegmentStatus
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -814,7 +810,7 @@ class _$AnalysedSegmentInvalidMapDeclarationImpl
 
   @override
   String toString() {
-    return 'AnalysedSegment.invalidMapDeclaration(offset: $offset, segmentText: $segmentText)';
+    return 'AnalysedSegmentStatus.invalidMapDeclaration(offset: $offset, segmentText: $segmentText)';
   }
 
   @override
@@ -830,7 +826,7 @@ class _$AnalysedSegmentInvalidMapDeclarationImpl
   @override
   int get hashCode => Object.hash(runtimeType, offset, segmentText);
 
-  /// Create a copy of AnalysedSegment
+  /// Create a copy of AnalysedSegmentStatus
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -924,8 +920,7 @@ class _$AnalysedSegmentInvalidMapDeclarationImpl
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_AnalysedSegmentText value) text,
-    required TResult Function(_AnalysedSegmentDeclaration value)
-        validDeclaration,
+    required TResult Function(_AnalysedSegmentValid value) validDeclaration,
     required TResult Function(_AnalysedSegmentInvalidMapDeclaration value)
         invalidMapDeclaration,
     required TResult Function(
@@ -957,7 +952,7 @@ class _$AnalysedSegmentInvalidMapDeclarationImpl
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_AnalysedSegmentText value)? text,
-    TResult? Function(_AnalysedSegmentDeclaration value)? validDeclaration,
+    TResult? Function(_AnalysedSegmentValid value)? validDeclaration,
     TResult? Function(_AnalysedSegmentInvalidMapDeclaration value)?
         invalidMapDeclaration,
     TResult? Function(_AnalysedSegmentModelDeclarationOpenWithoutClose value)?
@@ -984,7 +979,7 @@ class _$AnalysedSegmentInvalidMapDeclarationImpl
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_AnalysedSegmentText value)? text,
-    TResult Function(_AnalysedSegmentDeclaration value)? validDeclaration,
+    TResult Function(_AnalysedSegmentValid value)? validDeclaration,
     TResult Function(_AnalysedSegmentInvalidMapDeclaration value)?
         invalidMapDeclaration,
     TResult Function(_AnalysedSegmentModelDeclarationOpenWithoutClose value)?
@@ -1013,7 +1008,7 @@ class _$AnalysedSegmentInvalidMapDeclarationImpl
 }
 
 abstract class _AnalysedSegmentInvalidMapDeclaration
-    implements AnalysedSegment {
+    implements AnalysedSegmentStatus {
   factory _AnalysedSegmentInvalidMapDeclaration(
           {required final TextOffset offset,
           required final String segmentText}) =
@@ -1025,7 +1020,7 @@ abstract class _AnalysedSegmentInvalidMapDeclaration
   @override
   String get segmentText;
 
-  /// Create a copy of AnalysedSegment
+  /// Create a copy of AnalysedSegmentStatus
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1036,7 +1031,7 @@ abstract class _AnalysedSegmentInvalidMapDeclaration
 
 /// @nodoc
 abstract class _$$AnalysedSegmentModelDeclarationOpenWithoutCloseImplCopyWith<
-    $Res> implements $AnalysedSegmentCopyWith<$Res> {
+    $Res> implements $AnalysedSegmentStatusCopyWith<$Res> {
   factory _$$AnalysedSegmentModelDeclarationOpenWithoutCloseImplCopyWith(
           _$AnalysedSegmentModelDeclarationOpenWithoutCloseImpl value,
           $Res Function(_$AnalysedSegmentModelDeclarationOpenWithoutCloseImpl)
@@ -1049,7 +1044,7 @@ abstract class _$$AnalysedSegmentModelDeclarationOpenWithoutCloseImplCopyWith<
 
 /// @nodoc
 class __$$AnalysedSegmentModelDeclarationOpenWithoutCloseImplCopyWithImpl<$Res>
-    extends _$AnalysedSegmentCopyWithImpl<$Res,
+    extends _$AnalysedSegmentStatusCopyWithImpl<$Res,
         _$AnalysedSegmentModelDeclarationOpenWithoutCloseImpl>
     implements
         _$$AnalysedSegmentModelDeclarationOpenWithoutCloseImplCopyWith<$Res> {
@@ -1059,7 +1054,7 @@ class __$$AnalysedSegmentModelDeclarationOpenWithoutCloseImplCopyWithImpl<$Res>
           _then)
       : super(_value, _then);
 
-  /// Create a copy of AnalysedSegment
+  /// Create a copy of AnalysedSegmentStatus
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -1095,7 +1090,7 @@ class _$AnalysedSegmentModelDeclarationOpenWithoutCloseImpl
 
   @override
   String toString() {
-    return 'AnalysedSegment.modelDeclarationOpenWithoutClose(offset: $offset, segmentText: $segmentText)';
+    return 'AnalysedSegmentStatus.modelDeclarationOpenWithoutClose(offset: $offset, segmentText: $segmentText)';
   }
 
   @override
@@ -1111,7 +1106,7 @@ class _$AnalysedSegmentModelDeclarationOpenWithoutCloseImpl
   @override
   int get hashCode => Object.hash(runtimeType, offset, segmentText);
 
-  /// Create a copy of AnalysedSegment
+  /// Create a copy of AnalysedSegmentStatus
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -1207,8 +1202,7 @@ class _$AnalysedSegmentModelDeclarationOpenWithoutCloseImpl
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_AnalysedSegmentText value) text,
-    required TResult Function(_AnalysedSegmentDeclaration value)
-        validDeclaration,
+    required TResult Function(_AnalysedSegmentValid value) validDeclaration,
     required TResult Function(_AnalysedSegmentInvalidMapDeclaration value)
         invalidMapDeclaration,
     required TResult Function(
@@ -1240,7 +1234,7 @@ class _$AnalysedSegmentModelDeclarationOpenWithoutCloseImpl
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_AnalysedSegmentText value)? text,
-    TResult? Function(_AnalysedSegmentDeclaration value)? validDeclaration,
+    TResult? Function(_AnalysedSegmentValid value)? validDeclaration,
     TResult? Function(_AnalysedSegmentInvalidMapDeclaration value)?
         invalidMapDeclaration,
     TResult? Function(_AnalysedSegmentModelDeclarationOpenWithoutClose value)?
@@ -1267,7 +1261,7 @@ class _$AnalysedSegmentModelDeclarationOpenWithoutCloseImpl
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_AnalysedSegmentText value)? text,
-    TResult Function(_AnalysedSegmentDeclaration value)? validDeclaration,
+    TResult Function(_AnalysedSegmentValid value)? validDeclaration,
     TResult Function(_AnalysedSegmentInvalidMapDeclaration value)?
         invalidMapDeclaration,
     TResult Function(_AnalysedSegmentModelDeclarationOpenWithoutClose value)?
@@ -1296,7 +1290,7 @@ class _$AnalysedSegmentModelDeclarationOpenWithoutCloseImpl
 }
 
 abstract class _AnalysedSegmentModelDeclarationOpenWithoutClose
-    implements AnalysedSegment {
+    implements AnalysedSegmentStatus {
   factory _AnalysedSegmentModelDeclarationOpenWithoutClose(
           {required final TextOffset offset,
           required final String segmentText}) =
@@ -1308,7 +1302,7 @@ abstract class _AnalysedSegmentModelDeclarationOpenWithoutClose
   @override
   String get segmentText;
 
-  /// Create a copy of AnalysedSegment
+  /// Create a copy of AnalysedSegmentStatus
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1319,7 +1313,7 @@ abstract class _AnalysedSegmentModelDeclarationOpenWithoutClose
 
 /// @nodoc
 abstract class _$$AnalysedSegmentModelDeclarationCloseWithoutOpenImplCopyWith<
-    $Res> implements $AnalysedSegmentCopyWith<$Res> {
+    $Res> implements $AnalysedSegmentStatusCopyWith<$Res> {
   factory _$$AnalysedSegmentModelDeclarationCloseWithoutOpenImplCopyWith(
           _$AnalysedSegmentModelDeclarationCloseWithoutOpenImpl value,
           $Res Function(_$AnalysedSegmentModelDeclarationCloseWithoutOpenImpl)
@@ -1332,7 +1326,7 @@ abstract class _$$AnalysedSegmentModelDeclarationCloseWithoutOpenImplCopyWith<
 
 /// @nodoc
 class __$$AnalysedSegmentModelDeclarationCloseWithoutOpenImplCopyWithImpl<$Res>
-    extends _$AnalysedSegmentCopyWithImpl<$Res,
+    extends _$AnalysedSegmentStatusCopyWithImpl<$Res,
         _$AnalysedSegmentModelDeclarationCloseWithoutOpenImpl>
     implements
         _$$AnalysedSegmentModelDeclarationCloseWithoutOpenImplCopyWith<$Res> {
@@ -1342,7 +1336,7 @@ class __$$AnalysedSegmentModelDeclarationCloseWithoutOpenImplCopyWithImpl<$Res>
           _then)
       : super(_value, _then);
 
-  /// Create a copy of AnalysedSegment
+  /// Create a copy of AnalysedSegmentStatus
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -1378,7 +1372,7 @@ class _$AnalysedSegmentModelDeclarationCloseWithoutOpenImpl
 
   @override
   String toString() {
-    return 'AnalysedSegment.modelDeclarationCloseWithoutOpen(offset: $offset, segmentText: $segmentText)';
+    return 'AnalysedSegmentStatus.modelDeclarationCloseWithoutOpen(offset: $offset, segmentText: $segmentText)';
   }
 
   @override
@@ -1394,7 +1388,7 @@ class _$AnalysedSegmentModelDeclarationCloseWithoutOpenImpl
   @override
   int get hashCode => Object.hash(runtimeType, offset, segmentText);
 
-  /// Create a copy of AnalysedSegment
+  /// Create a copy of AnalysedSegmentStatus
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -1490,8 +1484,7 @@ class _$AnalysedSegmentModelDeclarationCloseWithoutOpenImpl
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_AnalysedSegmentText value) text,
-    required TResult Function(_AnalysedSegmentDeclaration value)
-        validDeclaration,
+    required TResult Function(_AnalysedSegmentValid value) validDeclaration,
     required TResult Function(_AnalysedSegmentInvalidMapDeclaration value)
         invalidMapDeclaration,
     required TResult Function(
@@ -1523,7 +1516,7 @@ class _$AnalysedSegmentModelDeclarationCloseWithoutOpenImpl
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_AnalysedSegmentText value)? text,
-    TResult? Function(_AnalysedSegmentDeclaration value)? validDeclaration,
+    TResult? Function(_AnalysedSegmentValid value)? validDeclaration,
     TResult? Function(_AnalysedSegmentInvalidMapDeclaration value)?
         invalidMapDeclaration,
     TResult? Function(_AnalysedSegmentModelDeclarationOpenWithoutClose value)?
@@ -1550,7 +1543,7 @@ class _$AnalysedSegmentModelDeclarationCloseWithoutOpenImpl
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_AnalysedSegmentText value)? text,
-    TResult Function(_AnalysedSegmentDeclaration value)? validDeclaration,
+    TResult Function(_AnalysedSegmentValid value)? validDeclaration,
     TResult Function(_AnalysedSegmentInvalidMapDeclaration value)?
         invalidMapDeclaration,
     TResult Function(_AnalysedSegmentModelDeclarationOpenWithoutClose value)?
@@ -1579,7 +1572,7 @@ class _$AnalysedSegmentModelDeclarationCloseWithoutOpenImpl
 }
 
 abstract class _AnalysedSegmentModelDeclarationCloseWithoutOpen
-    implements AnalysedSegment {
+    implements AnalysedSegmentStatus {
   factory _AnalysedSegmentModelDeclarationCloseWithoutOpen(
           {required final TextOffset offset,
           required final String segmentText}) =
@@ -1591,7 +1584,7 @@ abstract class _AnalysedSegmentModelDeclarationCloseWithoutOpen
   @override
   String get segmentText;
 
-  /// Create a copy of AnalysedSegment
+  /// Create a copy of AnalysedSegmentStatus
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1602,7 +1595,7 @@ abstract class _AnalysedSegmentModelDeclarationCloseWithoutOpen
 
 /// @nodoc
 abstract class _$$AnalysedSegmentBooleanDeclarationOpenWithoutCloseImplCopyWith<
-    $Res> implements $AnalysedSegmentCopyWith<$Res> {
+    $Res> implements $AnalysedSegmentStatusCopyWith<$Res> {
   factory _$$AnalysedSegmentBooleanDeclarationOpenWithoutCloseImplCopyWith(
           _$AnalysedSegmentBooleanDeclarationOpenWithoutCloseImpl value,
           $Res Function(_$AnalysedSegmentBooleanDeclarationOpenWithoutCloseImpl)
@@ -1617,7 +1610,7 @@ abstract class _$$AnalysedSegmentBooleanDeclarationOpenWithoutCloseImplCopyWith<
 /// @nodoc
 class __$$AnalysedSegmentBooleanDeclarationOpenWithoutCloseImplCopyWithImpl<
         $Res>
-    extends _$AnalysedSegmentCopyWithImpl<$Res,
+    extends _$AnalysedSegmentStatusCopyWithImpl<$Res,
         _$AnalysedSegmentBooleanDeclarationOpenWithoutCloseImpl>
     implements
         _$$AnalysedSegmentBooleanDeclarationOpenWithoutCloseImplCopyWith<$Res> {
@@ -1627,7 +1620,7 @@ class __$$AnalysedSegmentBooleanDeclarationOpenWithoutCloseImplCopyWithImpl<
           _then)
       : super(_value, _then);
 
-  /// Create a copy of AnalysedSegment
+  /// Create a copy of AnalysedSegmentStatus
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -1663,7 +1656,7 @@ class _$AnalysedSegmentBooleanDeclarationOpenWithoutCloseImpl
 
   @override
   String toString() {
-    return 'AnalysedSegment.booleanDeclarationOpenWithoutClose(offset: $offset, segmentText: $segmentText)';
+    return 'AnalysedSegmentStatus.booleanDeclarationOpenWithoutClose(offset: $offset, segmentText: $segmentText)';
   }
 
   @override
@@ -1679,7 +1672,7 @@ class _$AnalysedSegmentBooleanDeclarationOpenWithoutCloseImpl
   @override
   int get hashCode => Object.hash(runtimeType, offset, segmentText);
 
-  /// Create a copy of AnalysedSegment
+  /// Create a copy of AnalysedSegmentStatus
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -1775,8 +1768,7 @@ class _$AnalysedSegmentBooleanDeclarationOpenWithoutCloseImpl
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_AnalysedSegmentText value) text,
-    required TResult Function(_AnalysedSegmentDeclaration value)
-        validDeclaration,
+    required TResult Function(_AnalysedSegmentValid value) validDeclaration,
     required TResult Function(_AnalysedSegmentInvalidMapDeclaration value)
         invalidMapDeclaration,
     required TResult Function(
@@ -1808,7 +1800,7 @@ class _$AnalysedSegmentBooleanDeclarationOpenWithoutCloseImpl
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_AnalysedSegmentText value)? text,
-    TResult? Function(_AnalysedSegmentDeclaration value)? validDeclaration,
+    TResult? Function(_AnalysedSegmentValid value)? validDeclaration,
     TResult? Function(_AnalysedSegmentInvalidMapDeclaration value)?
         invalidMapDeclaration,
     TResult? Function(_AnalysedSegmentModelDeclarationOpenWithoutClose value)?
@@ -1835,7 +1827,7 @@ class _$AnalysedSegmentBooleanDeclarationOpenWithoutCloseImpl
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_AnalysedSegmentText value)? text,
-    TResult Function(_AnalysedSegmentDeclaration value)? validDeclaration,
+    TResult Function(_AnalysedSegmentValid value)? validDeclaration,
     TResult Function(_AnalysedSegmentInvalidMapDeclaration value)?
         invalidMapDeclaration,
     TResult Function(_AnalysedSegmentModelDeclarationOpenWithoutClose value)?
@@ -1864,7 +1856,7 @@ class _$AnalysedSegmentBooleanDeclarationOpenWithoutCloseImpl
 }
 
 abstract class _AnalysedSegmentBooleanDeclarationOpenWithoutClose
-    implements AnalysedSegment {
+    implements AnalysedSegmentStatus {
   factory _AnalysedSegmentBooleanDeclarationOpenWithoutClose(
           {required final TextOffset offset,
           required final String segmentText}) =
@@ -1876,7 +1868,7 @@ abstract class _AnalysedSegmentBooleanDeclarationOpenWithoutClose
   @override
   String get segmentText;
 
-  /// Create a copy of AnalysedSegment
+  /// Create a copy of AnalysedSegmentStatus
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1887,7 +1879,7 @@ abstract class _AnalysedSegmentBooleanDeclarationOpenWithoutClose
 
 /// @nodoc
 abstract class _$$AnalysedSegmentBooleanDeclarationCloseWithoutOpenImplCopyWith<
-    $Res> implements $AnalysedSegmentCopyWith<$Res> {
+    $Res> implements $AnalysedSegmentStatusCopyWith<$Res> {
   factory _$$AnalysedSegmentBooleanDeclarationCloseWithoutOpenImplCopyWith(
           _$AnalysedSegmentBooleanDeclarationCloseWithoutOpenImpl value,
           $Res Function(_$AnalysedSegmentBooleanDeclarationCloseWithoutOpenImpl)
@@ -1902,7 +1894,7 @@ abstract class _$$AnalysedSegmentBooleanDeclarationCloseWithoutOpenImplCopyWith<
 /// @nodoc
 class __$$AnalysedSegmentBooleanDeclarationCloseWithoutOpenImplCopyWithImpl<
         $Res>
-    extends _$AnalysedSegmentCopyWithImpl<$Res,
+    extends _$AnalysedSegmentStatusCopyWithImpl<$Res,
         _$AnalysedSegmentBooleanDeclarationCloseWithoutOpenImpl>
     implements
         _$$AnalysedSegmentBooleanDeclarationCloseWithoutOpenImplCopyWith<$Res> {
@@ -1912,7 +1904,7 @@ class __$$AnalysedSegmentBooleanDeclarationCloseWithoutOpenImplCopyWithImpl<
           _then)
       : super(_value, _then);
 
-  /// Create a copy of AnalysedSegment
+  /// Create a copy of AnalysedSegmentStatus
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -1948,7 +1940,7 @@ class _$AnalysedSegmentBooleanDeclarationCloseWithoutOpenImpl
 
   @override
   String toString() {
-    return 'AnalysedSegment.booleanDeclarationCloseWithoutOpen(offset: $offset, segmentText: $segmentText)';
+    return 'AnalysedSegmentStatus.booleanDeclarationCloseWithoutOpen(offset: $offset, segmentText: $segmentText)';
   }
 
   @override
@@ -1964,7 +1956,7 @@ class _$AnalysedSegmentBooleanDeclarationCloseWithoutOpenImpl
   @override
   int get hashCode => Object.hash(runtimeType, offset, segmentText);
 
-  /// Create a copy of AnalysedSegment
+  /// Create a copy of AnalysedSegmentStatus
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -2060,8 +2052,7 @@ class _$AnalysedSegmentBooleanDeclarationCloseWithoutOpenImpl
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_AnalysedSegmentText value) text,
-    required TResult Function(_AnalysedSegmentDeclaration value)
-        validDeclaration,
+    required TResult Function(_AnalysedSegmentValid value) validDeclaration,
     required TResult Function(_AnalysedSegmentInvalidMapDeclaration value)
         invalidMapDeclaration,
     required TResult Function(
@@ -2093,7 +2084,7 @@ class _$AnalysedSegmentBooleanDeclarationCloseWithoutOpenImpl
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_AnalysedSegmentText value)? text,
-    TResult? Function(_AnalysedSegmentDeclaration value)? validDeclaration,
+    TResult? Function(_AnalysedSegmentValid value)? validDeclaration,
     TResult? Function(_AnalysedSegmentInvalidMapDeclaration value)?
         invalidMapDeclaration,
     TResult? Function(_AnalysedSegmentModelDeclarationOpenWithoutClose value)?
@@ -2120,7 +2111,7 @@ class _$AnalysedSegmentBooleanDeclarationCloseWithoutOpenImpl
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_AnalysedSegmentText value)? text,
-    TResult Function(_AnalysedSegmentDeclaration value)? validDeclaration,
+    TResult Function(_AnalysedSegmentValid value)? validDeclaration,
     TResult Function(_AnalysedSegmentInvalidMapDeclaration value)?
         invalidMapDeclaration,
     TResult Function(_AnalysedSegmentModelDeclarationOpenWithoutClose value)?
@@ -2149,7 +2140,7 @@ class _$AnalysedSegmentBooleanDeclarationCloseWithoutOpenImpl
 }
 
 abstract class _AnalysedSegmentBooleanDeclarationCloseWithoutOpen
-    implements AnalysedSegment {
+    implements AnalysedSegmentStatus {
   factory _AnalysedSegmentBooleanDeclarationCloseWithoutOpen(
           {required final TextOffset offset,
           required final String segmentText}) =
@@ -2161,7 +2152,7 @@ abstract class _AnalysedSegmentBooleanDeclarationCloseWithoutOpen
   @override
   String get segmentText;
 
-  /// Create a copy of AnalysedSegment
+  /// Create a copy of AnalysedSegmentStatus
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -2172,7 +2163,7 @@ abstract class _AnalysedSegmentBooleanDeclarationCloseWithoutOpen
 
 /// @nodoc
 abstract class _$$AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiterImplCopyWith<
-    $Res> implements $AnalysedSegmentCopyWith<$Res> {
+    $Res> implements $AnalysedSegmentStatusCopyWith<$Res> {
   factory _$$AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiterImplCopyWith(
           _$AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiterImpl value,
           $Res Function(
@@ -2188,7 +2179,7 @@ abstract class _$$AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiterImplCo
 /// @nodoc
 class __$$AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiterImplCopyWithImpl<
         $Res>
-    extends _$AnalysedSegmentCopyWithImpl<$Res,
+    extends _$AnalysedSegmentStatusCopyWithImpl<$Res,
         _$AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiterImpl>
     implements
         _$$AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiterImplCopyWith<
@@ -2200,7 +2191,7 @@ class __$$AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiterImplCopyWithIm
           _then)
       : super(_value, _then);
 
-  /// Create a copy of AnalysedSegment
+  /// Create a copy of AnalysedSegmentStatus
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -2236,7 +2227,7 @@ class _$AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiterImpl
 
   @override
   String toString() {
-    return 'AnalysedSegment.nonModelVariableWithOpenOrCloseDelimmiter(offset: $offset, segmentText: $segmentText)';
+    return 'AnalysedSegmentStatus.nonModelVariableWithOpenOrCloseDelimmiter(offset: $offset, segmentText: $segmentText)';
   }
 
   @override
@@ -2253,7 +2244,7 @@ class _$AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiterImpl
   @override
   int get hashCode => Object.hash(runtimeType, offset, segmentText);
 
-  /// Create a copy of AnalysedSegment
+  /// Create a copy of AnalysedSegmentStatus
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -2349,8 +2340,7 @@ class _$AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiterImpl
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_AnalysedSegmentText value) text,
-    required TResult Function(_AnalysedSegmentDeclaration value)
-        validDeclaration,
+    required TResult Function(_AnalysedSegmentValid value) validDeclaration,
     required TResult Function(_AnalysedSegmentInvalidMapDeclaration value)
         invalidMapDeclaration,
     required TResult Function(
@@ -2382,7 +2372,7 @@ class _$AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiterImpl
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_AnalysedSegmentText value)? text,
-    TResult? Function(_AnalysedSegmentDeclaration value)? validDeclaration,
+    TResult? Function(_AnalysedSegmentValid value)? validDeclaration,
     TResult? Function(_AnalysedSegmentInvalidMapDeclaration value)?
         invalidMapDeclaration,
     TResult? Function(_AnalysedSegmentModelDeclarationOpenWithoutClose value)?
@@ -2409,7 +2399,7 @@ class _$AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiterImpl
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_AnalysedSegmentText value)? text,
-    TResult Function(_AnalysedSegmentDeclaration value)? validDeclaration,
+    TResult Function(_AnalysedSegmentValid value)? validDeclaration,
     TResult Function(_AnalysedSegmentInvalidMapDeclaration value)?
         invalidMapDeclaration,
     TResult Function(_AnalysedSegmentModelDeclarationOpenWithoutClose value)?
@@ -2438,7 +2428,7 @@ class _$AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiterImpl
 }
 
 abstract class _AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiter
-    implements AnalysedSegment {
+    implements AnalysedSegmentStatus {
   factory _AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiter(
           {required final TextOffset offset,
           required final String segmentText}) =
@@ -2450,7 +2440,7 @@ abstract class _AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiter
   @override
   String get segmentText;
 
-  /// Create a copy of AnalysedSegment
+  /// Create a copy of AnalysedSegmentStatus
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -2461,7 +2451,7 @@ abstract class _AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiter
 
 /// @nodoc
 abstract class _$$AnalysedSegmentDeclarationOfUncatalogedVariableImplCopyWith<
-    $Res> implements $AnalysedSegmentCopyWith<$Res> {
+    $Res> implements $AnalysedSegmentStatusCopyWith<$Res> {
   factory _$$AnalysedSegmentDeclarationOfUncatalogedVariableImplCopyWith(
           _$AnalysedSegmentDeclarationOfUncatalogedVariableImpl value,
           $Res Function(_$AnalysedSegmentDeclarationOfUncatalogedVariableImpl)
@@ -2474,7 +2464,7 @@ abstract class _$$AnalysedSegmentDeclarationOfUncatalogedVariableImplCopyWith<
 
 /// @nodoc
 class __$$AnalysedSegmentDeclarationOfUncatalogedVariableImplCopyWithImpl<$Res>
-    extends _$AnalysedSegmentCopyWithImpl<$Res,
+    extends _$AnalysedSegmentStatusCopyWithImpl<$Res,
         _$AnalysedSegmentDeclarationOfUncatalogedVariableImpl>
     implements
         _$$AnalysedSegmentDeclarationOfUncatalogedVariableImplCopyWith<$Res> {
@@ -2484,7 +2474,7 @@ class __$$AnalysedSegmentDeclarationOfUncatalogedVariableImplCopyWithImpl<$Res>
           _then)
       : super(_value, _then);
 
-  /// Create a copy of AnalysedSegment
+  /// Create a copy of AnalysedSegmentStatus
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -2520,7 +2510,7 @@ class _$AnalysedSegmentDeclarationOfUncatalogedVariableImpl
 
   @override
   String toString() {
-    return 'AnalysedSegment.declarationOfUncatalogedVariable(offset: $offset, segmentText: $segmentText)';
+    return 'AnalysedSegmentStatus.declarationOfUncatalogedVariable(offset: $offset, segmentText: $segmentText)';
   }
 
   @override
@@ -2536,7 +2526,7 @@ class _$AnalysedSegmentDeclarationOfUncatalogedVariableImpl
   @override
   int get hashCode => Object.hash(runtimeType, offset, segmentText);
 
-  /// Create a copy of AnalysedSegment
+  /// Create a copy of AnalysedSegmentStatus
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -2632,8 +2622,7 @@ class _$AnalysedSegmentDeclarationOfUncatalogedVariableImpl
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_AnalysedSegmentText value) text,
-    required TResult Function(_AnalysedSegmentDeclaration value)
-        validDeclaration,
+    required TResult Function(_AnalysedSegmentValid value) validDeclaration,
     required TResult Function(_AnalysedSegmentInvalidMapDeclaration value)
         invalidMapDeclaration,
     required TResult Function(
@@ -2665,7 +2654,7 @@ class _$AnalysedSegmentDeclarationOfUncatalogedVariableImpl
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_AnalysedSegmentText value)? text,
-    TResult? Function(_AnalysedSegmentDeclaration value)? validDeclaration,
+    TResult? Function(_AnalysedSegmentValid value)? validDeclaration,
     TResult? Function(_AnalysedSegmentInvalidMapDeclaration value)?
         invalidMapDeclaration,
     TResult? Function(_AnalysedSegmentModelDeclarationOpenWithoutClose value)?
@@ -2692,7 +2681,7 @@ class _$AnalysedSegmentDeclarationOfUncatalogedVariableImpl
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_AnalysedSegmentText value)? text,
-    TResult Function(_AnalysedSegmentDeclaration value)? validDeclaration,
+    TResult Function(_AnalysedSegmentValid value)? validDeclaration,
     TResult Function(_AnalysedSegmentInvalidMapDeclaration value)?
         invalidMapDeclaration,
     TResult Function(_AnalysedSegmentModelDeclarationOpenWithoutClose value)?
@@ -2721,7 +2710,7 @@ class _$AnalysedSegmentDeclarationOfUncatalogedVariableImpl
 }
 
 abstract class _AnalysedSegmentDeclarationOfUncatalogedVariable
-    implements AnalysedSegment {
+    implements AnalysedSegmentStatus {
   factory _AnalysedSegmentDeclarationOfUncatalogedVariable(
           {required final TextOffset offset,
           required final String segmentText}) =
@@ -2733,7 +2722,7 @@ abstract class _AnalysedSegmentDeclarationOfUncatalogedVariable
   @override
   String get segmentText;
 
-  /// Create a copy of AnalysedSegment
+  /// Create a copy of AnalysedSegmentStatus
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -2744,7 +2733,7 @@ abstract class _AnalysedSegmentDeclarationOfUncatalogedVariable
 
 /// @nodoc
 abstract class _$$AnalysedSegmentVariableExistsButCannotBeUsedInThisContextImplCopyWith<
-    $Res> implements $AnalysedSegmentCopyWith<$Res> {
+    $Res> implements $AnalysedSegmentStatusCopyWith<$Res> {
   factory _$$AnalysedSegmentVariableExistsButCannotBeUsedInThisContextImplCopyWith(
           _$AnalysedSegmentVariableExistsButCannotBeUsedInThisContextImpl value,
           $Res Function(
@@ -2760,7 +2749,7 @@ abstract class _$$AnalysedSegmentVariableExistsButCannotBeUsedInThisContextImplC
 /// @nodoc
 class __$$AnalysedSegmentVariableExistsButCannotBeUsedInThisContextImplCopyWithImpl<
         $Res>
-    extends _$AnalysedSegmentCopyWithImpl<$Res,
+    extends _$AnalysedSegmentStatusCopyWithImpl<$Res,
         _$AnalysedSegmentVariableExistsButCannotBeUsedInThisContextImpl>
     implements
         _$$AnalysedSegmentVariableExistsButCannotBeUsedInThisContextImplCopyWith<
@@ -2772,7 +2761,7 @@ class __$$AnalysedSegmentVariableExistsButCannotBeUsedInThisContextImplCopyWithI
           _then)
       : super(_value, _then);
 
-  /// Create a copy of AnalysedSegment
+  /// Create a copy of AnalysedSegmentStatus
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -2809,7 +2798,7 @@ class _$AnalysedSegmentVariableExistsButCannotBeUsedInThisContextImpl
 
   @override
   String toString() {
-    return 'AnalysedSegment.variableExistsButCannotBeUsedInThisContext(offset: $offset, segmentText: $segmentText)';
+    return 'AnalysedSegmentStatus.variableExistsButCannotBeUsedInThisContext(offset: $offset, segmentText: $segmentText)';
   }
 
   @override
@@ -2826,7 +2815,7 @@ class _$AnalysedSegmentVariableExistsButCannotBeUsedInThisContextImpl
   @override
   int get hashCode => Object.hash(runtimeType, offset, segmentText);
 
-  /// Create a copy of AnalysedSegment
+  /// Create a copy of AnalysedSegmentStatus
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -2923,8 +2912,7 @@ class _$AnalysedSegmentVariableExistsButCannotBeUsedInThisContextImpl
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_AnalysedSegmentText value) text,
-    required TResult Function(_AnalysedSegmentDeclaration value)
-        validDeclaration,
+    required TResult Function(_AnalysedSegmentValid value) validDeclaration,
     required TResult Function(_AnalysedSegmentInvalidMapDeclaration value)
         invalidMapDeclaration,
     required TResult Function(
@@ -2956,7 +2944,7 @@ class _$AnalysedSegmentVariableExistsButCannotBeUsedInThisContextImpl
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_AnalysedSegmentText value)? text,
-    TResult? Function(_AnalysedSegmentDeclaration value)? validDeclaration,
+    TResult? Function(_AnalysedSegmentValid value)? validDeclaration,
     TResult? Function(_AnalysedSegmentInvalidMapDeclaration value)?
         invalidMapDeclaration,
     TResult? Function(_AnalysedSegmentModelDeclarationOpenWithoutClose value)?
@@ -2983,7 +2971,7 @@ class _$AnalysedSegmentVariableExistsButCannotBeUsedInThisContextImpl
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_AnalysedSegmentText value)? text,
-    TResult Function(_AnalysedSegmentDeclaration value)? validDeclaration,
+    TResult Function(_AnalysedSegmentValid value)? validDeclaration,
     TResult Function(_AnalysedSegmentInvalidMapDeclaration value)?
         invalidMapDeclaration,
     TResult Function(_AnalysedSegmentModelDeclarationOpenWithoutClose value)?
@@ -3012,7 +3000,7 @@ class _$AnalysedSegmentVariableExistsButCannotBeUsedInThisContextImpl
 }
 
 abstract class _AnalysedSegmentVariableExistsButCannotBeUsedInThisContext
-    implements AnalysedSegment {
+    implements AnalysedSegmentStatus {
   factory _AnalysedSegmentVariableExistsButCannotBeUsedInThisContext(
           {required final TextOffset offset,
           required final String segmentText}) =
@@ -3024,7 +3012,7 @@ abstract class _AnalysedSegmentVariableExistsButCannotBeUsedInThisContext
   @override
   String get segmentText;
 
-  /// Create a copy of AnalysedSegment
+  /// Create a copy of AnalysedSegmentStatus
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)

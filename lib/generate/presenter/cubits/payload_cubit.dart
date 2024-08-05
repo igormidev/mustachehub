@@ -143,6 +143,29 @@ class PayloadCubit extends Cubit<PayloadState> {
     );
   }
 
+  Future<void> addChoicePayloadValue({
+    required ContentInput output,
+    required ExpectedPayload expectedPayload,
+    required ChoicePipe pipe,
+    required String value,
+  }) async {
+    final ExpectedPayloadDto? payloadDto = state.expectedPayloadDto;
+
+    if (payloadDto == null) return;
+
+    final List<ChoicePipeDto> newDtos = [...payloadDto.choiceDtos];
+    final index = newDtos.indexWhere((dto) => dto.pipe.pipeId == pipe.pipeId);
+    newDtos[index] = newDtos[index].copyWith(payloadValue: value);
+
+    await updateContent(
+      output: output,
+      expectedPayload: expectedPayload,
+      expectedPayloadDto: payloadDto.copyWith(
+        choiceDtos: newDtos,
+      ),
+    );
+  }
+
   Future<void> addModelPayloadValue({
     required ContentInput output,
     required ExpectedPayload expectedPayload,

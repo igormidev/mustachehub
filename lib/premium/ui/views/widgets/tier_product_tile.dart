@@ -36,7 +36,7 @@ class TierProductTile extends StatelessWidget {
                     spans: spans,
                   );
                 },
-              ).toList(),
+              ),
               const Spacer(),
               PriceDisplay(tier: tier),
               if (tier != PremiumTier.free) ...[

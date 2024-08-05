@@ -1,26 +1,26 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'token_identifier.freezed.dart';
-part 'token_identifier.g.dart';
+part 'variable_scope_parent_mapper.freezed.dart';
+part 'variable_scope_parent_mapper.g.dart';
 
 @freezed
-abstract class TokenIdentifier with _$TokenIdentifier {
-  const factory TokenIdentifier.text({
+abstract class VariableScopeParentMapper with _$VariableScopeParentMapper {
+  const factory VariableScopeParentMapper.text({
     required String? parrentName,
     required String name,
   }) = TextTokenIdentifier;
 
-  const factory TokenIdentifier.boolean({
+  const factory VariableScopeParentMapper.boolean({
     required String? parrentName,
     required String name,
   }) = BooleanTokenIdentifier;
 
-  const factory TokenIdentifier.choice({
+  const factory VariableScopeParentMapper.choice({
     required String? parrentName,
     required String name,
   }) = ChoiceTokenIdentifier;
 
-  const factory TokenIdentifier.model({
+  const factory VariableScopeParentMapper.model({
     required String? parrentName,
     required String name,
     required List<String> textsNames,
@@ -28,6 +28,6 @@ abstract class TokenIdentifier with _$TokenIdentifier {
     required List<String> subModelsNames,
   }) = ModelTokenIdentifier;
 
-  factory TokenIdentifier.fromJson(Map<String, dynamic> json) =>
-      _$TokenIdentifierFromJson(json);
+  factory VariableScopeParentMapper.fromJson(Map<String, dynamic> json) =>
+      _$VariableScopeParentMapperFromJson(json);
 }

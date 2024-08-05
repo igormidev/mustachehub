@@ -18,7 +18,7 @@ class SectionContentField extends StatelessWidget with ValidatorsMixins {
   final FocusNode textfieldFocusNode;
   final TextEditingController titleController;
   final VariablesInfoHighlightTextEditingController controller;
-  final OptionsController<VariableImplementation> optionsController;
+  final OptionsController<ChoosableVariableImplementations> optionsController;
   final Debouncer decouncer;
   final ContentStringCubit contentStringCubit;
   final VariablesCubit variablesCubit;
@@ -169,7 +169,7 @@ class SectionContentField extends StatelessWidget with ValidatorsMixins {
                     suggestionCardBuilder: (
                       BuildContext dialogContext,
                       Widget Function(
-                        List<VariableImplementation> value,
+                        List<ChoosableVariableImplementations> value,
                       ) listTilesWithOptionsBuilder,
                     ) {
                       return BlocProvider<SuggestionCubit>.value(

@@ -10,6 +10,7 @@ void main() {
       final text = tokenIdentifierTextDisplayAdapter.toDisplayText(
         textPipes: textsMock,
         booleanPipes: booleansMock,
+        choicePipes: [],
         modelPipes: [modelMock],
         targetIdentifiersName: null,
       );
@@ -58,6 +59,7 @@ void main() {
       final text = tokenIdentifierTextDisplayAdapter.toDisplayText(
         textPipes: textsMock,
         booleanPipes: booleansMock,
+        choicePipes: [],
         modelPipes: [modelMock],
         targetIdentifiersName: [
           ...textsMock.map((e) => e.mustacheName),
@@ -131,6 +133,7 @@ final booleansMock = [
 ];
 
 final modelMock = ModelPipe(
+  choicePipes: [],
   name: 'Model 1-1',
   mustacheName: 'Model 1-1',
   description: 'lorem lorem lorem',
@@ -162,6 +165,7 @@ final modelMock = ModelPipe(
   ],
   modelPipes: [
     ModelPipe(
+      choicePipes: [],
       name: 'Model 2-1',
       mustacheName: 'Model 2-1',
       description: 'lorem lorem lorem',
@@ -187,6 +191,7 @@ final modelMock = ModelPipe(
       ],
       modelPipes: [
         ModelPipe(
+          choicePipes: [],
           name: 'Model 3-1',
           mustacheName: 'Model 3-1',
           description: 'lorem lorem lorem',
@@ -217,6 +222,7 @@ final modelMock = ModelPipe(
           ],
           modelPipes: [
             ModelPipe(
+              choicePipes: [],
               name: 'Model 4-1',
               mustacheName: 'Model 4-1',
               description: 'lorem lorem lorem',
@@ -238,6 +244,7 @@ final modelMock = ModelPipe(
               modelPipes: const [],
             ),
             ModelPipe(
+              choicePipes: [],
               name: 'Model 4-2',
               mustacheName: 'Model 4-2',
               description: 'lorem lorem lorem',
@@ -257,6 +264,7 @@ final modelMock = ModelPipe(
               modelPipes: const [],
             ),
             ModelPipe(
+              choicePipes: [],
               name: 'Model 4-3',
               mustacheName: 'Model 4-3',
               description: 'lorem lorem lorem',
@@ -264,6 +272,7 @@ final modelMock = ModelPipe(
               booleanPipes: const [],
               modelPipes: [
                 ModelPipe(
+                  choicePipes: [],
                   name: 'Model 5-1',
                   mustacheName: 'Model 5-1',
                   description: 'lorem lorem lorem',
@@ -272,6 +281,7 @@ final modelMock = ModelPipe(
                   modelPipes: const [],
                 ),
                 ModelPipe(
+                  choicePipes: [],
                   name: 'Model 5-2',
                   mustacheName: 'Model 5-2',
                   description: 'lorem lorem lorem',
@@ -292,6 +302,7 @@ final modelMock = ModelPipe(
       ],
     ),
     ModelPipe(
+      choicePipes: [],
       name: 'Model 2-2',
       mustacheName: 'Model 2-2',
       description: 'lorem lorem lorem',
@@ -300,6 +311,7 @@ final modelMock = ModelPipe(
       modelPipes: const [],
     ),
     ModelPipe(
+      choicePipes: [],
       name: 'Model 2-3',
       mustacheName: 'Model 2-3',
       description: 'lorem lorem lorem',

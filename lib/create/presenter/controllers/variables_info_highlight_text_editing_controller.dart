@@ -23,7 +23,7 @@ class VariablesInfoHighlightTextEditingController
   }) : _textAnalyserBase = textAnalyserBase;
 
   List<InlineSpan>? getTexts(
-    List<AnalysedSegment> newCacheSegments,
+    List<AnalysedSegmentStatus> newCacheSegments,
     TextStyle? style,
     BuildContext? context,
   ) {
@@ -32,7 +32,9 @@ class VariablesInfoHighlightTextEditingController
         _cacheCS ?? (context == null ? null : Theme.of(context).colorScheme);
     if (cS == null) return null;
 
-    return newCacheSegments.map<InlineSpan>((AnalysedSegment analysedSegment) {
+    return newCacheSegments.map<InlineSpan>((
+      AnalysedSegmentStatus analysedSegment,
+    ) {
       return analysedSegment.map(
         text: (value) {
           return TextSpan(
@@ -200,10 +202,10 @@ class VariablesInfoHighlightTextEditingController
   String? cacheText;
 
   final TextAnalyserBase _textAnalyserBase;
-  Map<String, TokenIdentifier>? _flatMap;
+  Map<String, VariableScopeParentMapper>? _flatMap;
   ColorScheme? _cacheCS;
 
-  Map<String, TokenIdentifier>? get flatMap => _flatMap;
+  Map<String, VariableScopeParentMapper>? get flatMap => _flatMap;
 
   void update() {
     notifyListeners();
@@ -214,7 +216,7 @@ class VariablesInfoHighlightTextEditingController
     notifyListeners();
   }
 
-  void setFlatMap(Map<String, TokenIdentifier> flatMap) {
+  void setFlatMap(Map<String, VariableScopeParentMapper> flatMap) {
     _flatMap = flatMap;
     notifyListeners();
   }
@@ -235,7 +237,7 @@ class VariablesInfoHighlightTextEditingController
         flatMap!,
       );
 
-      final segments = response?.segments;
+      final segments = response?.segmentsStates;
 
       if (segments != null) {
         final spans = getTexts(segments, style, context);

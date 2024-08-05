@@ -6,7 +6,7 @@ class ErrorSnackBar extends SnackBar {
     required BuildContext context,
     required String text,
     String? description,
-    Duration duration = const Duration(milliseconds: 6000),
+    super.duration = const Duration(milliseconds: 6000),
   }) : super(
           backgroundColor: Theme.of(context).colorScheme.errorContainer,
           content: description == null
@@ -47,6 +47,5 @@ class ErrorSnackBar extends SnackBar {
               ScaffoldMessenger.of(context).hideCurrentSnackBar();
             },
           ),
-          duration: duration,
         );
 }
