@@ -17,14 +17,14 @@ asds {{name}}
       source,
       0,
       {
-        'person': ModelTokenIdentifier(
+        'person': ModelParentMapper(
           parrentName: null,
           name: 'person',
           textsNames: ['name'],
           booleanNames: [],
           subModelsNames: [],
         ),
-        'name': TextTokenIdentifier(name: 'name', parrentName: 'person')
+        'name': TextParentMapper(name: 'name', parrentName: 'person')
       },
     );
 

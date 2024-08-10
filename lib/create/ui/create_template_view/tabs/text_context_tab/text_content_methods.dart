@@ -38,7 +38,7 @@ mixin TextContentMethods on State<TextContentTab> {
           index++;
           final VariablesInfoHighlightTextEditingController controller =
               VariablesInfoHighlightTextEditingController(
-            textAnalyserBase: const TextAnalyserBase(),
+            textAnalyserBase: TextAnalyserBase(),
             text: output.content,
           );
 

@@ -62,7 +62,7 @@ abstract class AnalysedSegmentStatus with _$AnalysedSegmentStatus {
   /// This is a sintax correct declaration. But the identifier its of an
   /// cataloged variable that is not an model. And only models can have
   /// open or close delimiters sirgil indicator.
-  factory AnalysedSegmentStatus.nonModelVariableWithOpenOrCloseDelimmiter({
+  factory AnalysedSegmentStatus.hasDelimitterButIsAnVariableWithoutScope({
     required TextOffset offset,
     required String segmentText,
   }) = _AnalysedSegmentNonModelVariableWithOpenOrCloseDelimmiter;

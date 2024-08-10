@@ -6,57 +6,57 @@ part of 'variable_scope_parent_mapper.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$TextTokenIdentifierImpl _$$TextTokenIdentifierImplFromJson(
+_$TextParentMapperImpl _$$TextParentMapperImplFromJson(
         Map<String, dynamic> json) =>
-    _$TextTokenIdentifierImpl(
+    _$TextParentMapperImpl(
       parrentName: json['parrentName'] as String?,
       name: json['name'] as String,
       $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$$TextTokenIdentifierImplToJson(
-        _$TextTokenIdentifierImpl instance) =>
+Map<String, dynamic> _$$TextParentMapperImplToJson(
+        _$TextParentMapperImpl instance) =>
     <String, dynamic>{
       'parrentName': instance.parrentName,
       'name': instance.name,
       'runtimeType': instance.$type,
     };
 
-_$BooleanTokenIdentifierImpl _$$BooleanTokenIdentifierImplFromJson(
+_$BooleanParentMapperImpl _$$BooleanParentMapperImplFromJson(
         Map<String, dynamic> json) =>
-    _$BooleanTokenIdentifierImpl(
+    _$BooleanParentMapperImpl(
       parrentName: json['parrentName'] as String?,
       name: json['name'] as String,
       $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$$BooleanTokenIdentifierImplToJson(
-        _$BooleanTokenIdentifierImpl instance) =>
+Map<String, dynamic> _$$BooleanParentMapperImplToJson(
+        _$BooleanParentMapperImpl instance) =>
     <String, dynamic>{
       'parrentName': instance.parrentName,
       'name': instance.name,
       'runtimeType': instance.$type,
     };
 
-_$ChoiceTokenIdentifierImpl _$$ChoiceTokenIdentifierImplFromJson(
+_$ChoiceParentMapperImpl _$$ChoiceParentMapperImplFromJson(
         Map<String, dynamic> json) =>
-    _$ChoiceTokenIdentifierImpl(
+    _$ChoiceParentMapperImpl(
       parrentName: json['parrentName'] as String?,
       name: json['name'] as String,
       $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$$ChoiceTokenIdentifierImplToJson(
-        _$ChoiceTokenIdentifierImpl instance) =>
+Map<String, dynamic> _$$ChoiceParentMapperImplToJson(
+        _$ChoiceParentMapperImpl instance) =>
     <String, dynamic>{
       'parrentName': instance.parrentName,
       'name': instance.name,
       'runtimeType': instance.$type,
     };
 
-_$ModelTokenIdentifierImpl _$$ModelTokenIdentifierImplFromJson(
+_$ModelParentMapperImpl _$$ModelParentMapperImplFromJson(
         Map<String, dynamic> json) =>
-    _$ModelTokenIdentifierImpl(
+    _$ModelParentMapperImpl(
       parrentName: json['parrentName'] as String?,
       name: json['name'] as String,
       textsNames: (json['textsNames'] as List<dynamic>)
@@ -71,8 +71,8 @@ _$ModelTokenIdentifierImpl _$$ModelTokenIdentifierImplFromJson(
       $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$$ModelTokenIdentifierImplToJson(
-        _$ModelTokenIdentifierImpl instance) =>
+Map<String, dynamic> _$$ModelParentMapperImplToJson(
+        _$ModelParentMapperImpl instance) =>
     <String, dynamic>{
       'parrentName': instance.parrentName,
       'name': instance.name,

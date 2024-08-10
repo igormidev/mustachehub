@@ -1,4 +1,4 @@
-import 'package:text_analyser/text_analyser.dart';
+part of '../all_variables.dart';
 
 mixin TextAnalyserInputVariables {
   /// The input text, that is: the text that

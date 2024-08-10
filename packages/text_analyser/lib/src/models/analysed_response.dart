@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:text_analyser/src/models/choosable_variable_implementations/choosable_variable_implementations.dart';
 import 'package:text_analyser/text_analyser.dart';
 
 part 'analysed_response.freezed.dart';

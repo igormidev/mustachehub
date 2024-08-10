@@ -18,13 +18,13 @@ VariableScopeParentMapper _$VariableScopeParentMapperFromJson(
     Map<String, dynamic> json) {
   switch (json['runtimeType']) {
     case 'text':
-      return TextTokenIdentifier.fromJson(json);
+      return TextParentMapper.fromJson(json);
     case 'boolean':
-      return BooleanTokenIdentifier.fromJson(json);
+      return BooleanParentMapper.fromJson(json);
     case 'choice':
-      return ChoiceTokenIdentifier.fromJson(json);
+      return ChoiceParentMapper.fromJson(json);
     case 'model':
-      return ModelTokenIdentifier.fromJson(json);
+      return ModelParentMapper.fromJson(json);
 
     default:
       throw CheckedFromJsonException(
@@ -76,26 +76,26 @@ mixin _$VariableScopeParentMapper {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(TextTokenIdentifier value) text,
-    required TResult Function(BooleanTokenIdentifier value) boolean,
-    required TResult Function(ChoiceTokenIdentifier value) choice,
-    required TResult Function(ModelTokenIdentifier value) model,
+    required TResult Function(TextParentMapper value) text,
+    required TResult Function(BooleanParentMapper value) boolean,
+    required TResult Function(ChoiceParentMapper value) choice,
+    required TResult Function(ModelParentMapper value) model,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(TextTokenIdentifier value)? text,
-    TResult? Function(BooleanTokenIdentifier value)? boolean,
-    TResult? Function(ChoiceTokenIdentifier value)? choice,
-    TResult? Function(ModelTokenIdentifier value)? model,
+    TResult? Function(TextParentMapper value)? text,
+    TResult? Function(BooleanParentMapper value)? boolean,
+    TResult? Function(ChoiceParentMapper value)? choice,
+    TResult? Function(ModelParentMapper value)? model,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(TextTokenIdentifier value)? text,
-    TResult Function(BooleanTokenIdentifier value)? boolean,
-    TResult Function(ChoiceTokenIdentifier value)? choice,
-    TResult Function(ModelTokenIdentifier value)? model,
+    TResult Function(TextParentMapper value)? text,
+    TResult Function(BooleanParentMapper value)? boolean,
+    TResult Function(ChoiceParentMapper value)? choice,
+    TResult Function(ModelParentMapper value)? model,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -152,23 +152,23 @@ class _$VariableScopeParentMapperCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$TextTokenIdentifierImplCopyWith<$Res>
+abstract class _$$TextParentMapperImplCopyWith<$Res>
     implements $VariableScopeParentMapperCopyWith<$Res> {
-  factory _$$TextTokenIdentifierImplCopyWith(_$TextTokenIdentifierImpl value,
-          $Res Function(_$TextTokenIdentifierImpl) then) =
-      __$$TextTokenIdentifierImplCopyWithImpl<$Res>;
+  factory _$$TextParentMapperImplCopyWith(_$TextParentMapperImpl value,
+          $Res Function(_$TextParentMapperImpl) then) =
+      __$$TextParentMapperImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String? parrentName, String name});
 }
 
 /// @nodoc
-class __$$TextTokenIdentifierImplCopyWithImpl<$Res>
+class __$$TextParentMapperImplCopyWithImpl<$Res>
     extends _$VariableScopeParentMapperCopyWithImpl<$Res,
-        _$TextTokenIdentifierImpl>
-    implements _$$TextTokenIdentifierImplCopyWith<$Res> {
-  __$$TextTokenIdentifierImplCopyWithImpl(_$TextTokenIdentifierImpl _value,
-      $Res Function(_$TextTokenIdentifierImpl) _then)
+        _$TextParentMapperImpl>
+    implements _$$TextParentMapperImplCopyWith<$Res> {
+  __$$TextParentMapperImplCopyWithImpl(_$TextParentMapperImpl _value,
+      $Res Function(_$TextParentMapperImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of VariableScopeParentMapper
@@ -179,7 +179,7 @@ class __$$TextTokenIdentifierImplCopyWithImpl<$Res>
     Object? parrentName = freezed,
     Object? name = null,
   }) {
-    return _then(_$TextTokenIdentifierImpl(
+    return _then(_$TextParentMapperImpl(
       parrentName: freezed == parrentName
           ? _value.parrentName
           : parrentName // ignore: cast_nullable_to_non_nullable
@@ -194,13 +194,13 @@ class __$$TextTokenIdentifierImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$TextTokenIdentifierImpl implements TextTokenIdentifier {
-  const _$TextTokenIdentifierImpl(
+class _$TextParentMapperImpl implements TextParentMapper {
+  const _$TextParentMapperImpl(
       {required this.parrentName, required this.name, final String? $type})
       : $type = $type ?? 'text';
 
-  factory _$TextTokenIdentifierImpl.fromJson(Map<String, dynamic> json) =>
-      _$$TextTokenIdentifierImplFromJson(json);
+  factory _$TextParentMapperImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TextParentMapperImplFromJson(json);
 
   @override
   final String? parrentName;
@@ -219,7 +219,7 @@ class _$TextTokenIdentifierImpl implements TextTokenIdentifier {
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TextTokenIdentifierImpl &&
+            other is _$TextParentMapperImpl &&
             (identical(other.parrentName, parrentName) ||
                 other.parrentName == parrentName) &&
             (identical(other.name, name) || other.name == name));
@@ -234,8 +234,8 @@ class _$TextTokenIdentifierImpl implements TextTokenIdentifier {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$TextTokenIdentifierImplCopyWith<_$TextTokenIdentifierImpl> get copyWith =>
-      __$$TextTokenIdentifierImplCopyWithImpl<_$TextTokenIdentifierImpl>(
+  _$$TextParentMapperImplCopyWith<_$TextParentMapperImpl> get copyWith =>
+      __$$TextParentMapperImplCopyWithImpl<_$TextParentMapperImpl>(
           this, _$identity);
 
   @override
@@ -288,10 +288,10 @@ class _$TextTokenIdentifierImpl implements TextTokenIdentifier {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(TextTokenIdentifier value) text,
-    required TResult Function(BooleanTokenIdentifier value) boolean,
-    required TResult Function(ChoiceTokenIdentifier value) choice,
-    required TResult Function(ModelTokenIdentifier value) model,
+    required TResult Function(TextParentMapper value) text,
+    required TResult Function(BooleanParentMapper value) boolean,
+    required TResult Function(ChoiceParentMapper value) choice,
+    required TResult Function(ModelParentMapper value) model,
   }) {
     return text(this);
   }
@@ -299,10 +299,10 @@ class _$TextTokenIdentifierImpl implements TextTokenIdentifier {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(TextTokenIdentifier value)? text,
-    TResult? Function(BooleanTokenIdentifier value)? boolean,
-    TResult? Function(ChoiceTokenIdentifier value)? choice,
-    TResult? Function(ModelTokenIdentifier value)? model,
+    TResult? Function(TextParentMapper value)? text,
+    TResult? Function(BooleanParentMapper value)? boolean,
+    TResult? Function(ChoiceParentMapper value)? choice,
+    TResult? Function(ModelParentMapper value)? model,
   }) {
     return text?.call(this);
   }
@@ -310,10 +310,10 @@ class _$TextTokenIdentifierImpl implements TextTokenIdentifier {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(TextTokenIdentifier value)? text,
-    TResult Function(BooleanTokenIdentifier value)? boolean,
-    TResult Function(ChoiceTokenIdentifier value)? choice,
-    TResult Function(ModelTokenIdentifier value)? model,
+    TResult Function(TextParentMapper value)? text,
+    TResult Function(BooleanParentMapper value)? boolean,
+    TResult Function(ChoiceParentMapper value)? choice,
+    TResult Function(ModelParentMapper value)? model,
     required TResult orElse(),
   }) {
     if (text != null) {
@@ -324,19 +324,19 @@ class _$TextTokenIdentifierImpl implements TextTokenIdentifier {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$TextTokenIdentifierImplToJson(
+    return _$$TextParentMapperImplToJson(
       this,
     );
   }
 }
 
-abstract class TextTokenIdentifier implements VariableScopeParentMapper {
-  const factory TextTokenIdentifier(
+abstract class TextParentMapper implements VariableScopeParentMapper {
+  const factory TextParentMapper(
       {required final String? parrentName,
-      required final String name}) = _$TextTokenIdentifierImpl;
+      required final String name}) = _$TextParentMapperImpl;
 
-  factory TextTokenIdentifier.fromJson(Map<String, dynamic> json) =
-      _$TextTokenIdentifierImpl.fromJson;
+  factory TextParentMapper.fromJson(Map<String, dynamic> json) =
+      _$TextParentMapperImpl.fromJson;
 
   @override
   String? get parrentName;
@@ -347,30 +347,28 @@ abstract class TextTokenIdentifier implements VariableScopeParentMapper {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$TextTokenIdentifierImplCopyWith<_$TextTokenIdentifierImpl> get copyWith =>
+  _$$TextParentMapperImplCopyWith<_$TextParentMapperImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$BooleanTokenIdentifierImplCopyWith<$Res>
+abstract class _$$BooleanParentMapperImplCopyWith<$Res>
     implements $VariableScopeParentMapperCopyWith<$Res> {
-  factory _$$BooleanTokenIdentifierImplCopyWith(
-          _$BooleanTokenIdentifierImpl value,
-          $Res Function(_$BooleanTokenIdentifierImpl) then) =
-      __$$BooleanTokenIdentifierImplCopyWithImpl<$Res>;
+  factory _$$BooleanParentMapperImplCopyWith(_$BooleanParentMapperImpl value,
+          $Res Function(_$BooleanParentMapperImpl) then) =
+      __$$BooleanParentMapperImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String? parrentName, String name});
 }
 
 /// @nodoc
-class __$$BooleanTokenIdentifierImplCopyWithImpl<$Res>
+class __$$BooleanParentMapperImplCopyWithImpl<$Res>
     extends _$VariableScopeParentMapperCopyWithImpl<$Res,
-        _$BooleanTokenIdentifierImpl>
-    implements _$$BooleanTokenIdentifierImplCopyWith<$Res> {
-  __$$BooleanTokenIdentifierImplCopyWithImpl(
-      _$BooleanTokenIdentifierImpl _value,
-      $Res Function(_$BooleanTokenIdentifierImpl) _then)
+        _$BooleanParentMapperImpl>
+    implements _$$BooleanParentMapperImplCopyWith<$Res> {
+  __$$BooleanParentMapperImplCopyWithImpl(_$BooleanParentMapperImpl _value,
+      $Res Function(_$BooleanParentMapperImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of VariableScopeParentMapper
@@ -381,7 +379,7 @@ class __$$BooleanTokenIdentifierImplCopyWithImpl<$Res>
     Object? parrentName = freezed,
     Object? name = null,
   }) {
-    return _then(_$BooleanTokenIdentifierImpl(
+    return _then(_$BooleanParentMapperImpl(
       parrentName: freezed == parrentName
           ? _value.parrentName
           : parrentName // ignore: cast_nullable_to_non_nullable
@@ -396,13 +394,13 @@ class __$$BooleanTokenIdentifierImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$BooleanTokenIdentifierImpl implements BooleanTokenIdentifier {
-  const _$BooleanTokenIdentifierImpl(
+class _$BooleanParentMapperImpl implements BooleanParentMapper {
+  const _$BooleanParentMapperImpl(
       {required this.parrentName, required this.name, final String? $type})
       : $type = $type ?? 'boolean';
 
-  factory _$BooleanTokenIdentifierImpl.fromJson(Map<String, dynamic> json) =>
-      _$$BooleanTokenIdentifierImplFromJson(json);
+  factory _$BooleanParentMapperImpl.fromJson(Map<String, dynamic> json) =>
+      _$$BooleanParentMapperImplFromJson(json);
 
   @override
   final String? parrentName;
@@ -421,7 +419,7 @@ class _$BooleanTokenIdentifierImpl implements BooleanTokenIdentifier {
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$BooleanTokenIdentifierImpl &&
+            other is _$BooleanParentMapperImpl &&
             (identical(other.parrentName, parrentName) ||
                 other.parrentName == parrentName) &&
             (identical(other.name, name) || other.name == name));
@@ -436,9 +434,9 @@ class _$BooleanTokenIdentifierImpl implements BooleanTokenIdentifier {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$BooleanTokenIdentifierImplCopyWith<_$BooleanTokenIdentifierImpl>
-      get copyWith => __$$BooleanTokenIdentifierImplCopyWithImpl<
-          _$BooleanTokenIdentifierImpl>(this, _$identity);
+  _$$BooleanParentMapperImplCopyWith<_$BooleanParentMapperImpl> get copyWith =>
+      __$$BooleanParentMapperImplCopyWithImpl<_$BooleanParentMapperImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -490,10 +488,10 @@ class _$BooleanTokenIdentifierImpl implements BooleanTokenIdentifier {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(TextTokenIdentifier value) text,
-    required TResult Function(BooleanTokenIdentifier value) boolean,
-    required TResult Function(ChoiceTokenIdentifier value) choice,
-    required TResult Function(ModelTokenIdentifier value) model,
+    required TResult Function(TextParentMapper value) text,
+    required TResult Function(BooleanParentMapper value) boolean,
+    required TResult Function(ChoiceParentMapper value) choice,
+    required TResult Function(ModelParentMapper value) model,
   }) {
     return boolean(this);
   }
@@ -501,10 +499,10 @@ class _$BooleanTokenIdentifierImpl implements BooleanTokenIdentifier {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(TextTokenIdentifier value)? text,
-    TResult? Function(BooleanTokenIdentifier value)? boolean,
-    TResult? Function(ChoiceTokenIdentifier value)? choice,
-    TResult? Function(ModelTokenIdentifier value)? model,
+    TResult? Function(TextParentMapper value)? text,
+    TResult? Function(BooleanParentMapper value)? boolean,
+    TResult? Function(ChoiceParentMapper value)? choice,
+    TResult? Function(ModelParentMapper value)? model,
   }) {
     return boolean?.call(this);
   }
@@ -512,10 +510,10 @@ class _$BooleanTokenIdentifierImpl implements BooleanTokenIdentifier {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(TextTokenIdentifier value)? text,
-    TResult Function(BooleanTokenIdentifier value)? boolean,
-    TResult Function(ChoiceTokenIdentifier value)? choice,
-    TResult Function(ModelTokenIdentifier value)? model,
+    TResult Function(TextParentMapper value)? text,
+    TResult Function(BooleanParentMapper value)? boolean,
+    TResult Function(ChoiceParentMapper value)? choice,
+    TResult Function(ModelParentMapper value)? model,
     required TResult orElse(),
   }) {
     if (boolean != null) {
@@ -526,19 +524,19 @@ class _$BooleanTokenIdentifierImpl implements BooleanTokenIdentifier {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$BooleanTokenIdentifierImplToJson(
+    return _$$BooleanParentMapperImplToJson(
       this,
     );
   }
 }
 
-abstract class BooleanTokenIdentifier implements VariableScopeParentMapper {
-  const factory BooleanTokenIdentifier(
+abstract class BooleanParentMapper implements VariableScopeParentMapper {
+  const factory BooleanParentMapper(
       {required final String? parrentName,
-      required final String name}) = _$BooleanTokenIdentifierImpl;
+      required final String name}) = _$BooleanParentMapperImpl;
 
-  factory BooleanTokenIdentifier.fromJson(Map<String, dynamic> json) =
-      _$BooleanTokenIdentifierImpl.fromJson;
+  factory BooleanParentMapper.fromJson(Map<String, dynamic> json) =
+      _$BooleanParentMapperImpl.fromJson;
 
   @override
   String? get parrentName;
@@ -549,29 +547,28 @@ abstract class BooleanTokenIdentifier implements VariableScopeParentMapper {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$BooleanTokenIdentifierImplCopyWith<_$BooleanTokenIdentifierImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  _$$BooleanParentMapperImplCopyWith<_$BooleanParentMapperImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$ChoiceTokenIdentifierImplCopyWith<$Res>
+abstract class _$$ChoiceParentMapperImplCopyWith<$Res>
     implements $VariableScopeParentMapperCopyWith<$Res> {
-  factory _$$ChoiceTokenIdentifierImplCopyWith(
-          _$ChoiceTokenIdentifierImpl value,
-          $Res Function(_$ChoiceTokenIdentifierImpl) then) =
-      __$$ChoiceTokenIdentifierImplCopyWithImpl<$Res>;
+  factory _$$ChoiceParentMapperImplCopyWith(_$ChoiceParentMapperImpl value,
+          $Res Function(_$ChoiceParentMapperImpl) then) =
+      __$$ChoiceParentMapperImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String? parrentName, String name});
 }
 
 /// @nodoc
-class __$$ChoiceTokenIdentifierImplCopyWithImpl<$Res>
+class __$$ChoiceParentMapperImplCopyWithImpl<$Res>
     extends _$VariableScopeParentMapperCopyWithImpl<$Res,
-        _$ChoiceTokenIdentifierImpl>
-    implements _$$ChoiceTokenIdentifierImplCopyWith<$Res> {
-  __$$ChoiceTokenIdentifierImplCopyWithImpl(_$ChoiceTokenIdentifierImpl _value,
-      $Res Function(_$ChoiceTokenIdentifierImpl) _then)
+        _$ChoiceParentMapperImpl>
+    implements _$$ChoiceParentMapperImplCopyWith<$Res> {
+  __$$ChoiceParentMapperImplCopyWithImpl(_$ChoiceParentMapperImpl _value,
+      $Res Function(_$ChoiceParentMapperImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of VariableScopeParentMapper
@@ -582,7 +579,7 @@ class __$$ChoiceTokenIdentifierImplCopyWithImpl<$Res>
     Object? parrentName = freezed,
     Object? name = null,
   }) {
-    return _then(_$ChoiceTokenIdentifierImpl(
+    return _then(_$ChoiceParentMapperImpl(
       parrentName: freezed == parrentName
           ? _value.parrentName
           : parrentName // ignore: cast_nullable_to_non_nullable
@@ -597,13 +594,13 @@ class __$$ChoiceTokenIdentifierImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$ChoiceTokenIdentifierImpl implements ChoiceTokenIdentifier {
-  const _$ChoiceTokenIdentifierImpl(
+class _$ChoiceParentMapperImpl implements ChoiceParentMapper {
+  const _$ChoiceParentMapperImpl(
       {required this.parrentName, required this.name, final String? $type})
       : $type = $type ?? 'choice';
 
-  factory _$ChoiceTokenIdentifierImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ChoiceTokenIdentifierImplFromJson(json);
+  factory _$ChoiceParentMapperImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ChoiceParentMapperImplFromJson(json);
 
   @override
   final String? parrentName;
@@ -622,7 +619,7 @@ class _$ChoiceTokenIdentifierImpl implements ChoiceTokenIdentifier {
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ChoiceTokenIdentifierImpl &&
+            other is _$ChoiceParentMapperImpl &&
             (identical(other.parrentName, parrentName) ||
                 other.parrentName == parrentName) &&
             (identical(other.name, name) || other.name == name));
@@ -637,9 +634,9 @@ class _$ChoiceTokenIdentifierImpl implements ChoiceTokenIdentifier {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$ChoiceTokenIdentifierImplCopyWith<_$ChoiceTokenIdentifierImpl>
-      get copyWith => __$$ChoiceTokenIdentifierImplCopyWithImpl<
-          _$ChoiceTokenIdentifierImpl>(this, _$identity);
+  _$$ChoiceParentMapperImplCopyWith<_$ChoiceParentMapperImpl> get copyWith =>
+      __$$ChoiceParentMapperImplCopyWithImpl<_$ChoiceParentMapperImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -691,10 +688,10 @@ class _$ChoiceTokenIdentifierImpl implements ChoiceTokenIdentifier {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(TextTokenIdentifier value) text,
-    required TResult Function(BooleanTokenIdentifier value) boolean,
-    required TResult Function(ChoiceTokenIdentifier value) choice,
-    required TResult Function(ModelTokenIdentifier value) model,
+    required TResult Function(TextParentMapper value) text,
+    required TResult Function(BooleanParentMapper value) boolean,
+    required TResult Function(ChoiceParentMapper value) choice,
+    required TResult Function(ModelParentMapper value) model,
   }) {
     return choice(this);
   }
@@ -702,10 +699,10 @@ class _$ChoiceTokenIdentifierImpl implements ChoiceTokenIdentifier {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(TextTokenIdentifier value)? text,
-    TResult? Function(BooleanTokenIdentifier value)? boolean,
-    TResult? Function(ChoiceTokenIdentifier value)? choice,
-    TResult? Function(ModelTokenIdentifier value)? model,
+    TResult? Function(TextParentMapper value)? text,
+    TResult? Function(BooleanParentMapper value)? boolean,
+    TResult? Function(ChoiceParentMapper value)? choice,
+    TResult? Function(ModelParentMapper value)? model,
   }) {
     return choice?.call(this);
   }
@@ -713,10 +710,10 @@ class _$ChoiceTokenIdentifierImpl implements ChoiceTokenIdentifier {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(TextTokenIdentifier value)? text,
-    TResult Function(BooleanTokenIdentifier value)? boolean,
-    TResult Function(ChoiceTokenIdentifier value)? choice,
-    TResult Function(ModelTokenIdentifier value)? model,
+    TResult Function(TextParentMapper value)? text,
+    TResult Function(BooleanParentMapper value)? boolean,
+    TResult Function(ChoiceParentMapper value)? choice,
+    TResult Function(ModelParentMapper value)? model,
     required TResult orElse(),
   }) {
     if (choice != null) {
@@ -727,19 +724,19 @@ class _$ChoiceTokenIdentifierImpl implements ChoiceTokenIdentifier {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ChoiceTokenIdentifierImplToJson(
+    return _$$ChoiceParentMapperImplToJson(
       this,
     );
   }
 }
 
-abstract class ChoiceTokenIdentifier implements VariableScopeParentMapper {
-  const factory ChoiceTokenIdentifier(
+abstract class ChoiceParentMapper implements VariableScopeParentMapper {
+  const factory ChoiceParentMapper(
       {required final String? parrentName,
-      required final String name}) = _$ChoiceTokenIdentifierImpl;
+      required final String name}) = _$ChoiceParentMapperImpl;
 
-  factory ChoiceTokenIdentifier.fromJson(Map<String, dynamic> json) =
-      _$ChoiceTokenIdentifierImpl.fromJson;
+  factory ChoiceParentMapper.fromJson(Map<String, dynamic> json) =
+      _$ChoiceParentMapperImpl.fromJson;
 
   @override
   String? get parrentName;
@@ -750,16 +747,16 @@ abstract class ChoiceTokenIdentifier implements VariableScopeParentMapper {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ChoiceTokenIdentifierImplCopyWith<_$ChoiceTokenIdentifierImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  _$$ChoiceParentMapperImplCopyWith<_$ChoiceParentMapperImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$ModelTokenIdentifierImplCopyWith<$Res>
+abstract class _$$ModelParentMapperImplCopyWith<$Res>
     implements $VariableScopeParentMapperCopyWith<$Res> {
-  factory _$$ModelTokenIdentifierImplCopyWith(_$ModelTokenIdentifierImpl value,
-          $Res Function(_$ModelTokenIdentifierImpl) then) =
-      __$$ModelTokenIdentifierImplCopyWithImpl<$Res>;
+  factory _$$ModelParentMapperImplCopyWith(_$ModelParentMapperImpl value,
+          $Res Function(_$ModelParentMapperImpl) then) =
+      __$$ModelParentMapperImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -771,12 +768,12 @@ abstract class _$$ModelTokenIdentifierImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$ModelTokenIdentifierImplCopyWithImpl<$Res>
+class __$$ModelParentMapperImplCopyWithImpl<$Res>
     extends _$VariableScopeParentMapperCopyWithImpl<$Res,
-        _$ModelTokenIdentifierImpl>
-    implements _$$ModelTokenIdentifierImplCopyWith<$Res> {
-  __$$ModelTokenIdentifierImplCopyWithImpl(_$ModelTokenIdentifierImpl _value,
-      $Res Function(_$ModelTokenIdentifierImpl) _then)
+        _$ModelParentMapperImpl>
+    implements _$$ModelParentMapperImplCopyWith<$Res> {
+  __$$ModelParentMapperImplCopyWithImpl(_$ModelParentMapperImpl _value,
+      $Res Function(_$ModelParentMapperImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of VariableScopeParentMapper
@@ -790,7 +787,7 @@ class __$$ModelTokenIdentifierImplCopyWithImpl<$Res>
     Object? booleanNames = null,
     Object? subModelsNames = null,
   }) {
-    return _then(_$ModelTokenIdentifierImpl(
+    return _then(_$ModelParentMapperImpl(
       parrentName: freezed == parrentName
           ? _value.parrentName
           : parrentName // ignore: cast_nullable_to_non_nullable
@@ -817,8 +814,8 @@ class __$$ModelTokenIdentifierImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$ModelTokenIdentifierImpl implements ModelTokenIdentifier {
-  const _$ModelTokenIdentifierImpl(
+class _$ModelParentMapperImpl implements ModelParentMapper {
+  const _$ModelParentMapperImpl(
       {required this.parrentName,
       required this.name,
       required final List<String> textsNames,
@@ -830,8 +827,8 @@ class _$ModelTokenIdentifierImpl implements ModelTokenIdentifier {
         _subModelsNames = subModelsNames,
         $type = $type ?? 'model';
 
-  factory _$ModelTokenIdentifierImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ModelTokenIdentifierImplFromJson(json);
+  factory _$ModelParentMapperImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ModelParentMapperImplFromJson(json);
 
   @override
   final String? parrentName;
@@ -873,7 +870,7 @@ class _$ModelTokenIdentifierImpl implements ModelTokenIdentifier {
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ModelTokenIdentifierImpl &&
+            other is _$ModelParentMapperImpl &&
             (identical(other.parrentName, parrentName) ||
                 other.parrentName == parrentName) &&
             (identical(other.name, name) || other.name == name) &&
@@ -900,10 +897,9 @@ class _$ModelTokenIdentifierImpl implements ModelTokenIdentifier {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$ModelTokenIdentifierImplCopyWith<_$ModelTokenIdentifierImpl>
-      get copyWith =>
-          __$$ModelTokenIdentifierImplCopyWithImpl<_$ModelTokenIdentifierImpl>(
-              this, _$identity);
+  _$$ModelParentMapperImplCopyWith<_$ModelParentMapperImpl> get copyWith =>
+      __$$ModelParentMapperImplCopyWithImpl<_$ModelParentMapperImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -956,10 +952,10 @@ class _$ModelTokenIdentifierImpl implements ModelTokenIdentifier {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(TextTokenIdentifier value) text,
-    required TResult Function(BooleanTokenIdentifier value) boolean,
-    required TResult Function(ChoiceTokenIdentifier value) choice,
-    required TResult Function(ModelTokenIdentifier value) model,
+    required TResult Function(TextParentMapper value) text,
+    required TResult Function(BooleanParentMapper value) boolean,
+    required TResult Function(ChoiceParentMapper value) choice,
+    required TResult Function(ModelParentMapper value) model,
   }) {
     return model(this);
   }
@@ -967,10 +963,10 @@ class _$ModelTokenIdentifierImpl implements ModelTokenIdentifier {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(TextTokenIdentifier value)? text,
-    TResult? Function(BooleanTokenIdentifier value)? boolean,
-    TResult? Function(ChoiceTokenIdentifier value)? choice,
-    TResult? Function(ModelTokenIdentifier value)? model,
+    TResult? Function(TextParentMapper value)? text,
+    TResult? Function(BooleanParentMapper value)? boolean,
+    TResult? Function(ChoiceParentMapper value)? choice,
+    TResult? Function(ModelParentMapper value)? model,
   }) {
     return model?.call(this);
   }
@@ -978,10 +974,10 @@ class _$ModelTokenIdentifierImpl implements ModelTokenIdentifier {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(TextTokenIdentifier value)? text,
-    TResult Function(BooleanTokenIdentifier value)? boolean,
-    TResult Function(ChoiceTokenIdentifier value)? choice,
-    TResult Function(ModelTokenIdentifier value)? model,
+    TResult Function(TextParentMapper value)? text,
+    TResult Function(BooleanParentMapper value)? boolean,
+    TResult Function(ChoiceParentMapper value)? choice,
+    TResult Function(ModelParentMapper value)? model,
     required TResult orElse(),
   }) {
     if (model != null) {
@@ -992,22 +988,22 @@ class _$ModelTokenIdentifierImpl implements ModelTokenIdentifier {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ModelTokenIdentifierImplToJson(
+    return _$$ModelParentMapperImplToJson(
       this,
     );
   }
 }
 
-abstract class ModelTokenIdentifier implements VariableScopeParentMapper {
-  const factory ModelTokenIdentifier(
+abstract class ModelParentMapper implements VariableScopeParentMapper {
+  const factory ModelParentMapper(
       {required final String? parrentName,
       required final String name,
       required final List<String> textsNames,
       required final List<String> booleanNames,
-      required final List<String> subModelsNames}) = _$ModelTokenIdentifierImpl;
+      required final List<String> subModelsNames}) = _$ModelParentMapperImpl;
 
-  factory ModelTokenIdentifier.fromJson(Map<String, dynamic> json) =
-      _$ModelTokenIdentifierImpl.fromJson;
+  factory ModelParentMapper.fromJson(Map<String, dynamic> json) =
+      _$ModelParentMapperImpl.fromJson;
 
   @override
   String? get parrentName;
@@ -1021,6 +1017,6 @@ abstract class ModelTokenIdentifier implements VariableScopeParentMapper {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ModelTokenIdentifierImplCopyWith<_$ModelTokenIdentifierImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  _$$ModelParentMapperImplCopyWith<_$ModelParentMapperImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

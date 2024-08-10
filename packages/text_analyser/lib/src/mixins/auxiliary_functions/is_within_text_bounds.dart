@@ -1,6 +1,6 @@
-import 'package:text_analyser/src/mixins/text_analyser_input_variables.dart';
+part of '../all_variables.dart';
 
-mixin IsWithinTextBounds on TextAnalyserInputVariables {
+mixin IsWithinTextBounds on AllVariables {
   bool isWithinBounds() {
     final isIndexInText = indexAtText >= 0 && indexAtText <= input.length;
     if (isIndexInText == false) {
