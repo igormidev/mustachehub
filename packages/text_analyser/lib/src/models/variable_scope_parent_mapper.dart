@@ -25,6 +25,7 @@ abstract class VariableScopeParentMapper with _$VariableScopeParentMapper {
     required String name,
     required List<String> textsNames,
     required List<String> booleanNames,
+    required List<String> choicesNames,
     required List<String> subModelsNames,
   }) = ModelParentMapper;
 

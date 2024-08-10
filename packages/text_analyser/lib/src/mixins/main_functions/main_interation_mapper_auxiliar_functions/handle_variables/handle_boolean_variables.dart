@@ -1,7 +1,7 @@
 part of '../../../all_variables.dart';
 
 mixin HandleBooleanVariables on MainInterationVariables {
-  void handleBooleanVariables() {
+  void handleBooleansVariables() {
     // Now, we need to now if the boolean has a open and close declaration in somewhere in the text.
     final bool dontExistSegmentYet =
         openBooleanDeclarationsWithoutFindedCloseYet

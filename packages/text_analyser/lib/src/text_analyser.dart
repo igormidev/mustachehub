@@ -18,15 +18,18 @@ class TextAnalyser
         HandleOnNonMatch,
         HandleTextVariables,
         HandleBooleanVariables,
+        HandleChoiceVariables,
         HandleModelVariables,
         IsUncatologedVariable,
         HasDelimitterButIsAnVariableWithoutScope,
         MainInterationVariables,
         HandleFindedModelScope,
         SetOpenModelsWithNoCloseAsInvalidSegments,
+        SetOpenChoicesWithNoCloseAsInvalidSegments,
         SetOpenBooleansWithotCloseAsInvalidSegments,
         MainInterationMapper,
         SetIfTextSegmentIsInsidePaternScope,
+        SetIfChoiceSegmentIsInsidePaternScope,
         SetIfBooleanSegmentIsInsidePaternScope,
         SetIfModelSegmentIsInsidePaternScope {
   AnalysedResponse? getMatchClusters({
@@ -41,15 +44,17 @@ class TextAnalyser
     this.flatMap = flatMap;
     if (isWithinBounds() == false) return null;
 
-    setIfTextSegmentIsInsidePaternScope();
+    setAllRootVariablesAsUsableInCurrentContext();
 
     mapAllSegmentsAndVariables();
 
     setOpenModelsWithNoCloseAsInvalidSegments();
     setOpenBooleansWithNoCloseAsInvalidSegments();
+    setOpenChoicesWithNoCloseAsInvalidSegments();
 
     setIfTextSegmentIsInsidePaternScope();
     setIfBooleansSegmentAreInsidePaternScope();
+    setIfChoiceSegmentIsInsidePaternScope();
     setIfModelSegmentAreInsidePaternScope();
 
     setVariablesThatCanBeUsedInCursorIndex();

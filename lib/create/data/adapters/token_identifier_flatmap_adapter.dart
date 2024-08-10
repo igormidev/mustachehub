@@ -70,6 +70,7 @@ class TokenIdentifierFlatMapAdapter {
         textsNames: modelPipe.textPipes.map((e) => e.mustacheName).toList(),
         booleanNames:
             modelPipe.booleanPipes.map((e) => e.mustacheName).toList(),
+        choicesNames: modelPipe.choicePipes.map((e) => e.mustacheName).toList(),
         subModelsNames:
             modelPipe.modelPipes.map((e) => e.mustacheName).toList(),
       ),

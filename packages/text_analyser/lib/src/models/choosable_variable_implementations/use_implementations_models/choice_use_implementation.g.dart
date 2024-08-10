@@ -31,3 +31,16 @@ Map<String, dynamic> _$$ChoiceUseImplementationInvertedValueImplToJson(
     <String, dynamic>{
       'runtimeType': instance.$type,
     };
+
+_$ChoiceUseImplementationTextValueImpl
+    _$$ChoiceUseImplementationTextValueImplFromJson(
+            Map<String, dynamic> json) =>
+        _$ChoiceUseImplementationTextValueImpl(
+          $type: json['runtimeType'] as String?,
+        );
+
+Map<String, dynamic> _$$ChoiceUseImplementationTextValueImplToJson(
+        _$ChoiceUseImplementationTextValueImpl instance) =>
+    <String, dynamic>{
+      'runtimeType': instance.$type,
+    };

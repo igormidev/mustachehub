@@ -1,7 +1,7 @@
 part of '../../../all_variables.dart';
 
 mixin HandleTextVariables on MainInterationVariables {
-  void handleTextVariables() {
+  void handleTextsVariables() {
     // Root variables are not inside a scope model.
     // There are in the first layer of the variables declaration.
     // For that cases, we don't even have to check if they are valid or not

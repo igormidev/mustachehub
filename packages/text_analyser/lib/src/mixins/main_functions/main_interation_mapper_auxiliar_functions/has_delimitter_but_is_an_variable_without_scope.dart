@@ -7,7 +7,10 @@ mixin HasDelimitterButIsAnVariableWithoutScope on MainInterationVariables {
   /// (open or close delimitter, # or ^) it is not a valid variable.
   /// Because text variable does not have an delimitter.
   bool handleVariableThatHasDelimitterButIsAnVariableWihoutScope() {
-    if (hasDelimiter && isModel == false && isBoolean == false) {
+    if (hasDelimiter &&
+        isModel == false &&
+        isBoolean == false &&
+        isChoice == false) {
       segments[index] =
           AnalysedSegmentStatus.hasDelimitterButIsAnVariableWithoutScope(
         offset: offset,

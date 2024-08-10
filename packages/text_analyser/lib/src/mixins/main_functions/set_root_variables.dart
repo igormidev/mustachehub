@@ -38,6 +38,10 @@ mixin SetRootVariables on AllVariables {
               variableName: choice.name,
               choiceImplementation: ChoiceUseImplementation.invertedValue(),
             ));
+            usableVariablesInCurrentContext.add(
+                ChoosableVariableImplementations.choice(
+                    variableName: choice.name,
+                    choiceImplementation: ChoiceUseImplementation.textValue()));
           },
           text: (text) {
             usableVariablesInCurrentContext

@@ -9,6 +9,8 @@ abstract class ChoiceUseImplementation with _$ChoiceUseImplementation {
       _ChoiceUseImplementationNormalValue;
   factory ChoiceUseImplementation.invertedValue() =
       _ChoiceUseImplementationInvertedValue;
+  factory ChoiceUseImplementation.textValue() =
+      _ChoiceUseImplementationTextValue;
 
   factory ChoiceUseImplementation.fromJson(Map<String, dynamic> json) =>
       _$ChoiceUseImplementationFromJson(json);

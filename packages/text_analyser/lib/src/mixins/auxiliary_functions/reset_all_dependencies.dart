@@ -13,9 +13,11 @@ mixin ResetAllDependencies on MainInterationVariables {
 
     textsWithParentThatWeDontKnowIfAreInsideTheCorrectScopeYet.clear();
     booleansWithParentThatWeDontKnowIfAreInsideTheCorrectScopeYet.clear();
+    choicesWithParentThatWeDontKnowIfAreInsideTheCorrectScopeYet.clear();
     modelsWithParentThatWeDontKnowIfAreInsideTheCorrectScopeYet.clear();
 
     openModelDeclarationsWithoutFindedCloseYet.clear();
     openBooleanDeclarationsWithoutFindedCloseYet.clear();
+    openChoiceDeclarationsWithoutFindedCloseYet.clear();
   }
 }

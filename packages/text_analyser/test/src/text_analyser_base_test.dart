@@ -22,6 +22,7 @@ asds {{name}}
           name: 'person',
           textsNames: ['name'],
           booleanNames: [],
+          choicesNames: [],
           subModelsNames: [],
         ),
         'name': TextParentMapper(name: 'name', parrentName: 'person')
@@ -67,6 +68,7 @@ They are:
             name: 'father',
             textsNames: ['fatherName'],
             booleanNames: ['hasChild'],
+            choicesNames: [],
             subModelsNames: ['children']),
         'fatherName': VariableScopeParentMapper.text(
             parrentName: 'father', name: 'fatherName'),
@@ -77,6 +79,7 @@ They are:
             name: 'children',
             textsNames: ['fatherChildName'],
             booleanNames: [],
+            choicesNames: [],
             subModelsNames: ['childFriends']),
         'fatherChildName': VariableScopeParentMapper.text(
             parrentName: 'children', name: 'fatherChildName'),
@@ -85,6 +88,7 @@ They are:
             name: 'childFriends',
             textsNames: ['childFriendName'],
             booleanNames: [],
+            choicesNames: [],
             subModelsNames: []),
         'childFriendName': VariableScopeParentMapper.text(
             parrentName: 'childFriends', name: 'childFriendName'),

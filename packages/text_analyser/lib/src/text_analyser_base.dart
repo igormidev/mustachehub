@@ -829,10 +829,30 @@ class OpenBooleanDeclarationPayload {
   });
 }
 
+class OpenChoiceDeclarationPayload {
+  final ChoiceParentMapper parentMapper;
+  final FindedGroup findedGroup;
+  final int indexInSegment;
+  const OpenChoiceDeclarationPayload({
+    required this.parentMapper,
+    required this.findedGroup,
+    required this.indexInSegment,
+  });
+}
+
 class BooleanParentScopeValidationPayload {
   final OpenBooleanDeclarationPayload open;
   final OpenBooleanDeclarationPayload close;
   const BooleanParentScopeValidationPayload({
+    required this.open,
+    required this.close,
+  });
+}
+
+class ChoiceParentScopeValidationPayload {
+  final OpenChoiceDeclarationPayload open;
+  final OpenChoiceDeclarationPayload close;
+  const ChoiceParentScopeValidationPayload({
     required this.open,
     required this.close,
   });

@@ -6,6 +6,7 @@ mixin MainInterationMapper
         HandleOnNonMatch,
         HandleTextVariables,
         HandleBooleanVariables,
+        HandleChoiceVariables,
         HandleModelVariables,
         IsUncatologedVariable,
         HasDelimitterButIsAnVariableWithoutScope,
@@ -32,9 +33,11 @@ mixin MainInterationMapper
         }
 
         if (isText) {
-          return handleTextVariables();
+          return handleTextsVariables();
         } else if (isBoolean) {
-          return handleBooleanVariables();
+          return handleBooleansVariables();
+        } else if (isChoice) {
+          return handleChoicesVariables();
         } else {
           return handleModelsVariables();
         }

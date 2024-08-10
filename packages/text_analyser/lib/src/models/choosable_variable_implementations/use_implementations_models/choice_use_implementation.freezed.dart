@@ -21,6 +21,8 @@ ChoiceUseImplementation _$ChoiceUseImplementationFromJson(
       return _ChoiceUseImplementationNormalValue.fromJson(json);
     case 'invertedValue':
       return _ChoiceUseImplementationInvertedValue.fromJson(json);
+    case 'textValue':
+      return _ChoiceUseImplementationTextValue.fromJson(json);
 
     default:
       throw CheckedFromJsonException(
@@ -37,18 +39,21 @@ mixin _$ChoiceUseImplementation {
   TResult when<TResult extends Object?>({
     required TResult Function() normalValue,
     required TResult Function() invertedValue,
+    required TResult Function() textValue,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? normalValue,
     TResult? Function()? invertedValue,
+    TResult? Function()? textValue,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? normalValue,
     TResult Function()? invertedValue,
+    TResult Function()? textValue,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -58,6 +63,8 @@ mixin _$ChoiceUseImplementation {
         normalValue,
     required TResult Function(_ChoiceUseImplementationInvertedValue value)
         invertedValue,
+    required TResult Function(_ChoiceUseImplementationTextValue value)
+        textValue,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -65,6 +72,7 @@ mixin _$ChoiceUseImplementation {
     TResult? Function(_ChoiceUseImplementationNormalValue value)? normalValue,
     TResult? Function(_ChoiceUseImplementationInvertedValue value)?
         invertedValue,
+    TResult? Function(_ChoiceUseImplementationTextValue value)? textValue,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -72,6 +80,7 @@ mixin _$ChoiceUseImplementation {
     TResult Function(_ChoiceUseImplementationNormalValue value)? normalValue,
     TResult Function(_ChoiceUseImplementationInvertedValue value)?
         invertedValue,
+    TResult Function(_ChoiceUseImplementationTextValue value)? textValue,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -159,6 +168,7 @@ class _$ChoiceUseImplementationNormalValueImpl
   TResult when<TResult extends Object?>({
     required TResult Function() normalValue,
     required TResult Function() invertedValue,
+    required TResult Function() textValue,
   }) {
     return normalValue();
   }
@@ -168,6 +178,7 @@ class _$ChoiceUseImplementationNormalValueImpl
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? normalValue,
     TResult? Function()? invertedValue,
+    TResult? Function()? textValue,
   }) {
     return normalValue?.call();
   }
@@ -177,6 +188,7 @@ class _$ChoiceUseImplementationNormalValueImpl
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? normalValue,
     TResult Function()? invertedValue,
+    TResult Function()? textValue,
     required TResult orElse(),
   }) {
     if (normalValue != null) {
@@ -192,6 +204,8 @@ class _$ChoiceUseImplementationNormalValueImpl
         normalValue,
     required TResult Function(_ChoiceUseImplementationInvertedValue value)
         invertedValue,
+    required TResult Function(_ChoiceUseImplementationTextValue value)
+        textValue,
   }) {
     return normalValue(this);
   }
@@ -202,6 +216,7 @@ class _$ChoiceUseImplementationNormalValueImpl
     TResult? Function(_ChoiceUseImplementationNormalValue value)? normalValue,
     TResult? Function(_ChoiceUseImplementationInvertedValue value)?
         invertedValue,
+    TResult? Function(_ChoiceUseImplementationTextValue value)? textValue,
   }) {
     return normalValue?.call(this);
   }
@@ -212,6 +227,7 @@ class _$ChoiceUseImplementationNormalValueImpl
     TResult Function(_ChoiceUseImplementationNormalValue value)? normalValue,
     TResult Function(_ChoiceUseImplementationInvertedValue value)?
         invertedValue,
+    TResult Function(_ChoiceUseImplementationTextValue value)? textValue,
     required TResult orElse(),
   }) {
     if (normalValue != null) {
@@ -295,6 +311,7 @@ class _$ChoiceUseImplementationInvertedValueImpl
   TResult when<TResult extends Object?>({
     required TResult Function() normalValue,
     required TResult Function() invertedValue,
+    required TResult Function() textValue,
   }) {
     return invertedValue();
   }
@@ -304,6 +321,7 @@ class _$ChoiceUseImplementationInvertedValueImpl
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? normalValue,
     TResult? Function()? invertedValue,
+    TResult? Function()? textValue,
   }) {
     return invertedValue?.call();
   }
@@ -313,6 +331,7 @@ class _$ChoiceUseImplementationInvertedValueImpl
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? normalValue,
     TResult Function()? invertedValue,
+    TResult Function()? textValue,
     required TResult orElse(),
   }) {
     if (invertedValue != null) {
@@ -328,6 +347,8 @@ class _$ChoiceUseImplementationInvertedValueImpl
         normalValue,
     required TResult Function(_ChoiceUseImplementationInvertedValue value)
         invertedValue,
+    required TResult Function(_ChoiceUseImplementationTextValue value)
+        textValue,
   }) {
     return invertedValue(this);
   }
@@ -338,6 +359,7 @@ class _$ChoiceUseImplementationInvertedValueImpl
     TResult? Function(_ChoiceUseImplementationNormalValue value)? normalValue,
     TResult? Function(_ChoiceUseImplementationInvertedValue value)?
         invertedValue,
+    TResult? Function(_ChoiceUseImplementationTextValue value)? textValue,
   }) {
     return invertedValue?.call(this);
   }
@@ -348,6 +370,7 @@ class _$ChoiceUseImplementationInvertedValueImpl
     TResult Function(_ChoiceUseImplementationNormalValue value)? normalValue,
     TResult Function(_ChoiceUseImplementationInvertedValue value)?
         invertedValue,
+    TResult Function(_ChoiceUseImplementationTextValue value)? textValue,
     required TResult orElse(),
   }) {
     if (invertedValue != null) {
@@ -372,4 +395,147 @@ abstract class _ChoiceUseImplementationInvertedValue
   factory _ChoiceUseImplementationInvertedValue.fromJson(
           Map<String, dynamic> json) =
       _$ChoiceUseImplementationInvertedValueImpl.fromJson;
+}
+
+/// @nodoc
+abstract class _$$ChoiceUseImplementationTextValueImplCopyWith<$Res> {
+  factory _$$ChoiceUseImplementationTextValueImplCopyWith(
+          _$ChoiceUseImplementationTextValueImpl value,
+          $Res Function(_$ChoiceUseImplementationTextValueImpl) then) =
+      __$$ChoiceUseImplementationTextValueImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ChoiceUseImplementationTextValueImplCopyWithImpl<$Res>
+    extends _$ChoiceUseImplementationCopyWithImpl<$Res,
+        _$ChoiceUseImplementationTextValueImpl>
+    implements _$$ChoiceUseImplementationTextValueImplCopyWith<$Res> {
+  __$$ChoiceUseImplementationTextValueImplCopyWithImpl(
+      _$ChoiceUseImplementationTextValueImpl _value,
+      $Res Function(_$ChoiceUseImplementationTextValueImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ChoiceUseImplementation
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$ChoiceUseImplementationTextValueImpl
+    implements _ChoiceUseImplementationTextValue {
+  _$ChoiceUseImplementationTextValueImpl({final String? $type})
+      : $type = $type ?? 'textValue';
+
+  factory _$ChoiceUseImplementationTextValueImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$ChoiceUseImplementationTextValueImplFromJson(json);
+
+  @JsonKey(name: 'runtimeType')
+  final String $type;
+
+  @override
+  String toString() {
+    return 'ChoiceUseImplementation.textValue()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ChoiceUseImplementationTextValueImpl);
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() normalValue,
+    required TResult Function() invertedValue,
+    required TResult Function() textValue,
+  }) {
+    return textValue();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? normalValue,
+    TResult? Function()? invertedValue,
+    TResult? Function()? textValue,
+  }) {
+    return textValue?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? normalValue,
+    TResult Function()? invertedValue,
+    TResult Function()? textValue,
+    required TResult orElse(),
+  }) {
+    if (textValue != null) {
+      return textValue();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_ChoiceUseImplementationNormalValue value)
+        normalValue,
+    required TResult Function(_ChoiceUseImplementationInvertedValue value)
+        invertedValue,
+    required TResult Function(_ChoiceUseImplementationTextValue value)
+        textValue,
+  }) {
+    return textValue(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_ChoiceUseImplementationNormalValue value)? normalValue,
+    TResult? Function(_ChoiceUseImplementationInvertedValue value)?
+        invertedValue,
+    TResult? Function(_ChoiceUseImplementationTextValue value)? textValue,
+  }) {
+    return textValue?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_ChoiceUseImplementationNormalValue value)? normalValue,
+    TResult Function(_ChoiceUseImplementationInvertedValue value)?
+        invertedValue,
+    TResult Function(_ChoiceUseImplementationTextValue value)? textValue,
+    required TResult orElse(),
+  }) {
+    if (textValue != null) {
+      return textValue(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ChoiceUseImplementationTextValueImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _ChoiceUseImplementationTextValue
+    implements ChoiceUseImplementation {
+  factory _ChoiceUseImplementationTextValue() =
+      _$ChoiceUseImplementationTextValueImpl;
+
+  factory _ChoiceUseImplementationTextValue.fromJson(
+          Map<String, dynamic> json) =
+      _$ChoiceUseImplementationTextValueImpl.fromJson;
 }

@@ -31,6 +31,23 @@ mixin ParentScopeValidationPayload {
   final Map<String, List<BooleanParentScopeValidationPayload>>
       booleansWithParentThatWeDontKnowIfAreInsideTheCorrectScopeYet = {};
 
+  /// We will stock here all choices variables that have a parent
+  /// and the open and close declarations are in the correct scope.
+  ///
+  /// In the end, we will check if the choice declaration is
+  /// inside a scope that is valid for the choice to be used.
+  ///
+  /// PS: The open and close declarations need to be in the
+  /// same scope, both of them.
+  ///
+  /// The key is the name of the choice variable.
+  /// The value is an list of all the declarations of that
+  /// choice variable throughout the text. Some of them can be
+  /// valid, some of them can be invalid (outside the parent
+  /// model scope). So we will check one by one.
+  final Map<String, List<ChoiceParentScopeValidationPayload>>
+      choicesWithParentThatWeDontKnowIfAreInsideTheCorrectScopeYet = {};
+
   /// We will stock here all models variables that have a parent
   /// and the open and close declarations are in the correct scope.
   ///

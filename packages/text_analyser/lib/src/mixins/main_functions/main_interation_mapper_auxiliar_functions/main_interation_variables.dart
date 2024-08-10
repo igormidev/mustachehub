@@ -20,6 +20,11 @@ mixin MainInterationVariables on AllVariables {
         orElse: () => false,
       );
 
+  bool get isChoice => varScopeParentMapper.maybeMap(
+        choice: (_) => true,
+        orElse: () => false,
+      );
+
   bool get isBoolean => varScopeParentMapper.maybeMap(
         boolean: (_) => true,
         orElse: () => false,

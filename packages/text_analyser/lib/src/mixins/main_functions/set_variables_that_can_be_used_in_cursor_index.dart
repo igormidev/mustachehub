@@ -34,6 +34,23 @@ mixin SetVariablesThatCanBeUsedInCursorIndex on AllVariables {
           variableName: tokenIdentifier.name,
         ));
       }
+      for (final choiceName in identifier.choicesNames) {
+        usableVariablesInCurrentContext
+            .add(ChoosableVariableImplementations.choice(
+          variableName: choiceName,
+          choiceImplementation: ChoiceUseImplementation.normalValue(),
+        ));
+        usableVariablesInCurrentContext
+            .add(ChoosableVariableImplementations.choice(
+          variableName: choiceName,
+          choiceImplementation: ChoiceUseImplementation.invertedValue(),
+        ));
+        usableVariablesInCurrentContext
+            .add(ChoosableVariableImplementations.choice(
+          variableName: choiceName,
+          choiceImplementation: ChoiceUseImplementation.textValue(),
+        ));
+      }
 
       for (final booleanName in identifier.booleanNames) {
         usableVariablesInCurrentContext

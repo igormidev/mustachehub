@@ -38,7 +38,7 @@ mixin TextContentMethods on State<TextContentTab> {
           index++;
           final VariablesInfoHighlightTextEditingController controller =
               VariablesInfoHighlightTextEditingController(
-            textAnalyserBase: TextAnalyserBase(),
+            textAnalyserBase: const TextAnalyserBase(),
             text: output.content,
           );
 
@@ -64,6 +64,7 @@ mixin TextContentMethods on State<TextContentTab> {
                 },
               ),
               choice: (value) => value.choiceImplementation.map(
+                textValue: (impl) => '${value.variableName}.text',
                 normalValue: (impl) {
                   return '#${value.variableName}';
                 },
@@ -109,6 +110,7 @@ mixin TextContentMethods on State<TextContentTab> {
                   choice: (value) {
                     final name = value.variableName;
                     return value.choiceImplementation.map(
+                      textValue: (_) => '$name.text',
                       normalValue: (_) {
                         return '#$name}}{{/$name';
                       },

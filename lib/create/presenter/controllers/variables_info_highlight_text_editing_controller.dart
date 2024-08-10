@@ -36,7 +36,7 @@ class VariablesInfoHighlightTextEditingController
       AnalysedSegmentStatus analysedSegment,
     ) {
       return analysedSegment.map(
-        text: (value) {
+        normalText: (value) {
           return TextSpan(
             text: value.segmentText,
             style: defaultStyle,
@@ -54,6 +54,40 @@ class VariablesInfoHighlightTextEditingController
                 inlineSpan: TextSpan(
                   text: e,
                   style: validDeclarationStyle,
+                ),
+              );
+            }).toList(),
+          );
+        },
+        choiceDeclarationCloseWithoutOpen: (value) {
+          return TextSpan(
+            children: value.segmentText.characters.map((e) {
+              return TooltipSpan(
+                message:
+                    'Choice declaration close without an corresponding open declaration.\n\nThat means you are closing a choice (using \'/\' caracter) without opening it first.\nTo fix this, you need to open a "open choice declaration" using the \'^\' caracter.\n\nExample of a valid choice declaration: {{^isMale}}{{/isMale}}',
+                inlineSpan: TextSpan(
+                  text: e,
+                  style: defaultStyle.copyWith(
+                    color: cS.error,
+                    backgroundColor: cS.errorContainer,
+                  ),
+                ),
+              );
+            }).toList(),
+          );
+        },
+        choiceDeclarationOpenWithoutClose: (value) {
+          return TextSpan(
+            children: value.segmentText.characters.map((e) {
+              return TooltipSpan(
+                message:
+                    'Choice declaration open without an corresponding close declaration.\n\nThat means you are opening a choice (using \'/\' caracter) without closing it later in the text.\nTo fix this, you need to create a "close choice declaration" using the \'^\' caracter.\n\nExample of a valid choice declaration: {{^isMale}}{{/isMale}}',
+                inlineSpan: TextSpan(
+                  text: e,
+                  style: defaultStyle.copyWith(
+                    color: cS.error,
+                    backgroundColor: cS.errorContainer,
+                  ),
                 ),
               );
             }).toList(),
@@ -144,7 +178,7 @@ class VariablesInfoHighlightTextEditingController
             }).toList(),
           );
         },
-        nonModelVariableWithOpenOrCloseDelimmiter: (value) {
+        hasDelimitterButIsAnVariableWithoutScope: (value) {
           return TextSpan(
             children: value.segmentText.characters.map((e) {
               return TooltipSpan(

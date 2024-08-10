@@ -1,6 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:freezed_annotation/freezed_annotation.dart';
-part 'analysed_segment.freezed.dart';
+part 'analysed_segment_status.freezed.dart';
 
 /// The status of a segment of text that has been analysed.
 ///
@@ -52,12 +52,26 @@ abstract class AnalysedSegmentStatus with _$AnalysedSegmentStatus {
     required String segmentText,
   }) = _AnalysedSegmentBooleanDeclarationOpenWithoutClose;
 
+  /// This is a valid open mode identifier declaration, but because the rest of
+  /// the text dosen't have an corresponding close declaration match. It is invalid.
+  factory AnalysedSegmentStatus.choiceDeclarationOpenWithoutClose({
+    required TextOffset offset,
+    required String segmentText,
+  }) = _AnalysedSegmentChoiceDeclarationOpenWithoutClose;
+
   /// This is a valid close mode identifier declaration, but because the previous part of
   /// the text dosen't have an corresponding open declaration match. It is invalid.
   factory AnalysedSegmentStatus.booleanDeclarationCloseWithoutOpen({
     required TextOffset offset,
     required String segmentText,
   }) = _AnalysedSegmentBooleanDeclarationCloseWithoutOpen;
+
+  /// This is a valid open mode identifier declaration, but because the rest of
+  /// the text dosen't have an corresponding close declaration match. It is invalid.
+  factory AnalysedSegmentStatus.choiceDeclarationCloseWithoutOpen({
+    required TextOffset offset,
+    required String segmentText,
+  }) = _AnalysedSegmentChoiceDeclarationCloseWithoutOpen;
 
   /// This is a sintax correct declaration. But the identifier its of an
   /// cataloged variable that is not an model. And only models can have
