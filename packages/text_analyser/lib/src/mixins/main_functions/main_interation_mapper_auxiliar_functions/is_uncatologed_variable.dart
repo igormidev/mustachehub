@@ -1,5 +1,4 @@
-import 'package:text_analyser/src/mixins/main_functions/main_interation_mapper_auxiliar_functions/main_interation_variables.dart';
-import 'package:text_analyser/text_analyser.dart';
+part of '../../all_variables.dart';
 
 mixin IsUncatologedVariable on MainInterationVariables {
   /// Returns true if the variable is not in the flat map, it is an uncataloged variable.

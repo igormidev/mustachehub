@@ -10,7 +10,6 @@ mixin MainInterationMapper
         IsUncatologedVariable,
         HasDelimitterButIsAnVariableWithoutScope,
         MainInterationVariables,
-        SetInitialVariables,
         HandleFindedModelScope {
   void mapAllSegmentsAndVariables() {
     /// The main interation to map all variables
@@ -37,7 +36,7 @@ mixin MainInterationMapper
         } else if (isBoolean) {
           return handleBooleanVariables();
         } else {
-          return handleModelVariables();
+          return handleModelsVariables();
         }
       },
       onNonMatch: handleOnNonMatch,

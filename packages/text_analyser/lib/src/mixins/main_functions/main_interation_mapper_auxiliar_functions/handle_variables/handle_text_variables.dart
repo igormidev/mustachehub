@@ -1,7 +1,4 @@
-import 'package:text_analyser/src/mixins/main_functions/main_interation_mapper_auxiliar_functions/main_interation_variables.dart';
-import 'package:text_analyser/src/models/analysed_segment_status.dart';
-import 'package:text_analyser/src/models/variable_scope_parent_mapper.dart';
-import 'package:text_analyser/src/text_analyser_base.dart';
+part of '../../../all_variables.dart';
 
 mixin HandleTextVariables on MainInterationVariables {
   void handleTextVariables() {

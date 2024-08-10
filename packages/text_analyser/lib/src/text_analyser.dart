@@ -8,18 +8,57 @@ class TextAnalyser
         ParentScopeValidationPayload,
         OpenDeclarationsWithoutFindedClose,
         AllVariables, // <--- The main mixin
+        SetRootVariables,
+        SetVariablesThatCanBeUsedInCursorIndex,
+        MainInterationVariables,
         IsWithinTextBounds,
-        HandleFindedModelScope {
+        ResetAllDependencies,
+        HandleFindedModelScope,
+        GaranteeAllSegmentsAreCorrectlySorted,
+        HandleOnNonMatch,
+        HandleTextVariables,
+        HandleBooleanVariables,
+        HandleModelVariables,
+        IsUncatologedVariable,
+        HasDelimitterButIsAnVariableWithoutScope,
+        MainInterationVariables,
+        HandleFindedModelScope,
+        SetOpenModelsWithNoCloseAsInvalidSegments,
+        SetOpenBooleansWithotCloseAsInvalidSegments,
+        MainInterationMapper,
+        SetIfTextSegmentIsInsidePaternScope,
+        SetIfBooleanSegmentIsInsidePaternScope,
+        SetIfModelSegmentIsInsidePaternScope {
   AnalysedResponse? getMatchClusters({
     required String input,
     required int indexAtText,
     required Map<String, VariableScopeParentMapper> flatMap,
   }) {
+    resetAllDependencies();
+
     this.input = input;
     this.indexAtText = indexAtText;
     this.flatMap = flatMap;
     if (isWithinBounds() == false) return null;
 
-    return null;
+    setIfTextSegmentIsInsidePaternScope();
+
+    mapAllSegmentsAndVariables();
+
+    setOpenModelsWithNoCloseAsInvalidSegments();
+    setOpenBooleansWithNoCloseAsInvalidSegments();
+
+    setIfTextSegmentIsInsidePaternScope();
+    setIfBooleansSegmentAreInsidePaternScope();
+    setIfModelSegmentAreInsidePaternScope();
+
+    setVariablesThatCanBeUsedInCursorIndex();
+
+    garanteeAllSegmentsAreCorrectlySorted();
+
+    return AnalysedResponse(
+      segmentsStates: sortedSegments,
+      choosableVariablesInCurrentScope: usableVariablesInCurrentContext,
+    );
   }
 }

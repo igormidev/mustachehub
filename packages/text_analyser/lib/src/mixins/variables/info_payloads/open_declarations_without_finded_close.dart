@@ -14,7 +14,7 @@ mixin OpenDeclarationsWithoutFindedClose {
   /// model variable declarations throughout the text that don't have
   /// a close declaration yet.
   final Map<String, List<OpenModelDeclarationPayload>>
-      openModelDeclarationsWithoutFindedClose = {};
+      openModelDeclarationsWithoutFindedCloseYet = {};
 
   /// These are the open booleans declarations finded in the text
   /// that don't have a close declaration yet. In the main interation,
@@ -29,5 +29,5 @@ mixin OpenDeclarationsWithoutFindedClose {
   /// boolean variable declarations throughout the text that don't have
   /// a close declaration yet.
   final Map<String, List<OpenBooleanDeclarationPayload>>
-      openBooleanDeclarationsWithoutFindedClose = {};
+      openBooleanDeclarationsWithoutFindedCloseYet = {};
 }

@@ -1,6 +1,4 @@
-import 'package:enchanted_regex/enchanted_regex.dart';
-import 'package:text_analyser/src/mixins/all_variables.dart';
-import 'package:text_analyser/text_analyser.dart';
+part of '../../all_variables.dart';
 
 mixin MainInterationVariables on AllVariables {
   /// The curent index the interator currently is in the text.

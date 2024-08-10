@@ -125,7 +125,7 @@ class TextAnalyserBase {
     /// model variable declarations throughout the text that don't have
     /// a close declaration yet.
     final Map<String, List<OpenModelDeclarationPayload>>
-        openModelDeclarationsWithoutFindedClose = {};
+        openModelDeclarationsWithoutFindedCloseYet = {};
 
     /// These are the open booleans declarations finded in the text
     /// that don't have a close declaration yet. In the main interation,
@@ -140,7 +140,7 @@ class TextAnalyserBase {
     /// boolean variable declarations throughout the text that don't have
     /// a close declaration yet.
     final Map<String, List<OpenBooleanDeclarationPayload>>
-        openBooleanDeclarationsWithoutFindedClose = {};
+        openBooleanDeclarationsWithoutFindedCloseYet = {};
 
     /// We will stock here all texts variables that have a parent
     ///
@@ -342,15 +342,15 @@ class TextAnalyserBase {
           // Now, we need to now if the boolean has a open and close declaration in somewhere in the text.
 
           final bool dontExistSegmentYet =
-              openBooleanDeclarationsWithoutFindedClose
+              openBooleanDeclarationsWithoutFindedCloseYet
                       .containsKey(group.content) ==
                   false;
           if (dontExistSegmentYet) {
-            openBooleanDeclarationsWithoutFindedClose[group.content] = [];
+            openBooleanDeclarationsWithoutFindedCloseYet[group.content] = [];
           }
 
           if (isNormalOpenDelimiter || isInverseOpenDelimiter) {
-            openBooleanDeclarationsWithoutFindedClose[group.content]?.add(
+            openBooleanDeclarationsWithoutFindedCloseYet[group.content]?.add(
               OpenBooleanDeclarationPayload(
                 parentMapper: varScopeParentMapper as BooleanParentMapper,
                 findedGroup: group,
@@ -362,7 +362,7 @@ class TextAnalyserBase {
           }
 
           final List<OpenBooleanDeclarationPayload>? openDeclarations =
-              openBooleanDeclarationsWithoutFindedClose[group.content];
+              openBooleanDeclarationsWithoutFindedCloseYet[group.content];
 
           if (openDeclarations == null || openDeclarations.isEmpty) {
             segments[index] =
@@ -372,7 +372,7 @@ class TextAnalyserBase {
             );
           } else {
             final OpenBooleanDeclarationPayload openDeclaration =
-                openBooleanDeclarationsWithoutFindedClose[group.content]!
+                openBooleanDeclarationsWithoutFindedCloseYet[group.content]!
                     .removeLast();
             final isRootTokenIdentifier =
                 varScopeParentMapper.parrentName == null;
@@ -422,14 +422,14 @@ class TextAnalyserBase {
         }
 
         // Now, we need to now if the model has a open and close declaration in somewhere in the text.
-        if (openModelDeclarationsWithoutFindedClose
+        if (openModelDeclarationsWithoutFindedCloseYet
                 .containsKey(group.content) ==
             false) {
-          openModelDeclarationsWithoutFindedClose[group.content] = [];
+          openModelDeclarationsWithoutFindedCloseYet[group.content] = [];
         }
 
         if (isNormalOpenDelimiter) {
-          openModelDeclarationsWithoutFindedClose[group.content]?.add(
+          openModelDeclarationsWithoutFindedCloseYet[group.content]?.add(
             OpenModelDeclarationPayload(
               parentMapper: varScopeParentMapper as ModelParentMapper,
               findedGroup: group,
@@ -440,7 +440,7 @@ class TextAnalyserBase {
           return;
         } else {
           final List<OpenModelDeclarationPayload>? openDeclarations =
-              openModelDeclarationsWithoutFindedClose[group.content];
+              openModelDeclarationsWithoutFindedCloseYet[group.content];
 
           if (openDeclarations == null || openDeclarations.isEmpty) {
             segments[index] =
@@ -451,7 +451,7 @@ class TextAnalyserBase {
           }
 
           final OpenModelDeclarationPayload openDeclaration =
-              openModelDeclarationsWithoutFindedClose[group.content]!
+              openModelDeclarationsWithoutFindedCloseYet[group.content]!
                   .removeLast();
 
           if (varScopeParentMapper.parrentName == null) {
@@ -517,7 +517,7 @@ class TextAnalyserBase {
       },
     );
 
-    openModelDeclarationsWithoutFindedClose.forEach((content, declarations) {
+    openModelDeclarationsWithoutFindedCloseYet.forEach((content, declarations) {
       for (final declaration in declarations) {
         segments[declaration.indexInSegment] =
             AnalysedSegmentStatus.modelDeclarationOpenWithoutClose(
@@ -530,7 +530,7 @@ class TextAnalyserBase {
       }
     });
 
-    openBooleanDeclarationsWithoutFindedClose.forEach(
+    openBooleanDeclarationsWithoutFindedCloseYet.forEach(
       (content, declarations) {
         for (final declaration in declarations) {
           segments[declaration.indexInSegment] =
@@ -730,13 +730,6 @@ class TextAnalyserBase {
       },
     );
 
-    final sortedSegmentsEntries = segments
-        .castToList((key, value) => MapEntry(key, value))
-      ..sort((a, b) => a.key.compareTo(b.key));
-
-    final List<AnalysedSegmentStatus> sortedSegments =
-        sortedSegmentsEntries.map((e) => e.value).toList();
-
     for (final ModelParentMapper identifier
         in modelsThatCursorIndexIsInsideScope) {
       usableVariablesInCurrentContext
@@ -790,6 +783,13 @@ class TextAnalyserBase {
         ));
       }
     }
+
+    final sortedSegmentsEntries = segments
+        .castToList((key, value) => MapEntry(key, value))
+      ..sort((a, b) => a.key.compareTo(b.key));
+
+    final List<AnalysedSegmentStatus> sortedSegments =
+        sortedSegmentsEntries.map((e) => e.value).toList();
 
     return AnalysedResponse(
       segmentsStates: sortedSegments,
