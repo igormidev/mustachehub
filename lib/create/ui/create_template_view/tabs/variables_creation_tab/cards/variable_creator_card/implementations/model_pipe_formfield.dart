@@ -10,6 +10,7 @@ import 'package:mustachehub/create/presenter/cubits/edit_model_info_display_cubi
 import 'package:mustachehub/create/ui/create_template_view/tabs/variables_creation_tab/cards/variable_creator_card/base_variable_creation_card.dart';
 import 'package:mustachehub/create/ui/create_template_view/tabs/variables_creation_tab/cards/display_pipe_card/implementations/model_pipe_display_card.dart';
 import 'package:mustachehub/create/ui/create_template_view/tabs/variables_creation_tab/cards/variable_creator_card/forms/pipe_formfields/base_pipe_formfield.dart';
+import 'package:mustachehub/create/ui/create_template_view/tabs/variables_creation_tab/cards/variable_creator_card/implementations/choice_variable_creation_card.dart';
 import 'package:mustachehub/create/ui/create_template_view/tabs/variables_creation_tab/cards/variable_creator_card/implementations/text_variable_creation_card.dart';
 import 'package:mustachehub/create/ui/create_template_view/tabs/variables_creation_tab/cards/variable_creator_card/base_variables_creation_card_textfield_methods.dart';
 import 'package:mustachehub/create/ui/create_template_view/tabs/variables_creation_tab/cards/variable_creator_card/implementations/boolean_variable_creation_card.dart';
@@ -401,6 +402,29 @@ class _ModelPipeFormfieldState extends State<ModelPipeFormfield> {
             });
           },
         ),
+        const SizedBox(height: 6),
+        const Divider(),
+        Text(
+          'Add choice variables in item:',
+          style: Theme.of(context).textTheme.titleMedium,
+        ),
+        ChoiceVariableCreationCard(
+          type: ListType.listviewBuilder,
+          formKey: widget.formKey,
+          initialList: widget.choicePipes,
+          retriveCreatedPipes: (pipes) {
+            widget.choicePipes.clear();
+            widget.choicePipes.addAll(pipes);
+            debouncer.garanteedExecutionAfterDebounceFinished(() {
+              final editCubit = context.read<EditModelInfoDisplayCubit>();
+              editCubit.updatePipes(
+                pipeId: widget.pipe.pipeId,
+                pipes: pipes,
+              );
+            });
+          },
+        ),
+        const SizedBox(height: 6),
         const SizedBox(height: 6),
         const Divider(),
         Text(

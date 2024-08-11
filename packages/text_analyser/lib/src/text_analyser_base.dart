@@ -54,22 +54,22 @@ class TextAnalyserBaseLegacy {
               booleanImplementation: BooleanUseImplementation.invertedValue(),
             ));
           },
-          choice: (choice) {
-            usableVariablesInCurrentContext
-                .add(ChoosableVariableImplementations.choice(
-              variableName: choice.name,
-              choiceImplementation: ChoiceUseImplementation.normalValue(),
-            ));
-            usableVariablesInCurrentContext
-                .add(ChoosableVariableImplementations.choice(
-              variableName: choice.name,
-              choiceImplementation: ChoiceUseImplementation.invertedValue(),
-            ));
-            usableVariablesInCurrentContext.add(
-                ChoosableVariableImplementations.choice(
-                    variableName: choice.name,
-                    choiceImplementation: ChoiceUseImplementation.textValue()));
-          },
+          // choice: (choice) {
+          //   usableVariablesInCurrentContext
+          //       .add(ChoosableVariableImplementations.choice(
+          //     variableName: choice.name,
+          //     choiceImplementation: ChoiceUseImplementation.normalValue(),
+          //   ));
+          //   usableVariablesInCurrentContext
+          //       .add(ChoosableVariableImplementations.choice(
+          //     variableName: choice.name,
+          //     choiceImplementation: ChoiceUseImplementation.invertedValue(),
+          //   ));
+          //   usableVariablesInCurrentContext.add(
+          //       ChoosableVariableImplementations.choice(
+          //           variableName: choice.name,
+          //           choiceImplementation: ChoiceUseImplementation.textValue()));
+          // },
           text: (text) {
             usableVariablesInCurrentContext
                 .add(ChoosableVariableImplementations.text(
@@ -833,16 +833,16 @@ class OpenBooleanDeclarationPayload {
   });
 }
 
-class OpenChoiceDeclarationPayload {
-  final ChoiceParentMapper parentMapper;
-  final FindedGroup findedGroup;
-  final int indexInSegment;
-  const OpenChoiceDeclarationPayload({
-    required this.parentMapper,
-    required this.findedGroup,
-    required this.indexInSegment,
-  });
-}
+// class OpenChoiceDeclarationPayload {
+//   final ChoiceParentMapper parentMapper;
+//   final FindedGroup findedGroup;
+//   final int indexInSegment;
+//   const OpenChoiceDeclarationPayload({
+//     required this.parentMapper,
+//     required this.findedGroup,
+//     required this.indexInSegment,
+//   });
+// }
 
 class BooleanParentScopeValidationPayload {
   final OpenBooleanDeclarationPayload open;
@@ -853,14 +853,14 @@ class BooleanParentScopeValidationPayload {
   });
 }
 
-class ChoiceParentScopeValidationPayload {
-  final OpenChoiceDeclarationPayload open;
-  final OpenChoiceDeclarationPayload close;
-  const ChoiceParentScopeValidationPayload({
-    required this.open,
-    required this.close,
-  });
-}
+// class ChoiceParentScopeValidationPayload {
+//   final OpenChoiceDeclarationPayload open;
+//   final OpenChoiceDeclarationPayload close;
+//   const ChoiceParentScopeValidationPayload({
+//     required this.open,
+//     required this.close,
+//   });
+// }
 
 class TextParentScopeValidationPayload {
   final TextParentMapper parentMapper;

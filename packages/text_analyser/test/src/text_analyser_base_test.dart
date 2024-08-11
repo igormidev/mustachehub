@@ -13,9 +13,9 @@ asds {{name}}
 {{/person}}''';
 
     final response = tester.getMatchClusters(
-      source,
-      0,
-      {
+      input: source,
+      indexAtText: 0,
+      flatMap: {
         'person': ModelParentMapper(
           parrentName: null,
           name: 'person',
@@ -59,9 +59,9 @@ They are:
 {{/father}}''';
 
     final response = tester.getMatchClusters(
-      source,
-      0,
-      {
+      input: source,
+      indexAtText: 0,
+      flatMap: {
         'father': VariableScopeParentMapper.model(
             parrentName: null,
             name: 'father',

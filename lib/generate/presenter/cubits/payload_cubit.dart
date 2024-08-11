@@ -60,7 +60,8 @@ class PayloadCubit extends Cubit<PayloadState> {
   }) async {
     final areAllVariablesEmpty = generatorData.textPipes.isEmpty &&
         generatorData.booleanPipes.isEmpty &&
-        generatorData.modelPipes.isEmpty;
+        generatorData.modelPipes.isEmpty &&
+        generatorData.choicePipes.isEmpty;
 
     if (areAllVariablesEmpty) {
       return emit(PayloadState.initial());

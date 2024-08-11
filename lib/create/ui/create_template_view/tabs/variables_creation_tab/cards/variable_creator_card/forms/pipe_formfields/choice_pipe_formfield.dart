@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:enchanted_collection/enchanted_collection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:mustache_hub_core/mustache_hub_core.dart';
 
 import 'package:mustachehub/create/ui/create_template_view/tabs/variables_creation_tab/cards/variable_creator_card/forms/pipe_formfields/base_pipe_formfield.dart';
@@ -118,7 +119,16 @@ class _ChoicePipeFormfieldState extends State<ChoicePipeFormfield>
                         ),
                 ),
                 maxLength: 30,
-                validator: isNotEmpty,
+                inputFormatters: [
+                  // Only caracters and spaces
+                  FilteringTextInputFormatter.allow(
+                    RegExp(r'[a-zA-Z\s]*'),
+                  ),
+                ],
+                validator: (val) => combineValidators([
+                  () => isNotEmpty(val),
+                  () => onlyCaractersOrSpaces(val),
+                ]),
               ),
             );
           },

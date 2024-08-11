@@ -9,11 +9,7 @@ mixin MainInterationVariables on AllVariables {
   late FindedGroup group;
 
   VariableScopeParentMapper get varScopeParentMapper {
-    final contentName = group.content.contains('.')
-        ? group.content.split('.').first
-        : group.content;
-
-    return flatMap[contentName]!;
+    return flatMap[group.content]!;
   }
 
   TextOffset get offset => TextOffset(
@@ -26,10 +22,10 @@ mixin MainInterationVariables on AllVariables {
         orElse: () => false,
       );
 
-  bool get isChoice => varScopeParentMapper.maybeMap(
-        choice: (_) => true,
-        orElse: () => false,
-      );
+  // bool get isChoice => varScopeParentMapper.maybeMap(
+  //       choice: (_) => true,
+  //       orElse: () => false,
+  //     );
 
   bool get isBoolean => varScopeParentMapper.maybeMap(
         boolean: (_) => true,

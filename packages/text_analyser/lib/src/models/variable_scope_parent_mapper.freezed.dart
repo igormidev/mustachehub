@@ -21,8 +21,6 @@ VariableScopeParentMapper _$VariableScopeParentMapperFromJson(
       return TextParentMapper.fromJson(json);
     case 'boolean':
       return BooleanParentMapper.fromJson(json);
-    case 'choice':
-      return ChoiceParentMapper.fromJson(json);
     case 'model':
       return ModelParentMapper.fromJson(json);
 
@@ -43,7 +41,6 @@ mixin _$VariableScopeParentMapper {
   TResult when<TResult extends Object?>({
     required TResult Function(String? parrentName, String name) text,
     required TResult Function(String? parrentName, String name) boolean,
-    required TResult Function(String? parrentName, String name) choice,
     required TResult Function(
             String? parrentName,
             String name,
@@ -58,7 +55,6 @@ mixin _$VariableScopeParentMapper {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String? parrentName, String name)? text,
     TResult? Function(String? parrentName, String name)? boolean,
-    TResult? Function(String? parrentName, String name)? choice,
     TResult? Function(
             String? parrentName,
             String name,
@@ -73,7 +69,6 @@ mixin _$VariableScopeParentMapper {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? parrentName, String name)? text,
     TResult Function(String? parrentName, String name)? boolean,
-    TResult Function(String? parrentName, String name)? choice,
     TResult Function(
             String? parrentName,
             String name,
@@ -89,7 +84,6 @@ mixin _$VariableScopeParentMapper {
   TResult map<TResult extends Object?>({
     required TResult Function(TextParentMapper value) text,
     required TResult Function(BooleanParentMapper value) boolean,
-    required TResult Function(ChoiceParentMapper value) choice,
     required TResult Function(ModelParentMapper value) model,
   }) =>
       throw _privateConstructorUsedError;
@@ -97,7 +91,6 @@ mixin _$VariableScopeParentMapper {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(TextParentMapper value)? text,
     TResult? Function(BooleanParentMapper value)? boolean,
-    TResult? Function(ChoiceParentMapper value)? choice,
     TResult? Function(ModelParentMapper value)? model,
   }) =>
       throw _privateConstructorUsedError;
@@ -105,7 +98,6 @@ mixin _$VariableScopeParentMapper {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(TextParentMapper value)? text,
     TResult Function(BooleanParentMapper value)? boolean,
-    TResult Function(ChoiceParentMapper value)? choice,
     TResult Function(ModelParentMapper value)? model,
     required TResult orElse(),
   }) =>
@@ -254,7 +246,6 @@ class _$TextParentMapperImpl implements TextParentMapper {
   TResult when<TResult extends Object?>({
     required TResult Function(String? parrentName, String name) text,
     required TResult Function(String? parrentName, String name) boolean,
-    required TResult Function(String? parrentName, String name) choice,
     required TResult Function(
             String? parrentName,
             String name,
@@ -272,7 +263,6 @@ class _$TextParentMapperImpl implements TextParentMapper {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String? parrentName, String name)? text,
     TResult? Function(String? parrentName, String name)? boolean,
-    TResult? Function(String? parrentName, String name)? choice,
     TResult? Function(
             String? parrentName,
             String name,
@@ -290,7 +280,6 @@ class _$TextParentMapperImpl implements TextParentMapper {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? parrentName, String name)? text,
     TResult Function(String? parrentName, String name)? boolean,
-    TResult Function(String? parrentName, String name)? choice,
     TResult Function(
             String? parrentName,
             String name,
@@ -312,7 +301,6 @@ class _$TextParentMapperImpl implements TextParentMapper {
   TResult map<TResult extends Object?>({
     required TResult Function(TextParentMapper value) text,
     required TResult Function(BooleanParentMapper value) boolean,
-    required TResult Function(ChoiceParentMapper value) choice,
     required TResult Function(ModelParentMapper value) model,
   }) {
     return text(this);
@@ -323,7 +311,6 @@ class _$TextParentMapperImpl implements TextParentMapper {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(TextParentMapper value)? text,
     TResult? Function(BooleanParentMapper value)? boolean,
-    TResult? Function(ChoiceParentMapper value)? choice,
     TResult? Function(ModelParentMapper value)? model,
   }) {
     return text?.call(this);
@@ -334,7 +321,6 @@ class _$TextParentMapperImpl implements TextParentMapper {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(TextParentMapper value)? text,
     TResult Function(BooleanParentMapper value)? boolean,
-    TResult Function(ChoiceParentMapper value)? choice,
     TResult Function(ModelParentMapper value)? model,
     required TResult orElse(),
   }) {
@@ -465,7 +451,6 @@ class _$BooleanParentMapperImpl implements BooleanParentMapper {
   TResult when<TResult extends Object?>({
     required TResult Function(String? parrentName, String name) text,
     required TResult Function(String? parrentName, String name) boolean,
-    required TResult Function(String? parrentName, String name) choice,
     required TResult Function(
             String? parrentName,
             String name,
@@ -483,7 +468,6 @@ class _$BooleanParentMapperImpl implements BooleanParentMapper {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String? parrentName, String name)? text,
     TResult? Function(String? parrentName, String name)? boolean,
-    TResult? Function(String? parrentName, String name)? choice,
     TResult? Function(
             String? parrentName,
             String name,
@@ -501,7 +485,6 @@ class _$BooleanParentMapperImpl implements BooleanParentMapper {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? parrentName, String name)? text,
     TResult Function(String? parrentName, String name)? boolean,
-    TResult Function(String? parrentName, String name)? choice,
     TResult Function(
             String? parrentName,
             String name,
@@ -523,7 +506,6 @@ class _$BooleanParentMapperImpl implements BooleanParentMapper {
   TResult map<TResult extends Object?>({
     required TResult Function(TextParentMapper value) text,
     required TResult Function(BooleanParentMapper value) boolean,
-    required TResult Function(ChoiceParentMapper value) choice,
     required TResult Function(ModelParentMapper value) model,
   }) {
     return boolean(this);
@@ -534,7 +516,6 @@ class _$BooleanParentMapperImpl implements BooleanParentMapper {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(TextParentMapper value)? text,
     TResult? Function(BooleanParentMapper value)? boolean,
-    TResult? Function(ChoiceParentMapper value)? choice,
     TResult? Function(ModelParentMapper value)? model,
   }) {
     return boolean?.call(this);
@@ -545,7 +526,6 @@ class _$BooleanParentMapperImpl implements BooleanParentMapper {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(TextParentMapper value)? text,
     TResult Function(BooleanParentMapper value)? boolean,
-    TResult Function(ChoiceParentMapper value)? choice,
     TResult Function(ModelParentMapper value)? model,
     required TResult orElse(),
   }) {
@@ -581,217 +561,6 @@ abstract class BooleanParentMapper implements VariableScopeParentMapper {
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$BooleanParentMapperImplCopyWith<_$BooleanParentMapperImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$ChoiceParentMapperImplCopyWith<$Res>
-    implements $VariableScopeParentMapperCopyWith<$Res> {
-  factory _$$ChoiceParentMapperImplCopyWith(_$ChoiceParentMapperImpl value,
-          $Res Function(_$ChoiceParentMapperImpl) then) =
-      __$$ChoiceParentMapperImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({String? parrentName, String name});
-}
-
-/// @nodoc
-class __$$ChoiceParentMapperImplCopyWithImpl<$Res>
-    extends _$VariableScopeParentMapperCopyWithImpl<$Res,
-        _$ChoiceParentMapperImpl>
-    implements _$$ChoiceParentMapperImplCopyWith<$Res> {
-  __$$ChoiceParentMapperImplCopyWithImpl(_$ChoiceParentMapperImpl _value,
-      $Res Function(_$ChoiceParentMapperImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of VariableScopeParentMapper
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? parrentName = freezed,
-    Object? name = null,
-  }) {
-    return _then(_$ChoiceParentMapperImpl(
-      parrentName: freezed == parrentName
-          ? _value.parrentName
-          : parrentName // ignore: cast_nullable_to_non_nullable
-              as String?,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$ChoiceParentMapperImpl implements ChoiceParentMapper {
-  const _$ChoiceParentMapperImpl(
-      {required this.parrentName, required this.name, final String? $type})
-      : $type = $type ?? 'choice';
-
-  factory _$ChoiceParentMapperImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ChoiceParentMapperImplFromJson(json);
-
-  @override
-  final String? parrentName;
-  @override
-  final String name;
-
-  @JsonKey(name: 'runtimeType')
-  final String $type;
-
-  @override
-  String toString() {
-    return 'VariableScopeParentMapper.choice(parrentName: $parrentName, name: $name)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$ChoiceParentMapperImpl &&
-            (identical(other.parrentName, parrentName) ||
-                other.parrentName == parrentName) &&
-            (identical(other.name, name) || other.name == name));
-  }
-
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(runtimeType, parrentName, name);
-
-  /// Create a copy of VariableScopeParentMapper
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$ChoiceParentMapperImplCopyWith<_$ChoiceParentMapperImpl> get copyWith =>
-      __$$ChoiceParentMapperImplCopyWithImpl<_$ChoiceParentMapperImpl>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String? parrentName, String name) text,
-    required TResult Function(String? parrentName, String name) boolean,
-    required TResult Function(String? parrentName, String name) choice,
-    required TResult Function(
-            String? parrentName,
-            String name,
-            List<String> textsNames,
-            List<String> booleanNames,
-            List<String> choicesNames,
-            List<String> subModelsNames)
-        model,
-  }) {
-    return choice(parrentName, name);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String? parrentName, String name)? text,
-    TResult? Function(String? parrentName, String name)? boolean,
-    TResult? Function(String? parrentName, String name)? choice,
-    TResult? Function(
-            String? parrentName,
-            String name,
-            List<String> textsNames,
-            List<String> booleanNames,
-            List<String> choicesNames,
-            List<String> subModelsNames)?
-        model,
-  }) {
-    return choice?.call(parrentName, name);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String? parrentName, String name)? text,
-    TResult Function(String? parrentName, String name)? boolean,
-    TResult Function(String? parrentName, String name)? choice,
-    TResult Function(
-            String? parrentName,
-            String name,
-            List<String> textsNames,
-            List<String> booleanNames,
-            List<String> choicesNames,
-            List<String> subModelsNames)?
-        model,
-    required TResult orElse(),
-  }) {
-    if (choice != null) {
-      return choice(parrentName, name);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(TextParentMapper value) text,
-    required TResult Function(BooleanParentMapper value) boolean,
-    required TResult Function(ChoiceParentMapper value) choice,
-    required TResult Function(ModelParentMapper value) model,
-  }) {
-    return choice(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(TextParentMapper value)? text,
-    TResult? Function(BooleanParentMapper value)? boolean,
-    TResult? Function(ChoiceParentMapper value)? choice,
-    TResult? Function(ModelParentMapper value)? model,
-  }) {
-    return choice?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(TextParentMapper value)? text,
-    TResult Function(BooleanParentMapper value)? boolean,
-    TResult Function(ChoiceParentMapper value)? choice,
-    TResult Function(ModelParentMapper value)? model,
-    required TResult orElse(),
-  }) {
-    if (choice != null) {
-      return choice(this);
-    }
-    return orElse();
-  }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$ChoiceParentMapperImplToJson(
-      this,
-    );
-  }
-}
-
-abstract class ChoiceParentMapper implements VariableScopeParentMapper {
-  const factory ChoiceParentMapper(
-      {required final String? parrentName,
-      required final String name}) = _$ChoiceParentMapperImpl;
-
-  factory ChoiceParentMapper.fromJson(Map<String, dynamic> json) =
-      _$ChoiceParentMapperImpl.fromJson;
-
-  @override
-  String? get parrentName;
-  @override
-  String get name;
-
-  /// Create a copy of VariableScopeParentMapper
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ChoiceParentMapperImplCopyWith<_$ChoiceParentMapperImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -969,7 +738,6 @@ class _$ModelParentMapperImpl implements ModelParentMapper {
   TResult when<TResult extends Object?>({
     required TResult Function(String? parrentName, String name) text,
     required TResult Function(String? parrentName, String name) boolean,
-    required TResult Function(String? parrentName, String name) choice,
     required TResult Function(
             String? parrentName,
             String name,
@@ -988,7 +756,6 @@ class _$ModelParentMapperImpl implements ModelParentMapper {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String? parrentName, String name)? text,
     TResult? Function(String? parrentName, String name)? boolean,
-    TResult? Function(String? parrentName, String name)? choice,
     TResult? Function(
             String? parrentName,
             String name,
@@ -1007,7 +774,6 @@ class _$ModelParentMapperImpl implements ModelParentMapper {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? parrentName, String name)? text,
     TResult Function(String? parrentName, String name)? boolean,
-    TResult Function(String? parrentName, String name)? choice,
     TResult Function(
             String? parrentName,
             String name,
@@ -1030,7 +796,6 @@ class _$ModelParentMapperImpl implements ModelParentMapper {
   TResult map<TResult extends Object?>({
     required TResult Function(TextParentMapper value) text,
     required TResult Function(BooleanParentMapper value) boolean,
-    required TResult Function(ChoiceParentMapper value) choice,
     required TResult Function(ModelParentMapper value) model,
   }) {
     return model(this);
@@ -1041,7 +806,6 @@ class _$ModelParentMapperImpl implements ModelParentMapper {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(TextParentMapper value)? text,
     TResult? Function(BooleanParentMapper value)? boolean,
-    TResult? Function(ChoiceParentMapper value)? choice,
     TResult? Function(ModelParentMapper value)? model,
   }) {
     return model?.call(this);
@@ -1052,7 +816,6 @@ class _$ModelParentMapperImpl implements ModelParentMapper {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(TextParentMapper value)? text,
     TResult Function(BooleanParentMapper value)? boolean,
-    TResult Function(ChoiceParentMapper value)? choice,
     TResult Function(ModelParentMapper value)? model,
     required TResult orElse(),
   }) {

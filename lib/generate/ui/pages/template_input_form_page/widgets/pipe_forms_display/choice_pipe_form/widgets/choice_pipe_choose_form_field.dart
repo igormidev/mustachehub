@@ -15,32 +15,66 @@ class ChoicePipeChooseFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(
-          choicePipeDto.pipe.name,
-          style: Theme.of(context).textTheme.titleMedium,
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8.0),
+      child: IntrinsicHeight(
+        child: Row(
+          children: [
+            Container(
+              width: 8,
+              decoration: const BoxDecoration(
+                color: Colors.blueGrey,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(8),
+                  bottomLeft: Radius.circular(8),
+                ),
+              ),
+            ),
+            Expanded(
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.surfaceContainerHighest,
+                  borderRadius: const BorderRadius.only(
+                    topRight: Radius.circular(8),
+                    bottomRight: Radius.circular(8),
+                  ),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 12.0, top: 4, bottom: 8),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        choicePipeDto.pipe.name,
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
+                      Text(
+                        choicePipeDto.pipe.description,
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                      const SizedBox(height: 4),
+                      Wrap(
+                        spacing: 8,
+                        runSpacing: 8,
+                        children:
+                            choicePipeDto.pipe.options.map((String pipeText) {
+                          return ChoiceChip(
+                            label: Text(pipeText),
+                            selected: pipeText == choosedPipeName,
+                            onSelected: (_) {
+                              onChangedCallback(pipeText);
+                            },
+                          );
+                        }).toList(),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
-        Text(
-          choicePipeDto.pipe.description,
-          style: Theme.of(context).textTheme.bodyMedium,
-        ),
-        const SizedBox(height: 4),
-        Wrap(
-          spacing: 8,
-          runSpacing: 8,
-          children: choicePipeDto.pipe.options.map((String pipeText) {
-            return ChoiceChip(
-              label: Text(pipeText),
-              selected: pipeText == choosedPipeName,
-              onSelected: (_) {
-                onChangedCallback(pipeText);
-              },
-            );
-          }).toList(),
-        ),
-        const SizedBox(height: 8),
-      ],
+      ),
     );
   }
 }

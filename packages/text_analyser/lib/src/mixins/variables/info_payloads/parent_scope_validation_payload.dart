@@ -45,8 +45,8 @@ mixin ParentScopeValidationPayload {
   /// choice variable throughout the text. Some of them can be
   /// valid, some of them can be invalid (outside the parent
   /// model scope). So we will check one by one.
-  final Map<String, List<ChoiceParentScopeValidationPayload>>
-      choicesWithParentThatWeDontKnowIfAreInsideTheCorrectScopeYet = {};
+  // final Map<String, List<ChoiceParentScopeValidationPayload>>
+  //     choicesWithParentThatWeDontKnowIfAreInsideTheCorrectScopeYet = {};
 
   /// We will stock here all models variables that have a parent
   /// and the open and close declarations are in the correct scope.

@@ -1,4 +1,5 @@
 import 'package:mustache_hub_core/mustache_hub_core.dart';
+import 'package:mustachehub/app_core/extensions/string_extension.dart';
 import 'package:mustachehub/generate/presenter/dtos/pipe_dto/pipe_dto.dart';
 import 'package:enchanted_collection/enchanted_collection.dart';
 import 'package:uuid/uuid.dart';

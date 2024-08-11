@@ -15,9 +15,9 @@ class SuggestionCubit extends Cubit<SuggestionState> {
     required Map<String, VariableScopeParentMapper> flatMap,
   }) {
     final response = _textAnalyser.getMatchClusters(
-      input,
-      indexAtText,
-      flatMap,
+      input: input,
+      indexAtText: indexAtText,
+      flatMap: flatMap,
     );
     if (response == null) {
       emit(SuggestionState.errorOccurred());

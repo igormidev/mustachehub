@@ -1,4 +1,5 @@
 import 'package:mustache_hub_core/mustache_hub_core.dart';
+import 'package:mustachehub/app_core/extensions/string_extension.dart';
 import 'package:text_analyser/text_analyser.dart';
 
 class TokenIdentifierFlatMapAdapter {
@@ -39,14 +40,32 @@ class TokenIdentifierFlatMapAdapter {
 
     final choices = choicePipes
         .map(
-          (p) => MapEntry(
-            p.mustacheName,
-            VariableScopeParentMapper.choice(
-              name: p.mustacheName,
-              parrentName: null,
-            ),
-          ),
+          (p) {
+            return <MapEntry<String, VariableScopeParentMapper>>[
+              ...p.options.map(
+                (option) {
+                  final o = option.toMustacheName;
+
+                  return MapEntry(
+                    '${p.mustacheName}.$o',
+                    VariableScopeParentMapper.boolean(
+                      name: '${p.mustacheName}.$o',
+                      parrentName: null,
+                    ),
+                  );
+                },
+              ),
+              MapEntry(
+                '${p.mustacheName}.text',
+                VariableScopeParentMapper.text(
+                  name: '${p.mustacheName}.text',
+                  parrentName: null,
+                ),
+              ),
+            ];
+          },
         )
+        .expand((element) => element)
         .toList();
     response.addAll(Map.fromEntries(choices));
 
@@ -104,14 +123,31 @@ class TokenIdentifierFlatMapAdapter {
 
     final choices = modelPipe.choicePipes
         .map(
-          (p) => MapEntry(
-            p.mustacheName,
-            VariableScopeParentMapper.choice(
-              name: p.mustacheName,
-              parrentName: modelPipe.mustacheName,
-            ),
-          ),
+          (p) {
+            return <MapEntry<String, VariableScopeParentMapper>>[
+              ...p.options.map(
+                (option) {
+                  final o = option.toMustacheName;
+                  return MapEntry(
+                    '${p.mustacheName}.$o',
+                    VariableScopeParentMapper.boolean(
+                      name: '${p.mustacheName}.$o',
+                      parrentName: modelPipe.mustacheName,
+                    ),
+                  );
+                },
+              ),
+              MapEntry(
+                '${p.mustacheName}.text',
+                VariableScopeParentMapper.text(
+                  name: '${p.mustacheName}.text',
+                  parrentName: modelPipe.mustacheName,
+                ),
+              ),
+            ];
+          },
         )
+        .expand((element) => element)
         .toList();
     response.addAll(Map.fromEntries(choices));
 

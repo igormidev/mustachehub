@@ -27,22 +27,22 @@ mixin SetRootVariables on AllVariables {
               booleanImplementation: BooleanUseImplementation.invertedValue(),
             ));
           },
-          choice: (choice) {
-            usableVariablesInCurrentContext
-                .add(ChoosableVariableImplementations.choice(
-              variableName: choice.name,
-              choiceImplementation: ChoiceUseImplementation.normalValue(),
-            ));
-            usableVariablesInCurrentContext
-                .add(ChoosableVariableImplementations.choice(
-              variableName: choice.name,
-              choiceImplementation: ChoiceUseImplementation.invertedValue(),
-            ));
-            usableVariablesInCurrentContext.add(
-                ChoosableVariableImplementations.choice(
-                    variableName: choice.name,
-                    choiceImplementation: ChoiceUseImplementation.textValue()));
-          },
+          // choice: (choice) {
+          //   usableVariablesInCurrentContext
+          //       .add(ChoosableVariableImplementations.choice(
+          //     variableName: choice.name,
+          //     choiceImplementation: ChoiceUseImplementation.normalValue(),
+          //   ));
+          //   usableVariablesInCurrentContext
+          //       .add(ChoosableVariableImplementations.choice(
+          //     variableName: choice.name,
+          //     choiceImplementation: ChoiceUseImplementation.invertedValue(),
+          //   ));
+          //   usableVariablesInCurrentContext.add(
+          //       ChoosableVariableImplementations.choice(
+          //           variableName: choice.name,
+          //           choiceImplementation: ChoiceUseImplementation.textValue()));
+          // },
           text: (text) {
             usableVariablesInCurrentContext
                 .add(ChoosableVariableImplementations.text(

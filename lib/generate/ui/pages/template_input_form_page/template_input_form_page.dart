@@ -5,6 +5,7 @@ import 'package:mustachehub/app_core/theme/components/empty_template_input_secti
 import 'package:mustachehub/generate/presenter/cubits/payload_cubit.dart';
 import 'package:mustachehub/generate/presenter/states/payload_state.dart';
 import 'package:mustachehub/generate/ui/pages/template_input_form_page/widgets/pipe_forms_display/boolean_pipe_form/boolean_pipe_form.dart';
+import 'package:mustachehub/generate/ui/pages/template_input_form_page/widgets/pipe_forms_display/choice_pipe_form/choice_pipe_form.dart';
 import 'package:mustachehub/generate/ui/pages/template_input_form_page/widgets/pipe_forms_display/model_pipe_form/model_pipe_form.dart';
 import 'package:mustachehub/generate/ui/pages/template_input_form_page/widgets/pipe_forms_display/text_pipe_form/text_pipe_form.dart';
 
@@ -63,6 +64,15 @@ class _FinalWidget extends StatelessWidget {
         BooleanPipeForm(expectedPayload: generatorData, output: output),
         if ((generatorData.textPipes.isNotEmpty ||
                 generatorData.booleanPipes.isNotEmpty) &&
+            generatorData.choicePipes.isNotEmpty) ...[
+          const SizedBox(height: 8),
+          const Divider(height: 8),
+          const SizedBox(height: 8),
+        ],
+        ChoicePipeForm(expectedPayload: generatorData, output: output),
+        if ((generatorData.textPipes.isNotEmpty ||
+                generatorData.booleanPipes.isNotEmpty ||
+                generatorData.choicePipes.isNotEmpty) &&
             generatorData.modelPipes.isNotEmpty) ...[
           const SizedBox(height: 8),
           const Divider(height: 8),

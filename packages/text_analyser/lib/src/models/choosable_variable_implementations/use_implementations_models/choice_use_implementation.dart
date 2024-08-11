@@ -7,6 +7,7 @@ part 'choice_use_implementation.g.dart';
 abstract class ChoiceUseImplementation with _$ChoiceUseImplementation {
   factory ChoiceUseImplementation.normalValue() =
       _ChoiceUseImplementationNormalValue;
+
   factory ChoiceUseImplementation.invertedValue() =
       _ChoiceUseImplementationInvertedValue;
   factory ChoiceUseImplementation.textValue() =

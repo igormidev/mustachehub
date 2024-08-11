@@ -36,8 +36,8 @@ mixin MainInterationMapper
           return handleTextsVariables();
         } else if (isBoolean) {
           return handleBooleansVariables();
-        } else if (isChoice) {
-          return handleChoicesVariables();
+          // } else if (isChoice) {
+          //   return handleChoicesVariables();
         } else {
           return handleModelsVariables();
         }

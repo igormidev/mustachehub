@@ -40,7 +40,7 @@ Map<String, dynamic> _getChoicePayloads(
       choicePipe.mustacheName: {
         'text': text,
         ...dto.pipe.options.asMap().map((_, option) {
-          return MapEntry(option, text == option);
+          return MapEntry(option.toMustacheName, text == option);
         }),
       },
     });

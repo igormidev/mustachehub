@@ -14,15 +14,18 @@ import 'package:text_analyser/text_analyser.dart';
 mixin TextContentMethods on State<TextContentTab> {
   List<EditDependenciesCluster> dependencies = [];
 
-  final Debouncer debouncer = Debouncer(timerDuration: 200.ms);
-
   void setDependencies(ContentStringState state) {
     state.when(
       normal: (ContentInput textOutput) {
         int index = 0;
 
+        final didSomeToggleBeenPressed =
+            dependencies.map((e) => e.input.willBreakLine).length !=
+                textOutput.texts.map((e) => e.willBreakLine).length;
+
         final reCalculationIsNeeded = dependencies.isEmpty ||
-            dependencies.length != textOutput.texts.length;
+            dependencies.length != textOutput.texts.length ||
+            didSomeToggleBeenPressed;
         if (reCalculationIsNeeded == false) {
           return;
         }
@@ -177,8 +180,6 @@ mixin TextContentMethods on State<TextContentTab> {
     required ContentTextSectionInput output,
   }) {
     final contentCubit = context.read<ContentStringCubit>();
-    contentCubit.setCubit(
-      input: output,
-    );
+    contentCubit.setCubit(input: output);
   }
 }

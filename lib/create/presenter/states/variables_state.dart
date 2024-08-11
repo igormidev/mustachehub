@@ -76,5 +76,8 @@ class VariablesState {
       VariablesState.fromMap(json.decode(source) as Map<String, dynamic>);
 
   bool get isBlank =>
-      textPipes.isEmpty && booleanPipes.isEmpty && modelPipes.isEmpty;
+      textPipes.isEmpty &&
+      booleanPipes.isEmpty &&
+      modelPipes.isEmpty &&
+      choicePipes.isEmpty;
 }

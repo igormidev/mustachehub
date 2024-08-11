@@ -24,7 +24,7 @@ class DialogScrollOrientationPage extends StatelessWidget {
             Stack(
               children: [
                 Text(
-                  'Scroll shortcut',
+                  'Scroll\nshortcut',
                   style: Theme.of(context).textTheme.displaySmall,
                 ),
                 Align(

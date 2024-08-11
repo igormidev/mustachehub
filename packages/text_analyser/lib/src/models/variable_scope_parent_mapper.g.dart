@@ -38,22 +38,6 @@ Map<String, dynamic> _$$BooleanParentMapperImplToJson(
       'runtimeType': instance.$type,
     };
 
-_$ChoiceParentMapperImpl _$$ChoiceParentMapperImplFromJson(
-        Map<String, dynamic> json) =>
-    _$ChoiceParentMapperImpl(
-      parrentName: json['parrentName'] as String?,
-      name: json['name'] as String,
-      $type: json['runtimeType'] as String?,
-    );
-
-Map<String, dynamic> _$$ChoiceParentMapperImplToJson(
-        _$ChoiceParentMapperImpl instance) =>
-    <String, dynamic>{
-      'parrentName': instance.parrentName,
-      'name': instance.name,
-      'runtimeType': instance.$type,
-    };
-
 _$ModelParentMapperImpl _$$ModelParentMapperImplFromJson(
         Map<String, dynamic> json) =>
     _$ModelParentMapperImpl(
