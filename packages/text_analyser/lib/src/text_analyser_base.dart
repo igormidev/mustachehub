@@ -8,8 +8,8 @@ import 'package:text_analyser/src/models/choosable_variable_implementations/use_
 import 'package:text_analyser/src/models/choosable_variable_implementations/use_implementations_models/choice_use_implementation.dart';
 import 'package:text_analyser/src/models/variable_scope_parent_mapper.dart';
 
-class TextAnalyserBase {
-  const TextAnalyserBase();
+class TextAnalyserBaseLegacy {
+  const TextAnalyserBaseLegacy();
 
   AnalysedResponse? getMatchClusters(
     String input,
@@ -65,6 +65,10 @@ class TextAnalyserBase {
               variableName: choice.name,
               choiceImplementation: ChoiceUseImplementation.invertedValue(),
             ));
+            usableVariablesInCurrentContext.add(
+                ChoosableVariableImplementations.choice(
+                    variableName: choice.name,
+                    choiceImplementation: ChoiceUseImplementation.textValue()));
           },
           text: (text) {
             usableVariablesInCurrentContext

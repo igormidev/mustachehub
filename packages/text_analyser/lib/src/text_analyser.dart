@@ -37,6 +37,11 @@ class TextAnalyser
     required int indexAtText,
     required Map<String, VariableScopeParentMapper> flatMap,
   }) {
+    // AnalysedResponse? getMatchClusters({
+    //   required String input,
+    //   required int indexAtText,
+    //   required Map<String, VariableScopeParentMapper> flatMap,
+    // }) {
     resetAllDependencies();
 
     this.input = input;
@@ -52,10 +57,10 @@ class TextAnalyser
     setOpenBooleansWithNoCloseAsInvalidSegments();
     setOpenChoicesWithNoCloseAsInvalidSegments();
 
+    setIfModelSegmentAreInsidePaternScope();
     setIfTextSegmentIsInsidePaternScope();
     setIfBooleansSegmentAreInsidePaternScope();
     setIfChoiceSegmentIsInsidePaternScope();
-    setIfModelSegmentAreInsidePaternScope();
 
     setVariablesThatCanBeUsedInCursorIndex();
 

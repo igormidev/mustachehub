@@ -19,7 +19,7 @@ class VariablesInfoHighlightTextEditingController
     extends TextEditingController {
   VariablesInfoHighlightTextEditingController({
     super.text,
-    required TextAnalyserBase textAnalyserBase,
+    required TextAnalyser textAnalyserBase,
   }) : _textAnalyserBase = textAnalyserBase;
 
   List<InlineSpan>? getTexts(
@@ -235,7 +235,7 @@ class VariablesInfoHighlightTextEditingController
 
   String? cacheText;
 
-  final TextAnalyserBase _textAnalyserBase;
+  final TextAnalyser _textAnalyserBase;
   Map<String, VariableScopeParentMapper>? _flatMap;
   ColorScheme? _cacheCS;
 
@@ -266,9 +266,9 @@ class VariablesInfoHighlightTextEditingController
 
     if (flatMap != null) {
       final response = _textAnalyserBase.getMatchClusters(
-        typeText,
-        cursorIndexAtText == -1 ? 0 : cursorIndexAtText,
-        flatMap!,
+        input: typeText,
+        indexAtText: cursorIndexAtText == -1 ? 0 : cursorIndexAtText,
+        flatMap: flatMap!,
       );
 
       final segments = response?.segmentsStates;

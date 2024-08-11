@@ -34,7 +34,7 @@ mixin AllVariables
         ParentScopeValidationPayload,
         OpenDeclarationsWithoutFindedClose {
   /// The regular expression to find the mustache template variables.
-  final RegExp regExp = RegExp(r'{{[\^#\/]?(?<name>[a-zA-Z]+?)}}');
+  final RegExp regExp = RegExp(r'{{[\^#\/]?(?<name>[a-zA-Z\.]+?)}}');
 
   /// The key represents the index of the segment in the text.
   /// That is, each [input.forEachNamedGroup] iteration will

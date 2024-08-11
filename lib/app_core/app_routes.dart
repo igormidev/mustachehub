@@ -218,8 +218,8 @@ final router = GoRouter(
                 RepositoryProvider<TokenIdentifierTextDisplayAdapter>(
                   create: (context) => TokenIdentifierTextDisplayAdapter(),
                 ),
-                RepositoryProvider<TextAnalyserBase>(
-                  create: (context) => const TextAnalyserBase(),
+                RepositoryProvider<TextAnalyser>(
+                  create: (context) => TextAnalyser(),
                 ),
                 RepositoryProvider<ITemplateRepository>(
                   create: (context) => TemplateRepositoryImpl(),
@@ -242,7 +242,7 @@ final router = GoRouter(
                 BlocProvider(create: (context) => PackageFormCubit()),
                 BlocProvider(
                   create: (context) => SuggestionCubit(
-                    textAnalyser: context.read<TextAnalyserBase>(),
+                    textAnalyser: context.read<TextAnalyser>(),
                   ),
                 ),
                 BlocProvider(create: (context) => TabControllCubit()),

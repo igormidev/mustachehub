@@ -14,9 +14,39 @@ class ChoicePipeDisplayCard extends StatelessWidget {
     return BasePipeDisplayCard(
       pipe: pipe,
       onEdit: onEdit,
-      // children: [
-      //   for (final option in pipe!.options) Text(option),
-      // ],
+      children: [
+        const SizedBox(height: 4),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const Text('Options:'),
+            const SizedBox(height: 4),
+            Theme(
+              data: Theme.of(context).copyWith(
+                chipTheme: ChipThemeData(
+                  backgroundColor:
+                      Theme.of(context).colorScheme.secondaryContainer,
+                  padding: EdgeInsets.zero,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    side: const BorderSide(
+                      color: Colors.transparent,
+                    ),
+                  ),
+                ),
+              ),
+              child: Wrap(
+                spacing: 8,
+                runSpacing: 8,
+                children: [
+                  for (final option in pipe!.options) Chip(label: Text(option))
+                ],
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 4),
+      ],
     );
   }
 }

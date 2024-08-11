@@ -8,7 +8,13 @@ mixin MainInterationVariables on AllVariables {
 
   late FindedGroup group;
 
-  VariableScopeParentMapper get varScopeParentMapper => flatMap[group.content]!;
+  VariableScopeParentMapper get varScopeParentMapper {
+    final contentName = group.content.contains('.')
+        ? group.content.split('.').first
+        : group.content;
+
+    return flatMap[contentName]!;
+  }
 
   TextOffset get offset => TextOffset(
         start: group.globalStart,
@@ -40,6 +46,8 @@ mixin MainInterationVariables on AllVariables {
   bool get isInverseOpenDelimiter => group.fullMatchText.startsWith('{{^');
 
   bool get isCloseDelimiter => group.fullMatchText.startsWith('{{/');
+
+  bool get hasOption => group.fullMatchText.contains('.');
 
   bool get hasDelimiter =>
       isNormalOpenDelimiter ||
