@@ -4,16 +4,16 @@ import 'package:mustache_hub_core/mustache_hub_core.dart';
 import 'package:mustachehub/generate/presenter/cubits/payload_cubit.dart';
 import 'package:mustachehub/generate/presenter/dtos/pipe_dto/pipe_dto.dart';
 import 'package:mustachehub/generate/presenter/dtos/tree_node_generate_pipe_dto.dart';
-import 'package:mustachehub/generate/ui/pages/template_input_form_page/widgets/pipe_forms_display/boolean_pipe_form/widgets/boolean_pipe_switch_form_field.dart';
+import 'package:mustachehub/generate/ui/pages/template_input_form_page/widgets/pipe_forms_display/choice_pipe_form/widgets/choice_pipe_choose_form_field.dart';
 
-class BooleanGenerateNodeBuilder extends StatelessWidget {
+class ChoiceGenerateNodeBuilder extends StatelessWidget {
   final ModelPipeDto rootModelDTO;
   final ContentInput output;
   final ExpectedPayload expectedPayload;
-  final TreeNodeGeneratePipeDtoPipeBoolean booleanDTONode;
-  const BooleanGenerateNodeBuilder({
+  final TreeNodeGeneratePipeDtoPipeChoice choiceDTONode;
+  const ChoiceGenerateNodeBuilder({
     super.key,
-    required this.booleanDTONode,
+    required this.choiceDTONode,
     required this.rootModelDTO,
     required this.output,
     required this.expectedPayload,
@@ -22,27 +22,26 @@ class BooleanGenerateNodeBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bloc = context.read<PayloadCubit>();
-    final dto = booleanDTONode.pipeDTO;
+    final dto = choiceDTONode.pipeDTO;
 
     return Padding(
       padding: const EdgeInsets.only(
         top: 4,
         bottom: 4,
       ),
-      child: BooleanPipeSwitchFormField(
-        pipeDto: dto,
-        onChangedCallback: (value) async {
+      child: ChoicePipeChooseFormField(
+        choicePipeDto: dto,
+        choosedPipeName: dto.payloadValue,
+        onChangedCallback: (option) async {
           final ModelPipeDto? editedPipe =
-              rootModelDTO.deepEdit<BooleanPipe, bool>(
-            // payloadId: booleanDTONode.payloadUUID,
+              rootModelDTO.deepEdit<ChoicePipe, String>(
             pipeDtoUUID: dto.uuid,
             mapFunc: (
-              PipeDTO<BooleanPipe, bool> pipe,
+              PipeDTO<ChoicePipe, String> pipe,
             ) {
-              return pipe.copyWith(payloadValue: value);
+              return pipe.copyWith(payloadValue: option);
             },
           );
-
           if (editedPipe == null) return;
 
           await bloc.addModelPayloadValue(

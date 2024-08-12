@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:mustachex/mustachex.dart' as mustachex;
 import 'package:mustache_hub_core/mustache_hub_core.dart';
 import 'package:mustachehub/generate/presenter/dtos/content_output_dto.dart';
@@ -31,6 +33,8 @@ mixin MustacheTextMixin {
         );
       }).toList();
     } catch (error) {
+      log(error.toString());
+
       // } catch (error, stackTrace) {
       // log(error.toString(), stackTrace: stackTrace);
       return null;

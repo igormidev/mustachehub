@@ -21,6 +21,10 @@ class ModelPipeDto extends Equatable
         itemResponse[booleanDTO.pipe.mustacheName] = booleanDTO.payloadValue;
       }
 
+      for (final choiceDTO in item.choices) {
+        itemResponse[choiceDTO.pipe.mustacheName] = choiceDTO.payloadValue;
+      }
+
       for (final modelDTO in item.subModels) {
         itemResponse[modelDTO.pipe.mustacheName] = modelDTO.mapValue;
       }
@@ -111,6 +115,30 @@ class ModelPipeDto extends Equatable
                             mapFunc(text as PipeDTO<P, V>) as TextPipeDto
                           else
                             text,
+                      ],
+                    )
+                  else
+                    item,
+              ],
+            );
+          }
+        }
+      }
+
+      if (P == ChoicePipe && V == String) {
+        for (final choiceDTO in payload.choices) {
+          if (choiceDTO.uuid == pipeDtoUUID) {
+            return copyWith(
+              payloadValue: [
+                for (final item in payloadValue)
+                  if (item.uuid == payload.uuid)
+                    payload.copyWith(
+                      choices: [
+                        for (final choice in payload.choices)
+                          if (choice.uuid == pipeDtoUUID)
+                            mapFunc(choice as PipeDTO<P, V>) as ChoicePipeDto
+                          else
+                            choice,
                       ],
                     )
                   else
@@ -249,17 +277,20 @@ class ModelPipeDTOPayload {
   final List<ModelPipeDto> subModels;
   final List<TextPipeDto> texts;
   final List<BooleanPipeDto> booleans;
+  final List<ChoicePipeDto> choices;
   const ModelPipeDTOPayload({
     required this.uuid,
     required this.subModels,
     required this.texts,
     required this.booleans,
+    required this.choices,
   });
   const ModelPipeDTOPayload._({
     required this.uuid,
     required this.subModels,
     required this.texts,
     required this.booleans,
+    required this.choices,
   });
 
   factory ModelPipeDTOPayload.fromModelPipe(ModelPipe modelPipe) {
@@ -267,6 +298,13 @@ class ModelPipeDTOPayload {
     return ModelPipeDTOPayload._(uuid: '${uuid.v7()}${uuid.v7()}', texts: [
       for (final item in modelPipe.textPipes)
         TextPipeDto(
+          uuid: '${uuid.v7()}${uuid.v7()}',
+          pipe: item,
+          payloadValue: '',
+        ),
+    ], choices: [
+      for (final item in modelPipe.choicePipes)
+        ChoicePipeDto(
           uuid: '${uuid.v7()}${uuid.v7()}',
           pipe: item,
           payloadValue: '',
@@ -293,12 +331,14 @@ class ModelPipeDTOPayload {
     List<ModelPipeDto>? subModels,
     List<TextPipeDto>? texts,
     List<BooleanPipeDto>? booleans,
+    List<ChoicePipeDto>? choices,
   }) {
     return ModelPipeDTOPayload(
       uuid: uuid ?? this.uuid,
       subModels: subModels ?? this.subModels,
       texts: texts ?? this.texts,
       booleans: booleans ?? this.booleans,
+      choices: choices ?? this.choices,
     );
   }
 
@@ -308,6 +348,7 @@ class ModelPipeDTOPayload {
       'subModels': subModels.map((x) => x.toMap()).toList(),
       'texts': texts.map((x) => x.toMap()).toList(),
       'booleans': booleans.map((x) => x.toMap()).toList(),
+      'choices': choices.map((x) => x.toMap()).toList(),
     };
   }
 
@@ -327,6 +368,11 @@ class ModelPipeDTOPayload {
       booleans: List<BooleanPipeDto>.from(
         (map['booleans'] as List<int>).map<BooleanPipeDto>(
           (x) => BooleanPipeDto.fromMap(x as Map<String, dynamic>),
+        ),
+      ),
+      choices: List<ChoicePipeDto>.from(
+        (map['choices'] as List<int>).map<ChoicePipeDto>(
+          (x) => ChoicePipeDto.fromMap(x as Map<String, dynamic>),
         ),
       ),
     );

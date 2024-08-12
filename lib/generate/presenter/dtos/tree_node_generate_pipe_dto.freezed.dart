@@ -25,6 +25,7 @@ mixin _$TreeNodeGeneratePipeDto {
     required TResult Function(String payloadUUID, TextPipeDto pipeDTO) textNode,
     required TResult Function(String payloadUUID, BooleanPipeDto pipeDTO)
         boolean,
+    required TResult Function(String payloadUUID, ChoicePipeDto pipeDTO) choice,
     required TResult Function(String payloadUUID, ModelPipeDto pipeDTO,
             int index, ModelPipeDTOPayload payload)
         model,
@@ -36,6 +37,7 @@ mixin _$TreeNodeGeneratePipeDto {
         structureNode,
     TResult? Function(String payloadUUID, TextPipeDto pipeDTO)? textNode,
     TResult? Function(String payloadUUID, BooleanPipeDto pipeDTO)? boolean,
+    TResult? Function(String payloadUUID, ChoicePipeDto pipeDTO)? choice,
     TResult? Function(String payloadUUID, ModelPipeDto pipeDTO, int index,
             ModelPipeDTOPayload payload)?
         model,
@@ -47,6 +49,7 @@ mixin _$TreeNodeGeneratePipeDto {
         structureNode,
     TResult Function(String payloadUUID, TextPipeDto pipeDTO)? textNode,
     TResult Function(String payloadUUID, BooleanPipeDto pipeDTO)? boolean,
+    TResult Function(String payloadUUID, ChoicePipeDto pipeDTO)? choice,
     TResult Function(String payloadUUID, ModelPipeDto pipeDTO, int index,
             ModelPipeDTOPayload payload)?
         model,
@@ -59,6 +62,7 @@ mixin _$TreeNodeGeneratePipeDto {
         structureNode,
     required TResult Function(TreeNodeGeneratePipeDtoPipeText value) textNode,
     required TResult Function(TreeNodeGeneratePipeDtoPipeBoolean value) boolean,
+    required TResult Function(TreeNodeGeneratePipeDtoPipeChoice value) choice,
     required TResult Function(TreeNodeGeneratePipeDtoPipeModel value) model,
   }) =>
       throw _privateConstructorUsedError;
@@ -68,6 +72,7 @@ mixin _$TreeNodeGeneratePipeDto {
         structureNode,
     TResult? Function(TreeNodeGeneratePipeDtoPipeText value)? textNode,
     TResult? Function(TreeNodeGeneratePipeDtoPipeBoolean value)? boolean,
+    TResult? Function(TreeNodeGeneratePipeDtoPipeChoice value)? choice,
     TResult? Function(TreeNodeGeneratePipeDtoPipeModel value)? model,
   }) =>
       throw _privateConstructorUsedError;
@@ -76,6 +81,7 @@ mixin _$TreeNodeGeneratePipeDto {
     TResult Function(TreeNodeGeneratePipeDtoStructureNode value)? structureNode,
     TResult Function(TreeNodeGeneratePipeDtoPipeText value)? textNode,
     TResult Function(TreeNodeGeneratePipeDtoPipeBoolean value)? boolean,
+    TResult Function(TreeNodeGeneratePipeDtoPipeChoice value)? choice,
     TResult Function(TreeNodeGeneratePipeDtoPipeModel value)? model,
     required TResult orElse(),
   }) =>
@@ -217,6 +223,7 @@ class _$TreeNodeGeneratePipeDtoStructureNodeImpl
     required TResult Function(String payloadUUID, TextPipeDto pipeDTO) textNode,
     required TResult Function(String payloadUUID, BooleanPipeDto pipeDTO)
         boolean,
+    required TResult Function(String payloadUUID, ChoicePipeDto pipeDTO) choice,
     required TResult Function(String payloadUUID, ModelPipeDto pipeDTO,
             int index, ModelPipeDTOPayload payload)
         model,
@@ -231,6 +238,7 @@ class _$TreeNodeGeneratePipeDtoStructureNodeImpl
         structureNode,
     TResult? Function(String payloadUUID, TextPipeDto pipeDTO)? textNode,
     TResult? Function(String payloadUUID, BooleanPipeDto pipeDTO)? boolean,
+    TResult? Function(String payloadUUID, ChoicePipeDto pipeDTO)? choice,
     TResult? Function(String payloadUUID, ModelPipeDto pipeDTO, int index,
             ModelPipeDTOPayload payload)?
         model,
@@ -245,6 +253,7 @@ class _$TreeNodeGeneratePipeDtoStructureNodeImpl
         structureNode,
     TResult Function(String payloadUUID, TextPipeDto pipeDTO)? textNode,
     TResult Function(String payloadUUID, BooleanPipeDto pipeDTO)? boolean,
+    TResult Function(String payloadUUID, ChoicePipeDto pipeDTO)? choice,
     TResult Function(String payloadUUID, ModelPipeDto pipeDTO, int index,
             ModelPipeDTOPayload payload)?
         model,
@@ -263,6 +272,7 @@ class _$TreeNodeGeneratePipeDtoStructureNodeImpl
         structureNode,
     required TResult Function(TreeNodeGeneratePipeDtoPipeText value) textNode,
     required TResult Function(TreeNodeGeneratePipeDtoPipeBoolean value) boolean,
+    required TResult Function(TreeNodeGeneratePipeDtoPipeChoice value) choice,
     required TResult Function(TreeNodeGeneratePipeDtoPipeModel value) model,
   }) {
     return structureNode(this);
@@ -275,6 +285,7 @@ class _$TreeNodeGeneratePipeDtoStructureNodeImpl
         structureNode,
     TResult? Function(TreeNodeGeneratePipeDtoPipeText value)? textNode,
     TResult? Function(TreeNodeGeneratePipeDtoPipeBoolean value)? boolean,
+    TResult? Function(TreeNodeGeneratePipeDtoPipeChoice value)? choice,
     TResult? Function(TreeNodeGeneratePipeDtoPipeModel value)? model,
   }) {
     return structureNode?.call(this);
@@ -286,6 +297,7 @@ class _$TreeNodeGeneratePipeDtoStructureNodeImpl
     TResult Function(TreeNodeGeneratePipeDtoStructureNode value)? structureNode,
     TResult Function(TreeNodeGeneratePipeDtoPipeText value)? textNode,
     TResult Function(TreeNodeGeneratePipeDtoPipeBoolean value)? boolean,
+    TResult Function(TreeNodeGeneratePipeDtoPipeChoice value)? choice,
     TResult Function(TreeNodeGeneratePipeDtoPipeModel value)? model,
     required TResult orElse(),
   }) {
@@ -408,6 +420,7 @@ class _$TreeNodeGeneratePipeDtoPipeTextImpl
     required TResult Function(String payloadUUID, TextPipeDto pipeDTO) textNode,
     required TResult Function(String payloadUUID, BooleanPipeDto pipeDTO)
         boolean,
+    required TResult Function(String payloadUUID, ChoicePipeDto pipeDTO) choice,
     required TResult Function(String payloadUUID, ModelPipeDto pipeDTO,
             int index, ModelPipeDTOPayload payload)
         model,
@@ -422,6 +435,7 @@ class _$TreeNodeGeneratePipeDtoPipeTextImpl
         structureNode,
     TResult? Function(String payloadUUID, TextPipeDto pipeDTO)? textNode,
     TResult? Function(String payloadUUID, BooleanPipeDto pipeDTO)? boolean,
+    TResult? Function(String payloadUUID, ChoicePipeDto pipeDTO)? choice,
     TResult? Function(String payloadUUID, ModelPipeDto pipeDTO, int index,
             ModelPipeDTOPayload payload)?
         model,
@@ -436,6 +450,7 @@ class _$TreeNodeGeneratePipeDtoPipeTextImpl
         structureNode,
     TResult Function(String payloadUUID, TextPipeDto pipeDTO)? textNode,
     TResult Function(String payloadUUID, BooleanPipeDto pipeDTO)? boolean,
+    TResult Function(String payloadUUID, ChoicePipeDto pipeDTO)? choice,
     TResult Function(String payloadUUID, ModelPipeDto pipeDTO, int index,
             ModelPipeDTOPayload payload)?
         model,
@@ -454,6 +469,7 @@ class _$TreeNodeGeneratePipeDtoPipeTextImpl
         structureNode,
     required TResult Function(TreeNodeGeneratePipeDtoPipeText value) textNode,
     required TResult Function(TreeNodeGeneratePipeDtoPipeBoolean value) boolean,
+    required TResult Function(TreeNodeGeneratePipeDtoPipeChoice value) choice,
     required TResult Function(TreeNodeGeneratePipeDtoPipeModel value) model,
   }) {
     return textNode(this);
@@ -466,6 +482,7 @@ class _$TreeNodeGeneratePipeDtoPipeTextImpl
         structureNode,
     TResult? Function(TreeNodeGeneratePipeDtoPipeText value)? textNode,
     TResult? Function(TreeNodeGeneratePipeDtoPipeBoolean value)? boolean,
+    TResult? Function(TreeNodeGeneratePipeDtoPipeChoice value)? choice,
     TResult? Function(TreeNodeGeneratePipeDtoPipeModel value)? model,
   }) {
     return textNode?.call(this);
@@ -477,6 +494,7 @@ class _$TreeNodeGeneratePipeDtoPipeTextImpl
     TResult Function(TreeNodeGeneratePipeDtoStructureNode value)? structureNode,
     TResult Function(TreeNodeGeneratePipeDtoPipeText value)? textNode,
     TResult Function(TreeNodeGeneratePipeDtoPipeBoolean value)? boolean,
+    TResult Function(TreeNodeGeneratePipeDtoPipeChoice value)? choice,
     TResult Function(TreeNodeGeneratePipeDtoPipeModel value)? model,
     required TResult orElse(),
   }) {
@@ -599,6 +617,7 @@ class _$TreeNodeGeneratePipeDtoPipeBooleanImpl
     required TResult Function(String payloadUUID, TextPipeDto pipeDTO) textNode,
     required TResult Function(String payloadUUID, BooleanPipeDto pipeDTO)
         boolean,
+    required TResult Function(String payloadUUID, ChoicePipeDto pipeDTO) choice,
     required TResult Function(String payloadUUID, ModelPipeDto pipeDTO,
             int index, ModelPipeDTOPayload payload)
         model,
@@ -613,6 +632,7 @@ class _$TreeNodeGeneratePipeDtoPipeBooleanImpl
         structureNode,
     TResult? Function(String payloadUUID, TextPipeDto pipeDTO)? textNode,
     TResult? Function(String payloadUUID, BooleanPipeDto pipeDTO)? boolean,
+    TResult? Function(String payloadUUID, ChoicePipeDto pipeDTO)? choice,
     TResult? Function(String payloadUUID, ModelPipeDto pipeDTO, int index,
             ModelPipeDTOPayload payload)?
         model,
@@ -627,6 +647,7 @@ class _$TreeNodeGeneratePipeDtoPipeBooleanImpl
         structureNode,
     TResult Function(String payloadUUID, TextPipeDto pipeDTO)? textNode,
     TResult Function(String payloadUUID, BooleanPipeDto pipeDTO)? boolean,
+    TResult Function(String payloadUUID, ChoicePipeDto pipeDTO)? choice,
     TResult Function(String payloadUUID, ModelPipeDto pipeDTO, int index,
             ModelPipeDTOPayload payload)?
         model,
@@ -645,6 +666,7 @@ class _$TreeNodeGeneratePipeDtoPipeBooleanImpl
         structureNode,
     required TResult Function(TreeNodeGeneratePipeDtoPipeText value) textNode,
     required TResult Function(TreeNodeGeneratePipeDtoPipeBoolean value) boolean,
+    required TResult Function(TreeNodeGeneratePipeDtoPipeChoice value) choice,
     required TResult Function(TreeNodeGeneratePipeDtoPipeModel value) model,
   }) {
     return boolean(this);
@@ -657,6 +679,7 @@ class _$TreeNodeGeneratePipeDtoPipeBooleanImpl
         structureNode,
     TResult? Function(TreeNodeGeneratePipeDtoPipeText value)? textNode,
     TResult? Function(TreeNodeGeneratePipeDtoPipeBoolean value)? boolean,
+    TResult? Function(TreeNodeGeneratePipeDtoPipeChoice value)? choice,
     TResult? Function(TreeNodeGeneratePipeDtoPipeModel value)? model,
   }) {
     return boolean?.call(this);
@@ -668,6 +691,7 @@ class _$TreeNodeGeneratePipeDtoPipeBooleanImpl
     TResult Function(TreeNodeGeneratePipeDtoStructureNode value)? structureNode,
     TResult Function(TreeNodeGeneratePipeDtoPipeText value)? textNode,
     TResult Function(TreeNodeGeneratePipeDtoPipeBoolean value)? boolean,
+    TResult Function(TreeNodeGeneratePipeDtoPipeChoice value)? choice,
     TResult Function(TreeNodeGeneratePipeDtoPipeModel value)? model,
     required TResult orElse(),
   }) {
@@ -695,6 +719,203 @@ abstract class TreeNodeGeneratePipeDtoPipeBoolean
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TreeNodeGeneratePipeDtoPipeBooleanImplCopyWith<
           _$TreeNodeGeneratePipeDtoPipeBooleanImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$TreeNodeGeneratePipeDtoPipeChoiceImplCopyWith<$Res>
+    implements $TreeNodeGeneratePipeDtoCopyWith<$Res> {
+  factory _$$TreeNodeGeneratePipeDtoPipeChoiceImplCopyWith(
+          _$TreeNodeGeneratePipeDtoPipeChoiceImpl value,
+          $Res Function(_$TreeNodeGeneratePipeDtoPipeChoiceImpl) then) =
+      __$$TreeNodeGeneratePipeDtoPipeChoiceImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String payloadUUID, ChoicePipeDto pipeDTO});
+}
+
+/// @nodoc
+class __$$TreeNodeGeneratePipeDtoPipeChoiceImplCopyWithImpl<$Res>
+    extends _$TreeNodeGeneratePipeDtoCopyWithImpl<$Res,
+        _$TreeNodeGeneratePipeDtoPipeChoiceImpl>
+    implements _$$TreeNodeGeneratePipeDtoPipeChoiceImplCopyWith<$Res> {
+  __$$TreeNodeGeneratePipeDtoPipeChoiceImplCopyWithImpl(
+      _$TreeNodeGeneratePipeDtoPipeChoiceImpl _value,
+      $Res Function(_$TreeNodeGeneratePipeDtoPipeChoiceImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of TreeNodeGeneratePipeDto
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? payloadUUID = null,
+    Object? pipeDTO = null,
+  }) {
+    return _then(_$TreeNodeGeneratePipeDtoPipeChoiceImpl(
+      payloadUUID: null == payloadUUID
+          ? _value.payloadUUID
+          : payloadUUID // ignore: cast_nullable_to_non_nullable
+              as String,
+      pipeDTO: null == pipeDTO
+          ? _value.pipeDTO
+          : pipeDTO // ignore: cast_nullable_to_non_nullable
+              as ChoicePipeDto,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$TreeNodeGeneratePipeDtoPipeChoiceImpl
+    implements TreeNodeGeneratePipeDtoPipeChoice {
+  _$TreeNodeGeneratePipeDtoPipeChoiceImpl(
+      {required this.payloadUUID, required this.pipeDTO});
+
+  @override
+  final String payloadUUID;
+  @override
+  final ChoicePipeDto pipeDTO;
+
+  @override
+  String toString() {
+    return 'TreeNodeGeneratePipeDto.choice(payloadUUID: $payloadUUID, pipeDTO: $pipeDTO)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$TreeNodeGeneratePipeDtoPipeChoiceImpl &&
+            (identical(other.payloadUUID, payloadUUID) ||
+                other.payloadUUID == payloadUUID) &&
+            (identical(other.pipeDTO, pipeDTO) || other.pipeDTO == pipeDTO));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, payloadUUID, pipeDTO);
+
+  /// Create a copy of TreeNodeGeneratePipeDto
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$TreeNodeGeneratePipeDtoPipeChoiceImplCopyWith<
+          _$TreeNodeGeneratePipeDtoPipeChoiceImpl>
+      get copyWith => __$$TreeNodeGeneratePipeDtoPipeChoiceImplCopyWithImpl<
+          _$TreeNodeGeneratePipeDtoPipeChoiceImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String? payloadUUID, ModelPipeDto referenceModelDTO)
+        structureNode,
+    required TResult Function(String payloadUUID, TextPipeDto pipeDTO) textNode,
+    required TResult Function(String payloadUUID, BooleanPipeDto pipeDTO)
+        boolean,
+    required TResult Function(String payloadUUID, ChoicePipeDto pipeDTO) choice,
+    required TResult Function(String payloadUUID, ModelPipeDto pipeDTO,
+            int index, ModelPipeDTOPayload payload)
+        model,
+  }) {
+    return choice(payloadUUID, pipeDTO);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String? payloadUUID, ModelPipeDto referenceModelDTO)?
+        structureNode,
+    TResult? Function(String payloadUUID, TextPipeDto pipeDTO)? textNode,
+    TResult? Function(String payloadUUID, BooleanPipeDto pipeDTO)? boolean,
+    TResult? Function(String payloadUUID, ChoicePipeDto pipeDTO)? choice,
+    TResult? Function(String payloadUUID, ModelPipeDto pipeDTO, int index,
+            ModelPipeDTOPayload payload)?
+        model,
+  }) {
+    return choice?.call(payloadUUID, pipeDTO);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String? payloadUUID, ModelPipeDto referenceModelDTO)?
+        structureNode,
+    TResult Function(String payloadUUID, TextPipeDto pipeDTO)? textNode,
+    TResult Function(String payloadUUID, BooleanPipeDto pipeDTO)? boolean,
+    TResult Function(String payloadUUID, ChoicePipeDto pipeDTO)? choice,
+    TResult Function(String payloadUUID, ModelPipeDto pipeDTO, int index,
+            ModelPipeDTOPayload payload)?
+        model,
+    required TResult orElse(),
+  }) {
+    if (choice != null) {
+      return choice(payloadUUID, pipeDTO);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(TreeNodeGeneratePipeDtoStructureNode value)
+        structureNode,
+    required TResult Function(TreeNodeGeneratePipeDtoPipeText value) textNode,
+    required TResult Function(TreeNodeGeneratePipeDtoPipeBoolean value) boolean,
+    required TResult Function(TreeNodeGeneratePipeDtoPipeChoice value) choice,
+    required TResult Function(TreeNodeGeneratePipeDtoPipeModel value) model,
+  }) {
+    return choice(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(TreeNodeGeneratePipeDtoStructureNode value)?
+        structureNode,
+    TResult? Function(TreeNodeGeneratePipeDtoPipeText value)? textNode,
+    TResult? Function(TreeNodeGeneratePipeDtoPipeBoolean value)? boolean,
+    TResult? Function(TreeNodeGeneratePipeDtoPipeChoice value)? choice,
+    TResult? Function(TreeNodeGeneratePipeDtoPipeModel value)? model,
+  }) {
+    return choice?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(TreeNodeGeneratePipeDtoStructureNode value)? structureNode,
+    TResult Function(TreeNodeGeneratePipeDtoPipeText value)? textNode,
+    TResult Function(TreeNodeGeneratePipeDtoPipeBoolean value)? boolean,
+    TResult Function(TreeNodeGeneratePipeDtoPipeChoice value)? choice,
+    TResult Function(TreeNodeGeneratePipeDtoPipeModel value)? model,
+    required TResult orElse(),
+  }) {
+    if (choice != null) {
+      return choice(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class TreeNodeGeneratePipeDtoPipeChoice
+    implements TreeNodeGeneratePipeDto {
+  factory TreeNodeGeneratePipeDtoPipeChoice(
+          {required final String payloadUUID,
+          required final ChoicePipeDto pipeDTO}) =
+      _$TreeNodeGeneratePipeDtoPipeChoiceImpl;
+
+  @override
+  String get payloadUUID;
+  ChoicePipeDto get pipeDTO;
+
+  /// Create a copy of TreeNodeGeneratePipeDto
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$TreeNodeGeneratePipeDtoPipeChoiceImplCopyWith<
+          _$TreeNodeGeneratePipeDtoPipeChoiceImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -814,6 +1035,7 @@ class _$TreeNodeGeneratePipeDtoPipeModelImpl
     required TResult Function(String payloadUUID, TextPipeDto pipeDTO) textNode,
     required TResult Function(String payloadUUID, BooleanPipeDto pipeDTO)
         boolean,
+    required TResult Function(String payloadUUID, ChoicePipeDto pipeDTO) choice,
     required TResult Function(String payloadUUID, ModelPipeDto pipeDTO,
             int index, ModelPipeDTOPayload payload)
         model,
@@ -828,6 +1050,7 @@ class _$TreeNodeGeneratePipeDtoPipeModelImpl
         structureNode,
     TResult? Function(String payloadUUID, TextPipeDto pipeDTO)? textNode,
     TResult? Function(String payloadUUID, BooleanPipeDto pipeDTO)? boolean,
+    TResult? Function(String payloadUUID, ChoicePipeDto pipeDTO)? choice,
     TResult? Function(String payloadUUID, ModelPipeDto pipeDTO, int index,
             ModelPipeDTOPayload payload)?
         model,
@@ -842,6 +1065,7 @@ class _$TreeNodeGeneratePipeDtoPipeModelImpl
         structureNode,
     TResult Function(String payloadUUID, TextPipeDto pipeDTO)? textNode,
     TResult Function(String payloadUUID, BooleanPipeDto pipeDTO)? boolean,
+    TResult Function(String payloadUUID, ChoicePipeDto pipeDTO)? choice,
     TResult Function(String payloadUUID, ModelPipeDto pipeDTO, int index,
             ModelPipeDTOPayload payload)?
         model,
@@ -860,6 +1084,7 @@ class _$TreeNodeGeneratePipeDtoPipeModelImpl
         structureNode,
     required TResult Function(TreeNodeGeneratePipeDtoPipeText value) textNode,
     required TResult Function(TreeNodeGeneratePipeDtoPipeBoolean value) boolean,
+    required TResult Function(TreeNodeGeneratePipeDtoPipeChoice value) choice,
     required TResult Function(TreeNodeGeneratePipeDtoPipeModel value) model,
   }) {
     return model(this);
@@ -872,6 +1097,7 @@ class _$TreeNodeGeneratePipeDtoPipeModelImpl
         structureNode,
     TResult? Function(TreeNodeGeneratePipeDtoPipeText value)? textNode,
     TResult? Function(TreeNodeGeneratePipeDtoPipeBoolean value)? boolean,
+    TResult? Function(TreeNodeGeneratePipeDtoPipeChoice value)? choice,
     TResult? Function(TreeNodeGeneratePipeDtoPipeModel value)? model,
   }) {
     return model?.call(this);
@@ -883,6 +1109,7 @@ class _$TreeNodeGeneratePipeDtoPipeModelImpl
     TResult Function(TreeNodeGeneratePipeDtoStructureNode value)? structureNode,
     TResult Function(TreeNodeGeneratePipeDtoPipeText value)? textNode,
     TResult Function(TreeNodeGeneratePipeDtoPipeBoolean value)? boolean,
+    TResult Function(TreeNodeGeneratePipeDtoPipeChoice value)? choice,
     TResult Function(TreeNodeGeneratePipeDtoPipeModel value)? model,
     required TResult orElse(),
   }) {

@@ -4,6 +4,7 @@ import 'package:mustache_hub_core/mustache_hub_core.dart';
 import 'package:mustachehub/generate/presenter/dtos/pipe_dto/pipe_dto.dart';
 import 'package:mustachehub/generate/presenter/dtos/tree_node_generate_pipe_dto.dart';
 import 'package:mustachehub/generate/ui/pages/template_input_form_page/widgets/pipe_forms_display/model_pipe_form/widgets/generate_node_builders/boolean_generate_node_builder.dart';
+import 'package:mustachehub/generate/ui/pages/template_input_form_page/widgets/pipe_forms_display/model_pipe_form/widgets/generate_node_builders/choice_generate_node_builder.dart';
 import 'package:mustachehub/generate/ui/pages/template_input_form_page/widgets/pipe_forms_display/model_pipe_form/widgets/generate_node_builders/model_generate_node_builder.dart';
 import 'package:mustachehub/generate/ui/pages/template_input_form_page/widgets/pipe_forms_display/model_pipe_form/widgets/generate_node_builders/structure_generate_node_builder.dart';
 import 'package:mustachehub/generate/ui/pages/template_input_form_page/widgets/pipe_forms_display/model_pipe_form/widgets/generate_node_builders/text_generate_node_builder.dart';
@@ -28,6 +29,14 @@ class RootGeneratorHandler extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(left: 16),
       child: root.map(
+        choice: (TreeNodeGeneratePipeDtoPipeChoice value) {
+          return ChoiceGenerateNodeBuilder(
+            rootModelDTO: rootModelDTO,
+            output: output,
+            expectedPayload: expectedPayload,
+            choiceDTONode: value,
+          );
+        },
         structureNode: (TreeNodeGeneratePipeDtoStructureNode value) {
           return StructureGenerateNodeBuilder(
             rootModelDTO: rootModelDTO,

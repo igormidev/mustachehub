@@ -22,10 +22,7 @@ class DtoAdapter {
     payload.addAll(_getTextPayloads(texts, textDtos));
     payload.addAll(_getBoolPayloads(booleans, booleanDtos));
     payload.addAll(_getChoicePayloads(choices, choiceDtos));
-
-    for (final model in modelDtos) {
-      payload[model.pipe.mustacheName] = model.mapValue;
-    }
+    payload.addAll(_getModelPayloads(models, modelDtos));
 
     return payload;
   }

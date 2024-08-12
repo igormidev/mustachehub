@@ -41,13 +41,10 @@ class TextGenerateNodeBuilder extends StatelessWidget {
             mapFunc: (
               PipeDTO<TextPipe, String> pipe,
             ) {
-              return pipe.copyWith(
-                payloadValue: text,
-              );
+              return pipe.copyWith(payloadValue: text);
             },
           );
           if (editedPipe == null) return;
-          // return;
 
           await bloc.addModelPayloadValue(
             output: output,

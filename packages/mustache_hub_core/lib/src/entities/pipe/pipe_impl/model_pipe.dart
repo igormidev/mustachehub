@@ -20,7 +20,10 @@ class ModelPipe implements Pipe {
 
   /// Returns true if the pipe dosen't have any pipe inside it
   bool isEmpty() {
-    return textPipes.isEmpty && booleanPipes.isEmpty && modelPipes.isEmpty;
+    return textPipes.isEmpty &&
+        booleanPipes.isEmpty &&
+        modelPipes.isEmpty &&
+        choicePipes.isEmpty;
   }
 
   ModelPipe({
