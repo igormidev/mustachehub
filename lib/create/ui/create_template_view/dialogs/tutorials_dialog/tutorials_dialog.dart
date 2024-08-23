@@ -55,20 +55,21 @@ class _TutorialsDialogState extends State<TutorialsDialog> {
         final formated = smallestItemIndex + 1;
         // print('data: $data');
         // final formated = data.round();
-        if (formated < ETutorialSection.textVariable.scrollIndex) {
+        if (formated < ETutorialSection.textVariableResume.scrollIndex) {
           selectedSection.value = ETutorialSection.howToUseGuide;
           return;
-        } else if (ETutorialSection.textVariable.scrollIndex <= formated &&
-            formated < ETutorialSection.conditionalVariable.scrollIndex) {
-          selectedSection.value = ETutorialSection.textVariable;
-          return;
-        } else if (ETutorialSection.conditionalVariable.scrollIndex <=
+        } else if (ETutorialSection.textVariableResume.scrollIndex <=
                 formated &&
-            formated < ETutorialSection.listOfItemVariable.scrollIndex) {
-          selectedSection.value = ETutorialSection.conditionalVariable;
+            formated < ETutorialSection.conditionalVariableResume.scrollIndex) {
+          selectedSection.value = ETutorialSection.textVariableResume;
+          return;
+        } else if (ETutorialSection.conditionalVariableResume.scrollIndex <=
+                formated &&
+            formated < ETutorialSection.listOfItemVariableResume.scrollIndex) {
+          selectedSection.value = ETutorialSection.conditionalVariableResume;
           return;
         } else {
-          selectedSection.value = ETutorialSection.listOfItemVariable;
+          selectedSection.value = ETutorialSection.listOfItemVariableResume;
           return;
         }
       },

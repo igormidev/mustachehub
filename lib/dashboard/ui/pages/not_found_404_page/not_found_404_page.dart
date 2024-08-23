@@ -30,13 +30,13 @@ class NotFound404Page extends StatelessWidget {
                             ['**', 'Balon 2', '404 - Group $groupNumber', '**'],
                             value: primaryColor,
                           );
-                        }).toList(),
+                        }),
                         ...<int>[3, 4, 10, 12].map((groupNumber) {
                           return ValueDelegate.color(
                             ['**', 'Balon 2', '404 - Group $groupNumber', '**'],
                             value: secondaryColor,
                           );
-                        }).toList(),
+                        }),
 
                         // Balon 1 colors
                         ValueDelegate.color(
@@ -49,13 +49,13 @@ class NotFound404Page extends StatelessWidget {
                             ['**', 'balon 1', '404 - Group $groupNumber', '**'],
                             value: primaryColor,
                           );
-                        }).toList(),
+                        }),
                         ...<int>[15, 16].map((groupNumber) {
                           return ValueDelegate.color(
                             ['**', 'balon 1', '404 - Group $groupNumber', '**'],
                             value: secondaryColor,
                           );
-                        }).toList(),
+                        }),
 
                         // Text
                         ValueDelegate.color(
@@ -75,7 +75,7 @@ class NotFound404Page extends StatelessWidget {
                                 .secondaryContainer
                                 .withAlpha(100),
                           );
-                        }).toList(),
+                        }),
                       ],
                     ),
                   ),

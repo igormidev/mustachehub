@@ -35,13 +35,13 @@ class TextOutputPage extends StatelessWidget {
         return state.map(
           withContentPendency: (value) {
             return const EmptyIndicatorSection.empty(
-              text: 'No content text made',
+              text: 'No template text made',
               willHaveCircleAvatarInDarkMode: true,
             );
           },
           failureGeneratingText: (value) {
             return const EmptyIndicatorSection.error(
-              text: 'Error generating text!\nCheck if content text are valid.',
+              text: 'Error generating text!\nCheck if template text are valid.',
               willHaveCircleAvatarInDarkMode: false,
               sholdRepeat: false,
             );

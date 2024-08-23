@@ -130,7 +130,7 @@ class DashboardDrawer extends StatelessWidget with TabSelectionMixin {
                 selectedIcon: Icon(navOption.selectedIcon),
                 label: Text(navOption.fullName()),
               );
-            }).toList(),
+            }),
             const SizedBox(height: 20),
           ],
         ),

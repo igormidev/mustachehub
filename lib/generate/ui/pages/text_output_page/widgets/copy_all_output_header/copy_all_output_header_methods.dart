@@ -14,7 +14,7 @@ mixin CopyAllOutputHeaderMethods on CopyToClipboardMixin {
 
     if (contents == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        ErrorSnackBar(context: context, text: 'No content text to be copied'),
+        ErrorSnackBar(context: context, text: 'No template text to be copied'),
       );
       return;
     }

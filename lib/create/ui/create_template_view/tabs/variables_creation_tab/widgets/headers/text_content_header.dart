@@ -16,7 +16,7 @@ class TextContentHeader extends StatelessWidget {
 
     final style = Theme.of(context).textTheme.bodyMedium;
     return CustomHeader(
-      headerTitle: 'Content text',
+      headerTitle: 'Template text',
       subtractOnPressed: () {
         sizeBloc.decreaseSizeTestString();
       },

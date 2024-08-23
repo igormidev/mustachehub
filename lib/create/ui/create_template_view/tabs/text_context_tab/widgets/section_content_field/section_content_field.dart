@@ -117,8 +117,8 @@ class SectionContentField extends StatelessWidget with ValidatorsMixins {
                           ),
                           const Tooltip(
                             message: 'This is a section. Section are used to '
-                                'separate logic parts of content text.\n'
-                                'This is useful to organize your content text.'
+                                'separate logic parts of template text.\n'
+                                'This is useful to organize your template text.'
                                 'You can give a name for the section. Won\'t be '
                                 'reflected in the final text. The switch will '
                                 '',

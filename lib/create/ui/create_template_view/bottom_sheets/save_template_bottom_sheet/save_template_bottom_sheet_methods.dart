@@ -35,13 +35,13 @@ mixin SaveTemplateBottomSheetMethods on State<SaveTemplateBottomSheet> {
 
   String? _getInitialPackageName() {
     return widget.packageFormCubit.state.mapOrNull(
-      normal: (_) => _.formData.title,
+      normal: (value) => value.formData.title,
     );
   }
 
   String? _getInitialPackageDescription() {
     return widget.packageFormCubit.state.mapOrNull(
-      normal: (_) => _.formData.description,
+      normal: (value) => value.formData.description,
     );
   }
 

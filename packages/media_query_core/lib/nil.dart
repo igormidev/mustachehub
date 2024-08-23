@@ -1,7 +1,7 @@
 library nil;
 
 import 'package:flutter/widgets.dart'
-    show Widget, Element, Key, MultiChildRenderObjectElement, SizedBox;
+    show Widget, Element, MultiChildRenderObjectElement, SizedBox;
 
 const childrenNil = SizedBox.shrink();
 
@@ -12,14 +12,14 @@ const nil = Nil();
 /// It is useful when you have to return a widget and can't return null.
 class Nil extends Widget {
   /// Creates a [Nil] widget.
-  const Nil({Key? key}) : super(key: key);
+  const Nil({super.key});
 
   @override
   Element createElement() => _NilElement(this);
 }
 
 class _NilElement extends Element {
-  _NilElement(Nil widget) : super(widget);
+  _NilElement(super.widget);
 
   @override
   void mount(Element? parent, dynamic newSlot) {

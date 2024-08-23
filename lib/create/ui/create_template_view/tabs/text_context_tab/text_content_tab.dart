@@ -169,7 +169,7 @@ class _TextContentTabState extends State<TextContentTab>
 
                               contentCubit.addNew();
                             },
-                            tooltip: 'Add a new content text section',
+                            tooltip: 'Add a new template text section',
                           ),
                         ],
                       ),

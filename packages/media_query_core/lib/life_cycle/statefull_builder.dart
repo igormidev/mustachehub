@@ -7,12 +7,12 @@ class StatefullBuilder extends StatefulWidget {
   final void Function()? dispose;
   final Widget Function(BuildContext context) builder;
   const StatefullBuilder({
-    Key? key,
+    super.key,
     this.initState,
     this.didChangeDependencies,
     this.dispose,
     required this.builder,
-  }) : super(key: key);
+  });
 
   @override
   State<StatefullBuilder> createState() => _StatefullBuilderState();
