@@ -12,7 +12,9 @@ class CreateChoiceVariableGuide extends StatelessWidget {
           style: Theme.of(context).textTheme.headlineSmall,
         ),
         SelectableText(
-          'To create a choice variable, localize an big add button inside the choice variable section inside the variables declaration tab (the first tab).',
+          'To create a choice variable, localize an big  \'add '
+          'button\' inside the choice variable section that is '
+          'localized inside the variables declaration tab (the first tab).\n',
           style: Theme.of(context).textTheme.bodyLarge,
         ),
         SelectableText(
@@ -25,7 +27,7 @@ class CreateChoiceVariableGuide extends StatelessWidget {
         SelectableText(
           'Now comes the fun part. We now can add all the options that the user will be able to choose from.\n'
           'Initialy you will see two text\'s inputs with the name "Option 1" and "Option 2". '
-          'Click in those ones and fullfield them with the name of the options you wan\'t to give to the user.\n'
+          'Click in those ones and fullfield them with the name of the options you want to give to the user.\n'
           'You only see two options initialy because that the minimum amount of options that you need to have. '
           'But you can add as many options as you want by clicking in the add icon button right bellow the next option.',
           style: Theme.of(context).textTheme.bodyLarge,
@@ -35,7 +37,7 @@ class CreateChoiceVariableGuide extends StatelessWidget {
           style: Theme.of(context).textTheme.titleLarge,
         ),
         SelectableText(
-          'You wan\'t the user of your template to select his favorite hero.\n'
+          'You want the user of your template to select his favorite hero.\n'
           'On variables tab, in the choice variable section, click in the add button '
           'and inside the variable form you give the name to the variable as "Favorite hero"\n'
           'Then, you give a description like "Select your favorite hero from the list".\n'
@@ -44,7 +46,7 @@ class CreateChoiceVariableGuide extends StatelessWidget {
           style: Theme.of(context).textTheme.bodyLarge,
         ),
         SelectableText(
-          'After adding all the options you wan\'t, click in the button called "Save" to save that choice variable.\n'
+          'After adding all the options you want, click in the button called "Save" to save that choice variable.\n'
           'You can now use that variable in the template. ',
           style: Theme.of(context).textTheme.bodyLarge,
         ),

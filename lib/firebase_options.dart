@@ -69,7 +69,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions macos = FirebaseOptions(
     apiKey: 'AIzaSyCcqikagrAqZPoaEAS_B-lWqPC8cvtMmF0',
-    appId: '1:667846746873:ios:c957e21d6863b221acf828',
+    appId: '1:667846746873:ios:9065a31af0c97036acf828',
     messagingSenderId: '667846746873',
     projectId: 'mustache-hub---prod',
     storageBucket: 'mustache-hub---prod.appspot.com',
@@ -85,5 +85,4 @@ class DefaultFirebaseOptions {
     storageBucket: 'mustache-hub---prod.appspot.com',
     measurementId: 'G-FL224V6QT9',
   );
-
 }

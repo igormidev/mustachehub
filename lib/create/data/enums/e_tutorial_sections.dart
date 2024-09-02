@@ -123,11 +123,5 @@ enum ETutorialSection {
 
   int get scrollIndex {
     return index;
-    // return switch (this) {
-    //   ETutorialSection.howToUseGuide => 0,
-    //   ETutorialSection.textVariable => 5,
-    //   ETutorialSection.conditionalVariable => 10,
-    //   ETutorialSection.listOfItemVariable => 18,
-    // };
   }
 }

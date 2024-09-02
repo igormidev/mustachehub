@@ -13,9 +13,9 @@ class CreateConditionalVariableGuide extends StatelessWidget {
           style: Theme.of(context).textTheme.titleLarge,
         ),
         SelectableText(
-          'To create a conditional variable, localize an big add '
-          'button inside the conditional variable section inside '
-          'the variables declaration tab (the first tab).',
+          'To create a conditional variable, localize an big  \'add '
+          'button\' inside the conditional variable section that is '
+          'localized inside the variables declaration tab (the first tab).\n',
           style: Theme.of(context).textTheme.bodyLarge,
         ),
         SelectableText(

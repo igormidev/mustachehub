@@ -118,10 +118,12 @@ class SectionContentField extends StatelessWidget with ValidatorsMixins {
                           const Tooltip(
                             message: 'This is a section. Section are used to '
                                 'separate logic parts of template text.\n'
-                                'This is useful to organize your template text.'
+                                'This is useful to organize your template text. Read the documentation for more info\n'
                                 'You can give a name for the section. Won\'t be '
-                                'reflected in the final text. The switch will '
-                                '',
+                                'reflected in the final text.\nThe switch will '
+                                'determine if,\nwhen using the template and copying the hole text,\na line break '
+                                'will be added after the previous section or if it will be directly added right after '
+                                'the last caracter of the previous section.',
                             child: Icon(
                               Icons.info,
                               size: 26,

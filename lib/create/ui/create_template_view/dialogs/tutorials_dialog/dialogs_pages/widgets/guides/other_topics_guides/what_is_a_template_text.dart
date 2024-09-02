@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class WhatIsATemplateText extends StatelessWidget {
-  const WhatIsATemplateText({super.key});
+class WhatIsCamelCase extends StatelessWidget {
+  const WhatIsCamelCase({super.key});
 
   @override
   Widget build(BuildContext context) {

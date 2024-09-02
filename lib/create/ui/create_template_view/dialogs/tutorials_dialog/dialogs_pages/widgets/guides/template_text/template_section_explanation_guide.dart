@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class TemplateSectionExplanation extends StatelessWidget {
-  const TemplateSectionExplanation({super.key});
+class TemplateSectionExplanationGuide extends StatelessWidget {
+  const TemplateSectionExplanationGuide({super.key});
 
   @override
   Widget build(BuildContext context) {

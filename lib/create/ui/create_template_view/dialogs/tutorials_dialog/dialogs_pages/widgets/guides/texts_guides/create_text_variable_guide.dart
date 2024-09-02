@@ -13,7 +13,9 @@ class CreateTextVariableGuide extends StatelessWidget {
           style: Theme.of(context).textTheme.titleLarge,
         ),
         SelectableText(
-          'To create a text variable, localize an big add button inside the text variable section inside the variables declaration tab (the first tab).',
+          'To create a text variable, localize an big  \'add '
+          'button\' inside the text variable section that is '
+          'localized inside the variables declaration tab (the first tab).\n',
           style: Theme.of(context).textTheme.bodyLarge,
         ),
         SelectableText(
