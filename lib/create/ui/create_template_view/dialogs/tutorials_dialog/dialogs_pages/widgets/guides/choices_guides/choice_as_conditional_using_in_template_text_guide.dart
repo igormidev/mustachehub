@@ -16,9 +16,10 @@ class ChoiceAsConditionalUsingInTemplateTextGuide extends StatelessWidget {
         ),
         SelectableText(
           'You can use the choice variable as a conditional variable.\n'
-          'Similar to the conditional variables, you can display a certain text inside the variable scope only if the option choosed by the template user is the same as the option you want to use as requirement to display that text.\n\n',
+          'Similar to the conditional variables, you can display a certain text inside the variable scope only if the option choosed by the template user is the same as the option you want to use as requirement to display that text.',
           style: Theme.of(context).textTheme.bodyLarge,
         ),
+        const SizedBox(height: 10),
         SelectableText(
           'Displaying text if option is a determined one',
           style: Theme.of(context).textTheme.titleLarge,

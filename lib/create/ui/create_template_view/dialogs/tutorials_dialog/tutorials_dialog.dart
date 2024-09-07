@@ -1,6 +1,5 @@
 import 'package:dart_debouncer/dart_debouncer.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:mustachehub/create/data/enums/e_tutorial_sections.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:media_query_core/responsiveness/visibility_width_based.dart';
@@ -80,9 +79,9 @@ class _TutorialsDialogState extends State<TutorialsDialog> {
 
   bool _didScroll = false;
 
-  final Debouncer _debouncer = Debouncer(
-    timerDuration: const Duration(milliseconds: 500),
-  );
+  // final Debouncer _debouncer = Debouncer(
+  //   timerDuration: const Duration(milliseconds: 500),
+  // );
 
   @override
   Widget build(BuildContext context) {

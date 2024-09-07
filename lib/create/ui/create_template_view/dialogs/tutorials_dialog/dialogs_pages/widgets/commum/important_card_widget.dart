@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 class ImportantCardWidget extends StatelessWidget {
   final String text;
   final EdgeInsets padding;
-  const ImportantCardWidget(
-      {super.key,
-      required this.text,
-      this.padding = const EdgeInsets.symmetric(horizontal: 20, vertical: 14)});
+  const ImportantCardWidget({
+    super.key,
+    required this.text,
+    this.padding = const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+  });
 
   @override
   Widget build(BuildContext context) {

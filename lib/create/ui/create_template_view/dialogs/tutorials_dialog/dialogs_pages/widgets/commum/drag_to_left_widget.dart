@@ -11,7 +11,7 @@ class DragToLeftWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final BoxDecoration decoration = BoxDecoration(
       borderRadius: BorderRadius.circular(22),
-      color: Theme.of(context).colorScheme.secondaryContainer,
+      color: Theme.of(context).colorScheme.tertiaryContainer,
     );
     const EdgeInsets padding =
         EdgeInsets.symmetric(horizontal: 20, vertical: 14);
@@ -38,7 +38,7 @@ class DragToLeftWidget extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
-                  color: Theme.of(context).colorScheme.secondary,
+                  color: Theme.of(context).colorScheme.tertiary,
                 ),
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 height: 30,
@@ -48,13 +48,13 @@ class DragToLeftWidget extends StatelessWidget {
                     Text(
                       "Drag to left",
                       style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                            color: Theme.of(context).colorScheme.onSecondary,
+                            color: Theme.of(context).colorScheme.onTertiary,
                           ),
                     ),
                     const SizedBox(width: 10),
                     Icon(
                       Icons.keyboard_double_arrow_right_rounded,
-                      color: Theme.of(context).colorScheme.onSecondary,
+                      color: Theme.of(context).colorScheme.onTertiary,
                     ),
                   ],
                 ),

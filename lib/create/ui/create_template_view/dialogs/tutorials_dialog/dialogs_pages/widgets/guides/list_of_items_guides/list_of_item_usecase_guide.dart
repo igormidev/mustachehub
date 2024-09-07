@@ -9,9 +9,10 @@ class ListOfItemUsecaseGuide extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
+        const SizedBox(height: 12),
         SelectableText(
           'Use case example',
-          style: Theme.of(context).textTheme.displaySmall,
+          style: Theme.of(context).textTheme.titleLarge,
         ),
         SelectableText(
           'For instance; you want to give the possibility to the template user '

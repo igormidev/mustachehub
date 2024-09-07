@@ -13,6 +13,7 @@ import 'package:mustachehub/create/ui/create_template_view/dialogs/tutorials_dia
 import 'package:mustachehub/create/ui/create_template_view/dialogs/tutorials_dialog/dialogs_pages/widgets/guides/list_of_items_guides/create_list_of_items_guide.dart';
 import 'package:mustachehub/create/ui/create_template_view/dialogs/tutorials_dialog/dialogs_pages/widgets/guides/list_of_items_guides/list_of_item_usecase_guide.dart';
 import 'package:mustachehub/create/ui/create_template_view/dialogs/tutorials_dialog/dialogs_pages/widgets/guides/list_of_items_guides/list_of_item_using_in_template_text_guide.dart';
+import 'package:mustachehub/create/ui/create_template_view/dialogs/tutorials_dialog/dialogs_pages/widgets/guides/list_of_items_guides/list_of_items_resume_guide.dart';
 import 'package:mustachehub/create/ui/create_template_view/dialogs/tutorials_dialog/dialogs_pages/widgets/guides/list_of_items_guides/recursive_sub_models_bref_explain.dart';
 import 'package:mustachehub/create/ui/create_template_view/dialogs/tutorials_dialog/dialogs_pages/widgets/guides/other_topics_guides/other_topics.dart';
 import 'package:mustachehub/create/ui/create_template_view/dialogs/tutorials_dialog/dialogs_pages/widgets/guides/other_topics_guides/using_auto_complete_guide.dart';
@@ -76,7 +77,7 @@ class DialogTutorialPage extends StatelessWidget {
             ETutorialSection.choiceAsConditinalUsingInTemplateText =>
               const ChoiceAsConditionalUsingInTemplateTextGuide(),
             ETutorialSection.listOfItemVariableResume =>
-              const CreateListOfItemsGuide(),
+              const ListOfItemsResumeGuide(),
             ETutorialSection.listOfItemUseCaseExample =>
               const ListOfItemUsecaseGuide(),
             ETutorialSection.listOfItemCreatingVariable =>

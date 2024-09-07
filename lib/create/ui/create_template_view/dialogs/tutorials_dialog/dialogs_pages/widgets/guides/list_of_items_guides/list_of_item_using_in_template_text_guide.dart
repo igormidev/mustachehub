@@ -75,7 +75,7 @@ class ListOfItemUsingInTemplateTextGuide extends StatelessWidget {
         const SizedBox(height: 12),
         SelectableText(
           'The result should look something like this:',
-          style: Theme.of(context).textTheme.titleLarge,
+          style: Theme.of(context).textTheme.titleMedium,
         ),
         const DragToLeftWidget(
           text: ''
