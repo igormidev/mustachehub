@@ -20,59 +20,102 @@ class DialogScrollOrientationPage extends StatelessWidget {
         child: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           children: [
-            const SizedBox(height: 20),
-            Stack(
-              children: [
-                Text(
-                  'Scroll\nshortcut',
-                  style: Theme.of(context).textTheme.displaySmall,
-                ),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: CircleAvatar(
-                    child: IconButton(
-                      onPressed: () => Navigator.of(context).pop(),
-                      icon: const Icon(Icons.close),
-                    ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 20),
+              child: Column(
+                children: [
+                  Stack(
+                    children: [
+                      Text(
+                        'Scroll\nshortcut',
+                        style: Theme.of(context).textTheme.displaySmall,
+                      ),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: CircleAvatar(
+                          child: IconButton(
+                            onPressed: () => Navigator.of(context).pop(),
+                            icon: const Icon(Icons.close),
+                          ),
+                        ),
+                      )
+                    ],
                   ),
-                )
-              ],
+                  const Text(
+                    'Choose the section you want to read.',
+                  ),
+                  const SizedBox(height: 8),
+                ],
+              ),
             ),
-            const SizedBox(height: 20),
-            const Text(
-              'Choose the section you want to read.',
-            ),
-            const SizedBox(height: 8),
-            ...ETutorialSection.values.map(
-              (ETutorialSection section) {
+            ...mapHierarchy.entries.map(
+              (MapEntry<ETutorialSection, List<ETutorialSection>> entry) {
+                final ETutorialSection section = entry.key;
                 final bool isSelected = section == selectedSection;
-                return Padding(
-                  padding: const EdgeInsets.only(bottom: 16),
-                  child: OutlinedButton.icon(
-                    onPressed: () {
-                      scrollController.scrollTo(
-                        index: section.scrollIndex,
-                        duration: const Duration(milliseconds: 500),
-                        curve: Curves.easeInOutCubic,
-                      );
-                    },
-                    style: OutlinedButton.styleFrom(
-                      padding: EdgeInsets.zero,
-                      backgroundColor: isSelected
-                          ? Theme.of(context).colorScheme.secondary
-                          : null,
-                      foregroundColor: isSelected
-                          ? Theme.of(context).colorScheme.onSecondary
-                          : null,
+
+                return Column(
+                  children: [
+                    _ScrollShortcutButton(
+                      isMainSection: true,
+                      isSelected: isSelected,
+                      scrollController: scrollController,
+                      section: section,
                     ),
-                    label: Text(section.title),
-                    icon: const Icon(Icons.transit_enterexit_rounded),
-                  ),
+                    ...entry.value.map(
+                      (ETutorialSection subSection) {
+                        final bool isSelected = subSection == selectedSection;
+                        return _ScrollShortcutButton(
+                          isMainSection: false,
+                          isSelected: isSelected,
+                          scrollController: scrollController,
+                          section: subSection,
+                        );
+                      },
+                    ),
+                  ],
                 );
               },
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _ScrollShortcutButton extends StatelessWidget {
+  final bool isMainSection;
+  final ItemScrollController scrollController;
+  final ETutorialSection section;
+  final bool isSelected;
+  const _ScrollShortcutButton({
+    required this.isSelected,
+    required this.scrollController,
+    required this.section,
+    required this.isMainSection,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(left: isMainSection ? 0 : 60, bottom: 16),
+      child: OutlinedButton.icon(
+        onPressed: () {
+          scrollController.scrollTo(
+            index: section.scrollIndex,
+            duration: const Duration(milliseconds: 500),
+            curve: Curves.easeInOutCubic,
+          );
+        },
+        style: OutlinedButton.styleFrom(
+          padding: EdgeInsets.zero,
+          backgroundColor:
+              isSelected ? Theme.of(context).colorScheme.secondary : null,
+          foregroundColor:
+              isSelected ? Theme.of(context).colorScheme.onSecondary : null,
+        ),
+        label: Text(section.title),
+        icon: const Icon(Icons.transit_enterexit_rounded),
       ),
     );
   }

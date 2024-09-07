@@ -6,6 +6,8 @@ class CreateChoiceVariableGuide extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
       children: [
         SelectableText(
           'Creating a choice variable',

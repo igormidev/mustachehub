@@ -1,5 +1,7 @@
 final Map<ETutorialSection, List<ETutorialSection>> mapHierarchy = {
-  ETutorialSection.howToUseGuide: [],
+  ETutorialSection.howToUseGuide: [
+    ETutorialSection.usageFlow,
+  ],
   ETutorialSection.textVariableResume: [
     ETutorialSection.textUseCaseExample,
     ETutorialSection.textCreatingVariable,
@@ -21,10 +23,13 @@ final Map<ETutorialSection, List<ETutorialSection>> mapHierarchy = {
     ETutorialSection.listOfItemUsingInTemplateText,
     ETutorialSection.recursiveSubModelsBrefExplain,
   ],
+  ETutorialSection.whatIsTheTemplateText: [
+    ETutorialSection.creatingMultipleTemplateText,
+    ETutorialSection.howWillBreakLineCheckboxesWork,
+  ],
   ETutorialSection.otherInfosResume: [
     ETutorialSection.usingAutoComplete,
     ETutorialSection.whatIsAVariable,
-    ETutorialSection.whatIsTheTemplateText,
     ETutorialSection.whatIsAVariableScope,
     ETutorialSection.whatIsCamelCaseFormat,
   ],
@@ -81,43 +86,41 @@ enum ETutorialSection {
 
       // Text variable and its sub-sections
       ETutorialSection.textVariableResume => 'Text variable',
-      ETutorialSection.textUseCaseExample => 'Text use case example',
-      ETutorialSection.textCreatingVariable => 'Creating variable',
-      ETutorialSection.textUsingInTemplateText => 'Using in template text',
+      ETutorialSection.textUseCaseExample => 'Example',
+      ETutorialSection.textCreatingVariable => 'Creating',
+      ETutorialSection.textUsingInTemplateText => 'Usage',
 
       // Conditional variable and its sub-sections
       ETutorialSection.conditionalVariableResume => 'Conditional variable',
-      ETutorialSection.conditionalUseCaseExample => '',
-      ETutorialSection.conditionalCreatingVariable => '',
-      ETutorialSection.conditionalUsingInTemplateText => '',
+      ETutorialSection.conditionalUseCaseExample => 'Example',
+      ETutorialSection.conditionalCreatingVariable => 'Creating',
+      ETutorialSection.conditionalUsingInTemplateText => 'Usage',
 
       // Choice variable and its sub-sections
       ETutorialSection.choiceVariableResume => 'Choices variable',
-      ETutorialSection.choiceCreatingVariable => 'How to create',
+      ETutorialSection.choiceCreatingVariable => 'Example',
       ETutorialSection.choiceAsTextUsingInTemplateText => 'Text usage',
       ETutorialSection.choiceAsConditinalUsingInTemplateText =>
         'Conditional usage',
 
       // List of item variable and its sub-sections
       ETutorialSection.listOfItemVariableResume => 'List of item variable',
-      ETutorialSection.listOfItemUseCaseExample => '',
-      ETutorialSection.listOfItemCreatingVariable => '',
-      ETutorialSection.listOfItemUsingInTemplateText => '',
-      ETutorialSection.recursiveSubModelsBrefExplain => '',
+      ETutorialSection.listOfItemUseCaseExample => 'Example',
+      ETutorialSection.listOfItemCreatingVariable => 'Creating',
+      ETutorialSection.listOfItemUsingInTemplateText => 'Usage',
+      ETutorialSection.recursiveSubModelsBrefExplain => 'Sub-items',
+
+      // Text template explanation and its sub-sections
+      ETutorialSection.whatIsTheTemplateText => 'Template text',
+      ETutorialSection.creatingMultipleTemplateText => 'Multiple texts',
+      ETutorialSection.howWillBreakLineCheckboxesWork => 'Break line',
 
       // Other info/section
-      ETutorialSection.otherInfosResume => '',
-      ETutorialSection.usingAutoComplete => '',
-      ETutorialSection.whatIsAVariable => '',
-      ETutorialSection.whatIsTheTemplateText => '',
-      ETutorialSection.whatIsAVariableScope => '',
-      ETutorialSection.whatIsCamelCaseFormat => '',
-      // TODO: Handle this case.
-      ETutorialSection.creatingMultipleTemplateText =>
-        throw UnimplementedError(),
-      // TODO: Handle this case.
-      ETutorialSection.howWillBreakLineCheckboxesWork =>
-        throw UnimplementedError(),
+      ETutorialSection.otherInfosResume => 'Other guides',
+      ETutorialSection.usingAutoComplete => 'Auto-complete',
+      ETutorialSection.whatIsAVariable => 'What is an variable',
+      ETutorialSection.whatIsAVariableScope => 'Variable scope',
+      ETutorialSection.whatIsCamelCaseFormat => 'Camel case format',
     };
   }
 

@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:mustachehub/create/data/enums/e_tutorial_sections.dart';
@@ -22,7 +20,6 @@ class TutorialsDialog extends StatefulWidget {
 class _TutorialsDialogState extends State<TutorialsDialog> {
   late final ItemScrollController scrollController;
   late final ValueNotifier<ETutorialSection> selectedSection;
-  late final StreamSubscription<double> pagesListener;
   final ScrollOffsetListener scrollOffsetListener =
       ScrollOffsetListener.create(recordProgrammaticScrolls: false);
   final ItemScrollController itemScrollController = ItemScrollController();
@@ -34,17 +31,22 @@ class _TutorialsDialogState extends State<TutorialsDialog> {
   void initState() {
     super.initState();
     scrollController = ItemScrollController();
-
     selectedSection = ValueNotifier(widget.initialSection);
+    itemPositionsListener.itemPositions.addListener(_setSelectedSection);
+  }
 
-    // itemPositionsListener.itemPositions.addListener(() {
-    //   print('itemsPositions: ${itemPositionsListener.itemPositions.value}');
-    // });
-    // scrollOffsetListener.changes.listen(
-    // (event) {
-    itemPositionsListener.itemPositions.addListener(
-      () {
-        final smallestItemIndex = itemPositionsListener.itemPositions.value
+  @override
+  void dispose() {
+    selectedSection.dispose();
+    itemPositionsListener.itemPositions.removeListener(_setSelectedSection);
+    super.dispose();
+  }
+
+  void _setSelectedSection() {
+    final items = itemPositionsListener.itemPositions.value;
+    final smallestItemIndex = items.isEmpty
+        ? 0
+        : items
             .reduce(
               (value, element) =>
                   value.itemLeadingEdge < element.itemLeadingEdge
@@ -52,33 +54,11 @@ class _TutorialsDialogState extends State<TutorialsDialog> {
                       : element,
             )
             .index;
-        final formated = smallestItemIndex + 1;
-        // print('data: $data');
-        // final formated = data.round();
-        if (formated < ETutorialSection.textVariableResume.scrollIndex) {
-          selectedSection.value = ETutorialSection.howToUseGuide;
-          return;
-        } else if (ETutorialSection.textVariableResume.scrollIndex <=
-                formated &&
-            formated < ETutorialSection.conditionalVariableResume.scrollIndex) {
-          selectedSection.value = ETutorialSection.textVariableResume;
-          return;
-        } else if (ETutorialSection.conditionalVariableResume.scrollIndex <=
-                formated &&
-            formated < ETutorialSection.listOfItemVariableResume.scrollIndex) {
-          selectedSection.value = ETutorialSection.conditionalVariableResume;
-          return;
-        } else {
-          selectedSection.value = ETutorialSection.listOfItemVariableResume;
-          return;
-        }
-      },
-    );
-  }
 
-  @override
-  void dispose() {
-    super.dispose();
+    selectedSection.value = ETutorialSection.values.firstWhere(
+      (element) => element.scrollIndex == smallestItemIndex,
+      orElse: () => ETutorialSection.values.last,
+    );
   }
 
   @override

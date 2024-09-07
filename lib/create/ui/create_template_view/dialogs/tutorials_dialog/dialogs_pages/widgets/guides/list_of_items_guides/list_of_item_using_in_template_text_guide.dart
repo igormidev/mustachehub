@@ -15,6 +15,8 @@ class ListOfItemUsingInTemplateTextGuide extends StatelessWidget {
     );
 
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
       children: [
         SelectableText(
           'Using list of items variables in the template text',
@@ -136,14 +138,16 @@ class ListOfItemUsingInTemplateTextGuide extends StatelessWidget {
             ],
           ),
         ),
-        // SelectableText(
-        //   ' ',
-        //   style: Theme.of(context).textTheme.titleLarge,
-        // ),
-        // SelectableText(
-        //   '',
-        //   style: Theme.of(context).textTheme.bodyLarge,
-        // ),
+        SelectableText(
+          'So, how will this be used?',
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
+        SelectableText(
+          'Whoever uses the template will be able to add as many persons as they want and, '
+          'for each person, the template output text will be displayed with the person name, '
+          'age and an extra text if the person selects that he is male.',
+          style: Theme.of(context).textTheme.bodyLarge,
+        ),
       ],
     );
   }

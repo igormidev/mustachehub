@@ -13,6 +13,8 @@ class ChoiceAsTextUsingInTemplateTextGuide extends StatelessWidget {
         EdgeInsets.symmetric(horizontal: 20, vertical: 14);
 
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
       children: [
         SelectableText(
           'Using selected choice name',
