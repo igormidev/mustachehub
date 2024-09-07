@@ -11,9 +11,9 @@ class WhatIsAScope extends StatelessWidget {
       children: [
         SelectableText(
           'What is a variable scope?',
-          style: Theme.of(context).textTheme.displaySmall,
+          style: Theme.of(context).textTheme.titleLarge,
         ),
-        const SelectableText(
+        SelectableText(
           'Scope are used to delimit an area in the text where a variable will have effect.\n'
           'The scope have an opening and a closing tag, and the variable will only have "effect" '
           'inside this area.\n\n'
@@ -21,13 +21,15 @@ class WhatIsAScope extends StatelessWidget {
           'For a conditional variable, the scope is used to define the text that will be '
           'displayed when using the template and selecting that variable condition to true.\n'
           'For a item variable, the scope defines the loop scope that will repeat the same logic '
-          'inside the scope for each item in the list.\n',
+          'inside the scope for each item in the list.',
+          style: Theme.of(context).textTheme.bodyLarge,
         ),
+        const SizedBox(height: 10),
         SelectableText(
           'Scope anatomy',
           style: Theme.of(context).textTheme.titleLarge,
         ),
-        const SelectableText(
+        SelectableText(
           'The scope is defined by the opening and closing tags.\n'
           'A tag is defined by the name of the variable, in camel case '
           'format, surrounded with double curly braces.\n\n'
@@ -36,8 +38,10 @@ class WhatIsAScope extends StatelessWidget {
           'In the closing tag, the last one, you will add a "/" as a prefix, '
           'before the variable name. That will indicate that tag is the end of the scope\n\n'
           'And in the open tag, the first one, you can either add a "#" or a "^" as a prefix, '
-          'before the variable name. That will indicate the type of scope you are creating.\n',
+          'before the variable name. That will indicate the type of scope you are creating.',
+          style: Theme.of(context).textTheme.bodyLarge,
         ),
+        const SizedBox(height: 10),
         SelectableText(
           'Open scope types',
           style: Theme.of(context).textTheme.titleLarge,
@@ -49,8 +53,9 @@ class WhatIsAScope extends StatelessWidget {
           'The "^" symbol is used to indicate a negative action, '
           'that is, the text inside the scope will be displayed if the variable condition is false.\n'
           'In the list of items, the negative action scope is used to define the text that will be '
-          'displayed if the list of items is empty.\n',
+          'displayed if the list of items is empty.',
         ),
+        const SizedBox(height: 10),
       ],
     );
   }

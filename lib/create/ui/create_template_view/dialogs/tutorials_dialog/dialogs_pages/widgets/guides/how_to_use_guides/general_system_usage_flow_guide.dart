@@ -9,9 +9,10 @@ class GeneralSystemUsageFlowGuide extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
+        const SizedBox(height: 8),
         SelectableText(
           'Usage flow',
-          style: Theme.of(context).textTheme.displaySmall,
+          style: Theme.of(context).textTheme.titleLarge,
         ),
         SelectableText(
           'The system usage flow is simple and easy to understand. The flow is:',
@@ -24,7 +25,7 @@ class GeneralSystemUsageFlowGuide extends StatelessWidget {
                 text: '1. ',
                 style: Theme.of(context)
                     .textTheme
-                    .titleLarge
+                    .titleMedium
                     ?.copyWith(fontWeight: FontWeight.bold),
               ),
               TextSpan(
@@ -36,7 +37,7 @@ class GeneralSystemUsageFlowGuide extends StatelessWidget {
                 text: '2. ',
                 style: Theme.of(context)
                     .textTheme
-                    .titleLarge
+                    .titleMedium
                     ?.copyWith(fontWeight: FontWeight.bold),
               ),
               TextSpan(
@@ -48,7 +49,7 @@ class GeneralSystemUsageFlowGuide extends StatelessWidget {
                 text: '3. ',
                 style: Theme.of(context)
                     .textTheme
-                    .titleLarge
+                    .titleMedium
                     ?.copyWith(fontWeight: FontWeight.bold),
               ),
               TextSpan(
@@ -60,7 +61,7 @@ class GeneralSystemUsageFlowGuide extends StatelessWidget {
                 text: '4. ',
                 style: Theme.of(context)
                     .textTheme
-                    .titleLarge
+                    .titleMedium
                     ?.copyWith(fontWeight: FontWeight.bold),
               ),
               TextSpan(
@@ -72,7 +73,7 @@ class GeneralSystemUsageFlowGuide extends StatelessWidget {
                 text: '5. ',
                 style: Theme.of(context)
                     .textTheme
-                    .titleLarge
+                    .titleMedium
                     ?.copyWith(fontWeight: FontWeight.bold),
               ),
               TextSpan(
@@ -88,6 +89,7 @@ class GeneralSystemUsageFlowGuide extends StatelessWidget {
           'really need. Because most of the usage is very intuitive.',
           style: Theme.of(context).textTheme.bodyMedium,
         ),
+        const SizedBox(height: 10),
       ],
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mustachehub/create/ui/create_template_view/dialogs/tutorials_dialog/dialogs_pages/widgets/commum/drag_to_left_widget.dart';
 import 'package:mustachehub/create/ui/create_template_view/dialogs/tutorials_dialog/dialogs_pages/widgets/commum/important_card_widget.dart';
 
 class ListOfItemUsingInTemplateTextGuide extends StatelessWidget {
@@ -6,18 +7,11 @@ class ListOfItemUsingInTemplateTextGuide extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const EdgeInsets padding =
-        EdgeInsets.symmetric(horizontal: 20, vertical: 14);
-
-    final BoxDecoration decoration = BoxDecoration(
-      borderRadius: BorderRadius.circular(22),
-      color: Theme.of(context).colorScheme.secondaryContainer,
-    );
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
+        const SizedBox(height: 12),
         SelectableText(
           'Using list of items variables in the template text',
           style: Theme.of(context).textTheme.titleLarge,
@@ -34,7 +28,7 @@ class ListOfItemUsingInTemplateTextGuide extends StatelessWidget {
           'after the variable name, as a suffix, the name, in camel case format, '
           'of the option you want to use as requirement to display the text.\n'
           'Then, write exactly the same thing but replacing the "#" symbol with '
-          'a "/".\nThat will indicate the end of the scope.\n\n',
+          'a "/".\nThat will indicate the end of the scope.\n',
           style: Theme.of(context).textTheme.bodyLarge,
         ),
         SelectableText(
@@ -42,9 +36,10 @@ class ListOfItemUsingInTemplateTextGuide extends StatelessWidget {
           'close curly braces and the double open curly braces, '
           'you can use all the variables you created of the item.\n'
           'The usage of the variables does not change. '
-          'It is the same, that is: declare them the same you normally do.\n\n',
+          'It is the same, that is: declare them the same you normally do.',
           style: Theme.of(context).textTheme.bodyLarge,
         ),
+        const SizedBox(height: 12),
         const ImportantCardWidget(
           text:
               'The item variables can only be used inside the scope of the list of items variable. '
@@ -77,66 +72,18 @@ class ListOfItemUsingInTemplateTextGuide extends StatelessWidget {
           'The same logic is applied to the other variables.',
           style: Theme.of(context).textTheme.bodyLarge,
         ),
+        const SizedBox(height: 12),
         SelectableText(
           'The result should look something like this:',
           style: Theme.of(context).textTheme.titleLarge,
         ),
-        Container(
-          margin: const EdgeInsets.symmetric(vertical: 10),
-          decoration: decoration,
-          padding: padding,
-          child: Stack(
-            children: [
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 8, bottom: 8),
-                  child: Text(
-                    ''
-                    '{{#persons}}\n'
-                    'Hi, my name is {{personName}}'
-                    ' and I am {{personAge}} years old.\n'
-                    '{{#isMale}}I am a male!{{/isMale}}\n'
-                    '{{/persons}}',
-                    style: Theme.of(context).textTheme.bodyLarge,
-                  ),
-                ),
-              ),
-              IgnorePointer(
-                child: Align(
-                  alignment: Alignment.centerRight,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: Theme.of(context).colorScheme.secondary,
-                    ),
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    height: 30,
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          "Drag to left",
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleSmall
-                              ?.copyWith(
-                                color:
-                                    Theme.of(context).colorScheme.onSecondary,
-                              ),
-                        ),
-                        const SizedBox(width: 10),
-                        Icon(
-                          Icons.keyboard_double_arrow_right_rounded,
-                          color: Theme.of(context).colorScheme.onSecondary,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
+        const DragToLeftWidget(
+          text: ''
+              '{{#persons}}\n'
+              'Hi, my name is {{personName}}'
+              ' and I am {{personAge}} years old.\n'
+              '{{#isMale}}I am a male!{{/isMale}}\n'
+              '{{/persons}}',
         ),
         SelectableText(
           'So, how will this be used?',

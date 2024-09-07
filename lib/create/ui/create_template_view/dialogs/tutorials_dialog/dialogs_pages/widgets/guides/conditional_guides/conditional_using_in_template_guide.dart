@@ -1,21 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:mustachehub/create/ui/create_template_view/dialogs/tutorials_dialog/dialogs_pages/widgets/commum/drag_to_left_widget.dart';
 
 class ConditionalUsingInTemplateGuide extends StatelessWidget {
   const ConditionalUsingInTemplateGuide({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final BoxDecoration decoration = BoxDecoration(
-      borderRadius: BorderRadius.circular(22),
-      color: Theme.of(context).colorScheme.secondaryContainer,
-    );
-    const EdgeInsets padding =
-        EdgeInsets.symmetric(horizontal: 20, vertical: 14);
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
+        const SizedBox(height: 10),
         SelectableText(
           'Using conditional variables in the template text',
           style: Theme.of(context).textTheme.titleLarge,
@@ -31,17 +26,17 @@ class ConditionalUsingInTemplateGuide extends StatelessWidget {
           'after the variable name, as a suffix, the name, in camel case format, '
           'of the option you want to use as requirement to display the text.\n'
           'Then, write exactly the same thing but replacing the "#" symbol with '
-          'a "/".\nThat will indicate the end of the scope.\n\n',
+          'a "/".\nThat will indicate the end of the scope.\n',
           style: Theme.of(context).textTheme.bodyLarge,
         ),
         SelectableText(
           'Now, inside the scope, that is, between the double close curly braces and the double open curly braces, '
-          'you can write the text that you want to display if the option is the same as the requirement.\n\n',
+          'you can write the text that you want to display if the option is the same as the requirement.\n',
           style: Theme.of(context).textTheme.bodyLarge,
         ),
         SelectableText(
           'Dont worry, when using the choice as text, the auto-complete will help you to insert the correct syntax. '
-          'Just type in "{" to trigger the auto-complete dialog, and select the variable name with the # prefix.',
+          'Just type in "{" to trigger the auto-complete dialog, and select the variable name with the # prefix.\n',
           style: Theme.of(context).textTheme.bodyLarge,
         ),
         SelectableText(
@@ -50,60 +45,11 @@ class ConditionalUsingInTemplateGuide extends StatelessWidget {
           'display a message only if the client target is a new client:',
           style: Theme.of(context).textTheme.bodyLarge,
         ),
-        Container(
-          margin: const EdgeInsets.symmetric(vertical: 10),
-          decoration: decoration,
-          padding: padding,
-          child: Stack(
-            children: [
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 8, bottom: 8),
-                  child: Text(
-                    ''
-                    '{{#clientPriority.high}}\n'
-                    'The client has a high priority.\n'
-                    '{{/clientPriority.high}}\n',
-                    style: Theme.of(context).textTheme.bodyLarge,
-                  ),
-                ),
-              ),
-              IgnorePointer(
-                child: Align(
-                  alignment: Alignment.centerRight,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: Theme.of(context).colorScheme.secondary,
-                    ),
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    height: 30,
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          "Drag to left",
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleSmall
-                              ?.copyWith(
-                                color:
-                                    Theme.of(context).colorScheme.onSecondary,
-                              ),
-                        ),
-                        const SizedBox(width: 10),
-                        Icon(
-                          Icons.keyboard_double_arrow_right_rounded,
-                          color: Theme.of(context).colorScheme.onSecondary,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
+        const DragToLeftWidget(
+          text: ''
+              '{{#clientPriority.high}}\n'
+              'The client has a high priority.\n'
+              '{{/clientPriority.high}}',
         ),
         SelectableText(
           'Displaying text if the condition is not met',
@@ -118,6 +64,7 @@ class ConditionalUsingInTemplateGuide extends StatelessWidget {
           'as a prefix, you must use the caret, "^", symbol.',
           style: Theme.of(context).textTheme.bodyLarge,
         ),
+        const SizedBox(height: 12),
       ],
     );
   }

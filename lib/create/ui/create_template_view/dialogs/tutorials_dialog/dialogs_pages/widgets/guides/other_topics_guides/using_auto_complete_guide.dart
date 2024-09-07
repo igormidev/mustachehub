@@ -9,6 +9,7 @@ class UsingAutoCompleteGuide extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
+        const SizedBox(height: 10),
         SelectableText(
           'Using auto-complete',
           style: Theme.of(context).textTheme.titleLarge,
@@ -29,6 +30,7 @@ class UsingAutoCompleteGuide extends StatelessWidget {
           'you can always check the documentation.',
           style: Theme.of(context).textTheme.bodyLarge,
         ),
+        const SizedBox(height: 12),
       ],
     );
   }

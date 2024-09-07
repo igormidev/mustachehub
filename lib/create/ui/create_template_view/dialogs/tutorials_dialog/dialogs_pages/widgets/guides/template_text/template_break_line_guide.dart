@@ -13,7 +13,7 @@ class TemplateBreakLineGuide extends StatelessWidget {
           'Breakline or not between sections',
           style: Theme.of(context).textTheme.titleLarge,
         ),
-        const SelectableText(
+        SelectableText(
           'As said above, the intent of separating the template text '
           'into sections is to make it easier to understand and manage.\n'
           'In stat sense, you may want to separe parts of the text but without '
@@ -22,7 +22,9 @@ class TemplateBreakLineGuide extends StatelessWidget {
           'To do that, look for a switch button in the right side of the section title, '
           'if the switch is on, the breakline will be added between that specific section '
           'and the previous one when you click to copy the hole output when using the template.',
+          style: Theme.of(context).textTheme.bodyLarge,
         ),
+        const SizedBox(height: 12),
       ],
     );
   }

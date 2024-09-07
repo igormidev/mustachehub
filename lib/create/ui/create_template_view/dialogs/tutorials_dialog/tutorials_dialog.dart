@@ -1,3 +1,4 @@
+import 'package:dart_debouncer/dart_debouncer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:mustachehub/create/data/enums/e_tutorial_sections.dart';
@@ -23,9 +24,13 @@ class _TutorialsDialogState extends State<TutorialsDialog> {
   final ScrollOffsetListener scrollOffsetListener =
       ScrollOffsetListener.create(recordProgrammaticScrolls: false);
   final ItemScrollController itemScrollController = ItemScrollController();
+  final ItemScrollController shortcutItemScrollController =
+      ItemScrollController();
 
   final ItemPositionsListener itemPositionsListener =
       ItemPositionsListener.create();
+
+  final ScrollController controller = ScrollController();
 
   @override
   void initState() {
@@ -55,42 +60,71 @@ class _TutorialsDialogState extends State<TutorialsDialog> {
             )
             .index;
 
-    selectedSection.value = ETutorialSection.values.firstWhere(
+    final currentSection = ETutorialSection.values.firstWhere(
       (element) => element.scrollIndex == smallestItemIndex,
       orElse: () => ETutorialSection.values.last,
     );
+
+    selectedSection.value = currentSection;
+
+    if (_didScroll) {
+      // _debouncer.resetDebounce(() {
+      shortcutItemScrollController.scrollTo(
+          index: currentSection.scrollIndex,
+          duration: const Duration(milliseconds: 500));
+      // });
+    } else {
+      _didScroll = true;
+    }
   }
+
+  bool _didScroll = false;
+
+  final Debouncer _debouncer = Debouncer(
+    timerDuration: const Duration(milliseconds: 500),
+  );
 
   @override
   Widget build(BuildContext context) {
-    return VisibilityWidthBased.fromMediaQueryScreenWidth(
-      maximumWidth: ScreenSize.x900,
-      replacement: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          DialogTutorialPage(
-            scrollOffsetListener: scrollOffsetListener,
-            initialScrollIndex: widget.initialSection.scrollIndex,
-            scrollController: scrollController,
-            itemPositionsListener: itemPositionsListener,
-          ),
-          const SizedBox(width: 20),
-          ValueListenableBuilder(
-            valueListenable: selectedSection,
-            builder: (context, initialTutorialSection, child) {
-              return DialogScrollOrientationPage(
-                scrollController: scrollController,
-                selectedSection: initialTutorialSection,
-              );
-            },
-          ),
-        ],
+    return Theme(
+      data: Theme.of(context).copyWith(
+        textTheme: Theme.of(context).textTheme.copyWith(
+              titleLarge: Theme.of(context).textTheme.titleLarge?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+            ),
       ),
-      child: DialogTutorialPage(
-        scrollOffsetListener: scrollOffsetListener,
-        initialScrollIndex: widget.initialSection.scrollIndex,
-        scrollController: scrollController,
-        itemPositionsListener: itemPositionsListener,
+      child: VisibilityWidthBased.fromMediaQueryScreenWidth(
+        maximumWidth: ScreenSize.x900,
+        replacement: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            DialogTutorialPage(
+              scrollOffsetListener: scrollOffsetListener,
+              initialScrollIndex: widget.initialSection.scrollIndex,
+              scrollController: scrollController,
+              itemPositionsListener: itemPositionsListener,
+            ),
+            const SizedBox(width: 20),
+            ValueListenableBuilder(
+              valueListenable: selectedSection,
+              builder: (context, initialTutorialSection, child) {
+                return DialogScrollOrientationPage(
+                  shortcutItemScrollController: shortcutItemScrollController,
+                  scrollController: scrollController,
+                  selectedSection: initialTutorialSection,
+                );
+              },
+            ),
+          ],
+        ),
+        child: DialogTutorialPage(
+          scrollOffsetListener: scrollOffsetListener,
+          initialScrollIndex: widget.initialSection.scrollIndex,
+          scrollController: scrollController,
+          itemPositionsListener: itemPositionsListener,
+        ),
       ),
     );
   }

@@ -53,7 +53,7 @@ class VariablesCreationTab extends StatelessWidget {
                   'Choise variables are a list of enumerated choices. '
                   'Who uses the template will have to choose one of the options '
                   'and you can use that choise to make conditinals ou display the choice text.',
-              selectedSection: ETutorialSection.textVariableResume,
+              selectedSection: ETutorialSection.choiceVariableResume,
             ),
             const SliverToBoxAdapter(child: SizedBox(height: 4)),
             BlocBuilder<VariablesCubit, VariablesState>(

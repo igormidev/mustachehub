@@ -9,6 +9,7 @@ class CreateConditionalVariableGuide extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
+        const SizedBox(height: 10),
         SelectableText(
           'Creating a conditional variable',
           style: Theme.of(context).textTheme.titleLarge,
@@ -29,7 +30,7 @@ class CreateConditionalVariableGuide extends StatelessWidget {
         SelectableText(
           'After adding good name and description, click in the '
           'button called "Save" to save that conditional variable.\n'
-          'You can now use that variable in the template. ',
+          'You can now use that variable in the template.',
           style: Theme.of(context).textTheme.bodyLarge,
         ),
       ],

@@ -1,94 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:mustachehub/create/ui/create_template_view/dialogs/tutorials_dialog/dialogs_pages/widgets/commum/drag_to_left_widget.dart';
 
 class RecursiveSubModelsBrefExplain extends StatelessWidget {
   const RecursiveSubModelsBrefExplain({super.key});
 
   @override
   Widget build(BuildContext context) {
-    const EdgeInsets padding =
-        EdgeInsets.symmetric(horizontal: 20, vertical: 14);
-
-    final BoxDecoration decoration = BoxDecoration(
-      borderRadius: BorderRadius.circular(22),
-      color: Theme.of(context).colorScheme.secondaryContainer,
-    );
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
+        const SizedBox(height: 12),
         SelectableText(
           'Recursive sub-items usage',
-          style: Theme.of(context).textTheme.displaySmall,
+          style: Theme.of(context).textTheme.titleLarge,
         ),
-        const SelectableText(
+        SelectableText(
           'In an item, you can create any variable type, including other items.\n'
           'This is called a recursive sub-item.\n'
           'This is useful when you have a list of items, and each item has a list of items.\n'
           'For example, a company has a list of employees, and each employee has '
           'a list of variables such as name, age etc...\nAnd for each employee, of '
           'each company, you want to display the same template text.\n\n',
+          style: Theme.of(context).textTheme.bodyLarge,
         ),
         SelectableText(
           'Bellow is another example of a recursive sub-item:\n\n',
           style: Theme.of(context).textTheme.titleLarge,
         ),
-        Container(
-          margin: const EdgeInsets.symmetric(vertical: 10),
-          decoration: decoration,
-          padding: padding,
-          child: Stack(
-            children: [
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 8, bottom: 8),
-                  child: Text(
-                    ''
-                    '{{#persons}}\n'
-                    'Hi, my name is {{personName}}'
-                    'I have some children, they are:\n'
-                    '{{#children}}{{childName}}, {{/children}}\n'
-                    '{{/persons}}',
-                    style: Theme.of(context).textTheme.bodyLarge,
-                  ),
-                ),
-              ),
-              IgnorePointer(
-                child: Align(
-                  alignment: Alignment.centerRight,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: Theme.of(context).colorScheme.secondary,
-                    ),
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    height: 30,
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          "Drag to left",
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleSmall
-                              ?.copyWith(
-                                color:
-                                    Theme.of(context).colorScheme.onSecondary,
-                              ),
-                        ),
-                        const SizedBox(width: 10),
-                        Icon(
-                          Icons.keyboard_double_arrow_right_rounded,
-                          color: Theme.of(context).colorScheme.onSecondary,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
+        const DragToLeftWidget(
+          text: ''
+              '{{#persons}}\n'
+              'Hi, my name is {{personName}}'
+              'I have some children, they are:\n'
+              '{{#children}}{{childName}}, {{/children}}\n'
+              '{{/persons}}',
         ),
         SelectableText(
           'In this example, we have a list of persons, and each person has a list of children.\n'

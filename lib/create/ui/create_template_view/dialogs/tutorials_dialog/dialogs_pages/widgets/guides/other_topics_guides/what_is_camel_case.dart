@@ -10,7 +10,7 @@ class WhatIsCamelCase extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         SelectableText(
-          'What is the template text?',
+          'What is camel case format?',
           style: Theme.of(context).textTheme.titleLarge,
         ),
         SelectableText(
@@ -22,9 +22,10 @@ class WhatIsCamelCase extends StatelessWidget {
           'with an uppercase letter.',
           style: Theme.of(context).textTheme.bodyLarge,
         ),
+        const SizedBox(height: 12),
         SelectableText(
           'What is the reason for using camel case format when using variables in template text?',
-          style: Theme.of(context).textTheme.titleLarge,
+          style: Theme.of(context).textTheme.titleMedium,
         ),
         SelectableText(
           'In short, to better reconize the variables in template text.\n'

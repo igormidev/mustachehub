@@ -23,6 +23,7 @@ class WhatIsAVariableGuide extends StatelessWidget {
           'so you can create whatever type of template you want.',
           style: Theme.of(context).textTheme.bodyLarge,
         ),
+        const SizedBox(height: 12),
       ],
     );
   }

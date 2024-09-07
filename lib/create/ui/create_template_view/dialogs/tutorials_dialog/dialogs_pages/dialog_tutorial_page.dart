@@ -44,6 +44,7 @@ class DialogTutorialPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<Widget> children = [
+      const SizedBox(height: 20),
       ...ETutorialSection.values.map(
         (ETutorialSection section) {
           return switch (section) {

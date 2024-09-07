@@ -9,9 +9,10 @@ class CreateChoiceVariableGuide extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
+        const SizedBox(height: 6),
         SelectableText(
           'Creating a choice variable',
-          style: Theme.of(context).textTheme.headlineSmall,
+          style: Theme.of(context).textTheme.titleLarge,
         ),
         SelectableText(
           'To create a choice variable, localize an big  \'add '

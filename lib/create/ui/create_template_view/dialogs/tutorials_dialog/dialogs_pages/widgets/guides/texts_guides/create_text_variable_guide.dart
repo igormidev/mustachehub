@@ -9,6 +9,7 @@ class CreateTextVariableGuide extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
+        const SizedBox(height: 12),
         SelectableText(
           'Creating a text variable',
           style: Theme.of(context).textTheme.titleLarge,

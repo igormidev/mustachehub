@@ -7,7 +7,7 @@ class TextUsingInTemplateGuide extends StatelessWidget {
   Widget build(BuildContext context) {
     final BoxDecoration decoration = BoxDecoration(
       borderRadius: BorderRadius.circular(22),
-      color: Theme.of(context).colorScheme.secondaryContainer,
+      color: Theme.of(context).colorScheme.tertiaryContainer,
     );
     const EdgeInsets padding =
         EdgeInsets.symmetric(horizontal: 20, vertical: 14);
@@ -16,6 +16,7 @@ class TextUsingInTemplateGuide extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
+        const SizedBox(height: 12),
         SelectableText(
           'Using text variables in the template text',
           style: Theme.of(context).textTheme.titleLarge,
@@ -38,6 +39,13 @@ class TextUsingInTemplateGuide extends StatelessWidget {
             style: Theme.of(context).textTheme.bodyLarge,
           ),
         ),
+        SelectableText(
+          'Whoever is using the template will be able to insert the company name '
+          'and the text will be displayed as the example above by replacing '
+          '"{{companyName}}" with the company name typed by the template user.',
+          style: Theme.of(context).textTheme.bodyLarge,
+        ),
+        const SizedBox(height: 10),
       ],
     );
   }
