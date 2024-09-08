@@ -29,9 +29,9 @@ class SectionContentField extends StatelessWidget with ValidatorsMixins {
   final bool willContainBreakLineToggleOption;
 
   final Function({
+    // required bool willForceUpdate,
     required ContentTextSectionInput output,
   }) notifyContentCubit;
-  // _notifyContentCubit({required int index, required String output});
 
   const SectionContentField({
     super.key,

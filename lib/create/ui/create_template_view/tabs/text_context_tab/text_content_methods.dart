@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:mustache_hub_core/mustache_hub_core.dart';
 import 'package:mustachehub/create/presenter/controllers/variables_info_highlight_text_editing_controller.dart';
@@ -19,13 +20,13 @@ mixin TextContentMethods on State<TextContentTab> {
       normal: (ContentInput textOutput) {
         int index = 0;
 
-        final didSomeToggleBeenPressed =
-            dependencies.map((e) => e.input.willBreakLine).length !=
-                textOutput.texts.map((e) => e.willBreakLine).length;
+        final a = dependencies.map((e) => e.input.willBreakLine).toList();
+        final b = textOutput.texts.map((e) => e.willBreakLine).toList();
+        final didSomeToggleBeenPressed = listEquals(a, b);
 
         final reCalculationIsNeeded = dependencies.isEmpty ||
             dependencies.length != textOutput.texts.length ||
-            didSomeToggleBeenPressed;
+            didSomeToggleBeenPressed == false;
         if (reCalculationIsNeeded == false) {
           return;
         }
