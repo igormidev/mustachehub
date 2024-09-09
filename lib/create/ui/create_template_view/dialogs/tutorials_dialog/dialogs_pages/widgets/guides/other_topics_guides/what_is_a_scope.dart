@@ -27,7 +27,7 @@ class WhatIsAScope extends StatelessWidget {
         const SizedBox(height: 10),
         SelectableText(
           'Scope anatomy',
-          style: Theme.of(context).textTheme.titleLarge,
+          style: Theme.of(context).textTheme.titleMedium,
         ),
         SelectableText(
           'The scope is defined by the opening and closing tags.\n'
@@ -44,7 +44,7 @@ class WhatIsAScope extends StatelessWidget {
         const SizedBox(height: 10),
         SelectableText(
           'Open scope types',
-          style: Theme.of(context).textTheme.titleLarge,
+          style: Theme.of(context).textTheme.titleMedium,
         ),
         const SelectableText(
           'There are two types of scope, the positive and the negative.\n'

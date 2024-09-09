@@ -30,8 +30,8 @@ final Map<ETutorialSection, List<ETutorialSection>> mapHierarchy = {
   ETutorialSection.otherInfosResume: [
     ETutorialSection.usingAutoComplete,
     ETutorialSection.whatIsAVariable,
-    ETutorialSection.whatIsAVariableScope,
     ETutorialSection.whatIsCamelCaseFormat,
+    ETutorialSection.whatIsAVariableScope,
   ],
 };
 
@@ -74,8 +74,8 @@ enum ETutorialSection {
   otherInfosResume,
   usingAutoComplete,
   whatIsAVariable,
-  whatIsAVariableScope,
   whatIsCamelCaseFormat,
+  whatIsAVariableScope,
   ;
 
   String get title {

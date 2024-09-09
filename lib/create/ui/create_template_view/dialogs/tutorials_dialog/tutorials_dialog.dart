@@ -1,4 +1,5 @@
-import 'package:dart_debouncer/dart_debouncer.dart';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:mustachehub/create/data/enums/e_tutorial_sections.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
@@ -28,6 +29,8 @@ class _TutorialsDialogState extends State<TutorialsDialog> {
 
   final ItemPositionsListener itemPositionsListener =
       ItemPositionsListener.create();
+  final ItemPositionsListener shortCutItemPositionsListener =
+      ItemPositionsListener.create();
 
   final ScrollController controller = ScrollController();
 
@@ -48,6 +51,8 @@ class _TutorialsDialogState extends State<TutorialsDialog> {
 
   void _setSelectedSection() {
     final items = itemPositionsListener.itemPositions.value;
+    final shortCutItems = shortCutItemPositionsListener.itemPositions.value;
+
     final smallestItemIndex = items.isEmpty
         ? 0
         : items
@@ -60,14 +65,24 @@ class _TutorialsDialogState extends State<TutorialsDialog> {
             .index;
 
     final currentSection = ETutorialSection.values.firstWhere(
-      (element) => element.scrollIndex == smallestItemIndex,
-      orElse: () => ETutorialSection.values.last,
+      (element) => element.scrollIndex == (smallestItemIndex - 1),
+      orElse: () => ETutorialSection.values.first,
     );
 
     selectedSection.value = currentSection;
+    lastSettedShortcut ??= currentSection;
+
+    print(
+        '${shortCutItems.map((e) => e.index)} == ${(currentSection.scrollIndex)}');
 
     if (_didScroll) {
-      // _debouncer.resetDebounce(() {
+      if (shortCutItems
+          .map((e) => e.index)
+          .contains(currentSection.scrollIndex)) {
+        return;
+      }
+
+      lastSettedShortcut = currentSection;
       shortcutItemScrollController.scrollTo(
           index: currentSection.scrollIndex,
           duration: const Duration(milliseconds: 500));
@@ -76,6 +91,8 @@ class _TutorialsDialogState extends State<TutorialsDialog> {
       _didScroll = true;
     }
   }
+
+  ETutorialSection? lastSettedShortcut;
 
   bool _didScroll = false;
 
@@ -110,6 +127,7 @@ class _TutorialsDialogState extends State<TutorialsDialog> {
               valueListenable: selectedSection,
               builder: (context, initialTutorialSection, child) {
                 return DialogScrollOrientationPage(
+                  shortCutItemPositionsListener: shortCutItemPositionsListener,
                   shortcutItemScrollController: shortcutItemScrollController,
                   scrollController: scrollController,
                   selectedSection: initialTutorialSection,

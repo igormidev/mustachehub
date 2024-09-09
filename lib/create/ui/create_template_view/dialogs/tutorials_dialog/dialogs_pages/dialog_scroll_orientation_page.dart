@@ -6,11 +6,13 @@ class DialogScrollOrientationPage extends StatelessWidget {
   final ETutorialSection selectedSection;
   final ItemScrollController scrollController;
   final ItemScrollController shortcutItemScrollController;
+  final ItemPositionsListener shortCutItemPositionsListener;
   const DialogScrollOrientationPage({
     super.key,
     required this.scrollController,
     required this.selectedSection,
     required this.shortcutItemScrollController,
+    required this.shortCutItemPositionsListener,
   });
 
   @override
@@ -88,7 +90,7 @@ class DialogScrollOrientationPage extends StatelessWidget {
         child: ScrollablePositionedList.builder(
           initialScrollIndex: 0,
           itemScrollController: shortcutItemScrollController,
-          // initialScrollIndex: initialScrollIndex,
+          itemPositionsListener: shortCutItemPositionsListener,
           padding: const EdgeInsets.symmetric(horizontal: 20),
           itemCount: children.length,
           itemBuilder: (context, index) {
