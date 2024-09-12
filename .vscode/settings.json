@@ -21,7 +21,7 @@
         "**/.flutter-plugins": true, 
         "**/.flutter-plugins-dependencies": true,
         // "**/pubspec.lock": true,
-        "**/analysis_options.yaml": true,
+        // "**/analysis_options.yaml": true,
         "**/.gitignore": true, 
     },
     "editor.codeActionsOnSave": {

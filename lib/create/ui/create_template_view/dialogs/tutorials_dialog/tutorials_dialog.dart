@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:mustachehub/create/data/enums/e_tutorial_sections.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';

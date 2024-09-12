@@ -30,3 +30,28 @@ abstract class ChoosableVariableImplementations
           Map<String, dynamic> json) =>
       _$ChoosableVariableImplementationsFromJson(json);
 }
+
+extension ChoosableVariableImplementationsExt
+    on ChoosableVariableImplementations {
+  DeclarationType get declarationType {
+    return map(
+      text: (_) => DeclarationType.literal,
+      choice: (val) => val.choiceImplementation.map(
+        normalValue: (_) => DeclarationType.scope,
+        invertedValue: (_) => DeclarationType.invertedScope,
+        textValue: (_) => DeclarationType.literal,
+      ),
+      boolean: (val) => val.booleanImplementation.map(
+        normalValue: (_) => DeclarationType.scope,
+        invertedValue: (_) => DeclarationType.invertedScope,
+      ),
+      model: (val) => DeclarationType.scope,
+    );
+  }
+}
+
+enum DeclarationType {
+  scope,
+  invertedScope,
+  literal;
+}

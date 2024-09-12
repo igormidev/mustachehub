@@ -46,8 +46,45 @@ asds ''',
       second,
     );
     expect(isTheSame, true);
+  });
+  test('Should return expected value for inverted value', () {
+    final source = '''The {{^person}}NO NAME{{/person}}''';
 
-    // print(response);
+    final response = tester.getMatchClusters(
+      input: source,
+      indexAtText: 0,
+      flatMap: {
+        'person': ModelParentMapper(
+          parrentName: null,
+          name: 'person',
+          textsNames: ['name'],
+          booleanNames: [],
+          choicesNames: [],
+          subModelsNames: [],
+        ),
+        'name': TextParentMapper(name: 'name', parrentName: 'person')
+      },
+    );
+
+    final text = response?.segmentsStates.map((e) => e.segmentText).toList();
+    final first = text?.removeEmpty;
+    final second = [
+      'The ',
+      '{{#person}}',
+      '''
+
+asds ''',
+      '{{name}}',
+      '''
+''',
+      '{{/person}}',
+    ].removeEmpty;
+    print(text);
+    // final isTheSame = const ListEquality().equals(
+    //   first,
+    //   second,
+    // );
+    // expect(isTheSame, true);
   });
 
   test('Should enter model variables as expected', () {

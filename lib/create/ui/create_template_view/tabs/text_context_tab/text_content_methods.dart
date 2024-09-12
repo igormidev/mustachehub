@@ -58,27 +58,7 @@ mixin TextContentMethods on State<TextContentTab> {
             textEditingController: controller,
             context: context,
             // optionAsString: (option) => option.name,
-            optionAsString: (option) => option.map(
-              boolean: (value) => value.booleanImplementation.map(
-                normalValue: (impl) {
-                  return '#${value.variableName}';
-                },
-                invertedValue: (impl) {
-                  return '^${value.variableName}';
-                },
-              ),
-              choice: (value) => value.choiceImplementation.map(
-                textValue: (impl) => '${value.variableName}.text',
-                normalValue: (impl) {
-                  return '#${value.variableName}';
-                },
-                invertedValue: (impl) {
-                  return '^${value.variableName}';
-                },
-              ),
-              text: (value) => value.variableName,
-              model: (value) => '#${value.variableName}',
-            ),
+            optionAsString: choosableVariableImplementation,
             overlay: Overlay.of(
               NavigatorService.i.dashboardNavigatorKey.currentContext!,
             ),
@@ -184,3 +164,28 @@ mixin TextContentMethods on State<TextContentTab> {
     contentCubit.setCubit(input: output);
   }
 }
+
+String choosableVariableImplementation(
+  ChoosableVariableImplementations option,
+) =>
+    option.map(
+      boolean: (value) => value.booleanImplementation.map(
+        normalValue: (impl) {
+          return '#${value.variableName}';
+        },
+        invertedValue: (impl) {
+          return '^${value.variableName}';
+        },
+      ),
+      choice: (value) => value.choiceImplementation.map(
+        textValue: (impl) => '${value.variableName}.text',
+        normalValue: (impl) {
+          return '#${value.variableName}';
+        },
+        invertedValue: (impl) {
+          return '^${value.variableName}';
+        },
+      ),
+      text: (value) => value.variableName,
+      model: (value) => '#${value.variableName}',
+    );

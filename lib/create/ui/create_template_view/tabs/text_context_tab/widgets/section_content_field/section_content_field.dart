@@ -182,6 +182,19 @@ class SectionContentField extends StatelessWidget with ValidatorsMixins {
                         ),
                       );
                     },
+                    // tileBuilder: (
+                    //   ChoosableVariableImplementations option,
+                    //   int index,
+                    //   FocusNode tileFocusNode,
+                    //   void Function() onSelectCallback,
+                    // ) {
+                    //   return PipeAutocompleteTileFacade(
+                    //     option: option,
+                    //     index: index,
+                    //     tileFocusNode: tileFocusNode,
+                    //     onSelectCallback: onSelectCallback,
+                    //   );
+                    // },
                   );
                 },
               ),

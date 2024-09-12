@@ -8,7 +8,7 @@ analyzer:
     - '**.g.dart'
     - '**.gr.dart'
     - '**/generated_plugin_registrant.dart'
-    - 'cloned_apis/mustachex/**' 
+    # - 'cloned_apis/mustachex/**' 
     - 'cloned_apis/mason/**' 
  
 linter: 
