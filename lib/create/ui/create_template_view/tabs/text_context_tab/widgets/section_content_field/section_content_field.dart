@@ -11,6 +11,7 @@ import 'package:mustachehub/create/presenter/cubits/variables_cubit.dart';
 import 'package:mustachehub/create/presenter/input_formaters/add_mustache_delimmiter_input_formater.dart';
 import 'package:mustachehub/create/presenter/states/content_string_state.dart';
 import 'package:mustachehub/create/ui/create_template_view/tabs/text_context_tab/text_content_tab.dart';
+import 'package:mustachehub/create/ui/create_template_view/tabs/text_context_tab/widgets/section_content_field/facedes/pipe_autocomplete_tile/pipe_autocomplete_tile_facade.dart';
 import 'package:text_analyser/text_analyser.dart';
 
 class SectionContentField extends StatelessWidget with ValidatorsMixins {
@@ -182,19 +183,19 @@ class SectionContentField extends StatelessWidget with ValidatorsMixins {
                         ),
                       );
                     },
-                    // tileBuilder: (
-                    //   ChoosableVariableImplementations option,
-                    //   int index,
-                    //   FocusNode tileFocusNode,
-                    //   void Function() onSelectCallback,
-                    // ) {
-                    //   return PipeAutocompleteTileFacade(
-                    //     option: option,
-                    //     index: index,
-                    //     tileFocusNode: tileFocusNode,
-                    //     onSelectCallback: onSelectCallback,
-                    //   );
-                    // },
+                    tileBuilder: (
+                      ChoosableVariableImplementations option,
+                      int index,
+                      FocusNode tileFocusNode,
+                      void Function() onSelectCallback,
+                    ) {
+                      return PipeAutocompleteTileFacade(
+                        option: option,
+                        index: index,
+                        tileFocusNode: tileFocusNode,
+                        onSelectCallback: onSelectCallback,
+                      );
+                    },
                   );
                 },
               ),

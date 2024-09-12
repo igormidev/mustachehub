@@ -13,6 +13,12 @@ mixin SetRootVariables on AllVariables {
             usableVariablesInCurrentContext
                 .add(ChoosableVariableImplementations.model(
               variableName: model.name,
+              modelImplementation: ModelUseImplementations.normalValue(),
+            ));
+            usableVariablesInCurrentContext
+                .add(ChoosableVariableImplementations.model(
+              variableName: model.name,
+              modelImplementation: ModelUseImplementations.invertedValue(),
             ));
           },
           boolean: (boolean) {

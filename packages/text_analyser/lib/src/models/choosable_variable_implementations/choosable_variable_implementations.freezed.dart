@@ -47,7 +47,9 @@ mixin _$ChoosableVariableImplementations {
     required TResult Function(
             String variableName, BooleanUseImplementation booleanImplementation)
         boolean,
-    required TResult Function(String variableName) model,
+    required TResult Function(
+            String variableName, ModelUseImplementations modelImplementation)
+        model,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -59,7 +61,9 @@ mixin _$ChoosableVariableImplementations {
     TResult? Function(String variableName,
             BooleanUseImplementation booleanImplementation)?
         boolean,
-    TResult? Function(String variableName)? model,
+    TResult? Function(
+            String variableName, ModelUseImplementations modelImplementation)?
+        model,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -71,7 +75,9 @@ mixin _$ChoosableVariableImplementations {
     TResult Function(String variableName,
             BooleanUseImplementation booleanImplementation)?
         boolean,
-    TResult Function(String variableName)? model,
+    TResult Function(
+            String variableName, ModelUseImplementations modelImplementation)?
+        model,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -245,7 +251,9 @@ class _$ChoosableVariableImplementationTextImpl
     required TResult Function(
             String variableName, BooleanUseImplementation booleanImplementation)
         boolean,
-    required TResult Function(String variableName) model,
+    required TResult Function(
+            String variableName, ModelUseImplementations modelImplementation)
+        model,
   }) {
     return text(variableName);
   }
@@ -260,7 +268,9 @@ class _$ChoosableVariableImplementationTextImpl
     TResult? Function(String variableName,
             BooleanUseImplementation booleanImplementation)?
         boolean,
-    TResult? Function(String variableName)? model,
+    TResult? Function(
+            String variableName, ModelUseImplementations modelImplementation)?
+        model,
   }) {
     return text?.call(variableName);
   }
@@ -275,7 +285,9 @@ class _$ChoosableVariableImplementationTextImpl
     TResult Function(String variableName,
             BooleanUseImplementation booleanImplementation)?
         boolean,
-    TResult Function(String variableName)? model,
+    TResult Function(
+            String variableName, ModelUseImplementations modelImplementation)?
+        model,
     required TResult orElse(),
   }) {
     if (text != null) {
@@ -473,7 +485,9 @@ class _$ChoosableVariableImplementationChoiceImpl
     required TResult Function(
             String variableName, BooleanUseImplementation booleanImplementation)
         boolean,
-    required TResult Function(String variableName) model,
+    required TResult Function(
+            String variableName, ModelUseImplementations modelImplementation)
+        model,
   }) {
     return choice(variableName, choiceImplementation);
   }
@@ -488,7 +502,9 @@ class _$ChoosableVariableImplementationChoiceImpl
     TResult? Function(String variableName,
             BooleanUseImplementation booleanImplementation)?
         boolean,
-    TResult? Function(String variableName)? model,
+    TResult? Function(
+            String variableName, ModelUseImplementations modelImplementation)?
+        model,
   }) {
     return choice?.call(variableName, choiceImplementation);
   }
@@ -503,7 +519,9 @@ class _$ChoosableVariableImplementationChoiceImpl
     TResult Function(String variableName,
             BooleanUseImplementation booleanImplementation)?
         boolean,
-    TResult Function(String variableName)? model,
+    TResult Function(
+            String variableName, ModelUseImplementations modelImplementation)?
+        model,
     required TResult orElse(),
   }) {
     if (choice != null) {
@@ -704,7 +722,9 @@ class _$ChoosableVariableImplementationBooleanImpl
     required TResult Function(
             String variableName, BooleanUseImplementation booleanImplementation)
         boolean,
-    required TResult Function(String variableName) model,
+    required TResult Function(
+            String variableName, ModelUseImplementations modelImplementation)
+        model,
   }) {
     return boolean(variableName, booleanImplementation);
   }
@@ -719,7 +739,9 @@ class _$ChoosableVariableImplementationBooleanImpl
     TResult? Function(String variableName,
             BooleanUseImplementation booleanImplementation)?
         boolean,
-    TResult? Function(String variableName)? model,
+    TResult? Function(
+            String variableName, ModelUseImplementations modelImplementation)?
+        model,
   }) {
     return boolean?.call(variableName, booleanImplementation);
   }
@@ -734,7 +756,9 @@ class _$ChoosableVariableImplementationBooleanImpl
     TResult Function(String variableName,
             BooleanUseImplementation booleanImplementation)?
         boolean,
-    TResult Function(String variableName)? model,
+    TResult Function(
+            String variableName, ModelUseImplementations modelImplementation)?
+        model,
     required TResult orElse(),
   }) {
     if (boolean != null) {
@@ -823,7 +847,9 @@ abstract class _$$ChoosableVariableImplementationModelImplCopyWith<$Res>
       __$$ChoosableVariableImplementationModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String variableName});
+  $Res call({String variableName, ModelUseImplementations modelImplementation});
+
+  $ModelUseImplementationsCopyWith<$Res> get modelImplementation;
 }
 
 /// @nodoc
@@ -842,13 +868,29 @@ class __$$ChoosableVariableImplementationModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? variableName = null,
+    Object? modelImplementation = null,
   }) {
     return _then(_$ChoosableVariableImplementationModelImpl(
       variableName: null == variableName
           ? _value.variableName
           : variableName // ignore: cast_nullable_to_non_nullable
               as String,
+      modelImplementation: null == modelImplementation
+          ? _value.modelImplementation
+          : modelImplementation // ignore: cast_nullable_to_non_nullable
+              as ModelUseImplementations,
     ));
+  }
+
+  /// Create a copy of ChoosableVariableImplementations
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $ModelUseImplementationsCopyWith<$Res> get modelImplementation {
+    return $ModelUseImplementationsCopyWith<$Res>(_value.modelImplementation,
+        (value) {
+      return _then(_value.copyWith(modelImplementation: value));
+    });
   }
 }
 
@@ -857,7 +899,9 @@ class __$$ChoosableVariableImplementationModelImplCopyWithImpl<$Res>
 class _$ChoosableVariableImplementationModelImpl
     implements ChoosableVariableImplementationModel {
   _$ChoosableVariableImplementationModelImpl(
-      {required this.variableName, final String? $type})
+      {required this.variableName,
+      required this.modelImplementation,
+      final String? $type})
       : $type = $type ?? 'model';
 
   factory _$ChoosableVariableImplementationModelImpl.fromJson(
@@ -866,13 +910,15 @@ class _$ChoosableVariableImplementationModelImpl
 
   @override
   final String variableName;
+  @override
+  final ModelUseImplementations modelImplementation;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
   @override
   String toString() {
-    return 'ChoosableVariableImplementations.model(variableName: $variableName)';
+    return 'ChoosableVariableImplementations.model(variableName: $variableName, modelImplementation: $modelImplementation)';
   }
 
   @override
@@ -881,12 +927,15 @@ class _$ChoosableVariableImplementationModelImpl
         (other.runtimeType == runtimeType &&
             other is _$ChoosableVariableImplementationModelImpl &&
             (identical(other.variableName, variableName) ||
-                other.variableName == variableName));
+                other.variableName == variableName) &&
+            (identical(other.modelImplementation, modelImplementation) ||
+                other.modelImplementation == modelImplementation));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, variableName);
+  int get hashCode =>
+      Object.hash(runtimeType, variableName, modelImplementation);
 
   /// Create a copy of ChoosableVariableImplementations
   /// with the given fields replaced by the non-null parameter values.
@@ -908,9 +957,11 @@ class _$ChoosableVariableImplementationModelImpl
     required TResult Function(
             String variableName, BooleanUseImplementation booleanImplementation)
         boolean,
-    required TResult Function(String variableName) model,
+    required TResult Function(
+            String variableName, ModelUseImplementations modelImplementation)
+        model,
   }) {
-    return model(variableName);
+    return model(variableName, modelImplementation);
   }
 
   @override
@@ -923,9 +974,11 @@ class _$ChoosableVariableImplementationModelImpl
     TResult? Function(String variableName,
             BooleanUseImplementation booleanImplementation)?
         boolean,
-    TResult? Function(String variableName)? model,
+    TResult? Function(
+            String variableName, ModelUseImplementations modelImplementation)?
+        model,
   }) {
-    return model?.call(variableName);
+    return model?.call(variableName, modelImplementation);
   }
 
   @override
@@ -938,11 +991,13 @@ class _$ChoosableVariableImplementationModelImpl
     TResult Function(String variableName,
             BooleanUseImplementation booleanImplementation)?
         boolean,
-    TResult Function(String variableName)? model,
+    TResult Function(
+            String variableName, ModelUseImplementations modelImplementation)?
+        model,
     required TResult orElse(),
   }) {
     if (model != null) {
-      return model(variableName);
+      return model(variableName, modelImplementation);
     }
     return orElse();
   }
@@ -997,7 +1052,8 @@ class _$ChoosableVariableImplementationModelImpl
 abstract class ChoosableVariableImplementationModel
     implements ChoosableVariableImplementations {
   factory ChoosableVariableImplementationModel(
-          {required final String variableName}) =
+          {required final String variableName,
+          required final ModelUseImplementations modelImplementation}) =
       _$ChoosableVariableImplementationModelImpl;
 
   factory ChoosableVariableImplementationModel.fromJson(
@@ -1006,6 +1062,7 @@ abstract class ChoosableVariableImplementationModel
 
   @override
   String get variableName;
+  ModelUseImplementations get modelImplementation;
 
   /// Create a copy of ChoosableVariableImplementations
   /// with the given fields replaced by the non-null parameter values.

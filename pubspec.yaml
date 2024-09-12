@@ -55,12 +55,14 @@ dependency_overrides:
   freezed: ^2.5.7
   test: ^1.25.8
   lints: ^4.0.0 
+  material_symbols_icons:
 
   mustachex: 
     path: cloned_apis/mustachex  
 
 environment:
   sdk: '>=3.4.4 <4.0.0'
+  
 dependencies:
   flutter:
     sdk: flutter 
@@ -77,6 +79,7 @@ dependencies:
   bloc:
   flutter_bloc:
   replay_bloc:
+  material_symbols_icons:
   enchanted_regex:
   hydrated_bloc:
   go_router:

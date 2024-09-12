@@ -70,21 +70,16 @@ asds ''',
     final first = text?.removeEmpty;
     final second = [
       'The ',
-      '{{#person}}',
-      '''
-
-asds ''',
-      '{{name}}',
-      '''
-''',
+      '{{^person}}',
+      'NO NAME',
       '{{/person}}',
     ].removeEmpty;
-    print(text);
-    // final isTheSame = const ListEquality().equals(
-    //   first,
-    //   second,
-    // );
-    // expect(isTheSame, true);
+
+    final isTheSame = const ListEquality().equals(
+      first,
+      second,
+    );
+    expect(isTheSame, true);
   });
 
   test('Should enter model variables as expected', () {

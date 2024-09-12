@@ -1,4 +1,5 @@
 import 'package:enchanted_collection/enchanted_collection.dart';
+import 'package:text_analyser/src/models/choosable_variable_implementations/use_implementations_models/model_use_implementations.dart';
 import 'package:text_analyser/text_analyser.dart';
 import 'package:enchanted_regex/enchanted_regex.dart';
 
@@ -54,7 +55,7 @@ mixin AllVariables
   /// This list contains all model scopes that the text cursor is inside.
   ///
   /// Later on we will use this info to check if a variable parrent
-  final Set<ModelParentMapper> modelsThatCursorIndexIsInsideScope = {};
+  final Set<ModelMapperInfo> modelsThatCursorIndexIsInsideScope = {};
 
   /// Variables that can be used in the current context the mouse cursor is.
   ///
@@ -73,3 +74,8 @@ mixin AllVariables
 
   List<AnalysedSegmentStatus> sortedSegments = [];
 }
+
+typedef ModelMapperInfo = ({
+  ModelParentMapper modelParentMapper,
+  bool isInverse
+});

@@ -36,8 +36,10 @@ mixin HandleFindedModelScope on AllVariables {
             indexAtText < scope.endDeclaration.start;
 
     if (isIndexAtTextWithinScope) {
-      modelsThatCursorIndexIsInsideScope
-          .add(tokenIdentifier as ModelParentMapper);
+      modelsThatCursorIndexIsInsideScope.add((
+        modelParentMapper: tokenIdentifier as ModelParentMapper,
+        isInverse: false
+      ));
     }
   }
 }

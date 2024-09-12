@@ -62,6 +62,7 @@ mixin TextContentMethods on State<TextContentTab> {
             overlay: Overlay.of(
               NavigatorService.i.dashboardNavigatorKey.currentContext!,
             ),
+            tileHeight: 40,
             onTextAddedCallback: (option, newEditingValue) {
               notifyContentCubit(
                 output: output.copyWith(content: newEditingValue.text),
@@ -105,7 +106,14 @@ mixin TextContentMethods on State<TextContentTab> {
                   },
                   model: (value) {
                     final name = value.variableName;
-                    return '#$name}}{{/$name';
+                    return value.modelImplementation.map(
+                      normalValue: (_) {
+                        return '#$name}}{{/$name';
+                      },
+                      invertedValue: (_) {
+                        return '^$name}}{{/$name';
+                      },
+                    );
                   },
                 ),
               );
@@ -187,5 +195,12 @@ String choosableVariableImplementation(
         },
       ),
       text: (value) => value.variableName,
-      model: (value) => '#${value.variableName}',
+      model: (value) => value.modelImplementation.map(
+        normalValue: (impl) {
+          return '# ${value.variableName}';
+        },
+        invertedValue: (impl) {
+          return '^ ${value.variableName}';
+        },
+      ),
     );

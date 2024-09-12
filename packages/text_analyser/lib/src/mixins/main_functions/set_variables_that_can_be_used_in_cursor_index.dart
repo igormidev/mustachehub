@@ -2,11 +2,21 @@ part of '../all_variables.dart';
 
 mixin SetVariablesThatCanBeUsedInCursorIndex on AllVariables {
   void setVariablesThatCanBeUsedInCursorIndex() {
-    for (final ModelParentMapper identifier
+    for (final ModelMapperInfo modelMapper
         in modelsThatCursorIndexIsInsideScope) {
+      final ModelParentMapper identifier = modelMapper.modelParentMapper;
+      final bool isInverse = modelMapper.isInverse;
+      if (isInverse) continue;
+
       usableVariablesInCurrentContext
           .add(ChoosableVariableImplementations.model(
         variableName: identifier.name,
+        modelImplementation: ModelUseImplementations.normalValue(),
+      ));
+      usableVariablesInCurrentContext
+          .add(ChoosableVariableImplementations.model(
+        variableName: identifier.name,
+        modelImplementation: ModelUseImplementations.invertedValue(),
       ));
 
       for (final subModelName in identifier.subModelsNames) {
@@ -32,8 +42,15 @@ mixin SetVariablesThatCanBeUsedInCursorIndex on AllVariables {
         usableVariablesInCurrentContext
             .add(ChoosableVariableImplementations.model(
           variableName: tokenIdentifier.name,
+          modelImplementation: ModelUseImplementations.normalValue(),
+        ));
+        usableVariablesInCurrentContext
+            .add(ChoosableVariableImplementations.model(
+          variableName: tokenIdentifier.name,
+          modelImplementation: ModelUseImplementations.invertedValue(),
         ));
       }
+
       for (final choiceName in identifier.choicesNames) {
         usableVariablesInCurrentContext
             .add(ChoosableVariableImplementations.choice(

@@ -62,6 +62,8 @@ _$ChoosableVariableImplementationModelImpl
             Map<String, dynamic> json) =>
         _$ChoosableVariableImplementationModelImpl(
           variableName: json['variableName'] as String,
+          modelImplementation: ModelUseImplementations.fromJson(
+              json['modelImplementation'] as Map<String, dynamic>),
           $type: json['runtimeType'] as String?,
         );
 
@@ -69,5 +71,6 @@ Map<String, dynamic> _$$ChoosableVariableImplementationModelImplToJson(
         _$ChoosableVariableImplementationModelImpl instance) =>
     <String, dynamic>{
       'variableName': instance.variableName,
+      'modelImplementation': instance.modelImplementation,
       'runtimeType': instance.$type,
     };
