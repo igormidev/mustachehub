@@ -33,6 +33,17 @@ class ChoicePipeDto extends Equatable implements PipeDTO<ChoicePipe, String> {
         payloadValue,
       ];
 
+  Map<String, dynamic> toPayload() {
+    return {
+      pipe.mustacheName: {
+        'text': payloadValue,
+        ...pipe.options.asMap().map((_, option) {
+          return MapEntry(option.toMustacheName, payloadValue == option);
+        }),
+      },
+    };
+  }
+
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'uuid': uuid,

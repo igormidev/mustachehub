@@ -22,7 +22,12 @@ class ModelPipeDto extends Equatable
       }
 
       for (final choiceDTO in item.choices) {
-        itemResponse[choiceDTO.pipe.mustacheName] = choiceDTO.payloadValue;
+        // itemResponse[choiceDTO.pipe.mustacheName] = choiceDTO.payloadValue;
+        choiceDTO.toPayload().forEach(
+          (key, value) {
+            itemResponse[key] = value;
+          },
+        );
       }
 
       for (final modelDTO in item.subModels) {
@@ -72,7 +77,7 @@ class ModelPipeDto extends Equatable
                   modelDTO.copyWith(
                     subModels: [
                       for (final model in modelDTO.subModels)
-                        if (model.pipe.pipeId == pipeId) newModel else model,
+                        if (model.uuid == newModel.uuid) newModel else model,
                     ],
                   )
                 else

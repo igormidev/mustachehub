@@ -29,14 +29,6 @@ class RootGeneratorHandler extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(left: 16),
       child: root.map(
-        choice: (TreeNodeGeneratePipeDtoPipeChoice value) {
-          return ChoiceGenerateNodeBuilder(
-            rootModelDTO: rootModelDTO,
-            output: output,
-            expectedPayload: expectedPayload,
-            choiceDTONode: value,
-          );
-        },
         structureNode: (TreeNodeGeneratePipeDtoStructureNode value) {
           return StructureGenerateNodeBuilder(
             rootModelDTO: rootModelDTO,
@@ -44,6 +36,14 @@ class RootGeneratorHandler extends StatelessWidget {
             expectedPayload: expectedPayload,
             referenceModelDTO: value.referenceModelDTO,
             structureDTONode: value,
+          );
+        },
+        choice: (TreeNodeGeneratePipeDtoPipeChoice value) {
+          return ChoiceGenerateNodeBuilder(
+            rootModelDTO: rootModelDTO,
+            output: output,
+            expectedPayload: expectedPayload,
+            choiceDTONode: value,
           );
         },
         textNode: (TreeNodeGeneratePipeDtoPipeText value) {

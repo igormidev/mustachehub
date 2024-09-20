@@ -113,6 +113,7 @@ class ModelPipeForm extends StatelessWidget {
 typedef StructureDTONode = TreeNode<TreeNodeGeneratePipeDtoStructureNode>;
 typedef TextDTONode = TreeNode<TreeNodeGeneratePipeDtoPipeText>;
 typedef BooleanDTONode = TreeNode<TreeNodeGeneratePipeDtoPipeBoolean>;
+typedef ChoiceDTONode = TreeNode<TreeNodeGeneratePipeDtoPipeChoice>;
 typedef ModelDTONode = TreeNode<TreeNodeGeneratePipeDtoPipeModel>;
 
 Iterable<Node> _getNodesFromStructure(
@@ -165,6 +166,16 @@ Iterable<Node> _getNodesFromModel(
       key: boolean.uuid,
       data: TreeNodeGeneratePipeDtoPipeBoolean(
         pipeDTO: boolean,
+        payloadUUID: modelDTO.payload.uuid,
+      ),
+    ));
+  }
+
+  for (final ChoicePipeDto choice in modelDTO.payload.choices) {
+    nodes.add(ChoiceDTONode(
+      key: choice.uuid,
+      data: TreeNodeGeneratePipeDtoPipeChoice(
+        pipeDTO: choice,
         payloadUUID: modelDTO.payload.uuid,
       ),
     ));

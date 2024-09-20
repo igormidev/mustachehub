@@ -1,5 +1,4 @@
 import 'package:mustache_hub_core/mustache_hub_core.dart';
-import 'package:mustachehub/app_core/extensions/string_extension.dart';
 import 'package:mustachehub/generate/presenter/dtos/pipe_dto/pipe_dto.dart';
 import 'package:enchanted_collection/enchanted_collection.dart';
 import 'package:uuid/uuid.dart';
@@ -22,7 +21,11 @@ class DtoAdapter {
     payload.addAll(_getTextPayloads(texts, textDtos));
     payload.addAll(_getBoolPayloads(booleans, booleanDtos));
     payload.addAll(_getChoicePayloads(choices, choiceDtos));
-    payload.addAll(_getModelPayloads(models, modelDtos));
+
+    for (final model in modelDtos) {
+      payload[model.pipe.mustacheName] = model.mapValue;
+    }
+    // payload.addAll(_getModelPayloads(models, modelDtos));
 
     return payload;
   }

@@ -160,7 +160,8 @@ class PipeFormfield extends StatelessWidget
       ...state.modelPipes,
     ]) {
       final isDiferentPipe = refPipe.pipeId != pipe.pipeId;
-      if (pipe.name == value && isDiferentPipe) return true;
+      final isSameName = pipe.name == value || pipe.mustacheName == value;
+      if (isSameName && isDiferentPipe) return true;
 
       if (pipe is ModelPipe) {
         final didNameExist = _doesNameExist(<Pipe>[
@@ -181,7 +182,8 @@ class PipeFormfield extends StatelessWidget
   ) {
     for (final pipe in pipes) {
       final isDiferentPipe = refPipe.pipeId != pipe.pipeId;
-      if (pipe.name == value && isDiferentPipe) return true;
+      final isSameName = pipe.name == value || pipe.mustacheName == value;
+      if (isSameName && isDiferentPipe) return true;
 
       if (pipe is ModelPipe) {
         final didNameExist = _doesNameExist(<Pipe>[

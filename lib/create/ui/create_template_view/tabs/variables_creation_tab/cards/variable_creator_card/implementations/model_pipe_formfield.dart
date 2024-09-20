@@ -126,7 +126,12 @@ class _ModelVariableCreationWidgetState
                   descriptionEC: descriptionEC,
                   onDelete: onDeleteItem,
                   popOutModelFromNavigationCallback: () {
-                    final newList = [...pages.value]..removeLast();
+                    final newList = [...pages.value];
+
+                    // Remove the last element if possible
+                    if (newList.isNotEmpty) {
+                      newList.removeLast();
+                    }
                     pages.value = newList;
                   },
                   pipe: pipe,

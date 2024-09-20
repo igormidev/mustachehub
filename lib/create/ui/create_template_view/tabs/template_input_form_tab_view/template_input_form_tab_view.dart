@@ -38,6 +38,7 @@ class _TemplateInputFormPageViewState extends State<TemplateInputFormPageView>
     return BlocConsumer<ContentStringCubit, ContentStringState>(
       listener: (context, contentState) async {
         final varState = context.read<VariablesCubit>().state;
+
         setDependencies(
           context: context,
           output: contentState.currentText,
