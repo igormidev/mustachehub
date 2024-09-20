@@ -37,6 +37,6 @@ Map<String, dynamic> _$$PackageFormDataEditingMyPackageImplToJson(
     <String, dynamic>{
       'title': instance.title,
       'description': instance.description,
-      'previousInfoPackage': instance.previousInfoPackage,
+      'previousInfoPackage': instance.previousInfoPackage.toJson(),
       'runtimeType': instance.$type,
     };

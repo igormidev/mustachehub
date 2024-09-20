@@ -12,7 +12,7 @@ part of 'source_error.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 SourceError _$SourceErrorFromJson(Map<String, dynamic> json) {
   switch (json['runtimeType']) {
@@ -101,8 +101,13 @@ mixin _$SourceError {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  /// Serializes this SourceError to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of SourceError
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $SourceErrorCopyWith<SourceError> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -126,6 +131,8 @@ class _$SourceErrorCopyWithImpl<$Res, $Val extends SourceError>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of SourceError
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -159,6 +166,8 @@ class __$$SourceErrorStandardImplCopyWithImpl<$Res>
       $Res Function(_$SourceErrorStandardImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SourceError
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -201,11 +210,13 @@ class _$SourceErrorStandardImpl implements _SourceErrorStandard {
             (identical(other.message, message) || other.message == message));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, message);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SourceError
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SourceErrorStandardImplCopyWith<_$SourceErrorStandardImpl> get copyWith =>
@@ -316,8 +327,11 @@ abstract class _SourceErrorStandard implements SourceError {
 
   @override
   String get message;
+
+  /// Create a copy of SourceError
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SourceErrorStandardImplCopyWith<_$SourceErrorStandardImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -341,6 +355,8 @@ class __$$SourceErrorCastImplCopyWithImpl<$Res>
       _$SourceErrorCastImpl _value, $Res Function(_$SourceErrorCastImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SourceError
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -383,11 +399,13 @@ class _$SourceErrorCastImpl implements _SourceErrorCast {
             (identical(other.message, message) || other.message == message));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, message);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SourceError
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SourceErrorCastImplCopyWith<_$SourceErrorCastImpl> get copyWith =>
@@ -498,8 +516,11 @@ abstract class _SourceErrorCast implements SourceError {
 
   @override
   String get message;
+
+  /// Create a copy of SourceError
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SourceErrorCastImplCopyWith<_$SourceErrorCastImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -523,6 +544,8 @@ class __$$SourceErrorNotFoundImplCopyWithImpl<$Res>
       $Res Function(_$SourceErrorNotFoundImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SourceError
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -565,11 +588,13 @@ class _$SourceErrorNotFoundImpl implements _SourceErrorNotFound {
             (identical(other.message, message) || other.message == message));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, message);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SourceError
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SourceErrorNotFoundImplCopyWith<_$SourceErrorNotFoundImpl> get copyWith =>
@@ -680,8 +705,11 @@ abstract class _SourceErrorNotFound implements SourceError {
 
   @override
   String get message;
+
+  /// Create a copy of SourceError
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SourceErrorNotFoundImplCopyWith<_$SourceErrorNotFoundImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -707,6 +735,8 @@ class __$$SourceErrorNotLoggedInImplCopyWithImpl<$Res>
       $Res Function(_$SourceErrorNotLoggedInImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SourceError
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -752,11 +782,13 @@ class _$SourceErrorNotLoggedInImpl implements _SourceErrorNotLoggedIn {
             (identical(other.message, message) || other.message == message));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, message);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SourceError
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SourceErrorNotLoggedInImplCopyWith<_$SourceErrorNotLoggedInImpl>
@@ -867,8 +899,11 @@ abstract class _SourceErrorNotLoggedIn implements SourceError {
 
   @override
   String get message;
+
+  /// Create a copy of SourceError
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SourceErrorNotLoggedInImplCopyWith<_$SourceErrorNotLoggedInImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -894,6 +929,8 @@ class __$$SourceErrorDontExistAnyDataImplCopyWithImpl<$Res>
       $Res Function(_$SourceErrorDontExistAnyDataImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SourceError
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -939,11 +976,13 @@ class _$SourceErrorDontExistAnyDataImpl
             (identical(other.message, message) || other.message == message));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, message);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SourceError
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SourceErrorDontExistAnyDataImplCopyWith<_$SourceErrorDontExistAnyDataImpl>
@@ -1054,8 +1093,11 @@ abstract class _SourceErrorDontExistAnyData implements SourceError {
 
   @override
   String get message;
+
+  /// Create a copy of SourceError
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SourceErrorDontExistAnyDataImplCopyWith<_$SourceErrorDontExistAnyDataImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -1081,6 +1123,8 @@ class __$$SourceErrorDontHaveAccessImplCopyWithImpl<$Res>
       $Res Function(_$SourceErrorDontHaveAccessImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SourceError
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1126,11 +1170,13 @@ class _$SourceErrorDontHaveAccessImpl implements _SourceErrorDontHaveAccess {
             (identical(other.message, message) || other.message == message));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, message);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SourceError
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SourceErrorDontHaveAccessImplCopyWith<_$SourceErrorDontHaveAccessImpl>
@@ -1241,8 +1287,11 @@ abstract class _SourceErrorDontHaveAccess implements SourceError {
 
   @override
   String get message;
+
+  /// Create a copy of SourceError
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SourceErrorDontHaveAccessImplCopyWith<_$SourceErrorDontHaveAccessImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

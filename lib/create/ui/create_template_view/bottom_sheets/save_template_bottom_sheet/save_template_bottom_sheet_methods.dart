@@ -71,7 +71,7 @@ mixin SaveTemplateBottomSheetMethods on State<SaveTemplateBottomSheet> {
 
     if (newPackageInfo == null) return;
 
-    final contentCubit = context.read<ContentStringCubit>();
+    final contentCubit = widget.contentCubit;
     final ContentStringState contentState = contentCubit.state;
 
     if (isEditing) {

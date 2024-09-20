@@ -16,5 +16,5 @@ _$ContentInputImpl _$$ContentInputImplFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$ContentInputImplToJson(_$ContentInputImpl instance) =>
     <String, dynamic>{
-      'texts': instance.texts,
+      'texts': instance.texts.map((e) => e.toJson()).toList(),
     };

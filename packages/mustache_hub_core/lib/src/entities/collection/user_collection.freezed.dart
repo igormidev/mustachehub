@@ -12,7 +12,7 @@ part of 'user_collection.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 UserCollection _$UserCollectionFromJson(Map<String, dynamic> json) {
   switch (json['runtimeType']) {
@@ -81,6 +81,8 @@ mixin _$UserCollection {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  /// Serializes this UserCollection to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 }
 
@@ -100,6 +102,9 @@ class _$UserCollectionCopyWithImpl<$Res, $Val extends UserCollection>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of UserCollection
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -123,6 +128,8 @@ class __$$UserCollectionFolderImplCopyWithImpl<$Res>
       $Res Function(_$UserCollectionFolderImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of UserCollection
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -201,12 +208,14 @@ class _$UserCollectionFolderImpl implements UserCollectionFolder {
             const DeepCollectionEquality().equals(other._children, _children));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, name, description, uuid,
       const DeepCollectionEquality().hash(_children));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of UserCollection
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$UserCollectionFolderImplCopyWith<_$UserCollectionFolderImpl>
@@ -311,7 +320,10 @@ abstract class UserCollectionFolder implements UserCollection {
   String get description;
   String get uuid;
   List<UserCollection> get children;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of UserCollection
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$UserCollectionFolderImplCopyWith<_$UserCollectionFolderImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -335,6 +347,8 @@ class __$$UserCollectionFileImplCopyWithImpl<$Res>
       $Res Function(_$UserCollectionFileImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of UserCollection
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -348,6 +362,8 @@ class __$$UserCollectionFileImplCopyWithImpl<$Res>
     ));
   }
 
+  /// Create a copy of UserCollection
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $TemplateCopyWith<$Res> get template {
@@ -386,11 +402,13 @@ class _$UserCollectionFileImpl implements UserCollectionFile {
                 other.template == template));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, template);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of UserCollection
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$UserCollectionFileImplCopyWith<_$UserCollectionFileImpl> get copyWith =>
@@ -487,7 +505,10 @@ abstract class UserCollectionFile implements UserCollection {
       _$UserCollectionFileImpl.fromJson;
 
   Template get template;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of UserCollection
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$UserCollectionFileImplCopyWith<_$UserCollectionFileImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -509,6 +530,8 @@ class __$$UserCollectionRootImplCopyWithImpl<$Res>
       $Res Function(_$UserCollectionRootImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of UserCollection
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -559,12 +582,14 @@ class _$UserCollectionRootImpl implements UserCollectionRoot {
             const DeepCollectionEquality().equals(other._children, _children));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_children));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of UserCollection
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$UserCollectionRootImplCopyWith<_$UserCollectionRootImpl> get copyWith =>
@@ -661,7 +686,10 @@ abstract class UserCollectionRoot implements UserCollection {
       _$UserCollectionRootImpl.fromJson;
 
   List<UserCollection> get children;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of UserCollection
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$UserCollectionRootImplCopyWith<_$UserCollectionRootImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

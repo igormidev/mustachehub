@@ -13,5 +13,5 @@ _$NormalImpl _$$NormalImplFromJson(Map<String, dynamic> json) => _$NormalImpl(
 
 Map<String, dynamic> _$$NormalImplToJson(_$NormalImpl instance) =>
     <String, dynamic>{
-      'currentText': instance.currentText,
+      'currentText': instance.currentText.toJson(),
     };

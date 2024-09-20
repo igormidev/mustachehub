@@ -24,7 +24,7 @@ Map<String, dynamic> _$$UserCollectionFolderImplToJson(
       'name': instance.name,
       'description': instance.description,
       'uuid': instance.uuid,
-      'children': instance.children,
+      'children': instance.children.map((e) => e.toJson()).toList(),
       'runtimeType': instance.$type,
     };
 
@@ -38,7 +38,7 @@ _$UserCollectionFileImpl _$$UserCollectionFileImplFromJson(
 Map<String, dynamic> _$$UserCollectionFileImplToJson(
         _$UserCollectionFileImpl instance) =>
     <String, dynamic>{
-      'template': instance.template,
+      'template': instance.template.toJson(),
       'runtimeType': instance.$type,
     };
 
@@ -55,6 +55,6 @@ _$UserCollectionRootImpl _$$UserCollectionRootImplFromJson(
 Map<String, dynamic> _$$UserCollectionRootImplToJson(
         _$UserCollectionRootImpl instance) =>
     <String, dynamic>{
-      'children': instance.children,
+      'children': instance.children.map((e) => e.toJson()).toList(),
       'runtimeType': instance.$type,
     };

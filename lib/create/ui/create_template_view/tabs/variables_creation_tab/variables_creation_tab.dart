@@ -27,7 +27,7 @@ class VariablesCreationTab extends StatelessWidget {
               headerTitle: 'Text variables',
               subtitleSubtitle:
                   'A text variable that the user will need to fill..',
-              selectedSection: ETutorialSection.textVariableResume,
+              selectedSection: ETutorialSection.textUseCaseExample,
             ),
             const SliverToBoxAdapter(child: SizedBox(height: 4)),
             BlocBuilder<VariablesCubit, VariablesState>(
@@ -53,7 +53,7 @@ class VariablesCreationTab extends StatelessWidget {
                   'Choise variables are a list of enumerated choices. '
                   'Who uses the template will have to choose one of the options '
                   'and you can use that choise to make conditinals ou display the choice text.',
-              selectedSection: ETutorialSection.choiceVariableResume,
+              selectedSection: ETutorialSection.choiceCreatingVariable,
             ),
             const SliverToBoxAdapter(child: SizedBox(height: 4)),
             BlocBuilder<VariablesCubit, VariablesState>(
@@ -80,7 +80,7 @@ class VariablesCreationTab extends StatelessWidget {
                   'Conditional variables are characterized by being able '
                   'to assume a value of true or false. You can use this '
                   'conditional to make logic in the construction of your text.',
-              selectedSection: ETutorialSection.conditionalVariableResume,
+              selectedSection: ETutorialSection.conditionalUseCaseExample,
             ),
             BlocBuilder<VariablesCubit, VariablesState>(
               builder: (context, state) {
@@ -104,7 +104,7 @@ class VariablesCreationTab extends StatelessWidget {
               subtitleSubtitle:
                   'A list of items. Each item can have any type of variable in it. A item can be, for '
                   'example: a item of a person with variables name, age, height, etc...',
-              selectedSection: ETutorialSection.listOfItemVariableResume,
+              selectedSection: ETutorialSection.listOfItemUseCaseExample,
             ),
             BlocBuilder<VariablesCubit, VariablesState>(
               builder: (context, state) {

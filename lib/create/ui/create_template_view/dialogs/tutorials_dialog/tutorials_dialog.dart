@@ -37,7 +37,10 @@ class _TutorialsDialogState extends State<TutorialsDialog> {
     super.initState();
     scrollController = ItemScrollController();
     selectedSection = ValueNotifier(widget.initialSection);
-    itemPositionsListener.itemPositions.addListener(_setSelectedSection);
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      //   _setSelectedSection();
+      itemPositionsListener.itemPositions.addListener(_setSelectedSection);
+    });
   }
 
   @override

@@ -12,7 +12,7 @@ part of 'expected_payload.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 ExpectedPayload _$ExpectedPayloadFromJson(Map<String, dynamic> json) {
   return _ExpectedPayload.fromJson(json);
@@ -25,8 +25,12 @@ mixin _$ExpectedPayload {
   List<ChoicePipe> get choicePipes => throw _privateConstructorUsedError;
   List<ModelPipe> get modelPipes => throw _privateConstructorUsedError;
 
+  /// Serializes this ExpectedPayload to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ExpectedPayload
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ExpectedPayloadCopyWith<ExpectedPayload> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -54,6 +58,8 @@ class _$ExpectedPayloadCopyWithImpl<$Res, $Val extends ExpectedPayload>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ExpectedPayload
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -106,6 +112,8 @@ class __$$ExpectedPayloadImplCopyWithImpl<$Res>
       _$ExpectedPayloadImpl _value, $Res Function(_$ExpectedPayloadImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ExpectedPayload
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -204,7 +212,7 @@ class _$ExpectedPayloadImpl implements _ExpectedPayload {
                 .equals(other._modelPipes, _modelPipes));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -213,7 +221,9 @@ class _$ExpectedPayloadImpl implements _ExpectedPayload {
       const DeepCollectionEquality().hash(_choicePipes),
       const DeepCollectionEquality().hash(_modelPipes));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ExpectedPayload
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ExpectedPayloadImplCopyWith<_$ExpectedPayloadImpl> get copyWith =>
@@ -246,8 +256,11 @@ abstract class _ExpectedPayload implements ExpectedPayload {
   List<ChoicePipe> get choicePipes;
   @override
   List<ModelPipe> get modelPipes;
+
+  /// Create a copy of ExpectedPayload
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ExpectedPayloadImplCopyWith<_$ExpectedPayloadImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

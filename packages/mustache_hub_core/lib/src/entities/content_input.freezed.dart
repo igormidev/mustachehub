@@ -12,7 +12,7 @@ part of 'content_input.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 ContentInput _$ContentInputFromJson(Map<String, dynamic> json) {
   return _ContentInput.fromJson(json);
@@ -53,8 +53,13 @@ mixin _$ContentInput {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  /// Serializes this ContentInput to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ContentInput
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ContentInputCopyWith<ContentInput> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -78,6 +83,8 @@ class _$ContentInputCopyWithImpl<$Res, $Val extends ContentInput>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ContentInput
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -111,6 +118,8 @@ class __$$ContentInputImplCopyWithImpl<$Res>
       _$ContentInputImpl _value, $Res Function(_$ContentInputImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ContentInput
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -155,12 +164,14 @@ class _$ContentInputImpl implements _ContentInput {
             const DeepCollectionEquality().equals(other._texts, _texts));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_texts));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ContentInput
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ContentInputImplCopyWith<_$ContentInputImpl> get copyWith =>
@@ -239,8 +250,11 @@ abstract class _ContentInput implements ContentInput {
 
   @override
   List<ContentTextSectionInput> get texts;
+
+  /// Create a copy of ContentInput
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ContentInputImplCopyWith<_$ContentInputImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

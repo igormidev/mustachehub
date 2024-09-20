@@ -12,7 +12,7 @@ part of 'template.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 Template _$TemplateFromJson(Map<String, dynamic> json) {
   return _Template.fromJson(json);
@@ -26,8 +26,12 @@ mixin _$Template {
   TemplateMetadata get metadata => throw _privateConstructorUsedError;
   ExpectedPayload get payload => throw _privateConstructorUsedError;
 
+  /// Serializes this Template to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Template
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TemplateCopyWith<Template> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -60,6 +64,8 @@ class _$TemplateCopyWithImpl<$Res, $Val extends Template>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Template
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -93,6 +99,8 @@ class _$TemplateCopyWithImpl<$Res, $Val extends Template>
     ) as $Val);
   }
 
+  /// Create a copy of Template
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $PackageInfoCopyWith<$Res> get info {
@@ -101,6 +109,8 @@ class _$TemplateCopyWithImpl<$Res, $Val extends Template>
     });
   }
 
+  /// Create a copy of Template
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ContentInputCopyWith<$Res> get output {
@@ -109,6 +119,8 @@ class _$TemplateCopyWithImpl<$Res, $Val extends Template>
     });
   }
 
+  /// Create a copy of Template
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $TemplateMetadataCopyWith<$Res> get metadata {
@@ -117,6 +129,8 @@ class _$TemplateCopyWithImpl<$Res, $Val extends Template>
     });
   }
 
+  /// Create a copy of Template
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ExpectedPayloadCopyWith<$Res> get payload {
@@ -159,6 +173,8 @@ class __$$TemplateImplCopyWithImpl<$Res>
       _$TemplateImpl _value, $Res Function(_$TemplateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Template
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -236,12 +252,14 @@ class _$TemplateImpl implements _Template {
             (identical(other.payload, payload) || other.payload == payload));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, id, info, output, metadata, payload);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Template
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TemplateImplCopyWith<_$TemplateImpl> get copyWith =>
@@ -276,8 +294,11 @@ abstract class _Template implements Template {
   TemplateMetadata get metadata;
   @override
   ExpectedPayload get payload;
+
+  /// Create a copy of Template
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TemplateImplCopyWith<_$TemplateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
