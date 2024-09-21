@@ -51,7 +51,7 @@ class ChoicePipe extends Equatable implements Pipe {
       mustacheName: map['mustacheName'] as String,
       pipeId: map['pipeId'] as String,
       options: List<String>.from(
-        (map['options'] as List<String>),
+        (map['options'] as List).cast<String>(),
       ),
     );
   }

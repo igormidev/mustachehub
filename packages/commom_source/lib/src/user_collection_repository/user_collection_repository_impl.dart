@@ -74,9 +74,7 @@ class UserCollectionRepositoryImpl implements IUserCollectionRepository {
         );
 
         return templateResult
-            .map(
-          (template) => UserCollectionFile(template: template),
-        )
+            .map((template) => UserCollectionFile(template: template))
             .flatMapError(
           (error) {
             if (error.dontHaveAccess) {

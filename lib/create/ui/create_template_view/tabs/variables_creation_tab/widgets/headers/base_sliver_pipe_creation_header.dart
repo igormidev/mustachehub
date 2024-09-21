@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mustachehub/app_core/theme/default_widgets/custom_header.dart';
 import 'package:mustachehub/create/data/enums/e_tutorial_sections.dart';
-import 'package:mustachehub/create/ui/create_template_view/methods/open_tutorial_dialog.dart';
 import 'package:mustachehub/create/ui/create_template_view/widgets/display_tutorial_button.dart';
 
 class PipeCreationHeader extends StatelessWidget {
