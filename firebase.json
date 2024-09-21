@@ -1,1 +1,36 @@
-{"flutter":{"platforms":{"macos":{"default":{"projectId":"mustache-hub---prod","appId":"1:667846746873:ios:9065a31af0c97036acf828","uploadDebugSymbols":true,"fileOutput":"macos/Runner/GoogleService-Info.plist"}},"dart":{"lib/firebase_options.dart":{"projectId":"mustache-hub---prod","configurations":{"macos":"1:667846746873:ios:9065a31af0c97036acf828"}}}}}}
+{
+  "flutter": {
+    "platforms": {
+      "macos": {
+        "default": {
+          "projectId": "mustache-hub---prod",
+          "appId": "1:667846746873:ios:9065a31af0c97036acf828",
+          "uploadDebugSymbols": true,
+          "fileOutput": "macos/Runner/GoogleService-Info.plist"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "mustache-hub---prod",
+          "configurations": {
+            "macos": "1:667846746873:ios:9065a31af0c97036acf828"
+          }
+        }
+      }
+    }
+  },
+  "hosting": {
+    "public": "build/web",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
