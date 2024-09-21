@@ -18,10 +18,11 @@ class TemplateOutputTabView extends StatelessWidget {
       return BlocBuilder<VariablesCubit, VariablesState>(
           builder: (context, variablesCubit) {
         return TextOutputPage(
-          content: contentState.currentText,
+          output: contentState.currentText,
           expectedPayload: ExpectedPayload(
             textPipes: variablesCubit.textPipes,
             booleanPipes: variablesCubit.booleanPipes,
+            choicePipes: variablesCubit.choicePipes,
             modelPipes: variablesCubit.modelPipes,
           ),
           formKey: formKey,

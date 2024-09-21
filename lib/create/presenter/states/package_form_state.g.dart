@@ -17,7 +17,7 @@ _$PackageFormStateNormalImpl _$$PackageFormStateNormalImplFromJson(
 Map<String, dynamic> _$$PackageFormStateNormalImplToJson(
         _$PackageFormStateNormalImpl instance) =>
     <String, dynamic>{
-      'formData': instance.formData,
+      'formData': instance.formData.toJson(),
       'runtimeType': instance.$type,
     };
 

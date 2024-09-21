@@ -4,10 +4,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:media_query_core/responsiveness/extensions_screen_breakpoint.dart';
 import 'package:media_query_core/responsiveness/visibility_width_based.dart';
+import 'package:mustachehub/app_core/theme/components/error_snack_bar.dart';
 import 'package:mustachehub/app_core/theme/dialogs_api/implementations/confirm_dialog.dart';
 import 'package:mustachehub/create/data/enums/e_tutorial_sections.dart';
+import 'package:mustachehub/create/presenter/cubits/content_string_cubit.dart';
 import 'package:mustachehub/create/presenter/cubits/current_template_type_cubit.dart';
 import 'package:mustachehub/create/presenter/mixins/clear_all_data_mixin.dart';
+import 'package:mustachehub/create/presenter/states/content_string_state.dart';
 import 'package:mustachehub/create/presenter/states/current_template_type_state.dart';
 import 'package:mustachehub/create/ui/create_template_view/methods/open_save_dialog_.dart';
 import 'package:mustachehub/create/ui/create_template_view/methods/open_tutorial_dialog.dart';
@@ -40,6 +43,7 @@ class _CreateTemplateViewState extends State<CreateTemplateView>
         OpenSaveDialog,
         ClearAllDataMixin,
         OpenTutorialDialog {
+  final _contentTypeFormKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return LoadEditableTemplateWrapper(
@@ -54,9 +58,12 @@ class _CreateTemplateViewState extends State<CreateTemplateView>
               drawer: context.drawerOrNull,
               appBar: AppBar(
                 centerTitle: true,
-                leadingWidth: 176,
-                leading: VisibilityWidthBased.fromMediaQueryScreenWidth(
-                  minimumWidth: ScreenSize.x900,
+                leadingWidth: context.whenSizeIsBiggerThen(
+                  size: ScreenSize.x900,
+                  child: 176,
+                ),
+                leading: context.whenSizeIsBiggerThen(
+                  size: ScreenSize.x900,
                   child: Padding(
                     padding: const EdgeInsets.only(left: 16),
                     child: Center(
@@ -113,7 +120,28 @@ class _CreateTemplateViewState extends State<CreateTemplateView>
                           width: 160,
                           height: 40,
                           child: OutlinedButton.icon(
-                            onPressed: () => openTestDialog(context),
+                            onPressed: () {
+                              final isContentValid = _contentTypeFormKey
+                                      .currentState
+                                      ?.validate() ??
+                                  context
+                                      .read<ContentStringCubit>()
+                                      .state
+                                      .validate();
+
+                              if (isContentValid == false) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  ErrorSnackBar(
+                                    context: context,
+                                    text: 'Invalid content type. ',
+                                    description:
+                                        'Please fix the errors and ensure that all fields are filled in',
+                                  ),
+                                );
+                                return;
+                              }
+                              openTestDialog(context);
+                            },
                             style: OutlinedButton.styleFrom(
                               padding: EdgeInsets.zero,
                             ),
@@ -156,7 +184,7 @@ class _CreateTemplateViewState extends State<CreateTemplateView>
                                 // when the user clears all the data. So we need to
                                 // pass a random value to the route to force the
                                 // the update of the route in go router.
-                                final randomJustToUpdate = const Uuid().v4();
+                                final randomJustToUpdate = const Uuid().v7();
                                 if (context.mounted) {
                                   context.go('/createMustache',
                                       extra: randomJustToUpdate);
@@ -173,7 +201,24 @@ class _CreateTemplateViewState extends State<CreateTemplateView>
                     );
                   }),
                   IconButton(
-                    onPressed: () => openSaveDialog(context),
+                    onPressed: () {
+                      final isContentValid = _contentTypeFormKey.currentState
+                              ?.validate() ??
+                          context.read<ContentStringCubit>().state.validate();
+
+                      if (isContentValid == false) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          ErrorSnackBar(
+                            context: context,
+                            text: 'Invalid content type. ',
+                            description:
+                                'Please fix the errors and ensure that all fields are filled in',
+                          ),
+                        );
+                        return;
+                      }
+                      openSaveDialog(context);
+                    },
                     tooltip: 'Save template',
                     icon: const Icon(
                       Icons.save_rounded,
@@ -184,13 +229,19 @@ class _CreateTemplateViewState extends State<CreateTemplateView>
               body: Builder(
                 builder: (context) {
                   if (width <= 900) {
-                    return const CreateTemplateTabView();
+                    return CreateTemplateTabView(
+                      formKey: _contentTypeFormKey,
+                    );
                   } else if (750 < width && width <= 1300) {
                     return Row(
                       children: [
                         Expanded(child: VariablesCreationTab()),
                         const VerticalDivider(width: 20),
-                        const Expanded(child: TextContentTab()),
+                        Expanded(
+                          child: TextContentTab(
+                            formKey: _contentTypeFormKey,
+                          ),
+                        ),
                       ],
                     );
                   } else if (1300 < width && width <= 1850) {
@@ -198,13 +249,17 @@ class _CreateTemplateViewState extends State<CreateTemplateView>
                       children: [
                         Expanded(child: VariablesCreationTab()),
                         const VerticalDivider(width: 20),
-                        const Expanded(child: TextContentTab()),
+                        Expanded(
+                            child: TextContentTab(
+                          formKey: _contentTypeFormKey,
+                        )),
                         const VerticalDivider(width: 20),
                         Expanded(
                           child: Column(
                             children: [
                               const Expanded(
-                                  child: TemplateInputFormPageView()),
+                                child: TemplateInputFormPageView(),
+                              ),
                               const Divider(),
                               Expanded(child: TemplateOutputTabView()),
                             ],
@@ -217,7 +272,10 @@ class _CreateTemplateViewState extends State<CreateTemplateView>
                       children: [
                         Expanded(child: VariablesCreationTab()),
                         const VerticalDivider(width: 20),
-                        const Expanded(child: TextContentTab()),
+                        Expanded(
+                            child: TextContentTab(
+                          formKey: _contentTypeFormKey,
+                        )),
                         const VerticalDivider(width: 20),
                         const Expanded(child: TemplateInputFormPageView()),
                         const VerticalDivider(width: 20),

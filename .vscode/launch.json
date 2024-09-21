@@ -2,7 +2,15 @@
     "version": "0.2.0",
     "configurations": [ 
         {
-            "name": "APP-PROD", 
+            "name": "APP-PROD-RELEASE", 
+            "program": "lib/main.dart",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release",
+            // "args": ["--web --wasm"]
+        },
+        {
+            "name": "APP-PROD-DEBUG", 
             "program": "lib/main.dart",
             "request": "launch",
             "type": "dart",

@@ -1,123 +1,66 @@
 import 'package:cursor_autocomplete_options/cursor_autocomplete_options.dart';
 import 'package:dart_debouncer/dart_debouncer.dart';
+import 'package:enchanted_collection/enchanted_collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mustachehub/app_core/app_routes.dart';
+import 'package:mustache_hub_core/mustache_hub_core.dart';
 import 'package:mustachehub/create/presenter/controllers/variables_info_highlight_text_editing_controller.dart';
 import 'package:mustachehub/create/presenter/cubits/content_string_cubit.dart';
 import 'package:mustachehub/create/presenter/cubits/fields_text_size_cubit.dart';
 import 'package:mustachehub/create/presenter/cubits/suggestion_cubit.dart';
 import 'package:mustachehub/create/presenter/cubits/variables_cubit.dart';
-import 'package:mustachehub/create/presenter/input_formaters/add_mustache_delimmiter_input_formater.dart';
+import 'package:mustachehub/create/presenter/states/content_string_state.dart';
 import 'package:mustachehub/create/presenter/states/fields_text_size_state.dart';
 import 'package:mustachehub/create/presenter/states/suggestion_state.dart';
 import 'package:mustachehub/create/presenter/states/variables_state.dart';
+import 'package:mustachehub/create/ui/create_template_view/tabs/text_context_tab/text_content_methods.dart';
+import 'package:mustachehub/create/ui/create_template_view/tabs/text_context_tab/widgets/section_content_field/section_content_field.dart';
+import 'package:mustachehub/create/ui/create_template_view/tabs/variables_creation_tab/cards/variable_creator_card/widgets/add_new_dotted_button.dart';
 import 'package:mustachehub/create/ui/create_template_view/tabs/variables_creation_tab/widgets/headers/text_content_header.dart';
 import 'package:mustachehub/settings/interactor/cubit/theme_cubit.dart';
 import 'package:mustachehub/settings/interactor/state/theme_state.dart';
 import 'package:text_analyser/text_analyser.dart';
 
 class TextContentTab extends StatefulWidget {
-  const TextContentTab({super.key});
+  final GlobalKey<FormState> formKey;
+  const TextContentTab({super.key, required this.formKey});
 
   @override
   State<TextContentTab> createState() => _TextContentTabState();
 }
 
-class _TextContentTabState extends State<TextContentTab> {
-  final FocusNode textfieldFocusNode = FocusNode();
-  late final VariablesInfoHighlightTextEditingController controller;
-  late final OptionsController<VariableImplementation> optionsController;
-  final Debouncer decouncer = Debouncer(timerDuration: 800.ms);
-
+class _TextContentTabState extends State<TextContentTab>
+    with TextContentMethods {
+  // TODO(IGOR): Extract this to a mixin
   @override
   void initState() {
     super.initState();
 
     final contentCubit = context.read<ContentStringCubit>();
-    controller = VariablesInfoHighlightTextEditingController(
-      textAnalyserBase: const TextAnalyserBase(),
-      text: contentCubit.state.currentText,
+    didCreatedAtLeastOneVariable = ValueNotifier(
+      contentCubit.state.currentText.texts.isEmpty,
     );
-
-    controller.setFlatMap(context.read<VariablesCubit>().state.flatMap);
-
-    optionsController = OptionsController<VariableImplementation>(
-      textfieldFocusNode: textfieldFocusNode,
-      textEditingController: controller,
-      context: context,
-      // optionAsString: (option) => option.name,
-      optionAsString: (option) => option.map(
-        boolean: (value) => value.booleanImplementation.map(
-          normalValue: (impl) {
-            return '#${value.booleanTokenIdentifier.name}';
-          },
-          invertedValue: (impl) {
-            return '^${value.booleanTokenIdentifier.name}';
-          },
-        ),
-        text: (value) => value.textTokenIdentifier.name,
-        model: (value) => '#${value.modelTokenIdentifier.name}',
-      ),
-      overlay: Overlay.of(
-        NavigatorService.i.dashboardNavigatorKey.currentContext!,
-      ),
-      onTextAddedCallback: (option, newEditingValue) {
-        _notifyContentCubit(contentCubit, newEditingValue.text);
-      },
-      selectInCursorParser: (option) {
-        return InsertInCursorPayload(
-          cursorIndexChangeQuantity: option.map(
-            text: (value) => 2,
-            boolean: (value) => -3 - value.booleanTokenIdentifier.name.length,
-            model: (value) => -3 - value.modelTokenIdentifier.name.length,
-          ),
-          text: option.map(
-            text: (value) {
-              final name = value.textTokenIdentifier.name;
-              return name;
-            },
-            boolean: (value) {
-              final name = value.booleanTokenIdentifier.name;
-              return value.booleanImplementation.map(
-                normalValue: (_) {
-                  return '#$name}}{{/$name';
-                },
-                invertedValue: (_) {
-                  return '^$name}}{{/$name';
-                },
-              );
-            },
-            model: (value) {
-              final name = value.modelTokenIdentifier.name;
-              return '#$name}}{{/$name';
-            },
-          ),
-        );
-      },
-    );
-    Future.delayed(const Duration(milliseconds: 200), () {
-      if (!mounted) return;
-      _notifyContentCubit(contentCubit, contentCubit.state.currentText);
-    });
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      controller.setCacheCS(Theme.of(context).colorScheme);
-    });
-    Future.delayed(
-      const Duration(seconds: 1),
-      () {
-        controller.update();
-      },
-    );
+    setDependencies(contentCubit.state);
+    final varCubit = context.read<VariablesCubit>();
+    didCreatedAtLeastOneVariable.value = !varCubit.state.isBlank;
   }
 
   @override
   void dispose() {
-    controller.dispose();
-    optionsController.dispose();
-    decouncer.dispose();
+    disposeAll();
+    didCreatedAtLeastOneVariable.dispose();
     super.dispose();
   }
+
+  void disposeAll() {
+    for (final cluster in dependencies) {
+      cluster.controller.dispose();
+      cluster.optionsController.dispose();
+      cluster.decouncer.dispose();
+    }
+  }
+
+  late final ValueNotifier<bool> didCreatedAtLeastOneVariable;
 
   @override
   Widget build(BuildContext context) {
@@ -130,12 +73,25 @@ class _TextContentTabState extends State<TextContentTab> {
       listeners: [
         BlocListener<ThemeCubit, ThemeState>(
           listener: (context, _) {
-            controller.setCacheCS(Theme.of(context).colorScheme);
+            for (final cluster in dependencies) {
+              cluster.controller.setCacheCS(Theme.of(context).colorScheme);
+            }
           },
         ),
         BlocListener<VariablesCubit, VariablesState>(
           listener: (context, state) {
-            controller.setFlatMap(state.flatMap);
+            for (final cluster in dependencies) {
+              cluster.controller.setFlatMap(state.flatMap);
+            }
+
+            didCreatedAtLeastOneVariable.value = !state.isBlank;
+
+            // controller.setFlatMap(state.flatMap);
+          },
+        ),
+        BlocListener<ContentStringCubit, ContentStringState>(
+          listener: (context, state) {
+            setDependencies(state);
           },
         ),
       ],
@@ -143,70 +99,83 @@ class _TextContentTabState extends State<TextContentTab> {
         padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
         child: Column(
           children: [
-            TextContentHeader(
-              controller: controller,
-              debouncer: decouncer,
-            ),
-            const SizedBox(height: 8),
+            const TextContentHeader(),
             Expanded(
-              child: BlocBuilder<FieldsTextSizeCubit, FieldsTextSizeState>(
-                bloc: sizeBloc,
-                builder: (context, varState) {
-                  optionsController.updateContext(context);
-                  final style = Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        height: 1,
-                        fontSize: varState.testStringTextSize,
-                      );
+              child: ValueListenableBuilder(
+                valueListenable: didCreatedAtLeastOneVariable,
+                builder: (context, bool didCreatedAtLeastOneVariable, child) {
+                  if (didCreatedAtLeastOneVariable == false) {
+                    return Tooltip(
+                      triggerMode: TooltipTriggerMode.tap,
+                      message: 'You must create at least one variable.\n'
+                          'Create an text, condition or '
+                          'list of items variable.',
+                      child: IgnorePointer(
+                        child: Opacity(
+                          opacity: 0.7,
+                          child: child,
+                        ),
+                      ),
+                    );
+                  }
 
-                  return TextFormField(
-                    focusNode: textfieldFocusNode,
-                    controller: controller,
-                    maxLines: 30,
-                    style: style,
-                    decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.symmetric(
-                          vertical: 16, horizontal: 16),
-                      border: const OutlineInputBorder(
-                        borderSide: BorderSide.none,
-                      ),
-                      fillColor: Theme.of(context).colorScheme.onInverseSurface,
-                      filled: true,
-                      hintText:
-                          'Type your text here. Use {{}} to add variables.\nJust tap "{" after creating a variable...',
-                    ),
-                    textAlignVertical: TextAlignVertical.top,
-                    inputFormatters: [
-                      AddMustacheDelimmiterInputFormatter(
-                        sugestionCubit: sugestionCubit,
-                        varCubit: varCubit,
-                        onAddedDellimiter: () {
-                          final bloc = context.read<SuggestionCubit>();
-                          optionsController.showOptionsMenuWithWrapperBuilder(
-                            suggestionCardBuilder: (
-                              BuildContext dialogContext,
-                              Widget Function(
-                                List<VariableImplementation> value,
-                              ) listTilesWithOptionsBuilder,
-                            ) {
-                              return BlocProvider<SuggestionCubit>.value(
-                                value: bloc,
-                                child: SuggestionCard(
-                                  listTilesWithOptionsBuilder:
-                                      listTilesWithOptionsBuilder,
-                                ),
-                              );
-                            },
-                          );
-                        },
-                      ),
-                    ],
-                    onChanged: (final String text) {
-                      decouncer.resetDebounce(() {
-                        _notifyContentCubit(contentCubit, text);
-                      });
-                    },
-                  );
+                  return child!;
                 },
+                child: BlocBuilder<FieldsTextSizeCubit, FieldsTextSizeState>(
+                  bloc: sizeBloc,
+                  builder: (context, varState) {
+                    final fontSize = varState.testStringTextSize;
+                    return Form(
+                      key: widget.formKey,
+                      child: ListView(
+                        children: [
+                          ...dependencies.mapper((
+                            EditDependenciesCluster cluster,
+                            bool isFirst,
+                            bool isLast,
+                            int index,
+                          ) {
+                            return SectionContentField(
+                              key: ValueKey(
+                                  index.toString() + cluster.input.uuid),
+                              input: cluster.input,
+                              titleController: cluster.titleController,
+                              textfieldFocusNode: cluster.textfieldFocusNode,
+                              optionsController: cluster.optionsController,
+                              fontSize: fontSize,
+                              controller: cluster.controller,
+                              decouncer: cluster.decouncer,
+                              contentStringCubit: contentCubit,
+                              variablesCubit: varCubit,
+                              suggestionCubit: sugestionCubit,
+                              notifyContentCubit: notifyContentCubit,
+                              willBreakLine: cluster.input.willBreakLine,
+                              willDisplayEditLabel:
+                                  cluster.willDisplayEditLabel,
+                              willContainBreakLineToggleOption:
+                                  cluster.willContainBreakLineToggleOption,
+                            );
+                          }),
+                          const SizedBox(height: 8),
+                          AddNewButton(
+                            onTap: () {
+                              final isValid =
+                                  widget.formKey.currentState!.validate();
+                              if (!isValid) {
+                                return;
+                              }
+                              final contentCubit =
+                                  context.read<ContentStringCubit>();
+
+                              contentCubit.addNew();
+                            },
+                            tooltip: 'Add a new template text section',
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
               ),
             ),
           ],
@@ -214,14 +183,10 @@ class _TextContentTabState extends State<TextContentTab> {
       ),
     );
   }
-
-  void _notifyContentCubit(ContentStringCubit contentCubit, String text) {
-    contentCubit.setCubit(text);
-  }
 }
 
 class SuggestionCard extends StatelessWidget {
-  final Widget Function(List<VariableImplementation> options)
+  final Widget Function(List<ChoosableVariableImplementations> options)
       listTilesWithOptionsBuilder;
 
   const SuggestionCard({
@@ -262,4 +227,26 @@ class SuggestionCard extends StatelessWidget {
       },
     );
   }
+}
+
+class EditDependenciesCluster {
+  final bool willDisplayEditLabel;
+  final bool willContainBreakLineToggleOption;
+  final FocusNode textfieldFocusNode;
+  final TextEditingController titleController;
+  final VariablesInfoHighlightTextEditingController controller;
+  final OptionsController<ChoosableVariableImplementations> optionsController;
+  final Debouncer decouncer;
+  final ContentTextSectionInput input;
+
+  const EditDependenciesCluster({
+    required this.titleController,
+    required this.textfieldFocusNode,
+    required this.controller,
+    required this.optionsController,
+    required this.decouncer,
+    required this.input,
+    required this.willDisplayEditLabel,
+    required this.willContainBreakLineToggleOption,
+  });
 }

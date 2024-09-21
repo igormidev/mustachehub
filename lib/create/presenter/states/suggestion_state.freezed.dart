@@ -12,14 +12,15 @@ part of 'suggestion_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$SuggestionState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Set<VariableImplementation> tokenIdentifiers,
-            List<AnalysedSegment> segments)
+    required TResult Function(
+            Set<ChoosableVariableImplementations> tokenIdentifiers,
+            List<AnalysedSegmentStatus> segments)
         withIdentifiers,
     required TResult Function() undefined,
     required TResult Function() errorOccurred,
@@ -27,8 +28,8 @@ mixin _$SuggestionState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Set<VariableImplementation> tokenIdentifiers,
-            List<AnalysedSegment> segments)?
+    TResult? Function(Set<ChoosableVariableImplementations> tokenIdentifiers,
+            List<AnalysedSegmentStatus> segments)?
         withIdentifiers,
     TResult? Function()? undefined,
     TResult? Function()? errorOccurred,
@@ -36,8 +37,8 @@ mixin _$SuggestionState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Set<VariableImplementation> tokenIdentifiers,
-            List<AnalysedSegment> segments)?
+    TResult Function(Set<ChoosableVariableImplementations> tokenIdentifiers,
+            List<AnalysedSegmentStatus> segments)?
         withIdentifiers,
     TResult Function()? undefined,
     TResult Function()? errorOccurred,
@@ -86,6 +87,9 @@ class _$SuggestionStateCopyWithImpl<$Res, $Val extends SuggestionState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of SuggestionState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -96,8 +100,8 @@ abstract class _$$SuggestionStateWithIdentifiersImplCopyWith<$Res> {
       __$$SuggestionStateWithIdentifiersImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
-      {Set<VariableImplementation> tokenIdentifiers,
-      List<AnalysedSegment> segments});
+      {Set<ChoosableVariableImplementations> tokenIdentifiers,
+      List<AnalysedSegmentStatus> segments});
 }
 
 /// @nodoc
@@ -110,6 +114,8 @@ class __$$SuggestionStateWithIdentifiersImplCopyWithImpl<$Res>
       $Res Function(_$SuggestionStateWithIdentifiersImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SuggestionState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -120,11 +126,11 @@ class __$$SuggestionStateWithIdentifiersImplCopyWithImpl<$Res>
       tokenIdentifiers: null == tokenIdentifiers
           ? _value._tokenIdentifiers
           : tokenIdentifiers // ignore: cast_nullable_to_non_nullable
-              as Set<VariableImplementation>,
+              as Set<ChoosableVariableImplementations>,
       segments: null == segments
           ? _value._segments
           : segments // ignore: cast_nullable_to_non_nullable
-              as List<AnalysedSegment>,
+              as List<AnalysedSegmentStatus>,
     ));
   }
 }
@@ -134,22 +140,22 @@ class __$$SuggestionStateWithIdentifiersImplCopyWithImpl<$Res>
 class _$SuggestionStateWithIdentifiersImpl
     implements _SuggestionStateWithIdentifiers {
   _$SuggestionStateWithIdentifiersImpl(
-      {required final Set<VariableImplementation> tokenIdentifiers,
-      required final List<AnalysedSegment> segments})
+      {required final Set<ChoosableVariableImplementations> tokenIdentifiers,
+      required final List<AnalysedSegmentStatus> segments})
       : _tokenIdentifiers = tokenIdentifiers,
         _segments = segments;
 
-  final Set<VariableImplementation> _tokenIdentifiers;
+  final Set<ChoosableVariableImplementations> _tokenIdentifiers;
   @override
-  Set<VariableImplementation> get tokenIdentifiers {
+  Set<ChoosableVariableImplementations> get tokenIdentifiers {
     if (_tokenIdentifiers is EqualUnmodifiableSetView) return _tokenIdentifiers;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableSetView(_tokenIdentifiers);
   }
 
-  final List<AnalysedSegment> _segments;
+  final List<AnalysedSegmentStatus> _segments;
   @override
-  List<AnalysedSegment> get segments {
+  List<AnalysedSegmentStatus> get segments {
     if (_segments is EqualUnmodifiableListView) return _segments;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_segments);
@@ -176,7 +182,9 @@ class _$SuggestionStateWithIdentifiersImpl
       const DeepCollectionEquality().hash(_tokenIdentifiers),
       const DeepCollectionEquality().hash(_segments));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SuggestionState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SuggestionStateWithIdentifiersImplCopyWith<
@@ -187,8 +195,9 @@ class _$SuggestionStateWithIdentifiersImpl
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Set<VariableImplementation> tokenIdentifiers,
-            List<AnalysedSegment> segments)
+    required TResult Function(
+            Set<ChoosableVariableImplementations> tokenIdentifiers,
+            List<AnalysedSegmentStatus> segments)
         withIdentifiers,
     required TResult Function() undefined,
     required TResult Function() errorOccurred,
@@ -199,8 +208,8 @@ class _$SuggestionStateWithIdentifiersImpl
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Set<VariableImplementation> tokenIdentifiers,
-            List<AnalysedSegment> segments)?
+    TResult? Function(Set<ChoosableVariableImplementations> tokenIdentifiers,
+            List<AnalysedSegmentStatus> segments)?
         withIdentifiers,
     TResult? Function()? undefined,
     TResult? Function()? errorOccurred,
@@ -211,8 +220,8 @@ class _$SuggestionStateWithIdentifiersImpl
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Set<VariableImplementation> tokenIdentifiers,
-            List<AnalysedSegment> segments)?
+    TResult Function(Set<ChoosableVariableImplementations> tokenIdentifiers,
+            List<AnalysedSegmentStatus> segments)?
         withIdentifiers,
     TResult Function()? undefined,
     TResult Function()? errorOccurred,
@@ -263,13 +272,16 @@ class _$SuggestionStateWithIdentifiersImpl
 
 abstract class _SuggestionStateWithIdentifiers implements SuggestionState {
   factory _SuggestionStateWithIdentifiers(
-          {required final Set<VariableImplementation> tokenIdentifiers,
-          required final List<AnalysedSegment> segments}) =
-      _$SuggestionStateWithIdentifiersImpl;
+      {required final Set<ChoosableVariableImplementations> tokenIdentifiers,
+      required final List<AnalysedSegmentStatus>
+          segments}) = _$SuggestionStateWithIdentifiersImpl;
 
-  Set<VariableImplementation> get tokenIdentifiers;
-  List<AnalysedSegment> get segments;
-  @JsonKey(ignore: true)
+  Set<ChoosableVariableImplementations> get tokenIdentifiers;
+  List<AnalysedSegmentStatus> get segments;
+
+  /// Create a copy of SuggestionState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SuggestionStateWithIdentifiersImplCopyWith<
           _$SuggestionStateWithIdentifiersImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -291,6 +303,9 @@ class __$$SuggestionStateUndefinedImplCopyWithImpl<$Res>
       _$SuggestionStateUndefinedImpl _value,
       $Res Function(_$SuggestionStateUndefinedImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of SuggestionState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -316,8 +331,9 @@ class _$SuggestionStateUndefinedImpl implements _SuggestionStateUndefined {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Set<VariableImplementation> tokenIdentifiers,
-            List<AnalysedSegment> segments)
+    required TResult Function(
+            Set<ChoosableVariableImplementations> tokenIdentifiers,
+            List<AnalysedSegmentStatus> segments)
         withIdentifiers,
     required TResult Function() undefined,
     required TResult Function() errorOccurred,
@@ -328,8 +344,8 @@ class _$SuggestionStateUndefinedImpl implements _SuggestionStateUndefined {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Set<VariableImplementation> tokenIdentifiers,
-            List<AnalysedSegment> segments)?
+    TResult? Function(Set<ChoosableVariableImplementations> tokenIdentifiers,
+            List<AnalysedSegmentStatus> segments)?
         withIdentifiers,
     TResult? Function()? undefined,
     TResult? Function()? errorOccurred,
@@ -340,8 +356,8 @@ class _$SuggestionStateUndefinedImpl implements _SuggestionStateUndefined {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Set<VariableImplementation> tokenIdentifiers,
-            List<AnalysedSegment> segments)?
+    TResult Function(Set<ChoosableVariableImplementations> tokenIdentifiers,
+            List<AnalysedSegmentStatus> segments)?
         withIdentifiers,
     TResult Function()? undefined,
     TResult Function()? errorOccurred,
@@ -411,6 +427,9 @@ class __$$SuggestionStateErrorOccurredImplCopyWithImpl<$Res>
       _$SuggestionStateErrorOccurredImpl _value,
       $Res Function(_$SuggestionStateErrorOccurredImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of SuggestionState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -437,8 +456,9 @@ class _$SuggestionStateErrorOccurredImpl
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Set<VariableImplementation> tokenIdentifiers,
-            List<AnalysedSegment> segments)
+    required TResult Function(
+            Set<ChoosableVariableImplementations> tokenIdentifiers,
+            List<AnalysedSegmentStatus> segments)
         withIdentifiers,
     required TResult Function() undefined,
     required TResult Function() errorOccurred,
@@ -449,8 +469,8 @@ class _$SuggestionStateErrorOccurredImpl
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Set<VariableImplementation> tokenIdentifiers,
-            List<AnalysedSegment> segments)?
+    TResult? Function(Set<ChoosableVariableImplementations> tokenIdentifiers,
+            List<AnalysedSegmentStatus> segments)?
         withIdentifiers,
     TResult? Function()? undefined,
     TResult? Function()? errorOccurred,
@@ -461,8 +481,8 @@ class _$SuggestionStateErrorOccurredImpl
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Set<VariableImplementation> tokenIdentifiers,
-            List<AnalysedSegment> segments)?
+    TResult Function(Set<ChoosableVariableImplementations> tokenIdentifiers,
+            List<AnalysedSegmentStatus> segments)?
         withIdentifiers,
     TResult Function()? undefined,
     TResult Function()? errorOccurred,

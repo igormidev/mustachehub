@@ -7,6 +7,15 @@ mixin ValidatorsMixins {
     return null;
   }
 
+  String? onlyCaractersOrSpaces(String? value, [String? message]) {
+    final text = message ?? 'Only caracters or spaces';
+    if (value == null) return text;
+    final isValid = RegExp(r'[a-zA-Z\s]*').hasMatch(value);
+    if (isValid == false) return text;
+
+    return null;
+  }
+
   String? isNotEmpty(String? value, [String? message]) {
     final isValueEmpty = value?.replaceAll(' ', '').isEmpty ?? true;
     if (isValueEmpty) return message ?? 'Required';

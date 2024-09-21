@@ -5,11 +5,15 @@ class AddNewButton extends StatelessWidget {
   final String tooltip;
   final void Function() onTap;
   final Color? color;
+  final double height;
+  final double iconSize;
   const AddNewButton({
     super.key,
     required this.onTap,
     required this.tooltip,
     this.color,
+    this.height = 60,
+    this.iconSize = 30,
   });
 
   @override
@@ -17,7 +21,7 @@ class AddNewButton extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 8.0),
       child: SizedBox(
-        height: 60,
+        height: height,
         child: InkWell(
           borderRadius: const BorderRadius.all(Radius.circular(16)),
           onTap: onTap,
@@ -35,8 +39,8 @@ class AddNewButton extends StatelessWidget {
                   color: Theme.of(context).colorScheme.surfaceContainerHighest,
                   borderRadius: BorderRadius.circular(16),
                 ),
-                child: const Center(
-                  child: Icon(Icons.add, size: 30),
+                child: Center(
+                  child: Icon(Icons.add, size: iconSize),
                 ),
               ),
             ),

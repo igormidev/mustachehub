@@ -13,7 +13,7 @@ List<ModelPipeDto> _calculateModelsPipe(
 
     final ModelPipeDto pipeDto = ModelPipeDto(
       pipe: pipe,
-      uuid: cacheValue?.uuid ?? const Uuid().v4(),
+      uuid: cacheValue?.uuid ?? const Uuid().v7(),
       payloadValue: cacheValue?.payloadValue ?? [],
     );
 
@@ -36,7 +36,7 @@ List<TextPipeDto> _calculateTextsPipe(
     final pipeDto = TextPipeDto(
       pipe: pipe,
       payloadValue: cacheValue?.payloadValue,
-      uuid: cacheValue?.uuid ?? const Uuid().v4(),
+      uuid: cacheValue?.uuid ?? const Uuid().v7(),
     );
     response.add(pipeDto);
   }
@@ -55,9 +55,30 @@ List<BooleanPipeDto> _calculateBooleansPipe(
       (dto) => dto.pipe.pipeId == pipe.pipeId,
     );
     final pipeDto = BooleanPipeDto(
-      uuid: cacheValue?.uuid ?? const Uuid().v4(),
+      uuid: cacheValue?.uuid ?? const Uuid().v7(),
       pipe: pipe,
       payloadValue: cacheValue?.payloadValue ?? false,
+    );
+    response.add(pipeDto);
+  }
+
+  return response;
+}
+
+List<ChoicePipeDto> _calculateChoicesPipe(
+  List<ChoicePipe> pipes,
+  List<ChoicePipeDto>? oldDtos,
+) {
+  final List<ChoicePipeDto> response = [];
+
+  for (final pipe in pipes) {
+    final cacheValue = oldDtos?.singleWhereOrNull(
+      (dto) => dto.pipe.pipeId == pipe.pipeId,
+    );
+    final pipeDto = ChoicePipeDto(
+      uuid: cacheValue?.uuid ?? const Uuid().v7(),
+      pipe: pipe,
+      payloadValue: cacheValue?.payloadValue,
     );
     response.add(pipeDto);
   }

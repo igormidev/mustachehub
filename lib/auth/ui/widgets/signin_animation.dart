@@ -82,7 +82,7 @@ class ImagineAnimation extends StatelessWidget {
               ['**', 'man', 'Group $e', '**'],
               value: primaryContainer,
             );
-          }).toList(),
+          }),
           ...<int>[
             21,
             28,
@@ -91,7 +91,7 @@ class ImagineAnimation extends StatelessWidget {
               ['**', 'man', 'Group $e', '**'],
               value: secondaryColor,
             );
-          }).toList(),
+          }),
           ...<int>[
             20,
             27,
@@ -100,7 +100,7 @@ class ImagineAnimation extends StatelessWidget {
               ['**', 'man', 'Group $e', '**'],
               value: secondaryContainer,
             );
-          }).toList(),
+          }),
           ValueDelegate.color(
             ['**', 'right hand', 'Group 1', '**'],
             value: primaryColor,
@@ -155,7 +155,7 @@ class ImagineAnimation extends StatelessWidget {
               ['**', 'paint board', 'Group $e', '**'],
               value: primaryColor,
             );
-          }).toList(),
+          }),
           ValueDelegate.color(
             ['**', 'paint board', 'Group 7', '**'],
             value: secondaryColor,

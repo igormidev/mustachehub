@@ -12,7 +12,7 @@ part of 'user_collection_indexes.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 UserCollectionIndexes _$UserCollectionIndexesFromJson(
     Map<String, dynamic> json) {
@@ -85,6 +85,8 @@ mixin _$UserCollectionIndexes {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  /// Serializes this UserCollectionIndexes to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 }
 
@@ -105,6 +107,9 @@ class _$UserCollectionIndexesCopyWithImpl<$Res,
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of UserCollectionIndexes
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -128,6 +133,8 @@ class __$$UserCollectionIndexesFolderImplCopyWithImpl<$Res>
       $Res Function(_$UserCollectionIndexesFolderImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of UserCollectionIndexes
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -199,12 +206,14 @@ class _$UserCollectionIndexesFolderImpl implements UserCollectionIndexesFolder {
             const DeepCollectionEquality().equals(other._children, _children));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, name, description,
       const DeepCollectionEquality().hash(_children));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of UserCollectionIndexes
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$UserCollectionIndexesFolderImplCopyWith<_$UserCollectionIndexesFolderImpl>
@@ -306,7 +315,10 @@ abstract class UserCollectionIndexesFolder implements UserCollectionIndexes {
   String get name;
   String get description;
   List<UserCollectionIndexes> get children;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of UserCollectionIndexes
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$UserCollectionIndexesFolderImplCopyWith<_$UserCollectionIndexesFolderImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -331,6 +343,8 @@ class __$$UserCollectionIndexesFileImplCopyWithImpl<$Res>
       $Res Function(_$UserCollectionIndexesFileImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of UserCollectionIndexes
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -376,11 +390,13 @@ class _$UserCollectionIndexesFileImpl implements UserCollectionIndexesFile {
                 other.templateUuid == templateUuid));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, templateUuid);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of UserCollectionIndexes
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$UserCollectionIndexesFileImplCopyWith<_$UserCollectionIndexesFileImpl>
@@ -477,7 +493,10 @@ abstract class UserCollectionIndexesFile implements UserCollectionIndexes {
       _$UserCollectionIndexesFileImpl.fromJson;
 
   String get templateUuid;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of UserCollectionIndexes
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$UserCollectionIndexesFileImplCopyWith<_$UserCollectionIndexesFileImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -502,6 +521,8 @@ class __$$UserCollectionIndexesRootImplCopyWithImpl<$Res>
       $Res Function(_$UserCollectionIndexesRootImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of UserCollectionIndexes
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -553,12 +574,14 @@ class _$UserCollectionIndexesRootImpl implements UserCollectionIndexesRoot {
             const DeepCollectionEquality().equals(other._children, _children));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_children));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of UserCollectionIndexes
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$UserCollectionIndexesRootImplCopyWith<_$UserCollectionIndexesRootImpl>
@@ -656,7 +679,10 @@ abstract class UserCollectionIndexesRoot implements UserCollectionIndexes {
       _$UserCollectionIndexesRootImpl.fromJson;
 
   List<UserCollectionIndexes> get children;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of UserCollectionIndexes
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$UserCollectionIndexesRootImplCopyWith<_$UserCollectionIndexesRootImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

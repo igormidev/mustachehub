@@ -19,11 +19,11 @@ class VariablesInfoHighlightTextEditingController
     extends TextEditingController {
   VariablesInfoHighlightTextEditingController({
     super.text,
-    required TextAnalyserBase textAnalyserBase,
+    required TextAnalyser textAnalyserBase,
   }) : _textAnalyserBase = textAnalyserBase;
 
   List<InlineSpan>? getTexts(
-    List<AnalysedSegment> newCacheSegments,
+    List<AnalysedSegmentStatus> newCacheSegments,
     TextStyle? style,
     BuildContext? context,
   ) {
@@ -32,9 +32,11 @@ class VariablesInfoHighlightTextEditingController
         _cacheCS ?? (context == null ? null : Theme.of(context).colorScheme);
     if (cS == null) return null;
 
-    return newCacheSegments.map<InlineSpan>((AnalysedSegment analysedSegment) {
+    return newCacheSegments.map<InlineSpan>((
+      AnalysedSegmentStatus analysedSegment,
+    ) {
       return analysedSegment.map(
-        text: (value) {
+        normalText: (value) {
           return TextSpan(
             text: value.segmentText,
             style: defaultStyle,
@@ -52,6 +54,40 @@ class VariablesInfoHighlightTextEditingController
                 inlineSpan: TextSpan(
                   text: e,
                   style: validDeclarationStyle,
+                ),
+              );
+            }).toList(),
+          );
+        },
+        choiceDeclarationCloseWithoutOpen: (value) {
+          return TextSpan(
+            children: value.segmentText.characters.map((e) {
+              return TooltipSpan(
+                message:
+                    'Choice declaration close without an corresponding open declaration.\n\nThat means you are closing a choice (using \'/\' caracter) without opening it first.\nTo fix this, you need to open a "open choice declaration" using the \'^\' caracter.\n\nExample of a valid choice declaration: {{^isMale}}{{/isMale}}',
+                inlineSpan: TextSpan(
+                  text: e,
+                  style: defaultStyle.copyWith(
+                    color: cS.error,
+                    backgroundColor: cS.errorContainer,
+                  ),
+                ),
+              );
+            }).toList(),
+          );
+        },
+        choiceDeclarationOpenWithoutClose: (value) {
+          return TextSpan(
+            children: value.segmentText.characters.map((e) {
+              return TooltipSpan(
+                message:
+                    'Choice declaration open without an corresponding close declaration.\n\nThat means you are opening a choice (using \'/\' caracter) without closing it later in the text.\nTo fix this, you need to create a "close choice declaration" using the \'^\' caracter.\n\nExample of a valid choice declaration: {{^isMale}}{{/isMale}}',
+                inlineSpan: TextSpan(
+                  text: e,
+                  style: defaultStyle.copyWith(
+                    color: cS.error,
+                    backgroundColor: cS.errorContainer,
+                  ),
                 ),
               );
             }).toList(),
@@ -142,7 +178,7 @@ class VariablesInfoHighlightTextEditingController
             }).toList(),
           );
         },
-        nonModelVariableWithOpenOrCloseDelimmiter: (value) {
+        hasDelimitterButIsAnVariableWithoutScope: (value) {
           return TextSpan(
             children: value.segmentText.characters.map((e) {
               return TooltipSpan(
@@ -199,11 +235,11 @@ class VariablesInfoHighlightTextEditingController
 
   String? cacheText;
 
-  final TextAnalyserBase _textAnalyserBase;
-  Map<String, TokenIdentifier>? _flatMap;
+  final TextAnalyser _textAnalyserBase;
+  Map<String, VariableScopeParentMapper>? _flatMap;
   ColorScheme? _cacheCS;
 
-  Map<String, TokenIdentifier>? get flatMap => _flatMap;
+  Map<String, VariableScopeParentMapper>? get flatMap => _flatMap;
 
   void update() {
     notifyListeners();
@@ -214,7 +250,7 @@ class VariablesInfoHighlightTextEditingController
     notifyListeners();
   }
 
-  void setFlatMap(Map<String, TokenIdentifier> flatMap) {
+  void setFlatMap(Map<String, VariableScopeParentMapper> flatMap) {
     _flatMap = flatMap;
     notifyListeners();
   }
@@ -230,12 +266,12 @@ class VariablesInfoHighlightTextEditingController
 
     if (flatMap != null) {
       final response = _textAnalyserBase.getMatchClusters(
-        typeText,
-        cursorIndexAtText == -1 ? 0 : cursorIndexAtText,
-        flatMap!,
+        input: typeText,
+        indexAtText: cursorIndexAtText == -1 ? 0 : cursorIndexAtText,
+        flatMap: flatMap!,
       );
 
-      final segments = response?.segments;
+      final segments = response?.segmentsStates;
 
       if (segments != null) {
         final spans = getTexts(segments, style, context);

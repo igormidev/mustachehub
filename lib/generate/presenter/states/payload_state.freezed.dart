@@ -12,7 +12,7 @@ part of 'payload_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$PayloadState {
@@ -85,6 +85,9 @@ class _$PayloadStateCopyWithImpl<$Res, $Val extends PayloadState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of PayloadState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -106,6 +109,8 @@ class __$$WithRequiredFieldsPendencyImplCopyWithImpl<$Res>
       $Res Function(_$WithRequiredFieldsPendencyImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PayloadState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -145,7 +150,9 @@ class _$WithRequiredFieldsPendencyImpl implements WithRequiredFieldsPendency {
   @override
   int get hashCode => Object.hash(runtimeType, expectedPayloadDto);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PayloadState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$WithRequiredFieldsPendencyImplCopyWith<_$WithRequiredFieldsPendencyImpl>
@@ -234,7 +241,10 @@ abstract class WithRequiredFieldsPendency implements PayloadState {
       _$WithRequiredFieldsPendencyImpl;
 
   ExpectedPayloadDto get expectedPayloadDto;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of PayloadState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$WithRequiredFieldsPendencyImplCopyWith<_$WithRequiredFieldsPendencyImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -256,6 +266,8 @@ class __$$WithValidPayloadImplCopyWithImpl<$Res>
       $Res Function(_$WithValidPayloadImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PayloadState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -295,7 +307,9 @@ class _$WithValidPayloadImpl implements WithValidPayload {
   @override
   int get hashCode => Object.hash(runtimeType, expectedPayloadDto);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PayloadState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$WithValidPayloadImplCopyWith<_$WithValidPayloadImpl> get copyWith =>
@@ -384,7 +398,10 @@ abstract class WithValidPayload implements PayloadState {
       _$WithValidPayloadImpl;
 
   ExpectedPayloadDto get expectedPayloadDto;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of PayloadState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$WithValidPayloadImplCopyWith<_$WithValidPayloadImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -403,6 +420,9 @@ class __$$InitialPayloadStateImplCopyWithImpl<$Res>
   __$$InitialPayloadStateImplCopyWithImpl(_$InitialPayloadStateImpl _value,
       $Res Function(_$InitialPayloadStateImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of PayloadState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc

@@ -12,7 +12,7 @@ part of 'template_metadata.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 TemplateMetadata _$TemplateMetadataFromJson(Map<String, dynamic> json) {
   return _TemplateMetadata.fromJson(json);
@@ -25,8 +25,12 @@ mixin _$TemplateMetadata {
   DateTime get updatedAt => throw _privateConstructorUsedError;
   Map<String, String> get usersPermission => throw _privateConstructorUsedError;
 
+  /// Serializes this TemplateMetadata to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TemplateMetadata
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TemplateMetadataCopyWith<TemplateMetadata> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -54,6 +58,8 @@ class _$TemplateMetadataCopyWithImpl<$Res, $Val extends TemplateMetadata>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of TemplateMetadata
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -106,6 +112,8 @@ class __$$TemplateMetadataImplCopyWithImpl<$Res>
       $Res Function(_$TemplateMetadataImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TemplateMetadata
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -182,12 +190,14 @@ class _$TemplateMetadataImpl implements _TemplateMetadata {
                 .equals(other._usersPermission, _usersPermission));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, isPrivate, createdAt, updatedAt,
       const DeepCollectionEquality().hash(_usersPermission));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TemplateMetadata
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TemplateMetadataImplCopyWith<_$TemplateMetadataImpl> get copyWith =>
@@ -221,8 +231,11 @@ abstract class _TemplateMetadata implements TemplateMetadata {
   DateTime get updatedAt;
   @override
   Map<String, String> get usersPermission;
+
+  /// Create a copy of TemplateMetadata
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TemplateMetadataImplCopyWith<_$TemplateMetadataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

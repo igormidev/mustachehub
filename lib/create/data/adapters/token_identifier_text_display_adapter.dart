@@ -43,6 +43,7 @@ class TokenIdentifierTextDisplayAdapter {
   String toDisplayText({
     required final List<TextPipe> textPipes,
     required final List<BooleanPipe> booleanPipes,
+    required final List<ChoicePipe> choicePipes,
     required final List<ModelPipe> modelPipes,
     List<String>? targetIdentifiersName,
     final String? title,
@@ -61,6 +62,7 @@ class TokenIdentifierTextDisplayAdapter {
         description: '',
         textPipes: textPipes,
         booleanPipes: booleanPipes,
+        choicePipes: choicePipes,
         modelPipes: modelPipes,
       ),
     );
@@ -110,6 +112,22 @@ class TokenIdentifierTextDisplayAdapter {
         preffix = '┗━━━🔗 ';
       } else {
         preffix = '┣━━━🔗 ';
+      }
+      // String padding = ''.padLeft(innerPaddingCount.length, '  ');
+
+      if (targetIdentifiers?.contains(value.mustacheName) ?? true) {
+        response += '$padding$preffix${value.mustacheName}\n';
+      }
+    });
+
+    pipe.choicePipes.forEachMapper((value, isFirst, isLast, index) {
+      final String preffix;
+
+      if (isLast && pipe.modelPipes.isEmpty) {
+        // 🧱🛠️📃📄📑📕📗📘📙
+        preffix = '┗━━━🛠️ ';
+      } else {
+        preffix = '┣━━━🛠️ ';
       }
       // String padding = ''.padLeft(innerPaddingCount.length, '  ');
 

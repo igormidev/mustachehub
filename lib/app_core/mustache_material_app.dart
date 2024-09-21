@@ -13,7 +13,6 @@ import 'package:mustachehub/app_core/theme/theme.dart';
 import 'package:mustachehub/collection/presenter/cubits/collection_node_cubit.dart';
 import 'package:mustachehub/create/data/repositories/implementations/package_form_repository_impl.dart';
 import 'package:mustachehub/create/data/repositories/interfaces/i_package_form_repository.dart';
-import 'package:mustachehub/create/presenter/cubits/content_string_cubit.dart';
 import 'package:mustachehub/create/presenter/cubits/template_upload_cubit.dart';
 import 'package:mustachehub/dashboard/data/entities/e_navigation_possibilities.dart';
 import 'package:mustachehub/dashboard/presenter/cubits/navigation_possibilities_cubit.dart';
@@ -104,9 +103,6 @@ class _MustacheMaterialAppState extends State<MustacheMaterialApp> {
         ),
         BlocProvider<CollectionNodeCubit>(
           create: (context) => CollectionNodeCubit(),
-        ),
-        BlocProvider<ContentStringCubit>(
-          create: (context) => ContentStringCubit(),
         ),
         BlocProvider<SessionCubit>.value(value: sessionCubit),
         BlocProvider<LoadingCubit>(create: (context) => LoadingCubit()),

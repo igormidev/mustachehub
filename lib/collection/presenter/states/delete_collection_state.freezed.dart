@@ -12,7 +12,7 @@ part of 'delete_collection_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$DeleteCollectionState {
@@ -98,6 +98,9 @@ class _$DeleteCollectionStateCopyWithImpl<$Res,
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of DeleteCollectionState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -117,6 +120,9 @@ class __$$DeleteCollectionStateNormalImplCopyWithImpl<$Res>
       _$DeleteCollectionStateNormalImpl _value,
       $Res Function(_$DeleteCollectionStateNormalImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of DeleteCollectionState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -252,6 +258,8 @@ class __$$DeleteCollectionStateLoadingDeletingImplCopyWithImpl<$Res>
       $Res Function(_$DeleteCollectionStateLoadingDeletingImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DeleteCollectionState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -295,7 +303,9 @@ class _$DeleteCollectionStateLoadingDeletingImpl
   @override
   int get hashCode => Object.hash(runtimeType, deletingTargetTemplateUUID);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DeleteCollectionState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DeleteCollectionStateLoadingDeletingImplCopyWith<
@@ -398,7 +408,10 @@ abstract class _DeleteCollectionStateLoadingDeleting
       _$DeleteCollectionStateLoadingDeletingImpl;
 
   String get deletingTargetTemplateUUID;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of DeleteCollectionState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DeleteCollectionStateLoadingDeletingImplCopyWith<
           _$DeleteCollectionStateLoadingDeletingImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -424,6 +437,8 @@ class __$$DeleteCollectionStateErrorImplCopyWithImpl<$Res>
       $Res Function(_$DeleteCollectionStateErrorImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DeleteCollectionState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -462,7 +477,9 @@ class _$DeleteCollectionStateErrorImpl implements _DeleteCollectionStateError {
   @override
   int get hashCode => Object.hash(runtimeType, message);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DeleteCollectionState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DeleteCollectionStateErrorImplCopyWith<_$DeleteCollectionStateErrorImpl>
@@ -562,7 +579,10 @@ abstract class _DeleteCollectionStateError implements DeleteCollectionState {
       _$DeleteCollectionStateErrorImpl;
 
   String get message;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of DeleteCollectionState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DeleteCollectionStateErrorImplCopyWith<_$DeleteCollectionStateErrorImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -587,6 +607,8 @@ class __$$DeleteCollectionStateDeletedWithSucessImplCopyWithImpl<$Res>
       $Res Function(_$DeleteCollectionStateDeletedWithSucessImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DeleteCollectionState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -632,7 +654,9 @@ class _$DeleteCollectionStateDeletedWithSucessImpl
   int get hashCode =>
       Object.hash(runtimeType, newCollectionAfterDeletingTargetTemplate);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DeleteCollectionState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DeleteCollectionStateDeletedWithSucessImplCopyWith<
@@ -737,7 +761,10 @@ abstract class _DeleteCollectionStateDeletedWithSucess
       _$DeleteCollectionStateDeletedWithSucessImpl;
 
   UserCollectionRoot get newCollectionAfterDeletingTargetTemplate;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of DeleteCollectionState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DeleteCollectionStateDeletedWithSucessImplCopyWith<
           _$DeleteCollectionStateDeletedWithSucessImpl>
       get copyWith => throw _privateConstructorUsedError;

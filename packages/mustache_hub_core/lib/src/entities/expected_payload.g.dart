@@ -15,6 +15,9 @@ _$ExpectedPayloadImpl _$$ExpectedPayloadImplFromJson(
       booleanPipes: (json['booleanPipes'] as List<dynamic>)
           .map((e) => BooleanPipe.fromJson(e as String))
           .toList(),
+      choicePipes: (json['choicePipes'] as List<dynamic>)
+          .map((e) => ChoicePipe.fromJson(e as String))
+          .toList(),
       modelPipes: (json['modelPipes'] as List<dynamic>)
           .map((e) => ModelPipe.fromJson(e as String))
           .toList(),
@@ -25,5 +28,6 @@ Map<String, dynamic> _$$ExpectedPayloadImplToJson(
     <String, dynamic>{
       'textPipes': instance.textPipes.map((e) => e.toJson()).toList(),
       'booleanPipes': instance.booleanPipes.map((e) => e.toJson()).toList(),
+      'choicePipes': instance.choicePipes.map((e) => e.toJson()).toList(),
       'modelPipes': instance.modelPipes.map((e) => e.toJson()).toList(),
     };

@@ -7,13 +7,13 @@ import 'package:mustachehub/generate/presenter/dtos/tree_node_generate_pipe_dto.
 
 class ModelGenerateNodeBuilder extends StatelessWidget {
   final ModelPipeDto rootModelDTO;
-  final String content;
+  final ContentInput output;
   final ExpectedPayload expectedPayload;
   final TreeNodeGeneratePipeDtoPipeModel modelDTONode;
   const ModelGenerateNodeBuilder({
     super.key,
     required this.rootModelDTO,
-    required this.content,
+    required this.output,
     required this.expectedPayload,
     required this.modelDTONode,
   });
@@ -23,7 +23,7 @@ class ModelGenerateNodeBuilder extends StatelessWidget {
     final dto = modelDTONode.pipeDTO;
     final index = modelDTONode.index;
     return ListTile(
-      title: Text('$index ${dto.pipe.name}'),
+      title: Text('$index˚ ${dto.pipe.name}'),
       subtitle: const Text('Model'),
       leading: const Padding(
         padding: EdgeInsets.only(top: 8.0),
@@ -33,7 +33,7 @@ class ModelGenerateNodeBuilder extends StatelessWidget {
         icon: const Icon(Icons.delete),
         onPressed: () {
           final ModelPipeDto? editedPipe = rootModelDTO.deleteModel(
-            pipeId: dto.pipe.pipeId,
+            pipeId: modelDTONode.payloadUUID,
           );
 
           if (editedPipe == null) {
@@ -41,7 +41,7 @@ class ModelGenerateNodeBuilder extends StatelessWidget {
           }
 
           context.read<PayloadCubit>().addModelPayloadValue(
-                content: content,
+                output: output,
                 expectedPayload: expectedPayload,
                 newPipeDTO: editedPipe,
               );

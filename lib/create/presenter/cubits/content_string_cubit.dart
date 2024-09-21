@@ -1,44 +1,71 @@
 import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:mustache_hub_core/mustache_hub_core.dart';
 import 'package:mustachehub/create/presenter/states/content_string_state.dart';
-import 'package:mustachex/mustachex.dart';
+import 'package:uuid/uuid.dart';
 
 class ContentStringCubit extends HydratedCubit<ContentStringState> {
-  ContentStringCubit()
-      : super(const ContentStringState.normal(currentText: ''));
+  final Uuid _uuid;
+  ContentStringCubit({
+    required Uuid uuid,
+  })  : _uuid = uuid,
+        super(ContentStringState.normal(
+            currentText: ContentInput.listOfTexts(
+          texts: [ContentTextSectionInput(uuid: uuid.v7())],
+        )));
 
   void resetToDefault() {
-    emit(const ContentStringState.normal(currentText: ''));
+    emit(ContentStringState.normal(
+        currentText: ContentInput.listOfTexts(
+      texts: [ContentTextSectionInput(uuid: _uuid.v7())],
+    )));
   }
 
-  void setCubit(String text) {
-    try {
-      final parser = Parser(text, null, '{{ }}');
-      final tokens = parser.getTokens();
-      registerTextWithTokens(
-        newText: text,
-        tokens: tokens,
-      );
-    } catch (_, __) {
-      _registerNormalText(
-        newText: text,
-      );
-    }
-  }
-
-  void _registerNormalText({
-    required String newText,
+  void setCubit({
+    required ContentTextSectionInput input,
   }) {
-    emit(ContentStringState.normal(currentText: newText));
+    final String uuid = input.uuid;
+    final newTexts = [...state.currentText.texts];
+    final index = newTexts.indexWhere((element) => element.uuid == uuid);
+    if (index == -1) return;
+    newTexts[index] = input;
+
+    emit(
+      ContentStringState.normal(
+        currentText: ContentInput.listOfTexts(texts: List.from(newTexts)),
+      ),
+    );
   }
 
-  void registerTextWithTokens({
-    required String newText,
-    required List<Token> tokens,
-  }) {
-    emit(ContentStringState.withToken(
-      currentText: newText,
-      tokensInIt: tokens,
-    ));
+  void addNew() {
+    final newTexts = [...state.currentText.texts];
+
+    newTexts.add(ContentTextSectionInput(uuid: _uuid.v7()));
+
+    emit(
+      ContentStringState.normal(
+        currentText: ContentInput.listOfTexts(texts: List.from(newTexts)),
+      ),
+    );
+  }
+
+  void removeAt(String uuid) {
+    final newTexts = [...state.currentText.texts];
+
+    newTexts.removeWhere((element) => element.uuid == uuid);
+
+    emit(
+      ContentStringState.normal(
+        currentText: ContentInput.listOfTexts(texts: List.from(newTexts)),
+      ),
+    );
+  }
+
+  void setStateFromOutput(ContentInput output) {
+    emit(
+      ContentStringState.normal(
+        currentText: output,
+      ),
+    );
   }
 
   @override

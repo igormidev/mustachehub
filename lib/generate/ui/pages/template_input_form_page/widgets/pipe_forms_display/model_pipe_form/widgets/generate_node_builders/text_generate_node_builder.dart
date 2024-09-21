@@ -8,14 +8,14 @@ import 'package:mustachehub/generate/ui/pages/template_input_form_page/widgets/p
 
 class TextGenerateNodeBuilder extends StatelessWidget {
   final ModelPipeDto rootModelDTO;
-  final String content;
+  final ContentInput output;
   final ExpectedPayload expectedPayload;
   final TreeNodeGeneratePipeDtoPipeText textDTONode;
   const TextGenerateNodeBuilder({
     super.key,
     required this.textDTONode,
     required this.rootModelDTO,
-    required this.content,
+    required this.output,
     required this.expectedPayload,
   });
 
@@ -41,16 +41,13 @@ class TextGenerateNodeBuilder extends StatelessWidget {
             mapFunc: (
               PipeDTO<TextPipe, String> pipe,
             ) {
-              return pipe.copyWith(
-                payloadValue: text,
-              );
+              return pipe.copyWith(payloadValue: text);
             },
           );
           if (editedPipe == null) return;
-          // return;
 
           await bloc.addModelPayloadValue(
-            content: content,
+            output: output,
             expectedPayload: expectedPayload,
             newPipeDTO: editedPipe,
           );

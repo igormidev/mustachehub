@@ -35,13 +35,13 @@ mixin SaveTemplateBottomSheetMethods on State<SaveTemplateBottomSheet> {
 
   String? _getInitialPackageName() {
     return widget.packageFormCubit.state.mapOrNull(
-      normal: (_) => _.formData.title,
+      normal: (value) => value.formData.title,
     );
   }
 
   String? _getInitialPackageDescription() {
     return widget.packageFormCubit.state.mapOrNull(
-      normal: (_) => _.formData.description,
+      normal: (value) => value.formData.description,
     );
   }
 
@@ -71,7 +71,7 @@ mixin SaveTemplateBottomSheetMethods on State<SaveTemplateBottomSheet> {
 
     if (newPackageInfo == null) return;
 
-    final contentCubit = context.read<ContentStringCubit>();
+    final contentCubit = widget.contentCubit;
     final ContentStringState contentState = contentCubit.state;
 
     if (isEditing) {
@@ -88,7 +88,7 @@ mixin SaveTemplateBottomSheetMethods on State<SaveTemplateBottomSheet> {
           id: id,
           info: newPackageInfo,
           payload: expectectedPayload,
-          content: contentState.currentText,
+          output: contentState.currentText,
           metadata: metadata.copyWith(
             // usersPermission: {
             //   ...metadata.usersPermission,
@@ -102,7 +102,7 @@ mixin SaveTemplateBottomSheetMethods on State<SaveTemplateBottomSheet> {
     } else {
       FirebaseAnalytics.instance.logEvent(name: 'template_create');
       widget.templateUploadCubit.createPackage(
-        content: contentState.currentText,
+        output: contentState.currentText,
         packageInfo: newPackageInfo,
         expectedPayload: expectectedPayload,
       );

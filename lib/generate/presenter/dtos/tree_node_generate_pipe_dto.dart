@@ -20,6 +20,11 @@ abstract class TreeNodeGeneratePipeDto with _$TreeNodeGeneratePipeDto {
     required BooleanPipeDto pipeDTO,
   }) = TreeNodeGeneratePipeDtoPipeBoolean;
 
+  factory TreeNodeGeneratePipeDto.choice({
+    required String payloadUUID,
+    required ChoicePipeDto pipeDTO,
+  }) = TreeNodeGeneratePipeDtoPipeChoice;
+
   factory TreeNodeGeneratePipeDto.model({
     required String payloadUUID,
     required ModelPipeDto pipeDTO,

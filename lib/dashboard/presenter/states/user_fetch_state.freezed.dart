@@ -12,7 +12,7 @@ part of 'user_fetch_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$UserFetchState {
@@ -94,6 +94,9 @@ class _$UserFetchStateCopyWithImpl<$Res, $Val extends UserFetchState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of UserFetchState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -111,6 +114,9 @@ class __$$UserFetchStateInitialImplCopyWithImpl<$Res>
   __$$UserFetchStateInitialImplCopyWithImpl(_$UserFetchStateInitialImpl _value,
       $Res Function(_$UserFetchStateInitialImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of UserFetchState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -237,6 +243,9 @@ class __$$UserFetchStateLoadingImplCopyWithImpl<$Res>
   __$$UserFetchStateLoadingImplCopyWithImpl(_$UserFetchStateLoadingImpl _value,
       $Res Function(_$UserFetchStateLoadingImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of UserFetchState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -365,6 +374,8 @@ class __$$UserFetchStateErrorImplCopyWithImpl<$Res>
       $Res Function(_$UserFetchStateErrorImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of UserFetchState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -403,7 +414,9 @@ class _$UserFetchStateErrorImpl implements _UserFetchStateError {
   @override
   int get hashCode => Object.hash(runtimeType, error);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of UserFetchState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$UserFetchStateErrorImplCopyWith<_$UserFetchStateErrorImpl> get copyWith =>
@@ -500,7 +513,10 @@ abstract class _UserFetchStateError implements UserFetchState {
       _$UserFetchStateErrorImpl;
 
   CredentialAuthException get error;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of UserFetchState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$UserFetchStateErrorImplCopyWith<_$UserFetchStateErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -522,6 +538,9 @@ class __$$UserFetchStateDoneWithoutUserImplCopyWithImpl<$Res>
       _$UserFetchStateDoneWithoutUserImpl _value,
       $Res Function(_$UserFetchStateDoneWithoutUserImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of UserFetchState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -654,6 +673,8 @@ class __$$UserFetchStateDoneWithUserImplCopyWithImpl<$Res>
       $Res Function(_$UserFetchStateDoneWithUserImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of UserFetchState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -703,7 +724,9 @@ class _$UserFetchStateDoneWithUserImpl implements _UserFetchStateDoneWithUser {
   @override
   int get hashCode => Object.hash(runtimeType, userInfo, accountInfo);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of UserFetchState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$UserFetchStateDoneWithUserImplCopyWith<_$UserFetchStateDoneWithUserImpl>
@@ -803,7 +826,10 @@ abstract class _UserFetchStateDoneWithUser implements UserFetchState {
 
   UserProfile get userInfo;
   AccountInfo get accountInfo;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of UserFetchState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$UserFetchStateDoneWithUserImplCopyWith<_$UserFetchStateDoneWithUserImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

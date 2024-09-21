@@ -30,6 +30,6 @@ _$CurrentTemplateTypeStateWithExistingTemplateImpl
 Map<String, dynamic> _$$CurrentTemplateTypeStateWithExistingTemplateImplToJson(
         _$CurrentTemplateTypeStateWithExistingTemplateImpl instance) =>
     <String, dynamic>{
-      'template': instance.template,
+      'template': instance.template.toJson(),
       'runtimeType': instance.$type,
     };

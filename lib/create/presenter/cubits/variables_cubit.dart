@@ -13,6 +13,7 @@ class VariablesCubit extends HydratedCubit<VariablesState> {
           flatMap: {},
           textPipes: [],
           booleanPipes: [],
+          choicePipes: [],
           modelPipes: [],
         ));
 
@@ -21,6 +22,7 @@ class VariablesCubit extends HydratedCubit<VariablesState> {
       flatMap: {},
       textPipes: [],
       booleanPipes: [],
+      choicePipes: [],
       modelPipes: [],
     ));
   }
@@ -28,17 +30,20 @@ class VariablesCubit extends HydratedCubit<VariablesState> {
   void set({
     required List<TextPipe> textPipes,
     required List<BooleanPipe> booleanPipes,
+    required List<ChoicePipe> choicePipes,
     required List<ModelPipe> modelPipes,
   }) {
     final flatMap = _tokenIdentifierFlatMapAdapter.toFlatMap(
       textPipes: textPipes,
       booleanPipes: booleanPipes,
+      choicePipes: choicePipes,
       modelPipes: modelPipes,
     );
     emit(VariablesState(
       flatMap: flatMap,
       textPipes: textPipes,
       booleanPipes: booleanPipes,
+      choicePipes: choicePipes,
       modelPipes: modelPipes,
     ));
   }
@@ -49,12 +54,14 @@ class VariablesCubit extends HydratedCubit<VariablesState> {
     final flatMap = _tokenIdentifierFlatMapAdapter.toFlatMap(
       textPipes: textPipes,
       booleanPipes: state.booleanPipes,
+      choicePipes: state.choicePipes,
       modelPipes: state.modelPipes,
     );
     emit(VariablesState(
       flatMap: flatMap,
       textPipes: textPipes,
       booleanPipes: state.booleanPipes,
+      choicePipes: state.choicePipes,
       modelPipes: state.modelPipes,
     ));
   }
@@ -65,12 +72,32 @@ class VariablesCubit extends HydratedCubit<VariablesState> {
     final flatMap = _tokenIdentifierFlatMapAdapter.toFlatMap(
       textPipes: state.textPipes,
       booleanPipes: booleanPipes,
+      choicePipes: state.choicePipes,
       modelPipes: state.modelPipes,
     );
     emit(VariablesState(
       flatMap: flatMap,
       textPipes: state.textPipes,
       booleanPipes: booleanPipes,
+      choicePipes: state.choicePipes,
+      modelPipes: state.modelPipes,
+    ));
+  }
+
+  void updateChoiceVariables({
+    required List<ChoicePipe> choicePipes,
+  }) {
+    final flatMap = _tokenIdentifierFlatMapAdapter.toFlatMap(
+      textPipes: state.textPipes,
+      booleanPipes: state.booleanPipes,
+      choicePipes: choicePipes,
+      modelPipes: state.modelPipes,
+    );
+    emit(VariablesState(
+      flatMap: flatMap,
+      textPipes: state.textPipes,
+      booleanPipes: state.booleanPipes,
+      choicePipes: choicePipes,
       modelPipes: state.modelPipes,
     ));
   }
@@ -81,12 +108,14 @@ class VariablesCubit extends HydratedCubit<VariablesState> {
     final flatMap = _tokenIdentifierFlatMapAdapter.toFlatMap(
       textPipes: state.textPipes,
       booleanPipes: state.booleanPipes,
+      choicePipes: state.choicePipes,
       modelPipes: modelPipes,
     );
     emit(VariablesState(
       flatMap: flatMap,
       textPipes: state.textPipes,
       booleanPipes: state.booleanPipes,
+      choicePipes: state.choicePipes,
       modelPipes: modelPipes,
     ));
   }
@@ -99,8 +128,8 @@ class VariablesCubit extends HydratedCubit<VariablesState> {
     } catch (e) {
       // } catch (e, s) {
       // log(e.toString(), stackTrace: s);
+      return null;
     }
-    return null;
   }
 
   @override

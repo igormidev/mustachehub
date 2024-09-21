@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:mustache_hub_core/mustache_hub_core.dart';
 import 'package:result_dart/result_dart.dart';
 
@@ -29,7 +30,8 @@ class TemplateRepositoryImpl implements ITemplateRepository {
       try {
         final template = Template.fromJson(responseData);
         return template.toSuccess();
-      } catch (_) {
+      } catch (e, s) {
+        debugPrint('Error while parsing template:\n\n$e\n\n$s');
         return SourceError.cast(
           message:
               'Fatal failure because the server is returning an invalid collection. '

@@ -6,18 +6,18 @@ version: 1.0.1
 
 dependency_overrides: 
   uuid: ^4.3.3
-  firebase_core: ^3.2.0
-  firebase_auth: ^5.1.2
-  firebase_storage: ^12.1.1
-  cloud_firestore: ^5.1.0
-  firebase_analytics: ^11.2.0
+
+  firebase_analytics: ^11.3.0
+  firebase_remote_config: ^5.1.0
+  firebase_core: ^3.4.0
+  firebase_storage: ^12.2.0
+  firebase_storage_web: ^3.9.13
+  cloud_firestore: ^5.3.0
+  cloud_firestore_web: ^4.1.2
+  firebase_crashlytics: ^4.1.0
+  firebase_messaging: ^15.1.0
+
   scrollable_positioned_list: ^0.3.8
-  # firebase_crashlytics: ^4.0.3
-  # firebase_analytics:
-  # firebase_core: ^2.24.2
-  # firebase_auth: ^4.16.0
-  # firebase_storage: ^11.6.0
-  # cloud_firestore: ^4.15.9
   meta: 1.15.0
   test_api: ^0.7.3
   cupertino_icons: ^1.0.8
@@ -44,7 +44,7 @@ dependency_overrides:
   fluttertoast: ^8.2.6
   dart_debouncer: ^1.1.0
   dotted_border: ^2.1.0
-  cursor_autocomplete_options: ^1.5.0
+  cursor_autocomplete_options: ^1.7.1
   path_provider: ^2.1.3
   flex_color_scheme: ^7.3.1
   collection: ^1.19.0
@@ -55,12 +55,14 @@ dependency_overrides:
   freezed: ^2.5.7
   test: ^1.25.8
   lints: ^4.0.0 
+  material_symbols_icons:
 
   mustachex: 
     path: cloned_apis/mustachex  
 
 environment:
   sdk: '>=3.4.4 <4.0.0'
+  
 dependencies:
   flutter:
     sdk: flutter 
@@ -77,6 +79,7 @@ dependencies:
   bloc:
   flutter_bloc:
   replay_bloc:
+  material_symbols_icons:
   enchanted_regex:
   hydrated_bloc:
   go_router:
@@ -108,14 +111,16 @@ dependencies:
   mustachex:
   mason: 
     path: cloned_apis/mason
-
-  firebase_core: 
-  firebase_auth: 
-  firebase_storage:
-  cloud_firestore: 
-  # firebase_crashlytics: 
-  firebase_analytics:
-
+ 
+  firebase_analytics: ^11.3.0
+  firebase_remote_config: ^5.1.0
+  firebase_core: ^3.4.0
+  firebase_storage: ^12.2.0
+  firebase_storage_web: ^3.9.13
+  cloud_firestore: ^5.3.0
+  cloud_firestore_web: ^4.1.2
+  firebase_crashlytics: ^4.1.0
+  firebase_messaging: ^15.1.0
   
 
 dev_dependencies:

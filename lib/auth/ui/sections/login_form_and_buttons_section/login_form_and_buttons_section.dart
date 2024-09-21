@@ -67,10 +67,12 @@ class _LoginFormAndButtonsSectionState extends State<LoginFormAndButtonsSection>
               );
 
               return FilledButton(
-                onPressed: state.maybeMap(
-                  loadingWithCredentials: null,
-                  orElse: () => _makeLogin,
-                ),
+                onPressed: isCredentialsLoading
+                    ? null
+                    : state.maybeMap(
+                        loadingWithCredentials: null,
+                        orElse: () => _makeLogin,
+                      ),
                 child: Builder(
                   builder: (context) {
                     if (isCredentialsLoading) {

@@ -58,13 +58,5 @@ ThemeData getTheme(ColorScheme colorScheme) {
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(),
     ),
-    elevatedButtonTheme: ElevatedButtonThemeData(
-      style: ElevatedButton.styleFrom(
-        alignment: Alignment.centerLeft,
-        backgroundColor: colorScheme.tertiaryContainer,
-        foregroundColor: colorScheme.tertiary,
-        padding: const EdgeInsets.symmetric(horizontal: 8),
-      ),
-    ),
   );
 }

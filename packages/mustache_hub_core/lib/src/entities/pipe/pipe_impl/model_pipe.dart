@@ -1,24 +1,29 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-
 part of '../pipe.dart';
 
 class ModelPipe implements Pipe {
   @override
   String name;
+
   @override
   final String description;
+
   @override
   String mustacheName;
+
   @override
   final String pipeId;
 
   List<TextPipe> textPipes;
   List<BooleanPipe> booleanPipes;
+  List<ChoicePipe> choicePipes;
   List<ModelPipe> modelPipes;
 
   /// Returns true if the pipe dosen't have any pipe inside it
   bool isEmpty() {
-    return textPipes.isEmpty && booleanPipes.isEmpty && modelPipes.isEmpty;
+    return textPipes.isEmpty &&
+        booleanPipes.isEmpty &&
+        modelPipes.isEmpty &&
+        choicePipes.isEmpty;
   }
 
   ModelPipe({
@@ -28,8 +33,9 @@ class ModelPipe implements Pipe {
     required this.mustacheName,
     required this.textPipes,
     required this.booleanPipes,
+    required this.choicePipes,
     required this.modelPipes,
-  }) : pipeId = pipeId ?? const Uuid().v1();
+  }) : pipeId = pipeId ?? const Uuid().v7();
 
   ModelPipe.emptyPlaceholder()
       : name = '',
@@ -37,8 +43,9 @@ class ModelPipe implements Pipe {
         mustacheName = '',
         textPipes = const [],
         booleanPipes = const [],
+        choicePipes = const [],
         modelPipes = const [],
-        pipeId = const Uuid().v1();
+        pipeId = const Uuid().v7();
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -48,6 +55,7 @@ class ModelPipe implements Pipe {
       'pipeId': pipeId,
       'textPipes': textPipes.map((x) => x.toMap()).toList(),
       'booleanPipes': booleanPipes.map((x) => x.toMap()).toList(),
+      'choicePipes': choicePipes.map((x) => x.toMap()).toList(),
       'modelPipes': modelPipes.map((x) => x.toMap()).toList(),
     };
   }
@@ -66,6 +74,11 @@ class ModelPipe implements Pipe {
       booleanPipes: List<BooleanPipe>.from(
         (map['booleanPipes'] as List<dynamic>).map<BooleanPipe>(
           (x) => BooleanPipe.fromMap(x as Map<String, dynamic>),
+        ),
+      ),
+      choicePipes: List<ChoicePipe>.from(
+        (map['choicePipes'] as List<dynamic>).map<ChoicePipe>(
+          (x) => ChoicePipe.fromMap(x as Map<String, dynamic>),
         ),
       ),
       modelPipes: List<ModelPipe>.from(
@@ -88,6 +101,7 @@ class ModelPipe implements Pipe {
     String? pipeId,
     List<TextPipe>? textPipes,
     List<BooleanPipe>? booleanPipes,
+    List<ChoicePipe>? choicePipes,
     List<ModelPipe>? modelPipes,
   }) {
     return ModelPipe(
@@ -97,6 +111,7 @@ class ModelPipe implements Pipe {
       pipeId: pipeId ?? this.pipeId,
       textPipes: textPipes ?? this.textPipes,
       booleanPipes: booleanPipes ?? this.booleanPipes,
+      choicePipes: choicePipes ?? this.choicePipes,
       modelPipes: modelPipes ?? this.modelPipes,
     );
   }

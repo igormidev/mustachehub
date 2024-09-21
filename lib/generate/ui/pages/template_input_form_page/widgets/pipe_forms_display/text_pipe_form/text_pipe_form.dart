@@ -12,11 +12,11 @@ import 'package:mustachehub/generate/presenter/states/payload_state.dart';
 import 'package:mustachehub/generate/ui/pages/template_input_form_page/widgets/pipe_forms_display/text_pipe_form/widgets/text_pipe_form_field.dart';
 
 class TextPipeForm extends StatelessWidget {
-  final String content;
+  final ContentInput output;
   final ExpectedPayload expectedPayload;
   const TextPipeForm({
     super.key,
-    required this.content,
+    required this.output,
     required this.expectedPayload,
   });
 
@@ -43,37 +43,38 @@ class TextPipeForm extends StatelessWidget {
             CustomHeader(
               headerTitle: 'Text variables',
               moreOptions: [
-                PopupMenuItem(
-                  enabled: false,
-                  child: DropdownMenu<int?>(
-                    width: 150,
-                    leadingIcon: const Tooltip(
-                      message: 'Select how much textfields will be show in '
-                          'one the row.\nIf set to auto, will pick '
-                          'automatically the best size depending on how '
-                          'much space you have in screen.',
-                      child: Icon(Icons.help),
+                if (pipes.length > 1)
+                  PopupMenuItem(
+                    enabled: false,
+                    child: DropdownMenu<int?>(
+                      width: 150,
+                      leadingIcon: const Tooltip(
+                        message: 'Select how much textfields will be show in '
+                            'one the row.\nIf set to auto, will pick '
+                            'automatically the best size depending on how '
+                            'much space you have in screen.',
+                        child: Icon(Icons.help),
+                      ),
+                      label: const Text('Items per row'),
+                      onSelected: (value) {
+                        context.read<FormStatsCubit>().changeGridSize(value);
+                      },
+                      dropdownMenuEntries: const [
+                        DropdownMenuEntry(
+                          value: null,
+                          label: 'Auto',
+                        ),
+                        DropdownMenuEntry(
+                          value: 1,
+                          label: 'One',
+                        ),
+                        DropdownMenuEntry(
+                          value: 2,
+                          label: 'Two',
+                        ),
+                      ],
                     ),
-                    label: const Text('Items per row'),
-                    onSelected: (value) {
-                      context.read<FormStatsCubit>().changeGridSize(value);
-                    },
-                    dropdownMenuEntries: const [
-                      DropdownMenuEntry(
-                        value: null,
-                        label: 'Auto',
-                      ),
-                      DropdownMenuEntry(
-                        value: 1,
-                        label: 'One',
-                      ),
-                      DropdownMenuEntry(
-                        value: 2,
-                        label: 'Two',
-                      ),
-                    ],
                   ),
-                ),
               ],
             ),
             const SizedBox(height: 8),
@@ -116,7 +117,7 @@ class TextPipeForm extends StatelessWidget {
                                     pipeDto: dto,
                                     onChangedCallback: (text) async {
                                       return await bloc.addTextPayloadValue(
-                                        content: content,
+                                        output: output,
                                         generatorData: expectedPayload,
                                         pipe: dto.pipe,
                                         value: text,

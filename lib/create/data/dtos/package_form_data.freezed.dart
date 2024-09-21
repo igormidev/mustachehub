@@ -12,7 +12,7 @@ part of 'package_form_data.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 PackageFormData _$PackageFormDataFromJson(Map<String, dynamic> json) {
   switch (json['runtimeType']) {
@@ -78,8 +78,13 @@ mixin _$PackageFormData {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  /// Serializes this PackageFormData to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of PackageFormData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PackageFormDataCopyWith<PackageFormData> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -103,6 +108,8 @@ class _$PackageFormDataCopyWithImpl<$Res, $Val extends PackageFormData>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of PackageFormData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -144,6 +151,8 @@ class __$$PackageFormDataCreatingFromZeroImplCopyWithImpl<$Res>
       $Res Function(_$PackageFormDataCreatingFromZeroImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PackageFormData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -198,11 +207,13 @@ class _$PackageFormDataCreatingFromZeroImpl
                 other.description == description));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, title, description);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PackageFormData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PackageFormDataCreatingFromZeroImplCopyWith<
@@ -301,8 +312,11 @@ abstract class _PackageFormDataCreatingFromZero implements PackageFormData {
   String get title;
   @override
   String get description;
+
+  /// Create a copy of PackageFormData
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PackageFormDataCreatingFromZeroImplCopyWith<
           _$PackageFormDataCreatingFromZeroImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -333,6 +347,8 @@ class __$$PackageFormDataEditingMyPackageImplCopyWithImpl<$Res>
       $Res Function(_$PackageFormDataEditingMyPackageImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PackageFormData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -356,6 +372,8 @@ class __$$PackageFormDataEditingMyPackageImplCopyWithImpl<$Res>
     ));
   }
 
+  /// Create a copy of PackageFormData
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $PackageInfoCopyWith<$Res> get previousInfoPackage {
@@ -407,12 +425,14 @@ class _$PackageFormDataEditingMyPackageImpl
                 other.previousInfoPackage == previousInfoPackage));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, title, description, previousInfoPackage);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PackageFormData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PackageFormDataEditingMyPackageImplCopyWith<
@@ -514,8 +534,11 @@ abstract class _PackageFormDataEditingMyPackage implements PackageFormData {
   @override
   String get description;
   PackageInfo get previousInfoPackage;
+
+  /// Create a copy of PackageFormData
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PackageFormDataEditingMyPackageImplCopyWith<
           _$PackageFormDataEditingMyPackageImpl>
       get copyWith => throw _privateConstructorUsedError;

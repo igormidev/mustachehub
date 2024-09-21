@@ -64,6 +64,7 @@ import 'package:mustachehub/premium/presenter/cubit/billing_configurations_cubit
 import 'package:mustachehub/premium/ui/views/became_premium_view.dart';
 import 'package:mustachehub/settings/ui/views/settings_view/settings_view.dart';
 import 'package:text_analyser/text_analyser.dart';
+import 'package:uuid/uuid.dart';
 
 class NavigatorService {
   static NavigatorService? _instance;
@@ -217,13 +218,16 @@ final router = GoRouter(
                 RepositoryProvider<TokenIdentifierTextDisplayAdapter>(
                   create: (context) => TokenIdentifierTextDisplayAdapter(),
                 ),
-                RepositoryProvider<TextAnalyserBase>(
-                  create: (context) => const TextAnalyserBase(),
+                RepositoryProvider<TextAnalyser>(
+                  create: (context) => TextAnalyser(),
                 ),
                 RepositoryProvider<ITemplateRepository>(
                   create: (context) => TemplateRepositoryImpl(),
                 ),
-                BlocProvider(create: (context) => ContentStringCubit()),
+                BlocProvider(
+                    create: (context) => ContentStringCubit(
+                          uuid: const Uuid(),
+                        )),
                 BlocProvider(
                   create: (context) => CurrentTemplateTypeCubit(),
                 ),
@@ -238,7 +242,7 @@ final router = GoRouter(
                 BlocProvider(create: (context) => PackageFormCubit()),
                 BlocProvider(
                   create: (context) => SuggestionCubit(
-                    textAnalyser: context.read<TextAnalyserBase>(),
+                    textAnalyser: context.read<TextAnalyser>(),
                   ),
                 ),
                 BlocProvider(create: (context) => TabControllCubit()),

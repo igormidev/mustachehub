@@ -28,7 +28,7 @@ class CreateTemplateBottomNavigationBar extends StatelessWidget {
             BottomNavigationBarItem(
               icon: Icon(Icons.description_outlined),
               activeIcon: Icon(Icons.description),
-              label: 'Content text',
+              label: 'Template text',
               tooltip: 'Write a text that uses the mustache variables. '
                   'This text is the template that will be used to generate the texts.',
             ),

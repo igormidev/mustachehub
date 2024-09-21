@@ -65,7 +65,8 @@ class AddMustacheDelimmiterInputFormatter extends TextInputFormatter {
 
     if (varState.textPipes.isEmpty &&
         varState.booleanPipes.isEmpty &&
-        varState.modelPipes.isEmpty) {
+        varState.modelPipes.isEmpty &&
+        varState.choicePipes.isEmpty) {
       return;
     }
     onAddedDellimiter();

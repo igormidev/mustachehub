@@ -24,6 +24,7 @@ class ModelPipeDisplayCard extends StatelessWidget {
       title: pipe!.name,
       textPipes: pipe!.textPipes,
       booleanPipes: pipe!.booleanPipes,
+      choicePipes: pipe!.choicePipes,
       modelPipes: pipe!.modelPipes,
     );
 

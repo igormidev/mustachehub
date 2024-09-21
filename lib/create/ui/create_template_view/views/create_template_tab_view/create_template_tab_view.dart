@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mustachehub/app_core/theme/components/error_snack_bar.dart';
+import 'package:mustachehub/create/presenter/cubits/content_string_cubit.dart';
 import 'package:mustachehub/create/presenter/cubits/tab_controll_cubit.dart';
+import 'package:mustachehub/create/presenter/states/content_string_state.dart';
 import 'package:mustachehub/create/ui/create_template_view/tabs/template_input_form_tab_view/template_input_form_tab_view.dart';
 import 'package:mustachehub/create/ui/create_template_view/tabs/text_context_tab/text_content_tab.dart';
 import 'package:mustachehub/create/ui/create_template_view/tabs/variables_creation_tab/variables_creation_tab.dart';
@@ -8,7 +11,8 @@ import 'package:mustachehub/create/ui/create_template_view/views/create_template
 import 'package:mustachehub/generate/presenter/mixins/set_generator_dependencies_mixin.dart';
 
 class CreateTemplateTabView extends StatefulWidget {
-  const CreateTemplateTabView({super.key});
+  final GlobalKey<FormState> formKey;
+  const CreateTemplateTabView({super.key, required this.formKey});
 
   @override
   State<CreateTemplateTabView> createState() => _CreateTemplateTabViewState();
@@ -56,13 +60,33 @@ class _CreateTemplateTabViewState extends State<CreateTemplateTabView>
         controller: tabController,
         children: [
           VariablesCreationTab(),
-          const TextContentTab(),
+          TextContentTab(
+            formKey: widget.formKey,
+          ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Scaffold(
               body: const TemplateInputFormPageView(),
               floatingActionButton: FloatingActionButton.extended(
-                onPressed: () => openTemplateOutputDialog(context),
+                tooltip: 'See the text output preview',
+                onPressed: () {
+                  final isContentValid =
+                      context.read<ContentStringCubit>().state.validate();
+
+                  if (isContentValid == false) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      ErrorSnackBar(
+                        context: context,
+                        text: 'Invalid content type. ',
+                        description:
+                            'Please fix the errors and ensure that all fields are filled in',
+                      ),
+                    );
+                    return;
+                  }
+
+                  openTemplateOutputDialog(context);
+                },
                 label: const Text('See text'),
                 icon: const Icon(Icons.generating_tokens),
               ),

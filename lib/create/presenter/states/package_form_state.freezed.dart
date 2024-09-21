@@ -12,7 +12,7 @@ part of 'package_form_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 PackageFormState _$PackageFormStateFromJson(Map<String, dynamic> json) {
   switch (json['runtimeType']) {
@@ -67,6 +67,8 @@ mixin _$PackageFormState {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  /// Serializes this PackageFormState to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 }
 
@@ -86,6 +88,9 @@ class _$PackageFormStateCopyWithImpl<$Res, $Val extends PackageFormState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of PackageFormState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -109,6 +114,8 @@ class __$$PackageFormStateNormalImplCopyWithImpl<$Res>
       $Res Function(_$PackageFormStateNormalImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PackageFormState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -122,6 +129,8 @@ class __$$PackageFormStateNormalImplCopyWithImpl<$Res>
     ));
   }
 
+  /// Create a copy of PackageFormState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $PackageFormDataCopyWith<$Res> get formData {
@@ -160,11 +169,13 @@ class _$PackageFormStateNormalImpl implements _PackageFormStateNormal {
                 other.formData == formData));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, formData);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PackageFormState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PackageFormStateNormalImplCopyWith<_$PackageFormStateNormalImpl>
@@ -249,7 +260,10 @@ abstract class _PackageFormStateNormal implements PackageFormState {
       _$PackageFormStateNormalImpl.fromJson;
 
   PackageFormData get formData;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of PackageFormState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PackageFormStateNormalImplCopyWith<_$PackageFormStateNormalImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -270,6 +284,9 @@ class __$$PackageFormStateLoadingImplCopyWithImpl<$Res>
       _$PackageFormStateLoadingImpl _value,
       $Res Function(_$PackageFormStateLoadingImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of PackageFormState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -296,7 +313,7 @@ class _$PackageFormStateLoadingImpl implements _PackageFormStateLoading {
             other is _$PackageFormStateLoadingImpl);
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => runtimeType.hashCode;
 

@@ -24,7 +24,7 @@ class PackageFormRepositoryImpl implements IPackageFormRepository {
 
   @override
   Future<TemplateUploadState> createPackage({
-    required String content,
+    required ContentInput output,
     required PackageInfo packageInfo,
     required ExpectedPayload expectedPayload,
   }) async {
@@ -39,11 +39,11 @@ class PackageFormRepositoryImpl implements IPackageFormRepository {
 
     return _wrapper(
       mapper: (UserCollectionRoot collection) async {
-        final uuid = _uuid.v4();
+        final uuid = _uuid.v7();
         final template = Template(
           id: uuid,
           info: packageInfo,
-          content: content,
+          output: output,
           metadata: TemplateMetadata(
             createdAt: now,
             updatedAt: now,
@@ -102,7 +102,7 @@ class PackageFormRepositoryImpl implements IPackageFormRepository {
           (oldTemplate) => template.copyWith(
             info: template.info,
             payload: template.payload,
-            content: template.content,
+            output: template.output,
             metadata:
                 template.metadata.copyWith(updatedAt: now, usersPermission: {
               ...oldTemplate.metadata.usersPermission,

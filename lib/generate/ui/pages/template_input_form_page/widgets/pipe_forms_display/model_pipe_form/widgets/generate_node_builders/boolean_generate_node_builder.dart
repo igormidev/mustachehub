@@ -8,14 +8,14 @@ import 'package:mustachehub/generate/ui/pages/template_input_form_page/widgets/p
 
 class BooleanGenerateNodeBuilder extends StatelessWidget {
   final ModelPipeDto rootModelDTO;
-  final String content;
+  final ContentInput output;
   final ExpectedPayload expectedPayload;
   final TreeNodeGeneratePipeDtoPipeBoolean booleanDTONode;
   const BooleanGenerateNodeBuilder({
     super.key,
     required this.booleanDTONode,
     required this.rootModelDTO,
-    required this.content,
+    required this.output,
     required this.expectedPayload,
   });
 
@@ -39,16 +39,14 @@ class BooleanGenerateNodeBuilder extends StatelessWidget {
             mapFunc: (
               PipeDTO<BooleanPipe, bool> pipe,
             ) {
-              return pipe.copyWith(
-                payloadValue: value,
-              );
+              return pipe.copyWith(payloadValue: value);
             },
           );
 
           if (editedPipe == null) return;
 
           await bloc.addModelPayloadValue(
-            content: content,
+            output: output,
             expectedPayload: expectedPayload,
             newPipeDTO: editedPipe,
           );

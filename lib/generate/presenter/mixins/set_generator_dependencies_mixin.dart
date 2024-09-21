@@ -8,24 +8,26 @@ import 'package:mustachehub/generate/presenter/states/payload_state.dart';
 mixin SetGeneratorDependenciesMixin {
   Future<void> setDependencies({
     required BuildContext context,
-    required String content,
+    required ContentInput output,
     required List<TextPipe> textPipes,
     required List<BooleanPipe> booleanPipes,
+    required List<ChoicePipe> choicePipes,
     required List<ModelPipe> modelPipes,
   }) async {
     final payloadCubit = context.read<PayloadCubit>();
     final outputCubit = context.read<ContentCubit>();
     await payloadCubit.updateContent(
-      content: content,
+      output: output,
       expectedPayload: ExpectedPayload(
         textPipes: textPipes,
         booleanPipes: booleanPipes,
+        choicePipes: choicePipes,
         modelPipes: modelPipes,
       ),
       expectedPayloadDto: null,
     );
     if (payloadCubit.state is InitialPayloadState) {
-      outputCubit.setPendency(content);
+      outputCubit.setPendency(output);
     }
   }
 }

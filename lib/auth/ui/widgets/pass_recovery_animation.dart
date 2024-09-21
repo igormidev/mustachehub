@@ -24,13 +24,13 @@ class PassRecoveryAnimation extends StatelessWidget {
                 ['**', 'Path $e', '**'],
                 value: Theme.of(context).colorScheme.primary,
               );
-            }).toList(),
+            }),
             ...[456, 461].map((e) {
               return ValueDelegate.color(
                 ['**', 'Path $e', '**'],
                 value: Theme.of(context).colorScheme.secondaryContainer,
               );
-            }).toList(),
+            }),
             ValueDelegate.color(
               ['**', 'Floor', '**'],
               value: Theme.of(context).colorScheme.primaryContainer,
@@ -44,7 +44,7 @@ class PassRecoveryAnimation extends StatelessWidget {
                 ['**', 'Path $e', '**'],
                 value: Theme.of(context).colorScheme.secondary,
               );
-            }).toList(),
+            }),
           ],
         ),
       ),

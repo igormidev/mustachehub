@@ -8,7 +8,7 @@ import 'package:mustachehub/generate/ui/pages/text_output_page/text_output_page.
 
 class TextOutputGeneratorView extends StatefulWidget {
   final ExpectedPayload generatorData;
-  final String content;
+  final ContentInput content;
 
   const TextOutputGeneratorView({
     super.key,
@@ -21,10 +21,11 @@ class TextOutputGeneratorView extends StatefulWidget {
     required Template template,
   }) : this(
           key: key,
-          content: template.content,
+          content: template.output,
           generatorData: ExpectedPayload(
             textPipes: template.payload.textPipes,
             booleanPipes: template.payload.booleanPipes,
+            choicePipes: template.payload.choicePipes,
             modelPipes: template.payload.modelPipes,
           ),
         );
@@ -42,9 +43,10 @@ class _TextOutputGeneratorViewState extends State<TextOutputGeneratorView>
     Future.microtask(() async {
       setDependencies(
         context: context,
-        content: widget.content,
+        output: widget.content,
         textPipes: widget.generatorData.textPipes,
         booleanPipes: widget.generatorData.booleanPipes,
+        choicePipes: widget.generatorData.choicePipes,
         modelPipes: widget.generatorData.modelPipes,
       );
     });
@@ -61,13 +63,13 @@ class _TextOutputGeneratorViewState extends State<TextOutputGeneratorView>
           Expanded(
             child: TemplateInputFormPage(
               generatorData: widget.generatorData,
-              content: widget.content,
+              output: widget.content,
             ),
           ),
           const VerticalDivider(width: 20),
           Expanded(
             child: TextOutputPage(
-              content: widget.content,
+              output: widget.content,
               expectedPayload: widget.generatorData,
               formKey: formKey,
             ),

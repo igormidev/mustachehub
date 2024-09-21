@@ -6,8 +6,8 @@ part 'suggestion_state.freezed.dart';
 @freezed
 abstract class SuggestionState with _$SuggestionState {
   factory SuggestionState.withIdentifiers({
-    required Set<VariableImplementation> tokenIdentifiers,
-    required List<AnalysedSegment> segments,
+    required Set<ChoosableVariableImplementations> tokenIdentifiers,
+    required List<AnalysedSegmentStatus> segments,
   }) = _SuggestionStateWithIdentifiers;
 
   factory SuggestionState.undefined() = _SuggestionStateUndefined;

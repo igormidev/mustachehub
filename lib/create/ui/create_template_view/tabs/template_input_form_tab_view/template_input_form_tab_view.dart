@@ -24,9 +24,10 @@ class _TemplateInputFormPageViewState extends State<TemplateInputFormPageView>
     final contentState = context.read<ContentStringCubit>().state;
     setDependencies(
       context: context,
-      content: contentState.currentText,
+      output: contentState.currentText,
       textPipes: varState.textPipes,
       booleanPipes: varState.booleanPipes,
+      choicePipes: varState.choicePipes,
       modelPipes: varState.modelPipes,
     );
     super.initState();
@@ -37,11 +38,13 @@ class _TemplateInputFormPageViewState extends State<TemplateInputFormPageView>
     return BlocConsumer<ContentStringCubit, ContentStringState>(
       listener: (context, contentState) async {
         final varState = context.read<VariablesCubit>().state;
+
         setDependencies(
           context: context,
-          content: contentState.currentText,
+          output: contentState.currentText,
           textPipes: varState.textPipes,
           booleanPipes: varState.booleanPipes,
+          choicePipes: varState.choicePipes,
           modelPipes: varState.modelPipes,
         );
       },
@@ -50,9 +53,10 @@ class _TemplateInputFormPageViewState extends State<TemplateInputFormPageView>
           listener: (context, variablesCubit) async {
             setDependencies(
               context: context,
-              content: contentState.currentText,
+              output: contentState.currentText,
               textPipes: variablesCubit.textPipes,
               booleanPipes: variablesCubit.booleanPipes,
+              choicePipes: variablesCubit.choicePipes,
               modelPipes: variablesCubit.modelPipes,
             );
           },
@@ -61,9 +65,10 @@ class _TemplateInputFormPageViewState extends State<TemplateInputFormPageView>
               generatorData: ExpectedPayload(
                 textPipes: variablesCubit.textPipes,
                 booleanPipes: variablesCubit.booleanPipes,
+                choicePipes: variablesCubit.choicePipes,
                 modelPipes: variablesCubit.modelPipes,
               ),
-              content: contentState.currentText,
+              output: contentState.currentText,
             );
           },
         );

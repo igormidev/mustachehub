@@ -1,5 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-
 part of '../pipe.dart';
 
 class TextPipe extends Equatable implements Pipe {
@@ -20,13 +18,13 @@ class TextPipe extends Equatable implements Pipe {
     required this.mustacheName,
     required this.isRequired,
     String? pipeId,
-  }) : pipeId = pipeId ?? const Uuid().v1();
+  }) : pipeId = pipeId ?? const Uuid().v7();
 
   TextPipe.emptyPlaceholder()
       : name = '',
         description = '',
         mustacheName = '',
-        pipeId = const Uuid().v1(),
+        pipeId = const Uuid().v7(),
         isRequired = false;
 
   @override
