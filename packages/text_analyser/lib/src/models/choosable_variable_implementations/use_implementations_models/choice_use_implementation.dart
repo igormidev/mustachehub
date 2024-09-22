@@ -10,6 +10,7 @@ abstract class ChoiceUseImplementation with _$ChoiceUseImplementation {
 
   factory ChoiceUseImplementation.invertedValue() =
       _ChoiceUseImplementationInvertedValue;
+
   factory ChoiceUseImplementation.textValue() =
       _ChoiceUseImplementationTextValue;
 

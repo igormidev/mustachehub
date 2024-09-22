@@ -11,6 +11,8 @@ _$ChoosableVariableImplementationTextImpl
             Map<String, dynamic> json) =>
         _$ChoosableVariableImplementationTextImpl(
           variableName: json['variableName'] as String,
+          textImplementation: TextUseImplementations.fromJson(
+              json['textImplementation'] as Map<String, dynamic>),
           $type: json['runtimeType'] as String?,
         );
 
@@ -18,6 +20,7 @@ Map<String, dynamic> _$$ChoosableVariableImplementationTextImplToJson(
         _$ChoosableVariableImplementationTextImpl instance) =>
     <String, dynamic>{
       'variableName': instance.variableName,
+      'textImplementation': instance.textImplementation,
       'runtimeType': instance.$type,
     };
 

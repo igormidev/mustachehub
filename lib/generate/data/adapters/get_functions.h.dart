@@ -7,7 +7,17 @@ Map<String, dynamic> _getTextPayloads(
   final Map<String, dynamic> payload = {};
   for (final textPipe in pipes) {
     final dto = dtos.firstWhere((dto) => dto.pipe.pipeId == textPipe.pipeId);
-    payload.addAll({textPipe.mustacheName: dto.payloadValue});
+
+    final payloadValue = dto.payloadValue;
+    payload.addAll({
+      textPipe.mustacheName: {
+        'text': payloadValue,
+        'isEmpty':
+            payloadValue == null || payloadValue.replaceAll(' ', '').isEmpty,
+        'isNotEmpty':
+            payloadValue != null && payloadValue.replaceAll(' ', '').isNotEmpty,
+      }
+    });
   }
 
   return payload;

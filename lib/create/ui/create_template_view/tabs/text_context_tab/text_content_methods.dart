@@ -71,15 +71,28 @@ mixin TextContentMethods on State<TextContentTab> {
             selectInCursorParser: (option) {
               return InsertInCursorPayload(
                 cursorIndexChangeQuantity: option.map(
-                  text: (value) => 2,
+                  text: (value) => value.map(
+                    text: (_) => 2,
+                    boolean: (_) => -3 - value.variableName.length,
+                    choice: (_) => -3 - value.variableName.length,
+                    model: (_) => -3 - value.variableName.length,
+                  ),
                   boolean: (value) => -3 - value.variableName.length,
                   choice: (value) => -3 - value.variableName.length,
                   model: (value) => -3 - value.variableName.length,
                 ),
                 text: option.map(
                   text: (value) {
-                    final name = value.variableName;
-                    return name;
+                    final name = value.variableName.replaceAll('.text', '');
+                    return value.textImplementation.map(
+                      textValue: (_) => '$name.text',
+                      normalValue: (_) {
+                        return '#$name.isEmpty}}{{/$name.isEmpty';
+                      },
+                      invertedValue: (_) {
+                        return '^$name.isNotEmpty}}{{/$name.isNotEmpty';
+                      },
+                    );
                   },
                   boolean: (value) {
                     final name = value.variableName;
@@ -188,13 +201,21 @@ String choosableVariableImplementation(
       choice: (value) => value.choiceImplementation.map(
         textValue: (impl) => '${value.variableName}.text',
         normalValue: (impl) {
-          return '#${value.variableName}';
+          return '# ${value.variableName}';
         },
         invertedValue: (impl) {
-          return '^${value.variableName}';
+          return ' ^${value.variableName}';
         },
       ),
-      text: (value) => value.variableName,
+      text: (value) => value.textImplementation.map(
+        textValue: (impl) => value.variableName,
+        normalValue: (impl) {
+          return '# ${value.variableName}';
+        },
+        invertedValue: (impl) {
+          return '^ ${value.variableName}';
+        },
+      ),
       model: (value) => value.modelImplementation.map(
         normalValue: (impl) {
           return '# ${value.variableName}';

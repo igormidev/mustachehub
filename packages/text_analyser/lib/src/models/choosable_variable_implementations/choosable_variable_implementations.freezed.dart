@@ -40,7 +40,9 @@ mixin _$ChoosableVariableImplementations {
   String get variableName => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String variableName) text,
+    required TResult Function(
+            String variableName, TextUseImplementations textImplementation)
+        text,
     required TResult Function(
             String variableName, ChoiceUseImplementation choiceImplementation)
         choice,
@@ -54,7 +56,9 @@ mixin _$ChoosableVariableImplementations {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String variableName)? text,
+    TResult? Function(
+            String variableName, TextUseImplementations textImplementation)?
+        text,
     TResult? Function(
             String variableName, ChoiceUseImplementation choiceImplementation)?
         choice,
@@ -68,7 +72,9 @@ mixin _$ChoosableVariableImplementations {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String variableName)? text,
+    TResult Function(
+            String variableName, TextUseImplementations textImplementation)?
+        text,
     TResult Function(
             String variableName, ChoiceUseImplementation choiceImplementation)?
         choice,
@@ -166,7 +172,9 @@ abstract class _$$ChoosableVariableImplementationTextImplCopyWith<$Res>
       __$$ChoosableVariableImplementationTextImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String variableName});
+  $Res call({String variableName, TextUseImplementations textImplementation});
+
+  $TextUseImplementationsCopyWith<$Res> get textImplementation;
 }
 
 /// @nodoc
@@ -185,13 +193,29 @@ class __$$ChoosableVariableImplementationTextImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? variableName = null,
+    Object? textImplementation = null,
   }) {
     return _then(_$ChoosableVariableImplementationTextImpl(
       variableName: null == variableName
           ? _value.variableName
           : variableName // ignore: cast_nullable_to_non_nullable
               as String,
+      textImplementation: null == textImplementation
+          ? _value.textImplementation
+          : textImplementation // ignore: cast_nullable_to_non_nullable
+              as TextUseImplementations,
     ));
+  }
+
+  /// Create a copy of ChoosableVariableImplementations
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $TextUseImplementationsCopyWith<$Res> get textImplementation {
+    return $TextUseImplementationsCopyWith<$Res>(_value.textImplementation,
+        (value) {
+      return _then(_value.copyWith(textImplementation: value));
+    });
   }
 }
 
@@ -200,7 +224,9 @@ class __$$ChoosableVariableImplementationTextImplCopyWithImpl<$Res>
 class _$ChoosableVariableImplementationTextImpl
     implements ChoosableVariableImplementationText {
   _$ChoosableVariableImplementationTextImpl(
-      {required this.variableName, final String? $type})
+      {required this.variableName,
+      required this.textImplementation,
+      final String? $type})
       : $type = $type ?? 'text';
 
   factory _$ChoosableVariableImplementationTextImpl.fromJson(
@@ -209,13 +235,15 @@ class _$ChoosableVariableImplementationTextImpl
 
   @override
   final String variableName;
+  @override
+  final TextUseImplementations textImplementation;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
   @override
   String toString() {
-    return 'ChoosableVariableImplementations.text(variableName: $variableName)';
+    return 'ChoosableVariableImplementations.text(variableName: $variableName, textImplementation: $textImplementation)';
   }
 
   @override
@@ -224,12 +252,15 @@ class _$ChoosableVariableImplementationTextImpl
         (other.runtimeType == runtimeType &&
             other is _$ChoosableVariableImplementationTextImpl &&
             (identical(other.variableName, variableName) ||
-                other.variableName == variableName));
+                other.variableName == variableName) &&
+            (identical(other.textImplementation, textImplementation) ||
+                other.textImplementation == textImplementation));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, variableName);
+  int get hashCode =>
+      Object.hash(runtimeType, variableName, textImplementation);
 
   /// Create a copy of ChoosableVariableImplementations
   /// with the given fields replaced by the non-null parameter values.
@@ -244,7 +275,9 @@ class _$ChoosableVariableImplementationTextImpl
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String variableName) text,
+    required TResult Function(
+            String variableName, TextUseImplementations textImplementation)
+        text,
     required TResult Function(
             String variableName, ChoiceUseImplementation choiceImplementation)
         choice,
@@ -255,13 +288,15 @@ class _$ChoosableVariableImplementationTextImpl
             String variableName, ModelUseImplementations modelImplementation)
         model,
   }) {
-    return text(variableName);
+    return text(variableName, textImplementation);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String variableName)? text,
+    TResult? Function(
+            String variableName, TextUseImplementations textImplementation)?
+        text,
     TResult? Function(
             String variableName, ChoiceUseImplementation choiceImplementation)?
         choice,
@@ -272,13 +307,15 @@ class _$ChoosableVariableImplementationTextImpl
             String variableName, ModelUseImplementations modelImplementation)?
         model,
   }) {
-    return text?.call(variableName);
+    return text?.call(variableName, textImplementation);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String variableName)? text,
+    TResult Function(
+            String variableName, TextUseImplementations textImplementation)?
+        text,
     TResult Function(
             String variableName, ChoiceUseImplementation choiceImplementation)?
         choice,
@@ -291,7 +328,7 @@ class _$ChoosableVariableImplementationTextImpl
     required TResult orElse(),
   }) {
     if (text != null) {
-      return text(variableName);
+      return text(variableName, textImplementation);
     }
     return orElse();
   }
@@ -346,7 +383,8 @@ class _$ChoosableVariableImplementationTextImpl
 abstract class ChoosableVariableImplementationText
     implements ChoosableVariableImplementations {
   factory ChoosableVariableImplementationText(
-          {required final String variableName}) =
+          {required final String variableName,
+          required final TextUseImplementations textImplementation}) =
       _$ChoosableVariableImplementationTextImpl;
 
   factory ChoosableVariableImplementationText.fromJson(
@@ -355,6 +393,7 @@ abstract class ChoosableVariableImplementationText
 
   @override
   String get variableName;
+  TextUseImplementations get textImplementation;
 
   /// Create a copy of ChoosableVariableImplementations
   /// with the given fields replaced by the non-null parameter values.
@@ -478,7 +517,9 @@ class _$ChoosableVariableImplementationChoiceImpl
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String variableName) text,
+    required TResult Function(
+            String variableName, TextUseImplementations textImplementation)
+        text,
     required TResult Function(
             String variableName, ChoiceUseImplementation choiceImplementation)
         choice,
@@ -495,7 +536,9 @@ class _$ChoosableVariableImplementationChoiceImpl
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String variableName)? text,
+    TResult? Function(
+            String variableName, TextUseImplementations textImplementation)?
+        text,
     TResult? Function(
             String variableName, ChoiceUseImplementation choiceImplementation)?
         choice,
@@ -512,7 +555,9 @@ class _$ChoosableVariableImplementationChoiceImpl
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String variableName)? text,
+    TResult Function(
+            String variableName, TextUseImplementations textImplementation)?
+        text,
     TResult Function(
             String variableName, ChoiceUseImplementation choiceImplementation)?
         choice,
@@ -715,7 +760,9 @@ class _$ChoosableVariableImplementationBooleanImpl
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String variableName) text,
+    required TResult Function(
+            String variableName, TextUseImplementations textImplementation)
+        text,
     required TResult Function(
             String variableName, ChoiceUseImplementation choiceImplementation)
         choice,
@@ -732,7 +779,9 @@ class _$ChoosableVariableImplementationBooleanImpl
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String variableName)? text,
+    TResult? Function(
+            String variableName, TextUseImplementations textImplementation)?
+        text,
     TResult? Function(
             String variableName, ChoiceUseImplementation choiceImplementation)?
         choice,
@@ -749,7 +798,9 @@ class _$ChoosableVariableImplementationBooleanImpl
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String variableName)? text,
+    TResult Function(
+            String variableName, TextUseImplementations textImplementation)?
+        text,
     TResult Function(
             String variableName, ChoiceUseImplementation choiceImplementation)?
         choice,
@@ -950,7 +1001,9 @@ class _$ChoosableVariableImplementationModelImpl
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String variableName) text,
+    required TResult Function(
+            String variableName, TextUseImplementations textImplementation)
+        text,
     required TResult Function(
             String variableName, ChoiceUseImplementation choiceImplementation)
         choice,
@@ -967,7 +1020,9 @@ class _$ChoosableVariableImplementationModelImpl
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String variableName)? text,
+    TResult? Function(
+            String variableName, TextUseImplementations textImplementation)?
+        text,
     TResult? Function(
             String variableName, ChoiceUseImplementation choiceImplementation)?
         choice,
@@ -984,7 +1039,9 @@ class _$ChoosableVariableImplementationModelImpl
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String variableName)? text,
+    TResult Function(
+            String variableName, TextUseImplementations textImplementation)?
+        text,
     TResult Function(
             String variableName, ChoiceUseImplementation choiceImplementation)?
         choice,

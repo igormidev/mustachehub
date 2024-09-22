@@ -12,17 +12,9 @@ class TokenIdentifierFlatMapAdapter {
     required final List<ModelPipe> modelPipes,
   }) {
     final Map<String, VariableScopeParentMapper> response = {};
-    final texts = textPipes
-        .map(
-          (p) => MapEntry(
-            p.mustacheName,
-            VariableScopeParentMapper.text(
-              name: p.mustacheName,
-              parrentName: null,
-            ),
-          ),
-        )
-        .toList();
+    final texts =
+        textPipes.map(_getScopesFromText).expand((element) => element).toList();
+
     response.addAll(Map.fromEntries(texts));
 
     final booleans = booleanPipes
@@ -55,13 +47,7 @@ class TokenIdentifierFlatMapAdapter {
                   );
                 },
               ),
-              MapEntry(
-                '${p.mustacheName}.text',
-                VariableScopeParentMapper.text(
-                  name: '${p.mustacheName}.text',
-                  parrentName: null,
-                ),
-              ),
+              ...textPipes.map(_getScopesFromText).expand((element) => element),
             ];
           },
         )
@@ -96,15 +82,8 @@ class TokenIdentifierFlatMapAdapter {
     });
 
     final texts = modelPipe.textPipes
-        .map(
-          (p) => MapEntry(
-            p.mustacheName,
-            VariableScopeParentMapper.text(
-              name: p.mustacheName,
-              parrentName: modelPipe.mustacheName,
-            ),
-          ),
-        )
+        .map((t) => _getScopesFromText(t, modelPipe.mustacheName))
+        .expand((element) => element)
         .toList();
     response.addAll(Map.fromEntries(texts));
 
@@ -137,12 +116,9 @@ class TokenIdentifierFlatMapAdapter {
                   );
                 },
               ),
-              MapEntry(
-                '${p.mustacheName}.text',
-                VariableScopeParentMapper.text(
-                  name: '${p.mustacheName}.text',
-                  parrentName: modelPipe.mustacheName,
-                ),
+              ..._getScopesFromMustacheName(
+                p.mustacheName,
+                modelPipe.mustacheName,
               ),
             ];
           },
@@ -159,4 +135,40 @@ class TokenIdentifierFlatMapAdapter {
 
     return response;
   }
+}
+
+List<MapEntry<String, VariableScopeParentMapper>> _getScopesFromText(
+  TextPipe p, [
+  String? parrentName,
+]) {
+  return _getScopesFromMustacheName(p.mustacheName, parrentName);
+}
+
+List<MapEntry<String, VariableScopeParentMapper>> _getScopesFromMustacheName(
+  String mn, [
+  String? parrentName,
+]) {
+  return <MapEntry<String, VariableScopeParentMapper>>[
+    MapEntry(
+      '$mn.text',
+      VariableScopeParentMapper.text(
+        name: '$mn.text',
+        parrentName: parrentName,
+      ),
+    ),
+    MapEntry(
+      '$mn.isEmpty',
+      VariableScopeParentMapper.boolean(
+        name: '$mn.isEmpty',
+        parrentName: parrentName,
+      ),
+    ),
+    MapEntry(
+      '$mn.isNotEmpty',
+      VariableScopeParentMapper.boolean(
+        name: '$mn.isNotEmpty',
+        parrentName: parrentName,
+      ),
+    ),
+  ];
 }

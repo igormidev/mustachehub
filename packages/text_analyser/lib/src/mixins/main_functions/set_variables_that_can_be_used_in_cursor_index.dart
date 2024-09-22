@@ -86,6 +86,17 @@ mixin SetVariablesThatCanBeUsedInCursorIndex on AllVariables {
         usableVariablesInCurrentContext
             .add(ChoosableVariableImplementations.text(
           variableName: textName,
+          textImplementation: TextUseImplementations.textValue(),
+        ));
+        usableVariablesInCurrentContext
+            .add(ChoosableVariableImplementations.text(
+          variableName: textName,
+          textImplementation: TextUseImplementations.normalValue(),
+        ));
+        usableVariablesInCurrentContext
+            .add(ChoosableVariableImplementations.text(
+          variableName: textName,
+          textImplementation: TextUseImplementations.invertedValue(),
         ));
       }
     }

@@ -28,6 +28,34 @@ void main() {
     //   'businessType': {'isEcomerce': 'Greg Lowe'}
     // });
   });
+
+  test('Testing empty text', () {
+    // var t = Template('{{# foo }}oi{{/ foo }}');
+    // lambda(LambdaContext ctx) {
+    //   return '<b>${ctx.renderString().toUpperCase()}</b>';
+    // }
+
+    // final res = t.renderString({'foo': lambda}); // shown
+    // // print('"$res"');
+
+    // var temp = Template(
+    //     'Will diplay: {{#foo.isCompact}}IS DISPLAYED{{/foo.isCompact}}');
+    // // final input = '';
+    // print(temp.renderString({'foo.isCompact': true}));
+
+    var template = Template(
+        'Hello, I am {{name.text}} {{^name.isEmpty}}empty{{/name.isEmpty}}');
+    var output = template.renderString({
+      // 'name': 'igor',
+      'name': {'isEmpty': false, 'text': 'Greg Lowe'},
+      // 'name': 'Greg Lowe',
+    });
+    print(output);
+    //   var template = Template('{{businessType.isEcomerce}}');
+    // var output = template.renderString({
+    //   'businessType': {'isEcomerce': 'Greg Lowe'}
+    // });
+  });
 }
 
 final testInput =

@@ -3,6 +3,7 @@ import 'package:mustache_hub_core/mustache_hub_core.dart';
 import 'package:mustachehub/create/data/adapters/token_identifier_flatmap_adapter.dart';
 import 'package:mustachehub/create/presenter/states/variables_state.dart';
 
+//  Built build/macos/Build/Products/Release/Mustache Hub.app (148.5MB)
 class VariablesCubit extends HydratedCubit<VariablesState> {
   final TokenIdentifierFlatMapAdapter _tokenIdentifierFlatMapAdapter;
 

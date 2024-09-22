@@ -53,6 +53,17 @@ mixin SetRootVariables on AllVariables {
             usableVariablesInCurrentContext
                 .add(ChoosableVariableImplementations.text(
               variableName: text.name,
+              textImplementation: TextUseImplementations.textValue(),
+            ));
+            usableVariablesInCurrentContext
+                .add(ChoosableVariableImplementations.text(
+              variableName: text.name,
+              textImplementation: TextUseImplementations.normalValue(),
+            ));
+            usableVariablesInCurrentContext
+                .add(ChoosableVariableImplementations.text(
+              variableName: text.name,
+              textImplementation: TextUseImplementations.invertedValue(),
             ));
           },
         );
