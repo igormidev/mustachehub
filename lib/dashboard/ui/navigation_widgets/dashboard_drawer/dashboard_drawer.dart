@@ -10,6 +10,7 @@ import 'package:mustachehub/account/ui/widgets/user_display_circle_avatar.dart';
 import 'package:mustachehub/dashboard/presenter/cubits/navigation_possibilities_cubit.dart';
 import 'package:mustachehub/dashboard/presenter/states/navigation_possibilities_state.dart';
 import 'package:mustachehub/dashboard/ui/navigation_widgets/methods/tab_selection_mixin.dart';
+import 'package:mustachehub/dashboard/ui/navigation_widgets/widgets/report_bug/report_bug_card.dart';
 import 'package:mustachehub/dashboard/ui/translation/enums_translation_extensions/navigation_possibilities_extension.dart';
 
 extension BuildContextDrawer on BuildContext {
@@ -131,6 +132,8 @@ class DashboardDrawer extends StatelessWidget with TabSelectionMixin {
                 label: Text(navOption.fullName()),
               );
             }),
+            const SizedBox(height: 20),
+            const ReportBugCard(),
             const SizedBox(height: 20),
           ],
         ),
