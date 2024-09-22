@@ -84,9 +84,8 @@ class _FinalWidget extends StatelessWidget with CopyToClipboardMixin {
         return Padding(
           padding: const EdgeInsets.only(
             right: 20,
-            bottom: 20,
           ),
-          child: Column(
+          child: ListView(
             children: [
               const CopyAllOutputHeader(),
               const SizedBox(height: 8),
@@ -155,6 +154,7 @@ class _FinalWidget extends StatelessWidget with CopyToClipboardMixin {
                   );
                 },
               ),
+              const SizedBox(height: 20),
             ],
           ),
         );

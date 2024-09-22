@@ -25,9 +25,7 @@ class _LoadInitialTemplateWrapperState extends State<LoadInitialTemplateWrapper>
   Widget build(BuildContext context) {
     return BlocListener<TemplateFetchCubit, TemplateFetchState>(
       listener: (context, state) {
-        state.whenOrNull(
-          successFetch: setTemplate,
-        );
+        state.whenOrNull(successFetch: setTemplate);
       },
       child: LoadingInitialTemplateFacade(
         child: widget.child,

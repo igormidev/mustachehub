@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mustache_hub_core/mustache_hub_core.dart';
+import 'package:mustachehub/app_core/extensions/string_extension.dart';
 import 'package:mustachehub/app_core/theme/default_widgets/custom_header.dart';
 import 'package:mustachehub/generate/presenter/cubits/form_stats_cubit.dart';
 import 'package:mustachehub/generate/presenter/cubits/payload_cubit.dart';
@@ -95,6 +96,7 @@ class TextPipeForm extends StatelessWidget {
 
                     return Column(
                       mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.end,
                       children: pipes
                           .splitIntoGroups(groupSplit)
                           .map((List<TextPipeDto> pipesCluster) {
@@ -113,16 +115,35 @@ class TextPipeForm extends StatelessWidget {
                                     left: isFirst ? 0 : 4,
                                     right: isLast ? 0 : 4,
                                   ),
-                                  child: TextPipeFormField(
-                                    pipeDto: dto,
-                                    onChangedCallback: (text) async {
-                                      return await bloc.addTextPayloadValue(
-                                        output: output,
-                                        generatorData: expectedPayload,
-                                        pipe: dto.pipe,
-                                        value: text,
-                                      );
-                                    },
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        dto.pipe.name.capitalized,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleMedium,
+                                      ),
+                                      Text(
+                                        dto.pipe.description.capitalized,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyMedium,
+                                      ),
+                                      const SizedBox(height: 8),
+                                      TextPipeFormField(
+                                        pipeDto: dto,
+                                        onChangedCallback: (text) async {
+                                          return await bloc.addTextPayloadValue(
+                                            output: output,
+                                            generatorData: expectedPayload,
+                                            pipe: dto.pipe,
+                                            value: text,
+                                          );
+                                        },
+                                      ),
+                                    ],
                                   ),
                                 ),
                               );

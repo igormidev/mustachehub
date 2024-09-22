@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mustachehub/app_core/extensions/string_extension.dart';
 import 'package:mustachehub/generate/presenter/dtos/pipe_dto/pipe_dto.dart';
 
 class ChoicePipeChooseFormField extends StatelessWidget {
@@ -45,11 +46,11 @@ class ChoicePipeChooseFormField extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        choicePipeDto.pipe.name,
+                        choicePipeDto.pipe.name.capitalized,
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
                       Text(
-                        choicePipeDto.pipe.description,
+                        choicePipeDto.pipe.description.capitalized,
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       const SizedBox(height: 4),
@@ -59,7 +60,7 @@ class ChoicePipeChooseFormField extends StatelessWidget {
                         children:
                             choicePipeDto.pipe.options.map((String pipeText) {
                           return ChoiceChip(
-                            label: Text(pipeText),
+                            label: Text(pipeText.capitalized),
                             selected: pipeText == choosedPipeName,
                             onSelected: (_) {
                               onChangedCallback(pipeText);

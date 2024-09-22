@@ -7,12 +7,14 @@ import 'package:mustachehub/generate/ui/pages/template_input_form_page/template_
 import 'package:mustachehub/generate/ui/pages/text_output_page/text_output_page.dart';
 
 class TextOutputGeneratorView extends StatefulWidget {
+  final PackageInfo? info;
   final ExpectedPayload generatorData;
   final ContentInput content;
 
   const TextOutputGeneratorView({
     super.key,
     required this.content,
+    required this.info,
     required this.generatorData,
   });
 
@@ -21,6 +23,7 @@ class TextOutputGeneratorView extends StatefulWidget {
     required Template template,
   }) : this(
           key: key,
+          info: template.info,
           content: template.output,
           generatorData: ExpectedPayload(
             textPipes: template.payload.textPipes,
@@ -44,6 +47,7 @@ class _TextOutputGeneratorViewState extends State<TextOutputGeneratorView>
       setDependencies(
         context: context,
         output: widget.content,
+        packageInfo: widget.info,
         textPipes: widget.generatorData.textPipes,
         booleanPipes: widget.generatorData.booleanPipes,
         choicePipes: widget.generatorData.choicePipes,
