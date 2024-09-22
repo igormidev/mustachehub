@@ -15,7 +15,7 @@ Map<String, dynamic> _getTextPayloads(
         'isEmpty':
             payloadValue == null || payloadValue.replaceAll(' ', '').isEmpty,
         'isNotEmpty':
-            payloadValue != null && payloadValue.replaceAll(' ', '').isNotEmpty,
+            payloadValue == null || payloadValue.replaceAll(' ', '').isEmpty,
       }
     });
   }

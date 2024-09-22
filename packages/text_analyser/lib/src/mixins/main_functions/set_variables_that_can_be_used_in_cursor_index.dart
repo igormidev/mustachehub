@@ -70,33 +70,26 @@ mixin SetVariablesThatCanBeUsedInCursorIndex on AllVariables {
       }
 
       for (final booleanName in identifier.booleanNames) {
-        usableVariablesInCurrentContext
-            .add(ChoosableVariableImplementations.boolean(
-          variableName: booleanName,
-          booleanImplementation: BooleanUseImplementation.normalValue(),
-        ));
-        usableVariablesInCurrentContext
-            .add(ChoosableVariableImplementations.boolean(
-          variableName: booleanName,
-          booleanImplementation: BooleanUseImplementation.invertedValue(),
-        ));
+        if (!booleanName.contains('isEmpty')) {
+          usableVariablesInCurrentContext
+              .add(ChoosableVariableImplementations.boolean(
+            variableName: booleanName,
+            booleanImplementation: BooleanUseImplementation.invertedValue(),
+          ));
+        }
+        if (!booleanName.contains('isNotEmpty')) {
+          usableVariablesInCurrentContext
+              .add(ChoosableVariableImplementations.boolean(
+            variableName: booleanName,
+            booleanImplementation: BooleanUseImplementation.normalValue(),
+          ));
+        }
       }
 
       for (final textName in identifier.textsNames) {
         usableVariablesInCurrentContext
             .add(ChoosableVariableImplementations.text(
           variableName: textName,
-          textImplementation: TextUseImplementations.textValue(),
-        ));
-        usableVariablesInCurrentContext
-            .add(ChoosableVariableImplementations.text(
-          variableName: textName,
-          textImplementation: TextUseImplementations.normalValue(),
-        ));
-        usableVariablesInCurrentContext
-            .add(ChoosableVariableImplementations.text(
-          variableName: textName,
-          textImplementation: TextUseImplementations.invertedValue(),
         ));
       }
     }

@@ -26,7 +26,8 @@ class VariablesCreationTab extends StatelessWidget {
             const PipeCreationHeader(
               headerTitle: 'Text variables',
               subtitleSubtitle:
-                  'A text variable that the user will need to fill..',
+                  'Text variables are the most basic type of variables. '
+                  'They are used to dynamically insert a text into the template.',
               selectedSection: ETutorialSection.textUseCaseExample,
             ),
             const SliverToBoxAdapter(child: SizedBox(height: 4)),

@@ -68,13 +68,26 @@ class TokenIdentifierFlatMapAdapter {
   ) {
     final Map<String, VariableScopeParentMapper> response = {};
 
+    final textVariablesLiteral =
+        modelPipe.textPipes.map((e) => '${e.mustacheName}.text').toList();
+    final booleanVariablesOrText = modelPipe.textPipes
+        // .map((t) => _getOnlyBoleanScopesFromMustacheName(t.mustacheName))
+        .map((t) => <String>[
+              '${t.mustacheName}.isEmpty',
+              '${t.mustacheName}.isNotEmpty',
+            ])
+        .expand((e) => e)
+        .toList();
+
     response.addAll({
       modelPipe.mustacheName: VariableScopeParentMapper.model(
         parrentName: parrentName,
         name: modelPipe.mustacheName,
-        textsNames: modelPipe.textPipes.map((e) => e.mustacheName).toList(),
-        booleanNames:
-            modelPipe.booleanPipes.map((e) => e.mustacheName).toList(),
+        textsNames: textVariablesLiteral,
+        booleanNames: [
+          ...booleanVariablesOrText,
+          ...modelPipe.booleanPipes.map((e) => e.mustacheName),
+        ],
         choicesNames: modelPipe.choicePipes.map((e) => e.mustacheName).toList(),
         subModelsNames:
             modelPipe.modelPipes.map((e) => e.mustacheName).toList(),
@@ -156,6 +169,16 @@ List<MapEntry<String, VariableScopeParentMapper>> _getScopesFromMustacheName(
         parrentName: parrentName,
       ),
     ),
+    ..._getOnlyBoleanScopesFromMustacheName(mn, parrentName),
+  ];
+}
+
+List<MapEntry<String, VariableScopeParentMapper>>
+    _getOnlyBoleanScopesFromMustacheName(
+  String mn, [
+  String? parrentName,
+]) {
+  return <MapEntry<String, VariableScopeParentMapper>>[
     MapEntry(
       '$mn.isEmpty',
       VariableScopeParentMapper.boolean(

@@ -22,48 +22,25 @@ mixin SetRootVariables on AllVariables {
             ));
           },
           boolean: (boolean) {
-            usableVariablesInCurrentContext
-                .add(ChoosableVariableImplementations.boolean(
-              variableName: boolean.name,
-              booleanImplementation: BooleanUseImplementation.normalValue(),
-            ));
-            usableVariablesInCurrentContext
-                .add(ChoosableVariableImplementations.boolean(
-              variableName: boolean.name,
-              booleanImplementation: BooleanUseImplementation.invertedValue(),
-            ));
+            if (!boolean.name.contains('isEmpty')) {
+              usableVariablesInCurrentContext
+                  .add(ChoosableVariableImplementations.boolean(
+                variableName: boolean.name,
+                booleanImplementation: BooleanUseImplementation.invertedValue(),
+              ));
+            }
+            if (!boolean.name.contains('isNotEmpty')) {
+              usableVariablesInCurrentContext
+                  .add(ChoosableVariableImplementations.boolean(
+                variableName: boolean.name,
+                booleanImplementation: BooleanUseImplementation.normalValue(),
+              ));
+            }
           },
-          // choice: (choice) {
-          //   usableVariablesInCurrentContext
-          //       .add(ChoosableVariableImplementations.choice(
-          //     variableName: choice.name,
-          //     choiceImplementation: ChoiceUseImplementation.normalValue(),
-          //   ));
-          //   usableVariablesInCurrentContext
-          //       .add(ChoosableVariableImplementations.choice(
-          //     variableName: choice.name,
-          //     choiceImplementation: ChoiceUseImplementation.invertedValue(),
-          //   ));
-          //   usableVariablesInCurrentContext.add(
-          //       ChoosableVariableImplementations.choice(
-          //           variableName: choice.name,
-          //           choiceImplementation: ChoiceUseImplementation.textValue()));
-          // },
           text: (text) {
             usableVariablesInCurrentContext
                 .add(ChoosableVariableImplementations.text(
               variableName: text.name,
-              textImplementation: TextUseImplementations.textValue(),
-            ));
-            usableVariablesInCurrentContext
-                .add(ChoosableVariableImplementations.text(
-              variableName: text.name,
-              textImplementation: TextUseImplementations.normalValue(),
-            ));
-            usableVariablesInCurrentContext
-                .add(ChoosableVariableImplementations.text(
-              variableName: text.name,
-              textImplementation: TextUseImplementations.invertedValue(),
             ));
           },
         );

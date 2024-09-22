@@ -77,63 +77,66 @@ class _PipeAutocompleteTileFacadeState
       richMessage: TextSpan(
         children: [
           widget.option.map(
-            text: (ChoosableVariableImplementationText value) =>
-                value.textImplementation.map(
-              textValue: (_) => TextSpan(
-                text: 'Display text of the variable',
-                style: style,
-              ),
-              normalValue: (_) => TextSpan(
-                children: [
-                  const TextSpan(
-                    text: 'Display content in scope when text ',
-                  ),
-                  TextSpan(
-                    text: 'is NOT',
-                    style: style?.copyWith(
-                      fontWeight: FontWeight.bold,
-                      decoration: TextDecoration.underline,
-                    ),
-                  ),
-                  TextSpan(
-                    text: ' EMPTY',
-                    style: style?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  TextSpan(
-                    text:
-                        '. That is, when the user of this template has written something in the text field of the variable ${value.variableName}',
-                  ),
-                ],
-                style: style,
-              ),
-              invertedValue: (_) => TextSpan(
-                children: [
-                  const TextSpan(
-                    text: 'Display content in scope when text ',
-                  ),
-                  TextSpan(
-                    text: 'IS',
-                    style: style?.copyWith(
-                      fontWeight: FontWeight.bold,
-                      decoration: TextDecoration.underline,
-                    ),
-                  ),
-                  TextSpan(
-                    text: 'EMPTY',
-                    style: style?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  TextSpan(
-                    text:
-                        '. That is, when the user of this template has not written anything in the text field of the variable ${value.variableName}',
-                  ),
-                ],
-                style: style,
-              ),
+            text: (ChoosableVariableImplementationText value) => TextSpan(
+              text: 'Display text of the variable',
+              style: style,
             ),
+            //     value.textImplementation.map(
+            //   textValue: (_) => TextSpan(
+            //     text: 'Display text of the variable',
+            //     style: style,
+            //   ),
+            //   normalValue: (_) => TextSpan(
+            //     children: [
+            //       const TextSpan(
+            //         text: 'Display content in scope when text ',
+            //       ),
+            //       TextSpan(
+            //         text: 'is NOT',
+            //         style: style?.copyWith(
+            //           fontWeight: FontWeight.bold,
+            //           decoration: TextDecoration.underline,
+            //         ),
+            //       ),
+            //       TextSpan(
+            //         text: ' EMPTY',
+            //         style: style?.copyWith(
+            //           fontWeight: FontWeight.bold,
+            //         ),
+            //       ),
+            //       TextSpan(
+            //         text:
+            //             '. That is, when the user of this template has written something in the text field of the variable ${value.variableName}',
+            //       ),
+            //     ],
+            //     style: style,
+            //   ),
+            //   invertedValue: (_) => TextSpan(
+            //     children: [
+            //       const TextSpan(
+            //         text: 'Display content in scope when text ',
+            //       ),
+            //       TextSpan(
+            //         text: 'IS',
+            //         style: style?.copyWith(
+            //           fontWeight: FontWeight.bold,
+            //           decoration: TextDecoration.underline,
+            //         ),
+            //       ),
+            //       TextSpan(
+            //         text: 'EMPTY',
+            //         style: style?.copyWith(
+            //           fontWeight: FontWeight.bold,
+            //         ),
+            //       ),
+            //       TextSpan(
+            //         text:
+            //             '. That is, when the user of this template has not written anything in the text field of the variable ${value.variableName}',
+            //       ),
+            //     ],
+            //     style: style,
+            //   ),
+            // ),
             choice: (ChoosableVariableImplementationChoice value) =>
                 value.choiceImplementation.map(
               textValue: (_) => TextSpan(
@@ -333,15 +336,7 @@ class _PipeAutocompleteTileFacadeState
                           return value.variableName.replaceAll('.', '\n');
                         },
                       ),
-                      text: (value) => value.textImplementation.map(
-                        textValue: (impl) => '${value.variableName}\ntext',
-                        normalValue: (impl) {
-                          return value.variableName.replaceAll('.', '\n');
-                        },
-                        invertedValue: (impl) {
-                          return value.variableName.replaceAll('.', '\n');
-                        },
-                      ),
+                      text: (value) => '${value.variableName}\ntext',
                     ),
                     style: Theme.of(context).textTheme.titleSmall?.copyWith(
                           fontWeight: FontWeight.bold,

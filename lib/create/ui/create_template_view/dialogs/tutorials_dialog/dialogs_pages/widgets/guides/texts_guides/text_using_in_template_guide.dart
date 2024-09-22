@@ -25,8 +25,8 @@ class TextUsingInTemplateGuide extends StatelessWidget {
           'Continuing with the example of the company name, '
           'in the template text, you can use the variable in '
           'any place inside the template text by writting the variable name, '
-          'in camel case format, surrounded by double curly braces.\n'
-          'In this case, it would be "{{companyName}}".\n\n'
+          'in camel case format, surrounded by double curly braces, with ".text" suffix.\n'
+          'In this case, it would be "{{companyName.text}}".\n\n'
           'See bellow an example of an template text that uses the company name variable:',
           style: Theme.of(context).textTheme.bodyLarge,
         ),
@@ -35,14 +35,14 @@ class TextUsingInTemplateGuide extends StatelessWidget {
           decoration: decoration,
           padding: padding,
           child: Text(
-            'Hello, {{companyName}}!\nHow are you doing? We have a great oportunity for you!\n...',
+            'Hello, {{companyName.text}}!\nHow are you doing? We have a great oportunity for you!\n...',
             style: Theme.of(context).textTheme.bodyLarge,
           ),
         ),
         SelectableText(
           'Whoever is using the template will be able to insert the company name '
           'and the text will be displayed as the example above by replacing '
-          '"{{companyName}}" with the company name typed by the template user.',
+          '"{{companyName.text}}" with the company name typed by the template user.',
           style: Theme.of(context).textTheme.bodyLarge,
         ),
         const SizedBox(height: 10),

@@ -1,9 +1,7 @@
 import 'package:enchanted_collection/enchanted_collection.dart';
 import 'package:text_analyser/src/models/choosable_variable_implementations/use_implementations_models/model_use_implementations.dart';
-import 'package:text_analyser/src/models/choosable_variable_implementations/use_implementations_models/text_use_implementations.dart';
 import 'package:text_analyser/text_analyser.dart';
 import 'package:enchanted_regex/enchanted_regex.dart';
-
 part 'main_functions/handle_open_variables_without_close_as_invalid_segment/set_open_booleans_with_no_close_as_invalid_segments.dart';
 part 'main_functions/handle_open_variables_without_close_as_invalid_segment/set_open_choices_with_no_close_as_invalid_segments.dart';
 part 'main_functions/handle_open_variables_without_close_as_invalid_segment/set_open_models_with_no_close_as_invalid_segments.dart';

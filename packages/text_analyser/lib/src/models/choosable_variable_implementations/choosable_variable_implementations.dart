@@ -2,7 +2,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:text_analyser/src/models/choosable_variable_implementations/use_implementations_models/boolean_use_implementations.dart';
 import 'package:text_analyser/src/models/choosable_variable_implementations/use_implementations_models/choice_use_implementation.dart';
 import 'package:text_analyser/src/models/choosable_variable_implementations/use_implementations_models/model_use_implementations.dart';
-import 'package:text_analyser/src/models/choosable_variable_implementations/use_implementations_models/text_use_implementations.dart';
 
 part 'choosable_variable_implementations.freezed.dart';
 part 'choosable_variable_implementations.g.dart';
@@ -12,7 +11,6 @@ abstract class ChoosableVariableImplementations
     with _$ChoosableVariableImplementations {
   factory ChoosableVariableImplementations.text({
     required String variableName,
-    required TextUseImplementations textImplementation,
   }) = ChoosableVariableImplementationText;
 
   factory ChoosableVariableImplementations.choice({
@@ -39,11 +37,7 @@ extension ChoosableVariableImplementationsExt
     on ChoosableVariableImplementations {
   DeclarationType get declarationType {
     return map(
-      text: (val) => val.textImplementation.map(
-        normalValue: (_) => DeclarationType.scope,
-        invertedValue: (_) => DeclarationType.invertedScope,
-        textValue: (_) => DeclarationType.literal,
-      ),
+      text: (val) => DeclarationType.literal,
       choice: (val) => val.choiceImplementation.map(
         normalValue: (_) => DeclarationType.scope,
         invertedValue: (_) => DeclarationType.invertedScope,

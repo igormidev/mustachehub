@@ -43,8 +43,6 @@ mixin MainInterationVariables on AllVariables {
 
   bool get isCloseDelimiter => group.fullMatchText.startsWith('{{/');
 
-  bool get hasOption => group.fullMatchText.contains('.');
-
   bool get hasDelimiter =>
       isNormalOpenDelimiter ||
       isCloseDelimiter ||

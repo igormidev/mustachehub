@@ -83,16 +83,7 @@ mixin TextContentMethods on State<TextContentTab> {
                 ),
                 text: option.map(
                   text: (value) {
-                    final name = value.variableName.replaceAll('.text', '');
-                    return value.textImplementation.map(
-                      textValue: (_) => '$name.text',
-                      normalValue: (_) {
-                        return '#$name.isEmpty}}{{/$name.isEmpty';
-                      },
-                      invertedValue: (_) {
-                        return '^$name.isNotEmpty}}{{/$name.isNotEmpty';
-                      },
-                    );
+                    return value.variableName;
                   },
                   boolean: (value) {
                     final name = value.variableName;
@@ -207,15 +198,7 @@ String choosableVariableImplementation(
           return ' ^${value.variableName}';
         },
       ),
-      text: (value) => value.textImplementation.map(
-        textValue: (impl) => value.variableName,
-        normalValue: (impl) {
-          return '# ${value.variableName}';
-        },
-        invertedValue: (impl) {
-          return '^ ${value.variableName}';
-        },
-      ),
+      text: (value) => value.variableName,
       model: (value) => value.modelImplementation.map(
         normalValue: (impl) {
           return '# ${value.variableName}';
