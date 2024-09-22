@@ -5,11 +5,13 @@ void showMessageDialog(
   BuildContext context, {
   required String title,
   String? description,
+  Widget? icon,
   List<DialogAction>? actions,
 }) {
   InScreenOverlay.instance().show(
     context: context,
     overlayType: DialogTypeMessageAction(
+      icon: icon,
       title: title,
       description: description,
       actions: actions ?? [],
