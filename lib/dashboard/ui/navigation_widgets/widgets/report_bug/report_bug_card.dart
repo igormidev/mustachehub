@@ -4,6 +4,8 @@ import 'package:mustachehub/dashboard/presenter/cubits/packages_info_cubit.dart'
 import 'package:mustachehub/dashboard/ui/navigation_widgets/widgets/report_bug/bottomsheets/send_feedback_message_dialog.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
+const versionmock = '1.2.0+1';
+
 class ReportBugCard extends StatelessWidget {
   const ReportBugCard({super.key});
 
@@ -14,7 +16,7 @@ class ReportBugCard extends StatelessWidget {
         BlocBuilder<PackagesInfoCubit, PackageInfo?>(builder: (context, state) {
           final version = state?.version;
           return Text(
-            version != null ? 'Version: $version' : 'Loading...',
+            'Version: ${version ?? versionmock}',
             style: Theme.of(context).textTheme.titleSmall?.copyWith(
                   color: Theme.of(context).colorScheme.outline,
                 ),

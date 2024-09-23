@@ -320,7 +320,8 @@ class _PipeAutocompleteTileFacadeState
                         },
                       ),
                       choice: (value) => value.choiceImplementation.map(
-                        textValue: (impl) => '${value.variableName}\ntext',
+                        textValue: (impl) =>
+                            value.variableName.replaceAll('.', '\n'),
                         normalValue: (impl) {
                           return value.variableName.replaceAll('.', '\n');
                         },
