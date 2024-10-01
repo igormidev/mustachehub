@@ -30,6 +30,12 @@ class _PipeAutocompleteTileFacadeState
   }
 
   @override
+  void didUpdateWidget(covariant PipeAutocompleteTileFacade oldWidget) {
+    isSelected = widget.isSelected;
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
   void dispose() {
     // widget.tileFocusNode.addListener(_setIsFocus);
     super.dispose();
