@@ -58,7 +58,6 @@ mixin TextContentMethods on State<TextContentTab> {
             textEditingController: controller,
             context: context,
             // optionAsString: (option) => option.name,
-            optionAsString: choosableVariableImplementation,
             overlay: Overlay.of(
               NavigatorService.i.dashboardNavigatorKey.currentContext!,
             ),

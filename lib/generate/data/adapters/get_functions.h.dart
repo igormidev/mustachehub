@@ -7,20 +7,25 @@ Map<String, dynamic> _getTextPayloads(
   final Map<String, dynamic> payload = {};
   for (final textPipe in pipes) {
     final dto = dtos.firstWhere((dto) => dto.pipe.pipeId == textPipe.pipeId);
-
-    final payloadValue = dto.payloadValue;
-    payload.addAll({
-      textPipe.mustacheName: {
-        'text': payloadValue,
-        'isEmpty':
-            payloadValue == null || payloadValue.replaceAll(' ', '').isEmpty,
-        'isNotEmpty':
-            payloadValue == null || payloadValue.replaceAll(' ', '').isEmpty,
-      }
-    });
+    payload.addAll(getTextValue(dto));
   }
 
   return payload;
+}
+
+Map<String, dynamic> getTextValue(TextPipeDto dto) {
+  final payloadValue = dto.payloadValue;
+  final isEmtpy =
+      payloadValue == null || payloadValue.replaceAll(' ', '').isEmpty;
+  final mustacheName = dto.pipe.mustacheName;
+
+  return {
+    dto.pipe.mustacheName: {
+      'text': isEmtpy ? '[ $mustacheName ]' : payloadValue,
+      'isEmpty': isEmtpy,
+      'isNotEmpty': isEmtpy,
+    }
+  };
 }
 
 Map<String, dynamic> _getBoolPayloads(

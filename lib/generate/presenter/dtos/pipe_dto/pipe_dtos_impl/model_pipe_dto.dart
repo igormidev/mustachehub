@@ -15,17 +15,18 @@ class ModelPipeDto extends Equatable
 
       for (final textDTO in item.texts) {
         // itemResponse[textDTO.pipe.mustacheName] = textDTO.payloadValue;
-        final textValuePayload = textDTO.payloadValue;
-        final textPayload = {
-          textDTO.pipe.mustacheName: {
-            'text': textDTO,
-            'isEmpty': textValuePayload == null ||
-                textValuePayload.replaceAll(' ', '').isEmpty,
-            'isNotEmpty': textValuePayload == null ||
-                textValuePayload.replaceAll(' ', '').isEmpty,
-          }
-        };
-        itemResponse.addAll(textPayload);
+        // final textValuePayload = textDTO.payloadValue;
+        // final textPayload = {
+        //   textDTO.pipe.mustacheName: {
+        //     'text': textDTO,
+        //     'isEmpty': textValuePayload == null ||
+        //         textValuePayload.replaceAll(' ', '').isEmpty,
+        //     'isNotEmpty': textValuePayload == null ||
+        //         textValuePayload.replaceAll(' ', '').isEmpty,
+        //   }
+        // };
+        // itemResponse.addAll(textPayload);
+        itemResponse.addAll(getTextValue(textDTO));
       }
 
       for (final booleanDTO in item.booleans) {

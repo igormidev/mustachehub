@@ -9,6 +9,7 @@ import 'package:mustachehub/generate/presenter/cubits/payload_cubit.dart';
 import 'package:mustachehub/generate/presenter/dtos/content_output_dto.dart';
 import 'package:mustachehub/generate/presenter/states/content_state.dart';
 import 'package:mustachehub/generate/presenter/states/payload_state.dart';
+import 'package:mustachehub/generate/ui/pages/text_output_page/widgets/content_text_display.dart';
 import 'package:mustachehub/generate/ui/pages/text_output_page/widgets/copy_all_output_header/copy_all_output_header.dart';
 
 class TextOutputPage extends StatelessWidget {
@@ -144,7 +145,9 @@ class _FinalWidget extends StatelessWidget with CopyToClipboardMixin {
                               ),
                               child: Align(
                                 alignment: Alignment.topLeft,
-                                child: Text(text.content),
+                                child: ContentTextDisplay(
+                                  text: text.content,
+                                ),
                               ),
                             ),
                           ],
