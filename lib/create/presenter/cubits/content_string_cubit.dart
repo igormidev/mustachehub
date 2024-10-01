@@ -36,6 +36,19 @@ class ContentStringCubit extends HydratedCubit<ContentStringState> {
     );
   }
 
+  void deleteCubit({
+    required String uuid,
+  }) {
+    final newTexts = [...state.currentText.texts];
+    newTexts.removeWhere((element) => element.uuid == uuid);
+
+    emit(
+      ContentStringState.normal(
+        currentText: ContentInput.listOfTexts(texts: List.from(newTexts)),
+      ),
+    );
+  }
+
   void addNew() {
     final newTexts = [...state.currentText.texts];
 

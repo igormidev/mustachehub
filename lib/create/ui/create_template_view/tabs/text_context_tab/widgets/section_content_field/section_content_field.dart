@@ -30,13 +30,15 @@ class SectionContentField extends StatelessWidget with ValidatorsMixins {
   final bool willDisplayEditLabel;
   final bool willContainBreakLineToggleOption;
 
-  final Function({
+  final void Function({
     // required bool willForceUpdate,
     required ContentTextSectionInput output,
   }) notifyContentCubit;
+  final void Function(String uuid) onDelete;
 
   const SectionContentField({
     super.key,
+    required this.onDelete,
     required this.textfieldFocusNode,
     required this.titleController,
     required this.optionsController,
@@ -117,6 +119,20 @@ class SectionContentField extends StatelessWidget with ValidatorsMixins {
                               }),
                             ),
                           ),
+                          InkWell(
+                            onTap: () {
+                              onDelete(input.uuid);
+                            },
+                            child: Tooltip(
+                              message: 'Delete this section',
+                              child: Icon(
+                                Icons.delete,
+                                size: 26,
+                                color: Theme.of(context).colorScheme.error,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 8),
                           const Tooltip(
                             message: 'This is a section. Section are used to '
                                 'separate logic parts of template text.\n'
@@ -169,12 +185,16 @@ class SectionContentField extends StatelessWidget with ValidatorsMixins {
                 varCubit: variablesCubit,
                 onAddedDellimiter: () {
                   final bloc = context.read<SuggestionCubit>();
-                  optionsController.showOptionsMenuWithWrapperBuilder(
+                  optionsController.showComplexOptions(
                     optionAsString: choosableVariableImplementation,
                     suggestionCardBuilder: (
-                      BuildContext dialogContext,
+                      BuildContext context,
+                      // listTilesWithOptionsBuilder,
                       Widget Function(
-                        List<ChoosableVariableImplementations> value,
+                        List<
+                                StructuredDataType<
+                                    ChoosableVariableImplementations>>
+                            value,
                       ) listTilesWithOptionsBuilder,
                     ) {
                       return BlocProvider<SuggestionCubit>.value(
@@ -185,16 +205,28 @@ class SectionContentField extends StatelessWidget with ValidatorsMixins {
                         ),
                       );
                     },
+                    // suggestionCardBuilder: (
+                    //   BuildContext dialogContext,
+                    //   Widget Function(
+                    //     List<ChoosableVariableImplementations> value,
+                    //   ) listTilesWithOptionsBuilder,
+                    // ) {
+                    //   return BlocProvider<SuggestionCubit>.value(
+                    //     value: bloc,
+                    //     child: SuggestionCard(
+                    //       listTilesWithOptionsBuilder:
+                    //           listTilesWithOptionsBuilder,
+                    //     ),
+                    //   );
+                    // },
                     tileBuilder: (
                       ChoosableVariableImplementations option,
-                      int index,
-                      FocusNode tileFocusNode,
+                      bool isSelected,
                       void Function() onSelectCallback,
                     ) {
                       return PipeAutocompleteTileFacade(
                         option: option,
-                        index: index,
-                        tileFocusNode: tileFocusNode,
+                        isSelected: isSelected,
                         onSelectCallback: onSelectCallback,
                       );
                     },

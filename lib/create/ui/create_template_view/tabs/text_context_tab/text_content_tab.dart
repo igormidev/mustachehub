@@ -136,6 +136,7 @@ class _TextContentTabState extends State<TextContentTab>
                             int index,
                           ) {
                             return SectionContentField(
+                              onDelete: (uuid) => contentCubit.removeAt(uuid),
                               key: ValueKey(
                                   index.toString() + cluster.input.uuid),
                               input: cluster.input,
@@ -186,8 +187,9 @@ class _TextContentTabState extends State<TextContentTab>
 }
 
 class SuggestionCard extends StatelessWidget {
-  final Widget Function(List<ChoosableVariableImplementations> options)
-      listTilesWithOptionsBuilder;
+  final Widget Function(
+    List<StructuredDataType<ChoosableVariableImplementations>> value,
+  ) listTilesWithOptionsBuilder;
 
   const SuggestionCard({
     super.key,
@@ -210,7 +212,11 @@ class SuggestionCard extends StatelessWidget {
             );
           },
           withIdentifiers: (value) {
-            final items = value.tokenIdentifiers.toList();
+            final tokenIdentifiers = value.tokenIdentifiers.toList();
+            final items = tokenIdentifiers
+                .map((e) => FileStructureOptions(item: e))
+                .toList();
+
             return listTilesWithOptionsBuilder(items);
           },
           errorOccurred: (value) {

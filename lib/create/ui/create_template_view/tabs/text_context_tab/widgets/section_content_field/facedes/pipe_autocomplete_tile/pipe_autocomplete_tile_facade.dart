@@ -5,14 +5,12 @@ import 'package:material_symbols_icons/material_symbols_icons.dart';
 
 class PipeAutocompleteTileFacade extends StatefulWidget {
   final ChoosableVariableImplementations option;
-  final int index;
-  final FocusNode tileFocusNode;
+  final bool isSelected;
   final void Function() onSelectCallback;
   const PipeAutocompleteTileFacade({
     super.key,
     required this.option,
-    required this.index,
-    required this.tileFocusNode,
+    required this.isSelected,
     required this.onSelectCallback,
   });
 
@@ -23,12 +21,12 @@ class PipeAutocompleteTileFacade extends StatefulWidget {
 
 class _PipeAutocompleteTileFacadeState
     extends State<PipeAutocompleteTileFacade> {
-  bool isFocused = false;
+  bool isSelected = false;
 
   @override
   void initState() {
     super.initState();
-    // widget.tileFocusNode.addListener(_setIsFocus);
+    isSelected = widget.isSelected;
   }
 
   @override
@@ -37,32 +35,8 @@ class _PipeAutocompleteTileFacadeState
     super.dispose();
   }
 
-  void _setIsFocus() {
-    print('isFocused: ${widget.tileFocusNode.hasFocus}');
-    setState(() {
-      isFocused = widget.tileFocusNode.hasFocus;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    // return ListTile(
-    //   onTap: widget.onSelectCallback,
-    //   shape: RoundedRectangleBorder(
-    //     borderRadius: BorderRadius.circular(8),
-    //   ),
-    //   autofocus: false,
-    //   dense: true,
-    //   focusNode: widget.tileFocusNode,
-    //   title: Text(choosableVariableImplementation(widget.option)),
-    //   minLeadingWidth: 4,
-    //   leading: Container(
-    //     // height: 40,
-    //     width: 4,
-    //     color: isFocused ? Colors.green : Colors.amber,
-    //   ),
-    // );
-
     final hardColor = switch (widget.option.declarationType) {
       DeclarationType.scope => Theme.of(context).colorScheme.primary,
       DeclarationType.invertedScope => Theme.of(context).colorScheme.tertiary,
@@ -258,95 +232,87 @@ class _PipeAutocompleteTileFacadeState
       child: MouseRegion(
         onEnter: (PointerEnterEvent event) => _onHoverChanged(enabled: true),
         onExit: (PointerExitEvent event) => _onHoverChanged(enabled: false),
-        child: Focus(
-          focusNode: widget.tileFocusNode,
-          onFocusChange: (value) {
-            setState(() {
-              isFocused = value;
-            });
-          },
-          child: Container(
-            margin: const EdgeInsets.symmetric(horizontal: 8),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              // color: Colors.red,
-              // color: isFocused ? Colors.red : null,
-              color: isFocused
-                  ? Theme.of(context).colorScheme.surfaceContainerHighest
-                  : _isHovered
-                      ? Theme.of(context).colorScheme.surfaceContainerHigh
-                      : null,
-            ),
-            child: InkWell(
-              borderRadius: BorderRadius.circular(20),
-              onTap: widget.onSelectCallback,
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const SizedBox(width: 8),
-                  switch (widget.option.declarationType) {
-                    DeclarationType.scope => Icon(
-                        Symbols.tag,
-                        color: hardColor,
-                        // color: Theme.of(context).colorScheme.onPrimary,
-                      ),
-                    DeclarationType.invertedScope => Icon(
-                        Icons.keyboard_arrow_up_rounded,
-                        // Icons.adjust_rounded,
-                        color: hardColor,
-                        // color: Theme.of(context).colorScheme.onTertiary,
-                      ),
-                    DeclarationType.literal => Padding(
-                        padding: const EdgeInsets.only(left: 5, right: 5),
-                        child: Icon(
-                          Icons.circle,
-                          color: hardColor,
-                          size: 12,
-                          // color: Theme.of(context)
-                          //     .colorScheme
-                          //     .surfaceContainerLowest,
-                        ),
-                      ),
-                  },
-                  const SizedBox(width: 4),
-                  Text(
-                    widget.option.map(
-                      boolean: (value) => value.booleanImplementation.map(
-                        normalValue: (impl) {
-                          return value.variableName.replaceAll('.', '\n');
-                        },
-                        invertedValue: (impl) {
-                          return value.variableName.replaceAll('.', '\n');
-                        },
-                      ),
-                      choice: (value) => value.choiceImplementation.map(
-                        textValue: (impl) =>
-                            value.variableName.replaceAll('.', '\n'),
-                        normalValue: (impl) {
-                          return value.variableName.replaceAll('.', '\n');
-                        },
-                        invertedValue: (impl) {
-                          return value.variableName.replaceAll('.', '\n');
-                        },
-                      ),
-                      model: (value) => value.modelImplementation.map(
-                        normalValue: (impl) {
-                          return value.variableName.replaceAll('.', '\n');
-                        },
-                        invertedValue: (impl) {
-                          return value.variableName.replaceAll('.', '\n');
-                        },
-                      ),
-                      text: (value) => '${value.variableName}\ntext',
+        child: Container(
+          margin: const EdgeInsets.symmetric(horizontal: 8),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            // color: Colors.red,
+            // color: isFocused ? Colors.red : null,
+            color: isSelected
+                ? Theme.of(context).colorScheme.surfaceContainerHighest
+                : _isHovered
+                    ? Theme.of(context).colorScheme.surfaceContainerHigh
+                    : null,
+          ),
+          child: InkWell(
+            borderRadius: BorderRadius.circular(20),
+            onTap: widget.onSelectCallback,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const SizedBox(width: 8),
+                switch (widget.option.declarationType) {
+                  DeclarationType.scope => Icon(
+                      Symbols.tag,
+                      color: hardColor,
+                      // color: Theme.of(context).colorScheme.onPrimary,
                     ),
-                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: hardColor,
-                          height: 0.9,
-                        ),
+                  DeclarationType.invertedScope => Icon(
+                      Icons.keyboard_arrow_up_rounded,
+                      // Icons.adjust_rounded,
+                      color: hardColor,
+                      // color: Theme.of(context).colorScheme.onTertiary,
+                    ),
+                  DeclarationType.literal => Padding(
+                      padding: const EdgeInsets.only(left: 5, right: 5),
+                      child: Icon(
+                        Icons.circle,
+                        color: hardColor,
+                        size: 12,
+                        // color: Theme.of(context)
+                        //     .colorScheme
+                        //     .surfaceContainerLowest,
+                      ),
+                    ),
+                },
+                const SizedBox(width: 4),
+                Text(
+                  widget.option.map(
+                    boolean: (value) => value.booleanImplementation.map(
+                      normalValue: (impl) {
+                        return value.variableName.replaceAll('.', '\n');
+                      },
+                      invertedValue: (impl) {
+                        return value.variableName.replaceAll('.', '\n');
+                      },
+                    ),
+                    choice: (value) => value.choiceImplementation.map(
+                      textValue: (impl) =>
+                          value.variableName.replaceAll('.', '\n'),
+                      normalValue: (impl) {
+                        return value.variableName.replaceAll('.', '\n');
+                      },
+                      invertedValue: (impl) {
+                        return value.variableName.replaceAll('.', '\n');
+                      },
+                    ),
+                    model: (value) => value.modelImplementation.map(
+                      normalValue: (impl) {
+                        return value.variableName.replaceAll('.', '\n');
+                      },
+                      invertedValue: (impl) {
+                        return value.variableName.replaceAll('.', '\n');
+                      },
+                    ),
+                    text: (value) => '${value.variableName}\ntext',
                   ),
-                ],
-              ),
+                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: hardColor,
+                        height: 0.9,
+                      ),
+                ),
+              ],
             ),
           ),
         ),
