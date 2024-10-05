@@ -1,7 +1,6 @@
 import 'package:dart_debouncer/dart_debouncer.dart';
 import 'package:flutter/material.dart';
 import 'package:mustache_hub_core/mustache_hub_core.dart';
-import 'package:mustachehub/app_core/extensions/string_extension.dart';
 import 'package:mustachehub/app_core/theme/default_widgets/debounce_widget.dart';
 import 'package:mustachehub/generate/presenter/dtos/pipe_dto/pipe_dto.dart';
 
@@ -31,10 +30,12 @@ class _TextPipeFormFieldState extends State<TextPipeFormField>
     return TextFormField(
       initialValue: widget.pipeDto.payloadValue,
       decoration: InputDecoration(
-        labelText: widget.pipeDto.pipe.name.capitalized,
-        hintText: widget.pipeDto.pipe.description.capitalized,
-        fillColor:
-            isEmpty ? Theme.of(context).colorScheme.tertiaryContainer : null,
+        // labelText: widget.pipeDto.pipe.name.capitalized,
+        // hintText: widget.pipeDto.pipe.description.capitalized,
+        hintText: 'Type here...',
+        fillColor: Theme.of(context).colorScheme.surfaceContainerLow,
+        // fillColor:
+        //     isEmpty ? Theme.of(context).colorScheme.tertiaryContainer : null,
         suffixIcon: DebounceWidget(
           debouncer,
           child: Tooltip(
