@@ -54,7 +54,6 @@ class _TextContentTabState extends State<TextContentTab>
 
   void disposeAll() {
     for (final EditDependenciesCluster cluster in dependencies) {
-      cluster.textfieldFocusNode.dispose();
       cluster.titleController.dispose();
       cluster.controller.dispose();
       cluster.optionsController.dispose();
