@@ -103,6 +103,7 @@ class CustomHeader extends StatelessWidget {
               ),
           ],
         ),
+        const SizedBox(height: 8),
         if (subtitleWidget != null) subtitleWidget!,
         if (headerSubtitle != null)
           Padding(

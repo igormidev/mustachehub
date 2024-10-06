@@ -11,11 +11,13 @@ class TextGenerateNodeBuilder extends StatelessWidget {
   final ContentInput output;
   final ExpectedPayload expectedPayload;
   final TreeNodeGeneratePipeDtoPipeText textDTONode;
+  final bool isRequired;
   const TextGenerateNodeBuilder({
     super.key,
     required this.textDTONode,
     required this.rootModelDTO,
     required this.output,
+    required this.isRequired,
     required this.expectedPayload,
   });
 
@@ -30,6 +32,7 @@ class TextGenerateNodeBuilder extends StatelessWidget {
         bottom: 4,
       ),
       child: TextPipeFormField(
+        isRequired: isRequired,
         pipeDto: dto,
         onChangedCallback: (String? text) async {
           if (text == null) return;

@@ -3,10 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mustache_hub_core/mustache_hub_core.dart';
 import 'package:mustachehub/app_core/theme/components/empty_template_input_section.dart';
 import 'package:mustachehub/generate/presenter/cubits/content_cubit.dart';
-import 'package:mustachehub/generate/presenter/cubits/payload_cubit.dart';
+import 'package:mustachehub/generate/presenter/cubits/displayable_content_cubit.dart';
 import 'package:mustachehub/generate/presenter/dtos/content_output_dto.dart';
+import 'package:mustachehub/generate/presenter/dtos/text_span_exibition_dto.dart';
 import 'package:mustachehub/generate/presenter/states/content_state.dart';
-import 'package:mustachehub/generate/presenter/states/payload_state.dart';
+import 'package:mustachehub/generate/presenter/states/displayable_content_state.dart';
 import 'package:mustachehub/generate/ui/pages/text_output_page/widgets/content_text_section_input_textfield.dart';
 import 'package:mustachehub/generate/ui/pages/text_output_page/widgets/copy_all_output_header/copy_all_output_header.dart';
 
@@ -25,8 +26,19 @@ class TextOutputPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final contentBloc = context.read<ContentCubit>();
-    return BlocBuilder<ContentCubit, ContentState>(
+
+    return BlocConsumer<ContentCubit, ContentState>(
       bloc: contentBloc,
+      listener: (context, state) {
+        state.whenOrNull(
+          withGeneratedText: (value) {
+            context.read<DisplayableContentCubit>().set(value, context);
+          },
+          withContentText: (value) {
+            context.read<DisplayableContentCubit>().set(value, context);
+          },
+        );
+      },
       builder: (
         context,
         state,
@@ -65,44 +77,35 @@ class _FinalWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<PayloadCubit, PayloadState>(
-      bloc: context.read<PayloadCubit>(),
-      buildWhen: (previous, current) {
-        return previous.runtimeType != current.runtimeType;
-      },
-      builder: (context, state) {
-        if (state is WithRequiredFieldsPendency) {
-          return const EmptyIndicatorSection.empty(
-            text: 'Need to type all\nrequired fields!',
-            willHaveCircleAvatarInDarkMode: false,
-            sholdRepeat: false,
-            margin: 32,
-          );
-        }
+    final displayableContentCubit = context.read<DisplayableContentCubit>();
 
-        return Padding(
-          padding: const EdgeInsets.only(
-            right: 20,
-          ),
-          child: ListView(
-            children: [
-              const CopyAllOutputHeader(),
-              const SizedBox(height: 8),
-              if (output.contents.length == 1) ...[
-                ContentTextSectionInputTextfield(
-                  output.contents.first,
-                  isSingle: true,
-                ),
-              ] else ...[
-                ...output.when(
-                  string: (List<ContentTextSectionInput> items) {
-                    return items.map(ContentTextSectionInputTextfield.new);
-                  },
-                ),
-              ],
-              const SizedBox(height: 20),
-            ],
-          ),
+    return BlocBuilder<DisplayableContentCubit, DisplayableContentState>(
+      bloc: displayableContentCubit,
+      builder: (context, state) {
+        return state.when(
+          none: () => const SizedBox.shrink(),
+          listOfTexts: (List<TextSpanExibitionDto> exibitionDto) {
+            return Padding(
+              padding: const EdgeInsets.only(
+                right: 20,
+              ),
+              child: ListView(
+                children: [
+                  const CopyAllOutputHeader(),
+                  const SizedBox(height: 8),
+                  if (exibitionDto.length == 1) ...[
+                    ContentTextSectionInputTextfield(
+                      exibitionDto.first,
+                      isSingle: true,
+                    ),
+                  ] else ...[
+                    ...exibitionDto.map(ContentTextSectionInputTextfield.new),
+                  ],
+                  const SizedBox(height: 20),
+                ],
+              ),
+            );
+          },
         );
       },
     );

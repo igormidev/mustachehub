@@ -5,11 +5,13 @@ import 'package:mustachehub/app_core/theme/default_widgets/debounce_widget.dart'
 import 'package:mustachehub/generate/presenter/dtos/pipe_dto/pipe_dto.dart';
 
 class TextPipeFormField extends StatefulWidget {
+  final bool isRequired;
   final TextPipeDto pipeDto;
   final Future<void> Function(String? text) onChangedCallback;
 
   const TextPipeFormField({
     super.key,
+    required this.isRequired,
     required this.pipeDto,
     required this.onChangedCallback,
   });
@@ -27,15 +29,22 @@ class _TextPipeFormFieldState extends State<TextPipeFormField>
 
   @override
   Widget build(BuildContext context) {
+    final displayEmptyIndicator = (widget.isRequired && isEmpty);
+    final Brightness brightness = Theme.of(context).brightness;
+
     return TextFormField(
       initialValue: widget.pipeDto.payloadValue,
       decoration: InputDecoration(
-        // labelText: widget.pipeDto.pipe.name.capitalized,
-        // hintText: widget.pipeDto.pipe.description.capitalized,
-        hintText: 'Type here...',
-        fillColor: Theme.of(context).colorScheme.surfaceContainerLow,
-        // fillColor:
-        //     isEmpty ? Theme.of(context).colorScheme.tertiaryContainer : null,
+        hintText: "Type here...",
+        // hintStyle: const TextStyle(
+        // color: Theme.of(context).colorScheme.onError,
+        // ),
+        fillColor: displayEmptyIndicator
+            ? Theme.of(context)
+                .colorScheme
+                .errorContainer
+                .withOpacity(brightness == Brightness.light ? 1 : 0.2)
+            : Theme.of(context).colorScheme.surfaceContainerLow,
         suffixIcon: DebounceWidget(
           debouncer,
           child: Tooltip(
@@ -44,16 +53,18 @@ class _TextPipeFormFieldState extends State<TextPipeFormField>
           ),
         ),
       ),
-      autovalidateMode: AutovalidateMode.always,
+      autovalidateMode: displayEmptyIndicator ? AutovalidateMode.always : null,
       validator: (String? value) {
-        if (widget.pipeDto.pipe.isRequired) return isNotEmpty(value);
+        if (displayEmptyIndicator) return isNotEmpty(value);
 
         return null;
       },
       onChanged: (value) {
-        setState(() {
-          isEmpty = value.isEmpty;
-        });
+        if (isEmpty != value.isEmpty) {
+          setState(() {
+            isEmpty = value.isEmpty;
+          });
+        }
         debouncer.resetDebounce(() async {
           final text = value.isEmpty == true ? null : value;
           widget.onChangedCallback(text);
