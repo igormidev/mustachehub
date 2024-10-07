@@ -25,7 +25,6 @@ part 'main_functions/main_interation_mapper_auxiliar_functions/handle_variables/
 part 'main_functions/set_variables_that_can_be_used_in_cursor_index.dart';
 part 'main_functions/set_if_variables_are_used_inside_patern_scope/set_if_text_segment_is_inside_patern_scope.dart';
 part 'main_functions/set_if_variables_are_used_inside_patern_scope/set_if_boolean_segment_is_inside_patern_scope.dart';
-part 'main_functions/set_if_variables_are_used_inside_patern_scope/set_if_choice_segment_is_inside_patern_scope.dart';
 part 'main_functions/set_if_variables_are_used_inside_patern_scope/set_if_model_segment_is_inside_patern_scope.dart';
 
 mixin AllVariables
@@ -34,7 +33,7 @@ mixin AllVariables
         ParentScopeValidationPayload,
         OpenDeclarationsWithoutFindedClose {
   /// The regular expression to find the mustache template variables.
-  final RegExp regExp = RegExp(r'{{[\^#\/]?(?<name>[a-zA-Z\.]+?)}}');
+  final RegExp regExp = RegExp(r'{{[\^#\/]?(?<name>[a-zA-Z\.-]+?)}}');
 
   /// The key represents the index of the segment in the text.
   /// That is, each [input.forEachNamedGroup] iteration will

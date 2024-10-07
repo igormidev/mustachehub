@@ -81,9 +81,7 @@ mixin TextContentMethods on State<TextContentTab> {
                   model: (value) => -3 - value.variableName.length,
                 ),
                 text: option.map(
-                  text: (value) {
-                    return value.variableName;
-                  },
+                  text: (value) => value.variableName,
                   boolean: (value) {
                     final name = value.variableName;
                     return value.booleanImplementation.map(

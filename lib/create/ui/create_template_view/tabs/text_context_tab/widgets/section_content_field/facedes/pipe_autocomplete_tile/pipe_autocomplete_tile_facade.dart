@@ -310,7 +310,7 @@ class _PipeAutocompleteTileFacadeState
                         return value.variableName.replaceAll('.', '\n');
                       },
                     ),
-                    text: (value) => '${value.variableName}\ntext',
+                    text: (value) => value.variableName,
                   ),
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(
                         fontWeight: FontWeight.bold,

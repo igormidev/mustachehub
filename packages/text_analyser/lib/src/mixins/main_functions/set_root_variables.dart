@@ -22,20 +22,16 @@ mixin SetRootVariables on AllVariables {
             ));
           },
           boolean: (boolean) {
-            if (!boolean.name.contains('isEmpty')) {
-              usableVariablesInCurrentContext
-                  .add(ChoosableVariableImplementations.boolean(
-                variableName: boolean.name,
-                booleanImplementation: BooleanUseImplementation.invertedValue(),
-              ));
-            }
-            if (!boolean.name.contains('isNotEmpty')) {
-              usableVariablesInCurrentContext
-                  .add(ChoosableVariableImplementations.boolean(
-                variableName: boolean.name,
-                booleanImplementation: BooleanUseImplementation.normalValue(),
-              ));
-            }
+            usableVariablesInCurrentContext
+                .add(ChoosableVariableImplementations.boolean(
+              variableName: boolean.name,
+              booleanImplementation: BooleanUseImplementation.normalValue(),
+            ));
+            usableVariablesInCurrentContext
+                .add(ChoosableVariableImplementations.boolean(
+              variableName: boolean.name,
+              booleanImplementation: BooleanUseImplementation.invertedValue(),
+            ));
           },
           text: (text) {
             usableVariablesInCurrentContext

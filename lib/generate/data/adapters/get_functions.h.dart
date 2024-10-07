@@ -20,11 +20,8 @@ Map<String, dynamic> getTextValue(TextPipeDto dto) {
   final mustacheName = dto.pipe.mustacheName;
 
   return {
-    dto.pipe.mustacheName: {
-      'text': isEmtpy ? '[ $mustacheName ]' : payloadValue,
-      'isEmpty': isEmtpy,
-      'isNotEmpty': isEmtpy,
-    }
+    mustacheName: isEmtpy ? '[ $mustacheName ]' : payloadValue,
+    '$mustacheName-empty': isEmtpy,
   };
 }
 
@@ -49,7 +46,7 @@ Map<String, dynamic> _getChoicePayloads(
 
   for (final ChoicePipe choicePipe in pipes) {
     final dto = dtos.firstWhere((dto) => dto.pipe.pipeId == choicePipe.pipeId);
-    payload.addAll(dto.toPayload());
+    payload.addAll(dto.toPayloadValue());
   }
 
   return payload;

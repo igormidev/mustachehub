@@ -9,6 +9,8 @@ mixin IsUncatologedVariable on MainInterationVariables {
     /// a valid variable.
     final bool isUncatologedVariable = flatMap[group.content] == null;
     if (isUncatologedVariable) {
+      print(
+          'Uncataloged variable: ${group.content} ( "${flatMap.keys.join('", "')}" )');
       segments[index] = AnalysedSegmentStatus.declarationOfUncatalogedVariable(
         offset: offset,
         segmentText: group.fullMatchText,

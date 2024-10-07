@@ -29,7 +29,6 @@ class TextAnalyser
         SetOpenBooleansWithotCloseAsInvalidSegments,
         MainInterationMapper,
         SetIfTextSegmentIsInsidePaternScope,
-        SetIfChoiceSegmentIsInsidePaternScope,
         SetIfBooleanSegmentIsInsidePaternScope,
         SetIfModelSegmentIsInsidePaternScope {
   AnalysedResponse? getMatchClusters({
@@ -55,7 +54,6 @@ class TextAnalyser
     setIfModelSegmentAreInsidePaternScope();
     setIfTextSegmentIsInsidePaternScope();
     setIfBooleansSegmentAreInsidePaternScope();
-    setIfChoiceSegmentIsInsidePaternScope();
 
     setVariablesThatCanBeUsedInCursorIndex();
 

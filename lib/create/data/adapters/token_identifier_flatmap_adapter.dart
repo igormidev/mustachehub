@@ -39,15 +39,21 @@ class TokenIdentifierFlatMapAdapter {
                   final o = option.toMustacheName;
 
                   return MapEntry(
-                    '${p.mustacheName}.$o',
+                    '${p.mustacheName}-$o',
                     VariableScopeParentMapper.boolean(
-                      name: '${p.mustacheName}.$o',
+                      name: '${p.mustacheName}-$o',
                       parrentName: null,
                     ),
                   );
                 },
               ),
-              ...textPipes.map(_getScopesFromText).expand((element) => element),
+              MapEntry(
+                p.mustacheName,
+                VariableScopeParentMapper.text(
+                  name: p.mustacheName,
+                  parrentName: null,
+                ),
+              ),
             ];
           },
         )
@@ -69,12 +75,11 @@ class TokenIdentifierFlatMapAdapter {
     final Map<String, VariableScopeParentMapper> response = {};
 
     final textVariablesLiteral =
-        modelPipe.textPipes.map((e) => '${e.mustacheName}.text').toList();
+        modelPipe.textPipes.map((e) => e.mustacheName).toList();
+
     final booleanVariablesOrText = modelPipe.textPipes
-        // .map((t) => _getOnlyBoleanScopesFromMustacheName(t.mustacheName))
         .map((t) => <String>[
-              '${t.mustacheName}.isEmpty',
-              '${t.mustacheName}.isNotEmpty',
+              '${t.mustacheName}-empty',
             ])
         .expand((e) => e)
         .toList();
@@ -121,17 +126,20 @@ class TokenIdentifierFlatMapAdapter {
                 (option) {
                   final o = option.toMustacheName;
                   return MapEntry(
-                    '${p.mustacheName}.$o',
+                    '${p.mustacheName}-$o',
                     VariableScopeParentMapper.boolean(
-                      name: '${p.mustacheName}.$o',
+                      name: '${p.mustacheName}-$o',
                       parrentName: modelPipe.mustacheName,
                     ),
                   );
                 },
               ),
-              ..._getScopesFromMustacheName(
+              MapEntry(
                 p.mustacheName,
-                modelPipe.mustacheName,
+                VariableScopeParentMapper.text(
+                  name: p.mustacheName,
+                  parrentName: modelPipe.mustacheName,
+                ),
               ),
             ];
           },
@@ -163,9 +171,9 @@ List<MapEntry<String, VariableScopeParentMapper>> _getScopesFromMustacheName(
 ]) {
   return <MapEntry<String, VariableScopeParentMapper>>[
     MapEntry(
-      '$mn.text',
+      mn,
       VariableScopeParentMapper.text(
-        name: '$mn.text',
+        name: mn,
         parrentName: parrentName,
       ),
     ),
@@ -180,18 +188,25 @@ List<MapEntry<String, VariableScopeParentMapper>>
 ]) {
   return <MapEntry<String, VariableScopeParentMapper>>[
     MapEntry(
-      '$mn.isEmpty',
+      '$mn-empty',
       VariableScopeParentMapper.boolean(
-        name: '$mn.isEmpty',
+        name: '$mn-empty',
         parrentName: parrentName,
       ),
     ),
-    MapEntry(
-      '$mn.isNotEmpty',
-      VariableScopeParentMapper.boolean(
-        name: '$mn.isNotEmpty',
-        parrentName: parrentName,
-      ),
-    ),
+    // MapEntry(
+    //   '$mn.isEmpty',
+    //   VariableScopeParentMapper.boolean(
+    //     name: '$mn.isEmpty',
+    //     parrentName: parrentName,
+    //   ),
+    // ),
+    // MapEntry(
+    //   '$mn.isNotEmpty',
+    //   VariableScopeParentMapper.boolean(
+    //     name: '$mn.isNotEmpty',
+    //     parrentName: parrentName,
+    //   ),
+    // ),
   ];
 }

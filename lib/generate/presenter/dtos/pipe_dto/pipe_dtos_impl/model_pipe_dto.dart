@@ -35,7 +35,7 @@ class ModelPipeDto extends Equatable
 
       for (final choiceDTO in item.choices) {
         // itemResponse[choiceDTO.pipe.mustacheName] = choiceDTO.payloadValue;
-        choiceDTO.toPayload().forEach(
+        choiceDTO.toPayloadValue().forEach(
           (key, value) {
             itemResponse[key] = value;
           },
