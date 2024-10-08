@@ -68,7 +68,7 @@ class ListOfItemUsingInTemplateTextGuide extends StatelessWidget {
           'To achive so, we will create the scope, for example, {{#persons}}{{/persons}}.\n\n'
           'Inside the scope, we will use the variables we created for the person item. '
           'Lets start by using the person name;\n'
-          'A declaration of a variable inside a scope is like this:\n{{#persons}}{{personName.text}}{{/persons}}'
+          'A declaration of a variable inside a scope is like this:\n{{#persons}}{{personName}}{{/persons}}'
           'The same logic is applied to the other variables.',
           style: Theme.of(context).textTheme.bodyLarge,
         ),
@@ -80,8 +80,8 @@ class ListOfItemUsingInTemplateTextGuide extends StatelessWidget {
         const DragToLeftWidget(
           text: ''
               '{{#persons}}\n'
-              'Hi, my name is {{personName.text}}'
-              ' and I am {{personAge.text}} years old.\n'
+              'Hi, my name is {{personName}}'
+              ' and I am {{personAge}} years old.\n'
               '{{#isMale}}I am a male!{{/isMale}}\n'
               '{{/persons}}',
         ),

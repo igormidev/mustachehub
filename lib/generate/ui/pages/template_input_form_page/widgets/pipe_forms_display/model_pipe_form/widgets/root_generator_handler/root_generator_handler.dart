@@ -33,7 +33,9 @@ class RootGeneratorHandler extends StatelessWidget {
       child: root.map(
         structureNode: (TreeNodeGeneratePipeDtoStructureNode value) {
           return StructureGenerateNodeBuilder(
+            isExpanded: node.isExpanded,
             rootModelDTO: rootModelDTO,
+            isEmpty: node.children.isEmpty,
             output: output,
             expectedPayload: expectedPayload,
             referenceModelDTO: value.referenceModelDTO,
@@ -68,6 +70,7 @@ class RootGeneratorHandler extends StatelessWidget {
         },
         model: (TreeNodeGeneratePipeDtoPipeModel value) {
           return ModelGenerateNodeBuilder(
+            isExpanded: node.isExpanded,
             rootModelDTO: rootModelDTO,
             output: output,
             expectedPayload: expectedPayload,

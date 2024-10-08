@@ -47,7 +47,7 @@ class ChoiceAsTextUsingInTemplateTextGuide extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(top: 2, bottom: 2),
               child: Text(
-                'My favorite color is {{favoriteColor.text}}',
+                'My favorite color is {{favoriteColor}}',
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
             ),

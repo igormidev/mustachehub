@@ -55,6 +55,11 @@ mixin SetVariablesThatCanBeUsedInCursorIndex on AllVariables {
         usableVariablesInCurrentContext
             .add(ChoosableVariableImplementations.choice(
           variableName: choiceName,
+          choiceImplementation: ChoiceUseImplementation.textValue(),
+        ));
+        usableVariablesInCurrentContext
+            .add(ChoosableVariableImplementations.choice(
+          variableName: choiceName,
           choiceImplementation: ChoiceUseImplementation.normalValue(),
         ));
         usableVariablesInCurrentContext
@@ -62,23 +67,18 @@ mixin SetVariablesThatCanBeUsedInCursorIndex on AllVariables {
           variableName: choiceName,
           choiceImplementation: ChoiceUseImplementation.invertedValue(),
         ));
-        usableVariablesInCurrentContext
-            .add(ChoosableVariableImplementations.choice(
-          variableName: choiceName,
-          choiceImplementation: ChoiceUseImplementation.textValue(),
-        ));
       }
 
       for (final booleanName in identifier.booleanNames) {
         usableVariablesInCurrentContext
             .add(ChoosableVariableImplementations.boolean(
           variableName: booleanName,
-          booleanImplementation: BooleanUseImplementation.invertedValue(),
+          booleanImplementation: BooleanUseImplementation.normalValue(),
         ));
         usableVariablesInCurrentContext
             .add(ChoosableVariableImplementations.boolean(
           variableName: booleanName,
-          booleanImplementation: BooleanUseImplementation.normalValue(),
+          booleanImplementation: BooleanUseImplementation.invertedValue(),
         ));
       }
 

@@ -11,6 +11,8 @@ class StructureGenerateNodeBuilder extends StatelessWidget {
   final ContentInput output;
   final ExpectedPayload expectedPayload;
   final ModelPipeDto referenceModelDTO;
+  final bool isExpanded;
+  final bool isEmpty;
   final TreeNodeGeneratePipeDtoStructureNode structureDTONode;
 
   const StructureGenerateNodeBuilder({
@@ -19,6 +21,8 @@ class StructureGenerateNodeBuilder extends StatelessWidget {
     required this.output,
     required this.expectedPayload,
     required this.referenceModelDTO,
+    required this.isExpanded,
+    required this.isEmpty,
     required this.structureDTONode,
   });
 
@@ -27,12 +31,21 @@ class StructureGenerateNodeBuilder extends StatelessWidget {
     final bloc = context.read<PayloadCubit>();
     final payloadUUID = structureDTONode.payloadUUID;
 
+    // final dto = structureDTONode.payloadUUID;
+
     return ListTile(
       title: Text('Add new "${referenceModelDTO.pipe.name}"'),
       subtitle: const Text('Structure'),
-      leading: const Padding(
-        padding: EdgeInsets.only(top: 8.0),
-        child: Icon(Icons.account_tree_sharp),
+      leading: Padding(
+        padding: const EdgeInsets.only(top: 8.0),
+        child: Icon(
+          Icons.account_tree_sharp,
+          color: isEmpty
+              ? Theme.of(context).colorScheme.surfaceContainerHighest
+              : isExpanded
+                  ? Theme.of(context).colorScheme.tertiary
+                  : Theme.of(context).colorScheme.primary,
+        ),
       ),
       trailing: Builder(builder: (context) {
         return SizedBox(

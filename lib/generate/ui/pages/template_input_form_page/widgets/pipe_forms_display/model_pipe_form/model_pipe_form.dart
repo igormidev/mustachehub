@@ -37,93 +37,101 @@ class ModelPipeForm extends StatelessWidget {
         if (pipes.isEmpty) return SizedBox.fromSize();
 
         return BlocSelector<DisplayableContentCubit, DisplayableContentState,
-                Set<String>>(
-            bloc: displayableContentCubit,
-            selector: (state) => state.when(
-                  // All variables that are used in any fields, but are
-                  // currently not fullfilled (that is: are with red indicators)
-                  listOfTexts: (spans) =>
-                      spans.expand((e) => e.requiredFields).toSet(),
-                  none: () => {},
-                ),
-            builder: (context, allRequiredFields) {
-              return LayoutBuilder(
-                builder: (context, constraints) {
-                  return Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(height: 8),
-                      const CustomHeader(headerTitle: 'Model variables'),
-                      ...pipes.map(
-                        (ModelPipeDto pipeDTO) {
-                          final StructureDTONode treeNode =
-                              StructureDTONode.root(
-                            data: TreeNodeGeneratePipeDtoStructureNode(
-                              payloadUUID: null,
-                              referenceModelDTO: pipeDTO,
-                            ),
-                          );
+            Set<String>>(
+          bloc: displayableContentCubit,
+          selector: (state) => state.when(
+            // All variables that are used in any fields, but are
+            // currently not fullfilled (that is: are with red indicators)
+            listOfTexts: (spans) =>
+                spans.expand((e) => e.requiredFields).toSet(),
+            none: () => {},
+          ),
+          builder: (context, allRequiredFields) {
+            return LayoutBuilder(
+              builder: (context, constraints) {
+                return Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 8),
+                    const CustomHeader(headerTitle: 'Model variables'),
+                    ...pipes.map(
+                      (ModelPipeDto pipeDTO) {
+                        final StructureDTONode treeNode = StructureDTONode.root(
+                          data: TreeNodeGeneratePipeDtoStructureNode(
+                            payloadUUID: null,
+                            referenceModelDTO: pipeDTO,
+                          ),
+                        );
 
-                          final otherNodes =
-                              _getNodesFromStructure(treeNode.data!);
-                          treeNode.addAll(otherNodes);
+                        final otherNodes =
+                            _getNodesFromStructure(treeNode.data!);
+                        treeNode.addAll(otherNodes);
 
-                          return Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SizedBox(
-                                width: constraints.maxWidth,
-                                child: TreeView.simpleTyped<
-                                    TreeNodeGeneratePipeDto,
-                                    TreeNode<TreeNodeGeneratePipeDto>>(
-                                  tree: treeNode,
-                                  showRootNode: true,
-                                  shrinkWrap: true,
-                                  expansionBehavior:
-                                      ExpansionBehavior.scrollToLastChild,
-                                  indentation: const Indentation(),
-                                  expansionIndicatorBuilder: (
-                                    BuildContext context,
-                                    ITreeNode node,
-                                  ) {
-                                    if (node.isRoot) {
-                                      return PlusMinusIndicator(
-                                        tree: node,
-                                        alignment: Alignment.centerLeft,
-                                        color: Colors.grey[700],
-                                      );
-                                    }
-
-                                    return ChevronIndicator.rightDown(
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              width: constraints.maxWidth,
+                              child: TreeView.simpleTyped<
+                                  TreeNodeGeneratePipeDto,
+                                  TreeNode<TreeNodeGeneratePipeDto>>(
+                                tree: treeNode,
+                                showRootNode: true,
+                                shrinkWrap: true,
+                                expansionBehavior:
+                                    ExpansionBehavior.scrollToLastChild,
+                                indentation: const Indentation(),
+                                expansionIndicatorBuilder: (
+                                  BuildContext context,
+                                  ITreeNode node,
+                                ) {
+                                  if (node.isRoot) {
+                                    return PlusMinusIndicator(
                                       tree: node,
                                       alignment: Alignment.centerLeft,
-                                      color: Colors.grey[700],
+                                      color: node.isExpanded
+                                          ? Theme.of(context)
+                                              .colorScheme
+                                              .tertiary
+                                          : Theme.of(context)
+                                              .colorScheme
+                                              .primary,
                                     );
-                                  },
-                                  builder: (
-                                    BuildContext context,
-                                    TreeNode<TreeNodeGeneratePipeDto> node,
-                                  ) {
-                                    return RootGeneratorHandler(
-                                      allRequiredFields: allRequiredFields,
-                                      node: node,
-                                      output: output,
-                                      expectedPayload: expectedPayload,
-                                      rootModelDTO: pipeDTO,
-                                    );
-                                  },
-                                ),
+                                  }
+
+                                  return ChevronIndicator.rightDown(
+                                    tree: node,
+                                    alignment: Alignment.centerLeft,
+                                    color: node.isExpanded
+                                        ? Theme.of(context).colorScheme.tertiary
+                                        : Theme.of(context).colorScheme.primary,
+                                  );
+                                },
+                                builder: (
+                                  BuildContext context,
+                                  TreeNode<TreeNodeGeneratePipeDto> node,
+                                ) {
+                                  return RootGeneratorHandler(
+                                    allRequiredFields: allRequiredFields,
+                                    node: node,
+                                    output: output,
+                                    expectedPayload: expectedPayload,
+                                    rootModelDTO: pipeDTO,
+                                  );
+                                },
                               ),
-                            ],
-                          );
-                        },
-                      ),
-                    ],
-                  );
-                },
-              );
-            });
+                            ),
+                          ],
+                        );
+                      },
+                    ),
+                  ],
+                );
+              },
+            );
+          },
+        );
       },
     );
   }

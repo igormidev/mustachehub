@@ -117,6 +117,7 @@ class ModelPipeDto extends Equatable
     if (this.uuid == pipeDtoUUID) {
       return (mapFunc(this as PipeDTO<P, V>) as ModelPipeDto);
     }
+
     for (final payload in payloadValue) {
       if (P == TextPipe && V == String) {
         for (final textDTO in payload.texts) {
@@ -195,7 +196,7 @@ class ModelPipeDto extends Equatable
           return copyWith(
             payloadValue: [
               for (final item in payloadValue)
-                if (item.uuid == modelDTO.uuid)
+                if (item.uuid == payload.uuid)
                   payload.copyWith(
                     subModels: [
                       for (final model in payload.subModels)
@@ -215,8 +216,6 @@ class ModelPipeDto extends Equatable
       // Now, let's recursively search in the submodels
       for (final modelDTO in payload.subModels) {
         final newModel = modelDTO.deepEdit(
-          // payloadId: payloadId,
-          // pipeId: pipeId,
           pipeDtoUUID: pipeDtoUUID,
           mapFunc: mapFunc,
         );
