@@ -19,7 +19,8 @@ mixin _$SuggestionState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            Set<ChoosableVariableImplementations> tokenIdentifiers,
+            Set<StructuredDataType<FoldableSelection, FileSelection>>
+                tokenIdentifiers,
             List<AnalysedSegmentStatus> segments)
         withIdentifiers,
     required TResult Function() undefined,
@@ -28,7 +29,9 @@ mixin _$SuggestionState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Set<ChoosableVariableImplementations> tokenIdentifiers,
+    TResult? Function(
+            Set<StructuredDataType<FoldableSelection, FileSelection>>
+                tokenIdentifiers,
             List<AnalysedSegmentStatus> segments)?
         withIdentifiers,
     TResult? Function()? undefined,
@@ -37,7 +40,9 @@ mixin _$SuggestionState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Set<ChoosableVariableImplementations> tokenIdentifiers,
+    TResult Function(
+            Set<StructuredDataType<FoldableSelection, FileSelection>>
+                tokenIdentifiers,
             List<AnalysedSegmentStatus> segments)?
         withIdentifiers,
     TResult Function()? undefined,
@@ -100,7 +105,8 @@ abstract class _$$SuggestionStateWithIdentifiersImplCopyWith<$Res> {
       __$$SuggestionStateWithIdentifiersImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
-      {Set<ChoosableVariableImplementations> tokenIdentifiers,
+      {Set<StructuredDataType<FoldableSelection, FileSelection>>
+          tokenIdentifiers,
       List<AnalysedSegmentStatus> segments});
 }
 
@@ -126,7 +132,7 @@ class __$$SuggestionStateWithIdentifiersImplCopyWithImpl<$Res>
       tokenIdentifiers: null == tokenIdentifiers
           ? _value._tokenIdentifiers
           : tokenIdentifiers // ignore: cast_nullable_to_non_nullable
-              as Set<ChoosableVariableImplementations>,
+              as Set<StructuredDataType<FoldableSelection, FileSelection>>,
       segments: null == segments
           ? _value._segments
           : segments // ignore: cast_nullable_to_non_nullable
@@ -140,14 +146,17 @@ class __$$SuggestionStateWithIdentifiersImplCopyWithImpl<$Res>
 class _$SuggestionStateWithIdentifiersImpl
     implements _SuggestionStateWithIdentifiers {
   _$SuggestionStateWithIdentifiersImpl(
-      {required final Set<ChoosableVariableImplementations> tokenIdentifiers,
+      {required final Set<StructuredDataType<FoldableSelection, FileSelection>>
+          tokenIdentifiers,
       required final List<AnalysedSegmentStatus> segments})
       : _tokenIdentifiers = tokenIdentifiers,
         _segments = segments;
 
-  final Set<ChoosableVariableImplementations> _tokenIdentifiers;
+  final Set<StructuredDataType<FoldableSelection, FileSelection>>
+      _tokenIdentifiers;
   @override
-  Set<ChoosableVariableImplementations> get tokenIdentifiers {
+  Set<StructuredDataType<FoldableSelection, FileSelection>>
+      get tokenIdentifiers {
     if (_tokenIdentifiers is EqualUnmodifiableSetView) return _tokenIdentifiers;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableSetView(_tokenIdentifiers);
@@ -196,7 +205,8 @@ class _$SuggestionStateWithIdentifiersImpl
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            Set<ChoosableVariableImplementations> tokenIdentifiers,
+            Set<StructuredDataType<FoldableSelection, FileSelection>>
+                tokenIdentifiers,
             List<AnalysedSegmentStatus> segments)
         withIdentifiers,
     required TResult Function() undefined,
@@ -208,7 +218,9 @@ class _$SuggestionStateWithIdentifiersImpl
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Set<ChoosableVariableImplementations> tokenIdentifiers,
+    TResult? Function(
+            Set<StructuredDataType<FoldableSelection, FileSelection>>
+                tokenIdentifiers,
             List<AnalysedSegmentStatus> segments)?
         withIdentifiers,
     TResult? Function()? undefined,
@@ -220,7 +232,9 @@ class _$SuggestionStateWithIdentifiersImpl
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Set<ChoosableVariableImplementations> tokenIdentifiers,
+    TResult Function(
+            Set<StructuredDataType<FoldableSelection, FileSelection>>
+                tokenIdentifiers,
             List<AnalysedSegmentStatus> segments)?
         withIdentifiers,
     TResult Function()? undefined,
@@ -272,11 +286,13 @@ class _$SuggestionStateWithIdentifiersImpl
 
 abstract class _SuggestionStateWithIdentifiers implements SuggestionState {
   factory _SuggestionStateWithIdentifiers(
-      {required final Set<ChoosableVariableImplementations> tokenIdentifiers,
+      {required final Set<StructuredDataType<FoldableSelection, FileSelection>>
+          tokenIdentifiers,
       required final List<AnalysedSegmentStatus>
           segments}) = _$SuggestionStateWithIdentifiersImpl;
 
-  Set<ChoosableVariableImplementations> get tokenIdentifiers;
+  Set<StructuredDataType<FoldableSelection, FileSelection>>
+      get tokenIdentifiers;
   List<AnalysedSegmentStatus> get segments;
 
   /// Create a copy of SuggestionState
@@ -332,7 +348,8 @@ class _$SuggestionStateUndefinedImpl implements _SuggestionStateUndefined {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            Set<ChoosableVariableImplementations> tokenIdentifiers,
+            Set<StructuredDataType<FoldableSelection, FileSelection>>
+                tokenIdentifiers,
             List<AnalysedSegmentStatus> segments)
         withIdentifiers,
     required TResult Function() undefined,
@@ -344,7 +361,9 @@ class _$SuggestionStateUndefinedImpl implements _SuggestionStateUndefined {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Set<ChoosableVariableImplementations> tokenIdentifiers,
+    TResult? Function(
+            Set<StructuredDataType<FoldableSelection, FileSelection>>
+                tokenIdentifiers,
             List<AnalysedSegmentStatus> segments)?
         withIdentifiers,
     TResult? Function()? undefined,
@@ -356,7 +375,9 @@ class _$SuggestionStateUndefinedImpl implements _SuggestionStateUndefined {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Set<ChoosableVariableImplementations> tokenIdentifiers,
+    TResult Function(
+            Set<StructuredDataType<FoldableSelection, FileSelection>>
+                tokenIdentifiers,
             List<AnalysedSegmentStatus> segments)?
         withIdentifiers,
     TResult Function()? undefined,
@@ -457,7 +478,8 @@ class _$SuggestionStateErrorOccurredImpl
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            Set<ChoosableVariableImplementations> tokenIdentifiers,
+            Set<StructuredDataType<FoldableSelection, FileSelection>>
+                tokenIdentifiers,
             List<AnalysedSegmentStatus> segments)
         withIdentifiers,
     required TResult Function() undefined,
@@ -469,7 +491,9 @@ class _$SuggestionStateErrorOccurredImpl
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Set<ChoosableVariableImplementations> tokenIdentifiers,
+    TResult? Function(
+            Set<StructuredDataType<FoldableSelection, FileSelection>>
+                tokenIdentifiers,
             List<AnalysedSegmentStatus> segments)?
         withIdentifiers,
     TResult? Function()? undefined,
@@ -481,7 +505,9 @@ class _$SuggestionStateErrorOccurredImpl
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Set<ChoosableVariableImplementations> tokenIdentifiers,
+    TResult Function(
+            Set<StructuredDataType<FoldableSelection, FileSelection>>
+                tokenIdentifiers,
             List<AnalysedSegmentStatus> segments)?
         withIdentifiers,
     TResult Function()? undefined,

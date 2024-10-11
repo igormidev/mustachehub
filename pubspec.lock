@@ -272,10 +272,10 @@ packages:
     dependency: "direct main"
     description:
       name: cursor_autocomplete_options
-      sha256: "6027d504fcb879e52d67b13809302fd8bcfd58f12b4912fd4bb72fd27cd34949"
+      sha256: "14ed7bfeba899bdaf1fece947fd594602b68affed6788c2bdea77c88f0f5209a"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.0"
+    version: "2.1.0"
   dart_debouncer:
     dependency: "direct main"
     description:

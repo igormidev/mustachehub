@@ -189,7 +189,7 @@ class _TextContentTabState extends State<TextContentTab>
 
 class SuggestionCard extends StatelessWidget {
   final Widget Function(
-    List<StructuredDataType<ChoosableVariableImplementations>> value,
+    List<StructuredDataType<FoldableSelection, FileSelection>> value,
   ) listTilesWithOptionsBuilder;
 
   const SuggestionCard({
@@ -213,12 +213,9 @@ class SuggestionCard extends StatelessWidget {
             );
           },
           withIdentifiers: (value) {
-            final tokenIdentifiers = value.tokenIdentifiers.toList();
-            final items = tokenIdentifiers
-                .map((e) => FileStructureOptions(item: e))
-                .toList();
-
-            return listTilesWithOptionsBuilder(items);
+            final List<StructureFolder> tokenIdentifiers =
+                value.tokenIdentifiers.toList();
+            return listTilesWithOptionsBuilder(tokenIdentifiers);
           },
           errorOccurred: (value) {
             return const Column(
@@ -242,7 +239,7 @@ class EditDependenciesCluster {
   final FocusNode textfieldFocusNode;
   final TextEditingController titleController;
   final VariablesInfoHighlightTextEditingController controller;
-  final OptionsController<ChoosableVariableImplementations> optionsController;
+  final OptionsController<FoldableSelection, FileSelection> optionsController;
   final Debouncer decouncer;
   final ContentTextSectionInput input;
 

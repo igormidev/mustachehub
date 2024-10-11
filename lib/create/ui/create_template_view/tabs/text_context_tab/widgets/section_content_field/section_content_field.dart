@@ -12,7 +12,6 @@ import 'package:mustachehub/create/presenter/input_formaters/add_mustache_delimm
 import 'package:mustachehub/create/presenter/states/content_string_state.dart';
 import 'package:mustachehub/create/ui/create_template_view/tabs/text_context_tab/text_content_methods.dart';
 import 'package:mustachehub/create/ui/create_template_view/tabs/text_context_tab/text_content_tab.dart';
-import 'package:mustachehub/create/ui/create_template_view/tabs/text_context_tab/widgets/section_content_field/facedes/pipe_autocomplete_tile/pipe_autocomplete_tile_facade.dart';
 import 'package:text_analyser/text_analyser.dart';
 
 class SectionContentField extends StatelessWidget with ValidatorsMixins {
@@ -20,7 +19,7 @@ class SectionContentField extends StatelessWidget with ValidatorsMixins {
   final FocusNode textfieldFocusNode;
   final TextEditingController titleController;
   final VariablesInfoHighlightTextEditingController controller;
-  final OptionsController<ChoosableVariableImplementations> optionsController;
+  final OptionsController<FoldableSelection, FileSelection> optionsController;
   final Debouncer decouncer;
   final ContentStringCubit contentStringCubit;
   final VariablesCubit variablesCubit;
@@ -185,15 +184,17 @@ class SectionContentField extends StatelessWidget with ValidatorsMixins {
                 varCubit: variablesCubit,
                 onAddedDellimiter: () {
                   final bloc = context.read<SuggestionCubit>();
+                  // optionsController.showComplexOptions(
                   optionsController.showComplexOptions(
-                    optionAsString: choosableVariableImplementation,
+                    fileOptionAsString: fileOptionAsString,
+                    folderOptionAsString: folderOptionAsString,
                     suggestionCardBuilder: (
                       BuildContext context,
                       // listTilesWithOptionsBuilder,
                       Widget Function(
                         List<
-                                StructuredDataType<
-                                    ChoosableVariableImplementations>>
+                                StructuredDataType<FoldableSelection,
+                                    FileSelection>>
                             value,
                       ) listTilesWithOptionsBuilder,
                     ) {
@@ -219,17 +220,17 @@ class SectionContentField extends StatelessWidget with ValidatorsMixins {
                     //     ),
                     //   );
                     // },
-                    tileBuilder: (
-                      ChoosableVariableImplementations option,
-                      bool isSelected,
-                      void Function() onSelectCallback,
-                    ) {
-                      return PipeAutocompleteTileFacade(
-                        option: option,
-                        isSelected: isSelected,
-                        onSelectCallback: onSelectCallback,
-                      );
-                    },
+                    // tileBuilder: (
+                    //   StructureFolder option,
+                    //   bool isSelected,
+                    //   void Function() onSelectCallback,
+                    // ) {
+                    //   return PipeAutocompleteTileFacade(
+                    //     option: option,
+                    //     isSelected: isSelected,
+                    //     onSelectCallback: onSelectCallback,
+                    //   );
+                    // },
                   );
                 },
               ),

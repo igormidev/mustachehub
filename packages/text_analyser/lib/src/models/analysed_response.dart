@@ -1,3 +1,4 @@
+import 'package:cursor_autocomplete_options/cursor_autocomplete_options.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:text_analyser/text_analyser.dart';
 
@@ -12,12 +13,11 @@ part 'analysed_response.freezed.dart';
 ///
 /// The segment states are the status of each segments throght the hole text.
 ///
-/// Can be a
+/// Can be used to show the user the status of each segment and the variables
 @freezed
 abstract class AnalysedResponse with _$AnalysedResponse {
   factory AnalysedResponse({
-    required Set<ChoosableVariableImplementations>
-        choosableVariablesInCurrentScope,
+    required Set<StructureFolder> choosableVariablesInCurrentScope,
     required List<AnalysedSegmentStatus> segmentsStates,
   }) = _AnalysedResponse;
 }

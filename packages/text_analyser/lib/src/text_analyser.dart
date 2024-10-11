@@ -1,6 +1,9 @@
+import 'package:cursor_autocomplete_options/cursor_autocomplete_options.dart';
 import 'package:text_analyser/src/mixins/all_variables.dart';
 import 'package:text_analyser/src/models/analysed_response.dart';
 import 'package:text_analyser/text_analyser.dart';
+
+typedef StructureFolder = StructuredDataType<FoldableSelection, FileSelection>;
 
 class TextAnalyser
     with

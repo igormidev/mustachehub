@@ -9,35 +9,14 @@ mixin SetRootVariables on AllVariables {
     flatMap.forEach((key, value) {
       if (value.parrentName == null) {
         value.map(
-          model: (model) {
-            usableVariablesInCurrentContext
-                .add(ChoosableVariableImplementations.model(
-              variableName: model.name,
-              modelImplementation: ModelUseImplementations.normalValue(),
-            ));
-            usableVariablesInCurrentContext
-                .add(ChoosableVariableImplementations.model(
-              variableName: model.name,
-              modelImplementation: ModelUseImplementations.invertedValue(),
-            ));
+          model: (ModelParentMapper model) {
+            usableVariablesInCurrentContext.add(model.structureItems(flatMap));
           },
-          boolean: (boolean) {
-            usableVariablesInCurrentContext
-                .add(ChoosableVariableImplementations.boolean(
-              variableName: boolean.name,
-              booleanImplementation: BooleanUseImplementation.normalValue(),
-            ));
-            usableVariablesInCurrentContext
-                .add(ChoosableVariableImplementations.boolean(
-              variableName: boolean.name,
-              booleanImplementation: BooleanUseImplementation.invertedValue(),
-            ));
+          boolean: (BooleanParentMapper boolean) {
+            usableVariablesInCurrentContext.add(boolean.structure);
           },
-          text: (text) {
-            usableVariablesInCurrentContext
-                .add(ChoosableVariableImplementations.text(
-              variableName: text.name,
-            ));
+          text: (TextParentMapper text) {
+            usableVariablesInCurrentContext.add(text.structure);
           },
         );
       }

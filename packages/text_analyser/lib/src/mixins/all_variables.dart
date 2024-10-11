@@ -1,5 +1,6 @@
+import 'package:cursor_autocomplete_options/cursor_autocomplete_options.dart';
 import 'package:enchanted_collection/enchanted_collection.dart';
-import 'package:text_analyser/src/models/choosable_variable_implementations/use_implementations_models/model_use_implementations.dart';
+import 'package:text_analyser/src/models/selectable_variable_options/selectable_variable_mapper_extension.dart';
 import 'package:text_analyser/text_analyser.dart';
 import 'package:enchanted_regex/enchanted_regex.dart';
 part 'main_functions/handle_open_variables_without_close_as_invalid_segment/set_open_booleans_with_no_close_as_invalid_segments.dart';
@@ -59,8 +60,7 @@ mixin AllVariables
   ///
   /// This includes all root variables and the variables inside a model that
   /// the textfield cursor is inside that model scole.
-  final Set<ChoosableVariableImplementations> usableVariablesInCurrentContext =
-      {};
+  final Set<StructureFolder> usableVariablesInCurrentContext = {};
 
   /// All the model scopes that exists in the [input].
   /// Not necessary only the models that the cursor
