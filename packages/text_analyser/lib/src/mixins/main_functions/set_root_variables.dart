@@ -6,16 +6,21 @@ mixin SetRootVariables on AllVariables {
   /// Thats because they don't need to be in a scope since they are
   /// root/global variables that can be used in anyplace in the input.
   void setAllRootVariablesAsUsableInCurrentContext() {
-    flatMap.forEach((key, value) {
+    // scopeParentFlatMap.forEach((key, value) {
+    identifierFlatMap.forEach((key, VariableIdentifierMapper value) {
       if (value.parrentName == null) {
         value.map(
-          model: (ModelParentMapper model) {
-            usableVariablesInCurrentContext.add(model.structureItems(flatMap));
+          model: (VariableIdentifierMapperModel model) {
+            final allItems = model.structureItems(identifierFlatMap);
+            usableVariablesInCurrentContext.add(model.structure);
           },
-          boolean: (BooleanParentMapper boolean) {
+          choice: (VariableIdentifierMapperChoice choice) {
+            usableVariablesInCurrentContext.add(choice.structure);
+          },
+          boolean: (VariableIdentifierMapperBoolean boolean) {
             usableVariablesInCurrentContext.add(boolean.structure);
           },
-          text: (TextParentMapper text) {
+          text: (VariableIdentifierMapperText text) {
             usableVariablesInCurrentContext.add(text.structure);
           },
         );

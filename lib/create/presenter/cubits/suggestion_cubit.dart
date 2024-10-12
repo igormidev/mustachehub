@@ -12,12 +12,12 @@ class SuggestionCubit extends Cubit<SuggestionState> {
   void setSuggestions({
     required String input,
     required int indexAtText,
-    required Map<String, VariableScopeParentMapper> flatMap,
+    required Map<String, VariableIdentifierMapper> flatMap,
   }) {
     final response = _textAnalyser.getMatchClusters(
       input: input,
       indexAtText: indexAtText,
-      flatMap: flatMap,
+      identifierFlatMap: flatMap,
     );
     if (response == null) {
       emit(SuggestionState.errorOccurred());

@@ -246,10 +246,10 @@ class VariablesInfoHighlightTextEditingController
   String? cacheText;
 
   final TextAnalyser _textAnalyserBase;
-  Map<String, VariableScopeParentMapper>? _flatMap;
+  Map<String, VariableIdentifierMapper>? _flatMap;
   ColorScheme? _cacheCS;
 
-  Map<String, VariableScopeParentMapper>? get flatMap => _flatMap;
+  Map<String, VariableIdentifierMapper>? get flatMap => _flatMap;
 
   void update() {
     notifyListeners();
@@ -260,7 +260,7 @@ class VariablesInfoHighlightTextEditingController
     notifyListeners();
   }
 
-  void setFlatMap(Map<String, VariableScopeParentMapper> flatMap) {
+  void setFlatMap(Map<String, VariableIdentifierMapper> flatMap) {
     _flatMap = flatMap;
     notifyListeners();
   }
@@ -278,7 +278,7 @@ class VariablesInfoHighlightTextEditingController
       final response = _textAnalyserBase.getMatchClusters(
         input: typeText,
         indexAtText: cursorIndexAtText == -1 ? 0 : cursorIndexAtText,
-        flatMap: flatMap!,
+        identifierFlatMap: flatMap!,
       );
 
       final segments = response?.segmentsStates;

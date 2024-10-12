@@ -71,22 +71,22 @@ mixin TextContentMethods on State<TextContentTab> {
               return InsertInCursorPayload(
                 cursorIndexChangeQuantity: option.map(
                   fileTextLiteral: (v) => 2,
-                  fileTextOpenScope: (v) => -3 - v.variableName.length,
-                  fileTextInvertedScope: (v) => -3 - v.variableName.length,
+                  fileTextOpenScope: (v) => -9 - v.variableName.length,
+                  fileTextInvertedScope: (v) => -9 - v.variableName.length,
                   fileBooleanOpenScope: (v) => -3 - v.variableName.length,
                   fileBooleanInvertedScope: (v) => -3 - v.variableName.length,
                   fileChoiceLiteral: (v) => 2,
-                  fileChoiceOpenScope: (v) => -3 - v.variableName.length,
-                  fileChoiceInvertedScope: (v) => -3 - v.variableName.length,
+                  fileChoiceOpenScope: (v) => -9 - v.variableName.length,
+                  fileChoiceInvertedScope: (v) => -9 - v.variableName.length,
                   fileModelOpenScope: (v) => -3 - v.variableName.length,
                   fileModelInvertedScope: (v) => -3 - v.variableName.length,
                 ),
                 text: option.map(
                   fileTextLiteral: (v) => v.variableName,
                   fileTextOpenScope: (v) =>
-                      '#${v.variableName}}}{{/${v.variableName}',
+                      '#${v.variableName}-empty}}{{/${v.variableName}-empty',
                   fileTextInvertedScope: (v) =>
-                      '^${v.variableName}}}{{/${v.variableName}',
+                      '^${v.variableName}-empty}}{{/${v.variableName}-empty',
                   fileBooleanOpenScope: (v) =>
                       '#${v.variableName}}}{{/${v.variableName}',
                   fileBooleanInvertedScope: (v) =>
@@ -215,6 +215,7 @@ String folderOptionAsString(
     folderText: (value) => value.variableName,
     folderBoolean: (value) => value.variableName,
     folderChoice: (value) => value.variableName,
+    folderChoiceItems: (value) => '${value.variableName} items',
     folderItemsModel: (value) => '${value.variableName} items',
     folderModel: (value) => value.variableName,
   );
@@ -225,15 +226,15 @@ String fileOptionAsString(
 ) {
   return option.map(
     fileTextLiteral: (v) => v.variableName,
-    fileTextOpenScope: (v) => '# ${v.variableName}',
-    fileTextInvertedScope: (v) => '^ ${v.variableName}',
-    fileBooleanOpenScope: (v) => '# ${v.variableName}',
-    fileBooleanInvertedScope: (v) => '^ ${v.variableName}',
+    fileTextOpenScope: (v) => '#${v.variableName}',
+    fileTextInvertedScope: (v) => '^${v.variableName}',
+    fileBooleanOpenScope: (v) => '#${v.variableName}',
+    fileBooleanInvertedScope: (v) => '^${v.variableName}',
     fileChoiceLiteral: (v) => v.variableName,
-    fileChoiceOpenScope: (v) => '# ${v.variableName}',
-    fileChoiceInvertedScope: (v) => '^ ${v.variableName}',
-    fileModelOpenScope: (v) => '# ${v.variableName}',
-    fileModelInvertedScope: (v) => '^ ${v.variableName}',
+    fileChoiceOpenScope: (v) => '#${v.variableName}',
+    fileChoiceInvertedScope: (v) => '^${v.variableName}',
+    fileModelOpenScope: (v) => '#${v.variableName}',
+    fileModelInvertedScope: (v) => '^${v.variableName}',
   );
 }
     // option.map(

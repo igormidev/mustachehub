@@ -1,5 +1,6 @@
 import 'package:cursor_autocomplete_options/cursor_autocomplete_options.dart';
 import 'package:text_analyser/src/mixins/all_variables.dart';
+import 'package:text_analyser/src/mixins/auxiliary_functions/cast_identifier_to_scope_parent.dart';
 import 'package:text_analyser/src/models/analysed_response.dart';
 import 'package:text_analyser/text_analyser.dart';
 
@@ -37,13 +38,15 @@ class TextAnalyser
   AnalysedResponse? getMatchClusters({
     required String input,
     required int indexAtText,
-    required Map<String, VariableScopeParentMapper> flatMap,
+    required Map<String, VariableIdentifierMapper> identifierFlatMap,
+    // required Map<String, VariableScopeParentMapper> flatMap,
   }) {
     resetAllDependencies();
 
     this.input = input;
     this.indexAtText = indexAtText;
-    this.flatMap = flatMap;
+    scopeParentFlatMap = identifierFlatMap.scopeVariables;
+    this.identifierFlatMap = identifierFlatMap;
     if (isWithinBounds() == false) return null;
 
     setAllRootVariablesAsUsableInCurrentContext();

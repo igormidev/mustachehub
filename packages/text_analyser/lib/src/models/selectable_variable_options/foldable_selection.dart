@@ -17,6 +17,10 @@ abstract class FoldableSelection with _$FoldableSelection {
     required String variableName,
   }) = _FoldableSelectionFolderChoice;
 
+  factory FoldableSelection.folderChoiceItems({
+    required String variableName,
+  }) = _FoldableSelectionFolderChoiceItems;
+
   factory FoldableSelection.folderItemsModel({
     required String variableName,
   }) = _FoldableSelectionFolderItemsModel;
@@ -28,3 +32,37 @@ abstract class FoldableSelection with _$FoldableSelection {
   factory FoldableSelection.fromJson(Map<String, dynamic> json) =>
       _$FoldableSelectionFromJson(json);
 }
+
+//  on VariableIdentifierMapperChoice {
+//   StructureFolder get structure {
+//     return FolderStructure(
+//       item: FoldableSelection.folderChoiceItems(variableName: name),
+//       children: [
+//         FileStructureOptions(
+//           item: FileSelection.fileChoiceLiteral(
+//             variableName: name,
+//           ),
+//         ),
+//         ...options.map(
+//           (option) => FolderStructure(
+//             item: FoldableSelection.folderChoice(
+//               variableName: option,
+//             ),
+//             children: [
+//               FileStructureOptions(
+//                 item: FileSelection.fileBooleanOpenScope(
+//                   variableName: option,
+//                 ),
+//               ),
+//               FileStructureOptions(
+//                 item: FileSelection.fileBooleanInvertedScope(
+//                   variableName: option,
+//                 ),
+//               ),
+//             ],
+//           ),
+//         ),
+//       ],
+//     );
+//   }
+// }

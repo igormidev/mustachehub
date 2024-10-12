@@ -46,7 +46,6 @@ mixin _$VariableScopeParentMapper {
             String name,
             List<String> textsNames,
             List<String> booleanNames,
-            List<String> choicesNames,
             List<String> subModelsNames)
         model,
   }) =>
@@ -55,13 +54,8 @@ mixin _$VariableScopeParentMapper {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String? parrentName, String name)? text,
     TResult? Function(String? parrentName, String name)? boolean,
-    TResult? Function(
-            String? parrentName,
-            String name,
-            List<String> textsNames,
-            List<String> booleanNames,
-            List<String> choicesNames,
-            List<String> subModelsNames)?
+    TResult? Function(String? parrentName, String name, List<String> textsNames,
+            List<String> booleanNames, List<String> subModelsNames)?
         model,
   }) =>
       throw _privateConstructorUsedError;
@@ -69,13 +63,8 @@ mixin _$VariableScopeParentMapper {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? parrentName, String name)? text,
     TResult Function(String? parrentName, String name)? boolean,
-    TResult Function(
-            String? parrentName,
-            String name,
-            List<String> textsNames,
-            List<String> booleanNames,
-            List<String> choicesNames,
-            List<String> subModelsNames)?
+    TResult Function(String? parrentName, String name, List<String> textsNames,
+            List<String> booleanNames, List<String> subModelsNames)?
         model,
     required TResult orElse(),
   }) =>
@@ -251,7 +240,6 @@ class _$TextParentMapperImpl implements TextParentMapper {
             String name,
             List<String> textsNames,
             List<String> booleanNames,
-            List<String> choicesNames,
             List<String> subModelsNames)
         model,
   }) {
@@ -263,13 +251,8 @@ class _$TextParentMapperImpl implements TextParentMapper {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String? parrentName, String name)? text,
     TResult? Function(String? parrentName, String name)? boolean,
-    TResult? Function(
-            String? parrentName,
-            String name,
-            List<String> textsNames,
-            List<String> booleanNames,
-            List<String> choicesNames,
-            List<String> subModelsNames)?
+    TResult? Function(String? parrentName, String name, List<String> textsNames,
+            List<String> booleanNames, List<String> subModelsNames)?
         model,
   }) {
     return text?.call(parrentName, name);
@@ -280,13 +263,8 @@ class _$TextParentMapperImpl implements TextParentMapper {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? parrentName, String name)? text,
     TResult Function(String? parrentName, String name)? boolean,
-    TResult Function(
-            String? parrentName,
-            String name,
-            List<String> textsNames,
-            List<String> booleanNames,
-            List<String> choicesNames,
-            List<String> subModelsNames)?
+    TResult Function(String? parrentName, String name, List<String> textsNames,
+            List<String> booleanNames, List<String> subModelsNames)?
         model,
     required TResult orElse(),
   }) {
@@ -456,7 +434,6 @@ class _$BooleanParentMapperImpl implements BooleanParentMapper {
             String name,
             List<String> textsNames,
             List<String> booleanNames,
-            List<String> choicesNames,
             List<String> subModelsNames)
         model,
   }) {
@@ -468,13 +445,8 @@ class _$BooleanParentMapperImpl implements BooleanParentMapper {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String? parrentName, String name)? text,
     TResult? Function(String? parrentName, String name)? boolean,
-    TResult? Function(
-            String? parrentName,
-            String name,
-            List<String> textsNames,
-            List<String> booleanNames,
-            List<String> choicesNames,
-            List<String> subModelsNames)?
+    TResult? Function(String? parrentName, String name, List<String> textsNames,
+            List<String> booleanNames, List<String> subModelsNames)?
         model,
   }) {
     return boolean?.call(parrentName, name);
@@ -485,13 +457,8 @@ class _$BooleanParentMapperImpl implements BooleanParentMapper {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? parrentName, String name)? text,
     TResult Function(String? parrentName, String name)? boolean,
-    TResult Function(
-            String? parrentName,
-            String name,
-            List<String> textsNames,
-            List<String> booleanNames,
-            List<String> choicesNames,
-            List<String> subModelsNames)?
+    TResult Function(String? parrentName, String name, List<String> textsNames,
+            List<String> booleanNames, List<String> subModelsNames)?
         model,
     required TResult orElse(),
   }) {
@@ -577,7 +544,6 @@ abstract class _$$ModelParentMapperImplCopyWith<$Res>
       String name,
       List<String> textsNames,
       List<String> booleanNames,
-      List<String> choicesNames,
       List<String> subModelsNames});
 }
 
@@ -599,7 +565,6 @@ class __$$ModelParentMapperImplCopyWithImpl<$Res>
     Object? name = null,
     Object? textsNames = null,
     Object? booleanNames = null,
-    Object? choicesNames = null,
     Object? subModelsNames = null,
   }) {
     return _then(_$ModelParentMapperImpl(
@@ -619,10 +584,6 @@ class __$$ModelParentMapperImplCopyWithImpl<$Res>
           ? _value._booleanNames
           : booleanNames // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      choicesNames: null == choicesNames
-          ? _value._choicesNames
-          : choicesNames // ignore: cast_nullable_to_non_nullable
-              as List<String>,
       subModelsNames: null == subModelsNames
           ? _value._subModelsNames
           : subModelsNames // ignore: cast_nullable_to_non_nullable
@@ -639,12 +600,10 @@ class _$ModelParentMapperImpl implements ModelParentMapper {
       required this.name,
       required final List<String> textsNames,
       required final List<String> booleanNames,
-      required final List<String> choicesNames,
       required final List<String> subModelsNames,
       final String? $type})
       : _textsNames = textsNames,
         _booleanNames = booleanNames,
-        _choicesNames = choicesNames,
         _subModelsNames = subModelsNames,
         $type = $type ?? 'model';
 
@@ -671,14 +630,6 @@ class _$ModelParentMapperImpl implements ModelParentMapper {
     return EqualUnmodifiableListView(_booleanNames);
   }
 
-  final List<String> _choicesNames;
-  @override
-  List<String> get choicesNames {
-    if (_choicesNames is EqualUnmodifiableListView) return _choicesNames;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_choicesNames);
-  }
-
   final List<String> _subModelsNames;
   @override
   List<String> get subModelsNames {
@@ -692,7 +643,7 @@ class _$ModelParentMapperImpl implements ModelParentMapper {
 
   @override
   String toString() {
-    return 'VariableScopeParentMapper.model(parrentName: $parrentName, name: $name, textsNames: $textsNames, booleanNames: $booleanNames, choicesNames: $choicesNames, subModelsNames: $subModelsNames)';
+    return 'VariableScopeParentMapper.model(parrentName: $parrentName, name: $name, textsNames: $textsNames, booleanNames: $booleanNames, subModelsNames: $subModelsNames)';
   }
 
   @override
@@ -708,8 +659,6 @@ class _$ModelParentMapperImpl implements ModelParentMapper {
             const DeepCollectionEquality()
                 .equals(other._booleanNames, _booleanNames) &&
             const DeepCollectionEquality()
-                .equals(other._choicesNames, _choicesNames) &&
-            const DeepCollectionEquality()
                 .equals(other._subModelsNames, _subModelsNames));
   }
 
@@ -721,7 +670,6 @@ class _$ModelParentMapperImpl implements ModelParentMapper {
       name,
       const DeepCollectionEquality().hash(_textsNames),
       const DeepCollectionEquality().hash(_booleanNames),
-      const DeepCollectionEquality().hash(_choicesNames),
       const DeepCollectionEquality().hash(_subModelsNames));
 
   /// Create a copy of VariableScopeParentMapper
@@ -743,12 +691,10 @@ class _$ModelParentMapperImpl implements ModelParentMapper {
             String name,
             List<String> textsNames,
             List<String> booleanNames,
-            List<String> choicesNames,
             List<String> subModelsNames)
         model,
   }) {
-    return model(parrentName, name, textsNames, booleanNames, choicesNames,
-        subModelsNames);
+    return model(parrentName, name, textsNames, booleanNames, subModelsNames);
   }
 
   @override
@@ -756,17 +702,12 @@ class _$ModelParentMapperImpl implements ModelParentMapper {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String? parrentName, String name)? text,
     TResult? Function(String? parrentName, String name)? boolean,
-    TResult? Function(
-            String? parrentName,
-            String name,
-            List<String> textsNames,
-            List<String> booleanNames,
-            List<String> choicesNames,
-            List<String> subModelsNames)?
+    TResult? Function(String? parrentName, String name, List<String> textsNames,
+            List<String> booleanNames, List<String> subModelsNames)?
         model,
   }) {
-    return model?.call(parrentName, name, textsNames, booleanNames,
-        choicesNames, subModelsNames);
+    return model?.call(
+        parrentName, name, textsNames, booleanNames, subModelsNames);
   }
 
   @override
@@ -774,19 +715,13 @@ class _$ModelParentMapperImpl implements ModelParentMapper {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? parrentName, String name)? text,
     TResult Function(String? parrentName, String name)? boolean,
-    TResult Function(
-            String? parrentName,
-            String name,
-            List<String> textsNames,
-            List<String> booleanNames,
-            List<String> choicesNames,
-            List<String> subModelsNames)?
+    TResult Function(String? parrentName, String name, List<String> textsNames,
+            List<String> booleanNames, List<String> subModelsNames)?
         model,
     required TResult orElse(),
   }) {
     if (model != null) {
-      return model(parrentName, name, textsNames, booleanNames, choicesNames,
-          subModelsNames);
+      return model(parrentName, name, textsNames, booleanNames, subModelsNames);
     }
     return orElse();
   }
@@ -839,7 +774,6 @@ abstract class ModelParentMapper implements VariableScopeParentMapper {
       required final String name,
       required final List<String> textsNames,
       required final List<String> booleanNames,
-      required final List<String> choicesNames,
       required final List<String> subModelsNames}) = _$ModelParentMapperImpl;
 
   factory ModelParentMapper.fromJson(Map<String, dynamic> json) =
@@ -851,7 +785,6 @@ abstract class ModelParentMapper implements VariableScopeParentMapper {
   String get name;
   List<String> get textsNames;
   List<String> get booleanNames;
-  List<String> get choicesNames;
   List<String> get subModelsNames;
 
   /// Create a copy of VariableScopeParentMapper

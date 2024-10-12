@@ -1,5 +1,5 @@
 import 'package:enchanted_regex/enchanted_regex.dart';
-import 'package:text_analyser/text_analyser.dart';
+import 'package:text_analyser/src/models/variable_scope_parent_mapper.dart';
 
 class ModelParentScopeValidationPayload {
   final OpenModelDeclarationPayload open;

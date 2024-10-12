@@ -48,6 +48,21 @@ Map<String, dynamic> _$$FoldableSelectionFolderChoiceImplToJson(
       'runtimeType': instance.$type,
     };
 
+_$FoldableSelectionFolderChoiceItemsImpl
+    _$$FoldableSelectionFolderChoiceItemsImplFromJson(
+            Map<String, dynamic> json) =>
+        _$FoldableSelectionFolderChoiceItemsImpl(
+          variableName: json['variableName'] as String,
+          $type: json['runtimeType'] as String?,
+        );
+
+Map<String, dynamic> _$$FoldableSelectionFolderChoiceItemsImplToJson(
+        _$FoldableSelectionFolderChoiceItemsImpl instance) =>
+    <String, dynamic>{
+      'variableName': instance.variableName,
+      'runtimeType': instance.$type,
+    };
+
 _$FoldableSelectionFolderItemsModelImpl
     _$$FoldableSelectionFolderItemsModelImplFromJson(
             Map<String, dynamic> json) =>

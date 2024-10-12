@@ -1,6 +1,6 @@
-import 'package:cursor_autocomplete_options/cursor_autocomplete_options.dart';
 import 'package:enchanted_collection/enchanted_collection.dart';
 import 'package:text_analyser/src/models/selectable_variable_options/selectable_variable_mapper_extension.dart';
+import 'package:text_analyser/src/models/variable_scope_parent_mapper.dart';
 import 'package:text_analyser/text_analyser.dart';
 import 'package:enchanted_regex/enchanted_regex.dart';
 part 'main_functions/handle_open_variables_without_close_as_invalid_segment/set_open_booleans_with_no_close_as_invalid_segments.dart';

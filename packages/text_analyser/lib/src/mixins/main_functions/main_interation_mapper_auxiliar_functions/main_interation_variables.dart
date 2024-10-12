@@ -9,7 +9,7 @@ mixin MainInterationVariables on AllVariables {
   late FindedGroup group;
 
   VariableScopeParentMapper get varScopeParentMapper {
-    return flatMap[group.content]!;
+    return scopeParentFlatMap[group.content]!;
   }
 
   TextOffset get offset => TextOffset(

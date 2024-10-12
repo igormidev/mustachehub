@@ -22,6 +22,8 @@ FoldableSelection _$FoldableSelectionFromJson(Map<String, dynamic> json) {
       return _FoldableSelectionFolderBoolean.fromJson(json);
     case 'folderChoice':
       return _FoldableSelectionFolderChoice.fromJson(json);
+    case 'folderChoiceItems':
+      return _FoldableSelectionFolderChoiceItems.fromJson(json);
     case 'folderItemsModel':
       return _FoldableSelectionFolderItemsModel.fromJson(json);
     case 'folderModel':
@@ -41,6 +43,7 @@ mixin _$FoldableSelection {
     required TResult Function(String variableName) folderText,
     required TResult Function(String variableName) folderBoolean,
     required TResult Function(String variableName) folderChoice,
+    required TResult Function(String variableName) folderChoiceItems,
     required TResult Function(String variableName) folderItemsModel,
     required TResult Function(String variableName) folderModel,
   }) =>
@@ -50,6 +53,7 @@ mixin _$FoldableSelection {
     TResult? Function(String variableName)? folderText,
     TResult? Function(String variableName)? folderBoolean,
     TResult? Function(String variableName)? folderChoice,
+    TResult? Function(String variableName)? folderChoiceItems,
     TResult? Function(String variableName)? folderItemsModel,
     TResult? Function(String variableName)? folderModel,
   }) =>
@@ -59,6 +63,7 @@ mixin _$FoldableSelection {
     TResult Function(String variableName)? folderText,
     TResult Function(String variableName)? folderBoolean,
     TResult Function(String variableName)? folderChoice,
+    TResult Function(String variableName)? folderChoiceItems,
     TResult Function(String variableName)? folderItemsModel,
     TResult Function(String variableName)? folderModel,
     required TResult orElse(),
@@ -71,6 +76,8 @@ mixin _$FoldableSelection {
         folderBoolean,
     required TResult Function(_FoldableSelectionFolderChoice value)
         folderChoice,
+    required TResult Function(_FoldableSelectionFolderChoiceItems value)
+        folderChoiceItems,
     required TResult Function(_FoldableSelectionFolderItemsModel value)
         folderItemsModel,
     required TResult Function(_FoldableSelectionFolderModel value) folderModel,
@@ -81,6 +88,8 @@ mixin _$FoldableSelection {
     TResult? Function(_FoldableSelectionFolderText value)? folderText,
     TResult? Function(_FoldableSelectionFolderBoolean value)? folderBoolean,
     TResult? Function(_FoldableSelectionFolderChoice value)? folderChoice,
+    TResult? Function(_FoldableSelectionFolderChoiceItems value)?
+        folderChoiceItems,
     TResult? Function(_FoldableSelectionFolderItemsModel value)?
         folderItemsModel,
     TResult? Function(_FoldableSelectionFolderModel value)? folderModel,
@@ -91,6 +100,8 @@ mixin _$FoldableSelection {
     TResult Function(_FoldableSelectionFolderText value)? folderText,
     TResult Function(_FoldableSelectionFolderBoolean value)? folderBoolean,
     TResult Function(_FoldableSelectionFolderChoice value)? folderChoice,
+    TResult Function(_FoldableSelectionFolderChoiceItems value)?
+        folderChoiceItems,
     TResult Function(_FoldableSelectionFolderItemsModel value)?
         folderItemsModel,
     TResult Function(_FoldableSelectionFolderModel value)? folderModel,
@@ -232,6 +243,7 @@ class _$FoldableSelectionFolderTextImpl
     required TResult Function(String variableName) folderText,
     required TResult Function(String variableName) folderBoolean,
     required TResult Function(String variableName) folderChoice,
+    required TResult Function(String variableName) folderChoiceItems,
     required TResult Function(String variableName) folderItemsModel,
     required TResult Function(String variableName) folderModel,
   }) {
@@ -244,6 +256,7 @@ class _$FoldableSelectionFolderTextImpl
     TResult? Function(String variableName)? folderText,
     TResult? Function(String variableName)? folderBoolean,
     TResult? Function(String variableName)? folderChoice,
+    TResult? Function(String variableName)? folderChoiceItems,
     TResult? Function(String variableName)? folderItemsModel,
     TResult? Function(String variableName)? folderModel,
   }) {
@@ -256,6 +269,7 @@ class _$FoldableSelectionFolderTextImpl
     TResult Function(String variableName)? folderText,
     TResult Function(String variableName)? folderBoolean,
     TResult Function(String variableName)? folderChoice,
+    TResult Function(String variableName)? folderChoiceItems,
     TResult Function(String variableName)? folderItemsModel,
     TResult Function(String variableName)? folderModel,
     required TResult orElse(),
@@ -274,6 +288,8 @@ class _$FoldableSelectionFolderTextImpl
         folderBoolean,
     required TResult Function(_FoldableSelectionFolderChoice value)
         folderChoice,
+    required TResult Function(_FoldableSelectionFolderChoiceItems value)
+        folderChoiceItems,
     required TResult Function(_FoldableSelectionFolderItemsModel value)
         folderItemsModel,
     required TResult Function(_FoldableSelectionFolderModel value) folderModel,
@@ -287,6 +303,8 @@ class _$FoldableSelectionFolderTextImpl
     TResult? Function(_FoldableSelectionFolderText value)? folderText,
     TResult? Function(_FoldableSelectionFolderBoolean value)? folderBoolean,
     TResult? Function(_FoldableSelectionFolderChoice value)? folderChoice,
+    TResult? Function(_FoldableSelectionFolderChoiceItems value)?
+        folderChoiceItems,
     TResult? Function(_FoldableSelectionFolderItemsModel value)?
         folderItemsModel,
     TResult? Function(_FoldableSelectionFolderModel value)? folderModel,
@@ -300,6 +318,8 @@ class _$FoldableSelectionFolderTextImpl
     TResult Function(_FoldableSelectionFolderText value)? folderText,
     TResult Function(_FoldableSelectionFolderBoolean value)? folderBoolean,
     TResult Function(_FoldableSelectionFolderChoice value)? folderChoice,
+    TResult Function(_FoldableSelectionFolderChoiceItems value)?
+        folderChoiceItems,
     TResult Function(_FoldableSelectionFolderItemsModel value)?
         folderItemsModel,
     TResult Function(_FoldableSelectionFolderModel value)? folderModel,
@@ -427,6 +447,7 @@ class _$FoldableSelectionFolderBooleanImpl
     required TResult Function(String variableName) folderText,
     required TResult Function(String variableName) folderBoolean,
     required TResult Function(String variableName) folderChoice,
+    required TResult Function(String variableName) folderChoiceItems,
     required TResult Function(String variableName) folderItemsModel,
     required TResult Function(String variableName) folderModel,
   }) {
@@ -439,6 +460,7 @@ class _$FoldableSelectionFolderBooleanImpl
     TResult? Function(String variableName)? folderText,
     TResult? Function(String variableName)? folderBoolean,
     TResult? Function(String variableName)? folderChoice,
+    TResult? Function(String variableName)? folderChoiceItems,
     TResult? Function(String variableName)? folderItemsModel,
     TResult? Function(String variableName)? folderModel,
   }) {
@@ -451,6 +473,7 @@ class _$FoldableSelectionFolderBooleanImpl
     TResult Function(String variableName)? folderText,
     TResult Function(String variableName)? folderBoolean,
     TResult Function(String variableName)? folderChoice,
+    TResult Function(String variableName)? folderChoiceItems,
     TResult Function(String variableName)? folderItemsModel,
     TResult Function(String variableName)? folderModel,
     required TResult orElse(),
@@ -469,6 +492,8 @@ class _$FoldableSelectionFolderBooleanImpl
         folderBoolean,
     required TResult Function(_FoldableSelectionFolderChoice value)
         folderChoice,
+    required TResult Function(_FoldableSelectionFolderChoiceItems value)
+        folderChoiceItems,
     required TResult Function(_FoldableSelectionFolderItemsModel value)
         folderItemsModel,
     required TResult Function(_FoldableSelectionFolderModel value) folderModel,
@@ -482,6 +507,8 @@ class _$FoldableSelectionFolderBooleanImpl
     TResult? Function(_FoldableSelectionFolderText value)? folderText,
     TResult? Function(_FoldableSelectionFolderBoolean value)? folderBoolean,
     TResult? Function(_FoldableSelectionFolderChoice value)? folderChoice,
+    TResult? Function(_FoldableSelectionFolderChoiceItems value)?
+        folderChoiceItems,
     TResult? Function(_FoldableSelectionFolderItemsModel value)?
         folderItemsModel,
     TResult? Function(_FoldableSelectionFolderModel value)? folderModel,
@@ -495,6 +522,8 @@ class _$FoldableSelectionFolderBooleanImpl
     TResult Function(_FoldableSelectionFolderText value)? folderText,
     TResult Function(_FoldableSelectionFolderBoolean value)? folderBoolean,
     TResult Function(_FoldableSelectionFolderChoice value)? folderChoice,
+    TResult Function(_FoldableSelectionFolderChoiceItems value)?
+        folderChoiceItems,
     TResult Function(_FoldableSelectionFolderItemsModel value)?
         folderItemsModel,
     TResult Function(_FoldableSelectionFolderModel value)? folderModel,
@@ -624,6 +653,7 @@ class _$FoldableSelectionFolderChoiceImpl
     required TResult Function(String variableName) folderText,
     required TResult Function(String variableName) folderBoolean,
     required TResult Function(String variableName) folderChoice,
+    required TResult Function(String variableName) folderChoiceItems,
     required TResult Function(String variableName) folderItemsModel,
     required TResult Function(String variableName) folderModel,
   }) {
@@ -636,6 +666,7 @@ class _$FoldableSelectionFolderChoiceImpl
     TResult? Function(String variableName)? folderText,
     TResult? Function(String variableName)? folderBoolean,
     TResult? Function(String variableName)? folderChoice,
+    TResult? Function(String variableName)? folderChoiceItems,
     TResult? Function(String variableName)? folderItemsModel,
     TResult? Function(String variableName)? folderModel,
   }) {
@@ -648,6 +679,7 @@ class _$FoldableSelectionFolderChoiceImpl
     TResult Function(String variableName)? folderText,
     TResult Function(String variableName)? folderBoolean,
     TResult Function(String variableName)? folderChoice,
+    TResult Function(String variableName)? folderChoiceItems,
     TResult Function(String variableName)? folderItemsModel,
     TResult Function(String variableName)? folderModel,
     required TResult orElse(),
@@ -666,6 +698,8 @@ class _$FoldableSelectionFolderChoiceImpl
         folderBoolean,
     required TResult Function(_FoldableSelectionFolderChoice value)
         folderChoice,
+    required TResult Function(_FoldableSelectionFolderChoiceItems value)
+        folderChoiceItems,
     required TResult Function(_FoldableSelectionFolderItemsModel value)
         folderItemsModel,
     required TResult Function(_FoldableSelectionFolderModel value) folderModel,
@@ -679,6 +713,8 @@ class _$FoldableSelectionFolderChoiceImpl
     TResult? Function(_FoldableSelectionFolderText value)? folderText,
     TResult? Function(_FoldableSelectionFolderBoolean value)? folderBoolean,
     TResult? Function(_FoldableSelectionFolderChoice value)? folderChoice,
+    TResult? Function(_FoldableSelectionFolderChoiceItems value)?
+        folderChoiceItems,
     TResult? Function(_FoldableSelectionFolderItemsModel value)?
         folderItemsModel,
     TResult? Function(_FoldableSelectionFolderModel value)? folderModel,
@@ -692,6 +728,8 @@ class _$FoldableSelectionFolderChoiceImpl
     TResult Function(_FoldableSelectionFolderText value)? folderText,
     TResult Function(_FoldableSelectionFolderBoolean value)? folderBoolean,
     TResult Function(_FoldableSelectionFolderChoice value)? folderChoice,
+    TResult Function(_FoldableSelectionFolderChoiceItems value)?
+        folderChoiceItems,
     TResult Function(_FoldableSelectionFolderItemsModel value)?
         folderItemsModel,
     TResult Function(_FoldableSelectionFolderModel value)? folderModel,
@@ -727,6 +765,214 @@ abstract class _FoldableSelectionFolderChoice implements FoldableSelection {
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$FoldableSelectionFolderChoiceImplCopyWith<
           _$FoldableSelectionFolderChoiceImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$FoldableSelectionFolderChoiceItemsImplCopyWith<$Res>
+    implements $FoldableSelectionCopyWith<$Res> {
+  factory _$$FoldableSelectionFolderChoiceItemsImplCopyWith(
+          _$FoldableSelectionFolderChoiceItemsImpl value,
+          $Res Function(_$FoldableSelectionFolderChoiceItemsImpl) then) =
+      __$$FoldableSelectionFolderChoiceItemsImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String variableName});
+}
+
+/// @nodoc
+class __$$FoldableSelectionFolderChoiceItemsImplCopyWithImpl<$Res>
+    extends _$FoldableSelectionCopyWithImpl<$Res,
+        _$FoldableSelectionFolderChoiceItemsImpl>
+    implements _$$FoldableSelectionFolderChoiceItemsImplCopyWith<$Res> {
+  __$$FoldableSelectionFolderChoiceItemsImplCopyWithImpl(
+      _$FoldableSelectionFolderChoiceItemsImpl _value,
+      $Res Function(_$FoldableSelectionFolderChoiceItemsImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of FoldableSelection
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? variableName = null,
+  }) {
+    return _then(_$FoldableSelectionFolderChoiceItemsImpl(
+      variableName: null == variableName
+          ? _value.variableName
+          : variableName // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$FoldableSelectionFolderChoiceItemsImpl
+    implements _FoldableSelectionFolderChoiceItems {
+  _$FoldableSelectionFolderChoiceItemsImpl(
+      {required this.variableName, final String? $type})
+      : $type = $type ?? 'folderChoiceItems';
+
+  factory _$FoldableSelectionFolderChoiceItemsImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$FoldableSelectionFolderChoiceItemsImplFromJson(json);
+
+  @override
+  final String variableName;
+
+  @JsonKey(name: 'runtimeType')
+  final String $type;
+
+  @override
+  String toString() {
+    return 'FoldableSelection.folderChoiceItems(variableName: $variableName)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$FoldableSelectionFolderChoiceItemsImpl &&
+            (identical(other.variableName, variableName) ||
+                other.variableName == variableName));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, variableName);
+
+  /// Create a copy of FoldableSelection
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$FoldableSelectionFolderChoiceItemsImplCopyWith<
+          _$FoldableSelectionFolderChoiceItemsImpl>
+      get copyWith => __$$FoldableSelectionFolderChoiceItemsImplCopyWithImpl<
+          _$FoldableSelectionFolderChoiceItemsImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String variableName) folderText,
+    required TResult Function(String variableName) folderBoolean,
+    required TResult Function(String variableName) folderChoice,
+    required TResult Function(String variableName) folderChoiceItems,
+    required TResult Function(String variableName) folderItemsModel,
+    required TResult Function(String variableName) folderModel,
+  }) {
+    return folderChoiceItems(variableName);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String variableName)? folderText,
+    TResult? Function(String variableName)? folderBoolean,
+    TResult? Function(String variableName)? folderChoice,
+    TResult? Function(String variableName)? folderChoiceItems,
+    TResult? Function(String variableName)? folderItemsModel,
+    TResult? Function(String variableName)? folderModel,
+  }) {
+    return folderChoiceItems?.call(variableName);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String variableName)? folderText,
+    TResult Function(String variableName)? folderBoolean,
+    TResult Function(String variableName)? folderChoice,
+    TResult Function(String variableName)? folderChoiceItems,
+    TResult Function(String variableName)? folderItemsModel,
+    TResult Function(String variableName)? folderModel,
+    required TResult orElse(),
+  }) {
+    if (folderChoiceItems != null) {
+      return folderChoiceItems(variableName);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_FoldableSelectionFolderText value) folderText,
+    required TResult Function(_FoldableSelectionFolderBoolean value)
+        folderBoolean,
+    required TResult Function(_FoldableSelectionFolderChoice value)
+        folderChoice,
+    required TResult Function(_FoldableSelectionFolderChoiceItems value)
+        folderChoiceItems,
+    required TResult Function(_FoldableSelectionFolderItemsModel value)
+        folderItemsModel,
+    required TResult Function(_FoldableSelectionFolderModel value) folderModel,
+  }) {
+    return folderChoiceItems(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_FoldableSelectionFolderText value)? folderText,
+    TResult? Function(_FoldableSelectionFolderBoolean value)? folderBoolean,
+    TResult? Function(_FoldableSelectionFolderChoice value)? folderChoice,
+    TResult? Function(_FoldableSelectionFolderChoiceItems value)?
+        folderChoiceItems,
+    TResult? Function(_FoldableSelectionFolderItemsModel value)?
+        folderItemsModel,
+    TResult? Function(_FoldableSelectionFolderModel value)? folderModel,
+  }) {
+    return folderChoiceItems?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_FoldableSelectionFolderText value)? folderText,
+    TResult Function(_FoldableSelectionFolderBoolean value)? folderBoolean,
+    TResult Function(_FoldableSelectionFolderChoice value)? folderChoice,
+    TResult Function(_FoldableSelectionFolderChoiceItems value)?
+        folderChoiceItems,
+    TResult Function(_FoldableSelectionFolderItemsModel value)?
+        folderItemsModel,
+    TResult Function(_FoldableSelectionFolderModel value)? folderModel,
+    required TResult orElse(),
+  }) {
+    if (folderChoiceItems != null) {
+      return folderChoiceItems(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$FoldableSelectionFolderChoiceItemsImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _FoldableSelectionFolderChoiceItems
+    implements FoldableSelection {
+  factory _FoldableSelectionFolderChoiceItems(
+          {required final String variableName}) =
+      _$FoldableSelectionFolderChoiceItemsImpl;
+
+  factory _FoldableSelectionFolderChoiceItems.fromJson(
+          Map<String, dynamic> json) =
+      _$FoldableSelectionFolderChoiceItemsImpl.fromJson;
+
+  @override
+  String get variableName;
+
+  /// Create a copy of FoldableSelection
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$FoldableSelectionFolderChoiceItemsImplCopyWith<
+          _$FoldableSelectionFolderChoiceItemsImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -820,6 +1066,7 @@ class _$FoldableSelectionFolderItemsModelImpl
     required TResult Function(String variableName) folderText,
     required TResult Function(String variableName) folderBoolean,
     required TResult Function(String variableName) folderChoice,
+    required TResult Function(String variableName) folderChoiceItems,
     required TResult Function(String variableName) folderItemsModel,
     required TResult Function(String variableName) folderModel,
   }) {
@@ -832,6 +1079,7 @@ class _$FoldableSelectionFolderItemsModelImpl
     TResult? Function(String variableName)? folderText,
     TResult? Function(String variableName)? folderBoolean,
     TResult? Function(String variableName)? folderChoice,
+    TResult? Function(String variableName)? folderChoiceItems,
     TResult? Function(String variableName)? folderItemsModel,
     TResult? Function(String variableName)? folderModel,
   }) {
@@ -844,6 +1092,7 @@ class _$FoldableSelectionFolderItemsModelImpl
     TResult Function(String variableName)? folderText,
     TResult Function(String variableName)? folderBoolean,
     TResult Function(String variableName)? folderChoice,
+    TResult Function(String variableName)? folderChoiceItems,
     TResult Function(String variableName)? folderItemsModel,
     TResult Function(String variableName)? folderModel,
     required TResult orElse(),
@@ -862,6 +1111,8 @@ class _$FoldableSelectionFolderItemsModelImpl
         folderBoolean,
     required TResult Function(_FoldableSelectionFolderChoice value)
         folderChoice,
+    required TResult Function(_FoldableSelectionFolderChoiceItems value)
+        folderChoiceItems,
     required TResult Function(_FoldableSelectionFolderItemsModel value)
         folderItemsModel,
     required TResult Function(_FoldableSelectionFolderModel value) folderModel,
@@ -875,6 +1126,8 @@ class _$FoldableSelectionFolderItemsModelImpl
     TResult? Function(_FoldableSelectionFolderText value)? folderText,
     TResult? Function(_FoldableSelectionFolderBoolean value)? folderBoolean,
     TResult? Function(_FoldableSelectionFolderChoice value)? folderChoice,
+    TResult? Function(_FoldableSelectionFolderChoiceItems value)?
+        folderChoiceItems,
     TResult? Function(_FoldableSelectionFolderItemsModel value)?
         folderItemsModel,
     TResult? Function(_FoldableSelectionFolderModel value)? folderModel,
@@ -888,6 +1141,8 @@ class _$FoldableSelectionFolderItemsModelImpl
     TResult Function(_FoldableSelectionFolderText value)? folderText,
     TResult Function(_FoldableSelectionFolderBoolean value)? folderBoolean,
     TResult Function(_FoldableSelectionFolderChoice value)? folderChoice,
+    TResult Function(_FoldableSelectionFolderChoiceItems value)?
+        folderChoiceItems,
     TResult Function(_FoldableSelectionFolderItemsModel value)?
         folderItemsModel,
     TResult Function(_FoldableSelectionFolderModel value)? folderModel,
@@ -1018,6 +1273,7 @@ class _$FoldableSelectionFolderModelImpl
     required TResult Function(String variableName) folderText,
     required TResult Function(String variableName) folderBoolean,
     required TResult Function(String variableName) folderChoice,
+    required TResult Function(String variableName) folderChoiceItems,
     required TResult Function(String variableName) folderItemsModel,
     required TResult Function(String variableName) folderModel,
   }) {
@@ -1030,6 +1286,7 @@ class _$FoldableSelectionFolderModelImpl
     TResult? Function(String variableName)? folderText,
     TResult? Function(String variableName)? folderBoolean,
     TResult? Function(String variableName)? folderChoice,
+    TResult? Function(String variableName)? folderChoiceItems,
     TResult? Function(String variableName)? folderItemsModel,
     TResult? Function(String variableName)? folderModel,
   }) {
@@ -1042,6 +1299,7 @@ class _$FoldableSelectionFolderModelImpl
     TResult Function(String variableName)? folderText,
     TResult Function(String variableName)? folderBoolean,
     TResult Function(String variableName)? folderChoice,
+    TResult Function(String variableName)? folderChoiceItems,
     TResult Function(String variableName)? folderItemsModel,
     TResult Function(String variableName)? folderModel,
     required TResult orElse(),
@@ -1060,6 +1318,8 @@ class _$FoldableSelectionFolderModelImpl
         folderBoolean,
     required TResult Function(_FoldableSelectionFolderChoice value)
         folderChoice,
+    required TResult Function(_FoldableSelectionFolderChoiceItems value)
+        folderChoiceItems,
     required TResult Function(_FoldableSelectionFolderItemsModel value)
         folderItemsModel,
     required TResult Function(_FoldableSelectionFolderModel value) folderModel,
@@ -1073,6 +1333,8 @@ class _$FoldableSelectionFolderModelImpl
     TResult? Function(_FoldableSelectionFolderText value)? folderText,
     TResult? Function(_FoldableSelectionFolderBoolean value)? folderBoolean,
     TResult? Function(_FoldableSelectionFolderChoice value)? folderChoice,
+    TResult? Function(_FoldableSelectionFolderChoiceItems value)?
+        folderChoiceItems,
     TResult? Function(_FoldableSelectionFolderItemsModel value)?
         folderItemsModel,
     TResult? Function(_FoldableSelectionFolderModel value)? folderModel,
@@ -1086,6 +1348,8 @@ class _$FoldableSelectionFolderModelImpl
     TResult Function(_FoldableSelectionFolderText value)? folderText,
     TResult Function(_FoldableSelectionFolderBoolean value)? folderBoolean,
     TResult Function(_FoldableSelectionFolderChoice value)? folderChoice,
+    TResult Function(_FoldableSelectionFolderChoiceItems value)?
+        folderChoiceItems,
     TResult Function(_FoldableSelectionFolderItemsModel value)?
         folderItemsModel,
     TResult Function(_FoldableSelectionFolderModel value)? folderModel,
