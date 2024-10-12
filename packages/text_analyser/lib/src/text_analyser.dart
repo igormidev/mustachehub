@@ -29,7 +29,6 @@ class TextAnalyser
         MainInterationVariables,
         HandleFindedModelScope,
         SetOpenModelsWithNoCloseAsInvalidSegments,
-        SetOpenChoicesWithNoCloseAsInvalidSegments,
         SetOpenBooleansWithotCloseAsInvalidSegments,
         MainInterationMapper,
         SetIfTextSegmentIsInsidePaternScope,
@@ -55,7 +54,6 @@ class TextAnalyser
 
     setOpenModelsWithNoCloseAsInvalidSegments();
     setOpenBooleansWithNoCloseAsInvalidSegments();
-    setOpenChoicesWithNoCloseAsInvalidSegments();
 
     setIfModelSegmentAreInsidePaternScope();
     setIfTextSegmentIsInsidePaternScope();

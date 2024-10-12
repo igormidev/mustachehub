@@ -39,9 +39,14 @@ mixin MainInterationVariables on AllVariables {
 
   bool get isNormalOpenDelimiter => group.fullMatchText.startsWith('{{#');
 
-  bool get isInverseOpenDelimiter => group.fullMatchText.startsWith('{{^');
+  bool get isInverseOpenDelimiter =>
+      stringHasInvertedPattern(group.fullMatchText);
 
   bool get isCloseDelimiter => group.fullMatchText.startsWith('{{/');
+
+  bool stringHasInvertedPattern(String string) {
+    return string.startsWith('{{^');
+  }
 
   bool get hasDelimiter =>
       isNormalOpenDelimiter ||

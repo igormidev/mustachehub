@@ -1,10 +1,10 @@
+import 'package:cursor_autocomplete_options/cursor_autocomplete_options.dart';
 import 'package:enchanted_collection/enchanted_collection.dart';
 import 'package:text_analyser/src/models/selectable_variable_options/selectable_variable_mapper_extension.dart';
 import 'package:text_analyser/src/models/variable_scope_parent_mapper.dart';
 import 'package:text_analyser/text_analyser.dart';
 import 'package:enchanted_regex/enchanted_regex.dart';
 part 'main_functions/handle_open_variables_without_close_as_invalid_segment/set_open_booleans_with_no_close_as_invalid_segments.dart';
-part 'main_functions/handle_open_variables_without_close_as_invalid_segment/set_open_choices_with_no_close_as_invalid_segments.dart';
 part 'main_functions/handle_open_variables_without_close_as_invalid_segment/set_open_models_with_no_close_as_invalid_segments.dart';
 part 'main_functions/main_interation_mapper_auxiliar_functions/has_delimitter_but_is_an_variable_without_scope.dart';
 part 'main_functions/main_interation_mapper_auxiliar_functions/is_uncatologed_variable.dart';

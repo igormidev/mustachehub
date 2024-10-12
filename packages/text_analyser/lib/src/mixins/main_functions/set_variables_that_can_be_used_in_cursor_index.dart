@@ -8,7 +8,17 @@ mixin SetVariablesThatCanBeUsedInCursorIndex on AllVariables {
         in modelsThatCursorIndexIsInsideScope) {
       final ModelParentMapper identifier = modelMapper.modelParentMapper;
       final bool isInverse = modelMapper.isInverse;
-      if (isInverse) continue;
+      final identifierName = identifier.name;
+      if (isInverse) {
+        usableVariablesInCurrentContext
+            .removeWhere((element) => switch (element) {
+                  FolderStructure<FoldableSelection, FileSelection>() =>
+                    element.item.variableName == identifierName,
+                  FileStructureOptions<FoldableSelection, FileSelection>() =>
+                    false,
+                });
+        continue;
+      }
 
       // usableVariablesInCurrentContext
       //     .add(ChoosableVariableImplementations.model(
@@ -21,14 +31,26 @@ mixin SetVariablesThatCanBeUsedInCursorIndex on AllVariables {
       //   modelImplementation: ModelUseImplementations.invertedValue(),
       // ));
 
-      final identifierName = identifier.name;
       final variableIdentifierMapper =
           identifierFlatMap[identifierName]! as VariableIdentifierMapperModel;
 
       final allitems =
           variableIdentifierMapper.structureItems(identifierFlatMap);
 
+      print('before: ${usableVariablesInCurrentContext.length}');
+      usableVariablesInCurrentContext
+          .removeWhere((element) => switch (element) {
+                FolderStructure<FoldableSelection, FileSelection>() =>
+                  element.item.variableName == identifierName,
+                FileStructureOptions<FoldableSelection, FileSelection>() =>
+                  false,
+              });
+      // final removed = usableVariablesInCurrentContext
+      //     .remove(variableIdentifierMapper.structure);
+      print('after: ${usableVariablesInCurrentContext.length}');
+
       usableVariablesInCurrentContext.add(allitems);
+
       // .add(identifier.structureItems(scopeParentFlatMap));
 
       //   for (final subModelName in identifier.subModelsNames) {

@@ -53,7 +53,7 @@ extension ModelParentMapperExt on VariableIdentifierMapperModel {
         }).removeNull,
 
         // Own model
-        structure,
+        // structure,
       ],
     );
   }
@@ -95,12 +95,12 @@ extension ChoiceIdentifierMapperExt on VariableIdentifierMapperChoice {
             children: [
               FileStructureOptions(
                 item: FileSelection.fileChoiceOpenScope(
-                  variableName: '$name.$option',
+                  variableName: '$name-$option',
                 ),
               ),
               FileStructureOptions(
                 item: FileSelection.fileChoiceInvertedScope(
-                  variableName: '$name.$option',
+                  variableName: '$name-$option',
                 ),
               ),
             ],

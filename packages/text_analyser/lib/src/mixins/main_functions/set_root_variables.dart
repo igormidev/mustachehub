@@ -11,7 +11,6 @@ mixin SetRootVariables on AllVariables {
       if (value.parrentName == null) {
         value.map(
           model: (VariableIdentifierMapperModel model) {
-            final allItems = model.structureItems(identifierFlatMap);
             usableVariablesInCurrentContext.add(model.structure);
           },
           choice: (VariableIdentifierMapperChoice choice) {

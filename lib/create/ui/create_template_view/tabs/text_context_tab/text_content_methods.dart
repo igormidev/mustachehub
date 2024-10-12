@@ -76,8 +76,8 @@ mixin TextContentMethods on State<TextContentTab> {
                   fileBooleanOpenScope: (v) => -3 - v.variableName.length,
                   fileBooleanInvertedScope: (v) => -3 - v.variableName.length,
                   fileChoiceLiteral: (v) => 2,
-                  fileChoiceOpenScope: (v) => -9 - v.variableName.length,
-                  fileChoiceInvertedScope: (v) => -9 - v.variableName.length,
+                  fileChoiceOpenScope: (v) => -3 - v.variableName.length,
+                  fileChoiceInvertedScope: (v) => -3 - v.variableName.length,
                   fileModelOpenScope: (v) => -3 - v.variableName.length,
                   fileModelInvertedScope: (v) => -3 - v.variableName.length,
                 ),
@@ -92,10 +92,12 @@ mixin TextContentMethods on State<TextContentTab> {
                   fileBooleanInvertedScope: (v) =>
                       '^${v.variableName}}}{{/${v.variableName}',
                   fileChoiceLiteral: (v) => v.variableName,
-                  fileChoiceOpenScope: (v) =>
-                      '#${v.variableName}}}{{/${v.variableName}',
-                  fileChoiceInvertedScope: (v) =>
-                      '^${v.variableName}}}{{/${v.variableName}',
+                  fileChoiceOpenScope: (v) {
+                    return '#${v.variableName}}}{{/${v.variableName}';
+                  },
+                  fileChoiceInvertedScope: (v) {
+                    return '^${v.variableName}}}{{/${v.variableName}';
+                  },
                   fileModelOpenScope: (v) =>
                       '#${v.variableName}}}{{/${v.variableName}',
                   fileModelInvertedScope: (v) =>
@@ -215,8 +217,8 @@ String folderOptionAsString(
     folderText: (value) => value.variableName,
     folderBoolean: (value) => value.variableName,
     folderChoice: (value) => value.variableName,
-    folderChoiceItems: (value) => '${value.variableName} items',
-    folderItemsModel: (value) => '${value.variableName} items',
+    folderChoiceItems: (value) => '${value.variableName} options',
+    folderItemsModel: (value) => '${value.variableName} variables',
     folderModel: (value) => value.variableName,
   );
 }
