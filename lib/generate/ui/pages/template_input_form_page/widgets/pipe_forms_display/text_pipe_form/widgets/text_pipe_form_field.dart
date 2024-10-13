@@ -36,9 +36,6 @@ class _TextPipeFormFieldState extends State<TextPipeFormField>
       initialValue: widget.pipeDto.payloadValue,
       decoration: InputDecoration(
         hintText: "Type here...",
-        // hintStyle: const TextStyle(
-        // color: Theme.of(context).colorScheme.onError,
-        // ),
         fillColor: displayEmptyIndicator
             ? Theme.of(context)
                 .colorScheme

@@ -46,7 +46,7 @@ class TextPipeForm extends StatelessWidget {
                   PopupMenuItem(
                     enabled: false,
                     child: DropdownMenu<int?>(
-                      width: 150,
+                      width: 300,
                       leadingIcon: const Tooltip(
                         message: 'Select how much textfields will be show in '
                             'one the row.\nIf set to auto, will pick '
