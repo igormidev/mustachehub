@@ -24,9 +24,14 @@ mixin TextContentMethods on State<TextContentTab> {
         final b = textOutput.texts.map((e) => e.willBreakLine).toList();
         final didSomeToggleBeenPressed = listEquals(a, b);
 
+        final beforeUuid = dependencies.map((e) => e.input.uuid).toList();
+        final afterUuid = textOutput.texts.map((e) => e.uuid).toList();
+        final areUuidDifferent = listEquals(beforeUuid, afterUuid);
+
         final reCalculationIsNeeded = dependencies.isEmpty ||
             dependencies.length != textOutput.texts.length ||
-            didSomeToggleBeenPressed == false;
+            didSomeToggleBeenPressed == false ||
+            areUuidDifferent == false;
         if (reCalculationIsNeeded == false) {
           return;
         }
@@ -104,56 +109,6 @@ mixin TextContentMethods on State<TextContentTab> {
                       '^${v.variableName}}}{{/${v.variableName}',
                 ),
               );
-              // return InsertInCursorPayload(
-              //   cursorIndexChangeQuantity: option.map(
-              //     text: (value) => value.map(
-              //       text: (_) => 2,
-              //       boolean: (_) => -3 - value.variableName.length,
-              //       choice: (_) => -3 - value.variableName.length,
-              //       model: (_) => -3 - value.variableName.length,
-              //     ),
-              //     boolean: (value) => -3 - value.variableName.length,
-              //     choice: (value) => -3 - value.variableName.length,
-              //     model: (value) => -3 - value.variableName.length,
-              //   ),
-              //   text: option.map(
-              //     text: (value) => value.variableName,
-              //     boolean: (value) {
-              //       final name = value.variableName;
-              //       return value.booleanImplementation.map(
-              //         normalValue: (_) {
-              //           return '#$name}}{{/$name';
-              //         },
-              //         invertedValue: (_) {
-              //           return '^$name}}{{/$name';
-              //         },
-              //       );
-              //     },
-              //     choice: (value) {
-              //       final name = value.variableName;
-              //       return value.choiceImplementation.map(
-              //         textValue: (_) => '$name.text',
-              //         normalValue: (_) {
-              //           return '#$name}}{{/$name';
-              //         },
-              //         invertedValue: (_) {
-              //           return '^$name}}{{/$name';
-              //         },
-              //       );
-              //     },
-              //     model: (value) {
-              //       final name = value.variableName;
-              //       return value.modelImplementation.map(
-              //         normalValue: (_) {
-              //           return '#$name}}{{/$name';
-              //         },
-              //         invertedValue: (_) {
-              //           return '^$name}}{{/$name';
-              //         },
-              //       );
-              //     },
-              //   ),
-              // );
             },
           );
 

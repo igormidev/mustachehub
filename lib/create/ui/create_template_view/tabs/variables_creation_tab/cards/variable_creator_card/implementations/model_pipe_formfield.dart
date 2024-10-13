@@ -154,6 +154,7 @@ class _ModelVariableCreationWidgetState
                       booleanPipes: booleanPipes,
                       choicePipes: choicePipes,
                       modelPipes: modelPipes,
+                      pipeId: pipe.pipeId,
                     );
                     return saveEditFunc(newModelPipe, afterSaveFunction);
                   },

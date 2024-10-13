@@ -36,6 +36,32 @@ class ContentStringCubit extends HydratedCubit<ContentStringState> {
     );
   }
 
+  /// If new pipe has a diferent name, it will be
+  /// updated in all the texts.
+  void onPipeEdit(Pipe oldPipe, newPipe) {
+    final doesNewPipeHasDifferentName =
+        oldPipe.mustacheName != newPipe.mustacheName;
+    if (!doesNewPipeHasDifferentName) return;
+
+    final newTexts = [...state.currentText.texts];
+
+    final o = oldPipe.mustacheName;
+    final n = newPipe.mustacheName;
+    int index = -1;
+    for (final ContentTextSectionInput text in newTexts) {
+      index++;
+      newTexts[index] = newTexts[index].copyWith(
+        content: text.content //
+            .replaceAll(RegExp('(?<={)$o(?=[}.-])'), n),
+        uuid: _uuid.v7(),
+      );
+    }
+
+    emit(ContentStringState.normal(
+      currentText: ContentInput.listOfTexts(texts: List.from(newTexts)),
+    ));
+  }
+
   void deleteCubit({
     required String uuid,
   }) {
@@ -74,11 +100,7 @@ class ContentStringCubit extends HydratedCubit<ContentStringState> {
   }
 
   void setStateFromOutput(ContentInput output) {
-    emit(
-      ContentStringState.normal(
-        currentText: output,
-      ),
-    );
+    emit(ContentStringState.normal(currentText: output));
   }
 
   @override
