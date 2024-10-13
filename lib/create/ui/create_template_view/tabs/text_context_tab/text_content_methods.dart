@@ -66,7 +66,7 @@ mixin TextContentMethods on State<TextContentTab> {
             overlay: Overlay.of(
               NavigatorService.i.dashboardNavigatorKey.currentContext!,
             ),
-            tileHeight: 40,
+            overlayCardHeight: 300,
             onTextAddedCallback: (option, newEditingValue) {
               notifyContentCubit(
                 output: output.copyWith(content: newEditingValue.text),

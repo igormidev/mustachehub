@@ -22,8 +22,8 @@ class ChoiceAsTextUsingInTemplateTextGuide extends StatelessWidget {
           style: Theme.of(context).textTheme.titleLarge,
         ),
         SelectableText(
-          'You can display the name of the choosed option in the template text. To-do so, use the suffix '
-          '".text" to indicate you want to display name of the option, all of that surrounded by double curly braces.\n\n'
+          'You can display the name of the choosed option in the template text. To-do so, type just the name of the variable in '
+          'camelCase format to indicate you want to display name of the option, all of that surrounded by double curly braces.\n\n'
           'Dont worry, when using the choice as text, the auto-complete will help you to insert the correct syntax. '
           'Just type in "{" to trigger the auto-complete dialog, and select the variable name with the ".text" suffix.',
           style: Theme.of(context).textTheme.bodyLarge,
