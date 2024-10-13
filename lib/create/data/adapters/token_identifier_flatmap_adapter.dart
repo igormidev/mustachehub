@@ -5,55 +5,49 @@ import 'package:text_analyser/text_analyser.dart';
 class TokenIdentifierFlatMapAdapter {
   const TokenIdentifierFlatMapAdapter();
 
-  Map<String, VariableScopeParentMapper> toFlatMap({
+  Map<String, VariableIdentifierMapper> toFlatMap({
     required final List<TextPipe> textPipes,
     required final List<BooleanPipe> booleanPipes,
     required final List<ChoicePipe> choicePipes,
     required final List<ModelPipe> modelPipes,
   }) {
-    final Map<String, VariableScopeParentMapper> response = {};
-    final texts =
-        textPipes.map(_getScopesFromText).expand((element) => element).toList();
+    final Map<String, VariableIdentifierMapper> response = {};
 
-    response.addAll(Map.fromEntries(texts));
-
-    final booleans = booleanPipes
+    response.addEntries(textPipes
         .map(
           (p) => MapEntry(
-            p.mustacheName,
-            VariableScopeParentMapper.boolean(
-              name: p.mustacheName,
-              parrentName: null,
-            ),
-          ),
+              p.mustacheName,
+              VariableIdentifierMapper.text(
+                name: p.mustacheName,
+                parrentName: null,
+              )),
         )
-        .toList();
-    response.addAll(Map.fromEntries(booleans));
+        .toList());
 
-    final choices = choicePipes
+    response.addEntries(booleanPipes
         .map(
-          (p) {
-            return <MapEntry<String, VariableScopeParentMapper>>[
-              ...p.options.map(
-                (option) {
-                  final o = option.toMustacheName;
-
-                  return MapEntry(
-                    '${p.mustacheName}.$o',
-                    VariableScopeParentMapper.boolean(
-                      name: '${p.mustacheName}.$o',
-                      parrentName: null,
-                    ),
-                  );
-                },
-              ),
-              ...textPipes.map(_getScopesFromText).expand((element) => element),
-            ];
-          },
+          (p) => MapEntry(
+              p.mustacheName,
+              VariableIdentifierMapper.boolean(
+                name: p.mustacheName,
+                parrentName: null,
+              )),
         )
-        .expand((element) => element)
-        .toList();
-    response.addAll(Map.fromEntries(choices));
+        .toList());
+
+    response.addEntries(
+      choicePipes
+          .map(
+            (p) => MapEntry(
+                p.mustacheName,
+                VariableIdentifierMapper.choice(
+                  name: p.mustacheName,
+                  parrentName: null,
+                  options: p.options.map((e) => e.toMustacheName).toList(),
+                )),
+          )
+          .toList(),
+    );
 
     for (final modelPipe in modelPipes) {
       response.addAll(_flatModelPipe(null, modelPipe));
@@ -62,136 +56,72 @@ class TokenIdentifierFlatMapAdapter {
     return response;
   }
 
-  Map<String, VariableScopeParentMapper> _flatModelPipe(
-    String? parrentName,
+  Map<String, VariableIdentifierMapper> _flatModelPipe(
+    String? modelParrentName,
     ModelPipe modelPipe,
   ) {
-    final Map<String, VariableScopeParentMapper> response = {};
+    final Map<String, VariableIdentifierMapper> response = {};
 
-    final textVariablesLiteral =
-        modelPipe.textPipes.map((e) => '${e.mustacheName}.text').toList();
-    final booleanVariablesOrText = modelPipe.textPipes
-        // .map((t) => _getOnlyBoleanScopesFromMustacheName(t.mustacheName))
-        .map((t) => <String>[
-              '${t.mustacheName}.isEmpty',
-              '${t.mustacheName}.isNotEmpty',
-            ])
-        .expand((e) => e)
-        .toList();
+    final List<MapEntry<String, VariableIdentifierMapperText>> textEntries =
+        modelPipe.textPipes
+            .map(
+              (p) => MapEntry(
+                  p.mustacheName,
+                  VariableIdentifierMapperText(
+                    name: p.mustacheName,
+                    parrentName: modelPipe.mustacheName,
+                  )),
+            )
+            .toList();
+    response.addEntries(textEntries);
+
+    final List<MapEntry<String, VariableIdentifierMapperBoolean>>
+        booleanEntries = modelPipe.booleanPipes
+            .map(
+              (p) => MapEntry(
+                  p.mustacheName,
+                  VariableIdentifierMapperBoolean(
+                    name: p.mustacheName,
+                    parrentName: modelPipe.mustacheName,
+                  )),
+            )
+            .toList();
+    response.addEntries(booleanEntries);
+
+    final List<MapEntry<String, VariableIdentifierMapperChoice>> choiceEntries =
+        modelPipe.choicePipes
+            .map(
+              (p) => MapEntry(
+                  p.mustacheName,
+                  VariableIdentifierMapperChoice(
+                    name: p.mustacheName,
+                    parrentName: modelPipe.mustacheName,
+                    options: p.options.map((e) => e.toMustacheName).toList(),
+                  )),
+            )
+            .toList();
+    response.addEntries(choiceEntries);
+
+    final subModelsEntries = Map.fromEntries(modelPipe.modelPipes.map((model) {
+      return _flatModelPipe(modelPipe.mustacheName, model);
+    }).expand((element) => element.entries));
 
     response.addAll({
-      modelPipe.mustacheName: VariableScopeParentMapper.model(
-        parrentName: parrentName,
+      modelPipe.mustacheName: VariableIdentifierMapper.model(
+        parrentName: modelParrentName,
         name: modelPipe.mustacheName,
-        textsNames: textVariablesLiteral,
-        booleanNames: [
-          ...booleanVariablesOrText,
-          ...modelPipe.booleanPipes.map((e) => e.mustacheName),
-        ],
-        choicesNames: modelPipe.choicePipes.map((e) => e.mustacheName).toList(),
-        subModelsNames:
-            modelPipe.modelPipes.map((e) => e.mustacheName).toList(),
+        textsChildren: textEntries.map((e) => e.value).toList(),
+        booleansChildren: booleanEntries.map((e) => e.value).toList(),
+        choicesChildren: choiceEntries.map((e) => e.value).toList(),
+        subModelsChildren: modelPipe.modelPipes
+            .map(
+              (e) => subModelsEntries[e.mustacheName]
+                  as VariableIdentifierMapperModel,
+            )
+            .toList(),
       ),
     });
 
-    final texts = modelPipe.textPipes
-        .map((t) => _getScopesFromText(t, modelPipe.mustacheName))
-        .expand((element) => element)
-        .toList();
-    response.addAll(Map.fromEntries(texts));
-
-    final booleans = modelPipe.booleanPipes
-        .map(
-          (p) => MapEntry(
-            p.mustacheName,
-            VariableScopeParentMapper.boolean(
-              name: p.mustacheName,
-              parrentName: modelPipe.mustacheName,
-            ),
-          ),
-        )
-        .toList();
-    response.addAll(Map.fromEntries(booleans));
-
-    final choices = modelPipe.choicePipes
-        .map(
-          (p) {
-            return <MapEntry<String, VariableScopeParentMapper>>[
-              ...p.options.map(
-                (option) {
-                  final o = option.toMustacheName;
-                  return MapEntry(
-                    '${p.mustacheName}.$o',
-                    VariableScopeParentMapper.boolean(
-                      name: '${p.mustacheName}.$o',
-                      parrentName: modelPipe.mustacheName,
-                    ),
-                  );
-                },
-              ),
-              ..._getScopesFromMustacheName(
-                p.mustacheName,
-                modelPipe.mustacheName,
-              ),
-            ];
-          },
-        )
-        .expand((element) => element)
-        .toList();
-    response.addAll(Map.fromEntries(choices));
-
-    for (final model in modelPipe.modelPipes) {
-      response.addAll({
-        ..._flatModelPipe(modelPipe.mustacheName, model),
-      });
-    }
-
     return response;
   }
-}
-
-List<MapEntry<String, VariableScopeParentMapper>> _getScopesFromText(
-  TextPipe p, [
-  String? parrentName,
-]) {
-  return _getScopesFromMustacheName(p.mustacheName, parrentName);
-}
-
-List<MapEntry<String, VariableScopeParentMapper>> _getScopesFromMustacheName(
-  String mn, [
-  String? parrentName,
-]) {
-  return <MapEntry<String, VariableScopeParentMapper>>[
-    MapEntry(
-      '$mn.text',
-      VariableScopeParentMapper.text(
-        name: '$mn.text',
-        parrentName: parrentName,
-      ),
-    ),
-    ..._getOnlyBoleanScopesFromMustacheName(mn, parrentName),
-  ];
-}
-
-List<MapEntry<String, VariableScopeParentMapper>>
-    _getOnlyBoleanScopesFromMustacheName(
-  String mn, [
-  String? parrentName,
-]) {
-  return <MapEntry<String, VariableScopeParentMapper>>[
-    MapEntry(
-      '$mn.isEmpty',
-      VariableScopeParentMapper.boolean(
-        name: '$mn.isEmpty',
-        parrentName: parrentName,
-      ),
-    ),
-    MapEntry(
-      '$mn.isNotEmpty',
-      VariableScopeParentMapper.boolean(
-        name: '$mn.isNotEmpty',
-        parrentName: parrentName,
-      ),
-    ),
-  ];
 }

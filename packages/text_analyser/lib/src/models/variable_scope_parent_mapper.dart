@@ -15,17 +15,11 @@ abstract class VariableScopeParentMapper with _$VariableScopeParentMapper {
     required String name,
   }) = BooleanParentMapper;
 
-  // const factory VariableScopeParentMapper.choice({
-  //   required String? parrentName,
-  //   required String name,
-  // }) = ChoiceParentMapper;
-
   const factory VariableScopeParentMapper.model({
     required String? parrentName,
     required String name,
     required List<String> textsNames,
     required List<String> booleanNames,
-    required List<String> choicesNames,
     required List<String> subModelsNames,
   }) = ModelParentMapper;
 

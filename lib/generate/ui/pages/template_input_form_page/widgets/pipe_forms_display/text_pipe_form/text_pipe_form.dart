@@ -1,4 +1,3 @@
-import 'package:enchanted_collection/enchanted_collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,7 +8,7 @@ import 'package:mustachehub/generate/presenter/cubits/payload_cubit.dart';
 import 'package:mustachehub/generate/presenter/dtos/pipe_dto/pipe_dto.dart';
 import 'package:mustachehub/generate/presenter/states/form_stats_state.dart';
 import 'package:mustachehub/generate/presenter/states/payload_state.dart';
-import 'package:mustachehub/generate/ui/pages/template_input_form_page/widgets/pipe_forms_display/text_pipe_form/widgets/text_pipe_form_field.dart';
+import 'package:mustachehub/generate/ui/pages/template_input_form_page/widgets/pipe_forms_display/text_pipe_form/widgets/text_pipe_card_wrapper.dart';
 
 class TextPipeForm extends StatelessWidget {
   final ContentInput output;
@@ -47,7 +46,7 @@ class TextPipeForm extends StatelessWidget {
                   PopupMenuItem(
                     enabled: false,
                     child: DropdownMenu<int?>(
-                      width: 150,
+                      width: 300,
                       leadingIcon: const Tooltip(
                         message: 'Select how much textfields will be show in '
                             'one the row.\nIf set to auto, will pick '
@@ -77,7 +76,6 @@ class TextPipeForm extends StatelessWidget {
                   ),
               ],
             ),
-            const SizedBox(height: 8),
             BlocBuilder<FormStatsCubit, FormStatsState>(
               builder: (context, state) {
                 return LayoutBuilder(
@@ -93,43 +91,12 @@ class TextPipeForm extends StatelessWidget {
                       }
                     }
 
-                    return Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: pipes
-                          .splitIntoGroups(groupSplit)
-                          .map((List<TextPipeDto> pipesCluster) {
-                        return Padding(
-                          padding: const EdgeInsets.only(bottom: 8.0),
-                          child: Row(
-                            children: pipesCluster.mapper((
-                              TextPipeDto dto,
-                              bool isFirst,
-                              bool isLast,
-                              int index,
-                            ) {
-                              return Expanded(
-                                child: Padding(
-                                  padding: EdgeInsets.only(
-                                    left: isFirst ? 0 : 4,
-                                    right: isLast ? 0 : 4,
-                                  ),
-                                  child: TextPipeFormField(
-                                    pipeDto: dto,
-                                    onChangedCallback: (text) async {
-                                      return await bloc.addTextPayloadValue(
-                                        output: output,
-                                        generatorData: expectedPayload,
-                                        pipe: dto.pipe,
-                                        value: text,
-                                      );
-                                    },
-                                  ),
-                                ),
-                              );
-                            }),
-                          ),
-                        );
-                      }).toList(),
+                    return TextPipeCardWrapper(
+                      pipes: pipes,
+                      groupSplit: groupSplit,
+                      bloc: bloc,
+                      expectedPayload: expectedPayload,
+                      output: output,
                     );
                   },
                 );

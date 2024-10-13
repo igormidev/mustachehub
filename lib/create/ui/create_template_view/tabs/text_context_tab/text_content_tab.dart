@@ -53,7 +53,8 @@ class _TextContentTabState extends State<TextContentTab>
   }
 
   void disposeAll() {
-    for (final cluster in dependencies) {
+    for (final EditDependenciesCluster cluster in dependencies) {
+      cluster.titleController.dispose();
       cluster.controller.dispose();
       cluster.optionsController.dispose();
       cluster.decouncer.dispose();
@@ -136,6 +137,7 @@ class _TextContentTabState extends State<TextContentTab>
                             int index,
                           ) {
                             return SectionContentField(
+                              onDelete: (uuid) => contentCubit.removeAt(uuid),
                               key: ValueKey(
                                   index.toString() + cluster.input.uuid),
                               input: cluster.input,
@@ -186,8 +188,9 @@ class _TextContentTabState extends State<TextContentTab>
 }
 
 class SuggestionCard extends StatelessWidget {
-  final Widget Function(List<ChoosableVariableImplementations> options)
-      listTilesWithOptionsBuilder;
+  final Widget Function(
+    List<StructuredDataType<FoldableSelection, FileSelection>> value,
+  ) listTilesWithOptionsBuilder;
 
   const SuggestionCard({
     super.key,
@@ -210,8 +213,9 @@ class SuggestionCard extends StatelessWidget {
             );
           },
           withIdentifiers: (value) {
-            final items = value.tokenIdentifiers.toList();
-            return listTilesWithOptionsBuilder(items);
+            final List<StructureFolder> tokenIdentifiers =
+                value.tokenIdentifiers.toList();
+            return listTilesWithOptionsBuilder(tokenIdentifiers);
           },
           errorOccurred: (value) {
             return const Column(
@@ -235,7 +239,7 @@ class EditDependenciesCluster {
   final FocusNode textfieldFocusNode;
   final TextEditingController titleController;
   final VariablesInfoHighlightTextEditingController controller;
-  final OptionsController<ChoosableVariableImplementations> optionsController;
+  final OptionsController<FoldableSelection, FileSelection> optionsController;
   final Debouncer decouncer;
   final ContentTextSectionInput input;
 

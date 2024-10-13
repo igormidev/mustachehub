@@ -9,7 +9,7 @@ mixin MainInterationVariables on AllVariables {
   late FindedGroup group;
 
   VariableScopeParentMapper get varScopeParentMapper {
-    return flatMap[group.content]!;
+    return scopeParentFlatMap[group.content]!;
   }
 
   TextOffset get offset => TextOffset(
@@ -39,9 +39,14 @@ mixin MainInterationVariables on AllVariables {
 
   bool get isNormalOpenDelimiter => group.fullMatchText.startsWith('{{#');
 
-  bool get isInverseOpenDelimiter => group.fullMatchText.startsWith('{{^');
+  bool get isInverseOpenDelimiter =>
+      stringHasInvertedPattern(group.fullMatchText);
 
   bool get isCloseDelimiter => group.fullMatchText.startsWith('{{/');
+
+  bool stringHasInvertedPattern(String string) {
+    return string.startsWith('{{^');
+  }
 
   bool get hasDelimiter =>
       isNormalOpenDelimiter ||

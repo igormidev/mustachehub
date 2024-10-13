@@ -154,6 +154,7 @@ class _ModelVariableCreationWidgetState
                       booleanPipes: booleanPipes,
                       choicePipes: choicePipes,
                       modelPipes: modelPipes,
+                      pipeId: pipe.pipeId,
                     );
                     return saveEditFunc(newModelPipe, afterSaveFunction);
                   },
@@ -272,6 +273,7 @@ class _ModelBaseCreatorState extends State<ModelBaseCreator>
                 booleanPipes: booleanPipes,
                 choicePipes: choicePipes,
                 modelPipes: modelPipes,
+                pipeId: pipe.pipeId,
               );
               saveEditFunc(newModelPipe, afterSaveFunction);
             },

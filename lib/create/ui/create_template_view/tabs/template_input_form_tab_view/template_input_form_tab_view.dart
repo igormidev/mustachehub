@@ -24,6 +24,7 @@ class _TemplateInputFormPageViewState extends State<TemplateInputFormPageView>
     final contentState = context.read<ContentStringCubit>().state;
     setDependencies(
       context: context,
+      packageInfo: null,
       output: contentState.currentText,
       textPipes: varState.textPipes,
       booleanPipes: varState.booleanPipes,
@@ -41,6 +42,7 @@ class _TemplateInputFormPageViewState extends State<TemplateInputFormPageView>
 
         setDependencies(
           context: context,
+          packageInfo: null,
           output: contentState.currentText,
           textPipes: varState.textPipes,
           booleanPipes: varState.booleanPipes,
@@ -53,6 +55,7 @@ class _TemplateInputFormPageViewState extends State<TemplateInputFormPageView>
           listener: (context, variablesCubit) async {
             setDependencies(
               context: context,
+              packageInfo: null,
               output: contentState.currentText,
               textPipes: variablesCubit.textPipes,
               booleanPipes: variablesCubit.booleanPipes,

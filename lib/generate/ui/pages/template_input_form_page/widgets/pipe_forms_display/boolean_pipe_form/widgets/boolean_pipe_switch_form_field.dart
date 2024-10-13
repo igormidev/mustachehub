@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mustachehub/app_core/extensions/string_extension.dart';
 import 'package:mustachehub/generate/presenter/dtos/pipe_dto/pipe_dto.dart';
 import 'package:mustachehub/generate/ui/pages/template_input_form_page/widgets/pipe_forms_display/boolean_pipe_form/boolean_pipe_form_methods.dart';
 
@@ -31,7 +32,7 @@ class _BoleanSwitchState extends State<BooleanPipeSwitchFormField>
           children: [
             const SizedBox(width: 8),
             Tooltip(
-              message: widget.pipeDto.pipe.description,
+              message: widget.pipeDto.pipe.description.capitalized,
               child: Icon(
                 Icons.info,
                 color: Theme.of(context).colorScheme.secondary,
@@ -47,7 +48,7 @@ class _BoleanSwitchState extends State<BooleanPipeSwitchFormField>
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(widget.pipeDto.pipe.name),
+                  Text(widget.pipeDto.pipe.name.capitalized),
                   const SizedBox(width: 4),
                   IgnorePointer(
                     child: Checkbox(

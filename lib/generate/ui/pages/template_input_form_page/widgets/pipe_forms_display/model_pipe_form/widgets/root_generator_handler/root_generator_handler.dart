@@ -11,12 +11,14 @@ import 'package:mustachehub/generate/ui/pages/template_input_form_page/widgets/p
 
 // TODO(igor): Change for facade pattern
 class RootGeneratorHandler extends StatelessWidget {
+  final Set<String> allRequiredFields;
   final ContentInput output;
   final ExpectedPayload expectedPayload;
   final TreeNode<TreeNodeGeneratePipeDto> node;
   final ModelPipeDto rootModelDTO;
   const RootGeneratorHandler({
     super.key,
+    required this.allRequiredFields,
     required this.node,
     required this.output,
     required this.expectedPayload,
@@ -31,7 +33,9 @@ class RootGeneratorHandler extends StatelessWidget {
       child: root.map(
         structureNode: (TreeNodeGeneratePipeDtoStructureNode value) {
           return StructureGenerateNodeBuilder(
+            isExpanded: node.isExpanded,
             rootModelDTO: rootModelDTO,
+            isEmpty: node.children.isEmpty,
             output: output,
             expectedPayload: expectedPayload,
             referenceModelDTO: value.referenceModelDTO,
@@ -48,6 +52,8 @@ class RootGeneratorHandler extends StatelessWidget {
         },
         textNode: (TreeNodeGeneratePipeDtoPipeText value) {
           return TextGenerateNodeBuilder(
+            isRequired:
+                allRequiredFields.contains(value.pipeDTO.pipe.mustacheName),
             rootModelDTO: rootModelDTO,
             output: output,
             expectedPayload: expectedPayload,
@@ -64,6 +70,7 @@ class RootGeneratorHandler extends StatelessWidget {
         },
         model: (TreeNodeGeneratePipeDtoPipeModel value) {
           return ModelGenerateNodeBuilder(
+            isExpanded: node.isExpanded,
             rootModelDTO: rootModelDTO,
             output: output,
             expectedPayload: expectedPayload,

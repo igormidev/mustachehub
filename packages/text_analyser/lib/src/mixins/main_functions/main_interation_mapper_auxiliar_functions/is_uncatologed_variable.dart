@@ -7,8 +7,11 @@ mixin IsUncatologedVariable on MainInterationVariables {
     /// A variable that the user did not create before using it.
     /// Or maybe he just wrote it wrong by one caracter. Anyway, it is not
     /// a valid variable.
-    final bool isUncatologedVariable = flatMap[group.content] == null;
+    final bool isUncatologedVariable =
+        scopeParentFlatMap[group.content] == null;
     if (isUncatologedVariable) {
+      print(
+          'Uncataloged variable: ${group.content} ( "${scopeParentFlatMap.keys.join('", "')}" )');
       segments[index] = AnalysedSegmentStatus.declarationOfUncatalogedVariable(
         offset: offset,
         segmentText: group.fullMatchText,

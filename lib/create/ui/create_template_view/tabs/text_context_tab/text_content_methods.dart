@@ -24,9 +24,14 @@ mixin TextContentMethods on State<TextContentTab> {
         final b = textOutput.texts.map((e) => e.willBreakLine).toList();
         final didSomeToggleBeenPressed = listEquals(a, b);
 
+        final beforeUuid = dependencies.map((e) => e.input.uuid).toList();
+        final afterUuid = textOutput.texts.map((e) => e.uuid).toList();
+        final areUuidDifferent = listEquals(beforeUuid, afterUuid);
+
         final reCalculationIsNeeded = dependencies.isEmpty ||
             dependencies.length != textOutput.texts.length ||
-            didSomeToggleBeenPressed == false;
+            didSomeToggleBeenPressed == false ||
+            areUuidDifferent == false;
         if (reCalculationIsNeeded == false) {
           return;
         }
@@ -51,74 +56,57 @@ mixin TextContentMethods on State<TextContentTab> {
           final cacheFieldNode = cacheFocusNodes[output.uuid];
           final fieldNode = cacheFieldNode ?? FocusNode();
 
-          final OptionsController<ChoosableVariableImplementations>
+          final OptionsController<FoldableSelection, FileSelection>
               optionsController =
-              OptionsController<ChoosableVariableImplementations>(
+              OptionsController<FoldableSelection, FileSelection>(
             textfieldFocusNode: fieldNode,
             textEditingController: controller,
             context: context,
             // optionAsString: (option) => option.name,
-            optionAsString: choosableVariableImplementation,
             overlay: Overlay.of(
               NavigatorService.i.dashboardNavigatorKey.currentContext!,
             ),
-            tileHeight: 40,
+            overlayCardHeight: 300,
             onTextAddedCallback: (option, newEditingValue) {
               notifyContentCubit(
                 output: output.copyWith(content: newEditingValue.text),
               );
             },
-            selectInCursorParser: (option) {
+            selectInCursorParser: (FileSelection option) {
               return InsertInCursorPayload(
                 cursorIndexChangeQuantity: option.map(
-                  text: (value) => value.map(
-                    text: (_) => 2,
-                    boolean: (_) => -3 - value.variableName.length,
-                    choice: (_) => -3 - value.variableName.length,
-                    model: (_) => -3 - value.variableName.length,
-                  ),
-                  boolean: (value) => -3 - value.variableName.length,
-                  choice: (value) => -3 - value.variableName.length,
-                  model: (value) => -3 - value.variableName.length,
+                  fileTextLiteral: (v) => 2,
+                  fileTextOpenScope: (v) => -9 - v.variableName.length,
+                  fileTextInvertedScope: (v) => -9 - v.variableName.length,
+                  fileBooleanOpenScope: (v) => -3 - v.variableName.length,
+                  fileBooleanInvertedScope: (v) => -3 - v.variableName.length,
+                  fileChoiceLiteral: (v) => 2,
+                  fileChoiceOpenScope: (v) => -3 - v.variableName.length,
+                  fileChoiceInvertedScope: (v) => -3 - v.variableName.length,
+                  fileModelOpenScope: (v) => -3 - v.variableName.length,
+                  fileModelInvertedScope: (v) => -3 - v.variableName.length,
                 ),
                 text: option.map(
-                  text: (value) {
-                    return value.variableName;
+                  fileTextLiteral: (v) => v.variableName,
+                  fileTextOpenScope: (v) =>
+                      '#${v.variableName}-empty}}{{/${v.variableName}-empty',
+                  fileTextInvertedScope: (v) =>
+                      '^${v.variableName}-empty}}{{/${v.variableName}-empty',
+                  fileBooleanOpenScope: (v) =>
+                      '#${v.variableName}}}{{/${v.variableName}',
+                  fileBooleanInvertedScope: (v) =>
+                      '^${v.variableName}}}{{/${v.variableName}',
+                  fileChoiceLiteral: (v) => v.variableName,
+                  fileChoiceOpenScope: (v) {
+                    return '#${v.variableName}}}{{/${v.variableName}';
                   },
-                  boolean: (value) {
-                    final name = value.variableName;
-                    return value.booleanImplementation.map(
-                      normalValue: (_) {
-                        return '#$name}}{{/$name';
-                      },
-                      invertedValue: (_) {
-                        return '^$name}}{{/$name';
-                      },
-                    );
+                  fileChoiceInvertedScope: (v) {
+                    return '^${v.variableName}}}{{/${v.variableName}';
                   },
-                  choice: (value) {
-                    final name = value.variableName;
-                    return value.choiceImplementation.map(
-                      textValue: (_) => '$name.text',
-                      normalValue: (_) {
-                        return '#$name}}{{/$name';
-                      },
-                      invertedValue: (_) {
-                        return '^$name}}{{/$name';
-                      },
-                    );
-                  },
-                  model: (value) {
-                    final name = value.variableName;
-                    return value.modelImplementation.map(
-                      normalValue: (_) {
-                        return '#$name}}{{/$name';
-                      },
-                      invertedValue: (_) {
-                        return '^$name}}{{/$name';
-                      },
-                    );
-                  },
+                  fileModelOpenScope: (v) =>
+                      '#${v.variableName}}}{{/${v.variableName}',
+                  fileModelInvertedScope: (v) =>
+                      '^${v.variableName}}}{{/${v.variableName}',
                 ),
               );
             },
@@ -177,34 +165,60 @@ mixin TextContentMethods on State<TextContentTab> {
   }
 }
 
-String choosableVariableImplementation(
-  ChoosableVariableImplementations option,
-) =>
-    option.map(
-      boolean: (value) => value.booleanImplementation.map(
-        normalValue: (impl) {
-          return '#${value.variableName}';
-        },
-        invertedValue: (impl) {
-          return '^${value.variableName}';
-        },
-      ),
-      choice: (value) => value.choiceImplementation.map(
-        textValue: (impl) => '${value.variableName}.text',
-        normalValue: (impl) {
-          return '# ${value.variableName}';
-        },
-        invertedValue: (impl) {
-          return ' ^${value.variableName}';
-        },
-      ),
-      text: (value) => value.variableName,
-      model: (value) => value.modelImplementation.map(
-        normalValue: (impl) {
-          return '# ${value.variableName}';
-        },
-        invertedValue: (impl) {
-          return '^ ${value.variableName}';
-        },
-      ),
-    );
+String folderOptionAsString(
+  FoldableSelection option,
+) {
+  return option.map(
+    folderText: (value) => value.variableName,
+    folderBoolean: (value) => value.variableName,
+    folderChoice: (value) => value.variableName,
+    folderChoiceItems: (value) => '${value.variableName} options',
+    folderItemsModel: (value) => '${value.variableName} variables',
+    folderModel: (value) => value.variableName,
+  );
+}
+
+String fileOptionAsString(
+  FileSelection option,
+) {
+  return option.map(
+    fileTextLiteral: (v) => v.variableName,
+    fileTextOpenScope: (v) => '#${v.variableName}',
+    fileTextInvertedScope: (v) => '^${v.variableName}',
+    fileBooleanOpenScope: (v) => '#${v.variableName}',
+    fileBooleanInvertedScope: (v) => '^${v.variableName}',
+    fileChoiceLiteral: (v) => v.variableName,
+    fileChoiceOpenScope: (v) => '#${v.variableName}',
+    fileChoiceInvertedScope: (v) => '^${v.variableName}',
+    fileModelOpenScope: (v) => '#${v.variableName}',
+    fileModelInvertedScope: (v) => '^${v.variableName}',
+  );
+}
+    // option.map(
+    //   boolean: (value) => value.booleanImplementation.map(
+    //     normalValue: (impl) {
+    //       return '#${value.variableName}';
+    //     },
+    //     invertedValue: (impl) {
+    //       return '^${value.variableName}';
+    //     },
+    //   ),
+    //   choice: (value) => value.choiceImplementation.map(
+    //     textValue: (impl) => '${value.variableName}.text',
+    //     normalValue: (impl) {
+    //       return '# ${value.variableName}';
+    //     },
+    //     invertedValue: (impl) {
+    //       return ' ^${value.variableName}';
+    //     },
+    //   ),
+    //   text: (value) => value.variableName,
+    //   model: (value) => value.modelImplementation.map(
+    //     normalValue: (impl) {
+    //       return '# ${value.variableName}';
+    //     },
+    //     invertedValue: (impl) {
+    //       return '^ ${value.variableName}';
+    //     },
+    //   ),
+    // );

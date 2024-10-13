@@ -1,9 +1,10 @@
+import 'package:cursor_autocomplete_options/cursor_autocomplete_options.dart';
 import 'package:enchanted_collection/enchanted_collection.dart';
-import 'package:text_analyser/src/models/choosable_variable_implementations/use_implementations_models/model_use_implementations.dart';
+import 'package:text_analyser/src/models/selectable_variable_options/selectable_variable_mapper_extension.dart';
+import 'package:text_analyser/src/models/variable_scope_parent_mapper.dart';
 import 'package:text_analyser/text_analyser.dart';
 import 'package:enchanted_regex/enchanted_regex.dart';
 part 'main_functions/handle_open_variables_without_close_as_invalid_segment/set_open_booleans_with_no_close_as_invalid_segments.dart';
-part 'main_functions/handle_open_variables_without_close_as_invalid_segment/set_open_choices_with_no_close_as_invalid_segments.dart';
 part 'main_functions/handle_open_variables_without_close_as_invalid_segment/set_open_models_with_no_close_as_invalid_segments.dart';
 part 'main_functions/main_interation_mapper_auxiliar_functions/has_delimitter_but_is_an_variable_without_scope.dart';
 part 'main_functions/main_interation_mapper_auxiliar_functions/is_uncatologed_variable.dart';
@@ -25,7 +26,6 @@ part 'main_functions/main_interation_mapper_auxiliar_functions/handle_variables/
 part 'main_functions/set_variables_that_can_be_used_in_cursor_index.dart';
 part 'main_functions/set_if_variables_are_used_inside_patern_scope/set_if_text_segment_is_inside_patern_scope.dart';
 part 'main_functions/set_if_variables_are_used_inside_patern_scope/set_if_boolean_segment_is_inside_patern_scope.dart';
-part 'main_functions/set_if_variables_are_used_inside_patern_scope/set_if_choice_segment_is_inside_patern_scope.dart';
 part 'main_functions/set_if_variables_are_used_inside_patern_scope/set_if_model_segment_is_inside_patern_scope.dart';
 
 mixin AllVariables
@@ -34,7 +34,7 @@ mixin AllVariables
         ParentScopeValidationPayload,
         OpenDeclarationsWithoutFindedClose {
   /// The regular expression to find the mustache template variables.
-  final RegExp regExp = RegExp(r'{{[\^#\/]?(?<name>[a-zA-Z\.]+?)}}');
+  final RegExp regExp = RegExp(r'{{[\^#\/]?(?<name>[a-zA-Z\.-]+?)}}');
 
   /// The key represents the index of the segment in the text.
   /// That is, each [input.forEachNamedGroup] iteration will
@@ -60,8 +60,7 @@ mixin AllVariables
   ///
   /// This includes all root variables and the variables inside a model that
   /// the textfield cursor is inside that model scole.
-  final Set<ChoosableVariableImplementations> usableVariablesInCurrentContext =
-      {};
+  final Set<StructureFolder> usableVariablesInCurrentContext = {};
 
   /// All the model scopes that exists in the [input].
   /// Not necessary only the models that the cursor

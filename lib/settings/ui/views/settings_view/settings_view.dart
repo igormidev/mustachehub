@@ -5,6 +5,7 @@ import 'package:media_query_core/responsiveness/visibility_width_based.dart';
 import 'package:mustachehub/app_core/extensions/build_context_extension.dart';
 import 'package:mustachehub/dashboard/presenter/cubits/packages_info_cubit.dart';
 import 'package:mustachehub/dashboard/ui/navigation_widgets/dashboard_drawer/dashboard_drawer.dart';
+import 'package:mustachehub/dashboard/ui/navigation_widgets/widgets/report_bug/report_bug_card.dart';
 import 'package:mustachehub/settings/interactor/cubit/theme_cubit.dart';
 import 'package:mustachehub/settings/ui/views/settings_view/widgets/color_option.dart';
 import 'package:mustachehub/settings/ui/views/settings_view/widgets/configurations_lottie.dart';
@@ -97,8 +98,9 @@ class SettingsView extends StatelessWidget {
               BlocBuilder<PackagesInfoCubit, PackageInfo?>(
                   builder: (context, state) {
                 final version = state?.version;
+
                 return Text(
-                  version != null ? 'Version: $version' : 'Loading...',
+                  'Version: ${version ?? versionmock}',
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(
                         color: Theme.of(context).colorScheme.outline,
                       ),
@@ -118,8 +120,9 @@ class SettingsView extends StatelessWidget {
                     BlocBuilder<PackagesInfoCubit, PackageInfo?>(
                         builder: (context, state) {
                       final version = state?.version;
+
                       return Text(
-                        version != null ? 'Version: $version' : 'Loading...',
+                        'Version: ${version ?? versionmock}',
                         style: Theme.of(context).textTheme.titleSmall?.copyWith(
                               color: Theme.of(context).colorScheme.outline,
                             ),

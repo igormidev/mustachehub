@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mustache_hub_core/mustache_hub_core.dart';
 import 'package:mustachehub/app_core/theme/default_widgets/custom_header.dart';
+import 'package:mustachehub/generate/presenter/cubits/displayable_content_cubit.dart';
 import 'package:mustachehub/generate/presenter/cubits/payload_cubit.dart';
 import 'package:mustachehub/generate/presenter/dtos/pipe_dto/pipe_dto.dart';
 import 'package:mustachehub/generate/presenter/dtos/tree_node_generate_pipe_dto.dart';
+import 'package:mustachehub/generate/presenter/states/displayable_content_state.dart';
 import 'package:mustachehub/generate/presenter/states/payload_state.dart';
 import 'package:mustachehub/generate/ui/pages/template_input_form_page/widgets/pipe_forms_display/model_pipe_form/widgets/root_generator_handler/root_generator_handler.dart';
 
@@ -21,6 +23,7 @@ class ModelPipeForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final displayableContentCubit = context.read<DisplayableContentCubit>();
     return BlocBuilder<PayloadCubit, PayloadState>(
       buildWhen: (prev, curr) {
         final prevDtos = prev.expectedPayloadDto?.modelDtos;
@@ -33,75 +36,99 @@ class ModelPipeForm extends StatelessWidget {
 
         if (pipes.isEmpty) return SizedBox.fromSize();
 
-        return LayoutBuilder(
-          builder: (context, constraints) {
-            return Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 8),
-                const CustomHeader(headerTitle: 'Model variables'),
-                ...pipes.map(
-                  (ModelPipeDto pipeDTO) {
-                    final StructureDTONode treeNode = StructureDTONode.root(
-                      data: TreeNodeGeneratePipeDtoStructureNode(
-                        payloadUUID: null,
-                        referenceModelDTO: pipeDTO,
-                      ),
-                    );
-
-                    final otherNodes = _getNodesFromStructure(treeNode.data!);
-                    treeNode.addAll(otherNodes);
-
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          width: constraints.maxWidth,
-                          child: TreeView.simpleTyped<TreeNodeGeneratePipeDto,
-                              TreeNode<TreeNodeGeneratePipeDto>>(
-                            tree: treeNode,
-                            showRootNode: true,
-                            shrinkWrap: true,
-                            expansionBehavior:
-                                ExpansionBehavior.scrollToLastChild,
-                            indentation: const Indentation(),
-                            expansionIndicatorBuilder: (
-                              BuildContext context,
-                              ITreeNode node,
-                            ) {
-                              if (node.isRoot) {
-                                return PlusMinusIndicator(
-                                  tree: node,
-                                  alignment: Alignment.centerLeft,
-                                  color: Colors.grey[700],
-                                );
-                              }
-
-                              return ChevronIndicator.rightDown(
-                                tree: node,
-                                alignment: Alignment.centerLeft,
-                                color: Colors.grey[700],
-                              );
-                            },
-                            builder: (
-                              BuildContext context,
-                              TreeNode<TreeNodeGeneratePipeDto> node,
-                            ) {
-                              return RootGeneratorHandler(
-                                node: node,
-                                output: output,
-                                expectedPayload: expectedPayload,
-                                rootModelDTO: pipeDTO,
-                              );
-                            },
+        return BlocSelector<DisplayableContentCubit, DisplayableContentState,
+            Set<String>>(
+          bloc: displayableContentCubit,
+          selector: (state) => state.when(
+            // All variables that are used in any fields, but are
+            // currently not fullfilled (that is: are with red indicators)
+            listOfTexts: (spans) =>
+                spans.expand((e) => e.requiredFields).toSet(),
+            none: () => {},
+          ),
+          builder: (context, allRequiredFields) {
+            return LayoutBuilder(
+              builder: (context, constraints) {
+                return Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 8),
+                    const CustomHeader(headerTitle: 'Model variables'),
+                    ...pipes.map(
+                      (ModelPipeDto pipeDTO) {
+                        final StructureDTONode treeNode = StructureDTONode.root(
+                          data: TreeNodeGeneratePipeDtoStructureNode(
+                            payloadUUID: null,
+                            referenceModelDTO: pipeDTO,
                           ),
-                        ),
-                      ],
-                    );
-                  },
-                ),
-              ],
+                        );
+
+                        final otherNodes =
+                            _getNodesFromStructure(treeNode.data!);
+                        treeNode.addAll(otherNodes);
+
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              width: constraints.maxWidth,
+                              child: TreeView.simpleTyped<
+                                  TreeNodeGeneratePipeDto,
+                                  TreeNode<TreeNodeGeneratePipeDto>>(
+                                tree: treeNode,
+                                showRootNode: true,
+                                shrinkWrap: true,
+                                expansionBehavior:
+                                    ExpansionBehavior.scrollToLastChild,
+                                indentation: const Indentation(),
+                                expansionIndicatorBuilder: (
+                                  BuildContext context,
+                                  ITreeNode node,
+                                ) {
+                                  if (node.isRoot) {
+                                    return PlusMinusIndicator(
+                                      tree: node,
+                                      alignment: Alignment.centerLeft,
+                                      color: node.isExpanded
+                                          ? Theme.of(context)
+                                              .colorScheme
+                                              .tertiary
+                                          : Theme.of(context)
+                                              .colorScheme
+                                              .primary,
+                                    );
+                                  }
+
+                                  return ChevronIndicator.rightDown(
+                                    tree: node,
+                                    alignment: Alignment.centerLeft,
+                                    color: node.isExpanded
+                                        ? Theme.of(context).colorScheme.tertiary
+                                        : Theme.of(context).colorScheme.primary,
+                                  );
+                                },
+                                builder: (
+                                  BuildContext context,
+                                  TreeNode<TreeNodeGeneratePipeDto> node,
+                                ) {
+                                  return RootGeneratorHandler(
+                                    allRequiredFields: allRequiredFields,
+                                    node: node,
+                                    output: output,
+                                    expectedPayload: expectedPayload,
+                                    rootModelDTO: pipeDTO,
+                                  );
+                                },
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                    ),
+                  ],
+                );
+              },
             );
           },
         );

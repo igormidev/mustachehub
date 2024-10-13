@@ -6,42 +6,21 @@ mixin SetRootVariables on AllVariables {
   /// Thats because they don't need to be in a scope since they are
   /// root/global variables that can be used in anyplace in the input.
   void setAllRootVariablesAsUsableInCurrentContext() {
-    flatMap.forEach((key, value) {
+    // scopeParentFlatMap.forEach((key, value) {
+    identifierFlatMap.forEach((key, VariableIdentifierMapper value) {
       if (value.parrentName == null) {
         value.map(
-          model: (model) {
-            usableVariablesInCurrentContext
-                .add(ChoosableVariableImplementations.model(
-              variableName: model.name,
-              modelImplementation: ModelUseImplementations.normalValue(),
-            ));
-            usableVariablesInCurrentContext
-                .add(ChoosableVariableImplementations.model(
-              variableName: model.name,
-              modelImplementation: ModelUseImplementations.invertedValue(),
-            ));
+          model: (VariableIdentifierMapperModel model) {
+            usableVariablesInCurrentContext.add(model.structure);
           },
-          boolean: (boolean) {
-            if (!boolean.name.contains('isEmpty')) {
-              usableVariablesInCurrentContext
-                  .add(ChoosableVariableImplementations.boolean(
-                variableName: boolean.name,
-                booleanImplementation: BooleanUseImplementation.invertedValue(),
-              ));
-            }
-            if (!boolean.name.contains('isNotEmpty')) {
-              usableVariablesInCurrentContext
-                  .add(ChoosableVariableImplementations.boolean(
-                variableName: boolean.name,
-                booleanImplementation: BooleanUseImplementation.normalValue(),
-              ));
-            }
+          choice: (VariableIdentifierMapperChoice choice) {
+            usableVariablesInCurrentContext.add(choice.structure);
           },
-          text: (text) {
-            usableVariablesInCurrentContext
-                .add(ChoosableVariableImplementations.text(
-              variableName: text.name,
-            ));
+          boolean: (VariableIdentifierMapperBoolean boolean) {
+            usableVariablesInCurrentContext.add(boolean.structure);
+          },
+          text: (VariableIdentifierMapperText text) {
+            usableVariablesInCurrentContext.add(text.structure);
           },
         );
       }

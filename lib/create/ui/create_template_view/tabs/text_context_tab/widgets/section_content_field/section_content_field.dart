@@ -10,6 +10,7 @@ import 'package:mustachehub/create/presenter/cubits/suggestion_cubit.dart';
 import 'package:mustachehub/create/presenter/cubits/variables_cubit.dart';
 import 'package:mustachehub/create/presenter/input_formaters/add_mustache_delimmiter_input_formater.dart';
 import 'package:mustachehub/create/presenter/states/content_string_state.dart';
+import 'package:mustachehub/create/ui/create_template_view/tabs/text_context_tab/text_content_methods.dart';
 import 'package:mustachehub/create/ui/create_template_view/tabs/text_context_tab/text_content_tab.dart';
 import 'package:mustachehub/create/ui/create_template_view/tabs/text_context_tab/widgets/section_content_field/facedes/pipe_autocomplete_tile/pipe_autocomplete_tile_facade.dart';
 import 'package:text_analyser/text_analyser.dart';
@@ -19,7 +20,7 @@ class SectionContentField extends StatelessWidget with ValidatorsMixins {
   final FocusNode textfieldFocusNode;
   final TextEditingController titleController;
   final VariablesInfoHighlightTextEditingController controller;
-  final OptionsController<ChoosableVariableImplementations> optionsController;
+  final OptionsController<FoldableSelection, FileSelection> optionsController;
   final Debouncer decouncer;
   final ContentStringCubit contentStringCubit;
   final VariablesCubit variablesCubit;
@@ -29,13 +30,15 @@ class SectionContentField extends StatelessWidget with ValidatorsMixins {
   final bool willDisplayEditLabel;
   final bool willContainBreakLineToggleOption;
 
-  final Function({
+  final void Function({
     // required bool willForceUpdate,
     required ContentTextSectionInput output,
   }) notifyContentCubit;
+  final void Function(String uuid) onDelete;
 
   const SectionContentField({
     super.key,
+    required this.onDelete,
     required this.textfieldFocusNode,
     required this.titleController,
     required this.optionsController,
@@ -116,6 +119,20 @@ class SectionContentField extends StatelessWidget with ValidatorsMixins {
                               }),
                             ),
                           ),
+                          InkWell(
+                            onTap: () {
+                              onDelete(input.uuid);
+                            },
+                            child: Tooltip(
+                              message: 'Delete this section',
+                              child: Icon(
+                                Icons.delete,
+                                size: 26,
+                                color: Theme.of(context).colorScheme.error,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 8),
                           const Tooltip(
                             message: 'This is a section. Section are used to '
                                 'separate logic parts of template text.\n'
@@ -168,11 +185,18 @@ class SectionContentField extends StatelessWidget with ValidatorsMixins {
                 varCubit: variablesCubit,
                 onAddedDellimiter: () {
                   final bloc = context.read<SuggestionCubit>();
-                  optionsController.showOptionsMenuWithWrapperBuilder(
+                  // optionsController.showComplexOptions(
+                  optionsController.showComplexOptions(
+                    fileOptionAsString: fileOptionAsString,
+                    folderOptionAsString: folderOptionAsString,
                     suggestionCardBuilder: (
-                      BuildContext dialogContext,
+                      BuildContext context,
+                      // listTilesWithOptionsBuilder,
                       Widget Function(
-                        List<ChoosableVariableImplementations> value,
+                        List<
+                                StructuredDataType<FoldableSelection,
+                                    FileSelection>>
+                            value,
                       ) listTilesWithOptionsBuilder,
                     ) {
                       return BlocProvider<SuggestionCubit>.value(
@@ -184,18 +208,31 @@ class SectionContentField extends StatelessWidget with ValidatorsMixins {
                       );
                     },
                     tileBuilder: (
-                      ChoosableVariableImplementations option,
-                      int index,
-                      FocusNode tileFocusNode,
+                      StructureFolder option,
+                      bool isSelected,
                       void Function() onSelectCallback,
                     ) {
                       return PipeAutocompleteTileFacade(
                         option: option,
-                        index: index,
-                        tileFocusNode: tileFocusNode,
+                        isSelected: isSelected,
                         onSelectCallback: onSelectCallback,
                       );
                     },
+
+                    // suggestionCardBuilder: (
+                    //   BuildContext dialogContext,
+                    //   Widget Function(
+                    //     List<ChoosableVariableImplementations> value,
+                    //   ) listTilesWithOptionsBuilder,
+                    // ) {
+                    //   return BlocProvider<SuggestionCubit>.value(
+                    //     value: bloc,
+                    //     child: SuggestionCard(
+                    //       listTilesWithOptionsBuilder:
+                    //           listTilesWithOptionsBuilder,
+                    //     ),
+                    //   );
+                    // },
                   );
                 },
               ),

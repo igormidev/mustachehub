@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:mustachehub/app_core/utils/device_utils.dart';
 
 ThemeData getTheme(ColorScheme colorScheme) {
   final theme = ThemeData(
-    tooltipTheme: const TooltipThemeData(
-      triggerMode: TooltipTriggerMode.tap,
-    ),
+    tooltipTheme: DeviceUtils.usesTouchScreen
+        ? null
+        : const TooltipThemeData(
+            triggerMode: TooltipTriggerMode.tap,
+          ),
     colorScheme: colorScheme,
     snackBarTheme: SnackBarThemeData(
       backgroundColor: colorScheme.secondaryContainer,

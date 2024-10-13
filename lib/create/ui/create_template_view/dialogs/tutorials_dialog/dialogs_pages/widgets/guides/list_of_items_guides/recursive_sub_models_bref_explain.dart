@@ -31,9 +31,9 @@ class RecursiveSubModelsBrefExplain extends StatelessWidget {
         const DragToLeftWidget(
           text: ''
               '{{#persons}}\n'
-              'Hi, my name is {{personName.text}}'
+              'Hi, my name is {{personName}}'
               'I have some children, they are:\n'
-              '{{#children}}{{childName.text}}, {{/children}}\n'
+              '{{#children}}{{childName}}, {{/children}}\n'
               '{{/persons}}',
         ),
         SelectableText(

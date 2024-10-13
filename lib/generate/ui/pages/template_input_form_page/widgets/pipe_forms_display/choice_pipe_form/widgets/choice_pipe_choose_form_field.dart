@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mustachehub/app_core/extensions/string_extension.dart';
 import 'package:mustachehub/generate/presenter/dtos/pipe_dto/pipe_dto.dart';
 
 class ChoicePipeChooseFormField extends StatelessWidget {
@@ -25,8 +26,8 @@ class ChoicePipeChooseFormField extends StatelessWidget {
               decoration: const BoxDecoration(
                 color: Colors.blueGrey,
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(8),
-                  bottomLeft: Radius.circular(8),
+                  topLeft: Radius.circular(12),
+                  bottomLeft: Radius.circular(12),
                 ),
               ),
             ),
@@ -35,21 +36,26 @@ class ChoicePipeChooseFormField extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: Theme.of(context).colorScheme.surfaceContainerHighest,
                   borderRadius: const BorderRadius.only(
-                    topRight: Radius.circular(8),
-                    bottomRight: Radius.circular(8),
+                    topRight: Radius.circular(12),
+                    bottomRight: Radius.circular(12),
                   ),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 12.0, top: 4, bottom: 8),
+                  padding: const EdgeInsets.only(
+                    left: 12.0,
+                    top: 4,
+                    bottom: 8,
+                    right: 8,
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        choicePipeDto.pipe.name,
+                        choicePipeDto.pipe.name.capitalized,
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
                       Text(
-                        choicePipeDto.pipe.description,
+                        choicePipeDto.pipe.description.capitalized,
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       const SizedBox(height: 4),
@@ -59,7 +65,7 @@ class ChoicePipeChooseFormField extends StatelessWidget {
                         children:
                             choicePipeDto.pipe.options.map((String pipeText) {
                           return ChoiceChip(
-                            label: Text(pipeText),
+                            label: Text(pipeText.capitalized),
                             selected: pipeText == choosedPipeName,
                             onSelected: (_) {
                               onChangedCallback(pipeText);

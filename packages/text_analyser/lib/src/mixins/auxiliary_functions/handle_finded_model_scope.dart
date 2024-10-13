@@ -1,6 +1,6 @@
 part of '../all_variables.dart';
 
-mixin HandleFindedModelScope on AllVariables {
+mixin HandleFindedModelScope on MainInterationVariables {
   /// Will set the scope of the model in the [allModelScopesByMustacheName]
   /// Also, if the [indexAtText] is inside the scope, will add the model
   /// to the [modelsThatCursorIndexIsInsideScope]
@@ -36,9 +36,11 @@ mixin HandleFindedModelScope on AllVariables {
             indexAtText < scope.endDeclaration.start;
 
     if (isIndexAtTextWithinScope) {
+      final isInverse =
+          stringHasInvertedPattern(startFindedGroup.fullMatchText);
       modelsThatCursorIndexIsInsideScope.add((
         modelParentMapper: tokenIdentifier as ModelParentMapper,
-        isInverse: false
+        isInverse: isInverse,
       ));
     }
   }

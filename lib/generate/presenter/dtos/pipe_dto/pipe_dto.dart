@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:equatable/equatable.dart';
 import 'package:mustache_hub_core/mustache_hub_core.dart';
 import 'package:mustachehub/app_core/extensions/string_extension.dart';
+import 'package:mustachehub/generate/data/adapters/dto_adapter.dart';
 import 'package:uuid/uuid.dart';
 
 part 'pipe_dtos_impl/text_pipe_dto.dart';

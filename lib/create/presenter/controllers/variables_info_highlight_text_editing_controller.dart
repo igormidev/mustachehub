@@ -45,7 +45,7 @@ class VariablesInfoHighlightTextEditingController
         validDeclaration: (value) {
           final validDeclarationStyle = defaultStyle.copyWith(
             color: cS.primary,
-            backgroundColor: cS.primaryContainer,
+            background: Paint()..color = cS.primary.withOpacity(0.2 * 0.5),
           );
           return TextSpan(
             children: value.segmentText.characters.map((e) {
@@ -69,7 +69,8 @@ class VariablesInfoHighlightTextEditingController
                   text: e,
                   style: defaultStyle.copyWith(
                     color: cS.error,
-                    backgroundColor: cS.errorContainer,
+                    background: Paint()
+                      ..color = cS.errorContainer.withOpacity(0.2 * 0.5),
                   ),
                 ),
               );
@@ -86,7 +87,8 @@ class VariablesInfoHighlightTextEditingController
                   text: e,
                   style: defaultStyle.copyWith(
                     color: cS.error,
-                    backgroundColor: cS.errorContainer,
+                    background: Paint()
+                      ..color = cS.errorContainer.withOpacity(0.2 * 0.5),
                   ),
                 ),
               );
@@ -103,7 +105,8 @@ class VariablesInfoHighlightTextEditingController
                   text: e,
                   style: defaultStyle.copyWith(
                     color: cS.error,
-                    backgroundColor: cS.errorContainer,
+                    background: Paint()
+                      ..color = cS.errorContainer.withOpacity(0.2 * 0.5),
                   ),
                 ),
               );
@@ -120,7 +123,8 @@ class VariablesInfoHighlightTextEditingController
                   text: e,
                   style: defaultStyle.copyWith(
                     color: cS.error,
-                    backgroundColor: cS.errorContainer,
+                    background: Paint()
+                      ..color = cS.errorContainer.withOpacity(0.2 * 0.5),
                   ),
                 ),
               );
@@ -137,7 +141,8 @@ class VariablesInfoHighlightTextEditingController
                   text: e,
                   style: defaultStyle.copyWith(
                     color: cS.error,
-                    backgroundColor: cS.errorContainer,
+                    background: Paint()
+                      ..color = cS.errorContainer.withOpacity(0.2 * 0.5),
                   ),
                 ),
               );
@@ -154,7 +159,8 @@ class VariablesInfoHighlightTextEditingController
                   text: e,
                   style: defaultStyle.copyWith(
                     color: cS.error,
-                    backgroundColor: cS.errorContainer,
+                    background: Paint()
+                      ..color = cS.errorContainer.withOpacity(0.2 * 0.5),
                   ),
                 ),
               );
@@ -171,7 +177,8 @@ class VariablesInfoHighlightTextEditingController
                   text: e,
                   style: defaultStyle.copyWith(
                     color: cS.error,
-                    backgroundColor: cS.errorContainer,
+                    background: Paint()
+                      ..color = cS.errorContainer.withOpacity(0.2 * 0.5),
                   ),
                 ),
               );
@@ -188,7 +195,8 @@ class VariablesInfoHighlightTextEditingController
                   text: e,
                   style: defaultStyle.copyWith(
                     color: cS.error,
-                    backgroundColor: cS.errorContainer,
+                    background: Paint()
+                      ..color = cS.errorContainer.withOpacity(0.2 * 0.5),
                   ),
                 ),
               );
@@ -205,7 +213,8 @@ class VariablesInfoHighlightTextEditingController
                   text: e,
                   style: defaultStyle.copyWith(
                     color: cS.error,
-                    backgroundColor: cS.errorContainer,
+                    background: Paint()
+                      ..color = cS.errorContainer.withOpacity(0.2 * 0.5),
                   ),
                 ),
               );
@@ -222,7 +231,8 @@ class VariablesInfoHighlightTextEditingController
                   text: e,
                   style: defaultStyle.copyWith(
                     color: cS.error,
-                    backgroundColor: cS.errorContainer,
+                    background: Paint()
+                      ..color = cS.errorContainer.withOpacity(0.2 * 0.5),
                   ),
                 ),
               );
@@ -236,10 +246,10 @@ class VariablesInfoHighlightTextEditingController
   String? cacheText;
 
   final TextAnalyser _textAnalyserBase;
-  Map<String, VariableScopeParentMapper>? _flatMap;
+  Map<String, VariableIdentifierMapper>? _flatMap;
   ColorScheme? _cacheCS;
 
-  Map<String, VariableScopeParentMapper>? get flatMap => _flatMap;
+  Map<String, VariableIdentifierMapper>? get flatMap => _flatMap;
 
   void update() {
     notifyListeners();
@@ -250,7 +260,7 @@ class VariablesInfoHighlightTextEditingController
     notifyListeners();
   }
 
-  void setFlatMap(Map<String, VariableScopeParentMapper> flatMap) {
+  void setFlatMap(Map<String, VariableIdentifierMapper> flatMap) {
     _flatMap = flatMap;
     notifyListeners();
   }
@@ -268,7 +278,7 @@ class VariablesInfoHighlightTextEditingController
       final response = _textAnalyserBase.getMatchClusters(
         input: typeText,
         indexAtText: cursorIndexAtText == -1 ? 0 : cursorIndexAtText,
-        flatMap: flatMap!,
+        identifierFlatMap: flatMap!,
       );
 
       final segments = response?.segmentsStates;
@@ -357,9 +367,7 @@ class TooltipSpan extends WidgetSpan {
   }) : super(
           child: Tooltip(
             message: message,
-            child: Text.rich(
-              inlineSpan,
-            ),
+            child: Text.rich(inlineSpan),
           ),
         );
 }

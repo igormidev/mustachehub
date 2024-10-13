@@ -78,7 +78,7 @@ List<ChoicePipeDto> _calculateChoicesPipe(
     final pipeDto = ChoicePipeDto(
       uuid: cacheValue?.uuid ?? const Uuid().v7(),
       pipe: pipe,
-      payloadValue: cacheValue?.payloadValue,
+      payloadValue: cacheValue?.payloadValue ?? pipe.options.first,
     );
     response.add(pipeDto);
   }
