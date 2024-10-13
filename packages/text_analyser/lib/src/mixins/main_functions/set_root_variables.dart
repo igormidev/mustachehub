@@ -6,54 +6,21 @@ mixin SetRootVariables on AllVariables {
   /// Thats because they don't need to be in a scope since they are
   /// root/global variables that can be used in anyplace in the input.
   void setAllRootVariablesAsUsableInCurrentContext() {
-    flatMap.forEach((key, value) {
+    // scopeParentFlatMap.forEach((key, value) {
+    identifierFlatMap.forEach((key, VariableIdentifierMapper value) {
       if (value.parrentName == null) {
         value.map(
-          model: (model) {
-            usableVariablesInCurrentContext
-                .add(ChoosableVariableImplementations.model(
-              variableName: model.name,
-              modelImplementation: ModelUseImplementations.normalValue(),
-            ));
-            usableVariablesInCurrentContext
-                .add(ChoosableVariableImplementations.model(
-              variableName: model.name,
-              modelImplementation: ModelUseImplementations.invertedValue(),
-            ));
+          model: (VariableIdentifierMapperModel model) {
+            usableVariablesInCurrentContext.add(model.structure);
           },
-          boolean: (boolean) {
-            usableVariablesInCurrentContext
-                .add(ChoosableVariableImplementations.boolean(
-              variableName: boolean.name,
-              booleanImplementation: BooleanUseImplementation.normalValue(),
-            ));
-            usableVariablesInCurrentContext
-                .add(ChoosableVariableImplementations.boolean(
-              variableName: boolean.name,
-              booleanImplementation: BooleanUseImplementation.invertedValue(),
-            ));
+          choice: (VariableIdentifierMapperChoice choice) {
+            usableVariablesInCurrentContext.add(choice.structure);
           },
-          // choice: (choice) {
-          //   usableVariablesInCurrentContext
-          //       .add(ChoosableVariableImplementations.choice(
-          //     variableName: choice.name,
-          //     choiceImplementation: ChoiceUseImplementation.normalValue(),
-          //   ));
-          //   usableVariablesInCurrentContext
-          //       .add(ChoosableVariableImplementations.choice(
-          //     variableName: choice.name,
-          //     choiceImplementation: ChoiceUseImplementation.invertedValue(),
-          //   ));
-          //   usableVariablesInCurrentContext.add(
-          //       ChoosableVariableImplementations.choice(
-          //           variableName: choice.name,
-          //           choiceImplementation: ChoiceUseImplementation.textValue()));
-          // },
-          text: (text) {
-            usableVariablesInCurrentContext
-                .add(ChoosableVariableImplementations.text(
-              variableName: text.name,
-            ));
+          boolean: (VariableIdentifierMapperBoolean boolean) {
+            usableVariablesInCurrentContext.add(boolean.structure);
+          },
+          text: (VariableIdentifierMapperText text) {
+            usableVariablesInCurrentContext.add(text.structure);
           },
         );
       }

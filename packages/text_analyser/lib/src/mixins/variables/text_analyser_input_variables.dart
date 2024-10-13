@@ -13,5 +13,10 @@ mixin TextAnalyserInputVariables {
   /// in the text and to know what are the parents
   /// of them so we can know its need or noot to be
   /// in a scope to be used.
-  late Map<String, VariableScopeParentMapper> flatMap;
+  late Map<String, VariableScopeParentMapper> scopeParentFlatMap;
+
+  /// The flat map of the variables identifiers
+  ///
+  /// Used to know the structure of the variables
+  late Map<String, VariableIdentifierMapper> identifierFlatMap;
 }

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mustache_hub_core/mustache_hub_core.dart';
+import 'package:mustachehub/app_core/extensions/string_extension.dart';
 import 'package:mustachehub/create/presenter/cubits/variables_cubit.dart';
 import 'package:mustachehub/create/presenter/mixins/default_id_caster.dart';
-import 'package:mustachehub/create/presenter/states/variables_state.dart';
 import 'package:mustachehub/create/ui/create_template_view/tabs/variables_creation_tab/cards/variable_creator_card/base_variable_creation_card.dart';
 
 class PipeFormFieldCardWrapper extends StatelessWidget {
@@ -30,8 +30,7 @@ class PipeFormFieldCardWrapper extends StatelessWidget {
   }
 }
 
-class PipeFormfield extends StatelessWidget
-    with ValidatorsMixins, DefaultIdCaster {
+class PipeFormfield extends StatefulWidget {
   final TextEditingController nameEC;
   final TextEditingController descriptionEC;
   final void Function() onDelete;
@@ -42,7 +41,7 @@ class PipeFormfield extends StatelessWidget
   final Pipe pipe;
   final bool isScrollable;
 
-  PipeFormfield({
+  const PipeFormfield({
     super.key,
     required this.nameEC,
     required this.descriptionEC,
@@ -56,14 +55,27 @@ class PipeFormfield extends StatelessWidget
   });
 
   @override
-  Widget build(BuildContext context) {
-    final variablesBloc = context.read<VariablesCubit>();
+  State<PipeFormfield> createState() => _PipeFormfieldState();
+}
 
+class _PipeFormfieldState extends State<PipeFormfield>
+    with ValidatorsMixins, DefaultIdCaster {
+  final FocusNode nameFocusNode = FocusNode();
+  final FocusNode descriptionFocusNode = FocusNode();
+
+  @override
+  void dispose() {
+    nameFocusNode.dispose();
+    descriptionFocusNode.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final widgets = <Widget>[
       const SizedBox(height: 8),
       TextFormField(
-        focusNode: FocusNode()..requestFocus(),
-        controller: nameEC,
+        controller: widget.nameEC,
         decoration: InputDecoration(
           label: const Text('Name'),
           filled: true,
@@ -83,18 +95,31 @@ class PipeFormfield extends StatelessWidget
           () {
             if (val == null) return 'Invalid text';
 
-            if (_containsValuesAlready(variablesBloc.state, val, pipe)) {
+            if (_containsValuesAlready(val)) {
               return 'Already exists a variable with this name';
             }
 
             return null;
           },
         ]),
+        textInputAction: TextInputAction.next,
+        autofocus: true,
         maxLength: 30,
+        focusNode: nameFocusNode..requestFocus(),
+        onEditingComplete: () {
+          nameFocusNode.unfocus();
+          descriptionFocusNode.requestFocus();
+        },
+        onFieldSubmitted: (v) {
+          nameFocusNode.unfocus();
+          descriptionFocusNode.requestFocus();
+          FocusScope.of(context).requestFocus(descriptionFocusNode);
+        },
       ),
       const SizedBox(height: 8),
       TextFormField(
-        controller: descriptionEC,
+        focusNode: descriptionFocusNode,
+        controller: widget.descriptionEC,
         decoration: InputDecoration(
           label: const Text('Description'),
           filled: true,
@@ -107,26 +132,26 @@ class PipeFormfield extends StatelessWidget
         validator: isNotEmpty,
       ),
       const SizedBox(height: 8),
-      ...children,
+      ...widget.children,
       const SizedBox(height: 8),
       Row(
         children: [
-          if (optionWidget != null) optionWidget!,
+          if (widget.optionWidget != null) widget.optionWidget!,
           const Spacer(),
           ElevatedButton.icon(
             style: ElevatedButton.styleFrom(
               backgroundColor: Theme.of(context).colorScheme.errorContainer,
               foregroundColor: Theme.of(context).colorScheme.onErrorContainer,
             ),
-            onPressed: onDelete,
+            onPressed: widget.onDelete,
             icon: const Icon(Icons.delete),
             label: const Text('Delete'),
           ),
           const SizedBox(width: 8),
           ElevatedButton.icon(
             onPressed: () {
-              if (formKey.currentState?.validate() == true) {
-                onSave();
+              if (widget.formKey.currentState?.validate() == true) {
+                widget.onSave();
               }
             },
             icon: const Icon(Icons.save),
@@ -136,7 +161,7 @@ class PipeFormfield extends StatelessWidget
       ),
     ];
 
-    if (isScrollable == false) {
+    if (widget.isScrollable == false) {
       return Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -150,26 +175,33 @@ class PipeFormfield extends StatelessWidget
   }
 
   bool _containsValuesAlready(
-    VariablesState state,
+    // VariablesState state,
     String value,
-    Pipe refPipe,
   ) {
+    final state = context.read<VariablesCubit>().state;
     for (final Pipe pipe in <Pipe>[
       ...state.textPipes,
       ...state.booleanPipes,
+      ...state.choicePipes,
       ...state.modelPipes,
     ]) {
-      final isDiferentPipe = refPipe.pipeId != pipe.pipeId;
-      final isSameName = pipe.name == value || pipe.mustacheName == value;
-      if (isSameName && isDiferentPipe) return true;
+      final isDiferentPipe = widget.pipe.pipeId != pipe.pipeId;
+      final isSameMusName =
+          pipe.name == value || pipe.mustacheName == value.toMustacheName;
+      if (isSameMusName && isDiferentPipe) {
+        return true;
+      }
 
       if (pipe is ModelPipe) {
         final didNameExist = _doesNameExist(<Pipe>[
           ...pipe.textPipes,
           ...pipe.booleanPipes,
+          ...pipe.choicePipes,
           ...pipe.modelPipes,
-        ], value, refPipe);
-        if (didNameExist == true) return true;
+        ], value);
+        if (didNameExist == true) {
+          return true;
+        }
       }
     }
     return false;
@@ -178,22 +210,27 @@ class PipeFormfield extends StatelessWidget
   bool _doesNameExist(
     List<Pipe> pipes,
     String value,
-    Pipe refPipe,
   ) {
     for (final pipe in pipes) {
-      final isDiferentPipe = refPipe.pipeId != pipe.pipeId;
-      final isSameName = pipe.name == value || pipe.mustacheName == value;
-      if (isSameName && isDiferentPipe) return true;
+      final isDiferentPipe = widget.pipe.pipeId != pipe.pipeId;
+      final isSameName =
+          pipe.name == value || pipe.mustacheName == value.toMustacheName;
+      if (isSameName && isDiferentPipe) {
+        return true;
+      }
 
       if (pipe is ModelPipe) {
         final didNameExist = _doesNameExist(<Pipe>[
           ...pipe.textPipes,
           ...pipe.booleanPipes,
+          ...pipe.choicePipes,
           ...pipe.modelPipes,
-        ], value, refPipe);
+        ], value);
 
-        final isDiferentPipe = refPipe.pipeId != pipe.pipeId;
-        if (didNameExist == true && isDiferentPipe) return true;
+        final isDiferentPipe = widget.pipe.pipeId != pipe.pipeId;
+        if (didNameExist == true && isDiferentPipe) {
+          return true;
+        }
       }
     }
 

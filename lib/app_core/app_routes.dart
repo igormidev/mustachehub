@@ -56,6 +56,7 @@ import 'package:mustachehub/dashboard/ui/view/dashboard_view/dashboard_view.dart
 import 'package:mustachehub/dashboard/ui/view/spash_view/splash_view.dart';
 import 'package:mustachehub/generate/data/adapters/dto_adapter.dart';
 import 'package:mustachehub/generate/presenter/cubits/content_cubit.dart';
+import 'package:mustachehub/generate/presenter/cubits/displayable_content_cubit.dart';
 import 'package:mustachehub/generate/presenter/cubits/form_stats_cubit.dart';
 import 'package:mustachehub/generate/presenter/cubits/payload_cubit.dart';
 import 'package:mustachehub/generate/presenter/cubits/template_fetch_cubit.dart';
@@ -179,6 +180,9 @@ final router = GoRouter(
                     dtoAdapter: context.read<DtoAdapter>(),
                   ),
                 ),
+                BlocProvider<DisplayableContentCubit>(
+                  create: (context) => DisplayableContentCubit(),
+                ),
                 BlocProvider<FormStatsCubit>(
                   create: (context) => FormStatsCubit(),
                 ),
@@ -261,6 +265,9 @@ final router = GoRouter(
                   create: (context) => ContentCubit(
                     dtoAdapter: context.read<DtoAdapter>(),
                   ),
+                ),
+                BlocProvider<DisplayableContentCubit>(
+                  create: (context) => DisplayableContentCubit(),
                 ),
                 BlocProvider<FormStatsCubit>(
                   create: (context) => FormStatsCubit(),

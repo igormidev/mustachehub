@@ -56,9 +56,9 @@ class ChoiceAsConditionalUsingInTemplateTextGuide extends StatelessWidget {
         ),
         const DragToLeftWidget(
           text: ''
-              '{{#clientPriority.high}}\n'
+              '{{#clientPriority-high}}\n'
               'The client has a high priority.\n'
-              '{{/clientPriority.high}}',
+              '{{/clientPriority-high}}',
         ),
         SelectableText(
           'Displaying text if option is not a determined one',

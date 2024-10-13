@@ -49,9 +49,6 @@ _$ModelParentMapperImpl _$$ModelParentMapperImplFromJson(
       booleanNames: (json['booleanNames'] as List<dynamic>)
           .map((e) => e as String)
           .toList(),
-      choicesNames: (json['choicesNames'] as List<dynamic>)
-          .map((e) => e as String)
-          .toList(),
       subModelsNames: (json['subModelsNames'] as List<dynamic>)
           .map((e) => e as String)
           .toList(),
@@ -65,7 +62,6 @@ Map<String, dynamic> _$$ModelParentMapperImplToJson(
       'name': instance.name,
       'textsNames': instance.textsNames,
       'booleanNames': instance.booleanNames,
-      'choicesNames': instance.choicesNames,
       'subModelsNames': instance.subModelsNames,
       'runtimeType': instance.$type,
     };

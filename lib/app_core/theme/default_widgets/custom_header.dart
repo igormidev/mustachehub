@@ -99,10 +99,14 @@ class CustomHeader extends StatelessWidget {
             if (moreOptions.isNotEmpty)
               PopupMenuButton(
                 tooltip: 'More options',
+                constraints: const BoxConstraints(
+                  minWidth: 200,
+                ),
                 itemBuilder: (context) => moreOptions,
               ),
           ],
         ),
+        const SizedBox(height: 8),
         if (subtitleWidget != null) subtitleWidget!,
         if (headerSubtitle != null)
           Padding(

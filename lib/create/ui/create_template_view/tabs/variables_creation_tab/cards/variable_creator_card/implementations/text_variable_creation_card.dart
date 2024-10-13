@@ -68,6 +68,7 @@ class _TextVariablesCreationWidgetState
                     mustacheName: tryValidCast(nameEC.text)?.camelCase ??
                         nameEC.text.camelCase,
                     isRequired: isRequired.value,
+                    pipeId: pipe.pipeId,
                   ),
                   () {},
                 ),

@@ -56,6 +56,7 @@ class _ChoiceVariableCreationCardState extends State<ChoiceVariableCreationCard>
                 mustacheName: tryValidCast(nameEC.text)?.camelCase ??
                     nameEC.text.camelCase,
                 options: options,
+                pipeId: pipe.pipeId,
               ),
               () {},
             ),

@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_returning_null_for_void
+
 part of '../all_variables.dart';
 
 mixin SetVariablesThatCanBeUsedInCursorIndex on AllVariables {
@@ -6,88 +8,137 @@ mixin SetVariablesThatCanBeUsedInCursorIndex on AllVariables {
         in modelsThatCursorIndexIsInsideScope) {
       final ModelParentMapper identifier = modelMapper.modelParentMapper;
       final bool isInverse = modelMapper.isInverse;
-      if (isInverse) continue;
+      final identifierName = identifier.name;
+      if (isInverse) {
+        usableVariablesInCurrentContext
+            .removeWhere((element) => switch (element) {
+                  FolderStructure<FoldableSelection, FileSelection>() =>
+                    element.item.variableName == identifierName,
+                  FileStructureOptions<FoldableSelection, FileSelection>() =>
+                    false,
+                });
+        continue;
+      }
 
+      // usableVariablesInCurrentContext
+      //     .add(ChoosableVariableImplementations.model(
+      //   variableName: identifier.name,
+      //   modelImplementation: ModelUseImplementations.normalValue(),
+      // ));
+      // usableVariablesInCurrentContext
+      //     .add(ChoosableVariableImplementations.model(
+      //   variableName: identifier.name,
+      //   modelImplementation: ModelUseImplementations.invertedValue(),
+      // ));
+
+      final variableIdentifierMapper =
+          identifierFlatMap[identifierName]! as VariableIdentifierMapperModel;
+
+      final allitems =
+          variableIdentifierMapper.structureItems(identifierFlatMap);
+
+      print('before: ${usableVariablesInCurrentContext.length}');
       usableVariablesInCurrentContext
-          .add(ChoosableVariableImplementations.model(
-        variableName: identifier.name,
-        modelImplementation: ModelUseImplementations.normalValue(),
-      ));
-      usableVariablesInCurrentContext
-          .add(ChoosableVariableImplementations.model(
-        variableName: identifier.name,
-        modelImplementation: ModelUseImplementations.invertedValue(),
-      ));
+          .removeWhere((element) => switch (element) {
+                FolderStructure<FoldableSelection, FileSelection>() =>
+                  element.item.variableName == identifierName,
+                FileStructureOptions<FoldableSelection, FileSelection>() =>
+                  false,
+              });
+      // final removed = usableVariablesInCurrentContext
+      //     .remove(variableIdentifierMapper.structure);
+      print('after: ${usableVariablesInCurrentContext.length}');
 
-      for (final subModelName in identifier.subModelsNames) {
-        final isSubModelAlreadyDefined =
-            usableVariablesInCurrentContext.any((element) {
-          return element.maybeMap(
-            model: (value) {
-              return value.variableName == subModelName;
-            },
-            orElse: () => false,
-          );
-        });
-        if (isSubModelAlreadyDefined) {
-          continue;
-        }
+      usableVariablesInCurrentContext.add(allitems);
 
-        final VariableScopeParentMapper? tokenIdentifier =
-            flatMap[subModelName];
-        if (tokenIdentifier == null || tokenIdentifier is! ModelParentMapper) {
-          continue;
-        }
+      // .add(identifier.structureItems(scopeParentFlatMap));
 
-        usableVariablesInCurrentContext
-            .add(ChoosableVariableImplementations.model(
-          variableName: tokenIdentifier.name,
-          modelImplementation: ModelUseImplementations.normalValue(),
-        ));
-        usableVariablesInCurrentContext
-            .add(ChoosableVariableImplementations.model(
-          variableName: tokenIdentifier.name,
-          modelImplementation: ModelUseImplementations.invertedValue(),
-        ));
-      }
+      //   for (final subModelName in identifier.subModelsNames) {
+      //     final isSubModelAlreadyDefined = usableVariablesInCurrentContext.any(
+      //         (StructuredDataType<FoldableSelection, FileSelection> element) {
+      //       switch (element) {
+      //         case FolderStructure<FoldableSelection, FileSelection>():
+      //           return element.item.maybeMap(
+      //             folderModel: (value) => value.variableName == subModelName,
+      //             folderItemsModel: (value) => value.variableName == subModelName,
+      //             orElse: () => false,
+      //           );
+      //         case FileStructureOptions<FoldableSelection, FileSelection>():
+      //           return element.item.maybeMap(
+      //             fileModelOpenScope: (value) =>
+      //                 value.variableName == subModelName,
+      //             fileModelInvertedScope: (value) =>
+      //                 value.variableName == subModelName,
+      //             orElse: () => false,
+      //           );
+      //       }
+      //     });
+      //     if (isSubModelAlreadyDefined) {
+      //       continue;
+      //     }
 
-      for (final choiceName in identifier.choicesNames) {
-        usableVariablesInCurrentContext
-            .add(ChoosableVariableImplementations.choice(
-          variableName: choiceName,
-          choiceImplementation: ChoiceUseImplementation.normalValue(),
-        ));
-        usableVariablesInCurrentContext
-            .add(ChoosableVariableImplementations.choice(
-          variableName: choiceName,
-          choiceImplementation: ChoiceUseImplementation.invertedValue(),
-        ));
-        usableVariablesInCurrentContext
-            .add(ChoosableVariableImplementations.choice(
-          variableName: choiceName,
-          choiceImplementation: ChoiceUseImplementation.textValue(),
-        ));
-      }
+      //     final VariableScopeParentMapper? tokenIdentifier =
+      //         scopeParentFlatMap[subModelName];
+      //     if (tokenIdentifier == null || tokenIdentifier is! ModelParentMapper) {
+      //       continue;
+      //     }
 
-      for (final booleanName in identifier.booleanNames) {
-        usableVariablesInCurrentContext
-            .add(ChoosableVariableImplementations.boolean(
-          variableName: booleanName,
-          booleanImplementation: BooleanUseImplementation.normalValue(),
-        ));
-        usableVariablesInCurrentContext
-            .add(ChoosableVariableImplementations.boolean(
-          variableName: booleanName,
-          booleanImplementation: BooleanUseImplementation.invertedValue(),
-        ));
-      }
+      //     // usableVariablesInCurrentContext
+      //     //     .add(tokenIdentifier.structureItems(scopeParentFlatMap));
+      //     //
+      //     // usableVariablesInCurrentContext
+      //     //     .add(ChoosableVariableImplementations.model(
+      //     //   variableName: tokenIdentifier.name,
+      //     //   modelImplementation: ModelUseImplementations.normalValue(),
+      //     // ));
+      //     // usableVariablesInCurrentContext
+      //     //     .add(ChoosableVariableImplementations.model(
+      //     //   variableName: tokenIdentifier.name,
+      //     //   modelImplementation: ModelUseImplementations.invertedValue(),
+      //     // ));
+      //   // }
 
-      for (final textName in identifier.textsNames) {
-        usableVariablesInCurrentContext
-            .add(ChoosableVariableImplementations.text(
-          variableName: textName,
-        ));
-      }
+      //   // for (final choiceName in identifier.choicesNames) {
+      //   //   print('choiceName: $choiceName');
+      //     // usableVariablesInCurrentContext
+      //     //     .add(ChoosableVariableImplementations.choice(
+      //     //   variableName: choiceName,
+      //     //   choiceImplementation: ChoiceUseImplementation.textValue(),
+      //     // ));
+      //     // usableVariablesInCurrentContext
+      //     //     .add(ChoosableVariableImplementations.choice(
+      //     //   variableName: choiceName,
+      //     //   choiceImplementation: ChoiceUseImplementation.normalValue(),
+      //     // ));
+      //     // usableVariablesInCurrentContext
+      //     //     .add(ChoosableVariableImplementations.choice(
+      //     //   variableName: choiceName,
+      //     //   choiceImplementation: ChoiceUseImplementation.invertedValue(),
+      //     // ));
+      //   }
+
+      //   // for (final booleanName in identifier.booleanNames) {
+      //   //   final boolean = scopeParentFlatMap[booleanName] as BooleanParentMapper?;
+      //   //   if (boolean == null) return null;
+      //   //   usableVariablesInCurrentContext.add(boolean.structure);
+      //     // usableVariablesInCurrentContext
+      //     //     .add(ChoosableVariableImplementations.boolean(
+      //     //   variableName: booleanName,
+      //     //   booleanImplementation: BooleanUseImplementation.normalValue(),
+      //     // ));
+      //     // usableVariablesInCurrentContext
+      //     //     .add(ChoosableVariableImplementations.boolean(
+      //     //   variableName: booleanName,
+      //     //   booleanImplementation: BooleanUseImplementation.invertedValue(),
+      //     // ));
+      //   // }
+
+      //   // for (final textName in identifier.textsNames) {
+      //   //   final text = scopeParentFlatMap[textName] as TextParentMapper?;
+      //   //   if (text == null) return null;
+
+      //   //   usableVariablesInCurrentContext.add(text.structure);
+      //   // }
     }
   }
 }

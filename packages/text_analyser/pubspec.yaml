@@ -17,6 +17,7 @@ dependencies:
   enchanted_regex:
   freezed_annotation:
   enchanted_collection:
+  cursor_autocomplete_options: 2.1.0
   collection:
   mustache_hub_core:
     path: ../mustache_hub_core

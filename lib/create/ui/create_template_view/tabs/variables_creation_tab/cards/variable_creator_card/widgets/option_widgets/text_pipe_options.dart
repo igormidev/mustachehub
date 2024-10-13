@@ -5,9 +5,9 @@ class TextPipeOptions extends StatelessWidget {
   final ValueNotifier<bool> isRequired;
 
   const TextPipeOptions({
-    Key? key,
+    super.key,
     required this.isRequired,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

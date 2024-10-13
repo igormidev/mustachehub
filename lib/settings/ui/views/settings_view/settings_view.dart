@@ -3,10 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:media_query_core/responsiveness/visibility_width_based.dart';
 import 'package:mustachehub/app_core/extensions/build_context_extension.dart';
+import 'package:mustachehub/dashboard/presenter/cubits/packages_info_cubit.dart';
 import 'package:mustachehub/dashboard/ui/navigation_widgets/dashboard_drawer/dashboard_drawer.dart';
+import 'package:mustachehub/dashboard/ui/navigation_widgets/widgets/report_bug/report_bug_card.dart';
 import 'package:mustachehub/settings/interactor/cubit/theme_cubit.dart';
 import 'package:mustachehub/settings/ui/views/settings_view/widgets/color_option.dart';
 import 'package:mustachehub/settings/ui/views/settings_view/widgets/configurations_lottie.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 class SettingsView extends StatelessWidget {
   const SettingsView({super.key});
@@ -92,25 +95,39 @@ class SettingsView extends StatelessWidget {
               const Divider(),
               ...settingsWidget,
               const SizedBox(height: 20),
-              const Text(
-                'v1.1.5',
-                style: TextStyle(color: Colors.grey),
-              ),
+              BlocBuilder<PackagesInfoCubit, PackageInfo?>(
+                  builder: (context, state) {
+                final version = state?.version;
+
+                return Text(
+                  'Version: ${version ?? versionmock}',
+                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                        color: Theme.of(context).colorScheme.outline,
+                      ),
+                );
+              }),
               const SizedBox(height: 40),
             ],
           ),
           child: Row(
             children: [
-              const Expanded(
+              Expanded(
                 child: Column(
                   children: [
-                    SizedBox(height: 36),
-                    ConfigurationsLottie(),
-                    SizedBox(height: 36),
-                    Text(
-                      'v1.1.5',
-                      style: TextStyle(color: Colors.grey),
-                    ),
+                    const SizedBox(height: 36),
+                    const ConfigurationsLottie(),
+                    const SizedBox(height: 36),
+                    BlocBuilder<PackagesInfoCubit, PackageInfo?>(
+                        builder: (context, state) {
+                      final version = state?.version;
+
+                      return Text(
+                        'Version: ${version ?? versionmock}',
+                        style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                              color: Theme.of(context).colorScheme.outline,
+                            ),
+                      );
+                    }),
                   ],
                 ),
               ),

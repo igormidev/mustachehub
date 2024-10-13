@@ -8,7 +8,7 @@ class ChoicePipeDto extends Equatable implements PipeDTO<ChoicePipe, String> {
   @override
   final ChoicePipe pipe;
   @override
-  final String? payloadValue;
+  final String payloadValue;
 
   const ChoicePipeDto({
     required this.uuid,
@@ -33,14 +33,14 @@ class ChoicePipeDto extends Equatable implements PipeDTO<ChoicePipe, String> {
         payloadValue,
       ];
 
-  Map<String, dynamic> toPayload() {
+  Map<String, dynamic> toPayloadValue() {
+    final name = pipe.mustacheName;
     return {
-      pipe.mustacheName: {
-        'text': payloadValue,
-        ...pipe.options.asMap().map((_, option) {
-          return MapEntry(option.toMustacheName, payloadValue == option);
-        }),
-      },
+      name: payloadValue,
+      ...pipe.options.asMap().map((_, option) {
+        return MapEntry(
+            '$name-${option.toMustacheName}', payloadValue == option);
+      }),
     };
   }
 
@@ -56,7 +56,7 @@ class ChoicePipeDto extends Equatable implements PipeDTO<ChoicePipe, String> {
     return ChoicePipeDto(
       uuid: map['uuid'] as String,
       pipe: ChoicePipe.fromMap(map['pipe'] as Map<String, dynamic>),
-      payloadValue: map['payloadValue'] as String?,
+      payloadValue: map['payloadValue'] as String,
     );
   }
 

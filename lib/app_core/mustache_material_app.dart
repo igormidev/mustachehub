@@ -16,7 +16,10 @@ import 'package:mustachehub/create/data/repositories/interfaces/i_package_form_r
 import 'package:mustachehub/create/presenter/cubits/template_upload_cubit.dart';
 import 'package:mustachehub/dashboard/data/entities/e_navigation_possibilities.dart';
 import 'package:mustachehub/dashboard/presenter/cubits/navigation_possibilities_cubit.dart';
+import 'package:mustachehub/dashboard/presenter/cubits/packages_info_cubit.dart'
+    as native;
 import 'package:mustachehub/dashboard/ui/view/dashboard_view/wrappers/load_user_collections_wrapper.dart';
+import 'package:mustachehub/generate/presenter/cubits/packages_info_cubit.dart';
 import 'package:mustachehub/generate/presenter/cubits/selected_template_cubit.dart';
 import 'package:mustachehub/settings/interactor/cubit/theme_cubit.dart';
 import 'package:mustachehub/settings/interactor/state/theme_state.dart';
@@ -95,6 +98,9 @@ class _MustacheMaterialAppState extends State<MustacheMaterialApp> {
             repository: context.read<IPackageFormRepository>(),
           ),
         ),
+        BlocProvider<native.PackagesInfoCubit>(
+          create: (context) => native.PackagesInfoCubit(),
+        ),
         BlocProvider<ThemeCubit>(
           create: (context) => ThemeCubit(),
         ),
@@ -103,6 +109,9 @@ class _MustacheMaterialAppState extends State<MustacheMaterialApp> {
         ),
         BlocProvider<CollectionNodeCubit>(
           create: (context) => CollectionNodeCubit(),
+        ),
+        BlocProvider<PackagesInfoCubit>(
+          create: (context) => PackagesInfoCubit(),
         ),
         BlocProvider<SessionCubit>.value(value: sessionCubit),
         BlocProvider<LoadingCubit>(create: (context) => LoadingCubit()),

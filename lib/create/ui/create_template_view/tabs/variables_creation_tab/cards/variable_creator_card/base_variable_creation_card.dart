@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mustache_hub_core/mustache_hub_core.dart';
+import 'package:mustachehub/create/presenter/cubits/content_string_cubit.dart';
 import 'package:mustachehub/create/ui/create_template_view/tabs/variables_creation_tab/cards/variable_creator_card/widgets/add_new_dotted_button.dart';
 import 'package:media_query_core/reactiveness/is_item_selected_value_listenable.dart';
 
@@ -36,6 +38,7 @@ class BaseVariableCreatorCard<T extends Pipe> extends StatefulWidget {
 
   final List<T> initialList;
 
+  // final void Function(T oldPipe, T newPipe) onPipeUpdate;
   final void Function(List<T> pipes) retriveCreatedPipes;
 
   final GlobalKey<FormState> formKey;
@@ -145,6 +148,7 @@ class _BaseVariableCreatorCardState<T extends Pipe>
 
   @override
   Widget build(BuildContext context) {
+    final contentString = context.read<ContentStringCubit>();
     return ValueListenableBuilder(
       valueListenable: pipesStateVN,
       builder: (context, pipes, child) {
@@ -202,10 +206,12 @@ class _BaseVariableCreatorCardState<T extends Pipe>
                   }
 
                   final newList = [...pipesStateVN.value];
+                  final previousPipe = newList[innerIndex];
                   newList[innerIndex] = pipe;
                   pipesStateVN.value = newList;
                   selectedIndex.value = null;
                   widget.retriveCreatedPipes(newList);
+                  contentString.onPipeEdit(previousPipe, pipe);
                   afterSaveFunction();
                 }
 

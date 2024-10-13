@@ -163,43 +163,40 @@ class _CreateTemplateViewState extends State<CreateTemplateView>
                     ),
                   ),
                   BlocBuilder<CurrentTemplateTypeCubit,
-                      CurrentTemplateTypeState>(builder: (context, state) {
-                    return state.map(
-                      withExistingTemplate: (_) => SizedBox.fromSize(),
-                      creating: (_) {
-                        return IconButton(
-                          tooltip: 'Clear all',
-                          onPressed: () async {
-                            final confirm = await confirmDialog(
-                              context,
-                              description: 'This will clear all the '
-                                  'data you have entered.',
-                              continueLabelText: 'Clear',
-                            );
+                      CurrentTemplateTypeState>(
+                    builder: (context, state) {
+                      return IconButton(
+                        tooltip: 'Clear all',
+                        onPressed: () async {
+                          final confirm = await confirmDialog(
+                            context,
+                            description: 'This will clear all the '
+                                'data you have entered.',
+                            continueLabelText: 'Clear',
+                          );
 
-                            if (confirm == true) {
+                          if (confirm == true) {
+                            if (context.mounted) {
+                              clearAllDependencies(context);
+                              // For some reason, the route is not being updated
+                              // when the user clears all the data. So we need to
+                              // pass a random value to the route to force the
+                              // the update of the route in go router.
+                              final randomJustToUpdate = const Uuid().v7();
                               if (context.mounted) {
-                                clearAllDependencies(context);
-                                // For some reason, the route is not being updated
-                                // when the user clears all the data. So we need to
-                                // pass a random value to the route to force the
-                                // the update of the route in go router.
-                                final randomJustToUpdate = const Uuid().v7();
-                                if (context.mounted) {
-                                  context.go('/createMustache',
-                                      extra: randomJustToUpdate);
-                                }
-
-                                FirebaseAnalytics.instance
-                                    .logEvent(name: 'clear_all_data');
+                                context.go('/createMustache',
+                                    extra: randomJustToUpdate);
                               }
+
+                              FirebaseAnalytics.instance
+                                  .logEvent(name: 'clear_all_data');
                             }
-                          },
-                          icon: const Icon(Icons.cleaning_services_outlined),
-                        );
-                      },
-                    );
-                  }),
+                          }
+                        },
+                        icon: const Icon(Icons.cleaning_services_outlined),
+                      );
+                    },
+                  ),
                   IconButton(
                     onPressed: () {
                       final isContentValid = _contentTypeFormKey.currentState

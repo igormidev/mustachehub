@@ -16,8 +16,9 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$AnalysedResponse {
-  Set<ChoosableVariableImplementations> get choosableVariablesInCurrentScope =>
-      throw _privateConstructorUsedError;
+  Set<StructuredDataType<FoldableSelection, FileSelection>>
+      get choosableVariablesInCurrentScope =>
+          throw _privateConstructorUsedError;
   List<AnalysedSegmentStatus> get segmentsStates =>
       throw _privateConstructorUsedError;
 
@@ -35,7 +36,8 @@ abstract class $AnalysedResponseCopyWith<$Res> {
       _$AnalysedResponseCopyWithImpl<$Res, AnalysedResponse>;
   @useResult
   $Res call(
-      {Set<ChoosableVariableImplementations> choosableVariablesInCurrentScope,
+      {Set<StructuredDataType<FoldableSelection, FileSelection>>
+          choosableVariablesInCurrentScope,
       List<AnalysedSegmentStatus> segmentsStates});
 }
 
@@ -61,7 +63,7 @@ class _$AnalysedResponseCopyWithImpl<$Res, $Val extends AnalysedResponse>
       choosableVariablesInCurrentScope: null == choosableVariablesInCurrentScope
           ? _value.choosableVariablesInCurrentScope
           : choosableVariablesInCurrentScope // ignore: cast_nullable_to_non_nullable
-              as Set<ChoosableVariableImplementations>,
+              as Set<StructuredDataType<FoldableSelection, FileSelection>>,
       segmentsStates: null == segmentsStates
           ? _value.segmentsStates
           : segmentsStates // ignore: cast_nullable_to_non_nullable
@@ -79,7 +81,8 @@ abstract class _$$AnalysedResponseImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {Set<ChoosableVariableImplementations> choosableVariablesInCurrentScope,
+      {Set<StructuredDataType<FoldableSelection, FileSelection>>
+          choosableVariablesInCurrentScope,
       List<AnalysedSegmentStatus> segmentsStates});
 }
 
@@ -103,7 +106,7 @@ class __$$AnalysedResponseImplCopyWithImpl<$Res>
       choosableVariablesInCurrentScope: null == choosableVariablesInCurrentScope
           ? _value._choosableVariablesInCurrentScope
           : choosableVariablesInCurrentScope // ignore: cast_nullable_to_non_nullable
-              as Set<ChoosableVariableImplementations>,
+              as Set<StructuredDataType<FoldableSelection, FileSelection>>,
       segmentsStates: null == segmentsStates
           ? _value._segmentsStates
           : segmentsStates // ignore: cast_nullable_to_non_nullable
@@ -116,15 +119,17 @@ class __$$AnalysedResponseImplCopyWithImpl<$Res>
 
 class _$AnalysedResponseImpl implements _AnalysedResponse {
   _$AnalysedResponseImpl(
-      {required final Set<ChoosableVariableImplementations>
+      {required final Set<StructuredDataType<FoldableSelection, FileSelection>>
           choosableVariablesInCurrentScope,
       required final List<AnalysedSegmentStatus> segmentsStates})
       : _choosableVariablesInCurrentScope = choosableVariablesInCurrentScope,
         _segmentsStates = segmentsStates;
 
-  final Set<ChoosableVariableImplementations> _choosableVariablesInCurrentScope;
+  final Set<StructuredDataType<FoldableSelection, FileSelection>>
+      _choosableVariablesInCurrentScope;
   @override
-  Set<ChoosableVariableImplementations> get choosableVariablesInCurrentScope {
+  Set<StructuredDataType<FoldableSelection, FileSelection>>
+      get choosableVariablesInCurrentScope {
     if (_choosableVariablesInCurrentScope is EqualUnmodifiableSetView)
       return _choosableVariablesInCurrentScope;
     // ignore: implicit_dynamic_type
@@ -174,13 +179,14 @@ class _$AnalysedResponseImpl implements _AnalysedResponse {
 
 abstract class _AnalysedResponse implements AnalysedResponse {
   factory _AnalysedResponse(
-          {required final Set<ChoosableVariableImplementations>
-              choosableVariablesInCurrentScope,
-          required final List<AnalysedSegmentStatus> segmentsStates}) =
-      _$AnalysedResponseImpl;
+      {required final Set<StructuredDataType<FoldableSelection, FileSelection>>
+          choosableVariablesInCurrentScope,
+      required final List<AnalysedSegmentStatus>
+          segmentsStates}) = _$AnalysedResponseImpl;
 
   @override
-  Set<ChoosableVariableImplementations> get choosableVariablesInCurrentScope;
+  Set<StructuredDataType<FoldableSelection, FileSelection>>
+      get choosableVariablesInCurrentScope;
   @override
   List<AnalysedSegmentStatus> get segmentsStates;
 

@@ -23,6 +23,7 @@ mixin TemplateViewOpenTestBottomsheetMethod {
       child: GenerateDependenciesProvider(
         contextWithDependencies: context,
         child: TextOutputGeneratorView(
+          info: null,
           content: contentState.currentText,
           // content: contentState.currentText,
           generatorData: ExpectedPayload(

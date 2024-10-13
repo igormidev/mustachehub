@@ -4,6 +4,7 @@ import 'package:mustachehub/create/presenter/cubits/content_string_cubit.dart';
 import 'package:mustachehub/create/presenter/cubits/variables_cubit.dart';
 import 'package:mustachehub/generate/data/adapters/dto_adapter.dart';
 import 'package:mustachehub/generate/presenter/cubits/content_cubit.dart';
+import 'package:mustachehub/generate/presenter/cubits/displayable_content_cubit.dart';
 import 'package:mustachehub/generate/presenter/cubits/form_stats_cubit.dart';
 import 'package:mustachehub/generate/presenter/cubits/payload_cubit.dart';
 
@@ -37,6 +38,9 @@ class GenerateDependenciesProvider extends StatelessWidget {
         ),
         BlocProvider.value(
           value: contextWithDependencies.read<ContentStringCubit>(),
+        ),
+        BlocProvider.value(
+          value: contextWithDependencies.read<DisplayableContentCubit>(),
         ),
       ],
       child: child,

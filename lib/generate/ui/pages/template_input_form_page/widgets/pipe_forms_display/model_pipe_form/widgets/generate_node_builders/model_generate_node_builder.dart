@@ -8,13 +8,16 @@ import 'package:mustachehub/generate/presenter/dtos/tree_node_generate_pipe_dto.
 class ModelGenerateNodeBuilder extends StatelessWidget {
   final ModelPipeDto rootModelDTO;
   final ContentInput output;
+  final bool isExpanded;
   final ExpectedPayload expectedPayload;
   final TreeNodeGeneratePipeDtoPipeModel modelDTONode;
+
   const ModelGenerateNodeBuilder({
     super.key,
     required this.rootModelDTO,
     required this.output,
     required this.expectedPayload,
+    required this.isExpanded,
     required this.modelDTONode,
   });
 
@@ -25,9 +28,14 @@ class ModelGenerateNodeBuilder extends StatelessWidget {
     return ListTile(
       title: Text('$index˚ ${dto.pipe.name}'),
       subtitle: const Text('Model'),
-      leading: const Padding(
-        padding: EdgeInsets.only(top: 8.0),
-        child: Icon(Icons.folder),
+      leading: Padding(
+        padding: const EdgeInsets.only(top: 8.0),
+        child: Icon(
+          Icons.folder,
+          color: isExpanded
+              ? Theme.of(context).colorScheme.tertiary
+              : Theme.of(context).colorScheme.primary,
+        ),
       ),
       trailing: IconButton(
         icon: const Icon(Icons.delete),
