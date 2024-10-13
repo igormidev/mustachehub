@@ -76,7 +76,6 @@ class TextPipeForm extends StatelessWidget {
                   ),
               ],
             ),
-            const SizedBox(height: 8),
             BlocBuilder<FormStatsCubit, FormStatsState>(
               builder: (context, state) {
                 return LayoutBuilder(

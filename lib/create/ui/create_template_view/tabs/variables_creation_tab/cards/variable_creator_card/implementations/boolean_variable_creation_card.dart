@@ -55,6 +55,7 @@ class _BooleanVariablesCreationWidgetState
                 description: descriptionEC.text,
                 mustacheName: tryValidCast(nameEC.text)?.camelCase ??
                     nameEC.text.camelCase,
+                pipeId: pipe.pipeId,
               ),
               () {},
             ),

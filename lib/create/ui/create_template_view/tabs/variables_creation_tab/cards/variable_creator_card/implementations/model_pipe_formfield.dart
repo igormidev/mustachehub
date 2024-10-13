@@ -272,6 +272,7 @@ class _ModelBaseCreatorState extends State<ModelBaseCreator>
                 booleanPipes: booleanPipes,
                 choicePipes: choicePipes,
                 modelPipes: modelPipes,
+                pipeId: pipe.pipeId,
               );
               saveEditFunc(newModelPipe, afterSaveFunction);
             },

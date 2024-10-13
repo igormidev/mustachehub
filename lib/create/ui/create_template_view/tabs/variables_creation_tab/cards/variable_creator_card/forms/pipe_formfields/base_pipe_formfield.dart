@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mustache_hub_core/mustache_hub_core.dart';
+import 'package:mustachehub/app_core/extensions/string_extension.dart';
 import 'package:mustachehub/create/presenter/cubits/variables_cubit.dart';
 import 'package:mustachehub/create/presenter/mixins/default_id_caster.dart';
 import 'package:mustachehub/create/presenter/states/variables_state.dart';
@@ -72,8 +73,6 @@ class _PipeFormfieldState extends State<PipeFormfield>
 
   @override
   Widget build(BuildContext context) {
-    final variablesBloc = context.read<VariablesCubit>();
-
     final widgets = <Widget>[
       const SizedBox(height: 8),
       TextFormField(
@@ -97,7 +96,7 @@ class _PipeFormfieldState extends State<PipeFormfield>
           () {
             if (val == null) return 'Invalid text';
 
-            if (_containsValuesAlready(variablesBloc.state, val, widget.pipe)) {
+            if (_containsValuesAlready(val)) {
               return 'Already exists a variable with this name';
             }
 
@@ -177,26 +176,33 @@ class _PipeFormfieldState extends State<PipeFormfield>
   }
 
   bool _containsValuesAlready(
-    VariablesState state,
+    // VariablesState state,
     String value,
-    Pipe refPipe,
   ) {
+    final state = context.read<VariablesCubit>().state;
     for (final Pipe pipe in <Pipe>[
       ...state.textPipes,
       ...state.booleanPipes,
+      ...state.choicePipes,
       ...state.modelPipes,
     ]) {
-      final isDiferentPipe = refPipe.pipeId != pipe.pipeId;
-      final isSameName = pipe.name == value || pipe.mustacheName == value;
-      if (isSameName && isDiferentPipe) return true;
+      final isDiferentPipe = widget.pipe.pipeId != pipe.pipeId;
+      final isSameMusName =
+          pipe.name == value || pipe.mustacheName == value.toMustacheName;
+      if (isSameMusName && isDiferentPipe) {
+        return true;
+      }
 
       if (pipe is ModelPipe) {
         final didNameExist = _doesNameExist(<Pipe>[
           ...pipe.textPipes,
           ...pipe.booleanPipes,
+          ...pipe.choicePipes,
           ...pipe.modelPipes,
-        ], value, refPipe);
-        if (didNameExist == true) return true;
+        ], value);
+        if (didNameExist == true) {
+          return true;
+        }
       }
     }
     return false;
@@ -205,22 +211,27 @@ class _PipeFormfieldState extends State<PipeFormfield>
   bool _doesNameExist(
     List<Pipe> pipes,
     String value,
-    Pipe refPipe,
   ) {
     for (final pipe in pipes) {
-      final isDiferentPipe = refPipe.pipeId != pipe.pipeId;
-      final isSameName = pipe.name == value || pipe.mustacheName == value;
-      if (isSameName && isDiferentPipe) return true;
+      final isDiferentPipe = widget.pipe.pipeId != pipe.pipeId;
+      final isSameName =
+          pipe.name == value || pipe.mustacheName == value.toMustacheName;
+      if (isSameName && isDiferentPipe) {
+        return true;
+      }
 
       if (pipe is ModelPipe) {
         final didNameExist = _doesNameExist(<Pipe>[
           ...pipe.textPipes,
           ...pipe.booleanPipes,
+          ...pipe.choicePipes,
           ...pipe.modelPipes,
-        ], value, refPipe);
+        ], value);
 
-        final isDiferentPipe = refPipe.pipeId != pipe.pipeId;
-        if (didNameExist == true && isDiferentPipe) return true;
+        final isDiferentPipe = widget.pipe.pipeId != pipe.pipeId;
+        if (didNameExist == true && isDiferentPipe) {
+          return true;
+        }
       }
     }
 
