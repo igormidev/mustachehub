@@ -11,8 +11,7 @@ import 'package:mustachehub/generate/presenter/states/displayable_content_state.
 import 'package:mustachehub/generate/ui/pages/text_output_page/widgets/content_text_section_input_textfield.dart';
 import 'package:mustachehub/generate/ui/pages/text_output_page/widgets/copy_all_output_header/copy_all_output_header.dart';
 
-class TextOutputPage extends StatelessWidget {
-  final GlobalKey<FormState> formKey;
+class TextOutputPage extends StatefulWidget {
   final ContentInput output;
   final ExpectedPayload expectedPayload;
 
@@ -20,8 +19,36 @@ class TextOutputPage extends StatelessWidget {
     super.key,
     required this.output,
     required this.expectedPayload,
-    required this.formKey,
   });
+
+  @override
+  State<TextOutputPage> createState() => _TextOutputPageState();
+}
+
+class _TextOutputPageState extends State<TextOutputPage> {
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      contentBloc(context.read<ContentCubit>().state);
+    });
+  }
+
+  void contentBloc(ContentState state) {
+    state.whenOrNull(
+      withGeneratedText: (value) {
+        context
+            .read<DisplayableContentCubit>()
+            .setDisplayableContent(value, context);
+      },
+      withContentText: (value) {
+        context
+            .read<DisplayableContentCubit>()
+            .setDisplayableContent(value, context);
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,16 +56,7 @@ class TextOutputPage extends StatelessWidget {
 
     return BlocConsumer<ContentCubit, ContentState>(
       bloc: contentBloc,
-      listener: (context, state) {
-        state.whenOrNull(
-          withGeneratedText: (value) {
-            context.read<DisplayableContentCubit>().set(value, context);
-          },
-          withContentText: (value) {
-            context.read<DisplayableContentCubit>().set(value, context);
-          },
-        );
-      },
+      listener: (context, state) {},
       builder: (
         context,
         state,

@@ -25,7 +25,6 @@ class TemplateOutputTabView extends StatelessWidget {
             choicePipes: variablesCubit.choicePipes,
             modelPipes: variablesCubit.modelPipes,
           ),
-          formKey: formKey,
         );
       });
     });

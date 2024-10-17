@@ -1,4 +1,5 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:mustachehub/app_core/theme/mixins/copy_to_clipboard_mixin.dart';
 import 'package:mustachehub/generate/presenter/dtos/text_span_exibition_dto.dart';
@@ -40,8 +41,10 @@ class ContentTextSectionInputTextfield extends StatelessWidget
                     onTap: () {
                       copyText(exibitionDto.content.content, context);
 
-                      FirebaseAnalytics.instance
-                          .logEvent(name: 'output_section_copied');
+                      if (kReleaseMode) {
+                        FirebaseAnalytics.instance
+                            .logEvent(name: 'output_section_copied');
+                      }
                     },
                     // borderRadius: BorderRadius.circular(16),
                     child: const Icon(Icons.copy, size: 20),

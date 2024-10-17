@@ -7,7 +7,7 @@
             "request": "launch",
             "type": "dart",
             "flutterMode": "release",
-            // "args": ["--web --wasm"]
+            "args": ["--web --wasm"]
         },
         {
             "name": "APP-PROD-DEBUG", 
@@ -15,7 +15,7 @@
             "request": "launch",
             "type": "dart",
             "flutterMode": "debug",
-            // "args": ["--web --wasm"]
+            "args": ["--web --wasm"]
         },
         {
             "name": "Flutter clean dependencies",

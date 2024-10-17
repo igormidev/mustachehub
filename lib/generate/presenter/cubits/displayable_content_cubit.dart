@@ -9,7 +9,8 @@ import 'package:mustachehub/generate/presenter/states/displayable_content_state.
 class DisplayableContentCubit extends Cubit<DisplayableContentState> {
   DisplayableContentCubit() : super(DisplayableContentState.none());
 
-  void set(ContentOutputDto contentOutputDto, BuildContext context) {
+  void setDisplayableContent(
+      ContentOutputDto contentOutputDto, BuildContext context) {
     final List<TextSpanExibitionDto> allSpans = [];
 
     for (final contentTextDto in contentOutputDto.contents) {

@@ -60,9 +60,7 @@ class _CreateTemplateTabViewState extends State<CreateTemplateTabView>
         controller: tabController,
         children: [
           VariablesCreationTab(),
-          TextContentTab(
-            formKey: widget.formKey,
-          ),
+          TextContentTab(formKey: widget.formKey),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Scaffold(

@@ -1,3 +1,5 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -136,6 +138,9 @@ class _LoginFormAndButtonsSectionState extends State<LoginFormAndButtonsSection>
               Expanded(
                 child: OutlinedButton(
                   onPressed: () {
+                    if (kReleaseMode)
+                      FirebaseAnalytics.instance
+                          .logEvent(name: 'button_to_create_account');
                     context.go('/auth/signin');
                   },
                   child: const Text('Create account'),

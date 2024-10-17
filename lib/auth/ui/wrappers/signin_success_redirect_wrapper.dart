@@ -1,4 +1,5 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -34,9 +35,11 @@ class SigninSuccessRedirectWrapper extends StatelessWidget {
             return;
           },
           success: (value) {
-            FirebaseAnalytics.instance.logSignUp(
-              signUpMethod: 'withCredentials',
-            );
+            if (kReleaseMode) {
+              FirebaseAnalytics.instance.logSignUp(
+                signUpMethod: 'withCredentials',
+              );
+            }
             context.go('/splash');
           },
         );

@@ -1,4 +1,5 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mustache_hub_core/mustache_hub_core.dart';
@@ -21,7 +22,9 @@ mixin CopyAllOutputHeaderMethods on CopyToClipboardMixin {
 
     copyText(collapseAllOutputTextIntoASingle(contents), context);
 
-    FirebaseAnalytics.instance.logEvent(name: 'output_copied');
+    if (kReleaseMode) {
+      FirebaseAnalytics.instance.logEvent(name: 'output_copied');
+    }
   }
 
   String collapseAllOutputTextIntoASingle(

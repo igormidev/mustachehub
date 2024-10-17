@@ -1,4 +1,5 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -34,7 +35,7 @@ class LoginSuccessRedirectWrapper extends StatelessWidget {
             return;
           },
           success: (value) async {
-            FirebaseAnalytics.instance.logLogin();
+            if (kReleaseMode) FirebaseAnalytics.instance.logLogin();
             context.go('/splash');
           },
         );

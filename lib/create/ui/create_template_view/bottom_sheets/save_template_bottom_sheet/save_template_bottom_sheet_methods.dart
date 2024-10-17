@@ -57,12 +57,19 @@ mixin SaveTemplateBottomSheetMethods on State<SaveTemplateBottomSheet> {
   void _onSaveTemplate() {
     final userUUID = context.userProfile()?.id;
     if (!context.isUserLoggedIn || userUUID == null) {
+      if (kReleaseMode) {
+        FirebaseAnalytics.instance.logEvent(name: 'save_template_intent');
+      }
       showNeedToLogInDialog(context);
       return;
     }
 
     if (_formKey.currentState?.validate() != true) {
       return;
+    }
+
+    if (kReleaseMode) {
+      FirebaseAnalytics.instance.logEvent(name: 'save_template_intent');
     }
 
     final expectectedPayload = widget.variablesCubit.state.getExpectedPayload;
@@ -75,7 +82,8 @@ mixin SaveTemplateBottomSheetMethods on State<SaveTemplateBottomSheet> {
     final ContentStringState contentState = contentCubit.state;
 
     if (isEditing) {
-      FirebaseAnalytics.instance.logEvent(name: 'template_edit');
+      if (kReleaseMode)
+        FirebaseAnalytics.instance.logEvent(name: 'template_edit');
       final template = widget.currentTemplateTypeCubit.state.mapOrNull(
         withExistingTemplate: (value) => value.template,
       );
@@ -100,7 +108,8 @@ mixin SaveTemplateBottomSheetMethods on State<SaveTemplateBottomSheet> {
         ),
       );
     } else {
-      FirebaseAnalytics.instance.logEvent(name: 'template_create');
+      if (kReleaseMode)
+        FirebaseAnalytics.instance.logEvent(name: 'template_create');
       widget.templateUploadCubit.createPackage(
         output: contentState.currentText,
         packageInfo: newPackageInfo,

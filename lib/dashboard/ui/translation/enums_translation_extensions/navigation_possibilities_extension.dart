@@ -6,7 +6,7 @@ extension NavigationPossibilitiesExtension
     return switch (this) {
       EDashboardNavigationPossibilities.collection => 'Collection',
       EDashboardNavigationPossibilities.generateText => 'Generate text',
-      EDashboardNavigationPossibilities.createMustache => 'Create mustache',
+      EDashboardNavigationPossibilities.createMustache => 'Create template',
       EDashboardNavigationPossibilities.account => 'My account',
       EDashboardNavigationPossibilities.auth => 'Log in',
       EDashboardNavigationPossibilities.settings => 'Configuration',

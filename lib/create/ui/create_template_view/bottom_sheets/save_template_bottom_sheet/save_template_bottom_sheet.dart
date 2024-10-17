@@ -1,6 +1,7 @@
 import 'package:commom_states/states/session_state.dart';
 import 'package:dart_debouncer/dart_debouncer.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:media_query_core/media_query_core.dart';

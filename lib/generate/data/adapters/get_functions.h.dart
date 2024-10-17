@@ -51,32 +51,3 @@ Map<String, dynamic> _getChoicePayloads(
 
   return payload;
 }
-
-Map<String, dynamic> _getModelPayloads(
-  List<ModelPipe> pipes,
-  List<ModelPipeDto> dtos,
-) {
-  final Map<String, dynamic> response = {};
-
-  for (final ModelPipe modelPipe in pipes) {
-    final Iterable<ModelPipeDto> correspondingDTOs =
-        dtos.where((dto) => dto.pipe.pipeId == modelPipe.pipeId);
-
-    for (final ModelPipeDto dto in correspondingDTOs) {
-      {
-        final List<ModelPipeDTOPayload> payloads = dto.payloadValue;
-        for (final payload in payloads) {
-          response.addAll(_getTextPayloads(modelPipe.textPipes, payload.texts));
-          response.addAll(
-              _getBoolPayloads(modelPipe.booleanPipes, payload.booleans));
-          response.addAll(
-              _getChoicePayloads(modelPipe.choicePipes, payload.choices));
-          response.addAll(
-              _getModelPayloads(modelPipe.modelPipes, payload.subModels));
-        }
-      }
-    }
-  }
-
-  return response;
-}

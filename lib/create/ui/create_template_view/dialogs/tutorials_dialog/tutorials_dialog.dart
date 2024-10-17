@@ -73,9 +73,6 @@ class _TutorialsDialogState extends State<TutorialsDialog> {
     selectedSection.value = currentSection;
     lastSettedShortcut ??= currentSection;
 
-    print(
-        '${shortCutItems.map((e) => e.index)} == ${(currentSection.scrollIndex)}');
-
     if (_didScroll) {
       if (shortCutItems
           .map((e) => e.index)

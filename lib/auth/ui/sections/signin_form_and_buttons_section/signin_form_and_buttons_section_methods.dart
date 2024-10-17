@@ -33,6 +33,10 @@ mixin SignInFormAndButtonsSectionMethods on State<SigninFormAndButtonsSection> {
   Future<void> _createAccountWithFacebook() async {
     FocusScope.of(context).unfocus();
 
+    if (kReleaseMode) {
+      FirebaseAnalytics.instance.logEvent(name: 'tried_sign_in_with_facebook');
+    }
+
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
       ..showSnackBar(
@@ -48,6 +52,8 @@ mixin SignInFormAndButtonsSectionMethods on State<SigninFormAndButtonsSection> {
   Future<void> _createAccountWithGoogle() async {
     FocusScope.of(context).unfocus();
 
+    if (kReleaseMode)
+      FirebaseAnalytics.instance.logEvent(name: 'tried_sign_in_with_google');
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
       ..showSnackBar(

@@ -1,5 +1,6 @@
 import 'package:commom_states/cubits/user_collections_cubit.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mustache_hub_core/mustache_hub_core.dart';
@@ -22,7 +23,9 @@ class UpdateCollectionAfterDeletingTemplateWrapper extends StatelessWidget {
         state.whenOrNull(deletedWithSucess: (
           UserCollectionRoot newCollectionAfterDeletingTargetTemplate,
         ) {
-          FirebaseAnalytics.instance.logEvent(name: 'template_deleted');
+          if (kReleaseMode) {
+            FirebaseAnalytics.instance.logEvent(name: 'template_deleted');
+          }
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               content: Text('Template deleted with success!'),
