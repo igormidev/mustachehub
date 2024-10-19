@@ -48,16 +48,15 @@ mixin LoginFormAndButtonsSectionMethods on State<LoginFormAndButtonsSection> {
   }
 
   Future<void> _makeLoginWithGoogle() async {
-    FocusScope.of(context).unfocus();
-    ScaffoldMessenger.of(context)
-      ..hideCurrentSnackBar()
-      ..showSnackBar(
-        const SnackBar(
-          content: Text(
-              'This feature is not available yet. Use default login instead'),
-        ),
-      );
-    return;
+    // FocusScope.of(context).unfocus();
+    // ScaffoldMessenger.of(context)
+    //   ..hideCurrentSnackBar()
+    //   ..showSnackBar(
+    //     const SnackBar(
+    //       content: Text(
+    //           'This feature is not available yet. Use default login instead'),
+    //     ),
+    //   );
 
     await loginCubit.logInWithGoogle();
   }

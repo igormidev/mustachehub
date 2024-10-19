@@ -37,6 +37,11 @@ sealed class CredentialAuthException {
 }
 
 @immutable
+class UserDidNotFullfieldForm extends CredentialAuthException {
+  const UserDidNotFullfieldForm();
+}
+
+@immutable
 class CredentialAccountExistsWithADiferent extends CredentialAuthException {
   const CredentialAccountExistsWithADiferent(FirebaseAuthException error);
 }

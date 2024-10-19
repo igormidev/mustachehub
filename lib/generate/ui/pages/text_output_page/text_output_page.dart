@@ -27,30 +27,6 @@ class TextOutputPage extends StatefulWidget {
 
 class _TextOutputPageState extends State<TextOutputPage> {
   @override
-  void initState() {
-    super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      contentBloc(context.read<ContentCubit>().state);
-    });
-  }
-
-  void contentBloc(ContentState state) {
-    state.whenOrNull(
-      withGeneratedText: (value) {
-        context
-            .read<DisplayableContentCubit>()
-            .setDisplayableContent(value, context);
-      },
-      withContentText: (value) {
-        context
-            .read<DisplayableContentCubit>()
-            .setDisplayableContent(value, context);
-      },
-    );
-  }
-
-  @override
   Widget build(BuildContext context) {
     final contentBloc = context.read<ContentCubit>();
 

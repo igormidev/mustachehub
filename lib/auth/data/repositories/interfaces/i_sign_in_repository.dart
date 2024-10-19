@@ -6,4 +6,5 @@ abstract class ISignInRepository {
     required String email,
     required String password,
   });
+  Future<SignUpFormState> createUserWithGoogle();
 }

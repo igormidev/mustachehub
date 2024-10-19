@@ -23,7 +23,7 @@ class AccountImageSelectPage extends StatelessWidget
 
     return PopScope(
       canPop: true,
-      onPopInvoked: (didPop) {
+      onPopInvokedWithResult: (_, __) {
         cubit.resetState();
       },
       child: AccountImageSelectPageAgregator(

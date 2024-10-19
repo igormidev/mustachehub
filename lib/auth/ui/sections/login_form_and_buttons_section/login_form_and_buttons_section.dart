@@ -3,11 +3,13 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:media_query_core/reactiveness/boolean_toggle_wrapper.dart';
 import 'package:mustache_hub_core/mustache_hub_core.dart';
 import 'package:mustachehub/auth/presenter/cubits/login_form_cubit.dart';
 import 'package:mustachehub/auth/presenter/states/login_form_state.dart';
 import 'package:mustachehub/auth/ui/sections/widgets/media_buttons.dart';
+import 'package:simple_platform/simple_platform.dart';
 
 part 'login_form_and_buttons_section_methods.dart';
 
@@ -90,15 +92,17 @@ class _LoginFormAndButtonsSectionState extends State<LoginFormAndButtonsSection>
           const SizedBox(height: 20),
           Row(
             children: [
-              MediaButtons<LoginFormCubit, LoginFormState>.google(
-                text: 'Enter with Google',
-                onPressed: _makeLoginWithGoogle,
-                isLoading: (state) => state.maybeMap(
-                  loadingWithGoogle: (_) => true,
-                  orElse: () => false,
+              if (!DevicePlatform.isWindows) ...[
+                MediaButtons<LoginFormCubit, LoginFormState>.google(
+                  text: 'Enter with Google',
+                  onPressed: _makeLoginWithGoogle,
+                  isLoading: (state) => state.maybeMap(
+                    loadingWithGoogle: (_) => true,
+                    orElse: () => false,
+                  ),
                 ),
-              ),
-              const SizedBox(width: 8),
+                const SizedBox(width: 8),
+              ],
               MediaButtons<LoginFormCubit, LoginFormState>.facebook(
                 text: 'Enter with Facebook',
                 onPressed: _makeLoginWithFacebook,
@@ -138,9 +142,10 @@ class _LoginFormAndButtonsSectionState extends State<LoginFormAndButtonsSection>
               Expanded(
                 child: OutlinedButton(
                   onPressed: () {
-                    if (kReleaseMode)
+                    if (kReleaseMode) {
                       FirebaseAnalytics.instance
                           .logEvent(name: 'button_to_create_account');
+                    }
                     context.go('/auth/signin');
                   },
                   child: const Text('Create account'),

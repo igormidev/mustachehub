@@ -82,8 +82,9 @@ mixin SaveTemplateBottomSheetMethods on State<SaveTemplateBottomSheet> {
     final ContentStringState contentState = contentCubit.state;
 
     if (isEditing) {
-      if (kReleaseMode)
+      if (kReleaseMode) {
         FirebaseAnalytics.instance.logEvent(name: 'template_edit');
+      }
       final template = widget.currentTemplateTypeCubit.state.mapOrNull(
         withExistingTemplate: (value) => value.template,
       );
@@ -108,8 +109,9 @@ mixin SaveTemplateBottomSheetMethods on State<SaveTemplateBottomSheet> {
         ),
       );
     } else {
-      if (kReleaseMode)
+      if (kReleaseMode) {
         FirebaseAnalytics.instance.logEvent(name: 'template_create');
+      }
       widget.templateUploadCubit.createPackage(
         output: contentState.currentText,
         packageInfo: newPackageInfo,

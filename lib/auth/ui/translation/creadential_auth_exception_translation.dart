@@ -16,6 +16,7 @@ class CreadentialAuthExceptionTranslation {
       AuthUserNotFound() => 'User not found',
       CredentialWrongPassword() => 'Wrong password',
       CredentialUnknownFailure() => 'An unknown error has occurred',
+      UserDidNotFullfieldForm() => 'Please fill in all fields',
     };
   }
 
@@ -53,6 +54,8 @@ class CreadentialAuthExceptionTranslation {
             'my password to recover it.',
       CredentialUnknownFailure() => 'Try again. You can also try closing the '
           'application. If the error persists, contact support.',
+      UserDidNotFullfieldForm() =>
+        'Please fill all required fields in web form.',
     };
   }
 }

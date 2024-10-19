@@ -122,7 +122,7 @@ mixin TextContentMethods on State<TextContentTab> {
           Future.delayed(
             const Duration(seconds: 1),
             () {
-              controller.update();
+              if (mounted) controller.update();
             },
           );
 

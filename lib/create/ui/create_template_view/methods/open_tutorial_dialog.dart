@@ -9,11 +9,12 @@ mixin OpenTutorialDialog {
     BuildContext context, {
     required ETutorialSection section,
   }) {
-    if (kReleaseMode)
+    if (kReleaseMode) {
       FirebaseAnalytics.instance
           .logEvent(name: 'help_tutorial_opened', parameters: {
         'section': section.name,
       });
+    }
     showDialog(
       context: context,
       builder: (context) {

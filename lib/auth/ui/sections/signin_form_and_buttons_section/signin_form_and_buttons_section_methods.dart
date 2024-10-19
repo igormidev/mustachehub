@@ -52,17 +52,10 @@ mixin SignInFormAndButtonsSectionMethods on State<SigninFormAndButtonsSection> {
   Future<void> _createAccountWithGoogle() async {
     FocusScope.of(context).unfocus();
 
-    if (kReleaseMode)
+    if (kReleaseMode) {
       FirebaseAnalytics.instance.logEvent(name: 'tried_sign_in_with_google');
-    ScaffoldMessenger.of(context)
-      ..hideCurrentSnackBar()
-      ..showSnackBar(
-        const SnackBar(
-          content: Text(
-              'This feature is not available yet. Use default login instead'),
-        ),
-      );
-    return;
+    }
+
     await signInCubit.createUserWithGoogle();
   }
 

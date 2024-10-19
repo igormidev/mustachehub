@@ -16,7 +16,7 @@ class LoginFormCubit extends Cubit<LoginFormState>
     required String password,
   }) async {
     emit(LoginFormState.loadingWithCredentials());
-    await Future.delayed(const Duration(seconds: 3));
+    await Future.delayed(const Duration(seconds: 1));
     final response = await _loginRepository.signInUserWithEmailAndPassword(
       email: email,
       password: password,
@@ -33,7 +33,8 @@ class LoginFormCubit extends Cubit<LoginFormState>
 
   Future<void> logInWithGoogle() async {
     emit(LoginFormState.loadingWithGoogle());
-    await Future.delayed(const Duration(seconds: 3));
-    emit(LoginFormState.success());
+    await Future.delayed(const Duration(seconds: 1));
+    final response = await _loginRepository.signInUserWithGoogle();
+    emit(response);
   }
 }

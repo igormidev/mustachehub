@@ -69,6 +69,8 @@ dependencies:
     sdk: flutter 
   text_analyser: 
     path: packages/text_analyser
+  google_sign_in: ^6.2.1
+  google_sign_in_web: ^0.12.4+2
   package_info_plus:
   firebase_auth:
   cupertino_icons:

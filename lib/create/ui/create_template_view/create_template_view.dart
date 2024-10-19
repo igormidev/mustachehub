@@ -130,9 +130,10 @@ class _CreateTemplateViewState extends State<CreateTemplateView>
                                       .state
                                       .validate();
 
-                              if (kReleaseMode)
+                              if (kReleaseMode) {
                                 FirebaseAnalytics.instance
                                     .logEvent(name: 'test_template_action');
+                              }
 
                               if (isContentValid == false) {
                                 ScaffoldMessenger.of(context).showSnackBar(
@@ -193,9 +194,10 @@ class _CreateTemplateViewState extends State<CreateTemplateView>
                                     extra: randomJustToUpdate);
                               }
 
-                              if (kReleaseMode)
+                              if (kReleaseMode) {
                                 FirebaseAnalytics.instance
                                     .logEvent(name: 'clear_all_data');
+                              }
                             }
                           }
                         },

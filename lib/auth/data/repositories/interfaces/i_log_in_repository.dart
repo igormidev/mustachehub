@@ -5,4 +5,5 @@ abstract class ILogInRepository {
     required String email,
     required String password,
   });
+  Future<LoginFormState> signInUserWithGoogle();
 }

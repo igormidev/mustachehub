@@ -33,7 +33,7 @@ class SignUpFormCubit extends Cubit<SignUpFormState>
 
   Future<void> createUserWithGoogle() async {
     emit(SignUpFormState.loadingWithGoogle());
-    await Future.delayed(const Duration(seconds: 3));
-    emit(SignUpFormState.success());
+    final response = await _signInRepository.createUserWithGoogle();
+    emit(response);
   }
 }
